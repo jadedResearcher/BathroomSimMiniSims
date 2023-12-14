@@ -7,13 +7,31 @@
 
   <title>Catalyst's Bathroom Sim</title>
   <script src="utils.js"></script>
-  <script src="store.js"></script>
+  <script src="interloper.js"></script>
 
   <style>
     body {
       background: #2a2b31;
       font-family: 'Courier New', Courier, monospace;
       color: #c4c4c4;
+    }
+
+
+    @keyframes james-webb-telescope-mirrors-mirrored {
+      0% {
+        background-size: 475px 475px;
+
+      }
+
+      50% {
+        background-size:  485px 485px;
+
+      }
+
+      100% {
+        background-size:  475px 475px;
+
+      }
     }
 
     #header {
@@ -37,6 +55,13 @@
 
     .audio-icon:hover {
       background-color: #535358;
+    }
+
+    video {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding: 42px;
     }
 
 
@@ -107,7 +132,7 @@
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const date = new Date();
-      if(urlParams.get("friday")==="plzjrwantsin"){
+      if (urlParams.get("friday") === "plzjrwantsin") {
         return false;
       }
       if (urlParams.get("friday") || date.getHours() == 0 || date.getDay() === 5) {
@@ -117,7 +142,7 @@
     }
 
     window.onload = () => {
-      initHelpDesk();
+      initInterloper();
       if (isItFriday()) {
         const body = document.querySelector("body");
         body.innerHTML = `You really should take a break. This will still be here when you come back.
@@ -158,11 +183,11 @@
         return;
       }
       incrementLocalStorageByOne("BATHROOM_MAZE")
-      blurbFromNetwork();
-      rambleFromNetwork();
-      wireUpExits();
-      grabImages();
-      grabAudio();
+      //blurbFromNetwork();
+      //rambleFromNetwork();
+      //wireUpExits();
+      //grabImages();
+      //grabAudio();
     }
 
     const grabAudio = async () => {
@@ -331,9 +356,16 @@
       <select id="door-selection">
         <option>🚪 NO EXITS FOUND</option>
       </select>
+      <div>
+        <form id="interloper-form">
+          <input type="number" id="interloper-id"></input>
+          <button type="submit">Search for Stranger?</button>
+        </form>
+      </div>
       <div id="audio-container">
 
       </div>
+
     </div>
     <div id="room-container">
       <img class="bathroom" src="full_bathroom.png">
