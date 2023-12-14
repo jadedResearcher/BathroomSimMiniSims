@@ -53,7 +53,11 @@ initInterloper = () => {
 
 
 const mapping = {
-  217: { video: "rewards/gods_unlock_apocalypse.mp4", images: ["rewards/apocalypse_1.PNG", "rewards/apocalypse_2.PNG", "rewards/apocalypse_3.PNG"] }
+  217: { video: "rewards/gods_unlock_apocalypse.mp4", images: ["rewards/apocalypse_1.PNG", "rewards/apocalypse_2.PNG", "rewards/apocalypse_3.PNG"] },
+  113: { video: "rewards/will_you_become_a_waste.mp4", images: ["rewards/ifyouarecaughtbythis_youcangohere.PNG"] }
+  ,1313858: { video: "rewards/graces.mp4", images: ["rewards/gnosis_is_what_wasted_players_interact_with.PNG"] }
+  ,429044: { video: "rewards/cool_stairs_bro.mp4", images: ["rewards/stairs2.PNG"] }
+
 }
 
 const blankImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
@@ -89,6 +93,12 @@ const handleID = async (id) => {
       }
       video.loop = true;
       //fuckShitUP(100,room, hit.images,blankImage , rand);
+    }else{
+      for(let image of hit.images){
+        const video = createElementWithClassAndParent("img", room);
+        video.src = image;
+        video.width = 475;
+      }
     }
   } else {
     await grabEyesImages();
