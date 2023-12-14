@@ -58,7 +58,15 @@ const mapping = {
 
 const blankImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
+const findMultiple = (id)=>{
+  const keys = Object.keys(mapping);
+  for(let key of keys){
+    if(id % key === 0){
+      return mapping[key];
+    }
+  }
 
+}
 
 const handleID = async (id) => {
   const rand = new SeededRandom(id);
@@ -102,7 +110,16 @@ const handleID = async (id) => {
       and even work in one of the images from it with the other bits
     */
 
-    fuckShitUP(rand.getRandomNumberBetween(10,100),room, images,images[0] , rand);
+      const multiple = findMultiple(id);
+
+      if(multiple){
+        fuckShitUP(rand.getRandomNumberBetween(100,250),room, images,multiple.images[0] , rand);
+
+      }else{
+        fuckShitUP(rand.getRandomNumberBetween(10,100),room, images,images[0] , rand);
+      }
+
+
 
 
   }
