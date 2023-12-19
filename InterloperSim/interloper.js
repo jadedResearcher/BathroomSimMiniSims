@@ -40,7 +40,6 @@ initInterloper = () => {
     handleID(parseInt(queryId));
   }
   form.onsubmit = (e) => {
-    alert("!!!")
     e.preventDefault();
     updateURLParams("stranger=" + attempted_id.value);
     window.location.href = window.location.href;
@@ -57,6 +56,20 @@ const mapping = {
   113: { video: "rewards/will_you_become_a_waste.mp4", images: ["rewards/ifyouarecaughtbythis_youcangohere.PNG"] }
   ,1313858: { video: "rewards/graces.mp4", images: ["rewards/gnosis_is_what_wasted_players_interact_with.PNG"] }
   ,429044: { video: "rewards/cool_stairs_bro.mp4", images: ["rewards/stairs2.PNG"] }
+  ,333333333: {images: ["rewards/if_itshidden_then_bydefinition_youcare_bythetimeyoufindit___youwentlooking.PNG"] }
+  ,4444: {video: "rewards/ill_stop_for_now.mp4",images:["rewards/stop.PNG"] }
+  ,4665: {video: "rewards/lavinraca_slash_lavinraca.mp4",images:["rewards/crowscare.png","rewards/smiley.png"] }
+  ,107: {video: "rewards/k.mp4",images:["rewards/k.png"]}
+  ,420: {video: "rewards/match.mp4",images:["rewards/match.png"]} //blaze it
+  ,101010: {video: "rewards/apocalypse_chick.mp4",images:["rewards/flowerequisde.png","rewards/its_her_the_gamer.png"]} //42 in binary, math joke for flower chick
+  ,273: {video: "rewards/codex.mp4",images:["rewards/codex.png"]}
+  ,1313: {video: "rewards/jr.mp4",images:["rewards/timecapsule.png","rewards/jr_contains_multitudes.png","rewards/falsejr.png","rewards/eon337.png"]}
+  ,2022: {video: "rewards/end.mp4",images:["rewards/theend.png"]} //when it all ends
+  ,1996: {video: "rewards/eye_killer.mp4",images:["rewards/FomalDARP.png"]} //eye killer is a time player, of course she'd pick the date yugioh came out
+  ,1972: {video: "rewards/intern.mp4",images:["rewards/Blink1.gif","rewards/Blink2.gif","rewards/Blink3.gif","rewards/Blink4.gif"]} //when it all starts
+  ,6996: {video: "rewards/mirror.mp4",images:["rewards/novummirror.png"]} //same forwards and backwards with numerals that mirror each other. also: sex number.
+
+  ,6666: {video: "rewards/the_mediums_message.mp4",images:["rewards/medium7.png","rewards/medium6.png","rewards/medium5.png","rewards/medium4.png","rewards/medium3.png","rewards/medium2.png","rewards/medium1.png"] }
 
 }
 
@@ -72,6 +85,20 @@ const findMultiple = (id)=>{
 
 }
 
+const BATHROOM_KEY = "BATHROOM_MAZE";
+
+const incrementLocalStorageByAmount = (KEY, AMOUNT) => {
+
+  let current = localStorage.getItem(KEY);
+  if (!current) {
+    current = AMOUNT;
+  }
+  console.log("JR NOTE:", KEY, " was " + current)
+
+  localStorage.setItem(KEY, parseInt(current) + AMOUNT)
+
+}
+
 const handleID = async (id) => {
   const rand = new SeededRandom(id);
   const room = document.querySelector("#room-container");
@@ -79,6 +106,7 @@ const handleID = async (id) => {
 
   if (mapping[id]) {
     const hit = mapping[id];
+    incrementLocalStorageByAmount(BATHROOM_KEY,100);
     if (hit.video) {
       const video = createElementWithClassAndParent("video", room);
       video.src = hit.video;
@@ -89,13 +117,14 @@ const handleID = async (id) => {
       video.controls = false;
       window.onclick = () => {
         video.play();
-
       }
       video.loop = true;
       //fuckShitUP(100,room, hit.images,blankImage , rand);
     }else{
       for(let image of hit.images){
         const video = createElementWithClassAndParent("img", room);
+        video.style.position="absolute"
+        video.style.top = "0px"
         video.src = image;
         video.width = 475;
       }
@@ -123,7 +152,22 @@ const handleID = async (id) => {
       const multiple = findMultiple(id);
 
       if(multiple){
-        fuckShitUP(rand.getRandomNumberBetween(100,250),room, images,multiple.images[0] , rand);
+        //so the audio plays
+        incrementLocalStorageByAmount(BATHROOM_KEY,10);
+        const video = createElementWithClassAndParent("video", room);
+        video.src = multiple.video;
+        video.height = 475;
+        video.style.cursor="pointer";
+        video.width = 475;
+        video.autoplay = true;
+        video.controls = false;
+        window.onclick = () => {
+          video.play();
+        }
+        video.loop = true;
+        let tmp_images = [...multiple.images];
+        tmp_images.push(blankImage);
+        fuckShitUP(rand.getRandomNumberBetween(100,250),room, images,rand.pickFrom(tmp_images) , rand);
 
       }else{
         fuckShitUP(rand.getRandomNumberBetween(10,100),room, images,images[0] , rand);
