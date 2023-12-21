@@ -68,6 +68,11 @@ const mapping = {
   ,1996: {video: "rewards/eye_killer.mp4",images:["rewards/FomalDARP.png"]} //eye killer is a time player, of course she'd pick the date yugioh came out
   ,1972: {video: "rewards/intern.mp4",images:["rewards/Blink1.gif","rewards/Blink2.gif","rewards/Blink3.gif","rewards/Blink4.gif"]} //when it all starts
   ,6996: {video: "rewards/mirror.mp4",images:["rewards/novummirror.png"]} //same forwards and backwards with numerals that mirror each other. also: sex number.
+  ,413: {video: "rewards/justified.mp4",images:["rewards/justified.PNG"]} //i had fun making these
+  ,1025: {video: "rewards/justified_laughter.mp4",images:["rewards/justified_laughter.PNG"]} //my nesting partner 3d printed the mask
+  ,6262: {video: "rewards/neighbor.mp4",images:["rewards/mirror.png"]} //duo mask number and septum coin number
+  ,888: {video: "rewards/omni2.mp4",images:["rewards/codex.png"]}
+  ,8585: {video: "rewards/peeweereal.mp4",images:["rewards/left.gif"]}
 
   ,6666: {video: "rewards/the_mediums_message.mp4",images:["rewards/medium7.png","rewards/medium6.png","rewards/medium5.png","rewards/medium4.png","rewards/medium3.png","rewards/medium2.png","rewards/medium1.png"] }
 
