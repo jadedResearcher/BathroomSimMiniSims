@@ -73,6 +73,9 @@ const mapping = {
   ,6262: {video: "rewards/neighbor.mp4",images:["rewards/mirror.png"]} //duo mask number and septum coin number
   ,888: {video: "rewards/omni2.mp4",images:["rewards/codex.png"]}
   ,8585: {video: "rewards/peeweereal.mp4",images:["rewards/left.gif"]}
+  ,1919: {video: "rewards/quotidian.mp4",images:["http://knucklessux.com/PuzzleBox/Secrets/changeling.png"]} //this could legit be the first time a Wanderer finds  the puzzle box and this pleases me
+  ,9669: {video: "rewards/reflection.mp4",images:["rewards/thereflection.png"]} //same forwards and backwards with numerals that mirror each other. also: sex number.
+  ,2007: {video: "rewards/shot.mp4",images:["http://farragofiction.com/DehydrationSim/miku.gif"]}
 
   ,6666: {video: "rewards/the_mediums_message.mp4",images:["rewards/medium7.png","rewards/medium6.png","rewards/medium5.png","rewards/medium4.png","rewards/medium3.png","rewards/medium2.png","rewards/medium1.png"] }
 
@@ -171,7 +174,7 @@ const handleID = async (id) => {
         }
         video.loop = true;
         let tmp_images = [...multiple.images];
-        tmp_images.push(blankImage);
+        rand.nextDouble()> 0.5 && tmp_images.push(blankImage);
         fuckShitUP(rand.getRandomNumberBetween(100,250),room, images,rand.pickFrom(tmp_images) , rand);
 
       }else{
