@@ -59,12 +59,12 @@ const mapping = {
   ,333333333: {images: ["rewards/if_itshidden_then_bydefinition_youcare_bythetimeyoufindit___youwentlooking.PNG"] }
   ,4444: {video: "rewards/ill_stop_for_now.mp4",images:["rewards/stop.PNG"] }
   ,4665: {video: "rewards/lavinraca_slash_lavinraca.mp4",images:["rewards/crowscare.png","rewards/smiley.png"] }
-  ,107: {video: "rewards/k.mp4",images:["rewards/k.png"]}
-  ,420: {video: "rewards/match.mp4",images:["rewards/match.png"]} //blaze it
+  ,107: {video: "rewards/k.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/gaze_ego_do_you_see_this_shit.png","rewards/k.png","http://farragofiction.com/TwoGayJokes/Stories/loop2_infoteamandother.png"]}
+  ,420: {video: "rewards/match.mp4",images:["rewards/match.png","http://farragofiction.com/TwoGayJokes/Stories/fire_girl.png","http://farragofiction.com/TwoGayJokes/Stories/training_team.png"]} //blaze it
   ,101010: {video: "rewards/apocalypse_chick.mp4",images:["rewards/flowerequisde.png","rewards/its_her_the_gamer.png"]} //42 in binary, math joke for flower chick
   ,273: {video: "rewards/codex.mp4",images:["rewards/codex.png"]}
   ,1313: {video: "rewards/jr.mp4",images:["rewards/timecapsule.png","rewards/jr_contains_multitudes.png","rewards/falsejr.png","rewards/eon337.png"]}
-  ,2022: {video: "rewards/end.mp4",images:["rewards/theend.png"]} //when it all ends
+  ,2022: {video: "rewards/end.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/THREE_HUNDRED_YEARS.gif","http://farragofiction.com/TwoGayJokes/Stories/cleaned_up.gif","http://farragofiction.com/TwoGayJokes/Stories/oh_huh_2.gif","rewards/theend.png","http://farragofiction.com/TwoGayJokes/Stories/training_team.png"]} //when it all ends
   ,1996: {video: "rewards/eye_killer.mp4",images:["rewards/FomalDARP.png"]} //eye killer is a time player, of course she'd pick the date yugioh came out
   ,1972: {video: "rewards/intern.mp4",images:["rewards/Blink1.gif","rewards/Blink2.gif","rewards/Blink3.gif","rewards/Blink4.gif"]} //when it all starts
   ,6996: {video: "rewards/mirror.mp4",images:["rewards/novummirror.png"]} //same forwards and backwards with numerals that mirror each other. also: sex number.
@@ -74,8 +74,11 @@ const mapping = {
   ,888: {video: "rewards/omni2.mp4",images:["rewards/codex.png"]}
   ,8585: {video: "rewards/peeweereal.mp4",images:["rewards/left.gif"]}
   ,1919: {video: "rewards/quotidian.mp4",images:["http://knucklessux.com/PuzzleBox/Secrets/changeling.png"]} //this could legit be the first time a Wanderer finds  the puzzle box and this pleases me
-  ,9669: {video: "rewards/reflection.mp4",images:["rewards/thereflection.png"]} //same forwards and backwards with numerals that mirror each other. also: sex number.
-  ,2007: {video: "rewards/shot.mp4",images:["http://farragofiction.com/DehydrationSim/miku.gif"]}
+  ,9669: {video: "rewards/reflection.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/loop2_infoteamandother.png","rewards/thereflection.png","rewards/captain.png"]} //same forwards and backwards with numerals that mirror each other. also: sex number.
+  ,2007: {video: "rewards/shot.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/parkersfriends.png","http://farragofiction.com/TwoGayJokes/Stories/we_cant_expect_god_to_do_all_the_work.png","http://farragofiction.com/DehydrationSim/miku.gif","http://farragofiction.com/TwoGayJokes/Stories/the_clouds_are_open_wide.png"]}
+  ,1111: {video: "rewards/twins.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/training_team.png","rewards/thetwins1.png","rewards/thetwins2.png","http://farragofiction.com/TwoGayJokes/Stories/birds.png"]}
+  ,858585: {video: "rewards/tyrfing.mp4",images:["http://farragofiction.com/ZampanioHotlink/tyfing.png","http://farragofiction.com/ZampanioHotlink/panicalittlebit.png"]}
+  ,"-1": {video: "rewards/underscore.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/loop2_infoteamandother.png","http://farragofiction.com/TwoGayJokes/Stories/underscore.png"]} //no you cannot reach them, its for your own protection
 
   ,6666: {video: "rewards/the_mediums_message.mp4",images:["rewards/medium7.png","rewards/medium6.png","rewards/medium5.png","rewards/medium4.png","rewards/medium3.png","rewards/medium2.png","rewards/medium1.png"] }
 
@@ -84,9 +87,13 @@ const mapping = {
 const blankImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
 const findMultiple = (id)=>{
+  if(id <0){
+    console.log("JR NOTE: vik time lol")
+    return mapping["-1"];
+  }
   const keys = Object.keys(mapping);
   for(let key of keys){
-    if(id % key === 0){
+    if(id % key === 0 && key > 0){
       return mapping[key];
     }
   }
