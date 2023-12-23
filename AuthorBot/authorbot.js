@@ -13,5 +13,8 @@ const initAB = ()=>{
   const container = document.querySelector("#room-container");
   const closerSprite = createElementWithClassAndParent("img", container, 'sprite ab');
   closerSprite.src = "http://farragofiction.com/SBURBSim/images/Credits/ab.png";
-  container.append(closerSprite)
+  container.append(closerSprite);
+
+  const input = document.querySelector("#interloper-id");
+  input.value = window.location.href;
 }
