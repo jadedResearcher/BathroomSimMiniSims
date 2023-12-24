@@ -13,8 +13,12 @@ She always has my back!
 let roomsChecked = 0;
 
 let base_location = window.location.href.includes("index") ? window.location.href.split("index.html")[0] : window.location.href.split("?")[0];
-
+let select;
 const initAB = () => {
+  select = document.querySelector("#filter");
+  select.onchange = (e) => {
+    applyFilter(e.target.value);
+  }
   const container = document.querySelector("#room-container");
   const closerSprite = createElementWithClassAndParent("img", container, 'sprite ab');
   closerSprite.src = "http://farragofiction.com/SBURBSim/images/Credits/ab.png";
@@ -34,28 +38,28 @@ const process = async () => {
   roomsChecked = 0;
   const input = document.querySelector("#interloper-id");
 
-  const container = document.querySelector("#blurb");
-  container.innerHTML = `It seems you have asked about: ${input.value}. <br><br>Please wait while I Guide you to information regarding it. JR's Mind can be a convoluted place, so this may take a few minutes. `;
-  
-  let result = await processOneLocation(input.value,roomsChecked);
+  const container = document.querySelector("#results");
+  container.innerHTML += `<br><br>It seems you have asked about: ${input.value}. <br><br>Please wait while I Guide you to information regarding it. JR's Mind can be a convoluted place, so this may take a few minutes. `;
+
+  let result = await processOneLocation(input.value, roomsChecked);
   processAllExitsFromLocation(result, 0)
 
 }
 
 const processAllExitsFromLocation = async (result) => {
-  if(!result){return};
-  let {location, exits} = result;
-  for(let exit of exits){
-    let new_result = await processOneLocation(`${location}/${exit}`,roomsChecked);
+  if (!result) { return };
+  let { location, exits } = result;
+  for (let exit of exits) {
+    let new_result = await processOneLocation(`${location}/${exit}`, roomsChecked);
     processAllExitsFromLocation(new_result)
   }
 }
 
-const processOneLocation = async (location,index ) => {
-  const parent = document.querySelector("#blurb");
+const processOneLocation = async (location, index) => {
+  const parent = document.querySelector("#results");
 
   roomsChecked++;
-  if(index>13){
+  if (index > 13) {
     return;
   }
   const container = createElementWithClassAndParent("div", parent, "ab-entry"); //this will collect classes showing facts about it so i can filter
@@ -65,25 +69,32 @@ const processOneLocation = async (location,index ) => {
   const contents = createElementWithClassAndParent("div", container);
 
   let gopher = await isItGopher(location);
-  if(gopher){
+  if (gopher) {
     title.innerText += "(Gopher)"
+    contents.innerHTML += `<a target="_blank" href='${location}/waypoint.txt'>Visit</a><br><br>`;
+
     contents.innerHTML += `<li><b>Date Modified:</b> ${gopher.date}<li><b>Size:</b> ${gopher.size}`;
     processGopher(location, container, contents);
 
   }
 
   let bathroom = await isItBathroom(location);
-  if(bathroom){
+  if (bathroom) {
     title.innerText += "(Bathroom)"
+    contents.innerHTML += `<a target="_blank" href='${location}/bathroom.html'>Visit</a><br><br>`;
+
     contents.innerHTML += `<li><b>Date Modified:</b> ${bathroom.date}<li><b>Size:</b> ${bathroom.size}`;
     processBathroom(location, container, contents)
 
   }
-  if(gopher && bathroom){
+  if (gopher && bathroom) {
     title.innerText += "(It is not supposed to be possible to be both.)"
+    contents.innerHTML += `<a target="_blank" href='${location}/bathroom.html'>Visit</a>`;
+    contents.innerHTML += `<a target="_blank" href='${location}/waypoint.txt'>Visit</a><Br><Br>`;
+
   }
 
-  title.innerText += ` #${index}`
+  title.innerText += `#${index}`
 
 
   let branchPoints = await checkForCommonMazeExits(location);
@@ -91,31 +102,80 @@ const processOneLocation = async (location,index ) => {
   if (branchPoints.length > 0) {
     contents.innerHTML += `<br><br><b>Exits Found</b>: ${branchPoints.map((i) => `<li>${i}</li>`).join("")}`;
   } else {
-    contents.innerText += "It seems this is a dead end. Are you sure this is part of a file system maze?";
+    contents.innerHTML += "<br>It seems this is a dead end. Are you sure this is part of a file system maze?";
   }
 
   let n = await isThereNorth(location);
-  if(n){
+  if (n) {
     container.classList.add("north");
-  }else{
+  } else {
     container.classList.add("no-north");
   }
   let s = await isThereSouth(location);
-  if(s){
+  if (s) {
     container.classList.add("south");
-  }else{
+  } else {
     container.classList.add("no-south");
   }
   let e = await isThereEast(location);
-  if(3){
+  if (e) {
     container.classList.add("east");
-  }else{
+  } else {
     container.classList.add("no-east");
   }
 
-  return {location, exits: branchPoints};
+  renderFilter();
+  return { location, exits: branchPoints };
 
 }
+
+const setCount = () => {
+  const countEle = document.querySelector("#count");
+
+  let count = 0;
+  const entries = document.querySelectorAll(".ab-entry");
+  if (countEle && entries) {
+    for (let entry of entries) {
+
+      if (entry.style.display !== "none") {
+        count++;
+      }
+    }
+  }
+  countEle.innerText = "Count: " + count;
+
+}
+
+
+const renderFilter = () => {
+  console.log("JR NOTE: rendering filter")
+  select.innerHTML = "";
+  const tags = fetchTags();
+  console.log("JR NOTE: tags are", tags)
+  for (let tag of tags) {
+    if (tag.trim()) {
+      console.log("JR NOTE: creating option")
+      const option = createElementWithClassAndParent("option", select)
+      option.value = tag;
+      option.innerText = tag;
+    }
+
+  }
+
+}
+
+const applyFilter = (filter) => {
+  const entries = document.querySelectorAll(".ab-entry");
+  for (let entry of entries) {
+    if ([...entry.classList].includes(filter)) {
+      entry.style.display = "block";
+    } else {
+      entry.style.display = "none";
+    }
+  }
+  setCount();
+}
+
 
 const fetchTags = () => {
   let ret = "";
@@ -127,20 +187,21 @@ const fetchTags = () => {
 }
 
 //in addition to printing out facts, add clases to container so i can filter (so that'll include NoNorth etc)
-const processGopher = async (location, container, contents)=>{
+const processGopher = async (location, container, contents) => {
+
   let hydration = await isThereHydration(location);
-  if(hydration){
+  if (hydration) {
     contents.innerHTML += `<li>You can hydrate.`;
     container.classList.add("hydration");
-  }else{
+  } else {
     container.classList.add("no-hydration");
   }
 
   let vent = await isThereVent(location);
-  if(vent){
+  if (vent) {
     contents.innerHTML += `<li>You can vent.`;
     container.classList.add("vent");
-  }else{
+  } else {
     container.classList.add("no-vent");
   }
 
@@ -148,67 +209,68 @@ const processGopher = async (location, container, contents)=>{
 }
 
 //in addition to printing out facts, add clases to container so i can filter (so that'll include NoNorth etc)
-const processBathroom  = async (location, container, contents)=>{
+const processBathroom = async (location, container, contents) => {
+
   let defaultBlurb = await isBlurbDefault(location);
-  if(defaultBlurb){
+  if (defaultBlurb) {
     contents.innerHTML += `<li>The emptiness is echoing.`;
     container.classList.add("default-blurb");
-  }else{
+  } else {
     container.classList.add("no-default-blurb");
   }
 
   let images = await grabImagesAB(location);
-  if(images){
+  if (images) {
     contents.innerHTML += `<li>There are ${images} sprites in the bathroom.`;
     container.classList.add("sprites");
-  }else{
+  } else {
     container.classList.add("no-sprites");
   }
 
   let audio = await grabAudioAB(location);
-  if(images){
+  if (images) {
     contents.innerHTML += `<li>There are ${audio} audio files in the bathroom.`;
     container.classList.add("audio");
-  }else{
+  } else {
     container.classList.add("no-audio");
   }
 
   let ramble = await isThereRamble(location);
-  if(ramble){
+  if (ramble) {
     contents.innerHTML += `<li>JR hid something there.`;
     container.classList.add("ramble");
-  }else{
+  } else {
     container.classList.add("no-ramble");
   }
 
   let store = await isThereStore(location);
-  if(store){
+  if (store) {
     contents.innerHTML += `<li>You can shop for ${store} items.`;
     container.classList.add("shop");
-  }else{
+  } else {
     container.classList.add("no-shop");
   }
 
   let interloper = await isThereInterloper(location);
-  if(interloper){
+  if (interloper) {
     contents.innerHTML += `<li>There is an interloper.`;
     container.classList.add("interloper");
-  }else{
+  } else {
     container.classList.add("no-interloper");
   }
 
   let ab = await isThereAB(location);
-  if(ab){
+  if (ab) {
     contents.innerHTML += `<li>It seems I am there.`;
     container.classList.add("ab-loc");
-  }else{
+  } else {
     container.classList.add("no-ab-loc");
   }
 }
 
 const grabImagesAB = async (location) => {
   let tmp = await getImages(location);
-  return tmp.length;
+  return tmp.length - 1;
 }
 
 const grabAudioAB = async (location) => {
@@ -378,7 +440,7 @@ const checkForCommonMazeExits = async (location) => {
       if (data && data.includes("<html>")) {
         ret.push(exit);
       } else {
-        ret.push(`${exit} (FALSE PATH)`);
+        ret.push(`${exit}(FALSE PATH)`);
       }
     } catch (e) {
       //its not there, its fine

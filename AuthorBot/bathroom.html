@@ -64,6 +64,24 @@
       padding: 42px;
     }
 
+    a {
+      color: red;
+    }
+
+    .ab-entry {
+      border: 1px solid red;
+      padding: 20px;
+      margin-bottom: 13px;
+    }
+
+    a:hover {
+      color: darkred;
+    }
+
+    a:visited {
+      color: pink;
+    }
+
 
     select {
       background-color: #141619;
@@ -419,16 +437,31 @@
           <br>
           <button type="submit">Search for Room?</button>
         </form>
-      </div>
-      <div id="audio-container">
+
+        <div id="audio-container">
+
+        </div>
 
       </div>
-
     </div>
     <div id="room-container">
       <img class="bathroom" src="full_bathroom.png">
       <div id="blurb" style="color: red;">
-        It seems you have asked about JR's automatic maze room finder. This is an application designed to find areas of the maze that are strange, interesting and otherwise noteworthy without having to be lost for hundreds of hours.   </div>
+        <p>It seems you have asked about JR's automatic maze room finder. This is an application designed to find
+          areas of
+          the maze that are strange, interesting and otherwise noteworthy without having to be lost for hundreds of
+          hours.</p>
+        <div id="controls">
+          <label for="filter">
+            Filter:
+          </label>
+          <select name="filter" id="filter">
+
+          </select>
+          <div id="count">Count:</div>
+        </div>
+        <div id="results"></div>
+      </div>
 
     </div>
 
