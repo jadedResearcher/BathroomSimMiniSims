@@ -10,6 +10,8 @@ She has been having a well deserved break hanging out with Paladyn and being on 
 She always has my back!
 */
 
+let roomsChecked = 0;
+
 let base_location = window.location.href.includes("index") ? window.location.href.split("index.html")[0] : window.location.href.split("?")[0];
 
 const initAB = () => {
@@ -28,17 +30,34 @@ const initAB = () => {
 
 }
 
-const process = () => {
-  let index = 0;
+const process = async () => {
+  roomsChecked = 0;
   const input = document.querySelector("#interloper-id");
 
   const container = document.querySelector("#blurb");
   container.innerHTML = `It seems you have asked about: ${input.value}. <br><br>Please wait while I Guide you to information regarding it. JR's Mind can be a convoluted place, so this may take a few minutes. `;
-  let nextArray = processOneLocation(container, input.value);
+  
+  let result = await processOneLocation(input.value,roomsChecked);
+  processAllExitsFromLocation(result, 0)
+
 }
 
-const processOneLocation = async (parent, location) => {
-  console.log("JR NOTE: processing location", location)
+const processAllExitsFromLocation = async (result) => {
+  if(!result){return};
+  let {location, exits} = result;
+  for(let exit of exits){
+    let new_result = await processOneLocation(`${location}/${exit}`,roomsChecked);
+    processAllExitsFromLocation(new_result)
+  }
+}
+
+const processOneLocation = async (location,index ) => {
+  const parent = document.querySelector("#blurb");
+
+  roomsChecked++;
+  if(index>13){
+    return;
+  }
   const container = createElementWithClassAndParent("div", parent, "ab-entry"); //this will collect classes showing facts about it so i can filter
   const title = createElementWithClassAndParent("h2", container);
   title.style.direction = "rtl";
@@ -64,6 +83,7 @@ const processOneLocation = async (parent, location) => {
     title.innerText += "(It is not supposed to be possible to be both.)"
   }
 
+  title.innerText += ` #${index}`
 
 
   let branchPoints = await checkForCommonMazeExits(location);
@@ -93,7 +113,7 @@ const processOneLocation = async (parent, location) => {
     container.classList.add("no-east");
   }
 
-  return branchPoints;
+  return {location, exits: branchPoints};
 
 }
 
@@ -137,7 +157,23 @@ const processBathroom  = async (location, container, contents)=>{
     container.classList.add("no-default-blurb");
   }
 
-  let ramble = await isThereStore(location);
+  let images = await grabImagesAB(location);
+  if(images){
+    contents.innerHTML += `<li>There are ${images} sprites in the bathroom.`;
+    container.classList.add("sprites");
+  }else{
+    container.classList.add("no-sprites");
+  }
+
+  let audio = await grabAudioAB(location);
+  if(images){
+    contents.innerHTML += `<li>There are ${audio} audio files in the bathroom.`;
+    container.classList.add("audio");
+  }else{
+    container.classList.add("no-audio");
+  }
+
+  let ramble = await isThereRamble(location);
   if(ramble){
     contents.innerHTML += `<li>JR hid something there.`;
     container.classList.add("ramble");
@@ -147,7 +183,7 @@ const processBathroom  = async (location, container, contents)=>{
 
   let store = await isThereStore(location);
   if(store){
-    contents.innerHTML += `<li>You can shop.`;
+    contents.innerHTML += `<li>You can shop for ${store} items.`;
     container.classList.add("shop");
   }else{
     container.classList.add("no-shop");
@@ -168,6 +204,16 @@ const processBathroom  = async (location, container, contents)=>{
   }else{
     container.classList.add("no-ab-loc");
   }
+}
+
+const grabImagesAB = async (location) => {
+  let tmp = await getImages(location);
+  return tmp.length;
+}
+
+const grabAudioAB = async (location) => {
+  let tmp = await getAudio(location);
+  return tmp.length
 }
 
 
@@ -215,9 +261,9 @@ const isBlurbDefault = async (location) => {
 
 const isThereStore = async (location) => {
   try {
-    const data = await httpGetAsync(`${location}/store_inventory`);
-    if (data) {
-      return true;
+    const everything = await getEverything(location + "store_inventory/");
+    if (everything) {
+      return everything.length;
     }
   } catch (e) {
     return false;
@@ -323,7 +369,6 @@ const isThereVent = async (location) => {
 }
 
 const checkForCommonMazeExits = async (location) => {
-  console.log("JR NOTE: checking for common exits for ", location)
   const ret = [];
   let commonExits = ["NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"]; //whats that? you only thought NORTH, SOUTH and EAST existed? :) :) ;)
 
@@ -369,4 +414,55 @@ gimmeFacts = (url) => {
     console.error(err);
     return { date: null, size: null }
   }
+}
+
+
+const cachedEverthing = {}
+
+const everythingExtendsions = [
+  "png",
+  "PNG",
+  "gif",
+  "jpg",
+  "jpeg",
+  "wav",
+  "mp3",
+  "ogg",
+  "mp4",
+  "txt"
+];
+const everythingFilePattern = new RegExp('<a href="([^?]*?)">', 'g');
+
+const everythingExtensionPattern = new RegExp(`\\\.(${everythingExtendsions.join("|")})\$`);
+
+
+const getEverything = async (url) => {
+  if (cachedEverthing[url]) {
+    return cachedEverthing[url];
+  }
+
+  let promise = new Promise(async (resolve, reject) => {
+    try {
+      const rawText = await httpGetAsync(url);
+
+      let files = [];
+      const match = rawText.matchAll(everythingFilePattern);
+      const matches = Array.from(match, (res) => res);
+      for (let m of matches) {
+        const item = m[1];
+        if (item.match(everythingExtensionPattern)) {
+          files.push(item);
+        }
+      }
+
+      cachedEverthing[url] = files;
+      //console.log("JR NOTE: returned from network for", url)
+      resolve(files);
+    } catch (e) {
+      reject();
+      return [];
+    }
+  })
+  cachedEverthing[url] = promise;
+  return promise;
 }
