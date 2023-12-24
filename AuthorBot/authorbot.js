@@ -129,7 +129,45 @@ const processGopher = async (location, container, contents)=>{
 
 //in addition to printing out facts, add clases to container so i can filter (so that'll include NoNorth etc)
 const processBathroom  = async (location, container, contents)=>{
+  let defaultBlurb = await isBlurbDefault(location);
+  if(defaultBlurb){
+    contents.innerHTML += `<li>The emptiness is echoing.`;
+    container.classList.add("default-blurb");
+  }else{
+    container.classList.add("no-default-blurb");
+  }
 
+  let ramble = await isThereStore(location);
+  if(ramble){
+    contents.innerHTML += `<li>JR hid something there.`;
+    container.classList.add("ramble");
+  }else{
+    container.classList.add("no-ramble");
+  }
+
+  let store = await isThereStore(location);
+  if(store){
+    contents.innerHTML += `<li>You can shop.`;
+    container.classList.add("shop");
+  }else{
+    container.classList.add("no-shop");
+  }
+
+  let interloper = await isThereInterloper(location);
+  if(interloper){
+    contents.innerHTML += `<li>There is an interloper.`;
+    container.classList.add("interloper");
+  }else{
+    container.classList.add("no-interloper");
+  }
+
+  let ab = await isThereAB(location);
+  if(ab){
+    contents.innerHTML += `<li>It seems I am there.`;
+    container.classList.add("ab-loc");
+  }else{
+    container.classList.add("no-ab-loc");
+  }
 }
 
 
@@ -156,6 +194,66 @@ const isItBathroom = async (location) => {
     const data = await httpGetAsync(`${location}/bathroom.html`);
     if (data) {
       return gimmeFacts(`${location}/bathroom.html`);
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
+
+const isBlurbDefault = async (location) => {
+  try {
+    const data = await httpGetAsync(`${location}/blurb.txt`);
+    if (data && data === "The emptiness is echoing.") {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
+
+const isThereStore = async (location) => {
+  try {
+    const data = await httpGetAsync(`${location}/store_inventory`);
+    if (data) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
+
+const isThereInterloper = async (location) => {
+  try {
+    const data = await httpGetAsync(`${location}/interloper.js`);
+    if (data) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
+
+const isThereAB = async (location) => {
+  try {
+    const data = await httpGetAsync(`${location}/authorbot.js`);
+    if (data) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
+
+const isThereRamble = async (location) => {
+  try {
+    const data = await httpGetAsync(`${location}/ramble.txt`);
+    if (data) {
+      return true;
     }
   } catch (e) {
     return false;
