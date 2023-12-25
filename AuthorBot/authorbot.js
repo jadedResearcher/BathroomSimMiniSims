@@ -216,6 +216,7 @@ const renderFilter = () => {
     }
 
   }
+  setCount();
 
 }
 
@@ -367,8 +368,7 @@ const isItBathroom = async (location) => {
 const isBlurbDefault = async (location) => {
   try {
     const data = await httpGetAsync(`${location}/blurb.txt`);
-    console.log("JR NOTE: data is", data)
-    if (data && data === "The emptiness is echoing.") {
+    if (data && data.includes("The emptiness is echoing.")) {
       return true;
     }
   } catch (e) {
