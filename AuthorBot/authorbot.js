@@ -110,7 +110,6 @@ const processOneLocation = async (location, index) => {
   title.style.direction = "rtl";
   title.innerText = location;
   const contents = createElementWithClassAndParent("div", container);
-
   let gopher = await isItGopher(location);
   if (gopher) {
     title.innerText += "(Gopher)"
@@ -146,6 +145,11 @@ const processOneLocation = async (location, index) => {
     title.innerText += "(It is not supposed to be possible to be both.)"
     contents.innerHTML += `<a target="_blank" href='${location}/bathroom.html'>Visit</a>`;
     contents.innerHTML += `<a target="_blank" href='${location}/waypoint.txt'>Visit</a><Br><Br>`;
+
+  }
+
+  if(!gopher && !bathroom){
+    title.innerText += "(I don't know what this is...)"
 
   }
 
@@ -496,7 +500,7 @@ const checkForCommonMazeExits = async (location) => {
       if (data && data.includes("<html>")) {
         ret.push(exit);
       } else {
-        ret.push(`${exit}(FALSE PATH)`);
+        ret.push(`${exit}`);
       }
     } catch (e) {
       //its not there, its fine
