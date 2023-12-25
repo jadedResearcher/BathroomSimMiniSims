@@ -10,6 +10,11 @@
   <script src="authorbot.js"></script>
 
   <style>
+    @font-face {
+      font-family: digital;
+      src: url("ds_digital/DS-DIGI.TTF");
+    }
+
     body {
       background: #2a2b31;
       font-family: 'Courier New', Courier, monospace;
@@ -38,6 +43,7 @@
       display: flex;
       justify-content: space-between;
       width: 110%;
+      margin-top: 50px;
     }
 
     .audio-icon {
@@ -110,6 +116,17 @@
       right: 130px;
       animation: hover 13s ease-in-out infinite, glow 13s ease-in-out infinite;
       cursor: pointer;
+    }
+
+    #timer {
+      position: fixed;
+      top: 13px;
+      z-index: 1001;
+      right: 13px;
+      color: #00ff00;
+      font-family: digital;
+      font-size: 31px;
+      background: black;
     }
 
 
@@ -444,6 +461,8 @@
 
       </div>
     </div>
+    <div id="timer">Time Elapsed: 0 seconds</div>
+
     <div id="room-container">
       <img class="bathroom" src="full_bathroom.png">
       <div id="blurb" style="color: red;">
@@ -451,6 +470,8 @@
           areas of
           the maze that are strange, interesting and otherwise noteworthy without having to be lost for hundreds of
           hours.</p>
+          <div id="results"></div>
+
         <div id="controls">
           <label for="filter">
             Filter:
@@ -460,7 +481,6 @@
           </select>
           <div id="count">Count:</div>
         </div>
-        <div id="results"></div>
       </div>
 
     </div>

@@ -358,7 +358,7 @@ const getImagesOld = async (url) => {
 //since using this will mean you don't have anything on screen yet, you'll want some kinda placeholder
 const httpGetAsync = async (theUrl) => {
   return new Promise(function (resolve, reject) {
-
+    
     let xhr = new XMLHttpRequest();
     try {
       xhr.open("get", theUrl);

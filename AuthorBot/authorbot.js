@@ -10,12 +10,32 @@ She has been having a well deserved break hanging out with Paladyn and being on 
 She always has my back!
 */
 
-let roomsChecked = 0;
 
+/*
+time is a flat circle. AB is back but different
+*/
+let roomsChecked = 0;
+let pausedForHumanIntervention = false;
+//if an exact url was in here don't do it again, just stop
+let searchedLocations = [];
+//if i find an identical timestamp its the same room, even if it has a different address
+let timeStampsSeen = [];
 let base_location = window.location.href.includes("index") ? window.location.href.split("index.html")[0] : window.location.href.split("?")[0];
 let select;
+let timer;
+
+let startTime = new Date();
+
+const timeElapsedInSeconds = (start, end) => {
+  const ret = (end.getTime() - start.getTime()) / 1000;;
+  timer.innerHTML = "Time Elapsed: " + ret;
+  return ret;
+}
+
+
 const initAB = () => {
   select = document.querySelector("#filter");
+  timer = document.querySelector('#timer');
   select.onchange = (e) => {
     applyFilter(e.target.value);
   }
@@ -36,6 +56,8 @@ const initAB = () => {
 
 const process = async () => {
   roomsChecked = 0;
+  pausedForHumanIntervention = false;
+  startTime = new Date();
   const input = document.querySelector("#interloper-id");
 
   const container = document.querySelector("#results");
@@ -46,9 +68,14 @@ const process = async () => {
 
 }
 
+
 const processAllExitsFromLocation = async (result) => {
-  if (!result) { return };
+  if (!result || pausedForHumanIntervention) { return };
   let { location, exits } = result;
+
+  if (!exits) {
+    return;
+  }
   for (let exit of exits) {
     let new_result = await processOneLocation(`${location}/${exit}`, roomsChecked);
     processAllExitsFromLocation(new_result)
@@ -56,13 +83,29 @@ const processAllExitsFromLocation = async (result) => {
 }
 
 const processOneLocation = async (location, index) => {
-  const parent = document.querySelector("#results");
-
-  roomsChecked++;
-  if (index > 13) {
+  if (pausedForHumanIntervention) {
     return;
   }
+  const parent = document.querySelector("#results");
+  //do as many as you can in 13 seconds
+
   const container = createElementWithClassAndParent("div", parent, "ab-entry"); //this will collect classes showing facts about it so i can filter
+  if (timeElapsedInSeconds(startTime, new Date()) > 13 || index > 1113) {
+    pausedForHumanIntervention = true;
+    container.innerHTML = `<hr>13 seconds elapsed. Pausing for Human Evaluation. This is necessary for Loop Prevention.</hr>`;
+    return [];
+  }
+  roomsChecked++;
+  if (searchedLocations.includes(location)) {
+    container.classList.add("repeat")
+
+    container.innerHTML = `REPEAT DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under the exact same address. Skipping.`;
+    const body = document.querySelector("body")
+    body.scrollTop = body.scrollHeight;
+    return [];
+  }
+  searchedLocations.push(location);
+
   const title = createElementWithClassAndParent("h2", container);
   title.style.direction = "rtl";
   title.innerText = location;
@@ -74,6 +117,12 @@ const processOneLocation = async (location, index) => {
     contents.innerHTML += `<a target="_blank" href='${location}/waypoint.txt'>Visit</a><br><br>`;
 
     contents.innerHTML += `<li><b>Date Modified:</b> ${gopher.date}<li><b>Size:</b> ${gopher.size}`;
+    if (timeStampsSeen.includes(gopher.date)) {
+      container.classList.add("loop")
+      container.innerHTML = `LOOP DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under a different address. Skipping.`;
+      return;
+    }
+    timeStampsSeen.push(gopher.date);
     processGopher(location, container, contents);
 
   }
@@ -84,6 +133,12 @@ const processOneLocation = async (location, index) => {
     contents.innerHTML += `<a target="_blank" href='${location}/bathroom.html'>Visit</a><br><br>`;
 
     contents.innerHTML += `<li><b>Date Modified:</b> ${bathroom.date}<li><b>Size:</b> ${bathroom.size}`;
+    if (timeStampsSeen.includes(bathroom.date)) {
+      container.classList.add("loop")
+      container.innerHTML = `LOOP DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under a different address. Skipping.`;
+      return;
+    }
+    timeStampsSeen.push(bathroom.date);
     processBathroom(location, container, contents)
 
   }
@@ -125,6 +180,9 @@ const processOneLocation = async (location, index) => {
   }
 
   renderFilter();
+  const body = document.querySelector("body")
+  body.scrollTop = body.scrollHeight;
+
   return { location, exits: branchPoints };
 
 }
@@ -148,13 +206,10 @@ const setCount = () => {
 
 
 const renderFilter = () => {
-  console.log("JR NOTE: rendering filter")
   select.innerHTML = "";
   const tags = fetchTags();
-  console.log("JR NOTE: tags are", tags)
   for (let tag of tags) {
     if (tag.trim()) {
-      console.log("JR NOTE: creating option")
       const option = createElementWithClassAndParent("option", select)
       option.value = tag;
       option.innerText = tag;
@@ -312,6 +367,7 @@ const isItBathroom = async (location) => {
 const isBlurbDefault = async (location) => {
   try {
     const data = await httpGetAsync(`${location}/blurb.txt`);
+    console.log("JR NOTE: data is", data)
     if (data && data === "The emptiness is echoing.") {
       return true;
     }
@@ -323,7 +379,7 @@ const isBlurbDefault = async (location) => {
 
 const isThereStore = async (location) => {
   try {
-    const everything = await getEverything(location + "store_inventory/");
+    const everything = await getEverything(location + "/store_inventory/");
     if (everything) {
       return everything.length;
     }
