@@ -14,6 +14,7 @@ She always has my back!
 /*
 time is a flat circle. AB is back but different
 */
+//god i am so lazy right now but its literally christmas so, messy code is my gift to future me
 let roomsChecked = 0;
 let pausedForHumanIntervention = false;
 //if an exact url was in here don't do it again, just stop
@@ -23,6 +24,9 @@ let timeStampsSeen = [];
 let base_location = window.location.href.includes("index") ? window.location.href.split("index.html")[0] : window.location.href.split("?")[0];
 let select;
 let timer;
+
+//{function, params to call later
+const functionsToResume = [];
 
 let startTime = new Date();
 
@@ -61,30 +65,52 @@ const process = async () => {
   const input = document.querySelector("#interloper-id");
 
   const container = document.querySelector("#results");
-  container.innerHTML += `<br><br>It seems you have asked about: ${input.value}. <br><br>Please wait while I Guide you to information regarding it. JR's Mind can be a convoluted place, so this may take a few minutes. `;
+  const newStuff = createElementWithClassAndParent("div", container);
+
+  newStuff.innerHTML = `<br><br>It seems you have asked about: ${input.value}. <br><br>Please wait while I Guide you to information regarding it. JR's Mind can be a convoluted place, so this may take a few minutes. `;
 
   let result = await processOneLocation(input.value, roomsChecked);
-  processAllExitsFromLocation(result, 0)
+  if (result && result.exits && result.exits.length > 0) {
+    processAllExitsFromLocation(result, 0)
+  } else {
+    processExitsJustInCase(input.value, 0);
+  }
+}
 
+const processExitsJustInCase = async (location) => {
+  let branchPoints = await checkForCommonMazeExits(location);
+  processAllExitsFromLocation({ location, exits: branchPoints });
 }
 
 
 const processAllExitsFromLocation = async (result) => {
-  if (!result || pausedForHumanIntervention) { return };
+  if (!result || pausedForHumanIntervention) {
+    functionsToResume.push({ function: processAllExitsFromLocation, params: [result] });
+
+    return []
+  };
   let { location, exits } = result;
 
   if (!exits) {
-    return;
+    return [];
   }
+
+
+  let results = [];
   for (let exit of exits) {
     let new_result = await processOneLocation(`${location}/${exit}`, roomsChecked);
-    processAllExitsFromLocation(new_result)
+    results.push(new_result);
+    //let child_results = await processAllExitsFromLocation(new_result);
+
   }
+  return results;
+
 }
 
 const processOneLocation = async (location, index) => {
   if (pausedForHumanIntervention) {
-    return;
+    functionsToResume.push({ function: processOneLocation, params: [location, index] });
+    return { error: "TIMEOUT" };
   }
   const parent = document.querySelector("#results");
   //do as many as you can in 13 seconds
@@ -92,8 +118,21 @@ const processOneLocation = async (location, index) => {
   const container = createElementWithClassAndParent("div", parent, "ab-entry"); //this will collect classes showing facts about it so i can filter
   if (timeElapsedInSeconds(startTime, new Date()) > 13 || index > 1113) {
     pausedForHumanIntervention = true;
-    container.innerHTML = `<hr>13 seconds elapsed. Pausing for Human Evaluation. This is necessary for Loop Prevention.</hr>`;
-    return [];
+    container.innerHTML = `<hr>13 seconds elapsed. Pausing for Human Evaluation. Have you found what you need yet?
+    </hr>`;
+    functionsToResume.push({ function: processOneLocation, params: [location, index] });
+    const button = createElementWithClassAndParent("button", container,"new-root-button");
+    button.innerText="No, Resume Search"
+    button.onclick = ()=>{
+      button.remove();
+      startTime = new Date();
+      pausedForHumanIntervention= false;
+      for(let func of functionsToResume ){
+        func.function(...func.params);
+      }
+    }
+
+    return { error: "TIMEOUT" };
   }
   roomsChecked++;
   if (searchedLocations.includes(location)) {
@@ -102,7 +141,7 @@ const processOneLocation = async (location, index) => {
     container.innerHTML = `REPEAT DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under the exact same address. Skipping.`;
     const body = document.querySelector("body")
     body.scrollTop = body.scrollHeight;
-    return [];
+    return { error: "Repeat" };
   }
   searchedLocations.push(location);
 
@@ -119,7 +158,7 @@ const processOneLocation = async (location, index) => {
     if (timeStampsSeen.includes(gopher.date)) {
       container.classList.add("loop")
       container.innerHTML = `LOOP DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under a different address. Skipping.`;
-      return;
+      return { error: "Loop" };
     }
     timeStampsSeen.push(gopher.date);
     processGopher(location, container, contents);
@@ -135,7 +174,7 @@ const processOneLocation = async (location, index) => {
     if (timeStampsSeen.includes(bathroom.date)) {
       container.classList.add("loop")
       container.innerHTML = `LOOP DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under a different address. Skipping.`;
-      return;
+      return { error: "Loop" };
     }
     timeStampsSeen.push(bathroom.date);
     processBathroom(location, container, contents)
@@ -143,14 +182,19 @@ const processOneLocation = async (location, index) => {
   }
   if (gopher && bathroom) {
     title.innerText += "(It is not supposed to be possible to be both.)"
+    timeStampsSeen.push(bathroom.date);
+    timeStampsSeen.push(gopher.date);
     contents.innerHTML += `<a target="_blank" href='${location}/bathroom.html'>Visit</a>`;
     contents.innerHTML += `<a target="_blank" href='${location}/waypoint.txt'>Visit</a><Br><Br>`;
+    processGopher(location, container, contents);
+    processBathroom(location, container, contents)
 
   }
 
-  if(!gopher && !bathroom){
+  if (!gopher && !bathroom) {
     title.innerText += "(I don't know what this is...)"
-
+    contents.innerHTML += `<a target="_blank" href='${location}'>Visit</a><br><br>`;
+    processUnknown(location, container, contents);
   }
 
   title.innerText += `#${index}`
@@ -187,7 +231,10 @@ const processOneLocation = async (location, index) => {
   const body = document.querySelector("body")
   body.scrollTop = body.scrollHeight;
 
-  return { location, exits: branchPoints };
+
+
+  processAllExitsFromLocation({ container, location, exits: branchPoints });
+  return { container, location, exits: branchPoints };
 
 }
 
@@ -246,6 +293,13 @@ const fetchTags = () => {
   return uniq(ret.split(" "));
 }
 
+const processUnknown = async (location, container, contents) => {
+
+  timeStampsSeen.push(results.date);
+  let data = await dataOFirstFile(location);
+  contents.innerHTML += `<li><b>Date Modified:</b> ${data.date}<li><b>Size:</b> ${data.size}`;
+}
+
 //in addition to printing out facts, add clases to container so i can filter (so that'll include NoNorth etc)
 const processGopher = async (location, container, contents) => {
 
@@ -288,7 +342,7 @@ const processBathroom = async (location, container, contents) => {
   }
 
   let audio = await grabAudioAB(location);
-  if (images) {
+  if (audio) {
     contents.innerHTML += `<li>There are ${audio} audio files in the bathroom.`;
     container.classList.add("audio");
   } else {
@@ -378,6 +432,28 @@ const isBlurbDefault = async (location) => {
   } catch (e) {
     return false;
   }
+  return false;
+}
+
+const dataOFirstFile = async (location) => {
+  try {
+    const dataLocation = gimmeFacts(location); //the location itself is a file with content
+
+    if (dataLocation && dataLocation.date) {
+      return dataLocation;
+    }
+
+    //i couldn't get data on that location (was it an index file?)
+    //so instead trying for the things inside it
+    const everything = await getEverything(location);
+    if (everything && everything.length > 0) {
+      const data = gimmeFacts(everything[0]);
+      return data;
+    }
+  } catch (e) {
+    return false;
+  }
+
   return false;
 }
 
