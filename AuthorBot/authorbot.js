@@ -226,6 +226,15 @@ const processOneLocation = async (location, index) => {
   } else {
     container.classList.add("no-east");
   }
+  if(!n && !s && !e){
+    container.classList.add("no-exits")
+  }else   if(!n || !s || !e){
+    container.classList.add("missing-at-least-one-exits")
+  }
+
+  if(n && s && e){
+    container.classList.add("all-exits")
+  }
 
   renderFilter();
   const body = document.querySelector("body")
