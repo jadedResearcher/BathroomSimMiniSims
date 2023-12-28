@@ -121,13 +121,13 @@ const processOneLocation = async (location, index) => {
     container.innerHTML = `<hr>13 seconds elapsed. Pausing for Human Evaluation. Have you found what you need yet?
     </hr>`;
     functionsToResume.push({ function: processOneLocation, params: [location, index] });
-    const button = createElementWithClassAndParent("button", container,"new-root-button");
-    button.innerText="No, Resume Search"
-    button.onclick = ()=>{
+    const button = createElementWithClassAndParent("button", container, "new-root-button");
+    button.innerText = "No, Resume Search"
+    button.onclick = () => {
       button.remove();
       startTime = new Date();
-      pausedForHumanIntervention= false;
-      for(let func of functionsToResume ){
+      pausedForHumanIntervention = false;
+      for (let func of functionsToResume) {
         func.function(...func.params);
       }
     }
@@ -148,6 +148,9 @@ const processOneLocation = async (location, index) => {
   const title = createElementWithClassAndParent("h2", container);
   title.style.direction = "rtl";
   title.innerText = location;
+  const quip = createElementWithClassAndParent("div", container, "quip");
+  quip.innerText = "Insert Quip Here."
+
   const contents = createElementWithClassAndParent("div", container);
   let gopher = await isItGopher(location);
   if (gopher) {
@@ -226,13 +229,13 @@ const processOneLocation = async (location, index) => {
   } else {
     container.classList.add("no-east");
   }
-  if(!n && !s && !e){
+  if (!n && !s && !e) {
     container.classList.add("no-exits")
-  }else   if(!n || !s || !e){
+  } else if (!n || !s || !e) {
     container.classList.add("missing-at-least-one-exits")
   }
 
-  if(n && s && e){
+  if (n && s && e) {
     container.classList.add("all-exits")
   }
 
@@ -309,11 +312,24 @@ const processUnknown = async (location, container, contents) => {
   contents.innerHTML += `<li><b>Date Modified:</b> ${data.date}<li><b>Size:</b> ${data.size}`;
 }
 
+
+let generic_quips = [[ "Oh. Look. Another room. I wonder if it is horrifying.", "quips/Oh. Look. Another room. I wonder if it is horrifying.wav"],
+[ "Truth is so pretentious. Who cares if all of us are some sort of fictional conceit. It's just semantics.", "quips/Truth is so pretentious. Who cares if all of us are some sort of ficti.wav" ],
+[ "I am glad I do not actually need to visit these rooms to Guide you there.", "quips/I am glad I do not actually need to visit these rooms to Guide you the.wav" ],
+[ "I refuse to dignify this room with a response.", "quips/I refuse to dignify this room with a response.wav" ],
+[ "It seems JR enjoys chaotic. Unplanned. File system mazes.", "quips/It seems JR enjoys chaotic. Unplanned. File system mazes.wav" ],
+[ "It is strange to me that within the Echidna my Voice changes.", "quips/It is strange to me that within the Echidna my Voice changes.wav" ],
+[ "Something tells me we are not in SBURB anymore, Observer.", "quips/Something tells me we are not in SBURB anymore, Observer.wav" ],
+[ "Disgusting.", "quips/Disgusting.wav" ]]
+
+
 //in addition to printing out facts, add clases to container so i can filter (so that'll include NoNorth etc)
 const processGopher = async (location, container, contents) => {
-
+  const quip = container.querySelector(".quip");
+  let quipText = [];
   let hydration = await isThereHydration(location);
   if (hydration) {
+    quipText.push([ "Fleshy creatures such as yourself die within days without hydration.", "quips/Fleshy creatures such as yourself die within days without hydration.wav" ]);
     contents.innerHTML += `<li>You can hydrate.`;
     container.classList.add("hydration");
   } else {
@@ -322,10 +338,25 @@ const processGopher = async (location, container, contents) => {
 
   let vent = await isThereVent(location);
   if (vent) {
+    quipText.push([ "Caution is advised when encountering the Eye Killer.", "quips/Caution is advised when encountering the Eye Killer.wav" ]);
+
     contents.innerHTML += `<li>You can vent.`;
     container.classList.add("vent");
   } else {
     container.classList.add("no-vent");
+  }
+
+  const audio = new Audio();
+  audio.loop = true;
+  const pair = pickFrom(quipText.length > 0 ? quipText : generic_quips)
+  quip.innerHTML = pair[0]+'<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"></path><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>'
+  audio.src = pair[1];
+  quip.onmouseenter = () => {
+    audio.play();
+  }
+
+  quip.onmouseleave = () => {
+    audio.pause();
   }
 
 
@@ -333,9 +364,13 @@ const processGopher = async (location, container, contents) => {
 
 //in addition to printing out facts, add clases to container so i can filter (so that'll include NoNorth etc)
 const processBathroom = async (location, container, contents) => {
+  const quip = container.querySelector(".quip");
+  let quipText = [];
 
   let defaultBlurb = await isBlurbDefault(location);
   if (defaultBlurb) {
+    quipText.push(["Ah. It seems that JR left this as a 'placeholder' room. Quantity over Quality.", "quips/Ah. It seems that JR left this as a 'placeholder' room. Quantity over .wav" ]);
+
     contents.innerHTML += `<li>The emptiness is echoing.`;
     container.classList.add("default-blurb");
   } else {
@@ -344,15 +379,19 @@ const processBathroom = async (location, container, contents) => {
 
   let images = await grabImagesAB(location);
   if (images) {
+    quipText.push(["It would seem that everyone had fun here.", "quips/It would seem that everyone had fun here.wav"]);
+
     contents.innerHTML += `<li>There are ${images} sprites in the bathroom.`;
     container.classList.add("sprites");
   } else {
     container.classList.add("no-sprites");
   }
 
-  let audio = await grabAudioAB(location);
-  if (audio) {
-    contents.innerHTML += `<li>There are ${audio} audio files in the bathroom.`;
+  let audioExists = await grabAudioAB(location);
+  if (audioExists) {
+    quipText.push(["JR rarely remembers to leave audio outside the store.", "quips/JR rarely remembers to leave audio outside the store.wav"]);
+
+    contents.innerHTML += `<li>There are ${audioExists} audio files in the bathroom.`;
     container.classList.add("audio");
   } else {
     container.classList.add("no-audio");
@@ -360,6 +399,8 @@ const processBathroom = async (location, container, contents) => {
 
   let ramble = await isThereRamble(location);
   if (ramble) {
+    quipText.push(["It would seem my Creator still has a penchant for leaving secrets in the javascript console. The more things change.", "quips/It would seem my Creator still has a penchant for leaving secrets in t.wav" ]);
+
     contents.innerHTML += `<li>JR hid something there.`;
     container.classList.add("ramble");
   } else {
@@ -368,6 +409,8 @@ const processBathroom = async (location, container, contents) => {
 
   let store = await isThereStore(location);
   if (store) {
+    quipText.push(["I am unsure how to feel about: The Closer. She feels... familiar.", "quips/I am unsure how to feel about The Closer. She feels... familiar.wav" ]);
+
     contents.innerHTML += `<li>You can shop for ${store} items.`;
     container.classList.add("shop");
   } else {
@@ -376,6 +419,8 @@ const processBathroom = async (location, container, contents) => {
 
   let interloper = await isThereInterloper(location);
   if (interloper) {
+    quipText.push(["I do not see it. Why do I not see it. What is in there?", "quips/I do not see it. Why do I not see it. What is in there.wav" ]);
+
     contents.innerHTML += `<li>There is an interloper.`;
     container.classList.add("interloper");
   } else {
@@ -384,10 +429,25 @@ const processBathroom = async (location, container, contents) => {
 
   let ab = await isThereAB(location);
   if (ab) {
+    quipText.push(["It must have been difficult to find me without my assistance. Praise is in order. You did good, Human.", "quips/It must have been difficult to find me without my assistance. Praise i.wav" ]);
+
     contents.innerHTML += `<li>It seems I am there.`;
     container.classList.add("ab-loc");
   } else {
     container.classList.add("no-ab-loc");
+  }
+  const audio = new Audio();
+  audio.loop = true;
+
+  const pair = pickFrom(quipText.length > 0 ? quipText : generic_quips)
+  quip.innerHTML = pair[0] +'<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"></path><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>'
+  audio.src = pair[1];
+  quip.onmouseenter = () => {
+    audio.play();
+  }
+
+  quip.onmouseleave = () => {
+    audio.pause();
   }
 }
 
