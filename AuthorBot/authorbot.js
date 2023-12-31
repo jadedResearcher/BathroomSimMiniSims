@@ -240,6 +240,11 @@ const processOneLocation = async (location, index) => {
     container.classList.add("all-exits")
   }
 
+  //sin,  leveraging that true counts as 1 and false counts as 0
+  if (n + s + e === 1) {
+    container.classList.add("single-exit")
+  }
+
   renderFilter();
   const body = document.querySelector("body")
   body.scrollTop = body.scrollHeight;
