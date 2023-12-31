@@ -9,7 +9,7 @@ She has been having a well deserved break hanging out with Paladyn and being on 
 
 She always has my back!
 */
-
+//completely unrelated to anything, but this is a really cool story IC found and i wanted to share it:     https://www.thedarkmagazine.com/if-someone-you-love-has-become-a-vurdalak/ 
 
 /*
 time is a flat circle. AB is back but different
@@ -38,6 +38,7 @@ const timeElapsedInSeconds = (start, end) => {
 
 
 const initAB = () => {
+  console.log("JR NOTE: did you know you could search through GopherSim and other file system mazes like this too? Just make it the html version the top level URL to search.")
   select = document.querySelector("#filter");
   timer = document.querySelector('#timer');
   select.onchange = (e) => {
@@ -49,7 +50,7 @@ const initAB = () => {
   container.append(closerSprite);
 
   const input = document.querySelector("#interloper-id");
-  input.value = window.location.href.replaceAll("bathroom.html", "");
+  input.value = "http://farragofiction.com/CatalystsBathroomSim";
   const form = document.querySelector("#interloper-form");
   form.onsubmit = (e) => {
     e.preventDefault();
@@ -157,7 +158,7 @@ const processOneLocation = async (location, index) => {
     title.innerText += "(Gopher)"
     contents.innerHTML += `<a target="_blank" href='${location}/waypoint.txt'>Visit</a><br><br>`;
 
-    contents.innerHTML += `<li><b>Date Modified:</b> ${gopher.date}<li><b>Size:</b> ${gopher.size}`;
+    contents.innerHTML += `<li><b>Date Modified:</b> ${gopher.date}<li><b>Size:</b> ${gopher.size}<li>Depth: ${location.split("/").length}`;
     if (timeStampsSeen.includes(gopher.date)) {
       container.classList.add("loop")
       container.innerHTML = `LOOP DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under a different address. Skipping.`;
@@ -173,7 +174,7 @@ const processOneLocation = async (location, index) => {
     title.innerText += "(Bathroom)"
     contents.innerHTML += `<a target="_blank" href='${location}/bathroom.html'>Visit</a><br><br>`;
 
-    contents.innerHTML += `<li><b>Date Modified:</b> ${bathroom.date}<li><b>Size:</b> ${bathroom.size}`;
+    contents.innerHTML += `<li><b>Date Modified:</b> ${bathroom.date}<li><b>Size:</b> ${bathroom.size}<li>Depth: ${location.split("/").length}`;
     if (timeStampsSeen.includes(bathroom.date)) {
       container.classList.add("loop")
       container.innerHTML = `LOOP DISCOVERED: <span style="overflow: hidden; direction: rtl; max-width: 100px; " alt="${location}" title="${location}">${location}</span> ALREADY REPORTED under a different address. Skipping.`;
@@ -309,7 +310,7 @@ const processUnknown = async (location, container, contents) => {
 
   timeStampsSeen.push(results.date);
   let data = await dataOFirstFile(location);
-  contents.innerHTML += `<li><b>Date Modified:</b> ${data.date}<li><b>Size:</b> ${data.size}`;
+  contents.innerHTML += `<li><b>Date Modified:</b> ${data.date}<li><b>Size:</b> ${data.size}<li>Depth: ${location.split("/").length}</li>`;
 }
 
 
@@ -437,7 +438,6 @@ const processBathroom = async (location, container, contents) => {
     container.classList.add("no-ab-loc");
   }
   const audio = new Audio();
-  audio.loop = true;
 
   const pair = pickFrom(quipText.length > 0 ? quipText : generic_quips)
   quip.innerHTML = pair[0] +'<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"></path><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>'
