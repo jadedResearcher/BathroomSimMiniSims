@@ -260,3 +260,11 @@ fuckShitUP = async (fuckery_quotient, wrapper, images, secret_image, rand) => {
   }
 }
 
+
+/*
+i have actually been having so much fun adding foley to these lil ai videos my nesting partner has been making
+
+its just a nice lil new hobby to pick up. 
+
+making spooky noises with either my voice or the things around me.
+*/
