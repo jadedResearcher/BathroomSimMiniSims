@@ -8,7 +8,7 @@ do
   echo "Processing $f file...I think it should be ${fileName}"
 
   # take action on each file. $f store current file name 
-ffmpeg -i ${f} -r 0.25  ${fileName}%04d.png
+ffmpeg -i ${f} -r 1  ${fileName}%04d.png
 
 
 done

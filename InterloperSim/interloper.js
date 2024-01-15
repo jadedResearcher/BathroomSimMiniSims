@@ -83,6 +83,10 @@ const mapping = {
   ,5555: {video: "rewards/wiggler_eater.mp4",images:["http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif"]}
   ,1001: {video: "rewards/witherby.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/thebois.png","http://farragofiction.com/TwoGayJokes/Stories/witherby.png","http://farragofiction.com/TwoGayJokes/Stories/peeweesnewbestie.png","http://farragofiction.com/TwoGayJokes/Stories/who_the_fuck_are_you.gif","rewards/thesolemn.png","http://farragofiction.com/TwoGayJokes/Stories/zoomies.gif"]}
   ,217: {video: "rewards/zapanio_is_not_homestuck.mp4",images:["rewards/approved.gif"]}
+  ,33: {video: "rewards/bloodybath.mp4",images:["rewards/bloodybathroom.gif"]}
+  ,85: {video: "rewards/media_player_glitch.mp4",images:["rewards/normal_and_fine.png"]}
+  ,81: {video: "rewards/vlc_glitch.mp4",images:["rewards/normal_and_fine.png"]}
+  ,42: {video: "rewards/dentata.mp4",images:["rewards/dentata1.png","rewards/dentata2.png","rewards/dentata3.png","rewards/dentata4.png","rewards/dentata5.png","rewards/dentata6.png","rewards/dentata7.png"]}
 
   ,6666: {video: "rewards/the_mediums_message.mp4",images:["rewards/medium7.png","rewards/medium6.png","rewards/medium5.png","rewards/medium4.png","rewards/medium3.png","rewards/medium2.png","rewards/medium1.png"] }
 
