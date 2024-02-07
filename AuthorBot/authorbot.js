@@ -72,6 +72,7 @@ const massageURL = (value)=>{
   if(!window.location.href.includes("www.farragofiction") && value.includes("www.farragofiction")){
     return value.replaceAll("www.farragofiction.com","farragofiction.com")
   }
+  return value;
 
 }
 
