@@ -76,11 +76,11 @@ const massageURL = (value)=>{
 }
 
 const process = async () => {
-  const value = massageURL(input.value)
   roomsChecked = 0;
   pausedForHumanIntervention = false;
   startTime = new Date();
   const input = document.querySelector("#interloper-id");
+  const value = massageURL(input.value)
   input.value = value; //let user know if you changed www or not
 
   const container = document.querySelector("#results");
