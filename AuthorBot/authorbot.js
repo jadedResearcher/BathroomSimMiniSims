@@ -59,7 +59,25 @@ const initAB = () => {
 
 }
 
+//so.
+// if you are on http://www.farragofiction.com and search http://farragofiction.com
+//a CORS error blocks you
+//same vice versa
+//so if you accidentally put the wrong style url in, lets massage it
+const massageURL = (value)=>{
+  if(window.location.href.includes("www.farragofiction") && !value.includes("www.farragofiction")){
+    return value.replaceAll("farragofiction.com","www.farragofiction.com")
+  }
+
+  if(!window.location.href.includes("www.farragofiction") && value.includes("www.farragofiction")){
+    return value.replaceAll("www.farragofiction.com","farragofiction.com")
+  }
+
+}
+
 const process = async () => {
+  const value = massageURL(input.value)
+  input.value = value; //let user know if you changed www or not
   roomsChecked = 0;
   pausedForHumanIntervention = false;
   startTime = new Date();
@@ -68,13 +86,13 @@ const process = async () => {
   const container = document.querySelector("#results");
   const newStuff = createElementWithClassAndParent("div", container);
 
-  newStuff.innerHTML = `<br><br>It seems you have asked about: ${input.value}. <br><br>Please wait while I Guide you to information regarding it. JR's Mind can be a convoluted place, so this may take a few minutes. `;
+  newStuff.innerHTML = `<br><br>It seems you have asked about: ${value}. <br><br>Please wait while I Guide you to information regarding it. JR's Mind can be a convoluted place, so this may take a few minutes. `;
 
-  let result = await processOneLocation(input.value, roomsChecked);
+  let result = await processOneLocation(value, roomsChecked);
   if (result && result.exits && result.exits.length > 0) {
     processAllExitsFromLocation(result, 0)
   } else {
-    processExitsJustInCase(input.value, 0);
+    processExitsJustInCase(value, 0);
   }
 }
 
@@ -423,6 +441,16 @@ const processBathroom = async (location, container, contents) => {
     container.classList.add("no-shop");
   }
 
+  let fruit = await isThereFruit(location);
+  if (store) {
+    quipText.push(["I do not understand why Alt hates the Closer so much. Non Robots are so illogical.", "quips/I do not understand why Alt hates the Closer so much. Non Robots are s.wav" ]);
+
+    contents.innerHTML += `<li>There is fruit.`;
+    container.classList.add("fruit");
+  } else {
+    container.classList.add("no-fruit");
+  }
+
   let interloper = await isThereInterloper(location);
   if (interloper) {
     quipText.push(["I do not see it. Why do I not see it. What is in there?", "quips/I do not see it. Why do I not see it. What is in there.wav" ]);
@@ -536,6 +564,18 @@ const isThereStore = async (location) => {
     const everything = await getEverything(location + "/store_inventory/");
     if (everything) {
       return everything.length;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
+
+const isThereFruit = async (location) => {
+  try {
+    const everything = await getEverything(location + "fruit_fuckery.js");
+    if (everything) {
+      return true;
     }
   } catch (e) {
     return false;

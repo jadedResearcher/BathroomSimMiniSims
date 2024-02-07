@@ -5,109 +5,90 @@
   <meta name="description" content="Wait. Have you been here before?">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Catalyst's Bathroom Sim</title>
+  <title>FractalSim</title>
   <script src="utils.js"></script>
-  <script src="store.js"></script>
+  <script src="fractal.js"></script>
 
   <style>
+    @font-face {
+      font-family: digital;
+      src: url("ds_digital/DS-DIGI.TTF");
+    }
+
+    html,
     body {
-      background: #2a2b31;
-      font-family: 'Courier New', Courier, monospace;
-      color: #c4c4c4;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: black;
     }
 
-    #header {
-      display: flex;
-      justify-content: space-between;
-      width: 110%;
-    }
-
-    .audio-icon {
-      padding: 5px;
-      background-color: #141619;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .audio-icon svg {
-      color: #7b818a;
-      fill: #7b818a;
-    }
-
-
-    .audio-icon:hover {
-      background-color: #535358;
-    }
-
-
-    select {
-      background-color: #141619;
-      color: #7b818a;
-      border: none;
-      outline: none;
-      border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 25px;
-      cursor: pointer;
-    }
-
-    option:hover {
-      background-color: #303035;
-      box-shadow: 0 0 10px 100px #303035 inset;
-    }
-
-    option:checked {
-      background-color: #303035;
-      box-shadow: 0 0 10px 100px #303035 inset;
-    }
-
-    #container {
-      width: 507px;
-      height: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 25px;
-    }
-
-
-
-    #room-container {
-      background-color: #23252a;
-      width: 507px;
-      height: fit-content;
-      padding: 25px;
-      margin-bottom: 25px;
-      border-radius: 5px;
-      border-left: 5px solid black;
+    .container {
+      width: 1000px;
+      height: 500px;
       position: relative;
     }
 
-    #room-container .sprite {
-      position: absolute;
-      top: 0px;
-      transform: scaleX(-1);
+    #output {
+      padding: 20px;
     }
 
-    #room-container .lobster {
+    canvas {
       position: absolute;
       top: 0px;
+      left: 0px;
     }
 
-    #blurb {
-      min-height: 100px;
-      margin-top: 31px;
-      margin-left: 13px;
-      margin-right: 13px;
+    svg {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      top: 0px;
+      left: 0px;
+    }
+
+    .popup {
+      position: absolute;
+      box-shadow: -5px -5px 5px #ff0000;
+      background: black;
+      position: absolute;
+      top: 10%;
+      color: red;
+      border: 3px solid black;
+      font-size: 28px;
+      border-radius: 8px;
+      left: 10%;
+      padding: 20px;
     }
   </style>
   <script>
+    let fractal;
+
+    const popup =(text)=> {
+      const div = new DivElement()
+      div.innerHTML = (text)
+      div.classList.add("popup");
+      querySelector("body").append(div);
+      div.onmousedown = ((e) => {
+        div.remove();
+        if (!fractal.audio_playing) {
+          fractal.osc.start2(0);
+          fractal.audio_playing = true;
+        }
+      });
+    }
+
+
 
     const isItFriday = () => {
       //midnight and fridays are wungle time
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const date = new Date();
-      if(urlParams.get("friday")==="plzjrwantsin"){
+      if (urlParams.get("friday") === "plzjrwantsin") {
         return false;
       }
       if (urlParams.get("friday") || date.getHours() == 0 || date.getDay() === 5) {
@@ -117,7 +98,10 @@
     }
 
     window.onload = () => {
-      initHelpDesk();
+      popup("Click and Drag. Press keys. There's sound.");
+      fractal = new Fractal();
+      fractal.attach(querySelector('#output'));
+      initAB();
       if (isItFriday()) {
         const body = document.querySelector("body");
         body.innerHTML = `You really should take a break. This will still be here when you come back.
@@ -157,14 +141,14 @@
         `
         return;
       }
-      incrementByOne("BATHROOM_MAZE")
-      blurbFromNetwork();
-      rambleFromNetwork();
-      wireUpExits();
-      grabImages();
-      grabAudio();
+      incrementLocalStorageByOne("BATHROOM_MAZE")
+      //blurbFromNetwork();
+      //rambleFromNetwork();
+      //wireUpExits();
+      //grabImages();
+      //grabAudio();
     }
-
+    //https://www.youtube.com/watch?v=0xyH_JWlv04
     const grabAudio = async () => {
       let tmp = await getAudio(".");
       if (tmp.length > 0) {
@@ -328,16 +312,44 @@
 <body>
   <div id="container">
     <div id="header">
-      <select id="door-selection">
-        <option>🚪 NO EXITS FOUND</option>
-      </select>
-      <div id="audio-container">
+
+      <div>
+        <form id="interloper-form">
+          <input size="78" type="text" id="interloper-id"></input>
+          <br>
+          <br>
+          <button type="submit">Search for Room?</button>
+        </form>
+
+        <div id="audio-container">
+
+        </div>
 
       </div>
     </div>
+    <div id="timer">Time Elapsed: 0 seconds</div>
+
     <div id="room-container">
       <img class="bathroom" src="full_bathroom.png">
-      <div id="blurb">ERROR LOADING BLURB FILE, ARE YOU SURE YOU'RE ON A SERVER?</div>
+      <div id="blurb" style="color: red;">
+        <p>It seems you have asked about JR's automatic maze room finder. This is an application designed to find
+          areas of
+          the maze that are strange, interesting and otherwise noteworthy without having to be lost for hundreds of
+          hours.</p>
+        <p style="color:white">JR NOTE: I finally dragged the AuthorBot here from SBURBSim. Be gentle with her yeah?
+          She's still getting used to how space works over here.</p>
+        <div id="results"></div>
+
+        <div id="controls">
+          <label for="filter">
+            Filter:
+          </label>
+          <select name="filter" id="filter">
+
+          </select>
+          <div id="count">Count:</div>
+        </div>
+      </div>
 
     </div>
 
