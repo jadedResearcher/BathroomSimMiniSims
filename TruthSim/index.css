@@ -25,10 +25,21 @@ body {
   height: 100vh;
 }
 
+.gnosis-quip{
+  color: red;
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 13px;
+}
+
+.gnosis-button{
+  margin: 13px;
+}
+
 #tab-header{
   border: 1px dashed #c4c4c4;
   width: 100%;
   height: 100px;
+  display: flex;
 }
 
 #tab-content{
