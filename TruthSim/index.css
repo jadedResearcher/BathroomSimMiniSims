@@ -22,7 +22,21 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 1000px;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.stats div{
+  margin-top: 10px;
+}
+
+textarea{
+  width: 100%;
+}
+
+.stats{
+  margin: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  color: red;
 }
 
 .gnosis-quip{
@@ -44,7 +58,7 @@ body {
 
 #tab-content{
   width: 100%;
-  height: calc(100vh - 150px);
+  min-height: calc(100vh - 150px);
   border: 1px solid #c4c4c4;
   margin-top: 10px;
 }

@@ -8,9 +8,9 @@ let globalDataObject = {
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
   truthCurrentValue: 0,
+  obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
-  tabsUnlocked: []
 };
 
 window.onload = () => {
@@ -38,7 +38,7 @@ const load = () => {
     globalDataObject = JSON.parse(data);
     globalDataObject.lastLoadTimeCode = Date.now();
   }
-  
+
 }
 
 const increaseTruthBy = (amount) => {
@@ -51,11 +51,11 @@ const increaseTruthBy = (amount) => {
 const saveLoop = (saveTab) => {
   save();
   saveTab.innerText = `Last Save ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}.`;
-  setTimeout(() => { saveLoop(saveTab) }, 1000*60);
+  setTimeout(() => { saveLoop(saveTab) }, 1000 * 60);
 }
 
 const truthLoop = (truthCounter) => {
-  increaseTruthBy(1);
+  increaseTruthBy(globalDataObject.truthPerSecond);
   globalDataObject.obsessionCurrentValue++;
   truthCounter.innerText = `${globalDataObject.truthCurrentValue} Truth Obtained...`;
   setTimeout(() => { truthLoop(truthCounter) }, 1000);
@@ -91,10 +91,15 @@ const handleTruthTabButton = (header) => {
 const handleSaveTabButton = (header) => {
   const saveTab = createElementWithClassAndParent("div", header, 'tab');
   saveTab.id = "save-tab-button";
+  saveTab.onclick = () => {
+    renderSaveTab();
+  }
   const status = createElementWithClassAndParent("div", saveTab);
 
+
+
   status.innerText = `Last Save ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}.`;
-  
+
   if (globalDataObject.obsessionCurrentValue < 13) {
     saveTab.style.display = "none";
     const monitorObsession = () => {
@@ -106,30 +111,97 @@ const handleSaveTabButton = (header) => {
       setTimeout(monitorObsession, 1000);
     }
     monitorObsession();
-  }else{
+  } else {
     saveLoop(status);
   }
 
   const saveButton = createElementWithClassAndParent("button", saveTab);
   saveButton.innerText = "Manually Save";
-  saveButton.onclick = ()=>{
+  saveButton.onclick = () => {
     save();
     status.innerText = `Last Save ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}.`;
   }
 
 }
 
-const renderGnosisTab = () => {
+const renderSaveTab = () => {
+  globalTabContent.innerHTML = "";
+  const stats = createElementWithClassAndParent("div", globalTabContent, "stats");
 
+  const section1 = createElementWithClassAndParent("div", stats);
+
+  const startedPlaying = createElementWithClassAndParent("div", section1);
+  startedPlaying.innerHTML = `<b>Started Playing:</b> ` + `${new Date(globalDataObject.startedPlayingTimeCode).toLocaleDateString()},  ${new Date(globalDataObject.startedPlayingTimeCode).toLocaleTimeString()}`;
+  const lastSaved = createElementWithClassAndParent("div", section1);
+  lastSaved.innerHTML = `<b>Last Saved: </b>` + `${new Date(globalDataObject.lastSaveTimeCode).toLocaleDateString()},  ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}`;
+
+  const lastLoaded = createElementWithClassAndParent("div", section1);
+  lastLoaded.innerHTML = `<b>Last Loaded: </b>` + `${new Date(globalDataObject.lastLoadTimeCode).toLocaleDateString()},  ${new Date(globalDataObject.lastLoadTimeCode).toLocaleTimeString()}`;
+  if(globalDataObject.lastLoadTimeCode === 0){
+    lastLoaded.innerHTML = "<b>Last Loaded: </b>Never :( Don't you know Obession Is A Dangerous Thing?<br><br> As long as it auto saved recently or you manually saved, you should be able to refresh the tab and keep everything. Unless you're in incognito mode. Better to find out now than after a power outage..."
+  }
+  const section2 = createElementWithClassAndParent("div", stats);
+
+  const h2 = createElementWithClassAndParent("h2", section2);
+  h2.innerText = "Save Data Details: ";
+  const ul = createElementWithClassAndParent("ul", section2);
+  for (let k of Object.keys(globalDataObject)) {
+    const li = createElementWithClassAndParent("li", ul);
+    li.innerHTML = `<b>${k}</b>: <span>${globalDataObject[k]} ${k.includes('TimeCode') ? `(${new Date(globalDataObject[k]).toLocaleDateString()},  ${new Date(globalDataObject[k]).toLocaleTimeString()})` : ''}</span>`;
+  }
+
+  const section3 = createElementWithClassAndParent("div", stats);
+
+  const instructions = createElementWithClassAndParent("h3", section3);
+  instructions.innerText = "You can copy this to a text file to store locally. You should ABSOLUTELY do this if you are in incognito mode, clear your local data regularly or want to try playing this on another computer."
+  if (globalDataObject.truthCurrentValue > 1313) {
+    instructions.innerText += "Or if you want to hax :) :) :)"
+  }
+  const textArea = createElementWithClassAndParent("textarea", section3);
+  textArea.value = JSON.stringify(globalDataObject);
+
+  const instructions2 = createElementWithClassAndParent("h3", section3);
+  instructions2.innerText = "IF YOU CLICK THE LOAD BUTTON BELOW IT WILL OVERWRITE YOUR SAVE WITH WHATEVER IS IN THE ABOVE TEXT BOX (HOPEFULLY YOUR LOCAL SAVE FILE, RIGHT?). BE ABSOLUTELY SURE YOU WANT TO DO THIS :) :) ;)"
+
+  const button = createElementWithClassAndParent("button", section3);
+  button.innerText = "LOAD"
+  button.onclick = () => {
+    globalDataObject = JSON.parse(textArea.value);
+    globalDataObject.obviousHack = true;
+    textArea.value = JSON.stringify(globalDataObject);
+
+    //sure maybe you're loading from a past save
+    //but we all know why you're here
+    //hopefully you knew enough restraint you didn't ruin the game for yourself :) :) ;)
+  }
+
+  if (globalDataObject.allTimeTruthValue > 1313) {
+    section2.style.display = "block";
+  } else {
+    section2.style.display = "none";
+
+  }
+
+  if (globalDataObject.allTimeTruthValue > 13130) {
+    section3.style.display = "block";
+  } else {
+    section3.style.display = "none";
+
+  }
+
+}
+
+const renderGnosisTab = () => {
+  globalTabContent.innerHTML = "";
   const button = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
   button.innerText = "Surely this is enough Truth to know what is REALLY going on...";
 
   const quipEle = createElementWithClassAndParent("div", globalTabContent, "gnosis-quip");
 
-  if (globalDataObject.obsessionCurrentValue < 13) {
+  if (globalDataObject.obsessionCurrentValue < 10) {
     button.style.display = "none";
     const monitorObsession = () => {
-      if (globalDataObject.obsessionCurrentValue > 13) {
+      if (globalDataObject.obsessionCurrentValue > 10) {
         button.style.display = "block";
         return;
       }
