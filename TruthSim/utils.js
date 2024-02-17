@@ -5,7 +5,7 @@ let how_long_well_let_them_explore = 500;
 
 
 //from view-source:https://www.yyyyyyy.info/
-  function animateTitle(i) {
+  function animateTitle(i, functionToCheckIfStop) {
     var message = [
       '▁▂▃▄▅▆▇ `^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
       '▂▁▂▃▄▅▆` ^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
@@ -20,10 +20,18 @@ let how_long_well_let_them_explore = 500;
       '▃▄▅▆▇▆▅ `^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
       '▂▃▄▅▆▇▆` ^^^^^~ ░ ui▀┳╲ ☻ .info ▓'
     ]
+
+    const stopOrGo = ()=>{
+      if(functionToCheckIfStop && functionToCheckIfStop()){
+        return;
+      }else{
+        return setTimeout(()=>{animateTitle(i+1)}, 200);
+      }
+    }
     
     i >= message.length - 1 ? (i = 0) : i++,
       (document.title = message[i]),
-      setTimeout(()=>{animateTitle(i+1)}, 200)
+      stopOrGo()
   }
 
 
