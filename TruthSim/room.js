@@ -95,6 +95,8 @@ class Room {
     //console.log("JR NOTE: setting rotation", rotation)
     ele.style.filter = `hue-rotate(${rotation}deg)`;
 
+    ele.onclick=  this.onClick;
+
   }
 
 } 
