@@ -155,6 +155,8 @@ const handleMazeTabButton = (header) => {
   }
   const label = createElementWithClassAndParent("div", mazeTab);
   label.innerText = "Maze";
+  label.style.textAlign="center";
+  label.style.marginTop="30px";
 
   if (!globalDataObject.mazeUnlocked) {
     mazeTab.style.display = "none";
