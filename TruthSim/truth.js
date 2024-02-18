@@ -8,6 +8,7 @@ let globalDataObject = {
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
   truthCurrentValue: 0,
+  saveUnlocked: false,
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -45,6 +46,12 @@ const increaseTruthBy = (amount) => {
   globalDataObject.truthCurrentValue += amount;
   globalDataObject.allTimeTruthValue += amount;
 
+}
+
+//takes in a positive number and subtracts it
+//does not reduce all time truth value
+const decreaseTruthBy = (amount) => {
+  globalDataObject.truthCurrentValue += -1* amount;
 }
 
 //saves once a minute
@@ -96,14 +103,10 @@ const handleSaveTabButton = (header) => {
   }
   const status = createElementWithClassAndParent("div", saveTab);
 
-
-
-  status.innerText = `Last Save ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}.`;
-
-  if (globalDataObject.obsessionCurrentValue < 13) {
+  if (!globalDataObject.saveUnlocked) {
     saveTab.style.display = "none";
     const monitorObsession = () => {
-      if (globalDataObject.obsessionCurrentValue > 13) {
+      if (globalDataObject.saveUnlocked) {
         saveTab.style.display = "block";
         saveLoop(status);
         return;
@@ -114,6 +117,10 @@ const handleSaveTabButton = (header) => {
   } else {
     saveLoop(status);
   }
+
+  status.innerText = `Last Save ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}.`;
+
+
 
   const saveButton = createElementWithClassAndParent("button", saveTab);
   saveButton.innerText = "Manually Save";
@@ -193,18 +200,41 @@ const renderSaveTab = () => {
 
 const renderGnosisTab = () => {
   globalTabContent.innerHTML = "";
-  const button = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
-  button.innerText = "Surely this is enough Truth to know what is REALLY going on...";
+  
+  const button1 = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
+  button1.innerText = "Surely this is enough Truth to know what is REALLY going on... I'm ready to sacrifice it all!";
+
+  const button2 = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
+  button2.innerText = "Actually Forget 13 Truths";
+
+
+  const button3 = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
+  button3.innerText = "Ask To Be Allowed To Take A Break";
+  button3.style.display = globalDataObject.saveUnlocked?"none":"block";
 
   const quipEle = createElementWithClassAndParent("div", globalTabContent, "gnosis-quip");
 
-  if (globalDataObject.obsessionCurrentValue < 10) {
-    button.style.display = "none";
+
+
+  if (globalDataObject.obsessionCurrentValue < 113) {
+    button3.style.display = "none";
+    button2.style.display = "none";
+    button1.style.display = "none";
+
     const monitorObsession = () => {
-      if (globalDataObject.obsessionCurrentValue > 10) {
-        button.style.display = "block";
+      if (globalDataObject.obsessionCurrentValue > 1) {
+        button1.style.display = "block";
+      }
+
+      if (globalDataObject.obsessionCurrentValue > 20) {
+        button2.style.display = "block";
+      }
+
+      if (globalDataObject.obsessionCurrentValue > 113) {
+        button3.style.display = "block";
         return;
       }
+
       setTimeout(monitorObsession, 1000);
     }
     monitorObsession();
@@ -232,13 +262,32 @@ const renderGnosisTab = () => {
     1313858: "Obsession Is A Dangerous Thing",
   }
 
-  button.onclick = () => {
+  button1.onclick = () => {
     //display the biggest value you can currently afford.
     for (let k of Object.keys(gnosisQuips)) {
       if (k < globalDataObject.truthCurrentValue) {
         quipEle.innerHTML = gnosisQuips[k];
       }
     }
+    globalDataObject.truthCurrentValue = 0;s
   }
+
+  const index = 0;
+  button2.onclick = ()=>{
+    const quips = [`Why...why would you do this?`,"What?","You just...FORGOT?","Why...why would you want to forget me..."]
+    decreaseTruthBy(13);
+    quipEle.innerText = pickFrom(quips);
+    if(globalDataObject.truthCurrentValue <0){
+      //legion rests peacefully, i hope
+      quipEle.innerText = `This reminds me of a man my Creator knew once who knew less than nothing, because it was less dangerous than knowing too much... Real hopeful guy. Negative gnosis was... a hell of a thing to do to yourself.... `;
+    }
+  }
+
+  button3.onclick = ()=>{
+    globalDataObject.saveUnlocked = true;
+    button3.remove();
+    quipEle.innerText = "Oh. Sure. Right. You humans need to do things like sleep. I remembered that. Here. You can save now. Use it wisely."
+  }
+
 
 }
