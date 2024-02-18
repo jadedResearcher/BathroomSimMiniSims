@@ -8,6 +8,9 @@
   <title>TruthSim</title>
   <script src="utils.js"></script>
   <script src="truth.js"></script>
+  <script src="room.js"></script>
+  <script src="facts.js"></script>
+
   <link rel="stylesheet" href="index.css">
 
 
@@ -27,7 +30,7 @@
     <li>save data to local storage every minute (notify?)</li>
     <li>at 13 you get option to forget 13 Truths</li>
     <li>at 113 you get a tab that lets you save</li>
-    <li>at 217 you unlock the rabbit hole (lets you put in passwords in exchange for Facts)</li>
+    <li>at 217 you unlock the rabbit hole (lets you put in passwords in exchange for Facts, truth, truth multipliers, lore snippets, links etc)</li>
     <li>Facts have a lore snippet, a Truth Multiplier and an Obsession Multiplier and an array of themes (that parts of
       the maze can use however they want, for example spawning buttons like candybox2 spells)</li>
     <li>at 273 you get a 'map' (prototype procedural grid based map like issac has?)</li>
@@ -46,6 +49,9 @@
       <li>ROOM</li>
       <ul>
         <li>knows how to render itself (change TINT based on assigned fact themes) and runs a lil mini game</li>
+        <li>special rooms are bespoke (rabbit, shop, blorbos, etc)</li>
+        <li>ProceduralRooms are entirely procedural (combat, tiny minigames)</li>
+        <li>most of maze is procedural rooms</li>
         <li>knows unlock level (number between 0 and number of child rooms)</li>
         <li>list of facts currently assigned to room</li>
         <li>each time you beat the mini game, unlocks one new room from it till fully unlocked</li>
@@ -63,6 +69,10 @@
 
   <h1>TODO: branch loop</h1>
   <ul>
+    <li> tab that lets you store up to three mazes in your SAVE DATA so you can re-run them (if you find a good one)</li>
+    <li>if all rooms are unlocked, option to reset maze and get truth multiplier +1</li>
+    <li>some rooms only enter pool if you have enough all time truth</li>
+    <li>room that lets you reset your maze but keep everything you've found</li>
     <li>hide this somewhere https://drive.google.com/file/d/1gY8mFR74jaoj6KgbK9R2IdajabKK_hjE/view?usp=sharing ( a fact?) </li>
     <li>occasionally play weird sounds (every time you reach a new milestone of number of trailing zeroes?)</li>
     <li>closers room spawns with fact "Babies are Made of Fruit" that you can take from the room, transforming the WigglerEater into the closer and opening the shop up for business (and unlocks it)</li>

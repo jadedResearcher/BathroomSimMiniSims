@@ -49,6 +49,11 @@ textarea{
   margin: 13px;
 }
 
+.tab.active{
+  border-color: red;
+  box-shadow: 0px 0px 10px 0px red;
+}
+
 #tab-header{
   border: 1px dashed #c4c4c4;
   width: 100%;

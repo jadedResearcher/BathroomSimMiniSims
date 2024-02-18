@@ -8,7 +8,10 @@ let globalDataObject = {
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
   truthCurrentValue: 0,
+  currentMaze: [], //what maze are you currently exploring (serialized)
+  storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
   saveUnlocked: false,
+  mazeUnlocked: false,
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -51,7 +54,7 @@ const increaseTruthBy = (amount) => {
 //takes in a positive number and subtracts it
 //does not reduce all time truth value
 const decreaseTruthBy = (amount) => {
-  globalDataObject.truthCurrentValue += -1* amount;
+  globalDataObject.truthCurrentValue += -1 * amount;
 }
 
 //saves once a minute
@@ -82,6 +85,8 @@ const renderHeader = () => {
   */
   handleTruthTabButton(header);
   handleSaveTabButton(header);
+  handleMazeTabButton(header);
+
 
 }
 
@@ -90,7 +95,9 @@ const handleTruthTabButton = (header) => {
   truthCounter.id = "truth-counter";
   truthCounter.innerText = `${globalDataObject.truthCurrentValue} Truth Obtained...`
   truthLoop(truthCounter);
+  highlightTab(truthCounter);
   truthCounter.onclick = () => {
+    highlightTab(truthCounter);
     renderGnosisTab();
   }
 }
@@ -100,6 +107,7 @@ const handleSaveTabButton = (header) => {
   saveTab.id = "save-tab-button";
   saveTab.onclick = () => {
     renderSaveTab();
+    highlightTab(saveTab);
   }
   const status = createElementWithClassAndParent("div", saveTab);
 
@@ -120,14 +128,54 @@ const handleSaveTabButton = (header) => {
 
   status.innerText = `Last Save ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}.`;
 
-
-
   const saveButton = createElementWithClassAndParent("button", saveTab);
   saveButton.innerText = "Manually Save";
   saveButton.onclick = () => {
     save();
     status.innerText = `Last Save ${new Date(globalDataObject.lastSaveTimeCode).toLocaleTimeString()}.`;
   }
+
+}
+
+const highlightTab = (ele) => {
+  const tabs = document.querySelectorAll(".tab");
+  for (let t of tabs) {
+    t.classList.remove("active");
+  }
+  ele.classList.add("active");
+}
+
+const handleMazeTabButton = (header) => {
+  const mazeTab = createElementWithClassAndParent("div", header, 'tab');
+  mazeTab.id = "maze-tab-button";
+  mazeTab.onclick = () => {
+    renderMazeTab();
+    highlightTab(mazeTab);
+
+  }
+  const label = createElementWithClassAndParent("div", mazeTab);
+  label.innerText = "Maze";
+
+  if (!globalDataObject.mazeUnlocked) {
+    mazeTab.style.display = "none";
+    const monitorObsession = () => {
+      if (globalDataObject.mazeUnlocked) {
+        mazeTab.style.display = "block";
+        return;
+      }
+      setTimeout(monitorObsession, 1000);
+    }
+    monitorObsession();
+  }
+}
+
+const renderMazeTab = () => {
+  globalTabContent.innerHTML = "";
+  const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
+  mazeEle.innerText = "TODO: grid based maze like binding of issac";
+  /*
+    actually ask room.js what you should do
+  */
 
 }
 
@@ -144,7 +192,7 @@ const renderSaveTab = () => {
 
   const lastLoaded = createElementWithClassAndParent("div", section1);
   lastLoaded.innerHTML = `<b>Last Loaded: </b>` + `${new Date(globalDataObject.lastLoadTimeCode).toLocaleDateString()},  ${new Date(globalDataObject.lastLoadTimeCode).toLocaleTimeString()}`;
-  if(globalDataObject.lastLoadTimeCode === 0){
+  if (globalDataObject.lastLoadTimeCode === 0) {
     lastLoaded.innerHTML = "<b>Last Loaded: </b>Never :( Don't you know Obession Is A Dangerous Thing?<br><br> As long as it auto saved recently or you manually saved, you should be able to refresh the tab and keep everything. Unless you're in incognito mode. Better to find out now than after a power outage..."
   }
   const section2 = createElementWithClassAndParent("div", stats);
@@ -200,7 +248,7 @@ const renderSaveTab = () => {
 
 const renderGnosisTab = () => {
   globalTabContent.innerHTML = "";
-  
+
   const button1 = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
   button1.innerText = "Surely this is enough Truth to know what is REALLY going on... I'm ready to sacrifice it all!";
 
@@ -210,13 +258,18 @@ const renderGnosisTab = () => {
 
   const button3 = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
   button3.innerText = "Ask To Be Allowed To Take A Break";
-  button3.style.display = globalDataObject.saveUnlocked?"none":"block";
+  button3.style.display = globalDataObject.saveUnlocked ? "none" : "block";
+
+  const button4 = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
+  button4.innerText = "Complain About Being Bored";
+  button4.style.display = globalDataObject.mazeUnlocked ? "none" : "block";
 
   const quipEle = createElementWithClassAndParent("div", globalTabContent, "gnosis-quip");
 
 
 
-  if (globalDataObject.obsessionCurrentValue < 113) {
+  if (globalDataObject.obsessionCurrentValue < 217) {
+    button4.style.display = "none";
     button3.style.display = "none";
     button2.style.display = "none";
     button1.style.display = "none";
@@ -232,6 +285,10 @@ const renderGnosisTab = () => {
 
       if (globalDataObject.obsessionCurrentValue > 113) {
         button3.style.display = "block";
+      }
+
+      if (globalDataObject.obsessionCurrentValue > 217) {
+        button4.style.display = "block";
         return;
       }
 
@@ -269,24 +326,30 @@ const renderGnosisTab = () => {
         quipEle.innerHTML = gnosisQuips[k];
       }
     }
-    globalDataObject.truthCurrentValue = 0;s
+    globalDataObject.truthCurrentValue = 0; s
   }
 
   const index = 0;
-  button2.onclick = ()=>{
-    const quips = [`Why...why would you do this?`,"What?","You just...FORGOT?","Why...why would you want to forget me..."]
+  button2.onclick = () => {
+    const quips = [`Why...why would you do this?`, "What?", "You just...FORGOT?", "Why...why would you want to forget me..."]
     decreaseTruthBy(13);
     quipEle.innerText = pickFrom(quips);
-    if(globalDataObject.truthCurrentValue <0){
+    if (globalDataObject.truthCurrentValue < 0) {
       //legion rests peacefully, i hope
       quipEle.innerText = `This reminds me of a man my Creator knew once who knew less than nothing, because it was less dangerous than knowing too much... Real hopeful guy. Negative gnosis was... a hell of a thing to do to yourself.... `;
     }
   }
 
-  button3.onclick = ()=>{
+  button3.onclick = () => {
     globalDataObject.saveUnlocked = true;
     button3.remove();
     quipEle.innerText = "Oh. Sure. Right. You humans need to do things like sleep. I remembered that. Here. You can save now. Use it wisely."
+  }
+
+  button4.onclick = () => {
+    globalDataObject.mazeUnlocked = true;
+    button4.remove();
+    quipEle.innerText = "What are you even saying. Humans LOVE it when numbers go up. How could you POSSIBLY be bored? Ugh. Fine. I GUESS humans are only here for one thing and its disgusting. Have a maze or something."
   }
 
 
