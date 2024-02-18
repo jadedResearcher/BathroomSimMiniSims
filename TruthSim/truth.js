@@ -175,6 +175,7 @@ const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
   mazeEle.innerText = "TODO: grid based maze like binding of issac";
+  testMazeRender(mazeEle);
   /*
     actually ask room.js what you should do
   */

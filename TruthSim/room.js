@@ -23,3 +23,45 @@
         <li>others have tiny little changes that can happen based on ANY theme you give it (tyfings combat alters what enemies based on themes) (defeating a specific enemy for the first time might drop a new fact)</li>
       </ul>
 */
+
+//really just making a system that knows how to render boxes so i can wrap my head around it
+//this is created BEFORE i have a room element
+const testMazeRender = (parent)=>{
+
+  const sampleMaze = [
+    ["gold", "grey", "grey", "grey", "red", undefined]
+    ,[undefined, "grey", undefined, , "grey", undefined]
+    ,[undefined, "grey", undefined, "grey", "grey", undefined]
+    ,[undefined, "grey", undefined, "grey", "grey", "grey"]
+    ,[undefined, "grey", "blue", "grey", "grey", undefined]
+    ,[undefined, "grey", undefined, "grey", undefined, undefined]
+    ,[undefined, "grey", undefined, "grey", undefined, undefined]
+    ,[undefined, "grey", undefined, "grey", undefined, undefined]
+    ,[undefined, "grey", undefined, "grey", undefined, undefined]
+    ,["green", "grey", "grey", undefined, undefined, undefined]
+  ];
+
+  console.log("JR NOTE: going to try a maze")
+
+  for(let row of sampleMaze){
+    const rowEle = createElementWithClassAndParent("div", parent, "maze-row");
+    console.log("JR NOTE: row made from ", row)
+
+      for(let cell of row){
+        console.log("JR NOTE: cell made  from", cell)
+
+        const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+        if(cell){
+          ele.style.backgroundColor=cell;
+        }else{
+          ele.classList.add("empty-cell");
+        }
+
+      }
+
+
+  }
+
+
+
+}

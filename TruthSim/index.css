@@ -54,6 +54,24 @@ textarea{
   box-shadow: 0px 0px 10px 0px red;
 }
 
+.maze-row{
+  display: block;
+  overflow: auto;
+}
+
+
+
+.maze-cell{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid black;
+}
+
+.empty-cell{ 
+  border: 3px solid rgba(0,0,0,0);
+}
+
 #tab-header{
   border: 1px dashed #c4c4c4;
   width: 100%;
