@@ -26,38 +26,40 @@
 
 //really just making a system that knows how to render boxes so i can wrap my head around it
 //this is created BEFORE i have a room element
-const testMazeRender = (parent)=>{
+const testMazeRender = (parent) => {
+
+  const rand = new SeededRandom(13);
 
   const sampleMaze = [
-    ["gold", "grey", "grey", "grey", "red", undefined]
-    ,[undefined, "grey", undefined, , "grey", undefined]
-    ,[undefined, "grey", undefined, "grey", "grey", undefined]
-    ,[undefined, "grey", undefined, "grey", "grey", "grey"]
-    ,[undefined, "grey", "blue", "grey", "grey", undefined]
-    ,[undefined, "grey", undefined, "grey", undefined, undefined]
-    ,[undefined, "grey", undefined, "grey", undefined, undefined]
-    ,[undefined, "grey", undefined, "grey", undefined, undefined]
-    ,[undefined, "grey", undefined, "grey", undefined, undefined]
-    ,["green", "grey", "grey", undefined, undefined, undefined]
+    [makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined,  makeRandomTestRoom(rand), undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), makeRandomTestRoom(rand), undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom()]
+    , [undefined, makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), undefined, undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), undefined, undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), undefined, undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), undefined, undefined]
+    , [makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), undefined, undefined, undefined]
   ];
 
   console.log("JR NOTE: going to try a maze")
 
-  for(let row of sampleMaze){
+  for (let row of sampleMaze) {
     const rowEle = createElementWithClassAndParent("div", parent, "maze-row");
     console.log("JR NOTE: row made from ", row)
 
-      for(let cell of row){
-        console.log("JR NOTE: cell made  from", cell)
+    for (let cell of row) {
+      console.log("JR NOTE: cell made  from", cell)
 
+      if (cell) {
+        cell.renderSelf(rowEle);
+      } else {
         const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
-        if(cell){
-          ele.style.backgroundColor=cell;
-        }else{
-          ele.classList.add("empty-cell");
-        }
-
+        ele.classList.add("empty-cell");
       }
+
+    }
 
 
   }
@@ -65,3 +67,34 @@ const testMazeRender = (parent)=>{
 
 
 }
+
+const makeRandomTestRoom = (rand) => {
+  const theme = pickFrom(Object.values(all_themes));
+  return new Room(`${theme.pickPossibilityFor(ADJ,rand)} ROOM`, [theme], ()=>{window.alert("TODO")});
+}
+
+
+class Room {
+  title = "???"
+  themes = [];
+
+  onClick; //usually will be rendering the inside of the room
+
+  constructor(title, themes, onClick) {
+    this.title = title;
+    this.themes = themes;
+    this.onClick = onClick;
+  }
+
+  renderSelf = (rowEle) => {
+    const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+    let rotation = 0;
+    for (let theme of this.themes) {
+      rotation += themeToColorRotation(theme.key)
+    }
+    //console.log("JR NOTE: setting rotation", rotation)
+    ele.style.filter = `hue-rotate(${rotation}deg)`;
+
+  }
+
+} 

@@ -18,6 +18,7 @@ let globalDataObject = {
 };
 
 window.onload = () => {
+  initThemes();
   load();
   const button = document.querySelector("#entry-button");
   globalContainer = document.querySelector("#container");
