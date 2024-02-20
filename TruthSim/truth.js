@@ -158,8 +158,8 @@ const handleMazeTabButton = (header) => {
   }
   const label = createElementWithClassAndParent("div", mazeTab);
   label.innerText = "Maze";
-  label.style.textAlign="center";
-  label.style.marginTop="30px";
+  label.style.textAlign = "center";
+  label.style.marginTop = "30px";
 
   if (!globalDataObject.mazeUnlocked) {
     mazeTab.style.display = "none";
@@ -178,9 +178,11 @@ const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
   mazeEle.innerText = "TODO: grid based maze like binding of issac";
-  globalDataObject.currentMaze = new Maze();
+  if (!globalDataObject.currentMaze) {
+    globalDataObject.currentMaze = new Maze();
+  }
   globalDataObject.currentMaze.renderSelf(mazeEle);
- 
+
   /*
     actually ask room.js what you should do
   */

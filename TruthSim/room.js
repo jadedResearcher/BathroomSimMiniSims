@@ -32,7 +32,7 @@ const getNewBabyMaze = () => {
 const makeRandomEasyRoom = (rand, row, col) => {
   console.log("JR NOTE: making random easy room, for now they are all buttons")
   const theme = Math.random() > 0.3 ? undefined : pickFrom(Object.values(all_themes));
-  return new Room(`${theme ? theme.pickPossibilityFor(ADJ, rand) + "BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
+  return new Room(`${theme ? theme.pickPossibilityFor(ADJ, rand) + " BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
 }
 
 //mostly basic procedural rooms but occasionally special ones
@@ -194,7 +194,7 @@ class Room {
       if (!maze.map[right_row, right_col]) {
         //if up does not exist, proccess if my row index is zero (if so, stop)
         //then, pick my index and make a new random room
-        if (right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
+        if (maze.map[right_row] &&  right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
         }
       }
@@ -208,7 +208,7 @@ class Room {
         //if down does not exist, check if its row index is the same or greater than how many rows there are
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
-        if (right_row < maze.length && maze.rand.nextDouble() > odds_empty) {
+        if (maze.map[right_row] && right_row < maze.length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
         }
       }
@@ -231,9 +231,9 @@ class Room {
     */
     //right ,down, left,up is the order (makes going to bottom right corner (where it grows) easiest)
     const right = maze.map[this.row][this.col + 1];
-    const down = maze.map[this.row + 1][this.col];
+    const down = maze.map[this.row + 1]? maze.map[this.row + 1][this.col]:undefined;
     const left = maze.map[this.row][this.col - 1];
-    const up = maze.map[this.row - 1][this.col];
+    const up = maze.map[this.row - 1]?maze.map[this.row - 1][this.col]:undefined;
     let unlockOrder = [];
     //don't add undefined things (up can unlock after just one beat if its the only neighbor)
     if (right) {

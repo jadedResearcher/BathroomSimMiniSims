@@ -16,9 +16,9 @@ const buttonMiniGame = (callback)=>{
     quipEle.innerText = pickFrom(quips);
     increaseTruthBy(1);
     clicks ++;
-    if(clicks > 100){
+    if(clicks > 10){
       globalBGMusic.pause();
-      window.alert("100 clicks in one sitting!? Wow! You beat this challenge!")
+      window.alert("10 clicks in one sitting!? Wow! You beat this challenge!")
       globalBGMusic.src = savedSrc;
       globalBGMusic.play();
       callback(globalDataObject.currentMaze);
