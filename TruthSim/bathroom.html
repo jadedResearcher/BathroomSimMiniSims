@@ -8,6 +8,8 @@
   <title>TruthSim</title>
   <script src="utils.js"></script>
   <script src="data.js"></script>
+  <script src="miniGames.js"></script>
+
   <script src="truth.js"></script>
   <script src="room.js"></script>
   <script src="facts.js"></script>
@@ -28,13 +30,11 @@
   <h1>IMPORTANT: VERY SIMPLE GRAPHICS, ALL CSS/HTML/ascii</h1>
   <h1>TODO: core loop</h1>
   <ul>
-    <li>save data to local storage every minute (notify?)</li>
-    <li>at 13 you get option to forget 13 Truths</li>
-    <li>at 113 you get a tab that lets you save</li>
-    <li>at 217 you unlock the rabbit hole (lets you put in passwords in exchange for Facts, truth, truth multipliers, lore snippets, links etc)</li>
-    <li>Facts have a lore snippet, a Truth Multiplier and an Obsession Multiplier and an array of themes (that parts of
-      the maze can use however they want, for example spawning buttons like candybox2 spells)</li>
-    <li>at 273 you get a 'map' (prototype procedural grid based map like issac has?)</li>
+    <li>
+      each time you beat a room it records a beat increment
+    </li>>
+    <li>east unlocks at one beat, south at 2, north at three (doesn't matter where you unlock from)</li>
+    <li>unlocked rooms generate/render their neighbors. between 0 and 3 (a room can be WEST of another room but i refuse to acknowledge that fact)</li>
   </ul>
 
   <h1>TODO: objects</h1>
@@ -73,6 +73,8 @@
     <li> tab that lets you store up to three mazes in your SAVE DATA so you can re-run them (if you find a good one)</li>
     <li>if all rooms are unlocked, option to reset maze and get truth multiplier +1</li>
     <li>some rooms only enter pool if you have enough all time truth</li>
+    <li>bee breeding room</li>
+    <li>collectable crystals like that vrchat game</li>
     <li>room that lets you reset your maze but keep everything you've found</li>
     <li>hide this somewhere https://drive.google.com/file/d/1gY8mFR74jaoj6KgbK9R2IdajabKK_hjE/view?usp=sharing ( a fact?) </li>
     <li>occasionally play weird sounds (every time you reach a new milestone of number of trailing zeroes?)</li>

@@ -8,7 +8,7 @@ let globalDataObject = {
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
   truthCurrentValue: 0,
-  currentMaze: [], //what maze are you currently exploring (serialized)
+  currentMaze: undefined, //what maze are you currently exploring (serialized)
   storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
   saveUnlocked: false,
   mazeUnlocked: false,
@@ -16,6 +16,8 @@ let globalDataObject = {
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
 };
+
+
 
 window.onload = () => {
   initThemes();
@@ -176,7 +178,9 @@ const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
   mazeEle.innerText = "TODO: grid based maze like binding of issac";
-  testMazeRender(mazeEle);
+  globalDataObject.currentMaze = new Maze();
+  globalDataObject.currentMaze.renderSelf();
+ 
   /*
     actually ask room.js what you should do
   */

@@ -24,6 +24,71 @@
       </ul>
 */
 
+
+const getNewBabyMaze = () => {
+  return new Maze();
+}
+
+const makeRandomEasyRoom = (rand, row, col) => {
+  console.log("JR NOTE: making random easy room, for now they are all buttons")
+  const theme = Math.random() > 0.3 ? undefined : pickFrom(Object.values(all_themes));
+  return new Room(`${theme ? theme.pickPossibilityFor(ADJ, rand) + "BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
+}
+
+//mostly basic procedural rooms but occasionally special ones
+const makeRandomRoom = (rand, row, col) => {
+  console.log("JR NOTE: eventually if have more lifetime candy, pick harder rooms");
+  return makeRandomEasyRoom(rand, row, col);
+}
+
+
+
+/*
+ a maze knows how to render itself and will RE-render itself any time you view it
+ the way a maze renders itself will only change inside specific rooms (so it wont be rendering then)
+ a maze also knows the algorithms it uses to select rooms to place down
+ for example, rare for a room to the north to be generated
+*/
+class Maze {
+  rand;
+  //each row is a row in the map
+  //each cell is either undefined or a room in the maze
+  map = [];
+  constructor(rand) {
+    this.rand = rand;
+    //starts out with a size of one x one.
+    this.map.push([makeBasicRoom()]);
+  }
+
+  createNorthRoom = () => {
+    return this.rand.nextDouble() > 0.9
+  }
+
+  renderSelf(parent) {
+
+    for (let row of this.map) {
+      const rowEle = createElementWithClassAndParent("div", parent, "maze-row");
+      console.log("JR NOTE: row made from ", row)
+
+      for (let cell of row) {
+        console.log("JR NOTE: cell made  from", cell)
+
+        if (cell) {
+          cell.renderSelf(rowEle);
+        } else {
+          const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+          ele.classList.add("empty-cell");
+          ele.innerText = ".";
+        }
+
+      }
+
+
+    }
+  }
+
+}
+
 //really just making a system that knows how to render boxes so i can wrap my head around it
 //this is created BEFORE i have a room element
 const testMazeRender = (parent) => {
@@ -32,7 +97,7 @@ const testMazeRender = (parent) => {
 
   const sampleMaze = [
     [makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), undefined]
-    , [undefined, makeRandomTestRoom(rand), undefined,  makeRandomTestRoom(rand), undefined]
+    , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), undefined]
     , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), makeRandomTestRoom(rand), undefined]
     , [undefined, makeRandomTestRoom(rand), undefined, makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom()]
     , [undefined, makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), makeRandomTestRoom(rand), undefined]
@@ -57,6 +122,7 @@ const testMazeRender = (parent) => {
       } else {
         const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
         ele.classList.add("empty-cell");
+        ele.innerText = ".";
       }
 
     }
@@ -68,34 +134,181 @@ const testMazeRender = (parent) => {
 
 }
 
-const makeRandomTestRoom = (rand) => {
-  const theme = pickFrom(Object.values(all_themes));
-  return new Room(`${theme.pickPossibilityFor(ADJ,rand)} ROOM`, [theme], ()=>{window.alert("TODO")});
-}
+
 
 
 class Room {
   title = "???"
+  row = 0;
+  col = 0;
   themes = [];
+  unlocked = false;
+  timesBeaten = 0;
+  miniGameKey = "BUTTON"
+
 
   onClick; //usually will be rendering the inside of the room
 
-  constructor(title, themes, onClick) {
+  constructor(title, themes, miniGameKey, row = 0, col = 0) {
+    this.row = row;
+    this.col = col;
     this.title = title;
     this.themes = themes;
-    this.onClick = onClick;
+    this.miniGameKey = miniGameKey;
+  }
+
+  unlock = (maze) => {
+    this.unlocked = true;
+
+    const processRight = () => {
+      const right_row = this.row;
+      const right_col = this.col + 1;
+      const odds_empty = 0.25;
+      if (!maze.map[right_row, right_col]) {
+        //if right does not exist, check if its col index is the same or greater than the rows length
+        //if so, need to add a new "undefined" cel to the end of every row in the maze
+        //then, pick my index and make a new random room
+        if (right_col < maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
+          maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+        }
+      }
+    }
+
+    const processLeft = () => {
+      const right_row = this.row;
+      const right_col = this.col - 1;
+      const odds_empty = 0.75;
+      if (!maze.map[right_row, right_col]) {
+        //if left does not exist, check if my col index is zero (if so, stop)
+        //then, pick my index and make a new random room
+        if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
+          maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+        }
+      }
+    }
+
+    const processUp = () => {
+      const right_row = this.row - 1;
+      const right_col = this.col;
+      const odds_empty = 0.75;
+      if (!maze.map[right_row, right_col]) {
+        //if up does not exist, proccess if my row index is zero (if so, stop)
+        //then, pick my index and make a new random room
+        if (right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
+          maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+        }
+      }
+    }
+
+    const processDown = () => {
+      const right_row = this.row + 1;
+      const right_col = this.col;
+      const odds_empty = 0.25;
+      if (!maze.map[right_row, right_col]) {
+        //if down does not exist, check if its row index is the same or greater than how many rows there are
+        //if so, add a new row of all undefineds to the maze
+        //then, pick my index and make a new random room
+        if (right_row < maze.length && maze.rand.nextDouble() > odds_empty) {
+          maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+        }
+      }
+
+    }
+
+    processRight();
+    processDown();
+    processLeft();
+    processUp();
+  }
+
+  incrementTimesBeaten = (maze) => {
+    this.timesBeaten++;
+    /*
+      so my problem with directions doesn't fuck me over, i can refer to this
+        []
+      [][][]
+        []
+    */
+    //right ,down, left,up is the order (makes going to bottom right corner (where it grows) easiest)
+    const right = maze.map[this.row][this.col + 1];
+    const down = maze.map[this.row + 1][this.col];
+    const left = maze.map[this.row][this.col - 1];
+    const up = maze.map[this.row - 1][this.col];
+    let unlockOrder = [];
+    //don't add undefined things (up can unlock after just one beat if its the only neighbor)
+    if (right) {
+      unlockOrder.push(right)
+    }
+
+    if (down) {
+      unlockOrder.push(down)
+    }
+
+    if (left) {
+      unlockOrder.push(left)
+    }
+
+    if (up) {
+      unlockOrder.push(up)
+    }
+    //any of the above can be undefined
+
+    // if i have been beaten 1 time, unlock index 0, if 2, 1, etc.
+    let toUnlock = unlockOrder[timesBeaten - 1]
+
+    if (toUnlock) {
+      toUnlock.unlock();
+    }
+
+
+
   }
 
   renderSelf = (rowEle) => {
     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
-    let rotation = 0;
-    for (let theme of this.themes) {
-      rotation += themeToColorRotation(theme.key)
-    }
-    //console.log("JR NOTE: setting rotation", rotation)
-    ele.style.filter = `hue-rotate(${rotation}deg)`;
 
-    ele.onclick=  this.onClick;
+    const renderPending = () => {
+      ele.style.backgroundColor = "grey";
+    }
+
+    const renderEmpty = () => {
+      ele.classList.add("empty-cell");
+      ele.innerText = ".";
+    }
+
+    const renderUnlock = () => {
+      let rotation = 0;
+      for (let theme of this.themes) {
+        rotation += themeToColorRotation(theme.key)
+      }
+      //console.log("JR NOTE: setting rotation", rotation)
+      if (rotation === 0) {
+        ele.style.backgroundColor = "grey";
+      } else {
+        ele.style.filter = `hue-rotate(${rotation}deg)`;
+      }
+
+      ele.onclick = () => {
+        globalMiniGames[this.miniGameKey](this.incrementTimesBeaten);
+      }
+      const label = createElementWithClassAndParent("div", ele);
+      label.style.height = "50px";
+
+      label.innerText = this.title;
+    }
+
+    if (unlocked) {
+      renderUnlock();
+    } else {
+      for (let neighbor of this.neighbors) {
+        if (neighbor && neighbor.unlocked) {
+          renderPending();
+          return;
+        }
+      }
+      renderEmpty();
+    }
+
 
   }
 
