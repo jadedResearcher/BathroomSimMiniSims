@@ -1,4 +1,4 @@
-const globalBGMusic = new Audio("audio/music/funky_beat.mp3");
+const globalBGMusic = new Audio("audio/music/funky_beat_by_ic.mp3");
 let globalContainer;//the whole 'screen'
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
 const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO"
@@ -179,7 +179,7 @@ const renderMazeTab = () => {
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
   mazeEle.innerText = "TODO: grid based maze like binding of issac";
   globalDataObject.currentMaze = new Maze();
-  globalDataObject.currentMaze.renderSelf();
+  globalDataObject.currentMaze.renderSelf(mazeEle);
  
   /*
     actually ask room.js what you should do

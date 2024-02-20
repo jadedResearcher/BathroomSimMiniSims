@@ -1,7 +1,3 @@
-//each mini game knows how to render itself and takes in a function to use as call back if it unlocks
-const globalMiniGames = {
-  "BUTTON": buttonMiniGame
-}
 
 
 const buttonMiniGame = (callback)=>{
@@ -29,4 +25,9 @@ const buttonMiniGame = (callback)=>{
     }
   }
 
+}
+
+//each mini game knows how to render itself and takes in a function to use as call back if it unlocks
+const globalMiniGames = {
+  "BUTTON": buttonMiniGame
 }

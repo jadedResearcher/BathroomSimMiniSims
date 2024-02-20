@@ -57,7 +57,8 @@ class Maze {
   constructor(rand) {
     this.rand = rand;
     //starts out with a size of one x one.
-    this.map.push([makeBasicRoom()]);
+    this.map.push([makeRandomEasyRoom()]);
+    this.map[0][0].unlock(this);
   }
 
   createNorthRoom = () => {
@@ -65,7 +66,6 @@ class Maze {
   }
 
   renderSelf(parent) {
-
     for (let row of this.map) {
       const rowEle = createElementWithClassAndParent("div", parent, "maze-row");
       console.log("JR NOTE: row made from ", row)
@@ -74,7 +74,7 @@ class Maze {
         console.log("JR NOTE: cell made  from", cell)
 
         if (cell) {
-          cell.renderSelf(rowEle);
+          cell.renderSelf(this,rowEle);
         } else {
           const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
           ele.classList.add("empty-cell");
@@ -257,14 +257,14 @@ class Room {
     let toUnlock = unlockOrder[timesBeaten - 1]
 
     if (toUnlock) {
-      toUnlock.unlock();
+      toUnlock.unlock(maze);
     }
 
 
 
   }
 
-  renderSelf = (rowEle) => {
+  renderSelf = (maze, rowEle) => {
     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
 
     const renderPending = () => {
@@ -297,10 +297,15 @@ class Room {
       label.innerText = this.title;
     }
 
-    if (unlocked) {
+    if (this.unlocked) {
       renderUnlock();
     } else {
-      for (let neighbor of this.neighbors) {
+      const right = maze.map[this.row][this.col + 1];
+      const down = maze.map[this.row + 1]? maze.map[this.row + 1][this.col]:undefined;
+      const left = maze.map[this.row][this.col - 1];
+      const up = maze.map[this.row - 1]? maze.map[this.row - 1][this.col]:undefined;
+      const neighbors = [right, down, left, up];
+      for (let neighbor of neighbors) {
         if (neighbor && neighbor.unlocked) {
           renderPending();
           return;
