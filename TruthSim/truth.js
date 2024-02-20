@@ -1,7 +1,8 @@
 const globalBGMusic = new Audio("audio/music/funky_beat_by_ic.mp3");
 let globalContainer;//the whole 'screen'
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
-const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO"
+const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
+const globalRand = new SeededRandom(13);
 let globalDataObject = {
   truthPerSecond: 1,
   startedPlayingTimeCode: Date.now(),
@@ -11,6 +12,7 @@ let globalDataObject = {
   currentMaze: undefined, //what maze are you currently exploring (serialized)
   storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
   saveUnlocked: false,
+  mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
@@ -35,6 +37,7 @@ window.onload = () => {
 
 const save = () => {
   globalDataObject.lastSaveTimeCode = Date.now();
+  globalDataObject.mapInternalSeed = globalRand.internal_seed;
   localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));
 }
 
@@ -44,6 +47,9 @@ const load = () => {
   if (data) {
     globalDataObject = JSON.parse(data);
     globalDataObject.lastLoadTimeCode = Date.now();
+    let json = globalDataObject.currentMaze;
+    globalDataObject.currentMaze = new Maze(globalRand);
+    globalDataObject.currentMaze.loadFromJSON(json);
   }
 
 }
@@ -179,7 +185,7 @@ const renderMazeTab = () => {
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
   mazeEle.innerText = "TODO: grid based maze like binding of issac";
   if (!globalDataObject.currentMaze) {
-    globalDataObject.currentMaze = new Maze();
+    globalDataObject.currentMaze = new Maze(globalRand);
   }
   globalDataObject.currentMaze.renderSelf(mazeEle);
 

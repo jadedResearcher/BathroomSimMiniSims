@@ -26,13 +26,20 @@
 
 
 const getNewBabyMaze = () => {
-  return new Maze();
+  return new Maze(globalRand);
 }
 
 const makeRandomEasyRoom = (rand, row, col) => {
   console.log("JR NOTE: making random easy room, for now they are all buttons")
   const theme = Math.random() > 0.3 ? undefined : pickFrom(Object.values(all_themes));
   return new Room(`${theme ? theme.pickPossibilityFor(ADJ, rand) + " BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
+}
+
+const makeRoomFromJSon = (json)=>{
+  const room = new Room();
+  for(let key of Object.keys(json)){
+    room[key] = json[key];
+  }
 }
 
 //mostly basic procedural rooms but occasionally special ones
@@ -59,6 +66,21 @@ class Maze {
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom()]);
     this.map[0][0].unlock(this);
+  }
+
+  loadFromJSON = (json)=>{
+    this.map = []
+    for(let row of json.map){
+      const map_row = [];
+      for(let cell of row){
+        if(cell){
+          map_row.push(makeRoomFromJSon(cell));
+        }else{
+          map_row.push(undefined)
+        }
+      }
+      this.map.push(map_row)
+    }
   }
 
   createNorthRoom = () => {
