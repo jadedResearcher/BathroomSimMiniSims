@@ -354,19 +354,19 @@ class Room {
     console.log("JR NOTE: i am", this.title, "and here is my possibile unlocks", [right, down, left, up])
     let unlockOrder = [];
     //don't add undefined things (up can unlock after just one beat if its the only neighbor)
-    if (right) {
+    if (right && !right.unlocked) {
       unlockOrder.push(right)
     }
 
-    if (down) {
+    if (down && !down.unlocked) {
       unlockOrder.push(down)
     }
 
-    if (left) {
+    if (left && !left.unlocked) {
       unlockOrder.push(left)
     }
 
-    if (up) {
+    if (up && !up.unlocked) {
       unlockOrder.push(up)
     }
     //any of the above can be undefined
