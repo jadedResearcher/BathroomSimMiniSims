@@ -184,6 +184,8 @@ const handleMazeTabButton = (header) => {
 
 const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
+  globalBGMusic.src="audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
+  globalBGMusic.play();
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
   mazeEle.innerText = "TODO: grid based maze like binding of issac";
   if (!globalDataObject.currentMaze) {
@@ -199,6 +201,8 @@ const renderMazeTab = () => {
 
 const renderSaveTab = () => {
   globalTabContent.innerHTML = "";
+  globalBGMusic.src="audio/music/i_dont_remember_making_this_either_by_ic.mp3";
+  globalBGMusic.play();
   const stats = createElementWithClassAndParent("div", globalTabContent, "stats");
 
   const section1 = createElementWithClassAndParent("div", stats);

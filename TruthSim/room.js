@@ -95,13 +95,14 @@ class Maze {
   }
 
   hitMinSize = ()=>{
-    return this.getRoomCount()< this.minSize;
+    console.log("JR NOTE: did we hit the min size?",{roomCount: this.getRoomCount(), minSize: this.minSize})
+    return this.getRoomCount()> this.minSize;
   }
 
   getRoomCount = () => {
     let count = 0;
     //yes this is not efficient to loop on the map to find out how many rooms there are but this will be called only once on unlock per room, can afford to be slow
-    for (let row of maze.map) {
+    for (let row of this.map) {
       for (let col of row) {
         if (col) {
           count++;
@@ -220,6 +221,14 @@ class Room {
         if (right_col < maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
+        }else{
+          if(right_col = maze.map[right_row].length){
+            for(let row of maze.map){
+              row.push(undefined);
+            }
+            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            neighbor_count++;
+          }
         }
       }
     }
@@ -234,6 +243,14 @@ class Room {
         if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
+        }else{
+          if(right_col == -1){
+            for(let row of maze.map){
+              row.unshift(undefined);
+            }
+            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            neighbor_count++;
+          }
         }
       }
     }
@@ -248,6 +265,16 @@ class Room {
         if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
+        }else{
+          if(right_row == 0){
+            const new_row = [];
+            for(let cel of maze.map[0]){
+              new_row.push(undefined);
+            }
+            maze.map.unshift(new_row);
+            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            neighbor_count++;
+          }
         }
       }
     }
@@ -256,13 +283,24 @@ class Room {
       const right_row = this.row + 1;
       const right_col = this.col;
       const odds_empty = force ? 0 : 0.25;
+      console.log("JR NOTE: processing down, force is", force)
       if (!maze.map[right_row, right_col]) {
         //if down does not exist, check if its row index is the same or greater than how many rows there are
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
-        if (maze.map[right_row] && right_row < maze.length && maze.rand.nextDouble() > odds_empty) {
+        if (maze.map[right_row] && right_row < maze.map.length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
+        }else{
+          if(right_row == maze.map.length){
+            const new_row = [];
+            for(let cel of maze.map[0]){
+              new_row.push(undefined);
+            }
+            maze.map.push(new_row);
+            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            neighbor_count++;
+          }
         }
       }
 
@@ -272,9 +310,9 @@ class Room {
     processDown();
     processLeft();
     processUp();
-    console.log("JR NOTE: did we generate any rooms? ", maze.map)
+    console.log("JR NOTE: did we generate any rooms? ",neighbor_count, maze.map,maze.hitMinSize());
     //if neighbor_count is zero and maze has not yet hit its min size yet, force a down
-    if(!hitMinSize() && neighbor_count === 0){
+    if(!maze.hitMinSize() && neighbor_count === 0){
       console.log("JR NOTE: because we haven't hit min size yet, not allowing dead ends")
       processDown(true);
     }
