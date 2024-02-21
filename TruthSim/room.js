@@ -95,9 +95,9 @@ class Maze {
     }
   }
 
-  hitMinSize = ()=>{
-    console.log("JR NOTE: did we hit the min size?",{roomCount: this.getRoomCount(), minSize: this.minSize})
-    return this.getRoomCount()> this.minSize;
+  hitMinSize = () => {
+    console.log("JR NOTE: did we hit the min size?", { roomCount: this.getRoomCount(), minSize: this.minSize })
+    return this.getRoomCount() > this.minSize;
   }
 
   getRoomCount = () => {
@@ -114,7 +114,7 @@ class Maze {
   }
 
   //if i add something to the left or up all the indices the rooms know about are no longer valid
-  recalcIndices =()=>{
+  recalcIndices = () => {
     for (let row_index = 0; row_index < this.map.length; row_index++) {
       for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
         if (this.map[row_index][col_index]) {
@@ -235,9 +235,9 @@ class Room {
         if (right_col < maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }else{
-          if(right_col == maze.map[right_row].length){
-            for(let row of maze.map){
+        } else {
+          if (right_col == maze.map[right_row].length) {
+            for (let row of maze.map) {
               row.push(undefined);
             }
             maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
@@ -257,9 +257,9 @@ class Room {
         if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }else{
-          if(right_col == -1){
-            for(let row of maze.map){
+        } else {
+          if (right_col == -1) {
+            for (let row of maze.map) {
               row.unshift(undefined);
             }
             right_col = 0;
@@ -282,10 +282,10 @@ class Room {
         if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }else{
-          if(right_row == -1){
+        } else {
+          if (right_row == -1) {
             const new_row = [];
-            for(let cel of maze.map[0]){
+            for (let cel of maze.map[0]) {
               new_row.push(undefined);
             }
             right_row = 0;
@@ -310,10 +310,10 @@ class Room {
         if (maze.map[right_row] && right_row < maze.map.length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }else{
-          if(right_row == maze.map.length){
+        } else {
+          if (right_row == maze.map.length) {
             const new_row = [];
-            for(let cel of maze.map[0]){
+            for (let cel of maze.map[0]) {
               new_row.push(undefined);
             }
             maze.map.push(new_row);
@@ -329,9 +329,9 @@ class Room {
     processDown();
     processLeft();
     processUp();
-    console.log("JR NOTE: did we generate any rooms? ",neighbor_count, maze.map,maze.hitMinSize());
+    console.log("JR NOTE: did we generate any rooms? ", neighbor_count, maze.map, maze.hitMinSize());
     //if neighbor_count is zero and maze has not yet hit its min size yet, force a down
-    if(!maze.hitMinSize() && neighbor_count === 0){
+    if (!maze.hitMinSize() && neighbor_count === 0) {
       console.log("JR NOTE: because we haven't hit min size yet, not allowing dead ends")
       processDown(true);
     }
@@ -352,33 +352,17 @@ class Room {
     const left = maze.map[this.row][this.col - 1];
     const up = maze.map[this.row - 1] ? maze.map[this.row - 1][this.col] : undefined;
     console.log("JR NOTE: i am", this.title, "and here is my possibile unlocks", [right, down, left, up])
-    let unlockOrder = [];
-    //don't add undefined things (up can unlock after just one beat if its the only neighbor)
-    if (right) {
-      unlockOrder.push(right)
-    }
+    let unlockOrder = [right, down, left, up];
 
-    if (down) {
-      unlockOrder.push(down)
-    }
-
-    if (left) {
-      unlockOrder.push(left)
-    }
-
-    if (up) {
-      unlockOrder.push(up)
-    }
     //any of the above can be undefined
 
     // if i have been beaten 1 time, unlock index 0, if 2, 1, etc.
     let toUnlock = unlockOrder[this.timesBeaten - 1]
     //confirm everything correct is unlocked
-    for(let i = 0; i<unlockOrder.length; i++){
-      if(this.timesBeaten > i){ //if ive beaten it three times, 0,1 and 2 should be unlocked no matter what
-        //if you're not already unlocked, unlock yourself
-        !unlockOrder[i].unlocked && unlockOrder[i].unlock();
-      }
+    for (let i = 0; i < unlockOrder.length; i++) {
+      const room = unlockOrder[i];
+      //if you're not already unlocked, unlock yourself
+      room && !room.unlocked && room.unlock();
     }
     console.log("JR NOTE: I think i need to unlock: toUnlock ", { toUnlock, unlockOrder })
 
@@ -392,11 +376,11 @@ class Room {
 
   renderSelf = (maze, rowEle) => {
     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
-    this.unlocked? ele.classList.add("room-unlocked"):ele.classList.add("room-locked");
+    this.unlocked ? ele.classList.add("room-unlocked") : ele.classList.add("room-locked");
 
     const renderPending = () => {
       ele.style.backgroundColor = "grey";
-      const label = createElementWithClassAndParent("div", ele,"room-label");
+      const label = createElementWithClassAndParent("div", ele, "room-label");
       label.innerText = "LOCKED";
     }
 
@@ -420,7 +404,7 @@ class Room {
       ele.onclick = () => {
         globalMiniGames[this.miniGameKey](this.incrementTimesBeaten);
       }
-      const label = createElementWithClassAndParent("div", ele,"room-label");
+      const label = createElementWithClassAndParent("div", ele, "room-label");
 
       label.innerText = this.title;
     }
