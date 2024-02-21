@@ -113,6 +113,19 @@ class Maze {
     return count;
   }
 
+  //if i add something to the left or up all the indices the rooms know about are no longer valid
+  recalcIndices =()=>{
+    for (let row_index = 0; row_index < this.map.length; row_index++) {
+      for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
+        if (this.map[row_index][col_index]) {
+          this.map[row_index][col_index].row = row_index;
+          this.map[row_index][col_index].col = col_index;
+        }
+      }
+    }
+  }
+
+
   renderSelf(parent) {
     for (let row of this.map) {
       const rowEle = createElementWithClassAndParent("div", parent, "maze-row");
@@ -244,8 +257,18 @@ class Room {
         if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }//if you let it expand left you will lose your indice. please. please don't do this to me future jr
+        }else{
+          if(right_col == -1){
+            for(let row of maze.map){
+              row.unshift(undefined);
+            }
+            right_col = 0;
+            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            neighbor_count++;
+            maze.recalcIndices();
 
+          }
+        }
       }
     }
 
@@ -259,7 +282,19 @@ class Room {
         if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }//if you let it expand up you will lose your indice. please. please don't do this to me future jr
+        }else{
+          if(right_row == -1){
+            const new_row = [];
+            for(let cel of maze.map[0]){
+              new_row.push(undefined);
+            }
+            right_row = 0;
+            maze.map.unshift(new_row);
+            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            neighbor_count++;
+            maze.recalcIndices();
+          }
+        }
       }
     }
 

@@ -69,6 +69,7 @@ textarea {
   background-color: #a10000;
   cursor: pointer;
   overflow: hidden;
+  opacity: 0.9;
 
 }
 
@@ -82,7 +83,7 @@ textarea {
 }
 
 .room-unlocked{
-  opacity: 1.0;
+  opacity: 0.9;
 }
 
 .clicker-game-button {
@@ -92,7 +93,7 @@ textarea {
   margin-top: 100px;
 }
 
-.maze-cell:hover {
+.room-unlocked:hover {
   opacity: 1.0;
 }
 
