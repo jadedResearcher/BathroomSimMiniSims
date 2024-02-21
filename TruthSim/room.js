@@ -221,7 +221,7 @@ class Room {
   unlock = (maze) => {
     console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
-    const hitMinSize = maze.maze.hitMinSize();
+    const hitMinSize = maze.hitMinSize();
     const oddsEmpty = hitMinSize? 0.95:0.9;
 
     let neighbor_count = 0;
