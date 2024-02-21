@@ -354,25 +354,32 @@ class Room {
     console.log("JR NOTE: i am", this.title, "and here is my possibile unlocks", [right, down, left, up])
     let unlockOrder = [];
     //don't add undefined things (up can unlock after just one beat if its the only neighbor)
-    if (right && !right.unlocked) {
+    if (right) {
       unlockOrder.push(right)
     }
 
-    if (down && !down.unlocked) {
+    if (down) {
       unlockOrder.push(down)
     }
 
-    if (left && !left.unlocked) {
+    if (left) {
       unlockOrder.push(left)
     }
 
-    if (up && !up.unlocked) {
+    if (up) {
       unlockOrder.push(up)
     }
     //any of the above can be undefined
 
     // if i have been beaten 1 time, unlock index 0, if 2, 1, etc.
     let toUnlock = unlockOrder[this.timesBeaten - 1]
+    //confirm everything correct is unlocked
+    for(let i = 0; i<unlockOrder.length; i++){
+      if(this.timesBeaten > i){ //if ive beaten it three times, 0,1 and 2 should be unlocked no matter what
+        //if you're not already unlocked, unlock yourself
+        !unlockOrder[i].unlocked && unlockOrder[i].unlock();
+      }
+    }
     console.log("JR NOTE: I think i need to unlock: toUnlock ", { toUnlock, unlockOrder })
 
     if (toUnlock) {
