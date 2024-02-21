@@ -221,13 +221,15 @@ class Room {
   unlock = (maze) => {
     console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
+    const hitMinSize = maze.maze.hitMinSize();
+    const oddsEmpty = hitMinSize? 0.95:0.9;
 
     let neighbor_count = 0;
 
     const processRight = () => {
       let right_row = this.row;
       let right_col = this.col + 1;
-      const odds_empty = 0.75; //slightly higher chance of going right, because this will be East
+      const odds_empty = oddsEmpty -0.1; //slightly higher chance of going right, because this will be East
       if (!maze.map[right_row, right_col]) {
         //if right does not exist, check if its col index is the same or greater than the rows length
         //if so, need to add a new "undefined" cel to the end of every row in the maze
@@ -250,7 +252,7 @@ class Room {
     const processLeft = () => {
       let right_row = this.row;
       let right_col = this.col - 1;
-      const odds_empty = 0.85;
+      const odds_empty = oddsEmpty;
       if (!maze.map[right_row, right_col]) {
         //if left does not exist, check if my col index is zero (if so, stop)
         //then, pick my index and make a new random room
@@ -275,7 +277,7 @@ class Room {
     const processUp = () => {
       let right_row = this.row - 1;
       let right_col = this.col;
-      const odds_empty = 0.85;
+      const odds_empty = oddsEmpty;
       if (!maze.map[right_row, right_col]) {
         //if up does not exist, proccess if my row index is zero (if so, stop)
         //then, pick my index and make a new random room
@@ -301,7 +303,7 @@ class Room {
     const processDown = (force = false) => {
       let right_row = this.row + 1;
       let right_col = this.col;
-      const odds_empty = force ? 0 : 0.85;
+      const odds_empty = force ? 0 : oddsEmpty;
       console.log("JR NOTE: processing down, force is", force)
       if (!maze.map[right_row, right_col]) {
         //if down does not exist, check if its row index is the same or greater than how many rows there are
@@ -331,7 +333,7 @@ class Room {
     processUp();
     console.log("JR NOTE: did we generate any rooms? ", neighbor_count, maze.map, maze.hitMinSize());
     //if neighbor_count is zero and maze has not yet hit its min size yet, force a down
-    if (!maze.hitMinSize() && neighbor_count === 0) {
+    if (!hitMinSize && neighbor_count === 0) {
       console.log("JR NOTE: because we haven't hit min size yet, not allowing dead ends")
       processDown(true);
     }
