@@ -227,7 +227,7 @@ class Room {
     const processRight = () => {
       let right_row = this.row;
       let right_col = this.col + 1;
-      const odds_empty = 0.25;
+      const odds_empty = 0.75; //slightly higher chance of going right, because this will be East
       if (!maze.map[right_row, right_col]) {
         //if right does not exist, check if its col index is the same or greater than the rows length
         //if so, need to add a new "undefined" cel to the end of every row in the maze
@@ -250,7 +250,7 @@ class Room {
     const processLeft = () => {
       let right_row = this.row;
       let right_col = this.col - 1;
-      const odds_empty = 0.25;
+      const odds_empty = 0.85;
       if (!maze.map[right_row, right_col]) {
         //if left does not exist, check if my col index is zero (if so, stop)
         //then, pick my index and make a new random room
@@ -275,7 +275,7 @@ class Room {
     const processUp = () => {
       let right_row = this.row - 1;
       let right_col = this.col;
-      const odds_empty = 0.25;
+      const odds_empty = 0.85;
       if (!maze.map[right_row, right_col]) {
         //if up does not exist, proccess if my row index is zero (if so, stop)
         //then, pick my index and make a new random room
@@ -301,7 +301,7 @@ class Room {
     const processDown = (force = false) => {
       let right_row = this.row + 1;
       let right_col = this.col;
-      const odds_empty = force ? 0 : 0.25;
+      const odds_empty = force ? 0 : 0.85;
       console.log("JR NOTE: processing down, force is", force)
       if (!maze.map[right_row, right_col]) {
         //if down does not exist, check if its row index is the same or greater than how many rows there are
@@ -356,22 +356,12 @@ class Room {
 
     //any of the above can be undefined
 
-    // if i have been beaten 1 time, unlock index 0, if 2, 1, etc.
-    let toUnlock = unlockOrder[this.timesBeaten - 1]
     //confirm everything correct is unlocked
     for (let i = 0; i < unlockOrder.length; i++) {
       const room = unlockOrder[i];
       //if you're not already unlocked, unlock yourself
       room && !room.unlocked && room.unlock(maze);
     }
-    console.log("JR NOTE: I think i need to unlock: toUnlock ", { toUnlock, unlockOrder })
-
-    if (toUnlock) {
-      toUnlock.unlock(maze);
-    }
-
-
-
   }
 
   renderSelf = (maze, rowEle) => {
@@ -406,7 +396,7 @@ class Room {
       }
       const label = createElementWithClassAndParent("div", ele, "room-label");
 
-      label.innerText = this.title;
+      label.innerText = this.title + ` (${this.timesBeaten})`;
     }
 
     if (this.unlocked) {

@@ -80,6 +80,9 @@ textarea {
 .room-label{
   text-align: center;
   margin-top: 20px;
+  text-wrap: pretty;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .room-locked{
