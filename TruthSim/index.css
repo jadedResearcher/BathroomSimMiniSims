@@ -68,9 +68,21 @@ textarea {
   border: 3px solid #434343;
   background-color: #a10000;
   cursor: pointer;
-  opacity: 0.75;
   overflow: hidden;
 
+}
+
+.room-label{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.room-locked{
+  opacity: 0.25;
+}
+
+.room-unlocked{
+  opacity: 1.0;
 }
 
 .clicker-game-button {

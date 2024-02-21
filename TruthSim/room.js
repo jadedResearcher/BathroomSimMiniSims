@@ -70,6 +70,7 @@ class Maze {
     this.rand = rand;
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom()]);
+    this.map[0][0].title += "(ENTRANCE)";
     this.map[0][0].unlock(this);
   }
 
@@ -211,8 +212,8 @@ class Room {
     let neighbor_count = 0;
 
     const processRight = () => {
-      const right_row = this.row;
-      const right_col = this.col + 1;
+      let right_row = this.row;
+      let right_col = this.col + 1;
       const odds_empty = 0.25;
       if (!maze.map[right_row, right_col]) {
         //if right does not exist, check if its col index is the same or greater than the rows length
@@ -222,7 +223,7 @@ class Room {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         }else{
-          if(right_col = maze.map[right_row].length){
+          if(right_col == maze.map[right_row].length){
             for(let row of maze.map){
               row.push(undefined);
             }
@@ -234,8 +235,8 @@ class Room {
     }
 
     const processLeft = () => {
-      const right_row = this.row;
-      const right_col = this.col - 1;
+      let right_row = this.row;
+      let right_col = this.col - 1;
       const odds_empty = 0.75;
       if (!maze.map[right_row, right_col]) {
         //if left does not exist, check if my col index is zero (if so, stop)
@@ -248,6 +249,7 @@ class Room {
             for(let row of maze.map){
               row.unshift(undefined);
             }
+            right_col = 0;
             maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
             neighbor_count++;
           }
@@ -256,8 +258,8 @@ class Room {
     }
 
     const processUp = () => {
-      const right_row = this.row - 1;
-      const right_col = this.col;
+      let right_row = this.row - 1;
+      let right_col = this.col;
       const odds_empty = 0.75;
       if (!maze.map[right_row, right_col]) {
         //if up does not exist, proccess if my row index is zero (if so, stop)
@@ -266,11 +268,12 @@ class Room {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         }else{
-          if(right_row == 0){
+          if(right_row == -1){
             const new_row = [];
             for(let cel of maze.map[0]){
               new_row.push(undefined);
             }
+            right_row = 0;
             maze.map.unshift(new_row);
             maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
             neighbor_count++;
@@ -280,8 +283,8 @@ class Room {
     }
 
     const processDown = (force = false) => {
-      const right_row = this.row + 1;
-      const right_col = this.col;
+      let right_row = this.row + 1;
+      let right_col = this.col;
       const odds_empty = force ? 0 : 0.25;
       console.log("JR NOTE: processing down, force is", force)
       if (!maze.map[right_row, right_col]) {
@@ -364,9 +367,12 @@ class Room {
 
   renderSelf = (maze, rowEle) => {
     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+    this.unlocked? ele.classList.add("room-unlocked"):ele.classList.add("room-locked");
 
     const renderPending = () => {
       ele.style.backgroundColor = "grey";
+      const label = createElementWithClassAndParent("div", ele,"room-label");
+      label.innerText = "LOCKED";
     }
 
     const renderEmpty = () => {
@@ -389,8 +395,7 @@ class Room {
       ele.onclick = () => {
         globalMiniGames[this.miniGameKey](this.incrementTimesBeaten);
       }
-      const label = createElementWithClassAndParent("div", ele);
-      label.style.height = "50px";
+      const label = createElementWithClassAndParent("div", ele,"room-label");
 
       label.innerText = this.title;
     }
