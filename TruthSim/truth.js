@@ -4,7 +4,7 @@ let globalTabContent; //if you are messing only with the current tab (not the he
 const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
 const globalRand = new SeededRandom(13);
 let globalDataObject = {
-  truthPerSecond: 1,
+  truthPerSecond: 10,
   startedPlayingTimeCode: Date.now(),
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
@@ -49,7 +49,9 @@ const load = () => {
     globalDataObject.lastLoadTimeCode = Date.now();
     let json = globalDataObject.currentMaze;
     globalDataObject.currentMaze = new Maze(globalRand);
-    globalDataObject.currentMaze.loadFromJSON(json);
+    if (json) {
+      globalDataObject.currentMaze.loadFromJSON(json);
+    }
   }
 
 }
@@ -284,26 +286,26 @@ const renderGnosisTab = () => {
 
 
 
-  if (globalDataObject.obsessionCurrentValue < 217) {
+  if (globalDataObject.allTimeTruthValue < 217) {
     button4.style.display = "none";
     button3.style.display = "none";
     button2.style.display = "none";
     button1.style.display = "none";
 
     const monitorObsession = () => {
-      if (globalDataObject.obsessionCurrentValue > 1) {
+      if (globalDataObject.allTimeTruthValue > 1) {
         button1.style.display = "block";
       }
 
-      if (globalDataObject.obsessionCurrentValue > 20) {
+      if (globalDataObject.allTimeTruthValue > 20) {
         button2.style.display = "block";
       }
 
-      if (globalDataObject.obsessionCurrentValue > 113) {
+      if (globalDataObject.allTimeTruthValue > 113) {
         button3.style.display = "block";
       }
 
-      if (globalDataObject.obsessionCurrentValue > 217) {
+      if (globalDataObject.allTimeTruthValue > 217) {
         button4.style.display = "block";
         return;
       }

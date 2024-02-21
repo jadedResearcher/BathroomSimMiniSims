@@ -35,11 +35,14 @@ const makeRandomEasyRoom = (rand, row, col) => {
   return new Room(`${theme ? theme.pickPossibilityFor(ADJ, rand) + " BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
 }
 
-const makeRoomFromJSon = (json)=>{
+const makeRoomFromJSon = (json) => {
+  //console.log("JR NOTE: the json to make a room from is", json)
   const room = new Room();
-  for(let key of Object.keys(json)){
+  for (let key of Object.keys(json)) {
+    //console.log("JR NOTE: cloning key",key)
     room[key] = json[key];
   }
+  return room;
 }
 
 //mostly basic procedural rooms but occasionally special ones
@@ -58,6 +61,8 @@ const makeRandomRoom = (rand, row, col) => {
 */
 class Maze {
   rand;
+  minSize = 13; //later mazes can be bigger but for now, small
+  title = "Firsty";
   //each row is a row in the map
   //each cell is either undefined or a room in the maze
   map = [];
@@ -68,35 +73,54 @@ class Maze {
     this.map[0][0].unlock(this);
   }
 
-  loadFromJSON = (json)=>{
+  loadFromJSON = (json) => {
+    //console.log("JR NOTE: json is", json)
     this.map = []
-    for(let row of json.map){
+    this.title = json.title ? json.title : "FIRSTY";
+    for (let row of json.map) {
+      //console.log("JR NOTE: row is", row)
       const map_row = [];
-      for(let cell of row){
-        if(cell){
+      for (let cell of row) {
+        //console.log("JR NOTE: cell is", cell)
+        if (cell) {
+          //console.log("JR NOTE: because the cell is, going to make it from json")
           map_row.push(makeRoomFromJSon(cell));
-        }else{
+        } else {
           map_row.push(undefined)
         }
       }
+      // console.log("JR NOTE: going to add a new row to the map:", map_row)
       this.map.push(map_row)
     }
   }
 
-  createNorthRoom = () => {
-    return this.rand.nextDouble() > 0.9
+  hitMinSize = ()=>{
+    return this.getRoomCount()< this.minSize;
+  }
+
+  getRoomCount = () => {
+    let count = 0;
+    //yes this is not efficient to loop on the map to find out how many rooms there are but this will be called only once on unlock per room, can afford to be slow
+    for (let row of maze.map) {
+      for (let col of row) {
+        if (col) {
+          count++;
+        }
+      }
+    }
+    return count;
   }
 
   renderSelf(parent) {
     for (let row of this.map) {
       const rowEle = createElementWithClassAndParent("div", parent, "maze-row");
-      console.log("JR NOTE: row made from ", row)
+      //console.log("JR NOTE: rendering map, row is ", row)
 
       for (let cell of row) {
-        console.log("JR NOTE: cell made  from", cell)
+        //console.log("JR NOTE: rendering map cell is ", cell)
 
         if (cell) {
-          cell.renderSelf(this,rowEle);
+          cell.renderSelf(this, rowEle);
         } else {
           const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
           ele.classList.add("empty-cell");
@@ -180,7 +204,10 @@ class Room {
   }
 
   unlock = (maze) => {
+    console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
+
+    let neighbor_count = 0;
 
     const processRight = () => {
       const right_row = this.row;
@@ -192,6 +219,7 @@ class Room {
         //then, pick my index and make a new random room
         if (right_col < maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          neighbor_count++;
         }
       }
     }
@@ -205,6 +233,7 @@ class Room {
         //then, pick my index and make a new random room
         if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          neighbor_count++;
         }
       }
     }
@@ -216,22 +245,24 @@ class Room {
       if (!maze.map[right_row, right_col]) {
         //if up does not exist, proccess if my row index is zero (if so, stop)
         //then, pick my index and make a new random room
-        if (maze.map[right_row] &&  right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
+        if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          neighbor_count++;
         }
       }
     }
 
-    const processDown = () => {
+    const processDown = (force = false) => {
       const right_row = this.row + 1;
       const right_col = this.col;
-      const odds_empty = 0.25;
+      const odds_empty = force ? 0 : 0.25;
       if (!maze.map[right_row, right_col]) {
         //if down does not exist, check if its row index is the same or greater than how many rows there are
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
         if (maze.map[right_row] && right_row < maze.length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          neighbor_count++;
         }
       }
 
@@ -241,6 +272,12 @@ class Room {
     processDown();
     processLeft();
     processUp();
+    console.log("JR NOTE: did we generate any rooms? ", maze.map)
+    //if neighbor_count is zero and maze has not yet hit its min size yet, force a down
+    if(!hitMinSize() && neighbor_count === 0){
+      console.log("JR NOTE: because we haven't hit min size yet, not allowing dead ends")
+      processDown(true);
+    }
   }
 
   incrementTimesBeaten = (maze) => {
@@ -253,9 +290,9 @@ class Room {
     */
     //right ,down, left,up is the order (makes going to bottom right corner (where it grows) easiest)
     const right = maze.map[this.row][this.col + 1];
-    const down = maze.map[this.row + 1]? maze.map[this.row + 1][this.col]:undefined;
+    const down = maze.map[this.row + 1] ? maze.map[this.row + 1][this.col] : undefined;
     const left = maze.map[this.row][this.col - 1];
-    const up = maze.map[this.row - 1]?maze.map[this.row - 1][this.col]:undefined;
+    const up = maze.map[this.row - 1] ? maze.map[this.row - 1][this.col] : undefined;
     let unlockOrder = [];
     //don't add undefined things (up can unlock after just one beat if its the only neighbor)
     if (right) {
@@ -276,7 +313,8 @@ class Room {
     //any of the above can be undefined
 
     // if i have been beaten 1 time, unlock index 0, if 2, 1, etc.
-    let toUnlock = unlockOrder[timesBeaten - 1]
+    let toUnlock = unlockOrder[this.timesBeaten - 1]
+    console.log("JR NOTE: I think i need to unlock: toUnlock ", { toUnlock, unlockOrder })
 
     if (toUnlock) {
       toUnlock.unlock(maze);
@@ -323,9 +361,9 @@ class Room {
       renderUnlock();
     } else {
       const right = maze.map[this.row][this.col + 1];
-      const down = maze.map[this.row + 1]? maze.map[this.row + 1][this.col]:undefined;
+      const down = maze.map[this.row + 1] ? maze.map[this.row + 1][this.col] : undefined;
       const left = maze.map[this.row][this.col - 1];
-      const up = maze.map[this.row - 1]? maze.map[this.row - 1][this.col]:undefined;
+      const up = maze.map[this.row - 1] ? maze.map[this.row - 1][this.col] : undefined;
       const neighbors = [right, down, left, up];
       for (let neighbor of neighbors) {
         if (neighbor && neighbor.unlocked) {

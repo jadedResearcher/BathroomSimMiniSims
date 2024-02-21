@@ -22,6 +22,7 @@ const buttonMiniGame = (callback)=>{
       globalBGMusic.src = savedSrc;
       globalBGMusic.play();
       callback(globalDataObject.currentMaze);
+      renderMazeTab();
     }
   }
 
