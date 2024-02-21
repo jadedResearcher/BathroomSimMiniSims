@@ -70,7 +70,7 @@ class Maze {
     this.rand = rand;
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom()]);
-    this.map[0][0].title += "(ENTRANCE)";
+    this.map[0][0].title += " (ENTRANCE)";
     this.map[0][0].unlock(this);
   }
 
@@ -244,16 +244,8 @@ class Room {
         if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }else{
-          if(right_col == -1){
-            for(let row of maze.map){
-              row.unshift(undefined);
-            }
-            right_col = 0;
-            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
-            neighbor_count++;
-          }
-        }
+        }//if you let it expand left you will lose your indice. please. please don't do this to me future jr
+
       }
     }
 
@@ -267,18 +259,7 @@ class Room {
         if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
-        }else{
-          if(right_row == -1){
-            const new_row = [];
-            for(let cel of maze.map[0]){
-              new_row.push(undefined);
-            }
-            right_row = 0;
-            maze.map.unshift(new_row);
-            maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
-            neighbor_count++;
-          }
-        }
+        }//if you let it expand up you will lose your indice. please. please don't do this to me future jr
       }
     }
 
@@ -322,6 +303,7 @@ class Room {
   }
 
   incrementTimesBeaten = (maze) => {
+    console.log("JR NOTE: i am", this.title, "and my position is", this.row, this.col, "and maze is", maze.map)
     this.timesBeaten++;
     /*
       so my problem with directions doesn't fuck me over, i can refer to this
@@ -334,6 +316,7 @@ class Room {
     const down = maze.map[this.row + 1] ? maze.map[this.row + 1][this.col] : undefined;
     const left = maze.map[this.row][this.col - 1];
     const up = maze.map[this.row - 1] ? maze.map[this.row - 1][this.col] : undefined;
+    console.log("JR NOTE: i am", this.title, "and here is my possibile unlocks", [right, down, left, up])
     let unlockOrder = [];
     //don't add undefined things (up can unlock after just one beat if its the only neighbor)
     if (right) {
