@@ -31,8 +31,8 @@ const getNewBabyMaze = () => {
 
 const makeRandomEasyRoom = (rand, row, col) => {
   console.log("JR NOTE: making random easy room, for now they are all buttons")
-  const theme = Math.random() > 0.3 ? undefined : pickFrom(Object.values(all_themes));
-  return new Room(`${theme ? theme.pickPossibilityFor(ADJ, rand) + " BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
+  const theme = Math.random() > 0.3 ? undefined : pickFrom(Object.keys(all_themes));
+  return new Room(`${theme ? all_themes[theme].pickPossibilityFor(ADJ, rand) + " BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
 }
 
 const makeRoomFromJSon = (json) => {
@@ -202,7 +202,7 @@ class Room {
   title = "???"
   row = 0;
   col = 0;
-  themes = [];
+  themeKeys = [];
   unlocked = false;
   timesBeaten = 0;
   miniGameKey = "BUTTON"
@@ -210,11 +210,11 @@ class Room {
 
   onClick; //usually will be rendering the inside of the room
 
-  constructor(title, themes, miniGameKey, row = 0, col = 0) {
+  constructor(title, themeKeys, miniGameKey, row = 0, col = 0) {
     this.row = row;
     this.col = col;
     this.title = title;
-    this.themes = themes;
+    this.themeKeys = themeKeys;
     this.miniGameKey = miniGameKey;
   }
 
@@ -222,21 +222,24 @@ class Room {
     console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
     const hitMinSize = maze.hitMinSize();
+    //will be doubled for placing in an EXISTING empty slot, prefers to make new slots
     const oddsEmpty = hitMinSize? 0.9: 0.5;
+    const oddsEmptyBackTrack = hitMinSize? 1.0: 0.95;
+
 
     let neighbor_count = 0;
 
     const processRight = (force = false) => {
       let right_row = this.row;
       let right_col = this.col + 1;
-      const odds_empty = force? 0:oddsEmpty-0.1;//slightly higher chance of going right, because this will be East
+      const odds_empty = force? 0:oddsEmpty-0.5;//slightly higher chance of going right, because this will be East
       console.log("JR NOTE: processing right, force is", force, odds_empty, maze.rand.internal_seed)
 
       if (!maze.map[right_row][right_col]) {
         //if right does not exist, check if its col index is the same or greater than the rows length
         //if so, need to add a new "undefined" cel to the end of every row in the maze
         //then, pick my index and make a new random room
-        if (right_col < maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
+        if (right_col < maze.map[right_row].length && maze.rand.nextDouble() > oddsEmptyBackTrack) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         } else {
@@ -261,7 +264,7 @@ class Room {
       if (!maze.map[right_row][right_col]) {
         //if left does not exist, check if my col index is zero (if so, stop)
         //then, pick my index and make a new random room
-        if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
+        if (right_col >= 0 && maze.rand.nextDouble() > oddsEmptyBackTrack) {
           console.log("JR NOTE: adding a room to the left without making a new col")
 
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
@@ -294,7 +297,7 @@ class Room {
       if (!maze.map[right_row] || (maze.map[right_row] && !maze.map[right_row][right_col])) {
         //if up does not exist, proccess if my row index is zero (if so, stop)
         //then, pick my index and make a new random room
-        if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
+        if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > oddsEmptyBackTrack) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         } else {
@@ -322,7 +325,7 @@ class Room {
       if (!maze.map[right_row] || (maze.map[right_row] && !maze.map[right_row][right_col])) {        //if down does not exist, check if its row index is the same or greater than how many rows there are
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
-        if (maze.map[right_row] && right_row < maze.map.length && maze.rand.nextDouble() > odds_empty) {
+        if (maze.map[right_row] && right_row < maze.map.length && maze.rand.nextDouble() > oddsEmptyBackTrack) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         } else {
@@ -403,7 +406,8 @@ class Room {
 
     const renderUnlock = () => {
       let rotation = 0;
-      for (let theme of this.themes) {
+      const themes = this.themeKeys.map((item)=>all_themes[item])
+      for (let theme of themes) {
         rotation += themeToColorRotation(theme.key)
       }
       //console.log("JR NOTE: setting rotation", rotation)
@@ -414,7 +418,7 @@ class Room {
       }
 
       ele.onclick = () => {
-        globalMiniGames[this.miniGameKey](this.incrementTimesBeaten);
+        globalMiniGames[this.miniGameKey](this,this.incrementTimesBeaten);
       }
       const label = createElementWithClassAndParent("div", ele, "room-label");
 

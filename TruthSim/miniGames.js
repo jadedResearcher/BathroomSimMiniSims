@@ -1,6 +1,6 @@
 
 
-const buttonMiniGame = (callback)=>{
+const buttonMiniGame = (room,callback)=>{
   globalTabContent.innerHTML = "";
   const savedSrc = globalBGMusic.src;
   globalBGMusic.src="audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
@@ -9,6 +9,17 @@ const buttonMiniGame = (callback)=>{
   button.innerText = "CLICK FOR THE TRUTH";
 
   const quips = ["You clicked!","1 truth for you!","It tickles!","You're so smart!"];
+  if(room.themeKeys){
+    for(let themeKey of room.themeKeys){
+      const theme = all_themes[themeKey]
+      console.log("JR NOTE: theme is", theme)
+      quips.push("You're so " + theme.pickPossibilityFor(COMPLIMENT,globalRand));
+      quips.push("You could be a real " + theme.pickPossibilityFor(PERSON,globalRand));
+      quips.push("Wow! Why would anyone ever call you " + theme.pickPossibilityFor(INSULT,globalRand));
+
+
+    }
+  }
   const quipEle = createElementWithClassAndParent("div", globalTabContent, "clicker-game-quip");
 
   let clicks = 0;
