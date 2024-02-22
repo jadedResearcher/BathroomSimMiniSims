@@ -222,7 +222,7 @@ class Room {
     console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
     const hitMinSize = maze.hitMinSize();
-    const oddsEmpty = hitMinSize? 0.75:0.9;
+    const oddsEmpty = hitMinSize? 0.9: 0.5;
 
     let neighbor_count = 0;
 
@@ -348,7 +348,7 @@ class Room {
     //if neighbor_count is zero and maze has not yet hit its min size yet, force a down
     if (!hitMinSize && neighbor_count === 0) {
       console.log("JR NOTE: because we haven't hit min size yet, not allowing dead ends")
-      const options = [processRight,processDown,processLeft,processUp]
+      let options = [processRight,processDown,processLeft,processUp]
       options = maze.rand.shuffle(options);
       for(let attempt of options){
         attempt(true);
