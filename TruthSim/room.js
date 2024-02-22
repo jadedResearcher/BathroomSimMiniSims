@@ -223,8 +223,8 @@ class Room {
     this.unlocked = true;
     const hitMinSize = maze.hitMinSize();
     //will be doubled for placing in an EXISTING empty slot, prefers to make new slots
-    const oddsEmpty = hitMinSize? 0.9: 0.5;
-    const oddsEmptyBackTrack = hitMinSize? 1.0: 0.85;
+    const oddsEmpty = hitMinSize ? 0.9 : 0.5;
+    const oddsEmptyBackTrack = hitMinSize ? 1.0 : 0.85;
 
 
     let neighbor_count = 0;
@@ -232,7 +232,7 @@ class Room {
     const processRight = (force = false) => {
       let right_row = this.row;
       let right_col = this.col + 1;
-      const odds_empty = force? 0:oddsEmpty-0.5;//slightly higher chance of going right, because this will be East
+      const odds_empty = force ? 0 : oddsEmpty - 0.5;//slightly higher chance of going right, because this will be East
       console.log("JR NOTE: processing right, force is", force, odds_empty, maze.rand.internal_seed)
 
       if (!maze.map[right_row][right_col]) {
@@ -258,7 +258,7 @@ class Room {
 
       let right_row = this.row;
       let right_col = this.col - 1;
-      const odds_empty = force? 0:oddsEmpty;
+      const odds_empty = force ? 0 : oddsEmpty;
       console.log("JR NOTE: processing left, force is", force, odds_empty, maze.rand.internal_seed)
 
       if (!maze.map[right_row][right_col]) {
@@ -290,7 +290,7 @@ class Room {
 
       let right_row = this.row - 1;
       let right_col = this.col;
-      const odds_empty = force? 0:oddsEmpty;
+      const odds_empty = force ? 0 : oddsEmpty;
       console.log("JR NOTE: processing up, force is", force, odds_empty, maze.rand.internal_seed)
 
       //if the row doesn't even exist OR it does but theres nothing in the column
@@ -351,11 +351,11 @@ class Room {
     //if neighbor_count is zero and maze has not yet hit its min size yet, force a down
     if (!hitMinSize && neighbor_count === 0) {
       console.log("JR NOTE: because we haven't hit min size yet, not allowing dead ends")
-      let options = [processRight,processDown,processLeft,processUp]
+      let options = [processRight, processDown, processLeft, processUp]
       options = maze.rand.shuffle(options);
-      for(let attempt of options){
+      for (let attempt of options) {
         attempt(true);
-        if(neighbor_count >0){
+        if (neighbor_count > 0) {
           break;
         }
       }
@@ -389,6 +389,15 @@ class Room {
     }
   }
 
+  getTint = () => {
+    let rotation = 0;
+    const themes = this.themeKeys.map((item) => all_themes[item])
+    for (let theme of themes) {
+      rotation += themeToColorRotation(theme.key)
+    }
+    return rotation;
+  }
+
   renderSelf = (maze, rowEle) => {
     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
     this.unlocked ? ele.classList.add("room-unlocked") : ele.classList.add("room-locked");
@@ -404,12 +413,11 @@ class Room {
       ele.innerText = ".";
     }
 
+
+
     const renderUnlock = () => {
-      let rotation = 0;
-      const themes = this.themeKeys.map((item)=>all_themes[item])
-      for (let theme of themes) {
-        rotation += themeToColorRotation(theme.key)
-      }
+
+      const rotation = this.getTint();
       //console.log("JR NOTE: setting rotation", rotation)
       if (rotation === 0) {
         ele.style.backgroundColor = "grey";
@@ -418,7 +426,7 @@ class Room {
       }
 
       ele.onclick = () => {
-        globalMiniGames[this.miniGameKey](this,this.incrementTimesBeaten);
+        globalMiniGames[this.miniGameKey](this, this.incrementTimesBeaten);
       }
       const label = createElementWithClassAndParent("div", ele, "room-label");
 

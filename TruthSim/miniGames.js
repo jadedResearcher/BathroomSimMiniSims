@@ -7,6 +7,18 @@ const buttonMiniGame = (room,callback)=>{
   globalBGMusic.play();
   const button = createElementWithClassAndParent("button", globalTabContent, "clicker-game-button");
   button.innerText = "CLICK FOR THE TRUTH";
+  console.log("JR NOTE: Room is", room)
+  if(room.themeKeys && room.themeKeys.length >0){
+    button.style.position = "absolute";
+    button.style.backgroundColor = "#a10000"
+    const rotation = room.getTint();
+    //console.log("JR NOTE: setting rotation", rotation)
+    if (rotation === 0) {
+      button.style.backgroundColor = "grey";
+    } else {
+      button.style.filter = `hue-rotate(${rotation}deg)`;
+    }
+  }
 
   const quips = ["You clicked!","1 truth for you!","It tickles!","You're so smart!"];
   if(room.themeKeys){
@@ -25,8 +37,17 @@ const buttonMiniGame = (room,callback)=>{
   let clicks = 0;
   button.onclick = ()=>{
     quipEle.innerText = pickFrom(quips);
-    increaseTruthBy(1);
     clicks ++;
+    if(room.themeKeys && room.themeKeys.length >0){
+      increaseTruthBy(13);
+      button.style.position = "absolute";
+      button.style.top = `${getRandomNumberBetween(0,100)}%`;
+      button.style.left = `${getRandomNumberBetween(0,100)}%`;
+
+    }else{
+      increaseTruthBy(1);
+
+    }
     if(clicks > 10){
       globalBGMusic.pause();
       window.alert("10 clicks in one sitting!? Wow! You beat this challenge!")
