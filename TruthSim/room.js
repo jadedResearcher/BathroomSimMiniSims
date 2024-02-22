@@ -224,7 +224,7 @@ class Room {
     const hitMinSize = maze.hitMinSize();
     //will be doubled for placing in an EXISTING empty slot, prefers to make new slots
     const oddsEmpty = hitMinSize? 0.9: 0.5;
-    const oddsEmptyBackTrack = hitMinSize? 1.0: 0.95;
+    const oddsEmptyBackTrack = hitMinSize? 1.0: 0.85;
 
 
     let neighbor_count = 0;
