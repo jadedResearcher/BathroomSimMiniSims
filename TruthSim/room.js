@@ -222,15 +222,17 @@ class Room {
     console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
     const hitMinSize = maze.hitMinSize();
-    const oddsEmpty = hitMinSize? 0.95:0.9;
+    const oddsEmpty = hitMinSize? 0.75:0.9;
 
     let neighbor_count = 0;
 
-    const processRight = () => {
+    const processRight = (force = false) => {
       let right_row = this.row;
       let right_col = this.col + 1;
-      const odds_empty = oddsEmpty -0.1; //slightly higher chance of going right, because this will be East
-      if (!maze.map[right_row, right_col]) {
+      const odds_empty = force? 0:oddsEmpty-0.1;//slightly higher chance of going right, because this will be East
+      console.log("JR NOTE: processing right, force is", force, odds_empty, maze.rand.internal_seed)
+
+      if (!maze.map[right_row][right_col]) {
         //if right does not exist, check if its col index is the same or greater than the rows length
         //if so, need to add a new "undefined" cel to the end of every row in the maze
         //then, pick my index and make a new random room
@@ -238,7 +240,7 @@ class Room {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         } else {
-          if (right_col == maze.map[right_row].length) {
+          if (right_col == maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
             for (let row of maze.map) {
               row.push(undefined);
             }
@@ -249,18 +251,25 @@ class Room {
       }
     }
 
-    const processLeft = () => {
+    const processLeft = (force = false) => {
+
       let right_row = this.row;
       let right_col = this.col - 1;
-      const odds_empty = oddsEmpty;
-      if (!maze.map[right_row, right_col]) {
+      const odds_empty = force? 0:oddsEmpty;
+      console.log("JR NOTE: processing left, force is", force, odds_empty, maze.rand.internal_seed)
+
+      if (!maze.map[right_row][right_col]) {
         //if left does not exist, check if my col index is zero (if so, stop)
         //then, pick my index and make a new random room
         if (right_col >= 0 && maze.rand.nextDouble() > odds_empty) {
+          console.log("JR NOTE: adding a room to the left without making a new col")
+
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         } else {
-          if (right_col == -1) {
+          if (right_col == -1 && maze.rand.nextDouble() > odds_empty) {
+            console.log("JR NOTE: adding a room to the left while making a new col")
+
             for (let row of maze.map) {
               row.unshift(undefined);
             }
@@ -274,18 +283,22 @@ class Room {
       }
     }
 
-    const processUp = () => {
+    const processUp = (force = false) => {
+
       let right_row = this.row - 1;
       let right_col = this.col;
-      const odds_empty = oddsEmpty;
-      if (!maze.map[right_row, right_col]) {
+      const odds_empty = force? 0:oddsEmpty;
+      console.log("JR NOTE: processing up, force is", force, odds_empty, maze.rand.internal_seed)
+
+      //if the row doesn't even exist OR it does but theres nothing in the column
+      if (!maze.map[right_row] || (maze.map[right_row] && !maze.map[right_row][right_col])) {
         //if up does not exist, proccess if my row index is zero (if so, stop)
         //then, pick my index and make a new random room
         if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         } else {
-          if (right_row == -1) {
+          if (right_row == -1 && maze.rand.nextDouble() > odds_empty) {
             const new_row = [];
             for (let cel of maze.map[0]) {
               new_row.push(undefined);
@@ -304,16 +317,16 @@ class Room {
       let right_row = this.row + 1;
       let right_col = this.col;
       const odds_empty = force ? 0 : oddsEmpty;
-      console.log("JR NOTE: processing down, force is", force)
-      if (!maze.map[right_row, right_col]) {
-        //if down does not exist, check if its row index is the same or greater than how many rows there are
+      console.log("JR NOTE: processing down, force is", force, odds_empty, maze.rand.internal_seed)
+      //if the row doesn't even exist OR it does but theres nothing in the column
+      if (!maze.map[right_row] || (maze.map[right_row] && !maze.map[right_row][right_col])) {        //if down does not exist, check if its row index is the same or greater than how many rows there are
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
         if (maze.map[right_row] && right_row < maze.map.length && maze.rand.nextDouble() > odds_empty) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
           neighbor_count++;
         } else {
-          if (right_row == maze.map.length) {
+          if (right_row == maze.map.length && maze.rand.nextDouble() > odds_empty) {
             const new_row = [];
             for (let cel of maze.map[0]) {
               new_row.push(undefined);
@@ -335,7 +348,14 @@ class Room {
     //if neighbor_count is zero and maze has not yet hit its min size yet, force a down
     if (!hitMinSize && neighbor_count === 0) {
       console.log("JR NOTE: because we haven't hit min size yet, not allowing dead ends")
-      processDown(true);
+      const options = [processRight,processDown,processLeft,processUp]
+      options = maze.rand.shuffle(options);
+      for(let attempt of options){
+        attempt(true);
+        if(neighbor_count >0){
+          break;
+        }
+      }
     }
   }
 

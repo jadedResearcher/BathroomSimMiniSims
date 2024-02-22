@@ -77,6 +77,10 @@ textarea {
 
 }
 
+.clicker-game-quip{
+  margin-left: 100px;
+}
+
 .room-label{
   text-align: center;
   margin-top: 20px;
@@ -98,6 +102,7 @@ textarea {
   margin-right: auto;
   display: block;
   margin-top: 100px;
+  padding: 25px;
 }
 
 .room-unlocked:hover {
