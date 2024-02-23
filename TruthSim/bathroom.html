@@ -27,28 +27,31 @@
 
   </div>
   <div class="dev-log" style="margin-top: 200px;">
-  <h1>IMPORTANT: VERY SIMPLE GRAPHICS, ALL CSS/HTML/ascii</h1>
-  <h1>TODO: core loop</h1>
-  <ul>
+    <h1>IMPORTANT: VERY SIMPLE GRAPHICS, ALL CSS/HTML/ascii</h1>
+    <h1>TODO: core loop</h1>
+    <ul>
 
-    <li>if all rooms in a maze are unlocked, you have the option to reset (which increases truth multiplier)</li>
-    <li>can reset at any time but this does NOT increase the truth multiplier</li>
-    <li>ability to store up to three mazes to load when you want (if you find one good for grinding)</li>
-    <li>ability to delete save</li>
-    <li>facts, please (and fact store)</li>
-    <li>rare keys that will let you unlock a room for free without beating its neighbor</li>
-  </ul>
+      <li>if all rooms in a maze are unlocked, you have the option to reset (which increases truth multiplier)</li>
+      <li>can reset at any time but this does NOT increase the truth multiplier</li>
+      <li>ability to store up to three mazes to load when you want (if you find one good for grinding)</li>
+      <li>ability to delete save</li>
+      <li>another simple room that is just two doors, neville and devona and one of them is randomly telling the truth
+        and one of them is randomly lying , about which door is right, can bribe them with Truth to get hints, get 100
+        truth if you're right</li>
+      <li>facts, please (and fact store)</li>
+      <li>rare keys that will let you unlock a room for free without beating its neighbor</li>
+    </ul>
 
-  <h1>TODO: objects</h1>
-  <ul>
-    <li>FACT
-      <ul>
-        <li>TITLE</li>
-        <li>lore_snippet</li>
-        <li>truth_multiplier (can be 1)</li>
-        <li>theme_key_array</li>
-        <li>is_viral (if you give it to a room will it spread)</li>
-      </ul>
+    <h1>TODO: objects</h1>
+    <ul>
+      <li>FACT
+        <ul>
+          <li>TITLE</li>
+          <li>lore_snippet</li>
+          <li>truth_multiplier (can be 1)</li>
+          <li>theme_key_array</li>
+          <li>is_viral (if you give it to a room will it spread)</li>
+        </ul>
       <li>ROOM</li>
       <ul>
         <li>knows how to render itself (change TINT based on assigned fact themes) and runs a lil mini game</li>
@@ -58,50 +61,110 @@
         <li>knows unlock level (number between 0 and number of child rooms)</li>
         <li>list of facts currently assigned to room</li>
         <li>each time you beat the mini game, unlocks one new room from it till fully unlocked</li>
-        <li>can ALWAYS play the mini game, but for each unlock level can choose to move on N,S or E (i.e. you beat it once you can go north, if you beat it twice can go north or south ) (obviously only if it HAS those directions as non dead ends)</li>
-        <li>Button to ASSIGN A FACT from your inventory to this room, which will alter it based on themes or title  (removes it from inventory and instead stores it in this room) </li>
+        <li>can ALWAYS play the mini game, but for each unlock level can choose to move on N,S or E (i.e. you beat it
+          once you can go north, if you beat it twice can go north or south ) (obviously only if it HAS those directions
+          as non dead ends)</li>
+        <li>Button to ASSIGN A FACT from your inventory to this room, which will alter it based on themes or title
+          (removes it from inventory and instead stores it in this room) </li>
         <li>button to take a fact currently assigned to the room and put in your inventory instead</li>
-        <li>has list of 0-3 rooms it adds to the unlocked pool on unlock (and are its exits) (random which is mapped to which exit tho)</li>
+        <li>has list of 0-3 rooms it adds to the unlocked pool on unlock (and are its exits) (random which is mapped to
+          which exit tho)</li>
         <li>some rooms only care about SPECIFIC facts being assigned to them (like closer being wiggler eater)</li>
         <li>some rooms respond to a handful of themes in new ways (like lonely plus religion)</li>
-        <li>others have tiny little changes that can happen based on ANY theme you give it (tyfings combat alters what enemies based on themes) (defeating a specific enemy for the first time might drop a new fact)</li>
+        <li>others have tiny little changes that can happen based on ANY theme you give it (tyfings combat alters what
+          enemies based on themes) (defeating a specific enemy for the first time might drop a new fact)</li>
       </ul>
 
-    </li>
-  </ul>
+      </li>
+    </ul>
 
-  <h1>TODO: branch loop</h1>
-  <ul>
-    <li> tab that lets you store up to three mazes in your SAVE DATA so you can re-run them (if you find a good one)</li>
-    <li>if all rooms are unlocked, option to reset maze and get truth multiplier +1</li>
-    <li>some rooms only enter pool if you have enough all time truth</li>
-    <li>bee breeding room, honey stored along side truth, used for the slot machine to get rare facts</li>
-    <li>probably could keep a rand JUST inside the maze for room generation that doesn't get influenced by things like mini games</li>
-    <li>emphasize how twig and sam are doing post lavinraca/lavinraca</li>
-    <li>collectable crystals like that vrchat game</li>
-    <li>room that lets you reset your maze but keep everything you've found</li>
-    <li>hide this somewhere https://drive.google.com/file/d/1gY8mFR74jaoj6KgbK9R2IdajabKK_hjE/view?usp=sharing ( a fact?) </li>
-    <li>occasionally play weird sounds (every time you reach a new milestone of number of trailing zeroes?)</li>
-    <li>closers room spawns with fact "Babies are Made of Fruit" that you can take from the room, transforming the WigglerEater into the closer and opening the shop up for business (and unlocks it)</li>
-    <li>each area of the map has a specific challenge you must beat to get further. first area is closer, she simply
-      wants Commerce</li>
-      <li>if you are tabbed away for long enough (animation frame can tell, can anything else) truth gets *huffy*, how dare you stop paying attention to it</li>
-      <li>if you've been playing a while, Truth in the save tab starts asking you if you like it. starts warming up to you. especially if you've played the amount of time science says it takes to make friends or develop a habbit</li>
-      <li>if its been a while since it loaded, Truth starts pestering you to take breaks because its a marathon not a sprint</li>
+    <h1>Room ideas (most as small as wario ware i think) </h1>
+
+    <li>base room is wario ware style micro games staring blorbos that shift based on what facts you give them</li>
+    <ul>
+      <li>if no facts, its randomly one of the ogs rooms (closers store, flower chicks points shop, tyfings combat,
+        neighbors baking, eye killers hunting, NAMs multiple choice philosophy, alts fake version of someone elses game,
+        wandas echidna posting </li>
+      <li>help ambrose sell tickets</li>
+      <li>help Sam figure out why their BF is suddenly distant to them</li>
+      <li>help Twig find tasty garbage</li>
+      <li>help camille cut off heads</li>
+      <li>help ria burn it all to ash</li>
+      <li>twins mini game: one always lies, one always tells the truth. neville and devona randomize who the liar is and
+        you pay them Truths to get hints on which door to choose. door is worth 10x how much a hint costs</li>
+      <li>help witherby run a confessional</li>
+      <li>dog training mini game with Rava</li>
+      <li>vik mini game, if you look, your whole maze is rerolled</li>
+      <li>parker mini game, dig dig dig</li>
+      <li>yongki mini game: collect the snails (if you accidentally click more than once on a snail before it finishes
+        its animation it explodes into blood), mini game ends</li>
+      <li>captain mini game: keep your face from changing and making you weird (use grid based glitch animation from
+        jackelope)</li>
+      <li>k mini game, he just info dumps to you about himself and pays you for it (exposition booth)</li>
+    </ul>
+    <li>eye killer mini game fps like LOMAT hunting mini game (slashing sound, and blood, you're hunting cultists) (how
+      much damage you do is based on how much candy you have)</li>
+    <ul>
+      <li>facts shop run by the Closer/Shop Keeper (buy any item to progress)</li>
+      <li>points shopw run by Flower Chick/ Gamer </li>
+      <ul>
+        <li>put points store in truth sim</li>
+
+        <li>every truth you give to closer is tracked. every 100 truths you get one FlowerToken, which is tracked
+          secretly (if you currently have over a hundred flower tokens the exchange rate is two flower tokens for a
+          hundred) </li>
+
+        <li>flower chick runs the points store, because thats gaming baby
+
+          only shows up if you have at least one flower point</li>
+      </ul>
+      <li>black jack: win 3 hands to progress</li>
+      <li>bee breeding mini game. breed 10 unique bee types (out of over a thousand) to progress. gather honey</li>
+      <li>slot machine: input honey, get rare facts, truth or more honey</li>
+      <li>combat: basically like candybox2, themed enemies</li>
+    </ul>
+
+    <h1>TODO: branch loop</h1>
+    <ul>
+      <li>rare room with FRIEND in who gives you quests</li>
+      <li> tab that lets you store up to three mazes in your SAVE DATA so you can re-run them (if you find a good one)
+      </li>
+      <li>if all rooms are unlocked, option to reset maze and get truth multiplier +1</li>
+      <li>some rooms only enter pool if you have enough all time truth</li>
+      <li>bee breeding room, honey stored along side truth, used for the slot machine to get rare facts</li>
+      <li>probably could keep a rand JUST inside the maze for room generation that doesn't get influenced by things like
+        mini games</li>
+      <li>emphasize how twig and sam are doing post lavinraca/lavinraca</li>
+      <li>collectable crystals like that vrchat game</li>
+      <li>room that lets you reset your maze but keep everything you've found</li>
+      <li>hide this somewhere https://drive.google.com/file/d/1gY8mFR74jaoj6KgbK9R2IdajabKK_hjE/view?usp=sharing ( a
+        fact?) </li>
+      <li>occasionally play weird sounds (every time you reach a new milestone of number of trailing zeroes?)</li>
+      <li>closers room spawns with fact "Babies are Made of Fruit" that you can take from the room, transforming the
+        WigglerEater into the closer and opening the shop up for business (and unlocks it)</li>
+      <li>each area of the map has a specific challenge you must beat to get further. first area is closer, she simply
+        wants Commerce</li>
+      <li>if you are tabbed away for long enough (animation frame can tell, can anything else) truth gets *huffy*, how
+        dare you stop paying attention to it</li>
+      <li>if you've been playing a while, Truth in the save tab starts asking you if you like it. starts warming up to
+        you. especially if you've played the amount of time science says it takes to make friends or develop a habbit
+      </li>
+      <li>if its been a while since it loaded, Truth starts pestering you to take breaks because its a marathon not a
+        sprint</li>
       <li>special things that happen based on total play time this session or ever (in save tab?)</li>
-    <li>each time you visit the map the rooms you've unlocked appear connected in a random order</li>
-    <li>if you've already beaten a room you can either move to any of its exits OR redo its challenge in infinite mode
-      (for Truth)</li>
-    <li>each room has up to three rooms it can unlock next (if has three need to beat three times)</li>
-    <li>in map, closer has a shop that lets you trade Truth for Facts (stored in inventory, which unlocks) (the unique
-      themes you have in your facts unlock conversations with the Closer)</li>
-    <li>inventory is tab that lets you view all facts as well as your current truth and obsession modifier</li>
-    <li>in map, tyrfing has a "infinite glorious combat" mode (candbox 2 style combat, constantly moving right, no
-      input?, you only fight clone babies) you need to survive for 85 seconds to be allowed move on (facts spawn magic
-      spells you can cast based on themes)</li>
-    <li>keep adding more possible rooms</li>
-  </ul>
-</div>
+      <li>each time you visit the map the rooms you've unlocked appear connected in a random order</li>
+      <li>if you've already beaten a room you can either move to any of its exits OR redo its challenge in infinite mode
+        (for Truth)</li>
+      <li>each room has up to three rooms it can unlock next (if has three need to beat three times)</li>
+      <li>in map, closer has a shop that lets you trade Truth for Facts (stored in inventory, which unlocks) (the unique
+        themes you have in your facts unlock conversations with the Closer)</li>
+      <li>inventory is tab that lets you view all facts as well as your current truth and obsession modifier</li>
+      <li>in map, tyrfing has a "infinite glorious combat" mode (candbox 2 style combat, constantly moving right, no
+        input?, you only fight clone babies) you need to survive for 85 seconds to be allowed move on (facts spawn magic
+        spells you can cast based on themes)</li>
+      <li>keep adding more possible rooms</li>
+    </ul>
+  </div>
 </body>
 
 </html>
