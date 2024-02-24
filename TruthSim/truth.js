@@ -186,8 +186,15 @@ const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
   globalBGMusic.src="audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
+  const restartButton = createElementWithClassAndParent("button", globalTabContent, "restart-button");
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
-  mazeEle.innerText = "TODO: grid based maze like binding of issac";
+  restartButton.innerText = "Generate New Maze?"
+  restartButton.onclick = ()=>{
+    if(confirm("Are you sure? Progress in this maze will be lost unless saved...")){
+      globalDataObject.currentMaze = null;
+      renderMazeTab();
+    }
+  }
   if (!globalDataObject.currentMaze) {
     globalDataObject.currentMaze = new Maze(globalRand);
   }

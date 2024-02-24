@@ -116,6 +116,14 @@ textarea {
   opacity: 0;
 }
 
+.restart-button{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
 #tab-header {
   border: 1px dashed #c4c4c4;
   width: 100%;
