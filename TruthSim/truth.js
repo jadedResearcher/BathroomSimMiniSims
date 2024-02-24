@@ -1,19 +1,26 @@
+//note to future JR: "handleRewards" at the bottom you are likely to be tweaking and adding to the most in this file
+//plus the "globalDataObject" which isn't too far from here
+
 const globalBGMusic = new Audio("audio/music/funky_beat_by_ic.mp3");
 let globalContainer;//the whole 'screen'
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
 const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
 const globalRand = new SeededRandom(13);
+
+
 let globalDataObject = {
   truthPerSecond: 10,
   startedPlayingTimeCode: Date.now(),
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
   truthCurrentValue: 0,
+  mazesBeaten: 0,
   currentMaze: undefined, //what maze are you currently exploring (serialized)
   storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
+  unlockedMiniGames: ["BUTTON"],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -184,15 +191,48 @@ const handleMazeTabButton = (header) => {
 
 const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
-  globalBGMusic.src="audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
+  globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
   const restartButton = createElementWithClassAndParent("button", globalTabContent, "restart-button");
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
+  let allUnlocked = true; //if we find even one locked, this is permanently false
+  let allBeaten = true; //if we find evne one unbeaten this is permanetly false
   restartButton.innerText = "Generate New Maze?"
-  restartButton.onclick = ()=>{
-    if(confirm("Are you sure? Progress in this maze will be lost unless saved...")){
-      globalDataObject.currentMaze = null;
-      renderMazeTab();
+
+  for (let row of globalDataObject.currentMaze.map) {
+    console.log("JR NOTE: row is", row)
+    for (let room of row) {
+      if (room) {
+        if (!room.unlocked) {
+          allUnlocked = false;
+        }
+
+        if (room.timesBeaten <= 0) {
+          allBeaten = false;
+        }
+      }
+
+    }
+  }
+  if (allUnlocked) {
+    restartButton.innerText += "(And Gain a Reward)"
+  }
+
+  if (allBeaten) {
+    restartButton.innerText += "(And Gain a Bonus)"
+  }
+  restartButton.onclick = () => {
+    if (allUnlocked) {
+      if (confirm("Are you sure? Progress in this maze will be lost unless saved... (But you'll still get your reward).")) {
+
+        globalDataObject.currentMaze = null;
+        handleRewards();//its own screen for rendering
+      }
+    } else {
+      if (confirm("Are you sure? Progress in this maze will be lost unless saved...")) {
+        globalDataObject.currentMaze = null;
+        renderMazeTab();
+      }
     }
   }
   if (!globalDataObject.currentMaze) {
@@ -208,7 +248,7 @@ const renderMazeTab = () => {
 
 const renderSaveTab = () => {
   globalTabContent.innerHTML = "";
-  globalBGMusic.src="audio/music/i_dont_remember_making_this_either_by_ic.mp3";
+  globalBGMusic.src = "audio/music/i_dont_remember_making_this_either_by_ic.mp3";
   globalBGMusic.play();
   const stats = createElementWithClassAndParent("div", globalTabContent, "stats");
 
@@ -379,6 +419,104 @@ const renderGnosisTab = () => {
     globalDataObject.mazeUnlocked = true;
     button4.remove();
     quipEle.innerText = "What are you even saying. Humans LOVE it when numbers go up. How could you POSSIBLY be bored? Ugh. Fine. I GUESS humans are only here for one thing and its disgusting. Have a maze or something."
+  }
+
+
+}
+
+
+//uses the state of the current save data to decide what awards to apply
+//if there is a bonus, give a lil more
+//NOTE: does not save, auto save and manual does, this way if you get rewards you don't like can try again
+const handleRewards = (bonus) => {
+  globalTabContent.innerHTML = "";
+  globalBGMusic.src = "audio/music/dear_god.mp3";
+  globalBGMusic.play();
+  //calculate and hand out rewards, including if bonus
+  globalDataObject.mazesBeaten = globalDataObject.mazesBeaten ? 1 : globalDataObject.mazesBeaten + 1;
+
+
+
+  let truthPerSecond = 1;
+  let truthBulkReward = 0; //might not get this
+  //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
+  const rooms_to_unlock = {
+    1: "RABBIT",
+  };
+  let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
+
+
+
+  if (globalDataObject.mazesBeaten > 10) {
+    truthPerSecond += Math.ceil(globalDataObject.mazesBeaten / 10); //linear increase that scales with how many mazes you've beaten
+  }
+
+  if (globalDataObject.mazesBeaten > 100) {
+    truthPerSecond += globalDataObject.mazesBeaten * truthPerSecond; //i dunno, maybe this is exponential, this is still a WIP, point is, huge jumps
+  }
+
+  if (globalDataObject.mazesBeaten % 3 === 0) {//every three times you get a bonus of raw truth
+    //first time you get it you basically get 100 seconds of free truth
+    //second time you get 300 seconds of free truth
+    //and so on
+    truthBulkReward += (globalDataObject.truthCurrentValue / 100) * globalDataObject.mazesBeaten * globalDataObject.truthPerSecond;
+  }
+
+
+  if (bonus) { //doubles numerical rewards
+    truthPerSecond += truthPerSecond;
+    truthBulkReward += truthBulkReward;
+  }
+
+  globalDataObject.truthPerSecond += truthPerSecond;
+  if (truthBulkReward) {
+    increaseTruthBy(truthBulkReward);
+  }
+
+  if (unlockedRoom) {
+    if (globalDataObject.unlockedMiniGames) {
+      globalDataObject.unlockedMiniGames.push(unlockedRoom);
+
+    } else {
+      globalDataObject.unlockedMiniGames = [unlockedRoom];
+    }
+  }
+
+  //display all rewards, specify if bonus
+  const div = createElementWithClassAndParent("div", globalTabContent, "victory");
+  const header = createElementWithClassAndParent("h1", div);
+  header.innerText = "You did it!"
+
+  const header2 = createElementWithClassAndParent("h2", div);
+  header2.innerText = "Rewards:"
+
+  const list = createElementWithClassAndParent("ul", div);
+  const truthPerSecondEle = createElementWithClassAndParent("li", list);
+  if (bonus) {
+    truthPerSecondEle.innerHTML = `<b>Truth Per Second: ${truthPerSecond / 2} x 2 (bonus!)`;
+  } else {
+    truthPerSecondEle.innerHTML = `<b>Truth Per Second: ${truthPerSecond}`;
+  }
+
+  if (truthBulkReward) {
+    const truthBulkEle = createElementWithClassAndParent("li", list);
+    if (bonus) {
+      truthBulkEle.innerHTML = `<b>Truth: ${truthBulkReward/2} x 2 (bonus!)`;
+    } else {
+      truthBulkEle.innerHTML = `<b>Truth: ${truthBulkReward}`;
+    }
+  }
+
+  if (unlockedRoom) {
+    const unlockEle = createElementWithClassAndParent("li", list);
+    unlockEle.innerHTML = `<b>Unlocked New Room Type: ${unlockedRoom}`;
+  }
+
+
+  const button = createElementWithClassAndParent("button", list);
+  button.innerText = "Start New Maze";
+  button.onclick = () => {
+    renderMazeTab();
   }
 
 

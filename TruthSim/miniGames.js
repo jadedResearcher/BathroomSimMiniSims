@@ -1,5 +1,26 @@
 
 
+const rabbitMiniGame = (room, callback)=>{
+  globalTabContent.innerHTML = "";
+  globalBGMusic.src="audio/music/Drone1.mp3";
+  globalBGMusic.play();
+
+  const input = createElementWithClassAndParent("button", globalTabContent, "password-field");
+
+  const button = createElementWithClassAndParent("button", globalTabContent, "clicker-game-button");
+  button.onclick = ()=>{
+
+    if(input.value.toUpperCase() === "JR TEST"){
+      window.alert("!!! you did it!")
+      callback(globalDataObject.currentMaze);
+      renderMazeTab();
+    }
+  }
+
+
+
+}
+
 const buttonMiniGame = (room,callback)=>{
   globalTabContent.innerHTML = "";
   const savedSrc = globalBGMusic.src;
@@ -48,7 +69,7 @@ const buttonMiniGame = (room,callback)=>{
       increaseTruthBy(1);
 
     }
-    if(clicks > 10){
+    if(clicks > 1){
       globalBGMusic.pause();
       window.alert("10 clicks in one sitting!? Wow! You beat this challenge!")
       globalBGMusic.src = savedSrc;
@@ -62,5 +83,7 @@ const buttonMiniGame = (room,callback)=>{
 
 //each mini game knows how to render itself and takes in a function to use as call back if it unlocks
 const globalMiniGames = {
-  "BUTTON": buttonMiniGame
+  "BUTTON": buttonMiniGame,
+  "RABBIT": rabbitMiniGame,
 }
+
