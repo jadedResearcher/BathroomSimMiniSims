@@ -195,8 +195,13 @@ const renderMazeTab = () => {
   globalBGMusic.play();
   const restartButton = createElementWithClassAndParent("button", globalTabContent, "restart-button");
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
+
+  if (!globalDataObject.currentMaze) {
+    globalDataObject.currentMaze = new Maze(globalRand);
+  }
   let allUnlocked = true; //if we find even one locked, this is permanently false
   let allBeaten = true; //if we find evne one unbeaten this is permanetly false
+  let numberBeaten = 0;
   restartButton.innerText = "Generate New Maze?"
 
   for (let row of globalDataObject.currentMaze.map) {
@@ -209,24 +214,26 @@ const renderMazeTab = () => {
 
         if (room.timesBeaten <= 0) {
           allBeaten = false;
+        }else{
+          numberBeaten ++;
         }
       }
 
     }
   }
   if (allUnlocked) {
-    restartButton.innerText += "(And Gain a Reward)"
+    restartButton.innerText += " (And Gain a Reward)"
   }
 
   if (allBeaten) {
-    restartButton.innerText += "(And Gain a Bonus)"
+    restartButton.innerText += " (And Gain a Bonus)"
   }
   restartButton.onclick = () => {
     if (allUnlocked) {
       if (confirm("Are you sure? Progress in this maze will be lost unless saved... (But you'll still get your reward).")) {
 
         globalDataObject.currentMaze = null;
-        handleRewards();//its own screen for rendering
+        handleRewards(numberBeaten,allBeaten);//its own screen for rendering
       }
     } else {
       if (confirm("Are you sure? Progress in this maze will be lost unless saved...")) {
@@ -235,9 +242,7 @@ const renderMazeTab = () => {
       }
     }
   }
-  if (!globalDataObject.currentMaze) {
-    globalDataObject.currentMaze = new Maze(globalRand);
-  }
+
   globalDataObject.currentMaze.renderSelf(mazeEle);
 
   /*
@@ -428,13 +433,14 @@ const renderGnosisTab = () => {
 //uses the state of the current save data to decide what awards to apply
 //if there is a bonus, give a lil more
 //NOTE: does not save, auto save and manual does, this way if you get rewards you don't like can try again
-const handleRewards = (bonus) => {
+const handleRewards = (numberBeaten,bonus) => {
   globalTabContent.innerHTML = "";
   globalBGMusic.src = "audio/music/dear_god.mp3";
   globalBGMusic.play();
   //calculate and hand out rewards, including if bonus
   globalDataObject.mazesBeaten = globalDataObject.mazesBeaten ? 1 : globalDataObject.mazesBeaten + 1;
 
+  console.log("JR NOTE: handleRewards",globalDataObject.mazesBeaten)
 
 
   let truthPerSecond = 1;
@@ -444,6 +450,7 @@ const handleRewards = (bonus) => {
     1: "RABBIT",
   };
   let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
+  console.log("JR NOTE: unlocked room", unlockedRoom)
 
 
 
@@ -456,10 +463,10 @@ const handleRewards = (bonus) => {
   }
 
   if (globalDataObject.mazesBeaten % 3 === 0) {//every three times you get a bonus of raw truth
-    //first time you get it you basically get 100 seconds of free truth
-    //second time you get 300 seconds of free truth
+    //first time you get it you basically get number of rooms beaten seconds of free truth * one maze
     //and so on
-    truthBulkReward += (globalDataObject.truthCurrentValue / 100) * globalDataObject.mazesBeaten * globalDataObject.truthPerSecond;
+    //should grow exponentially
+    truthBulkReward += numberBeaten * globalDataObject.mazesBeaten * globalDataObject.truthPerSecond;
   }
 
 
@@ -468,6 +475,7 @@ const handleRewards = (bonus) => {
     truthBulkReward += truthBulkReward;
   }
 
+  console.log("JR NOTE: about to update, ", {truthPerSecond, truthBulkReward})
   globalDataObject.truthPerSecond += truthPerSecond;
   if (truthBulkReward) {
     increaseTruthBy(truthBulkReward);
@@ -514,6 +522,7 @@ const handleRewards = (bonus) => {
 
 
   const button = createElementWithClassAndParent("button", list);
+  button.style.marginTop='20px'
   button.innerText = "Start New Maze";
   button.onclick = () => {
     renderMazeTab();

@@ -109,6 +109,13 @@ textarea {
   opacity: 1.0;
 }
 
+.victory{
+  margin: 31px;
+  padding: 10px;
+  border: 1px dotted red;
+  
+}
+
 .empty-cell {
   border: 3px solid rgba(0, 0, 0, 0);
   background-color: rgba(0, 0, 0, 0);
