@@ -258,6 +258,8 @@ const renderMazeTab = () => {
 
     }
   }
+
+  header.innerText += ` (${numberBeaten} Rooms Beaten) `;
   if (allUnlocked) {
     restartButton.innerText += " (And Gain a Reward)"
   }
