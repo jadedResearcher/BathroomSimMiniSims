@@ -4,10 +4,13 @@ globalMiniGames at the bottom of this file is key
 
 
 //JR NOTE: todo displays the fact thing and rerenders the mini game if the fact changes
-const setupGameHeader = (title, sprite, callback)=>{
+const setupGameHeader = (title, difficulty_guide, sprite, callback) => {
   console.log("JR NOTE: setting up game header for", callback)
   const header = createElementWithClassAndParent("h1", globalTabContent, "game-header");
   header.innerText = title
+  const difficulty = createElementWithClassAndParent("div", globalTabContent);
+  difficulty.innerHTML = difficulty_guide
+
   const img = createElementWithClassAndParent("img", globalTabContent, "blorbo");
   img.src = sprite;
 
@@ -15,27 +18,58 @@ const setupGameHeader = (title, sprite, callback)=>{
   return container;
 }
 
-const eyekillerMiniGame = (room, callback)=>{
+const eyekillerMiniGame = (room, callback) => {
   globalTabContent.innerHTML = "";
-  globalBGMusic.src="audio/music/get_it_because_pipe_organ.mp3";//pipers theme...piper being the eye killers past name, but no longer (and even that isn't their TRUE name, that is Camellia, an even more past self (time players, am i right?))
+  globalBGMusic.src = "audio/music/get_it_because_pipe_organ.mp3";//pipers theme...piper being the eye killers past name, but no longer (and even that isn't their TRUE name, that is Camellia, an even more past self (time players, am i right?))
   globalBGMusic.play();
-  const container = setupGameHeader("Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", "images/Eye_Killer_pixel_by_the_guide.png", this)
+
+  let attack = room.difficulty * room.getAttack();
+  let defense = room.difficulty * 3 * room.getDefense(); //on average three slices to kill
+  let speed = 1 * room.getSpeed(); //don't mess with speed much
+  const container = setupGameHeader("Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${defense}/${speed}, Eye Killer Strength: ${attack}`, "images/Eye_Killer_pixel_by_the_guide.png", eyekillerMiniGame)
+
 
   let number_killed = 0;
-  for(let i = 0; i<10; i++){
+  let dead = false;
+  for (let i = 0; i < 10; i++) {
+    let hp = defense;
     const img = createElementWithClassAndParent("img", container, "cultist");
-    img.src="images/CultistForFriendLARGE.png";
-    img.style.top = `${getRandomNumberBetween(0,100)}%`;
-    img.style.left = `${getRandomNumberBetween(0,100)}%`;
+    img.src = "images/CultistForFriendLARGE.png";
+    const top = getRandomNumberBetween(0, 100);
+    const left = getRandomNumberBetween(0, 100);
+    img.style.top = `${top}%`;
+    img.style.left = `${left}%`;
+    const duration = distance(0, 0, top, left) / 5/speed;
+    img.style.animationDuration = `${duration}s`
+    console.log("JR NOTE: cultists constantly move towards upper left, if they reach 0,0, alert that you lost and render the maze tab without the callback (you did not win)")
 
-    img.onclick = ()=>{
-      console.log("JR NOTE: todo cultists should have hp, each click should do damage, cultists should turn into blood cultist for bein removed and we should hear slashing and squelching sounds")
-      img.remove();
-      number_killed++;
-      if(number_killed >=10){
-        window.alert("!!! you did it!")
-        callback(globalDataObject.currentMaze);
+    img.onanimationend = () => {
+      if (!dead) {
+        dead = true;
+        alert("You were hunted down!");
         renderMazeTab();
+      }
+    }
+    img.onclick = () => {
+      hp += -1 * attack;
+      const fx = new Audio("audio/fx/048958759-knife-draw.wav")
+      fx.loop = false;
+      fx.play();
+      if (hp <= 0) {
+        img.src = "images/HeadlessCultistForFriendLARGE.png";
+        img.style.animationPlayState = "paused";
+        fx.onended = () => {
+          if (!dead) {
+            img.remove();
+          }
+        }
+
+        number_killed++;
+        if (number_killed >= 10) {
+          window.alert("!!! you did it!")
+          callback(globalDataObject.currentMaze);
+          renderMazeTab();
+        }
       }
     }
 
@@ -45,18 +79,18 @@ const eyekillerMiniGame = (room, callback)=>{
 }
 
 
-const rabbitMiniGame = (room, callback)=>{
+const rabbitMiniGame = (room, callback) => {
   globalTabContent.innerHTML = "";
-  globalBGMusic.src="audio/music/Drone1.mp3";
+  globalBGMusic.src = "audio/music/Drone1.mp3";
   globalBGMusic.play();
 
   const input = createElementWithClassAndParent("input", globalTabContent, "password-field");
 
   const button = createElementWithClassAndParent("button", globalTabContent, "clicker-game-button");
   button.innerText = "Submit Password"
-  button.onclick = ()=>{
+  button.onclick = () => {
 
-    if(input.value.toUpperCase() === "JR TEST"){
+    if (input.value.toUpperCase() === "JR TEST") {
       window.alert("!!! you did it!")
       callback(globalDataObject.currentMaze);
       renderMazeTab();
@@ -64,15 +98,15 @@ const rabbitMiniGame = (room, callback)=>{
   }
 }
 
-const buttonMiniGame = (room,callback)=>{
+const buttonMiniGame = (room, callback) => {
   globalTabContent.innerHTML = "";
   const savedSrc = globalBGMusic.src;
-  globalBGMusic.src="audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
+  globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
   const button = createElementWithClassAndParent("button", globalTabContent, "clicker-game-button");
   button.innerText = "CLICK FOR THE TRUTH";
   console.log("JR NOTE: Room is", room)
-  if(room.themeKeys && room.themeKeys.length >0){
+  if (room.themeKeys && room.themeKeys.length > 0) {
     button.style.position = "absolute";
     button.style.backgroundColor = "#a10000"
     const rotation = room.getTint();
@@ -84,14 +118,14 @@ const buttonMiniGame = (room,callback)=>{
     }
   }
 
-  const quips = ["You clicked!","1 truth for you!","It tickles!","You're so smart!"];
-  if(room.themeKeys){
-    for(let themeKey of room.themeKeys){
+  const quips = ["You clicked!", "1 truth for you!", "It tickles!", "You're so smart!"];
+  if (room.themeKeys) {
+    for (let themeKey of room.themeKeys) {
       const theme = all_themes[themeKey]
       console.log("JR NOTE: theme is", theme)
-      quips.push("You're so " + theme.pickPossibilityFor(COMPLIMENT,globalRand));
-      quips.push("You could be a real " + theme.pickPossibilityFor(PERSON,globalRand));
-      quips.push("Wow! Why would anyone ever call you " + theme.pickPossibilityFor(INSULT,globalRand));
+      quips.push("You're so " + theme.pickPossibilityFor(COMPLIMENT, globalRand));
+      quips.push("You could be a real " + theme.pickPossibilityFor(PERSON, globalRand));
+      quips.push("Wow! Why would anyone ever call you " + theme.pickPossibilityFor(INSULT, globalRand));
 
 
     }
@@ -99,20 +133,20 @@ const buttonMiniGame = (room,callback)=>{
   const quipEle = createElementWithClassAndParent("div", globalTabContent, "clicker-game-quip");
 
   let clicks = 0;
-  button.onclick = ()=>{
+  button.onclick = () => {
     quipEle.innerText = pickFrom(quips);
-    clicks ++;
-    if(room.themeKeys && room.themeKeys.length >0){
+    clicks++;
+    if (room.themeKeys && room.themeKeys.length > 0) {
       increaseTruthBy(13);
       button.style.position = "absolute";
-      button.style.top = `${getRandomNumberBetween(0,100)}%`;
-      button.style.left = `${getRandomNumberBetween(0,100)}%`;
+      button.style.top = `${getRandomNumberBetween(0, 100)}%`;
+      button.style.left = `${getRandomNumberBetween(0, 100)}%`;
 
-    }else{
+    } else {
       increaseTruthBy(1);
 
     }
-    if(clicks > 1){
+    if (clicks > 1) {
       globalBGMusic.pause();
       window.alert("10 clicks in one sitting!? Wow! You beat this challenge!")
       globalBGMusic.src = savedSrc;

@@ -72,13 +72,13 @@ const load = () => {
     globalDataObject = JSON.parse(data);
     globalDataObject.lastLoadTimeCode = Date.now();
     let json = globalDataObject.currentMaze;
-    globalDataObject.currentMaze = new Maze(globalRand, -1); //negative one will keep it from generating the whole maze, since its about to load it
+    globalDataObject.currentMaze = new Maze(globalRand, -1, globalDataObject.truthPerSecond); //negative one will keep it from generating the whole maze, since its about to load it
     if (json) {
       globalDataObject.currentMaze.loadFromJSON(json);
     }
     for (let i = 0; i < globalDataObject.storedMazes.length; i++) {
       const json_stored = globalDataObject.storedMazes[i];
-      globalDataObject.storedMazes[i] = new Maze(globalRand, -1);
+      globalDataObject.storedMazes[i] = new Maze(globalRand, -1, globalDataObject.truthPerSecond);
       globalDataObject.storedMazes[i].loadFromJSON(json_stored)
     }
   }
@@ -216,7 +216,7 @@ const renderMazeTab = () => {
   globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
   if (!globalDataObject.currentMaze) {
-    globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried);
+    globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried, globalDataObject.truthPerSecond);
     globalDataObject.mazesTried++;
   }
   const header = createElementWithClassAndParent("h1", globalTabContent, "maze-title");
@@ -339,7 +339,7 @@ const renderSaveTab = () => {
       const button = createElementWithClassAndParent("button", container);
       button.innerText = `Rename and Overwrite Permanently With Current Maze (${globalDataObject.currentMaze.title})`;
       button.onclick = () => {
-        globalDataObject.storedMazes[i] = new Maze(globalDataObject.currentMaze.rand, 0);
+        globalDataObject.storedMazes[i] = new Maze(globalDataObject.currentMaze.rand, 0, globalDataObject.truthPerSecond);
         //this prevents changing the name for a saved maze from modifying the current maze OR if you save the same maze to multiple slots from it changing them too
         //deep cloning
         globalDataObject.storedMazes[i].loadFromJSON(JSON.parse(JSON.stringify(globalDataObject.currentMaze)))

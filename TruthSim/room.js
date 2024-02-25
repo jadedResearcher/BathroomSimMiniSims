@@ -68,8 +68,9 @@ class Maze {
   //each row is a row in the map
   //each cell is either undefined or a room in the maze
   map = [];
-  constructor(rand, number) {
+  constructor(rand, number, difficulty) {
     this.rand = rand;
+    this.difficulty = difficulty;
     this.title = "MAZE #"+number;
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom(rand,0,0)]);
@@ -87,6 +88,7 @@ class Maze {
     console.log("JR NOTE: json is", json)
     this.map = []
     this.title = json.title ? json.title : "FIRSTY";
+    this.difficulty = json.difficulty;
     this.internal_seed = json.internal_seed;
     this.rand.internal_seed = this.internal_seed;
     for (let row of json.map) {
@@ -217,6 +219,7 @@ class Room {
   title = "???"
   row = 0;
   col = 0;
+  difficulty = 1;
   themeKeys = [];
   unlocked = false;
   timesBeaten = 0;
@@ -242,6 +245,7 @@ class Room {
   //makes neighbors and calls makeNeighbors on them
   //but won't go above a mazes max size
   makeNeighbors = (maze) => {
+    this.difficulty = maze.difficulty; //recursively sets it for all rooms
     console.log("JR NOTE: making neighbors for", this.title)
     if(maze.hitMaxSize()){//no infinite mazes
       return;
@@ -428,6 +432,33 @@ class Room {
       //if you're not already unlocked, unlock yourself
       room && !room.unlocked && room.unlock(maze);
     }
+  }
+
+  getAttack = () => {
+    let rotation = 1;
+    const themes = this.themeKeys.map((item) => all_themes[item])
+    for (let theme of themes) {
+      rotation += themeToAttackMultiplier(theme.key)
+    }
+    return rotation;
+  }
+
+  getDefense = () => {
+    let rotation = 1;
+    const themes = this.themeKeys.map((item) => all_themes[item])
+    for (let theme of themes) {
+      rotation += themeToDefenseMultiplier(theme.key)
+    }
+    return rotation;
+  }
+
+  getSpeed = () => {
+    let rotation = 1;
+    const themes = this.themeKeys.map((item) => all_themes[item])
+    for (let theme of themes) {
+      rotation += themeToSpeedMultiplier(theme.key)
+    }
+    return rotation;
   }
 
   getTint = () => {

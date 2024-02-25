@@ -2,6 +2,11 @@ let ele;
 
 let how_long_well_let_them_explore = 500;
 
+ const distance = (x1, y1, x2, y2) => {
+  const first = (x1 - x2) ** 2;
+  const second = (y1 - y2) ** 2;
+  return (first + second) ** 0.5
+}
 
 
 //from view-source:https://www.yyyyyyy.info/

@@ -1144,6 +1144,174 @@ const initWallPossibilities = () => {
     wall_possibilities[QUESTING] = ["Satisfaction"] ;*/
 }
 
+
+const themeToAttackMultiplier = (key)=>{
+    const rotation ={};
+    rotation[ART] = 1.0;
+    rotation[TECHNOLOGY] = 2.0;
+    rotation[TIME] = 1.0;
+    rotation[SPACE] = 1.0;
+    rotation[OCEAN] = 1.0;
+    rotation[LONELY] = 1.0;
+    rotation[FIRE] = 3.0;
+    rotation[FREEDOM] = 1.0;
+    rotation[STEALING] = 1.0;
+    rotation[BURIED] = 0.5;
+    rotation[FLESH] = 1.0;
+    rotation[SCIENCE] = 2.0;
+    rotation[MATH] = 1.0;
+    rotation[TWISTING] = -1.0; //yeah i have no clue how this is going to turn out but spiral my beloved
+    rotation[DEATH] = 5.0;
+    rotation[APOCALYPSE] = 5.0;
+    rotation[ANGELS] = 1.0;
+    rotation[SERVICE] =1.0;
+    rotation[FAMILY] = 1.0;
+    rotation[MAGIC] = 2.0;
+    rotation[LIGHT] = 2.0;
+    rotation[HEALING] = 0.1;
+    rotation[PLANTS] = 1.0;
+    rotation[HUNTING] = 3.0;
+    rotation[DECAY] = 2.0;
+    rotation[CHOICES] = 1.0;
+    rotation[ZAP] = 3.0;
+    rotation[LOVE] = 1.0;
+    rotation[SOUL] = 1.0;
+    rotation[ANGER] = 2.0;
+    rotation[WEB] = 1.0;
+    rotation[ROYALTY] = 1.0;
+    rotation[ENDINGS] = 1.0;
+    rotation[KNOWING] = 1.5;
+    rotation[GUIDING] = 1.0;
+    rotation[CRAFTING] = 2.0;
+    rotation[LANGUAGE] = 1.0;
+    rotation[BUGS] = 1.0;
+    rotation[ADDICTION] = 2.0;
+    rotation[SPYING] = 1.0;
+    rotation[CLOWNS] = 3.0;
+    rotation[DOLLS] = 1.0;
+    rotation[OBFUSCATION] = 3.0;
+    rotation[CENSORSHIP] = 3.0;
+    rotation[DARKNESS] = 3.0;
+    rotation[KILLING] = 10.0; //obvious
+    rotation[MUSIC] = 1.0;
+    rotation[DEFENSE] = 0.1; 
+    rotation[QUESTING] = 2.0;
+
+    return rotation[key]?rotation[key]:0;
+}
+
+
+const themeToSpeedMultiplier = (key)=>{
+    const rotation ={};
+    rotation[ART] = 1.0;
+    rotation[TECHNOLOGY] = 2.0;
+    rotation[TIME] = 10.0;
+    rotation[SPACE] = 0.5;
+    rotation[OCEAN] = 1.0;
+    rotation[LONELY] = 1.0;
+    rotation[FIRE] = 1.0;
+    rotation[FREEDOM] = 5.0;
+    rotation[STEALING] = 3.0;
+    rotation[BURIED] = 0.1;
+    rotation[FLESH] = 1.0;
+    rotation[SCIENCE] = 1.0;
+    rotation[MATH] = 1.0;
+    rotation[TWISTING] = -1.0; //yeah i have no clue how this is going to turn out but spiral my beloved
+    rotation[DEATH] = 1.0;
+    rotation[APOCALYPSE] = 1.0;
+    rotation[ANGELS] = 2.0;
+    rotation[SERVICE] =1.0;
+    rotation[FAMILY] = 1.0;
+    rotation[MAGIC] = 1.0;
+    rotation[LIGHT] = 5.0;
+    rotation[HEALING] = 1.0;
+    rotation[PLANTS] = 1.0;
+    rotation[HUNTING] = 3.0;
+    rotation[DECAY] = 1.0;
+    rotation[CHOICES] = 3.0;
+    rotation[ZAP] = 3.0;
+    rotation[LOVE] = 1.0;
+    rotation[SOUL] = 1.0;
+    rotation[ANGER] = 2.0;
+    rotation[WEB] = 0.5;
+    rotation[ROYALTY] = 1.0;
+    rotation[ENDINGS] = 0.1;
+    rotation[KNOWING] = 1.0;
+    rotation[GUIDING] = 5.0;
+    rotation[CRAFTING] = 0.4;
+    rotation[LANGUAGE] = 1.0;
+    rotation[BUGS] = 3.0;
+    rotation[ADDICTION] = 2.0;
+    rotation[SPYING] = 1.0;
+    rotation[CLOWNS] = 3.0;
+    rotation[DOLLS] = 3.0;
+    rotation[OBFUSCATION] = 1.0;
+    rotation[CENSORSHIP] = 1.0;
+    rotation[DARKNESS] = 1.0;
+    rotation[KILLING] = 1.0;
+    rotation[MUSIC] = 2.0;
+    rotation[DEFENSE] = 0.5; 
+    rotation[QUESTING] = 2.0;
+
+    return rotation[key]?rotation[key]:0;
+}
+
+
+const themeToDefenseMultiplier = (key)=>{
+    const rotation ={};
+    rotation[ART] = 1.0;
+    rotation[TECHNOLOGY] = 2.0;
+    rotation[TIME] = 0.5;
+    rotation[SPACE] = 3.0;
+    rotation[OCEAN] = 1.0;
+    rotation[LONELY] = 0.5;
+    rotation[FIRE] = 1.0;
+    rotation[FREEDOM] = 1.0;
+    rotation[STEALING] = 1.0;
+    rotation[BURIED] = 2.0;
+    rotation[FLESH] = 2.0;
+    rotation[SCIENCE] = 2.0;
+    rotation[MATH] = 1.0;
+    rotation[TWISTING] = -1.0; //yeah i have no clue how this is going to turn out but spiral my beloved
+    rotation[DEATH] = 0.5;
+    rotation[APOCALYPSE] = 0.5;
+    rotation[ANGELS] = 3.0;
+    rotation[SERVICE] =2.0;
+    rotation[FAMILY] = 2.0;
+    rotation[MAGIC] = 1.0;
+    rotation[LIGHT] = 0.5;
+    rotation[HEALING] = 3.0;
+    rotation[PLANTS] = 2.0;
+    rotation[HUNTING] = 1.0;
+    rotation[DECAY] = 0.5;
+    rotation[CHOICES] = 1.0;
+    rotation[ZAP] = 1.0;
+    rotation[LOVE] = 1.0;
+    rotation[SOUL] = 1.0;
+    rotation[ANGER] = 1.0;
+    rotation[WEB] = 1.0;
+    rotation[ROYALTY] = 1.0;
+    rotation[ENDINGS] = 0.5;
+    rotation[KNOWING] = 1.0;
+    rotation[GUIDING] = 1.0;
+    rotation[CRAFTING] = 3.0;
+    rotation[LANGUAGE] = 1.0;
+    rotation[BUGS] = 1.0;
+    rotation[ADDICTION] = 0.5;
+    rotation[SPYING] = 1.0;
+    rotation[CLOWNS] = 1.0;
+    rotation[DOLLS] = 1.0;
+    rotation[OBFUSCATION] = 1.0;
+    rotation[CENSORSHIP] = 1.0;
+    rotation[DARKNESS] = 1.0;
+    rotation[KILLING] = 0.1;
+    rotation[MUSIC] = 1.0;
+    rotation[DEFENSE] = 10.0; //i mean, duh
+    rotation[QUESTING] = 2.0;
+
+    return rotation[key]?rotation[key]:0;
+}
+
  const themeToColorRotation = (key)=>{
     const rotation ={};
     rotation[ART] = 0;
