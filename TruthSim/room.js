@@ -66,10 +66,11 @@ class Maze {
   //each row is a row in the map
   //each cell is either undefined or a room in the maze
   map = [];
-  constructor(rand) {
+  constructor(rand, number) {
     this.rand = rand;
+    this.name = "MAZE #"+number;
     //starts out with a size of one x one.
-    this.map.push([makeRandomEasyRoom()]);
+    this.map.push([makeRandomEasyRoom(rand,0,0)]);
     this.map[0][0].title += " (ENTRANCE)";
     this.map[0][0].unlock(this);
   }

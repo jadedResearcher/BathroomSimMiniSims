@@ -109,11 +109,21 @@ textarea {
   opacity: 1.0;
 }
 
+.maze-title{
+  margin-left: 31px;
+}
+
+.maze-section{
+  padding: 31px;
+  border: 1px solid red;
+  margin-bottom: 50px;
+}
+
 .victory{
   margin: 31px;
   padding: 10px;
   border: 1px dotted red;
-  
+
 }
 
 .empty-cell {

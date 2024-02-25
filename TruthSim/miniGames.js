@@ -5,9 +5,10 @@ const rabbitMiniGame = (room, callback)=>{
   globalBGMusic.src="audio/music/Drone1.mp3";
   globalBGMusic.play();
 
-  const input = createElementWithClassAndParent("button", globalTabContent, "password-field");
+  const input = createElementWithClassAndParent("input", globalTabContent, "password-field");
 
   const button = createElementWithClassAndParent("button", globalTabContent, "clicker-game-button");
+  button.innerText = "Submit Password"
   button.onclick = ()=>{
 
     if(input.value.toUpperCase() === "JR TEST"){

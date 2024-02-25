@@ -15,6 +15,7 @@ let globalDataObject = {
   lastSaveTimeCode: 0,
   truthCurrentValue: 0,
   mazesBeaten: 0,
+  mazesTried: 0,
   currentMaze: undefined, //what maze are you currently exploring (serialized)
   storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
   saveUnlocked: false,
@@ -193,12 +194,17 @@ const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
   globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
+  if (!globalDataObject.currentMaze) {
+    globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried);
+    globalDataObject.mazesTried ++;
+  }
+  const header = createElementWithClassAndParent("h1", globalTabContent, "maze-title");
+  header.innerText = globalDataObject.currentMaze.name;
+
   const restartButton = createElementWithClassAndParent("button", globalTabContent, "restart-button");
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
 
-  if (!globalDataObject.currentMaze) {
-    globalDataObject.currentMaze = new Maze(globalRand);
-  }
+
   let allUnlocked = true; //if we find even one locked, this is permanently false
   let allBeaten = true; //if we find evne one unbeaten this is permanetly false
   let numberBeaten = 0;
@@ -269,6 +275,28 @@ const renderSaveTab = () => {
   if (globalDataObject.lastLoadTimeCode === 0) {
     lastLoaded.innerHTML = "<b>Last Loaded: </b>Never :( Don't you know Obession Is A Dangerous Thing?<br><br> As long as it auto saved recently or you manually saved, you should be able to refresh the tab and keep everything. Unless you're in incognito mode. Better to find out now than after a power outage..."
   }
+
+  const mazeSection  = createElementWithClassAndParent("div", stats, "maze-section");
+  const instructionsMaze  = createElementWithClassAndParent("div", mazeSection);
+  instructionsMaze.innerHTML = "Do you find a particular maze too hard to beat right now? Have you found an especially useful maze you don't want to forget? The End Is Never The End with Zampanio! You can remember up to three mazes at a time to load at your leisure!<br><br><i>But be warned: The Rot Takes All In The End</i> ";
+  if(!globalDataObject.storedMazes || globalDataObject.storedMazes.length === 0){
+    globalDataObject.storedMazes = [currentMaze, currentMaze, currentMaze]
+  }
+
+  for(let i = 0; i<3; i++){
+    const input  = createElementWithClassAndParent("input", mazeSection);
+    input.value = globalDataObject.storedMazes[i].name;
+    const button  = createElementWithClassAndParent("button", mazeSection);
+    button.innerText = `Overwrite Permanently With Current Maze (${globalDataObject.currentMaze.name})`;
+    button.onclick = ()=>{
+      globalDataObject.storedMazes[i] = currentMaze;
+      renderSaveTab();
+    }
+  }
+
+
+
+
   const section2 = createElementWithClassAndParent("div", stats);
 
   const h2 = createElementWithClassAndParent("h2", section2);
