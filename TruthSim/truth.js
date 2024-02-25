@@ -56,7 +56,7 @@ const load = () => {
     globalDataObject = JSON.parse(data);
     globalDataObject.lastLoadTimeCode = Date.now();
     let json = globalDataObject.currentMaze;
-    globalDataObject.currentMaze = new Maze(globalRand);
+    globalDataObject.currentMaze = new Maze(globalRand,-1);
     if (json) {
       globalDataObject.currentMaze.loadFromJSON(json);
     }
@@ -199,7 +199,7 @@ const renderMazeTab = () => {
     globalDataObject.mazesTried ++;
   }
   const header = createElementWithClassAndParent("h1", globalTabContent, "maze-title");
-  header.innerText = globalDataObject.currentMaze.name;
+  header.innerText = globalDataObject.currentMaze.title;
 
   const restartButton = createElementWithClassAndParent("button", globalTabContent, "restart-button");
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
@@ -276,23 +276,31 @@ const renderSaveTab = () => {
     lastLoaded.innerHTML = "<b>Last Loaded: </b>Never :( Don't you know Obession Is A Dangerous Thing?<br><br> As long as it auto saved recently or you manually saved, you should be able to refresh the tab and keep everything. Unless you're in incognito mode. Better to find out now than after a power outage..."
   }
 
+  if(globalDataObject.currentMaze){
   const mazeSection  = createElementWithClassAndParent("div", stats, "maze-section");
   const instructionsMaze  = createElementWithClassAndParent("div", mazeSection);
   instructionsMaze.innerHTML = "Do you find a particular maze too hard to beat right now? Have you found an especially useful maze you don't want to forget? The End Is Never The End with Zampanio! You can remember up to three mazes at a time to load at your leisure!<br><br><i>But be warned: The Rot Takes All In The End</i> ";
   if(!globalDataObject.storedMazes || globalDataObject.storedMazes.length === 0){
-    globalDataObject.storedMazes = [currentMaze, currentMaze, currentMaze]
+    globalDataObject.storedMazes = [globalDataObject.currentMaze, globalDataObject.currentMaze, globalDataObject.currentMaze]
   }
 
   for(let i = 0; i<3; i++){
-    const input  = createElementWithClassAndParent("input", mazeSection);
-    input.value = globalDataObject.storedMazes[i].name;
-    const button  = createElementWithClassAndParent("button", mazeSection);
-    button.innerText = `Overwrite Permanently With Current Maze (${globalDataObject.currentMaze.name})`;
+    const container  = createElementWithClassAndParent("div", mazeSection, "save-maze-line");
+
+    const input  = createElementWithClassAndParent("input", container);
+    input.value = globalDataObject.storedMazes[i].title;
+    const button  = createElementWithClassAndParent("button", container);
+    button.innerText = `Rename and Overwrite Permanently With Current Maze (${globalDataObject.currentMaze.title})`;
     button.onclick = ()=>{
-      globalDataObject.storedMazes[i] = currentMaze;
+      globalDataObject.storedMazes[i] = new Maze(globalDataObject.currentMaze.rand,0);
+      //this prevents changing the name for a saved maze from modifying the current maze OR if you save the same maze to multiple slots from it changing them too
+      //deep cloning
+      globalDataObject.storedMazes[i].loadFromJSON(JSON.parse(JSON.stringify(globalDataObject.currentMaze)))
+      globalDataObject.storedMazes[i].title = input.value;
       renderSaveTab();
     }
   }
+}
 
 
 

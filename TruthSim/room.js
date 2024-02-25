@@ -68,7 +68,7 @@ class Maze {
   map = [];
   constructor(rand, number) {
     this.rand = rand;
-    this.name = "MAZE #"+number;
+    this.title = "MAZE #"+number;
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom(rand,0,0)]);
     this.map[0][0].title += " (ENTRANCE)";
@@ -76,7 +76,7 @@ class Maze {
   }
 
   loadFromJSON = (json) => {
-    //console.log("JR NOTE: json is", json)
+    console.log("JR NOTE: json is", json)
     this.map = []
     this.title = json.title ? json.title : "FIRSTY";
     for (let row of json.map) {

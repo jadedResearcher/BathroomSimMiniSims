@@ -113,10 +113,23 @@ textarea {
   margin-left: 31px;
 }
 
+.save-maze-line{
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  gap: 31px;
+}
+
 .maze-section{
   padding: 31px;
   border: 1px solid red;
   margin-bottom: 50px;
+}
+
+.maze-section input{
+  height: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .victory{
