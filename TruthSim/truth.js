@@ -14,7 +14,7 @@ const globalRand = new SeededRandom(13);
 
 
 let globalDataObject = {
-  truthPerSecond: 10,
+  truthPerSecond: 100,
   startedPlayingTimeCode: Date.now(),
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
@@ -49,14 +49,17 @@ window.onload = () => {
 }
 
 const save = () => {
+  console.log("JR NOTE: saving");
   globalDataObject.lastSaveTimeCode = Date.now();
   //storing the whole systems internal seed means that save scumming gets you nothing, gotta be more clever than that wastes
   globalDataObject.mapInternalSeed = globalRand.internal_seed;
 
-  //storing the mazes seed lets us make sure they remain deterministic, even if random
-  globalDataObject.currentMaze.internal_seed = globalDataObject.currentMaze.rand.internal_seed;
-  for(let stored_maze of globalDataObject.storedMazes){
-    stored_maze.internal_seed = stored_maze.rand.internal_seed;
+  if (globalDataObject.currentMaze) {
+    //storing the mazes seed lets us make sure they remain deterministic, even if random
+    globalDataObject.currentMaze.internal_seed = globalDataObject.currentMaze.rand.internal_seed;
+    for (let stored_maze of globalDataObject.storedMazes) {
+      stored_maze.internal_seed = stored_maze.rand.internal_seed;
+    }
   }
 
   localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));
@@ -73,7 +76,7 @@ const load = () => {
     if (json) {
       globalDataObject.currentMaze.loadFromJSON(json);
     }
-    for(let i = 0; i<globalDataObject.storedMazes.length; i ++){
+    for (let i = 0; i < globalDataObject.storedMazes.length; i++) {
       const json_stored = globalDataObject.storedMazes[i];
       globalDataObject.storedMazes[i] = new Maze(globalRand, -1);
       globalDataObject.storedMazes[i].loadFromJSON(json_stored)
@@ -222,13 +225,24 @@ const renderMazeTab = () => {
   const buttonRow = createElementWithClassAndParent("div", globalTabContent, "button-row");
   const restartButton = createElementWithClassAndParent("button", buttonRow, "restart-button");
 
-  for (let i = 0; i < 3; i++) {
-    const loadButton = createElementWithClassAndParent("button", buttonRow, "load-button");
+  for (let i = 0; i < globalDataObject.storedMazes.length; i++) {
+    const container = createElementWithClassAndParent("div", buttonRow);
+
+    const saveButton = createElementWithClassAndParent("button", container, "load-button");
+    saveButton.innerText = `Overwrite '${globalDataObject.storedMazes[i].title}' with Current Maze`;
+    saveButton.onclick = () => {
+      if (confirm(`Are you sure? You will permanently lose ${globalDataObject.storedMazes[i].title}.`)) {
+        globalDataObject.storedMazes[i] = globalDataObject.currentMaze;
+        renderMazeTab();
+      }
+    }
+
+    const loadButton = createElementWithClassAndParent("button", container, "load-button");
     loadButton.innerText = `Load '${globalDataObject.storedMazes[i].title}' from Storage`;
     loadButton.onclick = () => {
-      if (confirm("Are you sure? Progress in current maze will be lost unless saved...")) {
+      if (confirm("Are you sure? Progress in current maze will be lost unless saved")) {
         globalDataObject.currentMaze = globalDataObject.storedMazes[i];
-        console.log("JR NOTE: current maze is now", globalDataObject.currentMaze, "because ",globalDataObject.storedMazes)
+        console.log("JR NOTE: current maze is now", globalDataObject.currentMaze, "because ", globalDataObject.storedMazes)
         renderMazeTab();
       }
     }
@@ -259,7 +273,7 @@ const renderMazeTab = () => {
     }
   }
 
-  header.innerText += ` (${numberBeaten} Rooms Beaten) `;
+  header.innerText += ` (${allBeaten? "All": numberBeaten} Rooms Beaten) ${allUnlocked?"Maze Fully Explored!":""} `;
   if (allUnlocked) {
     restartButton.innerText += " (And Gain a Reward)"
   }
@@ -275,7 +289,7 @@ const renderMazeTab = () => {
         handleRewards(numberBeaten, allBeaten);//its own screen for rendering
       }
     } else {
-      if (confirm("Are you sure? Progress in this maze will be lost unless saved...")) {
+      if (confirm("Are you sure? Progress in this maze will be lost unless saved")) {
         globalDataObject.currentMaze = null;
         renderMazeTab();
       }
@@ -485,6 +499,7 @@ const renderGnosisTab = () => {
 
   button3.onclick = () => {
     globalDataObject.saveUnlocked = true;
+    save();
     button3.remove();
     quipEle.innerText = "Oh. Sure. Right. You humans need to do things like sleep. I remembered that. Here. You can save now. Use it wisely."
   }

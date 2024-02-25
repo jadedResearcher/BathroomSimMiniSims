@@ -73,13 +73,14 @@ class Maze {
     this.title = "MAZE #"+number;
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom(rand,0,0)]);
-    this.map[0][0].title += " (ENTRANCE)";
+    const entrance = this.map[0][0];
+    entrance.title += " (ENTRANCE)";
     //it'll be negative if its intended to be a placeholder before loading
     if(number >=0){
       //will recursively fill out the whole maze without getting bigger than maxSize;
-      this.map[0][0].makeNeighbors(this);
+      entrance.makeNeighbors(this);
     }
-    this.map[0][0].unlock(this);
+    entrance.unlock(this);
   }
 
   loadFromJSON = (json) => {
