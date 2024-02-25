@@ -30,9 +30,9 @@ const getNewBabyMaze = () => {
 }
 
 const makeRandomEasyRoom = (rand, row, col) => {
-  console.log("JR NOTE: making random easy room, for now they are all buttons")
   const theme = Math.random() > 0.3 ? undefined : pickFrom(Object.keys(all_themes));
-  return new Room(`${theme ? all_themes[theme].pickPossibilityFor(ADJ, rand) + " BUTTON" : "BUTTON"} ROOM`, theme ? [theme] : [], "BUTTON", row, col);
+  const chosen_mini_game_key = rand.pickFrom(globalDataObject.unlockedMiniGames);
+  return new Room(`${theme ? `${all_themes[theme].pickPossibilityFor(ADJ, rand)} ${chosen_mini_game_key}` : chosen_mini_game_key} ROOM`, theme ? [theme] : [], chosen_mini_game_key, row, col);
 }
 
 const makeRoomFromJSon = (json) => {

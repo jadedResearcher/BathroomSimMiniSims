@@ -30,9 +30,8 @@
     <h1>IMPORTANT: VERY SIMPLE GRAPHICS, ALL CSS/HTML/ascii</h1>
     <h1>TODO: core loop</h1>
     <ul>
-
-      <li>if all rooms in a maze are unlocked, you have the option to reset (which increases truth multiplier)</li>
-      <li>can reset at any time but this does NOT increase the truth multiplier</li>
+      <li>save data knows what room types you have unlocked (if truth multiplier > 1 unlock themed button rooms as an option during generation)</li>
+      <li>if all rooms in a maze are unlocked, you have the option to reset (which increases truth multiplier and gives you rewards based on your current save data)</li>
       <li>ability to store up to three mazes to load when you want (if you find one good for grinding)</li>
       <li>ability to delete save</li>
     </ul>
@@ -43,8 +42,9 @@
         <ul>
           <li>TITLE</li>
           <li>lore_snippet</li>
-          <li>truth_multiplier (can be 1)</li>
           <li>theme_key_array</li>
+          <li>damage (only some rooms use)</li>
+          <li>defense (only some rooms use)</li>
           <li>is_viral (if you give it to a room will it spread)</li>
         </ul>
       <li>ROOM</li>
