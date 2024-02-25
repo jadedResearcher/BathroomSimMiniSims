@@ -1,6 +1,11 @@
 //note to future JR: "handleRewards" at the bottom you are likely to be tweaking and adding to the most in this file
 //plus the "globalDataObject" which isn't too far from here
 
+//also, hello! thanks for reading my code :) i call people who read (or better yet, CHANGE) my code "Wastes"
+//because the game i'm making is essentially wasted on you (you're skipping the regular progression)
+//but i wouldn't  want you to be bored
+//so i make sure theres enrichment for you in the code
+
 const globalBGMusic = new Audio("audio/music/funky_beat_by_ic.mp3");
 let globalContainer;//the whole 'screen'
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
@@ -45,7 +50,15 @@ window.onload = () => {
 
 const save = () => {
   globalDataObject.lastSaveTimeCode = Date.now();
+  //storing the whole systems internal seed means that save scumming gets you nothing, gotta be more clever than that wastes
   globalDataObject.mapInternalSeed = globalRand.internal_seed;
+
+  //storing the mazes seed lets us make sure they remain deterministic, even if random
+  globalDataObject.currentMaze.internal_seed = globalDataObject.currentMaze.rand.internal_seed;
+  for(let stored_maze of globalDataObject.storedMazes){
+    stored_maze.internal_seed = stored_maze.rand.internal_seed;
+  }
+
   localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));
 }
 
@@ -56,9 +69,14 @@ const load = () => {
     globalDataObject = JSON.parse(data);
     globalDataObject.lastLoadTimeCode = Date.now();
     let json = globalDataObject.currentMaze;
-    globalDataObject.currentMaze = new Maze(globalRand,-1);
+    globalDataObject.currentMaze = new Maze(globalRand, -1);
     if (json) {
       globalDataObject.currentMaze.loadFromJSON(json);
+    }
+    for(let i = 0; i<globalDataObject.storedMazes.length; i ++){
+      const json_stored = globalDataObject.storedMazes[i];
+      globalDataObject.storedMazes[i] = new Maze(globalRand, -1);
+      globalDataObject.storedMazes[i].loadFromJSON(json_stored)
     }
   }
 
@@ -196,12 +214,26 @@ const renderMazeTab = () => {
   globalBGMusic.play();
   if (!globalDataObject.currentMaze) {
     globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried);
-    globalDataObject.mazesTried ++;
+    globalDataObject.mazesTried++;
   }
   const header = createElementWithClassAndParent("h1", globalTabContent, "maze-title");
   header.innerText = globalDataObject.currentMaze.title;
 
-  const restartButton = createElementWithClassAndParent("button", globalTabContent, "restart-button");
+  const buttonRow = createElementWithClassAndParent("div", globalTabContent, "button-row");
+  const restartButton = createElementWithClassAndParent("button", buttonRow, "restart-button");
+
+  for (let i = 0; i < 3; i++) {
+    const loadButton = createElementWithClassAndParent("button", buttonRow, "load-button");
+    loadButton.innerText = `Load '${globalDataObject.storedMazes[i].title}' from Storage`;
+    loadButton.onclick = () => {
+      if (confirm("Are you sure? Progress in current maze will be lost unless saved...")) {
+        globalDataObject.currentMaze = globalDataObject.storedMazes[i];
+        console.log("JR NOTE: current maze is now", globalDataObject.currentMaze, "because ",globalDataObject.storedMazes)
+        renderMazeTab();
+      }
+    }
+  }
+
   const mazeEle = createElementWithClassAndParent("div", globalTabContent, "maze");
 
 
@@ -211,7 +243,6 @@ const renderMazeTab = () => {
   restartButton.innerText = "Generate New Maze?"
 
   for (let row of globalDataObject.currentMaze.map) {
-    console.log("JR NOTE: row is", row)
     for (let room of row) {
       if (room) {
         if (!room.unlocked) {
@@ -220,8 +251,8 @@ const renderMazeTab = () => {
 
         if (room.timesBeaten <= 0) {
           allBeaten = false;
-        }else{
-          numberBeaten ++;
+        } else {
+          numberBeaten++;
         }
       }
 
@@ -239,7 +270,7 @@ const renderMazeTab = () => {
       if (confirm("Are you sure? Progress in this maze will be lost unless saved... (But you'll still get your reward).")) {
 
         globalDataObject.currentMaze = null;
-        handleRewards(numberBeaten,allBeaten);//its own screen for rendering
+        handleRewards(numberBeaten, allBeaten);//its own screen for rendering
       }
     } else {
       if (confirm("Are you sure? Progress in this maze will be lost unless saved...")) {
@@ -276,31 +307,31 @@ const renderSaveTab = () => {
     lastLoaded.innerHTML = "<b>Last Loaded: </b>Never :( Don't you know Obession Is A Dangerous Thing?<br><br> As long as it auto saved recently or you manually saved, you should be able to refresh the tab and keep everything. Unless you're in incognito mode. Better to find out now than after a power outage..."
   }
 
-  if(globalDataObject.currentMaze){
-  const mazeSection  = createElementWithClassAndParent("div", stats, "maze-section");
-  const instructionsMaze  = createElementWithClassAndParent("div", mazeSection);
-  instructionsMaze.innerHTML = "Do you find a particular maze too hard to beat right now? Have you found an especially useful maze you don't want to forget? The End Is Never The End with Zampanio! You can remember up to three mazes at a time to load at your leisure!<br><br><i>But be warned: The Rot Takes All In The End</i> ";
-  if(!globalDataObject.storedMazes || globalDataObject.storedMazes.length === 0){
-    globalDataObject.storedMazes = [globalDataObject.currentMaze, globalDataObject.currentMaze, globalDataObject.currentMaze]
-  }
+  if (globalDataObject.currentMaze) {
+    const mazeSection = createElementWithClassAndParent("div", stats, "maze-section");
+    const instructionsMaze = createElementWithClassAndParent("div", mazeSection);
+    instructionsMaze.innerHTML = "Do you find a particular maze too hard to beat right now? Have you found an especially useful maze you don't want to forget? The End Is Never The End with Zampanio! You can remember up to three mazes at a time to load at your leisure!<br><br><i>But be warned: The Rot Takes All In The End</i> ";
+    if (!globalDataObject.storedMazes || globalDataObject.storedMazes.length === 0) {
+      globalDataObject.storedMazes = [globalDataObject.currentMaze, globalDataObject.currentMaze, globalDataObject.currentMaze]
+    }
 
-  for(let i = 0; i<3; i++){
-    const container  = createElementWithClassAndParent("div", mazeSection, "save-maze-line");
+    for (let i = 0; i < 3; i++) {
+      const container = createElementWithClassAndParent("div", mazeSection, "save-maze-line");
 
-    const input  = createElementWithClassAndParent("input", container);
-    input.value = globalDataObject.storedMazes[i].title;
-    const button  = createElementWithClassAndParent("button", container);
-    button.innerText = `Rename and Overwrite Permanently With Current Maze (${globalDataObject.currentMaze.title})`;
-    button.onclick = ()=>{
-      globalDataObject.storedMazes[i] = new Maze(globalDataObject.currentMaze.rand,0);
-      //this prevents changing the name for a saved maze from modifying the current maze OR if you save the same maze to multiple slots from it changing them too
-      //deep cloning
-      globalDataObject.storedMazes[i].loadFromJSON(JSON.parse(JSON.stringify(globalDataObject.currentMaze)))
-      globalDataObject.storedMazes[i].title = input.value;
-      renderSaveTab();
+      const input = createElementWithClassAndParent("input", container);
+      input.value = globalDataObject.storedMazes[i].title;
+      const button = createElementWithClassAndParent("button", container);
+      button.innerText = `Rename and Overwrite Permanently With Current Maze (${globalDataObject.currentMaze.title})`;
+      button.onclick = () => {
+        globalDataObject.storedMazes[i] = new Maze(globalDataObject.currentMaze.rand, 0);
+        //this prevents changing the name for a saved maze from modifying the current maze OR if you save the same maze to multiple slots from it changing them too
+        //deep cloning
+        globalDataObject.storedMazes[i].loadFromJSON(JSON.parse(JSON.stringify(globalDataObject.currentMaze)))
+        globalDataObject.storedMazes[i].title = input.value;
+        renderSaveTab();
+      }
     }
   }
-}
 
 
 
@@ -469,14 +500,14 @@ const renderGnosisTab = () => {
 //uses the state of the current save data to decide what awards to apply
 //if there is a bonus, give a lil more
 //NOTE: does not save, auto save and manual does, this way if you get rewards you don't like can try again
-const handleRewards = (numberBeaten,bonus) => {
+const handleRewards = (numberBeaten, bonus) => {
   globalTabContent.innerHTML = "";
   globalBGMusic.src = "audio/music/dear_god.mp3";
   globalBGMusic.play();
   //calculate and hand out rewards, including if bonus
   globalDataObject.mazesBeaten = globalDataObject.mazesBeaten ? 1 : globalDataObject.mazesBeaten + 1;
 
-  console.log("JR NOTE: handleRewards",globalDataObject.mazesBeaten)
+  console.log("JR NOTE: handleRewards", globalDataObject.mazesBeaten)
 
 
   let truthPerSecond = 1;
@@ -511,7 +542,7 @@ const handleRewards = (numberBeaten,bonus) => {
     truthBulkReward += truthBulkReward;
   }
 
-  console.log("JR NOTE: about to update, ", {truthPerSecond, truthBulkReward})
+  console.log("JR NOTE: about to update, ", { truthPerSecond, truthBulkReward })
   globalDataObject.truthPerSecond += truthPerSecond;
   if (truthBulkReward) {
     increaseTruthBy(truthBulkReward);
@@ -545,7 +576,7 @@ const handleRewards = (numberBeaten,bonus) => {
   if (truthBulkReward) {
     const truthBulkEle = createElementWithClassAndParent("li", list);
     if (bonus) {
-      truthBulkEle.innerHTML = `<b>Truth: ${truthBulkReward/2} x 2 (bonus!)`;
+      truthBulkEle.innerHTML = `<b>Truth: ${truthBulkReward / 2} x 2 (bonus!)`;
     } else {
       truthBulkEle.innerHTML = `<b>Truth: ${truthBulkReward}`;
     }
@@ -558,7 +589,7 @@ const handleRewards = (numberBeaten,bonus) => {
 
 
   const button = createElementWithClassAndParent("button", list);
-  button.style.marginTop='20px'
+  button.style.marginTop = '20px'
   button.innerText = "Start New Maze";
   button.onclick = () => {
     renderMazeTab();

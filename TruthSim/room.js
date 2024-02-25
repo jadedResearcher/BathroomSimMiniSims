@@ -63,6 +63,7 @@ class Maze {
   rand;
   minSize = 13; //later mazes can be bigger but for now, small
   title = "Firsty";
+  internal_seed=13;
   //each row is a row in the map
   //each cell is either undefined or a room in the maze
   map = [];
@@ -79,6 +80,8 @@ class Maze {
     console.log("JR NOTE: json is", json)
     this.map = []
     this.title = json.title ? json.title : "FIRSTY";
+    this.internal_seed = json.internal_seed;
+    this.rand.internal_seed = this.internal_seed;
     for (let row of json.map) {
       //console.log("JR NOTE: row is", row)
       const map_row = [];
