@@ -32,8 +32,41 @@
     <ul>
       <li>mini games :) :) :) (whatever takes my fancy, use guide and friend sprites)</li>
       <li>ability to delete save</li>
-      <li>opening quiz that claims its going to make a game entirely personalized for you (its lying) (throw it out)</li>
+      <li>opening quiz that claims its going to make a game entirely personalized for you (its lying) (throw it out)
+      </li>
     </ul>
+
+    <h1>
+      NEXT TODO:</h1>
+
+      <ul>
+        <li> * after beating one maze, unlock eye killer clicking mini game (damage you do is based on truth multiplier)
+          (speed and hp and number of cultsists is based on all time truth plus theme attack/defense)
+        </li>
+        <li>* implement fact system, first fact that will exist is "The Quatro Blade can creates wounds that can not be
+          percieved." (killing and obfuscation themed)
+        </li>
+        <li>* after beating two mazes unlock above fact
+        </li>
+        <li>* each room view has, in the upper left, a drop down that lets you assign a single fact to it (adds
+          temporary themes to the room, and alteres it in other ways) (need to have an "init" that all minigames call OR
+          have maze view take care of that before letting the mini game render (basically rerender mini game but now
+          with fact))
+        </li>
+        <li>* if a fact with the words "Quatro Blade" are given to the eye killer mini game, each click does its
+          per-click damage over time to EVERYTHING on screen (much easier)
+        </li>
+        <li>* tab for showing what FACTS you have
+        </li>
+        <li>* add damage and defense multiplier for each theme (for example guiding is highly defensive), useful to
+          modify the eye killer mini game in procedural ways
+        </li>
+        <li>* another fact: "the eye killer has the quatro blade" theme is killing and time
+        </li>
+        <li>* finally do the shop tab where the closer sells exponentially more expensive facts (but what facts they are
+          are random per maze)
+      </ul>
+    
 
     <h1>TODO: objects</h1>
     <ul>
@@ -76,7 +109,7 @@
 
     <li>base room is wario ware style micro games staring blorbos that shift based on what facts you give them</li>
     <ul>
-      <li>if no facts, its randomly one of the ogs rooms (closers store, flower chicks points shop, tyfings combat,
+      <li>ogs rooms (closers store, flower chicks points shop, tyfings combat,
         neighbors baking, eye killers hunting, NAMs multiple choice philosophy, alts fake version of someone elses game,
         wandas echidna posting </li>
       <li>help ambrose sell tickets</li>
@@ -96,8 +129,10 @@
         jackelope)</li>
       <li>k mini game, he just info dumps to you about himself and pays you for it (exposition booth)</li>
     </ul>
-    <li>eye killer mini game fps like LOMAT hunting mini game (slashing sound, and blood, you're hunting cultists) (how
-      much damage you do is based on how much candy you have)</li>
+    <li>eye killer mini game fps like LOMAT hunting mini game (slashing sound, and blood, you're hunting cultists but
+      they get closer and closer, hunting you) (how
+      much damage you do is based on how much candy you have, unless you apply Quatro Blade fact which kills everything
+      in one click)</li>
     <ul>
       <li>facts shop run by the Closer/Shop Keeper (buy any item to progress)</li>
       <li>points shopw run by Flower Chick/ Gamer </li>
@@ -113,16 +148,18 @@
           only shows up if you have at least one flower point</li>
       </ul>
       <li>black jack: win 3 hands to progress</li>
-      <li>bee breeding mini game. breed 10 unique bee types (out of over a thousand) to progress. gather honey (click to collect)</li>
+      <li>bee breeding mini game. breed 10 unique bee types (out of over a thousand) to progress. gather honey (click to
+        collect)</li>
       <li>slot machine: input honey, get rare facts, truth or more honey</li>
       <li>combat: basically like candybox2, themed enemies</li>
       <li>win a game of hang man</li>
-      <li>room with FRIEND in it who gives you a quest (usually having specific facts or more/less than a specific truth value)</li>
+      <li>room with FRIEND in it who gives you a quest (usually having specific facts or more/less than a specific truth
+        value)</li>
     </ul>
 
     <h1>TODO: branch loop</h1>
     <ul>
-      
+
       <li>another simple room that is just two doors, neville and devona and one of them is randomly telling the truth
         and one of them is randomly lying , about which door is right, can bribe them with Truth to get hints, get 100
         truth if you're right</li>
@@ -167,6 +204,7 @@
         input?, you only fight clone babies) you need to survive for 85 seconds to be allowed move on (facts spawn magic
         spells you can cast based on themes)</li>
       <li>keep adding more possible rooms</li>
+      <li>playtest volunteers: zead</li>
     </ul>
   </div>
 </body>

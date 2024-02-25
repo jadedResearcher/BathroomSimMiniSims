@@ -1,3 +1,48 @@
+/*
+globalMiniGames at the bottom of this file is key
+*/
+
+
+//JR NOTE: todo displays the fact thing and rerenders the mini game if the fact changes
+const setupGameHeader = (title, sprite, callback)=>{
+  console.log("JR NOTE: setting up game header for", callback)
+  const header = createElementWithClassAndParent("h1", globalTabContent, "game-header");
+  header.innerText = title
+  const img = createElementWithClassAndParent("img", globalTabContent, "blorbo");
+  img.src = sprite;
+
+  const container = createElementWithClassAndParent("div", globalTabContent, "game-container");
+  return container;
+}
+
+const eyekillerMiniGame = (room, callback)=>{
+  globalTabContent.innerHTML = "";
+  globalBGMusic.src="audio/music/get_it_because_pipe_organ.mp3";//pipers theme...piper being the eye killers past name, but no longer (and even that isn't their TRUE name, that is Camellia, an even more past self (time players, am i right?))
+  globalBGMusic.play();
+  const container = setupGameHeader("Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", "images/Eye_Killer_pixel_by_the_guide.png", this)
+
+  let number_killed = 0;
+  for(let i = 0; i<10; i++){
+    const img = createElementWithClassAndParent("img", container, "cultist");
+    img.src="images/CultistForFriendLARGE.png";
+    img.style.top = `${getRandomNumberBetween(0,100)}%`;
+    img.style.left = `${getRandomNumberBetween(0,100)}%`;
+
+    img.onclick = ()=>{
+      console.log("JR NOTE: todo cultists should have hp, each click should do damage, cultists should turn into blood cultist for bein removed and we should hear slashing and squelching sounds")
+      img.remove();
+      number_killed++;
+      if(number_killed >=10){
+        window.alert("!!! you did it!")
+        callback(globalDataObject.currentMaze);
+        renderMazeTab();
+      }
+    }
+
+  }
+
+
+}
 
 
 const rabbitMiniGame = (room, callback)=>{
@@ -17,9 +62,6 @@ const rabbitMiniGame = (room, callback)=>{
       renderMazeTab();
     }
   }
-
-
-
 }
 
 const buttonMiniGame = (room,callback)=>{
@@ -86,5 +128,6 @@ const buttonMiniGame = (room,callback)=>{
 const globalMiniGames = {
   "BUTTON": buttonMiniGame,
   "RABBIT": rabbitMiniGame,
+  "EYEKILLER": eyekillerMiniGame,
 }
 

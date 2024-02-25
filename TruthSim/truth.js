@@ -14,7 +14,7 @@ const globalRand = new SeededRandom(13);
 
 
 let globalDataObject = {
-  truthPerSecond: 100,
+  truthPerSecond: 200,
   startedPlayingTimeCode: Date.now(),
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
@@ -26,7 +26,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: ["BUTTON"],
+  unlockedMiniGames: ["BUTTON","EYEKILLER"],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -531,7 +531,7 @@ const handleRewards = (numberBeaten, bonus) => {
   let truthBulkReward = 0; //might not get this
   //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
   const rooms_to_unlock = {
-    1: "RABBIT",
+    1: "EYEKILLER",
   };
   let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
   console.log("JR NOTE: unlocked room", unlockedRoom)
