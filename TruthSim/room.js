@@ -62,6 +62,7 @@ const makeRandomRoom = (rand, row, col) => {
 class Maze {
   rand;
   minSize = 13; //later mazes can be bigger but for now, small
+  maxSize = 23; // no infinite mazes rip, makes saving dumb
   title = "Firsty";
   internal_seed=13;
   //each row is a row in the map
@@ -73,6 +74,11 @@ class Maze {
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom(rand,0,0)]);
     this.map[0][0].title += " (ENTRANCE)";
+    //it'll be negative if its intended to be a placeholder before loading
+    if(number >=0){
+      //will recursively fill out the whole maze without getting bigger than maxSize;
+      this.map[0][0].makeNeighbors(this);
+    }
     this.map[0][0].unlock(this);
   }
 
@@ -100,8 +106,12 @@ class Maze {
   }
 
   hitMinSize = () => {
-    console.log("JR NOTE: did we hit the min size?", { roomCount: this.getRoomCount(), minSize: this.minSize })
     return this.getRoomCount() > this.minSize;
+  }
+
+  hitMaxSize = ()=>{
+    return this.getRoomCount() > this.maxSize;
+
   }
 
   getRoomCount = () => {
@@ -225,7 +235,18 @@ class Room {
   unlock = (maze) => {
     console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
+  }
+
+
+  //makes neighbors and calls makeNeighbors on them
+  //but won't go above a mazes max size
+  makeNeighbors = (maze) => {
+    console.log("JR NOTE: making neighbors for", this.title)
+    if(maze.hitMaxSize()){//no infinite mazes
+      return;
+    }
     const hitMinSize = maze.hitMinSize();
+
     //will be doubled for placing in an EXISTING empty slot, prefers to make new slots
     const oddsEmpty = hitMinSize ? 0.9 : 0.5;
     const oddsEmptyBackTrack = hitMinSize ? 1.0 : 0.85;
@@ -245,6 +266,7 @@ class Room {
         //then, pick my index and make a new random room
         if (right_col < maze.map[right_row].length && maze.rand.nextDouble() > oddsEmptyBackTrack) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          maze.map[right_row][right_col].makeNeighbors(maze);
           neighbor_count++;
         } else {
           if (right_col == maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
@@ -252,6 +274,8 @@ class Room {
               row.push(undefined);
             }
             maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            maze.map[right_row][right_col].makeNeighbors(maze);
+
             neighbor_count++;
           }
         }
@@ -272,6 +296,8 @@ class Room {
           console.log("JR NOTE: adding a room to the left without making a new col")
 
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          maze.map[right_row][right_col].makeNeighbors(maze);
+
           neighbor_count++;
         } else {
           if (right_col == -1 && maze.rand.nextDouble() > odds_empty) {
@@ -282,6 +308,8 @@ class Room {
             }
             right_col = 0;
             maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            maze.map[right_row][right_col].makeNeighbors(maze);
+
             neighbor_count++;
             maze.recalcIndices();
 
@@ -303,6 +331,8 @@ class Room {
         //then, pick my index and make a new random room
         if (maze.map[right_row] && right_row >= 0 && maze.rand.nextDouble() > oddsEmptyBackTrack) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          maze.map[right_row][right_col].makeNeighbors(maze);
+
           neighbor_count++;
         } else {
           if (right_row == -1 && maze.rand.nextDouble() > odds_empty) {
@@ -313,6 +343,8 @@ class Room {
             right_row = 0;
             maze.map.unshift(new_row);
             maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            maze.map[right_row][right_col].makeNeighbors(maze);
+
             neighbor_count++;
             maze.recalcIndices();
           }
@@ -331,6 +363,8 @@ class Room {
         //then, pick my index and make a new random room
         if (maze.map[right_row] && right_row < maze.map.length && maze.rand.nextDouble() > oddsEmptyBackTrack) {
           maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+          maze.map[right_row][right_col].makeNeighbors(maze);
+
           neighbor_count++;
         } else {
           if (right_row == maze.map.length && maze.rand.nextDouble() > odds_empty) {
@@ -340,6 +374,8 @@ class Room {
             }
             maze.map.push(new_row);
             maze.map[right_row][right_col] = makeRandomRoom(maze.rand, right_row, right_col);
+            maze.map[right_row][right_col].makeNeighbors(maze);
+
             neighbor_count++;
           }
         }

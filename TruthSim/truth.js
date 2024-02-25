@@ -69,7 +69,7 @@ const load = () => {
     globalDataObject = JSON.parse(data);
     globalDataObject.lastLoadTimeCode = Date.now();
     let json = globalDataObject.currentMaze;
-    globalDataObject.currentMaze = new Maze(globalRand, -1);
+    globalDataObject.currentMaze = new Maze(globalRand, -1); //negative one will keep it from generating the whole maze, since its about to load it
     if (json) {
       globalDataObject.currentMaze.loadFromJSON(json);
     }
