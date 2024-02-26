@@ -1,0 +1,1 @@
+many of these sprites are by either the Guide or a Friend
