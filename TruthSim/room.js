@@ -31,7 +31,7 @@ const getNewBabyMaze = () => {
 
 const makeRandomEasyRoom = (maze, row, col) => {
   const theme = maze.rand.nextDouble() > 0.3 ? undefined : pickFrom(Object.keys(all_themes));
-  let possibleGames = globalDataObject.unlockedMiniGames;
+  let possibleGames = [...globalDataObject.unlockedMiniGames];
 
   for(let game of maze.miniGamesWithin){
 
@@ -91,7 +91,7 @@ class Maze {
     //starts out with a size of one x one.
     this.map.push([makeRandomEasyRoom(this,0,0)]);
     const entrance = this.map[0][0];
-    this.miniGamesWithin.push(entrance);
+    this.miniGamesWithin.push(entrance.miniGameKey);
     entrance.title += " (ENTRANCE)";
     //it'll be negative if its intended to be a placeholder before loading
     if(number >=0){

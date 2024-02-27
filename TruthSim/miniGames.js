@@ -169,13 +169,13 @@ const buttonMiniGame = (room, callback) => {
     quipEle.innerText = pickFrom(quips);
     clicks++;
     if (room.themeKeys && room.themeKeys.length > 0) {
-      increaseTruthBy(13);
+      increaseTruthBy(13*room.timesBeaten);
       button.style.position = "absolute";
       button.style.top = `${getRandomNumberBetween(0, 100)}%`;
       button.style.left = `${getRandomNumberBetween(0, 100)}%`;
 
     } else {
-      increaseTruthBy(1);
+      increaseTruthBy(1* room.timesBeaten);
 
     }
     if (clicks > 1) {

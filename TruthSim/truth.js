@@ -585,12 +585,7 @@ const handleRewards = (numberBeaten, bonus) => {
   }
 
   if (unlockedRoom) {
-    if (globalDataObject.unlockedMiniGames) {
-      globalDataObject.unlockedMiniGames.push(unlockedRoom);
-
-    } else {
-      globalDataObject.unlockedMiniGames = [unlockedRoom];
-    }
+    globalDataObject.unlockedMiniGames.push(unlockedRoom);
   }
 
   //display all rewards, specify if bonus
