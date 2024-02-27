@@ -26,6 +26,8 @@ const eyekillerMiniGame = (room, callback) => {
   let attack = room.difficulty * room.getAttack();
   let defense = room.difficulty * 3 * room.getDefense(); //on average three slices to kill
   let speed = 1 * room.getSpeed(); //don't mess with speed much
+  let tint =room.getTint(); 
+
   const container = setupGameHeader("Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${defense}/${speed}, Eye Killer Strength: ${attack}`, "images/Eye_Killer_pixel_by_the_guide.png", eyekillerMiniGame)
 
 
@@ -35,6 +37,10 @@ const eyekillerMiniGame = (room, callback) => {
     let hp = defense;
     const img = createElementWithClassAndParent("img", container, "cultist");
     img.src = "images/CultistForFriendLARGE.png";
+    if(tint){
+      img.style.filter = `hue-rotate(${tint}deg)`;
+
+    }
     const top = getRandomNumberBetween(0, 100);
     const left = getRandomNumberBetween(0, 100);
     img.style.top = `${top}%`;
