@@ -280,6 +280,9 @@ const renderMazeTab = () => {
     }
   }
 
+  allUnlocked = true;
+  console.log("JR NOTE: disable this hack")
+
 
   header.innerText += ` (${allBeaten ? "All" : numberBeaten} Rooms Beaten) ${allUnlocked ? "Maze Fully Explored!" : ""} `;
   if (allUnlocked) {
@@ -290,11 +293,11 @@ const renderMazeTab = () => {
     restartButton.innerText += " (And Gain a Bonus)"
   }
   restartButton.onclick = () => {
-    if (allUnlocked) {
+    if (allUnlocked) { //it matters FAR more that you SAW everything, not that you engaged with it, Wanderer
       if (confirm("Are you sure? Progress in this maze will be lost unless saved... (But you'll still get your reward).")) {
 
         globalDataObject.currentMaze = null;
-        handleRewards(numberBeaten, allBeaten);//its own screen for rendering
+        handleRewards(numberBeaten, allBeaten, numberBeaten);//its own screen for rendering
       }
     } else {
       if (confirm("Are you sure? Progress in this maze will be lost unless saved")) {
@@ -530,7 +533,8 @@ const handleRewards = (numberBeaten, bonus) => {
   globalBGMusic.src = "audio/music/dear_god.mp3";
   globalBGMusic.play();
   //calculate and hand out rewards, including if bonus
-  globalDataObject.mazesBeaten = globalDataObject.mazesBeaten ? 1 : globalDataObject.mazesBeaten + 1;
+  globalDataObject.mazesBeaten ++;
+  console.log("JR NOTE: mazes beaten ",globalDataObject.mazesBeaten)
 
   console.log("JR NOTE: handleRewards", globalDataObject.mazesBeaten)
 
@@ -543,6 +547,9 @@ const handleRewards = (numberBeaten, bonus) => {
     1: "EYEKILLER",
   };
   let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
+  if(!unlockedRoom && keyReward){
+    unlockedRoom = "LOCKED"
+  }
   console.log("JR NOTE: unlocked room", unlockedRoom)
 
 
@@ -589,7 +596,7 @@ const handleRewards = (numberBeaten, bonus) => {
   //display all rewards, specify if bonus
   const div = createElementWithClassAndParent("div", globalTabContent, "victory");
   const header = createElementWithClassAndParent("h1", div);
-  header.innerText = "You did it!"
+  header.innerText = `You did it! ${globalDataObject.mazesBeaten} Mazes Fully Explored!!!`
 
   const header2 = createElementWithClassAndParent("h2", div);
   header2.innerText = "Rewards:"

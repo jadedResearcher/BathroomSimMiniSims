@@ -100,6 +100,14 @@ const eyekillerMiniGame = (room, callback) => {
 
 }
 
+const lockMiniGame = (room, callback) => {
+  //there is no way to beat this one without a key
+  globalTabContent.innerHTML = "";
+
+  const container = setupGameHeader(room, callback,"There is a lock inside.", undefined, undefined, lockMiniGame)
+
+}
+
 
 const rabbitMiniGame = (room, callback) => {
   globalTabContent.innerHTML = "";
@@ -187,5 +195,13 @@ const globalMiniGames = {
   "BUTTON": buttonMiniGame,
   "RABBIT": rabbitMiniGame,
   "EYEKILLER": eyekillerMiniGame,
+  "LOCKED": lockMiniGame,
+
 }
+
+//half as common as other rooms
+const rareMiniGames = ["EYEKILLER"];
+
+//max of once per maze
+const uniqueMiniGames = ["LOCKED"];
 
