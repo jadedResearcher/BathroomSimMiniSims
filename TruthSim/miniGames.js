@@ -4,15 +4,31 @@ globalMiniGames at the bottom of this file is key
 
 
 //JR NOTE: todo displays the fact thing and rerenders the mini game if the fact changes
-const setupGameHeader = (title, difficulty_guide, sprite, callback) => {
+const setupGameHeader = (room, winCallback, title, difficulty_guide, sprite, callback) => {
   console.log("JR NOTE: setting up game header for", callback)
-  const header = createElementWithClassAndParent("h1", globalTabContent, "game-header");
-  header.innerText = title
-  const difficulty = createElementWithClassAndParent("div", globalTabContent);
-  difficulty.innerHTML = difficulty_guide
+  const header = createElementWithClassAndParent("div", globalTabContent, "game-header");
 
-  const img = createElementWithClassAndParent("img", globalTabContent, "blorbo");
-  img.src = sprite;
+  const h1 = createElementWithClassAndParent("h1", header);
+  h1.innerText = title
+  if (globalDataObject.numberKeys > 0) {
+    const skip_button = createElementWithClassAndParent("img", header, "skip-button");
+    skip_button.src = "images/KeyForFriend.png";
+    skip_button.onclick = () => {
+      window.alert("Room Skipped With Key!!!");
+      globalDataObject.numberKeys += -1;
+      winCallback(globalDataObject.currentMaze);
+      renderMazeTab();
+    }
+  }
+  if (difficulty_guide) {
+    const difficulty = createElementWithClassAndParent("div", globalTabContent);
+    difficulty.innerHTML = difficulty_guide
+  }
+
+  if (sprite) {
+    const img = createElementWithClassAndParent("img", globalTabContent, "blorbo");
+    img.src = sprite;
+  }
 
   const container = createElementWithClassAndParent("div", globalTabContent, "game-container");
   return container;
@@ -26,9 +42,9 @@ const eyekillerMiniGame = (room, callback) => {
   let attack = room.difficulty * room.getAttack();
   let defense = room.difficulty * 3 * room.getDefense(); //on average three slices to kill
   let speed = 1 * room.getSpeed(); //don't mess with speed much
-  let tint =room.getTint(); 
+  let tint = room.getTint();
 
-  const container = setupGameHeader("Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${defense}/${speed}, Eye Killer Strength: ${attack}`, "images/Eye_Killer_pixel_by_the_guide.png", eyekillerMiniGame)
+  const container = setupGameHeader(room,callback, "Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${defense}/${speed}, Eye Killer Strength: ${attack}`, "images/Eye_Killer_pixel_by_the_guide.png", eyekillerMiniGame)
 
 
   let number_killed = 0;
@@ -37,7 +53,7 @@ const eyekillerMiniGame = (room, callback) => {
     let hp = defense;
     const img = createElementWithClassAndParent("img", container, "cultist");
     img.src = "images/CultistForFriendLARGE.png";
-    if(tint){
+    if (tint) {
       img.style.filter = `hue-rotate(${tint}deg)`;
 
     }
@@ -45,7 +61,7 @@ const eyekillerMiniGame = (room, callback) => {
     const left = getRandomNumberBetween(0, 100);
     img.style.top = `${top}%`;
     img.style.left = `${left}%`;
-    const duration = distance(0, 0, top, left) / 5/speed;
+    const duration = distance(0, 0, top, left) / 5 / speed;
     img.style.animationDuration = `${duration}s`
     console.log("JR NOTE: cultists constantly move towards upper left, if they reach 0,0, alert that you lost and render the maze tab without the callback (you did not win)")
 
@@ -109,7 +125,9 @@ const buttonMiniGame = (room, callback) => {
   const savedSrc = globalBGMusic.src;
   globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
-  const button = createElementWithClassAndParent("button", globalTabContent, "clicker-game-button");
+  const container = setupGameHeader(room, callback,"Click For Bonus Truth!!!", undefined, undefined, buttonMiniGame)
+
+  const button = createElementWithClassAndParent("button", container, "clicker-game-button");
   button.innerText = "CLICK FOR THE TRUTH";
   console.log("JR NOTE: Room is", room)
   if (room.themeKeys && room.themeKeys.length > 0) {

@@ -65,6 +65,7 @@ class Maze {
   maxSize = 23; // no infinite mazes rip, makes saving dumb
   title = "Firsty";
   internal_seed=13;
+  roomPlaying; //what room are you currently in?
   //each row is a row in the map
   //each cell is either undefined or a room in the maze
   map = [];

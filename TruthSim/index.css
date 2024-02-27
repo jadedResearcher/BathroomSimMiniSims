@@ -141,6 +141,13 @@ textarea {
 
 .game-header{
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-header img{
+  width: 61px;
+  cursor: pointer;
 }
 
 .blorbo{
@@ -155,6 +162,11 @@ textarea {
   animation: approach-top-left 10s ease-in 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+.key-icon{
+  width: 31;
+  vertical-align: middle;
 }
 
 

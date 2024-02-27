@@ -16,6 +16,7 @@ const globalRand = new SeededRandom(13);
 let globalDataObject = {
   truthPerSecond: 200,
   startedPlayingTimeCode: Date.now(),
+  numberKeys: 1,
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
   truthCurrentValue: 0,
@@ -107,7 +108,10 @@ const saveLoop = (saveTab) => {
 const truthLoop = (truthCounter) => {
   increaseTruthBy(globalDataObject.truthPerSecond);
   globalDataObject.obsessionCurrentValue++;
-  truthCounter.innerText = `${globalDataObject.truthCurrentValue} Truth Obtained...`;
+  truthCounter.innerHTML = `${globalDataObject.truthCurrentValue} Truth Obtained...`;
+  if (globalDataObject.numberKeys > 0) {
+    truthCounter.innerHTML += `<br><img class='key-icon' src='images/KeyForFriend.png'> x ${globalDataObject.numberKeys}`;
+  }
   setTimeout(() => { truthLoop(truthCounter) }, 1000);
 }
 
@@ -133,7 +137,10 @@ const renderHeader = () => {
 const handleTruthTabButton = (header) => {
   const truthCounter = createElementWithClassAndParent("div", header, 'tab');
   truthCounter.id = "truth-counter";
-  truthCounter.innerText = `${globalDataObject.truthCurrentValue} Truth Obtained...`
+  truthCounter.innerHTML = `${globalDataObject.truthCurrentValue} Truth Obtained...<br>`
+  if (globalDataObject.numberKeys > 0) {
+    truthCounter.innerHTML += `<br><img class='key-icon' src='images/KeyForFriend.png'> x ${globalDataObject.numberKeys}`;
+  }
   truthLoop(truthCounter);
   highlightTab(truthCounter);
   truthCounter.onclick = () => {
@@ -273,7 +280,8 @@ const renderMazeTab = () => {
     }
   }
 
-  header.innerText += ` (${allBeaten? "All": numberBeaten} Rooms Beaten) ${allUnlocked?"Maze Fully Explored!":""} `;
+
+  header.innerText += ` (${allBeaten ? "All" : numberBeaten} Rooms Beaten) ${allUnlocked ? "Maze Fully Explored!" : ""} `;
   if (allUnlocked) {
     restartButton.innerText += " (And Gain a Reward)"
   }
@@ -527,6 +535,7 @@ const handleRewards = (numberBeaten, bonus) => {
   console.log("JR NOTE: handleRewards", globalDataObject.mazesBeaten)
 
 
+  let keyReward = pickFrom([true,false,false]);//1/3 chance in getting a key (31 being lavinraca/lavinraca arc number)
   let truthPerSecond = 1;
   let truthBulkReward = 0; //might not get this
   //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
@@ -561,6 +570,9 @@ const handleRewards = (numberBeaten, bonus) => {
 
   console.log("JR NOTE: about to update, ", { truthPerSecond, truthBulkReward })
   globalDataObject.truthPerSecond += truthPerSecond;
+  if(keyReward){
+    globalDataObject.numberKeys ++;
+  }
   if (truthBulkReward) {
     increaseTruthBy(truthBulkReward);
   }
@@ -593,15 +605,20 @@ const handleRewards = (numberBeaten, bonus) => {
   if (truthBulkReward) {
     const truthBulkEle = createElementWithClassAndParent("li", list);
     if (bonus) {
-      truthBulkEle.innerHTML = `<b>Truth: ${truthBulkReward / 2} x 2 (bonus!)`;
+      truthBulkEle.innerHTML = `<b>Truth:</b> ${truthBulkReward / 2} x 2 (bonus!)`;
     } else {
-      truthBulkEle.innerHTML = `<b>Truth: ${truthBulkReward}`;
+      truthBulkEle.innerHTML = `<b>Truth: </b>${truthBulkReward}`;
     }
   }
 
   if (unlockedRoom) {
     const unlockEle = createElementWithClassAndParent("li", list);
-    unlockEle.innerHTML = `<b>Unlocked New Room Type: ${unlockedRoom}`;
+    unlockEle.innerHTML = `<b>Unlocked New Room Type</b>: ${unlockedRoom}`;
+  }
+
+  if (keyReward) {
+    const unlockEle = createElementWithClassAndParent("li", list);
+    unlockEle.innerHTML = `<img src="images/KeyForFriend.png">`;
   }
 
 
