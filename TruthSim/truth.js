@@ -19,6 +19,7 @@ let globalDataObject = {
   numberKeys: 1,
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
+  factsUnlocked:[KILLEROWNSBLADE, TESTFACT], //JR NOTE: TODO clear this out 
   truthCurrentValue: 0,
   mazesBeaten: 0,
   mazesTried: 0,
@@ -37,6 +38,7 @@ let globalDataObject = {
 
 window.onload = () => {
   initThemes();
+  initAllMiniGames();
   load();
   const button = document.querySelector("#entry-button");
   globalContainer = document.querySelector("#container");

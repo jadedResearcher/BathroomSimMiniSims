@@ -140,7 +140,7 @@ textarea {
 }
 
 .game-header{
-  padding: 20px;
+  padding: 13px;
   display: flex;
   justify-content: space-between;
 }
@@ -148,6 +148,13 @@ textarea {
 .game-header img{
   width: 61px;
   cursor: pointer;
+}
+
+.secondary-header{
+  display: flex;
+  gap: 50px;
+  justify-content: start;
+  margin-left: 13px;
 }
 
 .blorbo{
