@@ -115,7 +115,7 @@ class MiniGame {
         return rotation;
     }
 
-    initializeRender = (ele)=>{
+    initializeRender = (ele) => {
         ele.innerHTML = "";
         this.fact = null;//every render we recalc what our facts are
         this.temporarilySetFact();
@@ -214,11 +214,15 @@ class LockMiniGame extends MiniGame {
 
 
 class EyeKillerMiniGame extends MiniGame {
+
+    cultists = [];
     constructor() {
         super(EYEKILLERMINIGAME);
     }
 
+    //this is a stupid chaotic mess, sorry future jr
     render = (ele, room, callback) => {
+        this.cultists = [];
         this.initializeRender(ele);
 
         globalBGMusic.src = "audio/music/get_it_because_pipe_organ.mp3";//pipers theme...piper being the eye killers past name, but no longer (and even that isn't their TRUE name, that is Camellia, an even more past self (time players, am i right?))
@@ -226,17 +230,21 @@ class EyeKillerMiniGame extends MiniGame {
 
         let attack = room.difficulty * this.getAttack(room);
         let defense = room.difficulty * 3 * this.getDefense(room); //on average three slices to kill
-        let speed = 1 * this.getSpeed(room); //don't mess with speed much
+        let speed = Math.min(this.getSpeed(room), 3); //don't mess with speed much
         let tint = this.getTint(room);
 
         const container = this.setupGameHeader(ele, room, callback, "Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${defense}/${speed}, Eye Killer Strength: ${attack}`, "images/Eye_Killer_pixel_by_the_guide.png")
-
+        const blorbo = document.querySelector(".blorbo");
 
         let number_killed = 0;
+        let won = false;
         let dead = false;
         for (let i = 0; i < 10; i++) {
             let hp = defense;
-            const img = createElementWithClassAndParent("img", container, "cultist");
+            const cultist_container = createElementWithClassAndParent("div", container, "cultist");
+            this.cultists.push(cultist_container);
+            cultist_container.dataset.hp = hp;
+            const img = createElementWithClassAndParent("img", cultist_container);
             img.src = "images/CultistForFriendLARGE.png";
             if (tint) {
                 img.style.filter = `hue-rotate(${tint}deg)`;
@@ -244,40 +252,96 @@ class EyeKillerMiniGame extends MiniGame {
             }
             const top = getRandomNumberBetween(0, 100);
             const left = getRandomNumberBetween(0, 100);
-            img.style.top = `${top}%`;
-            img.style.left = `${left}%`;
+            cultist_container.style.top = `${top}%`;
+            cultist_container.style.left = `${left}%`;
             const duration = distance(0, 0, top, left) / 5 / speed;
-            img.style.animationDuration = `${duration}s`
+            cultist_container.style.animationDuration = `${duration}s`
             console.log("JR NOTE: cultists constantly move towards upper left, if they reach 0,0, alert that you lost and render the maze tab without the callback (you did not win)")
 
-            img.onanimationend = () => {
-                if (!dead) {
-                    dead = true;
-                    alert("You were hunted down!");
-                    renderMazeTab();
-                }
-            }
-            img.onclick = () => {
-                hp += -1 * attack;
-                const fx = new Audio("audio/fx/048958759-knife-draw.wav")
-                fx.loop = false;
-                fx.play();
-                if (hp <= 0) {
-                    img.src = "images/HeadlessCultistForFriendLARGE.png";
-                    img.style.animationPlayState = "paused";
-                    fx.onended = () => {
-                        if (!dead) {
-                            img.remove();
-                        }
-                    }
-
-                    number_killed++;
-                    if (number_killed >= 10) {
-                        window.alert("!!! you did it!")
-                        callback(globalDataObject.currentMaze);
+            cultist_container.onanimationend = () => {
+                console.log("JR NOTE: cultist animation ended but did they get ya?", blorbo)
+                if (intersects(cultist_container, blorbo)) {
+                    if (!dead) {
+                        dead = true;
+                        alert("You were hunted down!" + cultist_container.style.animation);
                         renderMazeTab();
                     }
                 }
+            }
+            cultist_container.onclick = () => {
+
+                const massDamage = () => {
+                    alert("Quatro Blade detected");
+                    const fx = new Audio("audio/fx/048958759-knife-draw.wav")
+                    fx.loop = false;
+                    fx.play();
+                    cultist_container.dataset.quatro = true;
+                    for (let cultist of this.cultists) {
+                        cultist.dataset.quatro = true;
+                    }
+
+                    const hitEveryone = () => {
+                        for (let cultist of this.cultists) {
+                            let hp = parseInt(cultist.dataset.hp);
+                            cultist.dataset.hp = hp - attack / 10;
+                            const dmg = createElementWithClassAndParent("div", cultist, "damage-counter");
+                            dmg.innerText = cultist.dataset.hp;
+                            fx.play();
+                            if (hp <= 0) {
+                                fx.onended = () => {
+                                    cultist.remove();
+                                }
+
+                                number_killed++;
+                                if (number_killed >= 10 && !won) {
+                                    won = true
+                                    window.alert("!!! you did it!")
+                                    callback(globalDataObject.currentMaze);
+                                    renderMazeTab();
+                                }
+                            }
+                        }
+                        if (!won) {
+                            setTimeout(hitEveryone, 1000)
+                        }
+
+                    }
+
+                    setTimeout(hitEveryone, 1000)
+
+                }
+
+                const singleDamage = () => {
+                    hp += -1 * attack;
+                    const dmg = createElementWithClassAndParent("div", cultist_container, "damage-counter");
+                    dmg.innerText = hp;
+                    const fx = new Audio("audio/fx/048958759-knife-draw.wav")
+                    fx.loop = false;
+                    fx.play();
+                    if (hp <= 0) {
+                        img.src = "images/HeadlessCultistForFriendLARGE.png";
+                        cultist.style.animationPlayState = "paused";
+                        fx.onended = () => {
+                            if (!dead) {
+                                cultist.remove();
+                            }
+                        }
+
+                        number_killed++;
+                        if (number_killed >= 10) {
+                            window.alert("!!! you did it!")
+                            callback(globalDataObject.currentMaze);
+                            renderMazeTab();
+                        }
+                    }
+                }
+
+                if (this.fact && this.fact.title.includes("Quatro Blade")) {
+                    massDamage();
+                } else {
+                    singleDamage();
+                }
+
             }
 
         }

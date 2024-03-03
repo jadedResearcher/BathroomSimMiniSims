@@ -2,7 +2,21 @@ let ele;
 
 let how_long_well_let_them_explore = 500;
 
- const distance = (x1, y1, x2, y2) => {
+
+const intersects = (ele1, ele2) => {
+  const rect1 = ele1.getBoundingClientRect();
+  const rect2 = ele2.getBoundingClientRect();
+
+  if (rect1.bottom > rect2.top
+    && rect1.right > rect2.left
+    && rect1.top < rect2.bottom
+    && rect1.left < rect2.right) {
+    return true;
+  }
+
+}
+
+const distance = (x1, y1, x2, y2) => {
   const first = (x1 - x2) ** 2;
   const second = (y1 - y2) ** 2;
   return (first + second) ** 0.5
@@ -10,34 +24,34 @@ let how_long_well_let_them_explore = 500;
 
 
 //from view-source:https://www.yyyyyyy.info/
-  function animateTitle(i, functionToCheckIfStop) {
-    var message = [
-      '▁▂▃▄▅▆▇ `^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
-      '▂▁▂▃▄▅▆` ^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
-      '▃▂▁▂▃▄▅ `^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
-      '▄▃▂▁▂▃▄` ^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
-      '▅▄▃▂▁▂▃ `^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
-      '▆▅▄▃▂▁▂` ^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
-      '▇▆▅▄▃▂▁ `^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
-      '▆▇▆▅▄▃▂` ^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
-      '▅▆▇▆▅▄▃ `^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
-      '▄▅▆▇▆▅▄` ^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
-      '▃▄▅▆▇▆▅ `^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
-      '▂▃▄▅▆▇▆` ^^^^^~ ░ ui▀┳╲ ☻ .info ▓'
-    ]
+function animateTitle(i, functionToCheckIfStop) {
+  var message = [
+    '▁▂▃▄▅▆▇ `^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
+    '▂▁▂▃▄▅▆` ^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
+    '▃▂▁▂▃▄▅ `^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
+    '▄▃▂▁▂▃▄` ^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
+    '▅▄▃▂▁▂▃ `^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
+    '▆▅▄▃▂▁▂` ^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
+    '▇▆▅▄▃▂▁ `^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
+    '▆▇▆▅▄▃▂` ^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
+    '▅▆▇▆▅▄▃ `^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
+    '▄▅▆▇▆▅▄` ^^^^^~ ░ ui▀┳╲ ☺ .info ▓',
+    '▃▄▅▆▇▆▅ `^^^^^~ ░ ui▀┳╲ ☻ .info ▓',
+    '▂▃▄▅▆▇▆` ^^^^^~ ░ ui▀┳╲ ☻ .info ▓'
+  ]
 
-    const stopOrGo = ()=>{
-      if(functionToCheckIfStop && functionToCheckIfStop()){
-        return;
-      }else{
-        return setTimeout(()=>{animateTitle(i+1)}, 200);
-      }
+  const stopOrGo = () => {
+    if (functionToCheckIfStop && functionToCheckIfStop()) {
+      return;
+    } else {
+      return setTimeout(() => { animateTitle(i + 1) }, 200);
     }
-    
-    i >= message.length - 1 ? (i = 0) : i++,
-      (document.title = message[i]),
-      stopOrGo()
   }
+
+  i >= message.length - 1 ? (i = 0) : i++,
+    (document.title = message[i]),
+    stopOrGo()
+}
 
 
 const fuckShitUPAnimation = (ele) => {
@@ -198,14 +212,14 @@ const trimToLengthReverse = (string, length) => {
   return string.split("").reverse().join('').slice(0, length).split("").reverse().join("")
 }
 
-const incrementLocalStorageByOne = (KEY)=>{
+const incrementLocalStorageByOne = (KEY) => {
   let current = localStorage.getItem(KEY);
-  if(!current){
+  if (!current) {
     current = 0;
   }
-  console.log("JR NOTE:", KEY, " was " +current)
+  console.log("JR NOTE:", KEY, " was " + current)
 
-  localStorage.setItem(KEY,parseInt(current)+1)
+  localStorage.setItem(KEY, parseInt(current) + 1)
 
 }
 
@@ -264,12 +278,12 @@ function getTimeString(date) {
 //https://stackoverflow.com/questions/18229022/how-to-show-current-time-in-javascript-in-the-format-hhmmss
 function checkTime(i) {
   if (i < 10) {
-      i = "0" + i;
+    i = "0" + i;
   }
   return i;
 }
 
-const addImageProcess =(src)=>{
+const addImageProcess = (src) => {
   return new Promise((resolve, reject) => {
     let img = new Image()
     img.onload = () => resolve(img)
@@ -278,7 +292,7 @@ const addImageProcess =(src)=>{
   })
 }
 
-const getAudio = async(url)=>{
+const getAudio = async (url) => {
   if (cachedAudio[url]) {
     return cachedAudio[url];
   }
@@ -371,7 +385,7 @@ const getImagesOld = async (url) => {
 //since using this will mean you don't have anything on screen yet, you'll want some kinda placeholder
 const httpGetAsync = async (theUrl) => {
   return new Promise(function (resolve, reject) {
-    
+
     let xhr = new XMLHttpRequest();
     try {
       xhr.open("get", theUrl);
@@ -419,7 +433,7 @@ class SeededRandom {
   }
 
   //default is zero and one, type is inferred to be a number from this
-  nextDouble = (min = 0, max=1) => {
+  nextDouble = (min = 0, max = 1) => {
     this.internal_seed = (this.internal_seed * 1664525 + 1013904223) % 4294967296;
     const rnd = this.internal_seed / 4294967296;
     return min + rnd * (max - min);
@@ -436,7 +450,7 @@ class SeededRandom {
   //if you have say, a string "hello world my name is"
   //and you have a chunk size of 3, you'd get something like
   //"worhel na islo " etc
-  shuffleInChunks = (array, chunkSize)=>{
+  shuffleInChunks = (array, chunkSize) => {
     const chunks = chunkUpArray(array, chunkSize);
     this.shuffle(chunks);
     return chunks.flat();
