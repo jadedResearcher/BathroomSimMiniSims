@@ -154,11 +154,16 @@ class MiniGame {
                     option.innerText = fact.title;
                     options.push({ option, fact });
                 } else if (fact.mini_game_key === this.id) {
-                    h1.innerText += ` (FACT APPLIED: ${fact.title} )`
+                    const remove_button = createElementWithClassAndParent("button", secondaryHeader);
+                    remove_button.innerText= "Remove Fact: " + fact.title;
+                    remove_button.onclick = ()=>{
+                        fact.mini_game_key = undefined;
+                        this.render(ele, room, winCallback);
+                    }
                 }
 
             }
-            if (options.length > 0) {
+            if (options.length > 0 && !this.fact) {
                 const factsSelector = createElementWithClassAndParent("select", secondaryHeader);
                 const option = document.createElement("option")
                 option.innerText = "No Fact Assigned To This Room Type";
@@ -323,15 +328,18 @@ class EyeKillerMiniGame extends MiniGame {
                 }
 
                 const singleDamage = () => {
+
                     hp += -1 * attack;
                     const dmg = createElementWithClassAndParent("div", cultist_container, "damage-counter");
                     dmg.innerText = hp;
                     const fx = new Audio("audio/fx/048958759-knife-draw.wav")
                     fx.loop = false;
                     fx.play();
-                    if (hp <= 0) {
+                    if (hp <= 0 && !cultist_container.dataset.dead ) {
+                        cultist_container.dataset.dead = true;
+
                         img.src = "images/HeadlessCultistForFriendLARGE.png";
-                        cultist.style.animationPlayState = "paused";
+                        cultist_container.style.animationPlayState = "paused";
                         fx.onended = () => {
                             if (!dead) {
                                 cultist.remove();
