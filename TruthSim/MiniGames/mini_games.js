@@ -42,6 +42,11 @@ class MiniGame {
         window.alert("this should never be called??? did i forget to have this game know how to render itself?");
     }
 
+
+    startGame = (ele, room, callback) => {
+        window.alert("this should never be called, has a game forgotten how to start itself?")
+    }
+
     temporarilySetFact = () => {
         for (let fact of globalDataObject.factsUnlocked) {
             if (fact.mini_game_key === this.id) {
@@ -122,8 +127,6 @@ class MiniGame {
     }
 
     setupGameHeader = (ele, room, winCallback, title, difficulty_guide, sprite) => {
-
-
         console.log("JR NOTE: setting up game header for", this.id)
         const header = createElementWithClassAndParent("div", ele, "game-header");
 
@@ -191,6 +194,13 @@ class MiniGame {
         }
 
         const container = createElementWithClassAndParent("div", ele, "game-container");
+        const start_button = createElementWithClassAndParent("button", container, "start-button");
+        start_button.innerText = "START";
+        start_button.onclick = () => {
+            start_button.remove();
+            this.startGame(container, room, winCallback);
+        }
+
         return container;
     }
 }
@@ -202,6 +212,10 @@ class MiniGame {
 class LockMiniGame extends MiniGame {
     constructor() {
         super(LOCKEDMINIGAME);
+    }
+
+    startGame = (ele, room, callback) => {
+        //there kinda isn't a game
     }
 
     render = (ele, room, callback) => {
@@ -216,32 +230,29 @@ class LockMiniGame extends MiniGame {
 class EyeKillerMiniGame extends MiniGame {
 
     cultists = [];
+    attack = 1;
+    defense = 1;
+    speed = 1;
+    tint = 0;
     constructor() {
         super(EYEKILLERMINIGAME);
     }
 
-    //this is a stupid chaotic mess, sorry future jr
-    render = (ele, room, callback) => {
-        this.cultists = [];
-        this.initializeRender(ele);
-
+    startGame = (ele, room, callback) => {
         globalBGMusic.src = "audio/music/get_it_because_pipe_organ.mp3";//pipers theme...piper being the eye killers past name, but no longer (and even that isn't their TRUE name, that is Camellia, an even more past self (time players, am i right?))
         globalBGMusic.play();
-
-        let attack = room.difficulty * this.getAttack(room);
-        let defense = room.difficulty * 3 * this.getDefense(room); //on average three slices to kill
-        let speed = Math.min(this.getSpeed(room), 3); //don't mess with speed much
-        let tint = this.getTint(room);
-
-        const container = this.setupGameHeader(ele, room, callback, "Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${defense}/${speed}, Eye Killer Strength: ${attack}`, "images/Eye_Killer_pixel_by_the_guide.png")
         const blorbo = document.querySelector(".blorbo");
+        const attack = this.attack;
+        const defense = this.defense;
+        const speed = this.speed;
+        const tint = this.tint;
 
         let number_killed = 0;
         let won = false;
         let dead = false;
         for (let i = 0; i < 10; i++) {
             let hp = defense;
-            const cultist_container = createElementWithClassAndParent("div", container, "cultist");
+            const cultist_container = createElementWithClassAndParent("div", ele, "cultist");
             this.cultists.push(cultist_container);
             cultist_container.dataset.hp = hp;
             const img = createElementWithClassAndParent("img", cultist_container);
@@ -347,6 +358,22 @@ class EyeKillerMiniGame extends MiniGame {
         }
 
     }
+
+    //this is a stupid chaotic mess, sorry future jr
+    render = (ele, room, callback) => {
+        this.cultists = [];
+        this.initializeRender(ele);
+
+
+
+        this.attack = Math.round(room.difficulty * this.getAttack(room));
+        this.defense = Math.round(room.difficulty * 3 * this.getDefense(room)); //on average three slices to kill
+        this.speed = Math.round(Math.min(this.getSpeed(room), 3)); //don't mess with speed much
+        this.tint = this.getTint(room);
+
+        const container = this.setupGameHeader(ele, room, callback, "Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${this.defense}/${this.speed}, Eye Killer Strength: ${this.attack}`, "images/Eye_Killer_pixel_by_the_guide.png")
+
+    }
 }
 
 /*
@@ -358,16 +385,13 @@ class RabbitMiniGame extends MiniGame {
         super(RABBITMINIGAME);
     }
 
-    render = (ele, room, callback) => {
-        this.initializeRender(ele);
-
-        const container = this.setupGameHeader(ele, room, callback, "Click For Bonus Truth!!!", undefined, undefined)
+    startGame = (ele, room, callback) => {
         globalBGMusic.src = "audio/music/Drone1.mp3";
         globalBGMusic.play();
 
-        const input = createElementWithClassAndParent("input", container, "password-field");
+        const input = createElementWithClassAndParent("input", ele, "password-field");
 
-        const button = createElementWithClassAndParent("button", container, "clicker-game-button");
+        const button = createElementWithClassAndParent("button", ele, "clicker-game-button");
         button.innerText = "Submit Password"
         button.onclick = () => {
 
@@ -377,6 +401,13 @@ class RabbitMiniGame extends MiniGame {
                 renderMazeTab();
             }
         }
+    }
+
+    render = (ele, room, callback) => {
+        this.initializeRender(ele);
+
+        const container = this.setupGameHeader(ele, room, callback, "Click For Bonus Truth!!!", undefined, undefined)
+
     }
 }
 
@@ -391,15 +422,13 @@ class ButtonMiniGame extends MiniGame {
         super(BUTTONMINIGAME);
     }
 
-    render = (ele, room, callback) => {
-        this.initializeRender(ele);
-
+    startGame = (ele, room, callback) => {
+        //there kinda isn't a game
         const savedSrc = globalBGMusic.src;
         globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
         globalBGMusic.play();
-        const container = this.setupGameHeader(ele, room, callback, "Click For Bonus Truth!!!", undefined, undefined)
 
-        const button = createElementWithClassAndParent("button", container, "clicker-game-button");
+        const button = createElementWithClassAndParent("button", ele, "clicker-game-button");
         button.innerText = "CLICK FOR THE TRUTH";
         if (room.themeKeys && room.themeKeys.length > 0) {
             button.style.position = "absolute";
@@ -450,6 +479,13 @@ class ButtonMiniGame extends MiniGame {
                 renderMazeTab();
             }
         }
+
+    }
+
+    render = (ele, room, callback) => {
+        this.initializeRender(ele);
+        const container = this.setupGameHeader(ele, room, callback, "Click For Bonus Truth!!!", undefined, undefined)
+
 
     }
 }
