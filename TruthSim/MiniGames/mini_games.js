@@ -155,8 +155,8 @@ class MiniGame {
                     options.push({ option, fact });
                 } else if (fact.mini_game_key === this.id) {
                     const remove_button = createElementWithClassAndParent("button", secondaryHeader);
-                    remove_button.innerText= "Remove Fact: " + fact.title;
-                    remove_button.onclick = ()=>{
+                    remove_button.innerText = "Remove Fact: " + fact.title;
+                    remove_button.onclick = () => {
                         fact.mini_game_key = undefined;
                         this.render(ele, room, winCallback);
                     }
@@ -298,24 +298,28 @@ class EyeKillerMiniGame extends MiniGame {
 
                     const hitEveryone = () => {
                         for (let cultist of this.cultists) {
-                            let hp = parseInt(cultist.dataset.hp);
-                            cultist.dataset.hp = hp - attack / 10;
-                            const dmg = createElementWithClassAndParent("div", cultist, "damage-counter");
-                            dmg.innerText = cultist.dataset.hp;
-                            fx.play();
-                            if (hp <= 0) {
-                                fx.onended = () => {
-                                    cultist.remove();
-                                }
+                            if (!cultist.dataset.dead) {
+                                let hp = parseInt(cultist.dataset.hp);
+                                cultist.dataset.hp = hp - attack / 10;
+                                const dmg = createElementWithClassAndParent("div", cultist, "damage-counter");
+                                dmg.innerText = cultist.dataset.hp;
+                                fx.play();
+                                if (hp <= 0) {
+                                    console.log("JR NOTE: cultist bled out: ", number_killed)
+                                    cultist.dataset.dead = true;
 
-                                number_killed++;
-                                if (number_killed >= 10 && !won) {
-                                    won = true
-                                    window.alert("!!! you did it!")
-                                    callback(globalDataObject.currentMaze);
-                                    renderMazeTab();
+                                    cultist.style.display = "none";
+
+                                    number_killed++;
+                                    if (number_killed >= 10 && !won) {
+                                        won = true
+                                        window.alert("!!! you did it!")
+                                        callback(globalDataObject.currentMaze);
+                                        renderMazeTab();
+                                    }
                                 }
                             }
+
                         }
                         if (!won) {
                             setTimeout(hitEveryone, 1000)
@@ -328,23 +332,20 @@ class EyeKillerMiniGame extends MiniGame {
                 }
 
                 const singleDamage = () => {
-
+                    if (cultist_container.dataset.dead) {
+                        return;
+                    }
                     hp += -1 * attack;
                     const dmg = createElementWithClassAndParent("div", cultist_container, "damage-counter");
                     dmg.innerText = hp;
                     const fx = new Audio("audio/fx/048958759-knife-draw.wav")
                     fx.loop = false;
                     fx.play();
-                    if (hp <= 0 && !cultist_container.dataset.dead ) {
+                    if (hp <= 0 && !cultist_container.dataset.dead) {
                         cultist_container.dataset.dead = true;
 
                         img.src = "images/HeadlessCultistForFriendLARGE.png";
                         cultist_container.style.animationPlayState = "paused";
-                        fx.onended = () => {
-                            if (!dead) {
-                                cultist.remove();
-                            }
-                        }
 
                         number_killed++;
                         if (number_killed >= 10) {
@@ -378,8 +379,8 @@ class EyeKillerMiniGame extends MiniGame {
         this.defense = Math.round(room.difficulty * 3 * this.getDefense(room)); //on average three slices to kill
         this.speed = Math.round(Math.min(this.getSpeed(room), 3)); //don't mess with speed much
         this.tint = this.getTint(room);
-
-        const container = this.setupGameHeader(ele, room, callback, "Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${this.defense}/${this.speed}, Eye Killer Strength: ${this.attack}`, "images/Eye_Killer_pixel_by_the_guide.png")
+        const title = this.fact && this.fact.title.includes("Quatro Blade") ? "Make Them Pay" : "Save The Eye Killer From The Cultists Hunting Her!!!"
+        const container = this.setupGameHeader(ele, room, callback, title, `Cultist HP/Speed: ${this.defense}/${this.speed}, Eye Killer Strength: ${this.attack}`, "images/Eye_Killer_pixel_by_the_guide.png")
 
     }
 }
