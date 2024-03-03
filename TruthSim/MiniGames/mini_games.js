@@ -31,7 +31,7 @@ const initAllMiniGames = () => {
 
 class MiniGame {
     id; //how will things refer to you/ what is your key in globalMiniGames
-
+    fact; //not stored unless actively rendering, will be cleared every render
     constructor(id) {
         this.id = id;
         globalMiniGames[id] = this;
@@ -42,8 +42,87 @@ class MiniGame {
         window.alert("this should never be called??? did i forget to have this game know how to render itself?");
     }
 
-    setupGameHeader = (ele, room, winCallback, title, difficulty_guide, sprite) => {
+    temporarilySetFact = () => {
+        for (let fact of globalDataObject.factsUnlocked) {
+            if (fact.mini_game_key === this.id) {
+                console.log("JR NOTE: returning fact: ", fact)
+                this.fact = fact;
+            }
+
+        }
+    }
+
+    getAttack = (room) => {
+        let rotation = room.getAttack();
+        const fact = this.fact;
+        console.log("JR NOTE: getting attack, fact is")
+        if (!fact) {
+            console.log("JR NOTE: returning base room because there is no fact")
+            return rotation;
+        }
+        const themes = fact.theme_key_array.map((item) => all_themes[item])
+        console.log("JR NOTE: fact themes are", themes)
+        for (let theme of themes) {
+            rotation += themeToAttackMultiplier(theme.key)
+        }
+        rotation += fact.damage_multiplier;
+        console.log("JR NOTE: fact attack is", fact.attack)
+        console.log("JR NOTE: attack is", rotation)
+        return rotation;
+    }
+
+
+
+
+    getDefense = (room) => {
+        let rotation = room.getDefense();
+        const fact = this.fact;
+        if (!fact) {
+            return rotation;
+        }
+        const themes = fact.theme_key_array.map((item) => all_themes[item])
+        for (let theme of themes) {
+            rotation += themeToDefenseMultiplier(theme.key)
+        }
+        rotation += fact.defense_multipler;
+        return rotation;
+    }
+
+    getSpeed = (room) => {
+        let rotation = room.getSpeed();
+        const fact = this.fact;
+        if (!fact) {
+            return rotation;
+        }
+        const themes = fact.theme_key_array.map((item) => all_themes[item])
+        for (let theme of themes) {
+            rotation += themeToSpeedMultiplier(theme.key)
+        }
+        rotation += fact.speed_multipler;
+        return rotation;
+    }
+
+    getTint = (room) => {
+        let rotation = room.getTint();
+        const fact = this.fact;
+        if (!fact) {
+            return rotation;
+        }
+        const themes = fact.theme_key_array.map((item) => all_themes[item])
+        for (let theme of themes) {
+            rotation += themeToColorRotation(theme.key)
+        }
+        return rotation;
+    }
+
+    initializeRender = (ele)=>{
         ele.innerHTML = "";
+        this.fact = null;//every render we recalc what our facts are
+        this.temporarilySetFact();
+    }
+
+    setupGameHeader = (ele, room, winCallback, title, difficulty_guide, sprite) => {
+
 
         console.log("JR NOTE: setting up game header for", this.id)
         const header = createElementWithClassAndParent("div", ele, "game-header");
@@ -127,6 +206,7 @@ class LockMiniGame extends MiniGame {
 
     render = (ele, room, callback) => {
         //there is no way to beat this one without a keyz
+        this.initializeRender(ele);
         const container = this.setupGameHeader(ele, room, callback, "There is a lock inside.", undefined, undefined)
 
     }
@@ -139,13 +219,15 @@ class EyeKillerMiniGame extends MiniGame {
     }
 
     render = (ele, room, callback) => {
+        this.initializeRender(ele);
+
         globalBGMusic.src = "audio/music/get_it_because_pipe_organ.mp3";//pipers theme...piper being the eye killers past name, but no longer (and even that isn't their TRUE name, that is Camellia, an even more past self (time players, am i right?))
         globalBGMusic.play();
 
-        let attack = room.difficulty * room.getAttack();
-        let defense = room.difficulty * 3 * room.getDefense(); //on average three slices to kill
-        let speed = 1 * room.getSpeed(); //don't mess with speed much
-        let tint = room.getTint();
+        let attack = room.difficulty * this.getAttack(room);
+        let defense = room.difficulty * 3 * this.getDefense(room); //on average three slices to kill
+        let speed = 1 * this.getSpeed(room); //don't mess with speed much
+        let tint = this.getTint(room);
 
         const container = this.setupGameHeader(ele, room, callback, "Help the Eye Killer Hunt Down the Cultists Hunting Her!!!", `Cultist HP/Speed: ${defense}/${speed}, Eye Killer Strength: ${attack}`, "images/Eye_Killer_pixel_by_the_guide.png")
 
@@ -213,6 +295,8 @@ class RabbitMiniGame extends MiniGame {
     }
 
     render = (ele, room, callback) => {
+        this.initializeRender(ele);
+
         const container = this.setupGameHeader(ele, room, callback, "Click For Bonus Truth!!!", undefined, undefined)
         globalBGMusic.src = "audio/music/Drone1.mp3";
         globalBGMusic.play();
@@ -244,6 +328,8 @@ class ButtonMiniGame extends MiniGame {
     }
 
     render = (ele, room, callback) => {
+        this.initializeRender(ele);
+
         const savedSrc = globalBGMusic.src;
         globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
         globalBGMusic.play();
@@ -254,7 +340,7 @@ class ButtonMiniGame extends MiniGame {
         if (room.themeKeys && room.themeKeys.length > 0) {
             button.style.position = "absolute";
             button.style.backgroundColor = "#a10000"
-            const rotation = room.getTint();
+            const rotation = this.getTint(room);
             //console.log("JR NOTE: setting rotation", rotation)
             if (rotation === 0) {
                 button.style.backgroundColor = "grey";
