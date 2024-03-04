@@ -10,6 +10,9 @@
   <script src="data.js"></script>
   <script src="facts.js"></script>
   <script src="MiniGames/mini_games.js"></script>
+  <script src="MiniGames/confessional.js"></script>
+  <script src="MiniGames/shop.js"></script>
+
 
   <script src="truth.js"></script>
   <script src="room.js"></script>
@@ -30,11 +33,12 @@
     <h1>IMPORTANT: VERY SIMPLE GRAPHICS, ALL CSS/HTML/ascii</h1>
     <h1>TODO: core loop</h1>
     <ul>
-      <li>facts have one and only one mini game key (if assigned to a mini game don't appear in drop down for other rooms)</li>
-      <li>if have at least one fact, display facts tab and have facts drop down in a room</li>
       <li>closer can sell keys, facts, mini game keys</li>
-      <li>sacrifice it all any time you want (if youve beaten at least five mazes it does something). doing this erases all the truth you've built and facts youve found and all the mazes you've defeated but increases a new type of currency (OBSESSION) per second by one, and truth per second by ten (closer starts stocking facts that can onlly be purchased with OBSESSSION) </li>
-
+      <li>witherby's confessional next (if a fact mentions a blorbo they come confess to him, otherwise a random goncharov char does procedural confessions) (after one confession is forgiven, you win) (closer doens't confess, she just leaves (unwinnable))</li>
+      <li>after store and confessional unlocks, new room for RESETTING THE LOOP (all your save data besides obsessionCurrentValue and dates gets erased) (refactor truth per second in maze rewards to be multiplied by factor of obsessionCurrentValue, not scaling on its own)</li>
+      <li>devona room that lets you read fact lore (part of two doors lie and truth?)</li> 
+      <li>clear up hacked initial save day, play with scaling</li> 
+       <li></li>
       <li>mini games :) :) :) (whatever takes my fancy, use guide and friend sprites)</li>
       <li>ability to delete save</li>
       <li>opening quiz that claims its going to make a game entirely personalized for you (its lying) (throw it out)
@@ -115,7 +119,10 @@
 
     <h1>Room ideas (most as small as wario ware i think) </h1>
 
+    <li>neville and devona room for truth and lies, devonas reward is getting to read the lore associated with your fact, nevilles reward is getting to do stock stuff</li>
+    <li>lil amongus tasks like cleaning laundry</li>
     <li>pong while truth insults you</li>
+    <li>bee puns, bee holder (view blorbo bios?), spelling bee</li>
     <li>visual and audio memory puzzle (like simon says physical game)</li>
     <li>tom peyote dress up game (spot the difference but its hilariously easy)</li>
     <li>base room is wario ware style micro games staring blorbos that shift based on what facts you give them</li>

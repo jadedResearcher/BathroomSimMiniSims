@@ -13,6 +13,8 @@ const EYEKILLERMINIGAME = "EYEKILLER";
 const LOCKEDMINIGAME = "LOCKED";
 const RABBITMINIGAME = "RABBIT";
 const BUTTONMINIGAME = "BUTTON";
+const CONFESSIONMINIGAME = "CONFESSION";
+const SHOPMINIGAME = "SHOP";
 
 
 
@@ -20,13 +22,15 @@ const BUTTONMINIGAME = "BUTTON";
 const rareMiniGames = [EYEKILLERMINIGAME];
 
 //max of once per maze
-const uniqueMiniGames = [LOCKEDMINIGAME];
+const uniqueMiniGames = [LOCKEDMINIGAME,CONFESSIONMINIGAME, SHOPMINIGAME];
 
 const initAllMiniGames = () => {
     new LockMiniGame();
     new ButtonMiniGame();
     new EyeKillerMiniGame();
     new RabbitMiniGame();
+    new ConfessionMiniGame();
+    new ShopMiniGame();
 }
 
 class MiniGame {
@@ -479,7 +483,7 @@ class ButtonMiniGame extends MiniGame {
                 increaseTruthBy(1 * room.timesBeaten);
 
             }
-            if (clicks > 1) {
+            if (clicks > 10) {
                 globalBGMusic.pause();
                 window.alert("10 clicks in one sitting!? Wow! You beat this challenge!")
                 globalBGMusic.src = savedSrc;

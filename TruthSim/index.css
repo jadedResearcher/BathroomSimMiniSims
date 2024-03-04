@@ -111,6 +111,33 @@ textarea {
   opacity: 0.9;
 }
 
+.sales-floor{
+  display:flex;
+  gap: 31px;
+  padding: 13px;
+}
+
+.shop{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 31px;
+  width: 400px;
+  height: 400px;
+}
+.shop-keep{
+  left: 123px;
+  position: absolute;
+  z-index: -1;
+  width: 170px;
+  top: 70px;
+}
+
+.shop-kiosk{
+  position: absolute;
+  height :400px;
+}
+
 .start-button {
   margin-left: auto;
   margin-right: auto;

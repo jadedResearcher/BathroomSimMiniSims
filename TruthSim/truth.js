@@ -14,12 +14,12 @@ const globalRand = new SeededRandom(13);
 
 
 let globalDataObject = {
-  truthPerSecond: 200,
+  truthPerSecond: 1,
   startedPlayingTimeCode: Date.now(),
   numberKeys: 1,
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
-  factsUnlocked:[KILLEROWNSBLADE, TESTFACT], //JR NOTE: TODO clear this out 
+  factsUnlocked:[], 
   truthCurrentValue: 0,
   mazesBeaten: 0,
   mazesTried: 0,
@@ -28,7 +28,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: ["BUTTON"],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -74,7 +74,12 @@ const load = () => {
   if (data) {
     globalDataObject = JSON.parse(data);
     globalDataObject.lastLoadTimeCode = Date.now();
+    /*
+      only objects that need to respond to functions have to be separately parsed as json
+      if they just store data (like facts) its fine to leave them as parsed json
+    */
     let json = globalDataObject.currentMaze;
+
     globalDataObject.currentMaze = new Maze(globalRand, -1, globalDataObject.truthPerSecond); //negative one will keep it from generating the whole maze, since its about to load it
     if (json) {
       globalDataObject.currentMaze.loadFromJSON(json);
@@ -84,6 +89,7 @@ const load = () => {
       globalDataObject.storedMazes[i] = new Maze(globalRand, -1, globalDataObject.truthPerSecond);
       globalDataObject.storedMazes[i].loadFromJSON(json_stored)
     }
+
   }
 
 }
