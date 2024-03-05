@@ -24,7 +24,7 @@ class ShopMiniGame extends MiniGame {
 
 
         //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
-        const factsForSale = [TESTFACT, KILLEROWNSBLADE];
+        const factsForSale = [CLOSERISGREATATSALES,EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS,KILLEROWNSBLADE,EYEKILLERFOUNDFAMILY];
         const unlockedFacts = getAllUnlockedFactTitles();
         const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
 
@@ -46,6 +46,7 @@ class ShopMiniGame extends MiniGame {
                     anythingInShop = true;
                     button.innerHTML += `<p style="text-align:center;font-weight: bolder;">${price} Truth</p>`;
                     button.onclick = ()=>{
+                        decreaseTruthBy(price);
                         globalDataObject.factsUnlocked.push(fact);
                         button.remove();
                     }

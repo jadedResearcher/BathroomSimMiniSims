@@ -512,7 +512,33 @@ const renderGnosisTab = () => {
     quipEle.innerText = pickFrom(quips);
     if (globalDataObject.truthCurrentValue < 0) {
       //legion rests peacefully, i hope
-      quipEle.innerText = `This reminds me of a man my Creator knew once who knew less than nothing, because it was less dangerous than knowing too much... Real hopeful guy. Negative gnosis was... a hell of a thing to do to yourself.... `;
+      quipEle.innerText = `This reminds me of a man my Creator knew once who knew less than nothing, because it was less dangerous than knowing too much... Real hopeful guy. Negative gnosis was... a hell of a thing to do to yourself....
+      
+      <br><br>
+      <p>You weren&apos;t always a wanderer with little memory but that of the stars. You were someone else once-- normal, even, with all the trappings of mortality. So were all of your friends. Normal in every capacity. A highschooler with okay grades and zero friends. Full of teenage problems with teenage solutions-- stupid as all of them, but a predictable stupid.</p>
+<p><br></p>
+<p>Not after that, though. That game changed everything.&nbsp;</p>
+<p><br></p>
+<p>Suddenly you&apos;re gods-- real gods, not your play-pretend, 2006-DeviantArt-roleplay ones. Or gods-in-the-making. Or gods-that-already-were. Or something like that. It was your responsibility to make the new universe, create the new world... rebuild, maybe.</p>
+<p><br></p>
+<p>You&apos;d never let that happen, though. Not that you didn&apos;t agree-- a new world is good. But if they&apos;re gods, couldn&apos;t they just take the old one back? Why settle for once when you could have both?</p>
+<p><br></p>
+<p>Not like their plans for a new world ended well either-- not with any help of yours, you didn&apos;t play the game by its rules. It was this or nothing, you think. So you took it all in, closed it off from the world. Until there was nothing left. Until nothing else was true but...</p>
+<p><br></p>
+<p>You.</p>
+<p><br></p>
+<p>Where do you end and all of them begin? All that&apos;s left are shards within you, littered with them and you, the pieces unrecognizable. Do you even know the difference? Do you care to know the difference?</p>
+<p><br></p>
+<p>Do you think they&apos;re happier as that? As unraveled threads in the tapestry that makes you?</p>
+<p><br></p>
+<p>How long will you keep yourself trapped in your cold, empty, labyrinthian heart?</p>
+<p><br></p>
+<p>Not like it matters. You can&apos;t remember anyway.</p>
+<p><br></p>
+<p>If you have it your way, you&apos;ll never remember.</p>
+<p><br></p>
+<p>So shatter.</p>
+      `;
     }
   }
 
