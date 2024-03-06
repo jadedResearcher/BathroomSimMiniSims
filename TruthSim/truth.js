@@ -16,7 +16,9 @@ const globalRand = new SeededRandom(13);
 let globalDataObject = {
   truthPerSecond: 1,
   startedPlayingTimeCode: Date.now(),
-  numberKeys: 1,
+  numberKeys: 0,
+  keysBoughtFromCloser: 0,
+  allTimeTruthGivenToCloser: 0,
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
   factsUnlocked:[], 
@@ -92,6 +94,19 @@ const load = () => {
 
   }
 
+}
+
+const purchaseKeyFromCloser = (price)=>{
+  decreaseTruthBy(price);
+  globalDataObject.keysBoughtFromCloser ++;
+  globalDataObject.numberKeys ++;
+  allTimeTruthGivenToCloser += price;
+}
+
+const purchaseFactFromCloser = (price, fact)=>{
+  decreaseTruthBy(price);
+  globalDataObject.factsUnlocked.push(fact);
+  allTimeTruthGivenToCloser += price;
 }
 
 const increaseTruthBy = (amount) => {

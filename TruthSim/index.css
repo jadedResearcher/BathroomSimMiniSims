@@ -213,7 +213,10 @@ textarea {
   text-shadow: red 1px 0 1px;
   animation: fadeOut ease 1s;
   animation-fill-mode: forwards;
+  width: 100px;
 }
+
+
 
 .secondary-header{
   display: flex;

@@ -10,6 +10,79 @@ class ShopMiniGame extends MiniGame {
         super(SHOPMINIGAME);
     }
 
+    sellFacts = (ele) => {
+        //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
+        const factsForSale = [CLOSERISGREATATFACTS, EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, CLOSERISGREATATKEYS, CLOSERISGREATATROOMS];
+        const unlockedFacts = getAllUnlockedFactTitles();
+        const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
+
+        let index = 0;
+        let anythingInShop = false;
+        //this is specifically pulling from the bathroom sim to link the two for wastes. if you didn't know this existed before, well, now you do
+        const audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/184438__capslok__cash-register-fake.wav");
+        for (let fact of factsForSale) {
+            const price = 2 ** index;
+            index++;
+            if (price <= globalDataObject.truthCurrentValue) {
+                const button = createElementWithClassAndParent("button", sales_floor, 'shop-button');
+                const purchased = unlockedFacts.includes(fact.title);
+                button.innerHTML = `<p>${fact.title.substring(fact.length - 21, fact.length)} </p>`
+                if (purchased) {
+                    button.remove();
+                } else {
+                    anythingInShop = true;
+                    button.innerHTML += `<p style="text-align:center;font-weight: bolder;">${price} Truth</p>`;
+                    button.onclick = () => {
+                        purchaseFactFromCloser(price, fact)
+                        button.remove();
+                    }
+                }
+            }
+        }
+        if (!anythingInShop) {
+            const empty = createElementWithClassAndParent("div", sales_floor);
+            empty.innerText = "No Items In Shop??? How did you afford them all?";
+
+        }
+    }
+
+    sellKeys = (ele) => {
+        //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
+        const unlockedFacts = getAllUnlockedFactTitles();
+        const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
+
+        let anythingInShop = false;
+        //this is specifically pulling from the bathroom sim to link the two for wastes. if you didn't know this existed before, well, now you do
+        const audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/184438__capslok__cash-register-fake.wav");
+        for (let index = 0; index < 31; index++) {//halloween number
+            const price = 2 ** index;
+            console.log("JR NOTE: price is", price, globalDataObject.keysBoughtFromCloser)
+            index++;
+            if (price <= globalDataObject.truthCurrentValue && globalDataObject.keysBoughtFromCloser <= index) {
+                const button = createElementWithClassAndParent("button", sales_floor, 'shop-button');
+                const skip_button = createElementWithClassAndParent("img", button, "skip-button");
+                skip_button.src = "images/KeyForFriend.png";
+
+                anythingInShop = true;
+                button.innerHTML += `<p style="text-align:center;font-weight: bolder;">${price} Truth</p>`;
+                button.onclick = () => {
+                    purchaseKeyFromCloser(price);
+                    button.remove();
+                }
+
+            }
+        }
+        if (!anythingInShop) {
+            const empty = createElementWithClassAndParent("div", sales_floor);
+            empty.innerText = "No Items In Shop??? How did you afford them all?";
+
+        }
+    }
+
+    sellRooms = (ele) => {
+
+    }
+
     startGame = (ele, room, callback) => {
         globalBGMusic.src = "http://farragofiction.com/CatalystsBathroomSim/seeking_help.mp3";
         globalBGMusic.loop = true;
@@ -21,42 +94,13 @@ class ShopMiniGame extends MiniGame {
 
         const closer = createElementWithClassAndParent("img", parent, "shop-keep");
         closer.src = "images/closer_by_the_guide.png";
-
-
-        //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
-        const factsForSale = [CLOSERISGREATATFACTS,EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS,KILLEROWNSBLADE,EYEKILLERFOUNDFAMILY,CLOSERISGREATATKEYS, CLOSERISGREATATROOMS];
-        const unlockedFacts = getAllUnlockedFactTitles();
-        const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
-
-        let index = 0;
-        let anythingInShop = false;
-        //this is specifically pulling from the bathroom sim to link the two for wastes. if you didn't know this existed before, well, now you do
-        const audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/184438__capslok__cash-register-fake.wav");
-        for (let fact of factsForSale) {
-            const price = 2 ** index;
-            index ++;
-            if (price <= globalDataObject.truthCurrentValue) {
-                const button = createElementWithClassAndParent("button", sales_floor, 'shop-button');
-                const purchased = unlockedFacts.includes(fact.title);
-                button.innerHTML = `<p>${fact.title.substring(fact.length - 21, fact.length)} </p>`
-                if (purchased) {
-                    button.remove();
-                } else {
-                    anythingInShop = true;
-                    button.innerHTML += `<p style="text-align:center;font-weight: bolder;">${price} Truth</p>`;
-                    button.onclick = ()=>{
-                        decreaseTruthBy(price);
-                        globalDataObject.factsUnlocked.push(fact);
-                        button.remove();
-                    }
-                }
-            }
+        if (this.fact && this.fact.title.includes("The Closer Provides You With Best Value KEYS")) {
+            this.sellKeys(ele);
+        } else {
+            this.sellFacts(ele);
         }
-        if(!anythingInShop){
-            const empty = createElementWithClassAndParent("div", sales_floor);
-            empty.innerText = "No Items In Shop??? How did you afford them all?";
 
-        }
+
 
     }
 

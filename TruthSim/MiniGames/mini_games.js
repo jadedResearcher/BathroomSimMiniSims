@@ -456,7 +456,7 @@ class ButtonMiniGame extends MiniGame {
             }
         }
 
-        const quips = ["You clicked!", "1 truth for you!", "It tickles!", "You're so smart!"];
+        const quips = ["You clicked!", "Truth for you!", "It tickles!", "You're so smart!","Wow!","Impressive!"];
         if (room.themeKeys) {
             for (let themeKey of room.themeKeys) {
                 const theme = all_themes[themeKey]
@@ -480,6 +480,7 @@ class ButtonMiniGame extends MiniGame {
                 const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
                 dmg.innerText = `+ ${amount} Truth`;
                 buttonParent.style.position = "absolute";
+                button.style.marginTop ="0px";
                 buttonParent.style.top = `${getRandomNumberBetween(0, 100)}%`;
                 buttonParent.style.left = `${getRandomNumberBetween(0, 100)}%`;
 
