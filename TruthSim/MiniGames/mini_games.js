@@ -440,8 +440,9 @@ class ButtonMiniGame extends MiniGame {
         const savedSrc = globalBGMusic.src;
         globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
         globalBGMusic.play();
+        const buttonParent = createElementWithClassAndParent("div", ele, "clicker-game-button-parent");
 
-        const button = createElementWithClassAndParent("button", ele, "clicker-game-button");
+        const button = createElementWithClassAndParent("button", buttonParent, "clicker-game-button");
         button.innerText = "CLICK FOR THE TRUTH";
         if (room.themeKeys && room.themeKeys.length > 0) {
             button.style.position = "absolute";
@@ -474,13 +475,19 @@ class ButtonMiniGame extends MiniGame {
             quipEle.innerText = pickFrom(quips);
             clicks++;
             if (room.themeKeys && room.themeKeys.length > 0) {
-                increaseTruthBy(13 * room.timesBeaten);
-                button.style.position = "absolute";
-                button.style.top = `${getRandomNumberBetween(0, 100)}%`;
-                button.style.left = `${getRandomNumberBetween(0, 100)}%`;
+                const amount =13 * room.timesBeaten+1;
+                increaseTruthBy(amount);
+                const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
+                dmg.innerText = `+ ${amount} Truth`;
+                buttonParent.style.position = "absolute";
+                buttonParent.style.top = `${getRandomNumberBetween(0, 100)}%`;
+                buttonParent.style.left = `${getRandomNumberBetween(0, 100)}%`;
 
             } else {
-                increaseTruthBy(1 * room.timesBeaten);
+                const amount =1* room.timesBeaten+1;
+                increaseTruthBy(amount);
+                const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
+                dmg.innerText = `+ ${amount} Truth`;
 
             }
             if (clicks > 10) {

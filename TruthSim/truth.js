@@ -512,9 +512,10 @@ const renderGnosisTab = () => {
     quipEle.innerText = pickFrom(quips);
     if (globalDataObject.truthCurrentValue < 0) {
       //legion rests peacefully, i hope
-      quipEle.innerText = `This reminds me of a man my Creator knew once who knew less than nothing, because it was less dangerous than knowing too much... Real hopeful guy. Negative gnosis was... a hell of a thing to do to yourself....
+      quipEle.innerHTML = `This reminds me of a man my Creator knew once who knew less than nothing, because it was less dangerous than knowing too much... Real hopeful guy. Negative gnosis was... a hell of a thing to do to yourself....
       
       <br><br>
+      <div style="color: white; font-family: Times New Roman">
       <p>You weren&apos;t always a wanderer with little memory but that of the stars. You were someone else once-- normal, even, with all the trappings of mortality. So were all of your friends. Normal in every capacity. A highschooler with okay grades and zero friends. Full of teenage problems with teenage solutions-- stupid as all of them, but a predictable stupid.</p>
 <p><br></p>
 <p>Not after that, though. That game changed everything.&nbsp;</p>
@@ -538,6 +539,7 @@ const renderGnosisTab = () => {
 <p>If you have it your way, you&apos;ll never remember.</p>
 <p><br></p>
 <p>So shatter.</p>
+</div>
       `;
     }
   }
