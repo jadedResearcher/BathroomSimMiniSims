@@ -169,6 +169,7 @@ class MiniGame {
             }
             if (options.length > 0 && !this.fact) {
                 const factsSelector = createElementWithClassAndParent("select", secondaryHeader);
+                factsSelector.id = "facts-selector"
                 const option = document.createElement("option")
                 option.innerText = "No Fact Assigned To This Room Type";
                 factsSelector.append(option);
@@ -207,6 +208,10 @@ class MiniGame {
         start_button.innerText = "START";
         start_button.onclick = () => {
             start_button.remove();
+            const factsSelector = document.querySelector("#facts-selector")
+            if(factsSelector){
+                factsSelector.remove();
+            }
             this.startGame(container, room, winCallback);
         }
 

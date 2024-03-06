@@ -10,7 +10,24 @@ class ShopMiniGame extends MiniGame {
         super(SHOPMINIGAME);
     }
 
-    sellFacts = (ele) => {
+    valuableCustomer = (ele, callback)=>{
+        const button = createElementWithClassAndParent("button", ele);
+        button.innerText = "Thank You Valuable Customer: Click Here To Complete This Room";
+        button.onclick = ()=>{
+            callback(globalDataObject.currentMaze);
+            renderMazeTab();
+        }
+
+    }
+
+    sellRooms = (ele, callback)=>{
+        console.log("JR NOTE: sell rooms")
+        const sales_floor = createElementWithClassAndParent("div", ele,"sales-floor");
+        sales_floor.innerText = "COMING SOON!!!";
+
+    }
+
+    sellFacts = (ele,callback) => {
         //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
         const factsForSale = [CLOSERISGREATATFACTS, EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, CLOSERISGREATATKEYS, CLOSERISGREATATROOMS];
         const unlockedFacts = getAllUnlockedFactTitles();
@@ -33,8 +50,9 @@ class ShopMiniGame extends MiniGame {
                     anythingInShop = true;
                     button.innerHTML += `<p style="text-align:center;font-weight: bolder;">${price} Truth</p>`;
                     button.onclick = () => {
-                        purchaseFactFromCloser(price, fact)
                         button.remove();
+                        purchaseFactFromCloser(price, fact);
+                        this.valuableCustomer(ele, callback); //she'll spam it if you buy a lot, its fine
                     }
                 }
             }
@@ -42,11 +60,12 @@ class ShopMiniGame extends MiniGame {
         if (!anythingInShop) {
             const empty = createElementWithClassAndParent("div", sales_floor);
             empty.innerText = "No Items In Shop??? How did you afford them all?";
+            this.valuableCustomer(ele, callback);
 
         }
     }
 
-    sellKeys = (ele) => {
+    sellKeys = (ele,callback) => {
         //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
         const unlockedFacts = getAllUnlockedFactTitles();
         const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
@@ -56,9 +75,8 @@ class ShopMiniGame extends MiniGame {
         const audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/184438__capslok__cash-register-fake.wav");
         for (let index = 0; index < 31; index++) {//halloween number
             const price = 2 ** index;
-            console.log("JR NOTE: price is", price, globalDataObject.keysBoughtFromCloser)
             index++;
-            if (price <= globalDataObject.truthCurrentValue && globalDataObject.keysBoughtFromCloser <= index) {
+            if (price <= globalDataObject.truthCurrentValue && globalDataObject.keysBoughtFromCloser < index) {
                 const button = createElementWithClassAndParent("button", sales_floor, 'shop-button');
                 const skip_button = createElementWithClassAndParent("img", button, "skip-button");
                 skip_button.src = "images/KeyForFriend.png";
@@ -66,8 +84,9 @@ class ShopMiniGame extends MiniGame {
                 anythingInShop = true;
                 button.innerHTML += `<p style="text-align:center;font-weight: bolder;">${price} Truth</p>`;
                 button.onclick = () => {
-                    purchaseKeyFromCloser(price);
                     button.remove();
+                    purchaseKeyFromCloser(price);
+                    this.valuableCustomer(ele, callback); //she'll spam it if you buy a lot, its fine
                 }
 
             }
@@ -75,13 +94,10 @@ class ShopMiniGame extends MiniGame {
         if (!anythingInShop) {
             const empty = createElementWithClassAndParent("div", sales_floor);
             empty.innerText = "No Items In Shop??? How did you afford them all?";
-
+            this.valuableCustomer(ele, callback);
         }
     }
 
-    sellRooms = (ele) => {
-
-    }
 
     startGame = (ele, room, callback) => {
         globalBGMusic.src = "http://farragofiction.com/CatalystsBathroomSim/seeking_help.mp3";
@@ -95,9 +111,11 @@ class ShopMiniGame extends MiniGame {
         const closer = createElementWithClassAndParent("img", parent, "shop-keep");
         closer.src = "images/closer_by_the_guide.png";
         if (this.fact && this.fact.title.includes("The Closer Provides You With Best Value KEYS")) {
-            this.sellKeys(ele);
+            this.sellKeys(ele,callback);
+        }else if(this.fact && this.fact.title.includes("The Closer Provides You With Best Value ROOMS")){
+            this.sellRooms(ele,callback);
         } else {
-            this.sellFacts(ele);
+            this.sellFacts(ele,callback);
         }
 
 

@@ -205,6 +205,10 @@ textarea {
   cursor: pointer;
 }
 
+button img{
+  height: 50px;
+}
+
 .damage-counter{
   position: absolute;
   top: -25px;

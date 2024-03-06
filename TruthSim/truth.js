@@ -100,13 +100,13 @@ const purchaseKeyFromCloser = (price)=>{
   decreaseTruthBy(price);
   globalDataObject.keysBoughtFromCloser ++;
   globalDataObject.numberKeys ++;
-  allTimeTruthGivenToCloser += price;
+  globalDataObject.allTimeTruthGivenToCloser += price;
 }
 
 const purchaseFactFromCloser = (price, fact)=>{
   decreaseTruthBy(price);
   globalDataObject.factsUnlocked.push(fact);
-  allTimeTruthGivenToCloser += price;
+  globalDataObject.allTimeTruthGivenToCloser += price;
 }
 
 const increaseTruthBy = (amount) => {
