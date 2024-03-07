@@ -12,7 +12,6 @@ const kickoffImageRenderingToCanvas = (source, canvas) => {
 //takes in a base canvas and applys each transform individually to get a css animation on the bg
 //transform array is an array of functions that take in a canvas and do operations on it
 const transformCanvasIntoAnimationWithTransform = (canvas, transform_array) => {
-  console.log("JR NOTE: creating a transformed canvas")
   const original = document.createElement("canvas");
   const context = original.getContext("2d");
   context.drawImage(canvas, 0, 0);
@@ -23,7 +22,6 @@ const transformCanvasIntoAnimationWithTransform = (canvas, transform_array) => {
   const bigContext = bigBoi.getContext("2d");
   let index = 0;
   for (let transform of transform_array) {
-    console.log("JR NOTE: doing some transform arrays")
     const copy = document.createElement("canvas");
     const context = copy.getContext("2d");
     context.drawImage(original, 0, 0);
@@ -82,7 +80,6 @@ const randomizeColors = (canvas) => {
 
 //doesn't care about palettes. just for every color it finds shoves it in a hash map and refers to it later
 const turnToPureStatic = (canvas) => {
-  console.log("JR NOTE: turning to pure staticf")
   //key is color in original image, value is color in new image
   let remembered_colors = {}
   var ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -106,7 +103,6 @@ const turnToPureStatic = (canvas) => {
 
 //doesn't care about palettes. just for every color it finds shoves it in a hash map and refers to it later
 const turnToPartialStatic = (canvas) => {
-  console.log("JR NOTE: turning to partial static")
   //key is color in original image, value is color in new image
   let remembered_colors = {}
   var ctx = canvas.getContext('2d', { willReadFrequently: true });

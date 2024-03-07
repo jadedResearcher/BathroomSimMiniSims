@@ -292,6 +292,9 @@ button img{
 
 .el-wrap {
   position: absolute;
+  cursor: pointer;
+  pointer-events: all;
+
 }
 
 .el {
@@ -351,6 +354,7 @@ button img{
   position: fixed;
   top: 0px;
   left: 0px;
+  pointer-events: none;
 }
 
 @keyframes x {

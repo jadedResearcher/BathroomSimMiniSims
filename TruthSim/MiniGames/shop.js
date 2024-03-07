@@ -117,12 +117,12 @@ class ShopMiniGame extends MiniGame {
 
 
         const bounceTime = (canvas) => {
-            console.log("JR NOTE: bounce time")
+            console.log("JR NOTE: bounce time", canvas)
 
             let animation_frame_sheet = transformCanvasIntoAnimationWithTransform(canvas, [turnToPureStatic, turnToPartialStatic, turnToPureStatic]);
             ele.append(animation_frame_sheet);
-
             ele.append(canvas);
+
             //multiple things we wanna do. first is just bounce it around as is
             //then give it three frames of animation (same as LOGAC) that makes it staticky
 
@@ -132,8 +132,8 @@ class ShopMiniGame extends MiniGame {
             </div>
             */
             //ternary is so i can debug it without it zipping about
-            const xAnimations = false ? ["x-turtle"] : ["x", "x-fast", "x-zip", "x-turtle"];
-            const yAnimations = false ? ["y-turtle"] : ["y", "y-fast", "y-zip", "y-turtle"];
+            const xAnimations = false ? ["x-turtle"] : ["x", "x-fast", "x-turtle"];
+            const yAnimations = false ? ["y-turtle"] : ["y", "y-fast", "y-turtle"];
             const elWrap = createElementWithClassAndParent("div", bounce_container, `el-wrap ${pickFrom(xAnimations)}`);
             elWrap.style.left = `${getRandomNumberBetween(0, 100)}vw`;
             elWrap.style.top = `${getRandomNumberBetween(0, 100)}vh`;
@@ -161,18 +161,36 @@ class ShopMiniGame extends MiniGame {
           
           }
 
+        const fruitStack = [];
+        const wigglerEater = document.querySelector(".shop-kiosk");
+        wigglerEater.cursor = "pointer";
+        wigglerEater.pointerEvents = "all";
+
+          wigglerEater.onclick = ()=>{
+            if(fruitStack.length > 0){
+                bounceTime(fruitStack)
+            }
+          }
+
         const addFruit = async () => {
             const image = fruit_source + pickFrom(fruit)
             let canvas = document.createElement("canvas");
             canvas.width = 50;
             canvas.height = 50;
+            ele.append(canvas);
             await kickoffImageRenderingToCanvas(image, canvas);
-            bounceTime(canvas);
+
+            canvas.onclick = ()=>{
+                console.log("JR NOTE: click so its bounce time")
+                bounceTime(canvas);
+            }
+            fruitStack.push(canvas);
+           // bounceTime(canvas);
 
 
         }
 
-        const max = 113;
+        const max = 31;
         for(let i = 0;  i< max; i++){
             addFruit();
         }
