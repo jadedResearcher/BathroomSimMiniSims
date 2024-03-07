@@ -114,6 +114,10 @@ class ShopMiniGame extends MiniGame {
         header.innerText = "SELL ME FRUIT!!!!!!!!!!! TRUTH FOR FRUIT!!!!!!!!!!! COMMERCE!!!!!!!!!!!!"
         //basically staticky fruit goes everywhere like in fruit sim and if you click one you get some truth
         const bounce_container = createElementWithClassAndParent("div", ele, `bounce-container`);
+        const secret = createElementWithClassAndParent("a", ele)
+        secret.href = "http://farragofiction.com/FruitSim/";
+        secret.target="_blank";
+        secret.innerText = "Does this look familiar to you?";
 
 
         const bounceTime = (canvas) => {
