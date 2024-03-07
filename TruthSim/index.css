@@ -131,6 +131,7 @@ textarea {
   z-index: -1;
   width: 170px;
   top: 70px;
+  pointer-events: all;
 }
 
 .shop-kiosk{
@@ -349,9 +350,8 @@ button img{
 }
 
 .bounce-container {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
+  width: 50vw;
+  height: 50vh;
   top: 0px;
   left: 0px;
   pointer-events: none;

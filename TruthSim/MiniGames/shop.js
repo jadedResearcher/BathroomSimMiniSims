@@ -120,8 +120,6 @@ class ShopMiniGame extends MiniGame {
             console.log("JR NOTE: bounce time", canvas)
 
             let animation_frame_sheet = transformCanvasIntoAnimationWithTransform(canvas, [turnToPureStatic, turnToPartialStatic, turnToPureStatic]);
-            ele.append(animation_frame_sheet);
-            ele.append(canvas);
 
             //multiple things we wanna do. first is just bounce it around as is
             //then give it three frames of animation (same as LOGAC) that makes it staticky
@@ -132,8 +130,8 @@ class ShopMiniGame extends MiniGame {
             </div>
             */
             //ternary is so i can debug it without it zipping about
-            const xAnimations = false ? ["x-turtle"] : ["x", "x-fast", "x-turtle"];
-            const yAnimations = false ? ["y-turtle"] : ["y", "y-fast", "y-turtle"];
+            const xAnimations = false ? ["x-turtle"] : ["x", "x-turtle"];
+            const yAnimations = false ? ["y-turtle"] : ["y", "y-turtle"];
             const elWrap = createElementWithClassAndParent("div", bounce_container, `el-wrap ${pickFrom(xAnimations)}`);
             elWrap.style.left = `${getRandomNumberBetween(0, 100)}vw`;
             elWrap.style.top = `${getRandomNumberBetween(0, 100)}vh`;
@@ -146,7 +144,7 @@ class ShopMiniGame extends MiniGame {
             const audio = new Audio("audio/fx/275015__wadaltmon__bite-apple.wav");
             elWrap.onclick = () => {
                 audio.play();
-                const dmg = createElementWithClassAndParent("div", elWrap, "damage-counter");
+                const dmg = createElementWithClassAndParent("div", ele, "damage-counter");
                 const amount = 11 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 dmg.innerText = `+ Tasty Tasty Fruit! Have Truth! ${amount} Truth For Fruit!!!`;
@@ -168,7 +166,7 @@ class ShopMiniGame extends MiniGame {
 
           wigglerEater.onclick = ()=>{
             if(fruitStack.length > 0){
-                bounceTime(fruitStack)
+                bounceTime(fruitStack.pop())
             }
           }
 
@@ -177,15 +175,12 @@ class ShopMiniGame extends MiniGame {
             let canvas = document.createElement("canvas");
             canvas.width = 50;
             canvas.height = 50;
-            ele.append(canvas);
+            //ele.append(canvas);
             await kickoffImageRenderingToCanvas(image, canvas);
-
-            canvas.onclick = ()=>{
-                console.log("JR NOTE: click so its bounce time")
-                bounceTime(canvas);
-            }
+            //secret extra fruit leftover from a debugging effort
             fruitStack.push(canvas);
-           // bounceTime(canvas);
+            await sleep(500);
+            bounceTime(canvas);
 
 
         }
