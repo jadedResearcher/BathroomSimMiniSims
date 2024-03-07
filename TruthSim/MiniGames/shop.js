@@ -5,31 +5,41 @@ need to find that confession fic IC wrote and feed on it
 
 */
 
+const fruit_source = `http://farragofiction.com/DollSource/images/Fruit/Body/`;
+let fruit;
+
+const getFruit = async()=>{
+    fruit = await getImages(fruit_source);
+}
+
+
+
 class ShopMiniGame extends MiniGame {
     constructor() {
         super(SHOPMINIGAME);
+        getFruit();
     }
 
-    valuableCustomer = (ele, callback)=>{
+    valuableCustomer = (ele, callback) => {
         const button = createElementWithClassAndParent("button", ele);
         button.innerText = "Thank You Valuable Customer: Click Here To Complete This Room";
-        button.onclick = ()=>{
+        button.onclick = () => {
             callback(globalDataObject.currentMaze);
             renderMazeTab();
         }
 
     }
 
-    sellRooms = (ele, callback)=>{
+    sellRooms = (ele, callback) => {
         console.log("JR NOTE: sell rooms")
-        const sales_floor = createElementWithClassAndParent("div", ele,"sales-floor");
+        const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
         sales_floor.innerText = "COMING SOON!!!";
 
     }
 
-    sellFacts = (ele,callback) => {
+    sellFacts = (ele, callback) => {
+        console.log("JR NOTE: remove closer eats babies, she'd never reveal that, but need it for testing")
         //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
-        const factsForSale = [CLOSERISGREATATFACTS, EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, CLOSERISGREATATKEYS, CLOSERISGREATATROOMS];
         const unlockedFacts = getAllUnlockedFactTitles();
         const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
 
@@ -65,7 +75,7 @@ class ShopMiniGame extends MiniGame {
         }
     }
 
-    sellKeys = (ele,callback) => {
+    sellKeys = (ele, callback) => {
         //TODO list of facts closer can sell, each one costs exponentially more, start with eye killer fact
         const unlockedFacts = getAllUnlockedFactTitles();
         const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
@@ -98,6 +108,77 @@ class ShopMiniGame extends MiniGame {
         }
     }
 
+    trickster = (ele, callback) => {
+        const header = document.querySelector(".game-header h1");
+        header.classList.add("rainbowTextAnimated")
+        header.innerText = "SELL ME FRUIT!!!!!!!!!!! TRUTH FOR FRUIT!!!!!!!!!!! COMMERCE!!!!!!!!!!!!"
+        //basically staticky fruit goes everywhere like in fruit sim and if you click one you get some truth
+        const bounce_container = createElementWithClassAndParent("div", ele, `bounce-container`);
+
+
+        const bounceTime = (canvas) => {
+            console.log("JR NOTE: bounce time")
+
+            let animation_frame_sheet = transformCanvasIntoAnimationWithTransform(canvas, [turnToPureStatic, turnToPartialStatic, turnToPureStatic]);
+            ele.append(animation_frame_sheet);
+
+            ele.append(canvas);
+            //multiple things we wanna do. first is just bounce it around as is
+            //then give it three frames of animation (same as LOGAC) that makes it staticky
+
+            /*
+            <div class="el-wrap x">
+              <div class="el y"></div>
+            </div>
+            */
+            //ternary is so i can debug it without it zipping about
+            const xAnimations = false ? ["x-turtle"] : ["x", "x-fast", "x-zip", "x-turtle"];
+            const yAnimations = false ? ["y-turtle"] : ["y", "y-fast", "y-zip", "y-turtle"];
+            const elWrap = createElementWithClassAndParent("div", bounce_container, `el-wrap ${pickFrom(xAnimations)}`);
+            elWrap.style.left = `${getRandomNumberBetween(0, 100)}vw`;
+            elWrap.style.top = `${getRandomNumberBetween(0, 100)}vh`;
+            const el = createElementWithClassAndParent("div", elWrap, `el ${pickFrom(yAnimations)}`);
+            el.style.width = "50px";
+            el.style.height = "50px";
+          
+            const graphic = createElementWithClassAndParent("div", el, `animated_bg`);
+            graphic.style.backgroundImage = `url(${animation_frame_sheet.toDataURL()})`;
+            const audio = new Audio("audio/fx/275015__wadaltmon__bite-apple.wav");
+            elWrap.onclick = () => {
+                audio.play();
+                const dmg = createElementWithClassAndParent("div", elWrap, "damage-counter");
+                const amount = 11 * globalDataObject.truthPerSecond;
+                increaseTruthBy(amount);
+                dmg.innerText = `+ Tasty Tasty Fruit! Have Truth! ${amount} Truth For Fruit!!!`;
+                elWrap.remove();
+                if(!document.querySelector(".el")){
+                    this.valuableCustomer(ele, callback);
+                }
+            }
+          
+            //JR NOTE: to debug
+            //bounce_container.append(animation_frame_sheet);
+          
+          }
+
+        const addFruit = async () => {
+            const image = fruit_source + pickFrom(fruit)
+            let canvas = document.createElement("canvas");
+            canvas.width = 50;
+            canvas.height = 50;
+            await kickoffImageRenderingToCanvas(image, canvas);
+            bounceTime(canvas);
+
+
+        }
+
+        const max = 113;
+        for(let i = 0;  i< max; i++){
+            addFruit();
+        }
+
+    }
+
 
     startGame = (ele, room, callback) => {
         globalBGMusic.src = "http://farragofiction.com/CatalystsBathroomSim/seeking_help.mp3";
@@ -111,11 +192,14 @@ class ShopMiniGame extends MiniGame {
         const closer = createElementWithClassAndParent("img", parent, "shop-keep");
         closer.src = "images/closer_by_the_guide.png";
         if (this.fact && this.fact.title.includes("The Closer Provides You With Best Value KEYS")) {
-            this.sellKeys(ele,callback);
-        }else if(this.fact && this.fact.title.includes("The Closer Provides You With Best Value ROOMS")){
-            this.sellRooms(ele,callback);
+            this.sellKeys(ele, callback);
+        } else if (this.fact && this.fact.title.includes("The Closer Provides You With Best Value ROOMS")) {
+            this.sellRooms(ele, callback);
+        } else if (this.fact && (this.fact.title.includes("The Closer Eats Babies") || this.fact.title.includes("The Closer Is Addicted To Fruit"))) {
+            closer.src = "http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif";
+            this.trickster(ele, callback);
         } else {
-            this.sellFacts(ele,callback);
+            this.sellFacts(ele, callback);
         }
 
 

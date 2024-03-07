@@ -243,6 +243,136 @@ button img{
   animation-fill-mode: forwards;
 }
 
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-1px);
+  }
+}
+
+.rainbow-text {
+  -webkit-background-clip: text;
+  background-image: linear-gradient(270deg, violet, indigo, blue, green, #ff0, orange, red);
+  color: transparent;
+}
+
+.rainbow-border {
+  background: black;
+  box-shadow: 0px 0px 2px 1px rgba(148, 0, 211, 1),
+    0px 0px 2px 2px rgba(75, 0, 130, 1),
+    0px 0px 2px 3px rgba(0, 0, 255, 1),
+    0px 0px 2px 4px rgba(0, 255, 0, 1),
+    0px 0px 2px 5px rgba(255, 255, 0, 1),
+    0px 0px 2px 6px rgba(255, 127, 0, 1),
+    0px 0px 2px 7px rgba(255, 0, 0, 1);
+}
+
+.rainbowTextAnimated {
+  background-image: 
+    linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  animation: move 360s linear infinite;
+}
+
+
+:root {
+  --width: 300px;
+  --x-turtle: 60s;
+  --y-turtle: 60s;
+  --x-speed: 7s;
+  --y-speed: 7s;
+  --x-speed-fast: 3s;
+  --y-speed-fast: 3s;
+  --x-speed-zip: 1s;
+  --y-speed-zip: 1s;
+}
+
+.el-wrap {
+  position: absolute;
+}
+
+.el {
+  width: var(--width);
+  height: var(--width);
+  z-index: 1;
+
+}
+
+.x {
+  animation: x var(--x-speed) linear infinite alternate;
+}
+
+.y {
+  animation: y var(--y-speed) linear infinite alternate;
+}
+
+.x-fast {
+  animation: x var(--x-speed-fast) linear infinite alternate;
+}
+
+.y-fast {
+  animation: y var(--y-speed-fast) linear infinite alternate;
+}
+
+.x-zip {
+  animation: x var(--x-speed-zip) linear infinite alternate;
+}
+
+.y-zip {
+  animation: y var(--y-speed-zip) linear infinite alternate;
+}
+
+.x-turtle {
+  animation: x var(--x-speed-turtle) linear infinite alternate;
+}
+
+.y-turtle {
+  animation: y var(--y-speed-turtle) linear infinite alternate;
+}
+
+.animated_bg {
+  animation: animated-bg-animation 0.4s steps(3) infinite;
+  width: 50px;
+  height: 50px;
+}
+
+@keyframes animated-bg-animation {
+  100% {
+    background-position: -150px;
+  }
+}
+
+.bounce-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+@keyframes x {
+  100% {
+    transform: translateX(calc(100vw - var(--width)));
+  }
+}
+
+@keyframes y {
+  100% {
+    transform: translateY(calc(100vh - var(--width)));
+  }
+}
+
+
+
+@keyframes move {
+  to {
+    background-position: -4500vh;
+  }
+}
+
 [data-quatro="true"] {
   animation: tremble 1s linear infinite;
 }

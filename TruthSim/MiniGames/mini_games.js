@@ -480,7 +480,7 @@ class ButtonMiniGame extends MiniGame {
             quipEle.innerText = pickFrom(quips);
             clicks++;
             if (room.themeKeys && room.themeKeys.length > 0) {
-                const amount =13 * room.timesBeaten+1;
+                const amount =13 * room.timesBeaten+1 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
                 dmg.innerText = `+ ${amount} Truth`;
@@ -490,7 +490,7 @@ class ButtonMiniGame extends MiniGame {
                 buttonParent.style.left = `${getRandomNumberBetween(0, 100)}%`;
 
             } else {
-                const amount =1* room.timesBeaten+1;
+                const amount =1* room.timesBeaten+1 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
                 dmg.innerText = `+ ${amount} Truth`;

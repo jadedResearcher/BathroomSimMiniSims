@@ -7,6 +7,7 @@
 
   <title>TruthSim</title>
   <script src="utils.js"></script>
+  <script src="canvas_utils.js"></script>
   <script src="data.js"></script>
   <script src="facts.js"></script>
   <script src="MiniGames/mini_games.js"></script>
@@ -33,8 +34,12 @@
     <h1>IMPORTANT: VERY SIMPLE GRAPHICS, ALL CSS/HTML/ascii</h1>
     <h1>TODO: core loop</h1>
     <ul>
-      <li>closer can sell keys, facts, mini game keys</li>
-      <li>witherby's confessional next (if a fact mentions a blorbo they come confess to him, otherwise a random goncharov char does procedural confessions) (after one confession is forgiven, you win) (closer doens't confess, she just leaves (unwinnable))</li>
+
+      <li>on friday and midnight: * force refresh page
+      * disable saving
+      * load special save file with no truth, 0 truth per second, a single fact (Zampanio Needs You To Live A Long Life) and a single room where you type into a text box that you need to take a break, zampanio will still be here later, the end is never the end so you are not nearly done, its a marathon, not a race      <li>witherby's confessional next (if a fact mentions a blorbo they come confess to him, otherwise a random goncharov char does procedural confessions) (after one confession is forgiven, you win) (closer doens't confess, she just leaves (unwinnable))</li>
+    </li>
+    <li>confessional</li>
       <li>after store and confessional unlocks, new room for RESETTING THE LOOP (all your save data besides obsessionCurrentValue and dates gets erased) (refactor truth per second in maze rewards to be multiplied by factor of obsessionCurrentValue, not scaling on its own)</li>
       <li>devona room that lets you read fact lore (part of two doors lie and truth?)</li> 
       <li>clear up hacked initial save day, play with scaling</li> 

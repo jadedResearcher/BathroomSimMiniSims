@@ -68,3 +68,14 @@ const CLOSERISGREATATROOMS = new Fact("The Closer Provides You With Best Value R
 const CLOSEREATSBABIES = new Fact("The Closer Eats Babies", "Baby Lamia grow on trees as 'fruit babs'. While they are moderately ambulatory at this stage ('wiggling') they are not generally considered sapient until they cocoon and their fruit innards become actual organs, veins and nervous systems",[KILLING, BUGS], 2, 1, 1);
 const CLOSERADDICTEDTOFRUIT = new Fact("The Closer Is Addicted To Fruit", "In the Closer's Home Universe, her race was known for being obsessively addicted to eating fruit. It is a sign of great will power to resist for even a moment.",[ADDICTION, PLANTS], 1, 1, 2);
 
+
+
+
+//every fact the closer can give you
+const factsForSale = [CLOSEREATSBABIES,CLOSERISGREATATFACTS, EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, CLOSERISGREATATKEYS];
+
+//every fact the CFO can give you
+const factsForGaming = [CLOSERISGREATATROOMS];
+
+//every fact the slot machines can give you
+const factsForGambling = [CLOSEREATSBABIES, CLOSERADDICTEDTOFRUIT]
