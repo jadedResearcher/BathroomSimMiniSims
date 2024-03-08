@@ -372,7 +372,7 @@ button img {
   height: 100%;
   z-index: 1000;
   pointer-events: none;
-  background-color: pink;
+  background-color: #b03a3a;
   opacity: 0.13;
   display: block;
   position: fixed;
