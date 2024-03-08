@@ -256,6 +256,9 @@ class Room {
   }
 
   unlock = (maze) => {
+    if(globalMeatMode){
+      return;
+    }
     console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
   }
