@@ -30,7 +30,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, MAZEMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -97,6 +97,9 @@ const load = () => {
 }
 
 const purchaseKeyFromCloser = (price)=>{
+  if(globalMeatMode){
+    return;
+  }
   decreaseTruthBy(price);
   globalDataObject.keysBoughtFromCloser ++;
   globalDataObject.numberKeys ++;
@@ -104,12 +107,18 @@ const purchaseKeyFromCloser = (price)=>{
 }
 
 const purchaseFactFromCloser = (price, fact)=>{
+  if(globalMeatMode){
+    return;
+  }
   decreaseTruthBy(price);
   globalDataObject.factsUnlocked.push(fact);
   globalDataObject.allTimeTruthGivenToCloser += price;
 }
 
 const increaseTruthBy = (amount) => {
+  if(globalMeatMode){
+    return;
+  }
   globalDataObject.truthCurrentValue += amount;
   globalDataObject.allTimeTruthValue += amount;
 
@@ -118,6 +127,9 @@ const increaseTruthBy = (amount) => {
 //takes in a positive number and subtracts it
 //does not reduce all time truth value
 const decreaseTruthBy = (amount) => {
+  if(globalMeatMode){
+    return;
+  }
   globalDataObject.truthCurrentValue += -1 * amount;
 }
 

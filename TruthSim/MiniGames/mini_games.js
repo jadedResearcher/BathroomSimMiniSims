@@ -15,6 +15,8 @@ const RABBITMINIGAME = "RABBIT";
 const BUTTONMINIGAME = "BUTTON";
 const CONFESSIONMINIGAME = "CONFESSION";
 const SHOPMINIGAME = "SHOP";
+const LAUNDRYMINIGAME = "LAUNDRY";
+const MAZEMINIGAME = "MAZE";
 
 
 
@@ -29,10 +31,11 @@ const initAllMiniGames = () => {
     new ButtonMiniGame();
     new EyeKillerMiniGame();
     new RabbitMiniGame();
-    new ConfessionMiniGame();
     new ShopMiniGame();
+    new MazeMiniGame();
 }
 
+// is for Alt
 class MiniGame {
     id; //how will things refer to you/ what is your key in globalMiniGames
     fact; //not stored unless actively rendering, will be cleared every render
@@ -480,7 +483,7 @@ class ButtonMiniGame extends MiniGame {
             quipEle.innerText = pickFrom(quips);
             clicks++;
             if (room.themeKeys && room.themeKeys.length > 0) {
-                const amount =13 * room.timesBeaten+1 * globalDataObject.truthPerSecond;
+                const amount =globalMeatMode? 0: 13 * room.timesBeaten+1 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
                 dmg.innerText = `+ ${amount} Truth`;
@@ -490,7 +493,7 @@ class ButtonMiniGame extends MiniGame {
                 buttonParent.style.left = `${getRandomNumberBetween(0, 100)}%`;
 
             } else {
-                const amount =1* room.timesBeaten+1 * globalDataObject.truthPerSecond;
+                const amount =globalMeatMode? 0: 1* room.timesBeaten+1 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
                 dmg.innerText = `+ ${amount} Truth`;

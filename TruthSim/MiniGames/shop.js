@@ -149,7 +149,7 @@ class ShopMiniGame extends MiniGame {
             elWrap.onclick = () => {
                 audio.play();
                 const dmg = createElementWithClassAndParent("div", ele, "damage-counter");
-                const amount = 11 * globalDataObject.truthPerSecond;
+                const amount = globalMeatMode? 0: 11 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 dmg.innerText = `+ Tasty Tasty Fruit! Have Truth! ${amount} Truth For Fruit!!!`;
                 elWrap.remove();
