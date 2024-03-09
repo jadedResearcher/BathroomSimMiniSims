@@ -67,6 +67,8 @@ class MazeMiniGame extends MiniGame {
             meat.style.opacity = `${getRandomNumberBetween(0,100)}%`;
             meat.onclick = ()=>{
                 stop = true;
+                globalBGMusic.src ="audio/music/waiting_music_var2.mp3";
+                globalBGMusic.play();
                 alert("TODO handle alt")
             }
 

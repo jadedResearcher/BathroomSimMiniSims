@@ -255,7 +255,7 @@ const handleMazeTabButton = (header) => {
 
 const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
-  globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
+  globalBGMusic.src = globalMeatMode? "audio/music/waiting_music_var1.mp3":"audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
   if (!globalDataObject.currentMaze) {
     globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried, globalDataObject.truthPerSecond);
