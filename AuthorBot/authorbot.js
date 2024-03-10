@@ -443,7 +443,7 @@ const processBathroom = async (location, container, contents) => {
   }
 
   let fruit = await isThereFruit(location);
-  if (store) {
+  if (fruit) {
     quipText.push(["I do not understand why Alt hates the Closer so much. Non Robots are so illogical.", "quips/I do not understand why Alt hates the Closer so much. Non Robots are s.wav" ]);
 
     contents.innerHTML += `<li>There is fruit.`;
