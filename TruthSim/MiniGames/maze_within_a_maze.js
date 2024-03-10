@@ -50,7 +50,7 @@ class MazeMiniGame extends MiniGame {
     /*
     the kind of reward alt would PREFER to give out is not appropriate for this setting
     */
-    reward = (duration) => {
+    reward = (duration, callback) => {
         const popup = createElementWithClassAndParent("div", document.querySelector("body"), "meat-popup");
         const popupbody = createElementWithClassAndParent("div", popup);
 
@@ -60,7 +60,7 @@ class MazeMiniGame extends MiniGame {
         //this is terrible
         //it is paying so much more attention to you if you're with alt
         //essentially
-        const truthReward = 3 * globalDataObject.truthPerSecond * duration;
+        const truthReward = Math.ceil(2 * globalDataObject.truthPerSecond * duration);
         let factReward;
         if(globalDataObject.totalTimeInMeatMode > 30*1000*60){
             const unlockedFacts = getAllUnlockedFactTitles();
@@ -83,6 +83,7 @@ class MazeMiniGame extends MiniGame {
         const rewardButton = createElementWithClassAndParent("button", popup, "meat-button");
         rewardButton.innerText = "OK";
         rewardButton.onclick = () => {
+            popup.remove();
             callback(globalDataObject.currentMaze);
             renderMazeTab();
         }
@@ -135,7 +136,7 @@ class MazeMiniGame extends MiniGame {
             globalMeatMode = false;
             cleanup();
             truthLog("...", "Thank you for staying with my hot flesh maze girlfriend for " + duration + "seconds.")
-            this.reward();
+            this.reward(duration, callback);
         }
     }
 
@@ -171,7 +172,7 @@ class MazeMiniGame extends MiniGame {
                 meat.remove();
                 globalMeatMode = true; //if you somehow click a meat that didn't clean up, meat mode time
                 if (globalMeatGrowing) {
-                    this.shareGossip();
+                    this.shareGossip(ele, room, callback);
                     return;
                 }
                 globalBGMusic.src = "audio/music/waiting_music_var2.mp3";
@@ -309,7 +310,8 @@ class MazeMiniGame extends MiniGame {
 
 const growMeat = async () => {
     console.log("JR NOTE: growing meat")
-    const meat = document.querySelectorAll(":not(.meat-bg)");
+    let meat = document.querySelectorAll(":not(.meat-bg):not(.empty-cell)");
+    //meat = globalRand.shuffle(Array.from(meat)); //doens't look as good
     for (let m of meat) {
         await sleep(500);
         if (!globalMeatGrowing) {

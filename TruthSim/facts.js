@@ -78,4 +78,4 @@ const factsForSale = [CLOSERISGREATATFACTS, EYEKILLERISHUNTED, EYEKILLERKILLSCUL
 const factsForGaming = [CLOSERISGREATATROOMS];
 
 //every fact the slot machines can give you
-const factsForGambling = [CLOSEREATSBABIES, CLOSERADDICTEDTOFRUIT]
+const factsForGambling = [CLOSERADDICTEDTOFRUIT]
