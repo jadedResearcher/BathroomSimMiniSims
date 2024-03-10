@@ -574,8 +574,8 @@ const isThereStore = async (location) => {
 
 const isThereFruit = async (location) => {
   try {
-    const everything = await getEverything(location + "fruit_fuckery.js");
-    if (everything) {
+    const data = await httpGetAsync(location + "/fruit_fuckery.js");
+    if (data) {
       return true;
     }
   } catch (e) {

@@ -20,6 +20,7 @@ let globalDataObject = {
   keysBoughtFromCloser: 0,
   allTimeTruthGivenToCloser: 0,
   lastLoadTimeCode: 0,
+  totalTimeInMeatMode: 0,
   lastSaveTimeCode: 0,
   factsUnlocked: [],
   truthCurrentValue: 0,
@@ -70,6 +71,12 @@ const save = () => {
     for (let stored_maze of globalDataObject.storedMazes) {
       stored_maze.internal_seed = stored_maze.rand.internal_seed;
     }
+  }
+
+  if(globalMeatMode){
+    const now = Date.now();
+    globalDataObject.totalTimeInMeatMode += now -lastSavedMeatMode;
+    lastSavedMeatMode = now;
   }
 
   localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));

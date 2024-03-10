@@ -37,9 +37,106 @@ well that answers itself, code worse because its funnier to lay traps for wastes
 let globalMeatMode = false;
 let globalMeatGrowing = false;
 
+//used to calculate just how much time you're spending with alt
+let timeEnteredMeatMode = 0;
+let lastSavedMeatMode = 0;
+
+
 class MazeMiniGame extends MiniGame {
     constructor() {
         super(MAZEMINIGAME);
+    }
+
+    /*
+    the kind of reward alt would PREFER to give out is not appropriate for this setting
+    */
+    reward = (duration) => {
+        const popup = createElementWithClassAndParent("div", document.querySelector("body"), "meat-popup");
+        const popupbody = createElementWithClassAndParent("div", popup);
+
+        //you get more truth than ambiently chilling with truth
+        //it loves its hot maze gf
+        //but also, why aren't you inside ITS maze
+        //this is terrible
+        //it is paying so much more attention to you if you're with alt
+        //essentially
+        const truthReward = 3 * globalDataObject.truthPerSecond * duration;
+        let factReward;
+        if(globalDataObject.totalTimeInMeatMode > 30*1000*60){
+            const unlockedFacts = getAllUnlockedFactTitles();
+            if(!unlockedFacts.includes(CLOSEREATSBABIES.title)){
+                factReward = CLOSEREATSBABIES; //alt loves messing with the closer
+            }
+
+        }
+        popupbody.innerHTML = `
+        <p>I get it.</p>
+        <p>Can't stay forever...</p>
+        <p>Thanks, though, for staying with me for ${duration} seconds!</p>
+        <p>Come back any time ;)</p>
+        <ul>
+        Truth Reward: ${truthReward}
+        ${factReward? `Fact Reward: ${factReward.title}`:""}
+        </ul>
+        `;
+
+        const rewardButton = createElementWithClassAndParent("button", popup, "meat-button");
+        rewardButton.innerText = "OK";
+        rewardButton.onclick = () => {
+            callback(globalDataObject.currentMaze);
+            renderMazeTab();
+        }
+
+
+
+    }
+
+    shareGossip = (ele, room, callback) => {
+
+        const gossipOptions = ["test1", "test2"];
+        const popup = createElementWithClassAndParent("div", document.querySelector("body"), "meat-popup");
+        const popupbody = createElementWithClassAndParent("div", popup);
+
+        popupbody.innerHTML = `
+        <p></p>
+<p><span style="">Hell yes!</span><span style=""></span><span style=""></span><span style="">I&apos;m really glad you&apos;re still here!</span></p>
+<p></p>
+<p><span style="">Get some quality time together!</span></p>
+<p></p>
+<p><span style="">Hmm...&nbsp;</span></p>
+<p></p>
+<p><span style="">What to talk about..</span></p>
+<p></p>
+<p><span style="">Ooooo, I know!</span></p>
+<p></p>
+<p><span style="">How about some sweet gossip?</span></p>
+<p></p>
+<p></p>
+<p><span style="">Did you know: ${pickFrom(gossipOptions)}</span></p>
+<p></p>
+        `;
+
+        const stayButton = createElementWithClassAndParent("button", popup, "meat-button");
+        stayButton.innerHTML = "Stay with the Meat Maze";
+
+        stayButton.onclick = () => {
+            popup.remove();
+            globalMeatGrowing = true;
+            growMeat();
+        }
+        const leaveButton = createElementWithClassAndParent("button", popup, "meat-button");
+        leaveButton.innerHTML = "Return to the Regular Maze";
+
+        leaveButton.onclick = () => {
+            const duration = (Date.now() - timeEnteredMeatMode) / 1000;
+            stop = true;
+            globalMeatGrowing = false;
+            popup.remove();
+            globalMeatMode = false;
+            cleanup();
+            truthLog("...", "Thank you for staying with my hot flesh maze girlfriend for " + duration + "seconds.")
+            this.reward();
+        }
     }
 
     //literally all she does is mimic the maze (meat mode)
@@ -47,6 +144,8 @@ class MazeMiniGame extends MiniGame {
         truthLog("Alt Is Here", `Oh. Um. I see. She could have. Asked me if she wanted to spend some time with the Wanderer? I would have let her. But. Uh. I am sorry for hogging the attention. `)
 
         globalMeatMode = true;
+        timeEnteredMeatMode = Date.now();
+        lastSavedMeatMode = Date.now();
         renderMazeTab();
         /*
             once every 31 seconds, alt renders a meaty blob somewhere that jiggles
@@ -69,7 +168,12 @@ class MazeMiniGame extends MiniGame {
             meat.style.left = `${getRandomNumberBetween(0, 100)}%`;
             meat.style.opacity = `${getRandomNumberBetween(0, 100)}%`;
             meat.onclick = () => {
-                stop = true;
+                meat.remove();
+                globalMeatMode = true; //if you somehow click a meat that didn't clean up, meat mode time
+                if (globalMeatGrowing) {
+                    this.shareGossip();
+                    return;
+                }
                 globalBGMusic.src = "audio/music/waiting_music_var2.mp3";
                 globalBGMusic.play();
                 /*
@@ -162,23 +266,24 @@ class MazeMiniGame extends MiniGame {
 <p></p>
                `;
                 const stayButton = createElementWithClassAndParent("button", popup, "meat-button");
-                stayButton.innerHTML="Stay with the Meat Maze";
+                stayButton.innerHTML = "Stay with the Meat Maze";
 
-                stayButton.onclick = ()=>{
+                stayButton.onclick = () => {
                     popup.remove();
                     globalMeatGrowing = true;
                     growMeat();
                 }
                 const leaveButton = createElementWithClassAndParent("button", popup, "meat-button");
-                leaveButton.innerHTML="Return to the Regular Maze";
+                leaveButton.innerHTML = "Return to the Regular Maze";
 
-                leaveButton.onclick = ()=>{
+                leaveButton.onclick = () => {
                     alert("...");
+                    stop = true;
                     globalMeatGrowing = false;
                     popup.remove();
                     globalMeatMode = false;
                     cleanup();
-                    truthLog("...","Well. I suppose I appreciate you returning to me. But did you have to be so mean to my girlfriend?")
+                    truthLog("...", "Well. I suppose I appreciate you returning to me. But did you have to be so mean to my girlfriend?")
                     callback(globalDataObject.currentMaze);
                     renderMazeTab();
                 }
@@ -192,7 +297,7 @@ class MazeMiniGame extends MiniGame {
 
 
             if (!stop) {
-                setTimeout(spawnMeat, 1 * 1000); //31 is halloween, arc number from lavinraca/lavinraca
+                setTimeout(spawnMeat, 31 * 1000); //31 is halloween, arc number from lavinraca/lavinraca
             }
         }
         setTimeout(spawnMeat, 1 * 1000); //31 is halloween, arc number from lavinraca/lavinraca
@@ -202,12 +307,12 @@ class MazeMiniGame extends MiniGame {
 }
 
 
-const growMeat = async ()=>{
+const growMeat = async () => {
     console.log("JR NOTE: growing meat")
     const meat = document.querySelectorAll(":not(.meat-bg)");
-    for(let m of meat){
+    for (let m of meat) {
         await sleep(500);
-        if(!globalMeatGrowing){
+        if (!globalMeatGrowing) {
             break;
         }
         m.classList.add("meat-bg")
@@ -215,18 +320,18 @@ const growMeat = async ()=>{
 }
 
 
-const cleanup = ()=>{
+const cleanup = () => {
     const meat = document.querySelectorAll("[class*='meat'] ");
-    for(let m of meat){
-        if(m.className =="meat" || m.className == "meat-overlay"){
+    for (let m of meat) {
+        if (m.className == "meat" || m.className == "meat-overlay") {
             m.remove();
-        }else{
-            for(let c of m.classList){
-                if(c.includes("meat")){
+        } else {
+            for (let c of m.classList) {
+                if (c.includes("meat")) {
                     m.classList.remove(c);
                 }
             }
         }
-        
+
     }
 }
