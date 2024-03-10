@@ -355,7 +355,7 @@ button img {
 }
 
 .meat {
-  z-index: 4556;
+  z-index: 13;
   image-rendering: optimizeSpeed;
   image-rendering: -moz-crisp-edges;
   image-rendering: -o-crisp-edges;
@@ -365,6 +365,70 @@ button img {
   -ms-interpolation-mode: nearest-neighbor;
   position: absolute;
   cursor: pointer;
+}
+
+.meat-bg{
+  background-color: #bd6e6e;
+  border: none;
+  outline: none;
+  color: white;
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+}
+
+.meat-bg::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+
+.meat-bg::-webkit-scrollbar-thumb {
+  background-color: #bd6e6e;
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+
+}
+
+.meat-button{
+  border: none;
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+  margin: 30px;
+  color: white;
+  background-color: #bd6e6e;
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+
+}
+
+.meat-popup{
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: fixed;
+  top: 10%;
+  left: 25%;
+  padding: 50px;
+  font-size: 14px;
+  background-color: #bd6e6e;
+  width: 50vw;
+  height: 68vh;
+  overflow-y: auto;
+  border: 1px solid black;
+  z-index: 4556;
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+}
+
+.meat-popup::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+
+.meat-popup::-webkit-scrollbar-thumb {
+  background-color: #bd6e6e;
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+
 }
 
 .meat-overlay{

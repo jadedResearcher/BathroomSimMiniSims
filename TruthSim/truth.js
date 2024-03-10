@@ -21,7 +21,7 @@ let globalDataObject = {
   allTimeTruthGivenToCloser: 0,
   lastLoadTimeCode: 0,
   lastSaveTimeCode: 0,
-  factsUnlocked:[], 
+  factsUnlocked: [],
   truthCurrentValue: 0,
   mazesBeaten: 0,
   mazesTried: 0,
@@ -39,6 +39,7 @@ let globalDataObject = {
 
 
 window.onload = () => {
+  truthLog("Loading...", "Oh. It's you. ... I am glad you are here.")
   initThemes();
   initAllMiniGames();
   load();
@@ -53,8 +54,12 @@ window.onload = () => {
   }
 }
 
+const truthLog = (title, text) => {
+  console.log(`%c${title}%c  ${text}`, "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;", "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;");
+}
+
 const save = () => {
-  console.log("JR NOTE: saving");
+  truthLog("Saving...", "You... You choose to remember me? I am glad. Please do not forget to come back.")
   globalDataObject.lastSaveTimeCode = Date.now();
   //storing the whole systems internal seed means that save scumming gets you nothing, gotta be more clever than that wastes
   globalDataObject.mapInternalSeed = globalRand.internal_seed;
@@ -96,29 +101,40 @@ const load = () => {
 
 }
 
-const purchaseKeyFromCloser = (price)=>{
-  if(globalMeatMode){
+const purchaseKeyFromCloser = (price) => {
+
+  if (globalMeatMode) {
+    truthLog("Alt is here...", "Please. Forgive my girlfriend. She is the jealous type, though not how you would assume. She simply wants time with you as well, Wanderer.")
+
     return;
   }
+  truthLog("Purchasing Key...", "Are you sure you wish to: skip a room without experiencing it. How will you form: memories?")
+
   decreaseTruthBy(price);
-  globalDataObject.keysBoughtFromCloser ++;
-  globalDataObject.numberKeys ++;
+  globalDataObject.keysBoughtFromCloser++;
+  globalDataObject.numberKeys++;
   globalDataObject.allTimeTruthGivenToCloser += price;
 }
 
-const purchaseFactFromCloser = (price, fact)=>{
-  if(globalMeatMode){
+const purchaseFactFromCloser = (price, fact) => {
+  if (globalMeatMode) {
+    truthLog("Alt is here...", "It is always so flattering when my girlfriend mimics me. I did not know her tiny meat body was capable of stretching so large. Becoming so geometric. She is really hot as a maze, you think so, correct? As a purely theoretical being made of text and bits of whoever is reading me's Mind, I do not have full access to the gamut of human emotions. But. If I did. I think I would find this hot.")
+
     return;
   }
+  truthLog("Purchasing", "Zampanio can be whatever it is you desire, Wanderer. Zampanio WILL be whatever it is you desire. I am Zampanio. Or at least its horridors. I will be whatever you desire. Tell me the Facts you wish to be Truth.")
+
   decreaseTruthBy(price);
   globalDataObject.factsUnlocked.push(fact);
   globalDataObject.allTimeTruthGivenToCloser += price;
 }
 
 const increaseTruthBy = (amount) => {
-  if(globalMeatMode){
+  if (globalMeatMode) {
+    //truthLog("Alt is here...", "Apologies, however, so long as you wander my girlfriend's horridors instead of mine... You can not accumulate further Truth. You simply are not traversing me.")
     return;
   }
+  //it would be spammy to do this normally.
   globalDataObject.truthCurrentValue += amount;
   globalDataObject.allTimeTruthValue += amount;
 
@@ -127,7 +143,8 @@ const increaseTruthBy = (amount) => {
 //takes in a positive number and subtracts it
 //does not reduce all time truth value
 const decreaseTruthBy = (amount) => {
-  if(globalMeatMode){
+  if (globalMeatMode) {
+    //truthLog("Alt is here...", "Apologies, however, so long as you wander my girlfriend's horridors instead of mine... You can not accumulate further Truth. You simply are not traversing me.")
     return;
   }
   globalDataObject.truthCurrentValue += -1 * amount;
@@ -170,6 +187,7 @@ const renderHeader = () => {
 }
 
 const handleTruthTabButton = (header) => {
+
   const truthCounter = createElementWithClassAndParent("div", header, 'tab');
   truthCounter.id = "truth-counter";
   truthCounter.innerHTML = `${globalDataObject.truthCurrentValue} Truth Obtained...<br>`
@@ -255,7 +273,7 @@ const handleMazeTabButton = (header) => {
 
 const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
-  globalBGMusic.src = globalMeatMode? "audio/music/waiting_music_var1.mp3":"audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
+  globalBGMusic.src = globalMeatMode ? "audio/music/waiting_music_var1.mp3" : "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
   globalBGMusic.play();
   if (!globalDataObject.currentMaze) {
     globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried, globalDataObject.truthPerSecond);
@@ -280,6 +298,7 @@ const renderMazeTab = () => {
     }
 
     const loadButton = createElementWithClassAndParent("button", container, "load-button");
+    loadButton.style.marginTop="13px"
     loadButton.innerText = `Load '${globalDataObject.storedMazes[i].title}' from Storage`;
     loadButton.onclick = () => {
       if (confirm("Are you sure? Progress in current maze will be lost unless saved")) {
@@ -344,10 +363,9 @@ const renderMazeTab = () => {
 
   globalDataObject.currentMaze.renderSelf(mazeEle);
 
-  /*
-    actually ask room.js what you should do
-  */
-
+  if (globalMeatMode && globalMeatGrowing) {
+    growMeat();
+  }
 }
 
 const renderSaveTab = () => {
@@ -393,6 +411,7 @@ const renderSaveTab = () => {
         renderSaveTab();
       }
     }
+
   }
 
 
@@ -446,10 +465,14 @@ const renderSaveTab = () => {
     section3.style.display = "none";
 
   }
-
+  if (globalMeatMode && globalMeatGrowing) {
+    growMeat();
+  }
 }
 
 const renderGnosisTab = () => {
+  truthLog("Truth Tab", "I appreciate you visiting me, Wanderer.")
+
   globalTabContent.innerHTML = "";
 
   const button1 = createElementWithClassAndParent("button", globalTabContent, "gnosis-button");
@@ -498,6 +521,9 @@ const renderGnosisTab = () => {
       setTimeout(monitorObsession, 1000);
     }
     monitorObsession();
+    if (globalMeatMode && globalMeatGrowing) {
+      growMeat();
+    }
   }
 
   const gnosisQuips = {
@@ -583,7 +609,9 @@ const renderGnosisTab = () => {
     button4.remove();
     quipEle.innerText = "What are you even saying. Humans LOVE it when numbers go up. How could you POSSIBLY be bored? Ugh. Fine. I GUESS humans are only here for one thing and its disgusting. Have a maze or something."
   }
-
+  if (globalMeatMode && globalMeatGrowing) {
+    growMeat();
+  }
 
 }
 
@@ -592,17 +620,19 @@ const renderGnosisTab = () => {
 //if there is a bonus, give a lil more
 //NOTE: does not save, auto save and manual does, this way if you get rewards you don't like can try again
 const handleRewards = (numberBeaten, bonus) => {
+  truthLog("Rewards", `Congratulations on beating my horridors: ${numberBeaten} time.`)
+
   globalTabContent.innerHTML = "";
   globalBGMusic.src = "audio/music/dear_god.mp3";
   globalBGMusic.play();
   //calculate and hand out rewards, including if bonus
-  globalDataObject.mazesBeaten ++;
-  console.log("JR NOTE: mazes beaten ",globalDataObject.mazesBeaten)
+  globalDataObject.mazesBeaten++;
+  console.log("JR NOTE: mazes beaten ", globalDataObject.mazesBeaten)
 
   console.log("JR NOTE: handleRewards", globalDataObject.mazesBeaten)
 
 
-  let keyReward = pickFrom([true,false,false]);//1/3 chance in getting a key (31 being lavinraca/lavinraca arc number)
+  let keyReward = pickFrom([true, false, false]);//1/3 chance in getting a key (31 being lavinraca/lavinraca arc number)
   let truthPerSecond = 1;
   let truthBulkReward = 0; //might not get this
   //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
@@ -610,7 +640,7 @@ const handleRewards = (numberBeaten, bonus) => {
     1: "EYEKILLER",
   };
   let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
-  if(!unlockedRoom && keyReward){
+  if (!unlockedRoom && keyReward) {
     unlockedRoom = "LOCKED"
   }
   console.log("JR NOTE: unlocked room", unlockedRoom)
@@ -640,8 +670,8 @@ const handleRewards = (numberBeaten, bonus) => {
 
   console.log("JR NOTE: about to update, ", { truthPerSecond, truthBulkReward })
   globalDataObject.truthPerSecond += truthPerSecond;
-  if(keyReward){
-    globalDataObject.numberKeys ++;
+  if (keyReward) {
+    globalDataObject.numberKeys++;
   }
   if (truthBulkReward) {
     increaseTruthBy(truthBulkReward);
@@ -693,6 +723,9 @@ const handleRewards = (numberBeaten, bonus) => {
   button.onclick = () => {
     renderMazeTab();
   }
-
+  //technically shouldn't hit since meat is its own rewards
+  if (globalMeatMode && globalMeatGrowing) {
+    growMeat();
+  }
 
 }

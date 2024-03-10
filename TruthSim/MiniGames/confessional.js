@@ -15,6 +15,8 @@ class ConfessionMiniGame extends MiniGame {
     }
 
     render = (ele, room, callback) => {
+        truthLog("Confessional", `I suppose the little priest is useful for prying the secrets from the blorbos. You like the blorbos. This will help keep you coming back.`)
+
         //there is no way to beat this one without a keyz
         this.initializeRender(ele);
         const container = this.setupGameHeader(ele, room, callback, "Come All and Confess Your Sins", undefined, "images/Thesolemn_by_guide.png")

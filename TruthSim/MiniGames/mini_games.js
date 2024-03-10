@@ -382,6 +382,8 @@ class EyeKillerMiniGame extends MiniGame {
 
     //this is a stupid chaotic mess, sorry future jr
     render = (ele, room, callback) => {
+        truthLog("Eye Killer", `... It has been a long time since my Creator programmed something so game like.`)
+
         this.cultists = [];
         this.initializeRender(ele);
 

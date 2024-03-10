@@ -522,6 +522,9 @@ class Room {
       ele.onclick = () => {
         console.log("JR NOTE: trying to render", this.miniGameKey, globalTabContent)
         globalMiniGames[this.miniGameKey].render(globalTabContent,this, this.incrementTimesBeaten);
+        if (globalMeatMode && globalMeatGrowing) {
+          growMeat();
+        }
       }
       const label = createElementWithClassAndParent("div", ele, "room-label");
 
