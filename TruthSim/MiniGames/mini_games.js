@@ -18,6 +18,12 @@ const SHOPMINIGAME = "SHOP";
 const LAUNDRYMINIGAME = "LAUNDRY";
 const MAZEMINIGAME = "MAZE";
 
+  //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
+  const rooms_to_unlock = {
+    1: EYEKILLERMINIGAME,
+    10: MAZEMINIGAME
+  };
+
 
 
 //half as common as other rooms

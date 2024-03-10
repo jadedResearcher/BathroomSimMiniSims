@@ -31,7 +31,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, MAZEMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -642,10 +642,7 @@ const handleRewards = (numberBeaten, bonus) => {
   let keyReward = pickFrom([true, false, false]);//1/3 chance in getting a key (31 being lavinraca/lavinraca arc number)
   let truthPerSecond = 1;
   let truthBulkReward = 0; //might not get this
-  //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
-  const rooms_to_unlock = {
-    1: "EYEKILLER",
-  };
+
   let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
   if (!unlockedRoom && keyReward) {
     unlockedRoom = "LOCKED"

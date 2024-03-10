@@ -66,6 +66,8 @@ class MazeMiniGame extends MiniGame {
             const unlockedFacts = getAllUnlockedFactTitles();
             if(!unlockedFacts.includes(CLOSEREATSBABIES.title)){
                 factReward = CLOSEREATSBABIES; //alt loves messing with the closer
+                globalDataObject.factsUnlocked.push(factReward);
+
             }
 
         }
@@ -76,7 +78,7 @@ class MazeMiniGame extends MiniGame {
         <p>Come back any time ;)</p>
         <ul>
         Truth Reward: ${truthReward}
-        ${factReward? `Fact Reward: ${factReward.title}`:""}
+        ${factReward? `<li>Fact Reward: ${factReward.title}</li>`:""}
         </ul>
         `;
 
@@ -136,7 +138,7 @@ class MazeMiniGame extends MiniGame {
             globalMeatMode = false;
             cleanup();
             truthLog("...", "Thank you for staying with my hot flesh maze girlfriend for " + duration + "seconds.")
-            this.reward(duration, callback);
+            this.reward(Math.ceil(duration), callback);
         }
     }
 
@@ -301,7 +303,7 @@ class MazeMiniGame extends MiniGame {
                 setTimeout(spawnMeat, 31 * 1000); //31 is halloween, arc number from lavinraca/lavinraca
             }
         }
-        setTimeout(spawnMeat, 1 * 1000); //31 is halloween, arc number from lavinraca/lavinraca
+        setTimeout(spawnMeat, 31 * 1000); //31 is halloween, arc number from lavinraca/lavinraca
 
 
     }
@@ -313,7 +315,7 @@ const growMeat = async () => {
     let meat = document.querySelectorAll(":not(.meat-bg):not(.empty-cell)");
     //meat = globalRand.shuffle(Array.from(meat)); //doens't look as good
     for (let m of meat) {
-        await sleep(500);
+        await sleep(310);
         if (!globalMeatGrowing) {
             break;
         }
