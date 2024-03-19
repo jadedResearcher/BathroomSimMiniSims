@@ -380,6 +380,10 @@ button img {
   background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
 }
 
+.target{
+  display: inline-block;
+}
+
 .meat-bg::-webkit-scrollbar {
   width: 5px;
   height: 5px;

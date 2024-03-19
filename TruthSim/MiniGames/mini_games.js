@@ -420,7 +420,7 @@ class ParkerMiniGame extends MiniGame {
         super(PARKERMINIGAME);
     }
 
-    startGame = (ele, room, callback) => {
+    startGame = async (ele, room, callback) => {
         globalBGMusic.src = "audio/music/i_think_its_finished_priska_turbo_time.mp3";
         globalBGMusic.play();
         ele.style.border = "3px solid #1f140d";
@@ -429,6 +429,17 @@ class ParkerMiniGame extends MiniGame {
         const body = document.querySelector("body")
         const targetingReticule = createElementWithClassAndParent("img", ele, "targeting-reticule");
         targetingReticule.src = "images/ReticalForFriendLARGE.png"
+
+
+        const rando_source = `http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/randos/`;
+        let randos;
+
+        const getRandos = async () => {
+            randos = await getImages(rando_source);
+        }
+        await getRandos();
+
+
 
         const syncTargetingReticule = (x, y) => {
             targetingReticule.style.left = `${x}px`;
@@ -450,17 +461,39 @@ class ParkerMiniGame extends MiniGame {
 
         ele.onmouseup = (event) => {
             targetingReticule.src = "images/ReticalForFriendLARGE.png"
-            syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45-rect.top);
+            syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45 - rect.top);
         };
 
         ele.onmousemove = (event) => {
-            syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45-rect.top);
+            syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45 - rect.top);
         }
+
+        const spawnBlorbos = () => {
+            let miku = false;
+            for (let i = 0; i < this.defense+1; i++) {
+                const blorbo = createElementWithClassAndParent("img", ele, "blorbo target");
+                if(!miku && (i === this.defense || Math.random()>.75)){
+                    blorbo.src = "http://farragofiction.com/DehydrationSim/miku.gif";
+                    blorbo.classList.add("miku");
+                    miku = true;
+                }else{
+                    blorbo.src = rando_source + pickFrom(randos);
+                }
+                blorbo.style.marginLeft = `${getRandomNumberBetween(0,100)}px`
+                blorbo.style.marginRight = `${getRandomNumberBetween(0,100)}px`
+            }
+
+          
+            
+            truthLog("Parker Is a Disturbed Man","In Truth, you can always dig deeper, learn more. Here is more about Parker: http://farragofiction.com/DehydrationSim/  Do not mind the ravings of a madman. Dig deeper, until the dancing anime waifus no longer plague you.  Once hydrated, return , and perhaps you will learn something.")
+        }
+
+        spawnBlorbos();
 
         let index = 0;
         const tick = () => {
             new Audio("audio/fx/dig.mp3").play();
-            index ++;
+            index++;
             if (index >= this.speed) {
                 fire(0, 0);
             } else {
@@ -478,9 +511,12 @@ class ParkerMiniGame extends MiniGame {
 
     render = (ele, room, callback) => {
         this.initializeRender(ele);
+        this.defense = Math.max(13 - Math.round(room.difficulty/10  * this.getDefense(room)), 1); //on average three randos to kill instead of hatsune miku (less randos is more difficult)
+        console.log("JR NOTE: defense is made of ", {defense: this.defense, difficulty: room.difficulty, baseDefense: this.getDefense(room)})
+
         this.speed = 5 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
 
-        const container = this.setupGameHeader(ele, room, callback, "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", `She goes off every ${this.speed} seconds!`, "images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
+        const container = this.setupGameHeader(ele, room, callback, "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", `She goes off every ${this.speed} seconds! There are ${this.defense} valid targets!`, "images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
 
     }
 }
