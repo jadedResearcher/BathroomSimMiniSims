@@ -367,6 +367,10 @@ button img {
   cursor: pointer;
 }
 
+.targeting-reticule{
+  position: absolute;
+}
+
 .meat-bg{
   background-color: #bd6e6e;
   border: none;

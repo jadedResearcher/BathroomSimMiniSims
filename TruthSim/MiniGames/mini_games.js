@@ -17,12 +17,13 @@ const CONFESSIONMINIGAME = "CONFESSION";
 const SHOPMINIGAME = "SHOP";
 const LAUNDRYMINIGAME = "LAUNDRY";
 const MAZEMINIGAME = "MAZE";
+const PARKERMINIGAME = "GUN";
 
-  //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
-  const rooms_to_unlock = {
+//if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
+const rooms_to_unlock = {
     1: EYEKILLERMINIGAME,
     10: MAZEMINIGAME
-  };
+};
 
 
 
@@ -30,13 +31,14 @@ const MAZEMINIGAME = "MAZE";
 const rareMiniGames = [EYEKILLERMINIGAME];
 
 //max of once per maze
-const uniqueMiniGames = [LOCKEDMINIGAME,CONFESSIONMINIGAME, SHOPMINIGAME];
+const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME];
 
 const initAllMiniGames = () => {
     new LockMiniGame();
     new ButtonMiniGame();
     new EyeKillerMiniGame();
     new RabbitMiniGame();
+    new ParkerMiniGame();
     new ShopMiniGame();
     new MazeMiniGame();
 }
@@ -218,7 +220,7 @@ class MiniGame {
         start_button.onclick = () => {
             start_button.remove();
             const factsSelector = document.querySelector("#facts-selector")
-            if(factsSelector){
+            if (factsSelector) {
                 factsSelector.remove();
             }
             this.startGame(container, room, winCallback);
@@ -406,6 +408,63 @@ class EyeKillerMiniGame extends MiniGame {
 }
 
 /*
+    Try your best not to shoot hatsune miku
+
+    every 3 seconds GunTan goes off. She's so great. 
+
+    If you don't pick a target, she will.
+*/
+
+class ParkerMiniGame extends MiniGame {
+    constructor() {
+        super(PARKERMINIGAME);
+    }
+
+    startGame = (ele, room, callback) => {
+        globalBGMusic.src = "audio/music/i_think_its_finished_priska_turbo_time.mp3";
+        globalBGMusic.play();
+
+        const body = document.querySelector("body")
+        const targetingReticule = createElementWithClassAndParent("img", body, "targeting-reticule");
+        targetingReticule.src = "images/ReticalForFriendLARGE.png"
+
+        const syncTargetingReticule = (x, y) => {
+            targetingReticule.style.left = `${x}px`;
+            targetingReticule.style.top = `${y}px`;
+        }
+        body.onmousedown = (event) => {
+            console.log("JR NOTE: TODO fire gun");
+            targetingReticule.src = "images/ReticalForFriendFiredredLARGE.png"
+
+            syncTargetingReticule(event.pageX-45, event.pageY-45);
+        };
+
+        body.onmouseup = (event) => {
+            targetingReticule.src = "images/ReticalForFriendLARGE.png"
+            syncTargetingReticule(event.pageX-45, event.pageY-45);
+        };
+
+        body.onmousemove = (event) => {
+            syncTargetingReticule(event.pageX-45, event.pageY-45);
+        }
+
+
+
+
+
+    }
+
+    render = (ele, room, callback) => {
+        this.initializeRender(ele);
+        this.speed = 10 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
+
+        const container = this.setupGameHeader(ele, room, callback, "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", `She goes off every ${this.speed} seconds!`, "images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
+
+    }
+}
+
+
+/*
 IF YOU DON'T KNOW ANY PASSWORDS YOU CAN'T MOVE FORWARD
 */
 
@@ -472,7 +531,7 @@ class ButtonMiniGame extends MiniGame {
             }
         }
 
-        const quips = ["You clicked!", "Truth for you!", "It tickles!", "You're so smart!","Wow!","Impressive!"];
+        const quips = ["You clicked!", "Truth for you!", "It tickles!", "You're so smart!", "Wow!", "Impressive!"];
         if (room.themeKeys) {
             for (let themeKey of room.themeKeys) {
                 const theme = all_themes[themeKey]
@@ -491,17 +550,17 @@ class ButtonMiniGame extends MiniGame {
             quipEle.innerText = pickFrom(quips);
             clicks++;
             if (room.themeKeys && room.themeKeys.length > 0) {
-                const amount =globalMeatMode? 0: 13 * room.timesBeaten+1 * globalDataObject.truthPerSecond;
+                const amount = globalMeatMode ? 0 : 13 * room.timesBeaten + 1 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
                 dmg.innerText = `+ ${amount} Truth`;
                 buttonParent.style.position = "absolute";
-                button.style.marginTop ="0px";
+                button.style.marginTop = "0px";
                 buttonParent.style.top = `${getRandomNumberBetween(0, 100)}%`;
                 buttonParent.style.left = `${getRandomNumberBetween(0, 100)}%`;
 
             } else {
-                const amount =globalMeatMode? 0: 1* room.timesBeaten+1 * globalDataObject.truthPerSecond;
+                const amount = globalMeatMode ? 0 : 1 * room.timesBeaten + 1 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 const dmg = createElementWithClassAndParent("div", buttonParent, "damage-counter");
                 dmg.innerText = `+ ${amount} Truth`;

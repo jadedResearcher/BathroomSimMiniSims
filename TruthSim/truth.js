@@ -12,8 +12,33 @@ let globalTabContent; //if you are messing only with the current tab (not the he
 const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
 const globalRand = new SeededRandom(13);
 
+//the Witness doens't exist and neither do the arms except they clearly also do
 
 let globalDataObject = {
+  truthPerSecond: 100,
+  startedPlayingTimeCode: Date.now(),
+  numberKeys: 0,
+  keysBoughtFromCloser: 0,
+  allTimeTruthGivenToCloser: 0,
+  lastLoadTimeCode: 0,
+  totalTimeInMeatMode: 0,
+  lastSaveTimeCode: 0,
+  factsUnlocked: [],
+  truthCurrentValue: 0,
+  mazesBeaten: 0,
+  mazesTried: 0,
+  currentMaze: undefined, //what maze are you currently exploring (serialized)
+  storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
+  saveUnlocked: false,
+  mapInternalSeed: globalRand.internal_seed,
+  mazeUnlocked: false,
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, PARKERMINIGAME,EYEKILLERMINIGAME],
+  obviousHack: false, // :) :) ;)
+  allTimeTruthValue: 0, //truth but it never goes down
+  obsessionCurrentValue: 0,//lifetime  value for seconds in game
+};
+
+let globalDataObjectREAL = {
   truthPerSecond: 1,
   startedPlayingTimeCode: Date.now(),
   numberKeys: 0,
@@ -341,8 +366,6 @@ const renderMazeTab = () => {
     }
   }
 
-  allUnlocked = true;
-  console.log("JR NOTE: disable this hack")
 
 
   header.innerText += ` (${allBeaten ? "All" : numberBeaten} Rooms Beaten) ${allUnlocked ? "Maze Fully Explored!" : ""} `;
