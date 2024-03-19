@@ -423,9 +423,11 @@ class ParkerMiniGame extends MiniGame {
     startGame = (ele, room, callback) => {
         globalBGMusic.src = "audio/music/i_think_its_finished_priska_turbo_time.mp3";
         globalBGMusic.play();
+        ele.style.border = "3px solid #1f140d";
+        ele.style.backgroundColor = "#4e2c13";
 
         const body = document.querySelector("body")
-        const targetingReticule = createElementWithClassAndParent("img", body, "targeting-reticule");
+        const targetingReticule = createElementWithClassAndParent("img", ele, "targeting-reticule");
         targetingReticule.src = "images/ReticalForFriendLARGE.png"
 
         const syncTargetingReticule = (x, y) => {
@@ -439,18 +441,20 @@ class ParkerMiniGame extends MiniGame {
             console.log("JR NOTE: TODO pick a random blorbo (unless you hovered over them) and kill them (even if it wasn't time)");
 
         }
-        body.onmousedown = (event) => {
+        var rect = ele.getBoundingClientRect();
+
+        ele.onmousedown = (event) => {
             fire(event.pageX - 45, event.pageY - 45);
-            syncTargetingReticule(event.pageX - 45, event.pageY - 45);
+            syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45 - rect.top);
         };
 
-        body.onmouseup = (event) => {
+        ele.onmouseup = (event) => {
             targetingReticule.src = "images/ReticalForFriendLARGE.png"
-            syncTargetingReticule(event.pageX - 45, event.pageY - 45);
+            syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45-rect.top);
         };
 
-        body.onmousemove = (event) => {
-            syncTargetingReticule(event.pageX - 45, event.pageY - 45);
+        ele.onmousemove = (event) => {
+            syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45-rect.top);
         }
 
         let index = 0;

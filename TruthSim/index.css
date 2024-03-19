@@ -369,6 +369,7 @@ button img {
 
 .targeting-reticule{
   position: absolute;
+  pointer-events: none;
 }
 
 .meat-bg{
