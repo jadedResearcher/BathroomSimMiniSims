@@ -434,6 +434,7 @@ class ParkerMiniGame extends MiniGame {
         }
         body.onmousedown = (event) => {
             console.log("JR NOTE: TODO fire gun");
+            new Audio("audio/fx/404562__superphat__assaultrifle1.wav").play();
             targetingReticule.src = "images/ReticalForFriendFiredredLARGE.png"
 
             syncTargetingReticule(event.pageX-45, event.pageY-45);
@@ -456,7 +457,7 @@ class ParkerMiniGame extends MiniGame {
 
     render = (ele, room, callback) => {
         this.initializeRender(ele);
-        this.speed = 10 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
+        this.speed = 3 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
 
         const container = this.setupGameHeader(ele, room, callback, "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", `She goes off every ${this.speed} seconds!`, "images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
 
