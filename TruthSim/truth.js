@@ -65,6 +65,7 @@ let globalDataObjectREAL = {
 
 
 window.onload = () => {
+  alert("Be aware this is a Work In Progress :) :) :)")
   truthLog("Loading...", "Oh. It's you. ... I am glad you are here.")
   initThemes();
   initAllMiniGames();

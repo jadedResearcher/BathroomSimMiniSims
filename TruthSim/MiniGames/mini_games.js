@@ -432,22 +432,39 @@ class ParkerMiniGame extends MiniGame {
             targetingReticule.style.left = `${x}px`;
             targetingReticule.style.top = `${y}px`;
         }
-        body.onmousedown = (event) => {
-            console.log("JR NOTE: TODO fire gun");
-            new Audio("audio/fx/404562__superphat__assaultrifle1.wav").play();
-            targetingReticule.src = "images/ReticalForFriendFiredredLARGE.png"
 
-            syncTargetingReticule(event.pageX-45, event.pageY-45);
+        const fire = (x, y) => {
+            new Audio("audio/fx/404562__superphat__assaultrifle1.wav").play();
+            targetingReticule.src = "images/ReticalForFriendFiredredLARGE.png";
+            console.log("JR NOTE: TODO pick a random blorbo (unless you hovered over them) and kill them (even if it wasn't time)");
+
+        }
+        body.onmousedown = (event) => {
+            fire(event.pageX - 45, event.pageY - 45);
+            syncTargetingReticule(event.pageX - 45, event.pageY - 45);
         };
 
         body.onmouseup = (event) => {
             targetingReticule.src = "images/ReticalForFriendLARGE.png"
-            syncTargetingReticule(event.pageX-45, event.pageY-45);
+            syncTargetingReticule(event.pageX - 45, event.pageY - 45);
         };
 
         body.onmousemove = (event) => {
-            syncTargetingReticule(event.pageX-45, event.pageY-45);
+            syncTargetingReticule(event.pageX - 45, event.pageY - 45);
         }
+
+        let index = 0;
+        const tick = () => {
+            new Audio("audio/fx/dig.mp3").play();
+            index ++;
+            if (index >= this.speed) {
+                fire(0, 0);
+            } else {
+                setTimeout(tick, 1000); //once a second have a warning
+            }
+
+        }
+        setTimeout(tick, 1000); //once a second have a warning
 
 
 
@@ -457,7 +474,7 @@ class ParkerMiniGame extends MiniGame {
 
     render = (ele, room, callback) => {
         this.initializeRender(ele);
-        this.speed = 3 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
+        this.speed = 5 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
 
         const container = this.setupGameHeader(ele, room, callback, "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", `She goes off every ${this.speed} seconds!`, "images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
 
