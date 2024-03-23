@@ -382,6 +382,7 @@ button img {
 
 .target{
   display: inline-block;
+  background-size: cover;
 }
 
 .meat-bg::-webkit-scrollbar {
@@ -408,6 +409,26 @@ button img {
 
 }
 
+/*truth and alt are mimicking each other but truth is meat*/
+.truth-popup{
+  color: red;
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: fixed;
+  top: 10%;
+  left: 25%;
+  padding: 50px;
+  font-size: 14px;
+  background-color: black;
+  width: 50vw;
+  overflow-y: auto;
+  border: 3px solid red;
+  z-index: 4556;
+}
+
+/*alt*/
 .meat-popup{
   color: white;
   font-family: 'Courier New', Courier, monospace;

@@ -298,14 +298,13 @@ class MazeMiniGame extends MiniGame {
                 const leaveButton = createElementWithClassAndParent("button", popup, "meat-button");
                 leaveButton.innerHTML = "Return to the Regular Maze";
 
-                leaveButton.onclick = () => {
-                    alert("...");
+                leaveButton.onclick = async () => {
+                    await truthPopup("...","You will return to my Maze. Welcome back. I missed you.","Well. I suppose I appreciate you returning to me. But did you have to be so mean to my girlfriend?");
                     stop = true;
                     globalMeatGrowing = false;
                     popup.remove();
                     globalMeatMode = false;
                     cleanup();
-                    truthLog("...", "Well. I suppose I appreciate you returning to me. But did you have to be so mean to my girlfriend?")
                     callback(globalDataObject.currentMaze);
                     renderMazeTab();
                 }

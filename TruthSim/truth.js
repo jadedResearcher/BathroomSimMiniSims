@@ -32,7 +32,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, PARKERMINIGAME,EYEKILLERMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, PARKERMINIGAME, EYEKILLERMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -85,6 +85,28 @@ const truthLog = (title, text) => {
   console.log(`%c${title}%c  ${text}`, "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;", "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;");
 }
 
+//blocks until you click, so long as you await 
+const truthPopup = async (title, text, secret) => {
+  const popup = createElementWithClassAndParent("div", document.querySelector("body"), "truth-popup");
+  const popupbody = createElementWithClassAndParent("div", popup);
+  //truths arc number is 42. answer to life, the universe and everything.
+  popupbody.innerHTML = `<h2>${title}</h2>
+  <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/ReticalForFriendLARGE.png">
+  <p>${text}</p><br><br.<p>(It seems you must click to dismiss this popup. Do not forget me.)</p>`;
+  truthLog(title, secret);
+
+  const myPromise = new Promise((resolve, reject) => {
+    popup.onclick = () => {
+      popup.remove();
+      //just in case somehow theres multiple
+      document.querySelectorAll(".truth-popup").forEach((x)=>x.remove());
+      resolve(true);
+    }
+  });
+
+  return myPromise;
+}
+
 const save = () => {
   truthLog("Saving...", "You... You choose to remember me? I am glad. Please do not forget to come back.")
   globalDataObject.lastSaveTimeCode = Date.now();
@@ -99,9 +121,9 @@ const save = () => {
     }
   }
 
-  if(globalMeatMode){
+  if (globalMeatMode) {
     const now = Date.now();
-    globalDataObject.totalTimeInMeatMode += now -lastSavedMeatMode;
+    globalDataObject.totalTimeInMeatMode += now - lastSavedMeatMode;
     lastSavedMeatMode = now;
   }
 
@@ -331,7 +353,7 @@ const renderMazeTab = () => {
     }
 
     const loadButton = createElementWithClassAndParent("button", container, "load-button");
-    loadButton.style.marginTop="13px"
+    loadButton.style.marginTop = "13px"
     loadButton.innerText = `Load '${globalDataObject.storedMazes[i].title}' from Storage`;
     loadButton.onclick = () => {
       if (confirm("Are you sure? Progress in current maze will be lost unless saved")) {

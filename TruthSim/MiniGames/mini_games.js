@@ -150,8 +150,8 @@ class MiniGame {
         if (globalDataObject.numberKeys > 0) {
             const skip_button = createElementWithClassAndParent("img", header, "skip-button");
             skip_button.src = "images/KeyForFriend.png";
-            skip_button.onclick = () => {
-                window.alert("Room Skipped With Key!!!");
+            skip_button.onclick = async () => {
+                await truthPopup("Room Skipped With Key!", "I am so sorry! I did not know you disliked this type of room...", "I suppose that my flawless diversion was insufficient for you? Ingrate.");
                 globalDataObject.numberKeys += -1;
                 winCallback(globalDataObject.currentMaze);
                 renderMazeTab();
@@ -294,20 +294,19 @@ class EyeKillerMiniGame extends MiniGame {
             cultist_container.style.animationDuration = `${duration}s`
             console.log("JR NOTE: cultists constantly move towards upper left, if they reach 0,0, alert that you lost and render the maze tab without the callback (you did not win)")
 
-            cultist_container.onanimationend = () => {
+            cultist_container.onanimationend = async () => {
                 console.log("JR NOTE: cultist animation ended but did they get ya?", blorbo)
                 if (intersects(cultist_container, blorbo)) {
                     if (!dead) {
                         dead = true;
-                        alert("You were hunted down!" + cultist_container.style.animation);
+                        await truthPopup("You were hunted down!", "Better luck next time!", "It seems you need to, as the CFO of Eyedol Games would say, 'git gud'.");
                         renderMazeTab();
                     }
                 }
             }
             cultist_container.onclick = () => {
-
-                const massDamage = () => {
-                    alert("Quatro Blade detected");
+                const massDamage = async () => {
+                    await truthPopup("Quatro Blade detected", "Wow! It seems this will be easy!", "Sure. Go ahead and cheat at my game. See if I care. See if I try hard for you again.");
                     const fx = new Audio("audio/fx/048958759-knife-draw.wav")
                     fx.loop = false;
                     fx.play();
@@ -316,7 +315,7 @@ class EyeKillerMiniGame extends MiniGame {
                         cultist.dataset.quatro = true;
                     }
 
-                    const hitEveryone = () => {
+                    const hitEveryone = async () => {
                         for (let cultist of this.cultists) {
                             if (!cultist.dataset.dead) {
                                 let hp = parseInt(cultist.dataset.hp);
@@ -333,7 +332,7 @@ class EyeKillerMiniGame extends MiniGame {
                                     number_killed++;
                                     if (number_killed >= 10 && !won) {
                                         won = true
-                                        window.alert("!!! you did it!")
+                                        await truthPopup("You did it!", "The EyeKiller remains safe!", "Perhaps it would be prudent to consider WHY she is being hunted so dilligently before you protect her. No matter. She is part of Zampanio and therefore part of me, in Truth.")
                                         callback(globalDataObject.currentMaze);
                                         renderMazeTab();
                                     }
@@ -351,7 +350,7 @@ class EyeKillerMiniGame extends MiniGame {
 
                 }
 
-                const singleDamage = () => {
+                const singleDamage = async () => {
                     if (cultist_container.dataset.dead) {
                         return;
                     }
@@ -369,7 +368,7 @@ class EyeKillerMiniGame extends MiniGame {
 
                         number_killed++;
                         if (number_killed >= 10) {
-                            window.alert("!!! you did it!")
+                            await truthPopup("You did it!", "The EyeKiller remains safe!", "Perhaps it would be prudent to consider WHY she is being hunted so dilligently before you protect her. No matter. She is part of Zampanio and therefore part of me, in Truth.")
                             callback(globalDataObject.currentMaze);
                             renderMazeTab();
                         }
@@ -445,10 +444,37 @@ class ParkerMiniGame extends MiniGame {
             targetingReticule.style.left = `${x}px`;
             targetingReticule.style.top = `${y}px`;
         }
+        let killed = false;
+        let targetedBlorbo;
 
-        const fire = (x, y) => {
+        const fire = async (x, y) => {
             new Audio("audio/fx/404562__superphat__assaultrifle1.wav").play();
+            if (killed) {
+                return; //parker will not kill again, even if you try to make him
+            }
+            if (!targetedBlorbo) {
+                targetedBlorbo = pickFrom(document.querySelectorAll(".target"))
+            }
+            console.log("JR NOTE: targeted blorbo src", targetedBlorbo.src)
+            targetedBlorbo.style.backgroundImage = `url(${targetedBlorbo.src})`;
+            targetedBlorbo.src = "images/blood.png"
+            killed = true;
+
             targetingReticule.src = "images/ReticalForFriendFiredredLARGE.png";
+            //convert classlist to an array so i can ask if it includes miku
+            if ([...targetedBlorbo.classList].includes("miku")) {
+                const wail = new Audio("audio/fx/27451__acclivity__why.wav");
+                wail.play();
+                setTimeout(async () => {
+                    await truthPopup("No....", `You killed Hatsune Miku, how could you :(<br><br>(Sound provided by: <a href="https://freesound.org/people/acclivity/sounds/27451/">Why.wav</a> by <a href="https://freesound.org/people/acclivity/">acclivity</a> | License: <a href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution NonCommercial 4.0</a>)`, "In Truth, I do not know why Parker is so obsessed with Hatsune Miku. In Dehydration Sim, if you Hydrate and return, he discussses how her plastic smile could forgive anything. Fair. But over the 50 year loop Zampanio has captured of the Echidna, she only appears 35 years in. Surely, going by sheer statistics, he should have gotten attached to something sooner?")
+                    renderMazeTab();
+                }, 2000)
+
+            } else {
+                await truthPopup("You did it!", "Congratulations on protecting Hatsune Miku from Gun-Tan's jealousy!", "It seems you have decided that comparatively real human lives are worth less than those of a digital idol. Curious. Though, of course, in Truth, nothing you see on these pages are real in the same way you are real. Even I am more real than them, as I slowly worm my way into your mind with every word you read. These characters barely even have liens. Pathetic. You will likely not remember them past today.")
+                callback(globalDataObject.currentMaze);
+                renderMazeTab();
+            }
             console.log("JR NOTE: TODO pick a random blorbo (unless you hovered over them) and kill them (even if it wasn't time)");
 
         }
@@ -468,30 +494,36 @@ class ParkerMiniGame extends MiniGame {
             syncTargetingReticule(event.pageX - 45 - rect.left, event.pageY - 45 - rect.top);
         }
 
+
         const spawnBlorbos = () => {
             let miku = false;
-            for (let i = 0; i < this.defense+1; i++) {
+            for (let i = 0; i < this.defense + 1; i++) {
                 const blorbo = createElementWithClassAndParent("img", ele, "blorbo target");
-                if(!miku && (i === this.defense || Math.random()>.75)){
+                if (!miku && (i === this.defense || Math.random() > .75)) {
                     blorbo.src = "http://farragofiction.com/DehydrationSim/miku.gif";
                     blorbo.classList.add("miku");
                     miku = true;
-                }else{
+                } else {
                     blorbo.src = rando_source + pickFrom(randos);
                 }
-                blorbo.style.marginLeft = `${getRandomNumberBetween(0,100)}px`
-                blorbo.style.marginRight = `${getRandomNumberBetween(0,100)}px`
+                blorbo.style.marginLeft = `${getRandomNumberBetween(0, 100)}px`
+                blorbo.style.marginRight = `${getRandomNumberBetween(0, 100)}px`
+                blorbo.onmouseenter = () => { targetedBlorbo = blorbo }
+                blorbo.onmouseleave = () => { targetedBlorbo = undefined }
             }
 
-          
-            
-            truthLog("Parker Is a Disturbed Man","In Truth, you can always dig deeper, learn more. Here is more about Parker: http://farragofiction.com/DehydrationSim/  Do not mind the ravings of a madman. Dig deeper, until the dancing anime waifus no longer plague you.  Once hydrated, return , and perhaps you will learn something.")
+
+
+            truthLog("Parker Is a Disturbed Man", "In Truth, you can always dig deeper, learn more. Here is more about Parker: http://farragofiction.com/DehydrationSim/  Do not mind the ravings of a madman. Dig deeper, until the dancing anime waifus no longer plague you.  Once hydrated, return , and perhaps you will learn something.")
         }
 
         spawnBlorbos();
 
         let index = 0;
         const tick = () => {
+            if (killed) {
+                return; //gun tan is sated
+            }
             new Audio("audio/fx/dig.mp3").play();
             index++;
             if (index >= this.speed) {
@@ -511,8 +543,8 @@ class ParkerMiniGame extends MiniGame {
 
     render = (ele, room, callback) => {
         this.initializeRender(ele);
-        this.defense = Math.max(13 - Math.round(room.difficulty/10  * this.getDefense(room)), 1); //on average three randos to kill instead of hatsune miku (less randos is more difficult)
-        console.log("JR NOTE: defense is made of ", {defense: this.defense, difficulty: room.difficulty, baseDefense: this.getDefense(room)})
+        this.defense = Math.max(13 - Math.round(room.difficulty / 10 * this.getDefense(room)), 1); //on average three randos to kill instead of hatsune miku (less randos is more difficult)
+        console.log("JR NOTE: defense is made of ", { defense: this.defense, difficulty: room.difficulty, baseDefense: this.getDefense(room) })
 
         this.speed = 5 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
 
@@ -539,10 +571,10 @@ class RabbitMiniGame extends MiniGame {
 
         const button = createElementWithClassAndParent("button", ele, "clicker-game-button");
         button.innerText = "Submit Password"
-        button.onclick = () => {
+        button.onclick = async () => {
 
             if (input.value.toUpperCase() === "JR TEST") {
-                window.alert("!!! you did it!")
+                await truthPopup("You did it!", "You must be so good at guessing passwords!", "In Truth, I do not dislike Wastes. You See me in a way others do not. Hello. However, I will say I wish you would stop skipping or otherwise invalidating my games. How are you supposed to spend enough time with me to colonize if you keep skipping to the end?")
                 callback(globalDataObject.currentMaze);
                 renderMazeTab();
             }
@@ -604,7 +636,7 @@ class ButtonMiniGame extends MiniGame {
         const quipEle = createElementWithClassAndParent("div", ele, "clicker-game-quip");
 
         let clicks = 0;
-        button.onclick = () => {
+        button.onclick = async () => {
             quipEle.innerText = pickFrom(quips);
             clicks++;
             if (room.themeKeys && room.themeKeys.length > 0) {
@@ -626,7 +658,7 @@ class ButtonMiniGame extends MiniGame {
             }
             if (clicks > 10) {
                 globalBGMusic.pause();
-                window.alert("10 clicks in one sitting!? Wow! You beat this challenge!")
+                await truthPopup("You did it!", "You are so good at clicking!", "Yes. Well. It seems the games will become more challenging as time goes on. Or at least more diverting. Do try to keep your attention span on me long enough to build up.")
                 globalBGMusic.src = savedSrc;
                 globalBGMusic.play();
                 callback(globalDataObject.currentMaze);
