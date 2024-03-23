@@ -35,7 +35,6 @@
     <h1>IMPORTANT: VERY SIMPLE GRAPHICS, ALL CSS/HTML/ascii</h1>
     <h1>TODO: core loop</h1>
     <ul>
-      <li>figure out why sometimes single room mazes</li>
 
       <li>on friday and midnight: * force refresh page
       * disable saving
@@ -43,83 +42,14 @@
     </li>
     <li>confessional</li>
       <li>after store and confessional unlocks, new room for RESETTING THE LOOP (all your save data besides obsessionCurrentValue and dates gets erased) (refactor truth per second in maze rewards to be multiplied by factor of obsessionCurrentValue, not scaling on its own)</li>
-      <li>devona room that lets you read fact lore (part of two doors lie and truth?)</li> 
-      <li>clear up hacked initial save day, play with scaling</li> 
-       <li></li>
+      <li>devona room that lets you read fact lore </li> 
+       <li>cfo gamer store</li>
       <li>mini games :) :) :) (whatever takes my fancy, use guide and friend sprites)</li>
       <li>ability to delete save</li>
       <li>opening quiz that claims its going to make a game entirely personalized for you (its lying) (throw it out)
       </li>
     </ul>
-
-    <h1>
-      NEXT TODO:</h1>
-
-      <ul>
-        <li> * after beating one maze, unlock eye killer clicking mini game (damage you do is based on truth multiplier)
-          (speed and hp and number of cultsists is based on all time truth plus theme attack/defense)
-        </li>
-        <li>* implement fact system, first fact that will exist is "The Quatro Blade can creates wounds that can not be
-          percieved." (killing and obfuscation themed)
-        </li>
-        <li>* after beating two mazes unlock above fact
-        </li>
-        <li>* each room view has, in the upper left, a drop down that lets you assign a single fact to it (adds
-          temporary themes to the room, and alteres it in other ways) (need to have an "init" that all minigames call OR
-          have maze view take care of that before letting the mini game render (basically rerender mini game but now
-          with fact))
-        </li>
-        <li>* if a fact with the words "Quatro Blade" are given to the eye killer mini game, each click does its
-          per-click damage over time to EVERYTHING on screen (much easier)
-        </li>
-        <li>* tab for showing what FACTS you have
-        </li>
-        <li>* add damage and defense multiplier for each theme (for example guiding is highly defensive), useful to
-          modify the eye killer mini game in procedural ways
-        </li>
-        <li>* another fact: "the eye killer has the quatro blade" theme is killing and time
-        </li>
-        <li>parker mini game, every 13 seconds your gun goes off. if you don't have it over a target, it'll pick one at random. don't kill hatsune miku</li>
-
-        <li>* finally do the shop tab where the closer sells exponentially more expensive facts (but what facts they are
-          are random per maze)
-      </ul>
     
-
-    <h1>TODO: objects</h1>
-    <ul>
-      <li>FACT
-        <ul>
-          <li>TITLE</li>
-          <li>lore_snippet</li>
-          <li>mini game key (each fact appears in only one mini game type)</li>
-          <li>theme_key_array</li>
-          <li>damage (only some rooms use)</li>
-          <li>defense (only some rooms use)</li>
-          <li>is_viral (if you give it to a room will it spread)</li>
-        </ul>
-      <li>ROOM</li>
-      <ul>
-        <li>knows how to render itself (change TINT based on assigned fact themes) and runs a lil mini game</li>
-        <li>special rooms are bespoke (rabbit, shop, blorbos, etc)</li>
-        <li>ProceduralRooms are entirely procedural (combat, tiny minigames)</li>
-        <li>most of maze is procedural rooms</li>
-        <li>knows unlock level (number between 0 and number of child rooms)</li>
-        <li>list of facts currently assigned to room</li>
-        <li>each time you beat the mini game, unlocks one new room from it till fully unlocked</li>
-        <li>can ALWAYS play the mini game, but for each unlock level can choose to move on N,S or E (i.e. you beat it
-          once you can go north, if you beat it twice can go north or south ) (obviously only if it HAS those directions
-          as non dead ends)</li>
-        <li>Button to ASSIGN A FACT from your inventory to this room, which will alter it based on themes or title
-          (removes it from inventory and instead stores it in this room) </li>
-        <li>button to take a fact currently assigned to the room and put in your inventory instead</li>
-        <li>has list of 0-3 rooms it adds to the unlocked pool on unlock (and are its exits) (random which is mapped to
-          which exit tho)</li>
-        <li>some rooms only care about SPECIFIC facts being assigned to them (like closer being wiggler eater)</li>
-        <li>some rooms respond to a handful of themes in new ways (like lonely plus religion)</li>
-        <li>others have tiny little changes that can happen based on ANY theme you give it (tyfings combat alters what
-          enemies based on themes) (defeating a specific enemy for the first time might drop a new fact)</li>
-      </ul>
 
       </li>
     </ul>
@@ -160,7 +90,6 @@
       <li>help witherby run a confessional</li>
       <li>dog training mini game with Rava</li>
       <li>vik lets you forget any room type you want, for a price (if you mouse over vik the room erases itself and replaces itself with a generic button room)</li>
-      <li>parker mini game, every 13 seconds your gun goes off. if you don't have it over a target, it'll pick one at random. don't kill hatsune miku</li>
       <li>yongki mini game: collect the snails (if you accidentally click more than once on a snail before it finishes
         its animation it explodes into blood), mini game ends</li>
       <li>captain mini game: keep your face from changing and making you weird (use grid based glitch animation from
@@ -172,12 +101,7 @@
       <li>k mini game, he just info dumps to you about himself and pays you for it (exposition booth)</li>
     </ul>
 
-    <li>eye killer mini game fps like LOMAT hunting mini game (slashing sound, and blood, you're hunting cultists but
-      they get closer and closer, hunting you) (how
-      much damage you do is based on how much candy you have, unless you apply Quatro Blade fact which kills everything
-      in one click)</li>
     <ul>
-      <li>facts shop run by the Closer/Shop Keeper (buy any item to progress)</li>
       <li>points shopw run by Flower Chick/ Gamer </li>
       <ul>
         <li>put points store in truth sim</li>

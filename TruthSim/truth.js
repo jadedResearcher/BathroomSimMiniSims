@@ -32,7 +32,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, PARKERMINIGAME, EYEKILLERMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game

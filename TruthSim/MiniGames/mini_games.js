@@ -22,6 +22,7 @@ const PARKERMINIGAME = "GUN";
 //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
 const rooms_to_unlock = {
     1: EYEKILLERMINIGAME,
+    2: PARKERMINIGAME,
     10: MAZEMINIGAME
 };
 
