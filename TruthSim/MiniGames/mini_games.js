@@ -419,6 +419,13 @@ class ParkerMiniGame extends MiniGame {
         super(PARKERMINIGAME);
     }
 
+    thinkingOfBestie = () => {
+        if (this.fact && this.fact.title.toUpperCase().includes("BESTIE")) {
+            return true;
+        }
+        return false;
+    }
+
     startGame = async (ele, room, callback) => {
         globalBGMusic.src = "audio/music/i_think_its_finished_priska_turbo_time.mp3";
         globalBGMusic.play();
@@ -452,26 +459,43 @@ class ParkerMiniGame extends MiniGame {
             if (killed) {
                 return; //parker will not kill again, even if you try to make him
             }
-            if (!targetedBlorbo) {
+            if (!targetedBlorbo && !this.thinkingOfBestie()) { //can shoot at nothing if bestie is in your thoughts
                 targetedBlorbo = pickFrom(document.querySelectorAll(".target"))
             }
-            console.log("JR NOTE: targeted blorbo src", targetedBlorbo.src)
-            targetedBlorbo.style.backgroundImage = `url(${targetedBlorbo.src})`;
-            targetedBlorbo.src = "images/blood.png"
+            if (targetedBlorbo) {//might not be one if bestie
+                targetedBlorbo.style.backgroundImage = `url(${targetedBlorbo.src})`;
+                targetedBlorbo.src = "images/blood.png"
+            }
             killed = true;
 
             targetingReticule.src = "images/ReticalForFriendFiredredLARGE.png";
             //convert classlist to an array so i can ask if it includes miku
-            if ([...targetedBlorbo.classList].includes("miku")) {
+            if (targetedBlorbo && [...targetedBlorbo?.classList].includes("miku")) {
+                /*
+                this
+                may be
+                the most evil thing i have ever done
+                gonna make a quick video screenshot then add the bestie variation
+                i feel genuinely mildly guilty for what parker is going through
+                but he's BEEN going through this the whole time
+                this is just the first time i've had to Face The Truth of it
+                */
                 const wail = new Audio("audio/fx/27451__acclivity__why.wav");
                 wail.play();
+
                 setTimeout(async () => {
                     await truthPopup("No....", `You killed Hatsune Miku, how could you :(<br><br>(Sound provided by: <a href="https://freesound.org/people/acclivity/sounds/27451/">Why.wav</a> by <a href="https://freesound.org/people/acclivity/">acclivity</a> | License: <a href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution NonCommercial 4.0</a>)`, "In Truth, I do not know why Parker is so obsessed with Hatsune Miku. In Dehydration Sim, if you Hydrate and return, he discussses how her plastic smile could forgive anything. Fair. But over the 50 year loop Zampanio has captured of the Echidna, she only appears 35 years in. Surely, going by sheer statistics, he should have gotten attached to something sooner?")
                     renderMazeTab();
                 }, 2000)
 
             } else {
-                await truthPopup("You did it!", "Congratulations on protecting Hatsune Miku from Gun-Tan's jealousy!", "It seems you have decided that comparatively real human lives are worth less than those of a digital idol. Curious. Though, of course, in Truth, nothing you see on these pages are real in the same way you are real. Even I am more real than them, as I slowly worm my way into your mind with every word you read. These characters barely even have liens. Pathetic. You will likely not remember them past today.")
+                if(targetedBlorbo){
+                    await truthPopup("You did it!", "Congratulations on protecting Hatsune Miku from Gun-Tan's jealousy!", "It seems you have decided that comparatively real human lives are worth less than those of a digital idol. Curious. Though, of course, in Truth, nothing you see on these pages are real in the same way you are real. Even I am more real than them, as I slowly worm my way into your mind with every word you read. These characters barely even have liens. Pathetic. You will likely not remember them past today.")
+
+                }else{
+                    await truthPopup("You did it!", "...", "In Truth, JR felt guilty at how much Parker suffers because of Gun-Tan. He is not aware of Homestuck (perhaps thankfully), but if he were, he might describe Vik as his Moirail. Certainly they calm each other down and help each other navigate their disabilities. Though I doubt many people would argue they are GOOD for each other, they are certainly the least bad people in each others lives.")
+
+                }
                 callback(globalDataObject.currentMaze);
                 renderMazeTab();
             }
@@ -513,13 +537,13 @@ class ParkerMiniGame extends MiniGame {
             }
 
 
-
             truthLog("Parker Is a Disturbed Man", "In Truth, you can always dig deeper, learn more. Here is more about Parker: http://farragofiction.com/DehydrationSim/  Do not mind the ravings of a madman. Dig deeper, until the dancing anime waifus no longer plague you.  Once hydrated, return , and perhaps you will learn something.")
         }
 
         spawnBlorbos();
 
         let index = 0;
+
         const tick = () => {
             if (killed) {
                 return; //gun tan is sated
@@ -533,7 +557,9 @@ class ParkerMiniGame extends MiniGame {
             }
 
         }
-        setTimeout(tick, 1000); //once a second have a warning
+        if (!this.thinkingOfBestie()) { //gun tan is quiet around bestie
+            setTimeout(tick, 1000); //once a second have a warning
+        }
 
 
 
@@ -544,11 +570,11 @@ class ParkerMiniGame extends MiniGame {
     render = (ele, room, callback) => {
         this.initializeRender(ele);
         this.defense = Math.max(13 - Math.round(room.difficulty / 10 * this.getDefense(room)), 1); //on average three randos to kill instead of hatsune miku (less randos is more difficult)
-        console.log("JR NOTE: defense is made of ", { defense: this.defense, difficulty: room.difficulty, baseDefense: this.getDefense(room) })
 
         this.speed = 5 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
+        const alt = this.thinkingOfBestie();
 
-        const container = this.setupGameHeader(ele, room, callback, "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", `She goes off every ${this.speed} seconds! There are ${this.defense} valid targets!`, "images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
+        const container = this.setupGameHeader(ele, room, callback, alt ? "Bestie is so great :)" : "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", alt ? "Shoot whenever you feel like :)" : `She goes off every ${this.speed} seconds! There are ${this.defense} valid targets!`, alt?"images/Parker_pixel_by_the_guide_with_bestie.png":"images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
 
     }
 }
