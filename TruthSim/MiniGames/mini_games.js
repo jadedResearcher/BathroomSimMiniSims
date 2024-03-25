@@ -15,6 +15,7 @@ const RABBITMINIGAME = "RABBIT";
 const BUTTONMINIGAME = "BUTTON";
 const CONFESSIONMINIGAME = "CONFESSION";
 const SHOPMINIGAME = "SHOP";
+const GAMERSHOPMINIGAME = "POINTS STORE";
 const LAUNDRYMINIGAME = "LAUNDRY";
 const MAZEMINIGAME = "MAZE";
 const PARKERMINIGAME = "GUN";
@@ -23,13 +24,14 @@ const PARKERMINIGAME = "GUN";
 const rooms_to_unlock = {
     1: EYEKILLERMINIGAME,
     2: PARKERMINIGAME,
+    3: GAMERSHOPMINIGAME,
     10: MAZEMINIGAME
 };
 
 
 
 //half as common as other rooms
-const rareMiniGames = [EYEKILLERMINIGAME];
+const rareMiniGames = [EYEKILLERMINIGAME, GAMERSHOPMINIGAME];
 
 //max of once per maze
 const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME];
@@ -472,6 +474,8 @@ class ParkerMiniGame extends MiniGame {
             targetingReticule.src = "images/ReticalForFriendFiredredLARGE.png";
             //convert classlist to an array so i can ask if it includes miku
             if (targetedBlorbo && [...targetedBlorbo?.classList].includes("miku")) {
+                targetedBlorbo.src = "images/DeadMikuForFriend.png";
+
                 /*
                 this
                 may be
@@ -525,7 +529,7 @@ class ParkerMiniGame extends MiniGame {
             for (let i = 0; i < this.defense + 1; i++) {
                 const blorbo = createElementWithClassAndParent("img", ele, "blorbo target");
                 if (!miku && (i === this.defense || Math.random() > .75)) {
-                    blorbo.src = "http://farragofiction.com/DehydrationSim/miku.gif";
+                    blorbo.src = "images/MikuForFriend.png";
                     blorbo.classList.add("miku");
                     miku = true;
                 } else {
