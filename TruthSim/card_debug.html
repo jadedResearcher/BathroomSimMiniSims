@@ -1,0 +1,36 @@
+<html language="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Wait. Have you been here before?">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Card Debug</title>
+  <script src="utils.js"></script>
+  <script src="canvas_utils.js"></script>
+  <script src="data.js"></script>
+  <script src="card_engine.js"></script>
+
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="card-engine.css">
+
+<script>
+    let deck;
+
+  window.onload = ()=>{
+     deck = createDeckFromSource("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/cards/8Bit/")
+     deck.renderDebug(document.querySelector("#container"));
+  }
+</script>
+
+
+</head>
+
+<body>
+  <div id="container">
+
+  
+  </div>
+</body>
+
+</html>

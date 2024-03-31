@@ -1,7 +1,9 @@
 /*
-very lore heavy, just lil cutscenes of characters confession to witherby
-need to find that confession fic IC wrote and feed on it
+Closer has a store where you trade truth for facts, keys and maybe even rooms.
 
+And the CFO/FlowerChick/Gamer has a store where the more you spend with the closer
+ the more points/TrustCoin you earn and the more you level up 
+ in order to get fabulous prizes and bees
 
 */
 
@@ -12,7 +14,28 @@ const getFruit = async()=>{
     fruit = await getImages(fruit_source);
 }
 
+/*
 
+*/
+//https://www.youtube.com/playlist?list=PLKcFg5LoVMv6PNU4ImcXL7tJzA3BGHkNp from soup
+class GamerPointsStoreMiniGame extends MiniGame{
+    constructor() {
+        super(GAMERSHOPMINIGAME);
+    }
+
+    startGame = (ele, room, callback) => {
+        window.alert("JR NOTE: TODO");
+    }
+
+    render = (ele, room, callback) => {
+
+        //there is no way to beat this one without a keyz
+        this.initializeRender(ele);
+        const container = this.setupGameHeader(ele, room, callback, "Points Store with The CFO Of Eyedol Games!", undefined, "images/flower_chick_by_the_guide.png")
+
+    }
+
+}
 
 class ShopMiniGame extends MiniGame {
     constructor() {
