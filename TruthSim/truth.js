@@ -32,7 +32,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, GAMERSHOPMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, HOONMINIGAME, GAMERSHOPMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -62,14 +62,30 @@ let globalDataObjectREAL = {
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
 };
 
+const debugMode = (game)=>{
+  if(globalMiniGames[game]){
+    globalMiniGames[game].render(document.querySelector("body"),this, ()=>{alert("you did it!")});
+  }else{
+    alert("NO MINI GAME FOUND CALLED " + game + " ARE YOU SURE YOURE WASTING RIGHT???");
+    console.log("JR NOTE: game was", game, "and globalMiniGAmes is", globalMiniGames)
+  }
 
+}
 
 window.onload = () => {
-  alert("Be aware this is a Work In Progress :) :) :)")
-  truthLog("Loading...", "Oh. It's you. ... I am glad you are here.")
+
   initThemes();
   initAllMiniGames();
   load();
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  debugMiniGame = urlParams.get('debugMiniGame');
+  if(debugMiniGame){
+    debugMode(debugMiniGame);
+    return;
+  }
+  alert("Be aware this is a Work In Progress :) :) :)")
+  truthLog("Loading...", "Oh. It's you. ... I am glad you are here.")
   const button = document.querySelector("#entry-button");
   globalContainer = document.querySelector("#container");
   button.onclick = () => {

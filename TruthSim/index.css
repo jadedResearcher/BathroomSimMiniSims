@@ -385,6 +385,16 @@ button img {
   background-size: cover;
 }
 
+.high-or-low-card{
+  width: 100px;
+}
+
+.centered{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .meat-bg::-webkit-scrollbar {
   width: 5px;
   height: 5px;

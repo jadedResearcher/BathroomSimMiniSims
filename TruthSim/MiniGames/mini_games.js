@@ -19,12 +19,14 @@ const GAMERSHOPMINIGAME = "POINTS STORE";
 const LAUNDRYMINIGAME = "LAUNDRY";
 const MAZEMINIGAME = "MAZE";
 const PARKERMINIGAME = "GUN";
+const HOONMINIGAME = "BETTING";
 
 //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
 const rooms_to_unlock = {
     1: EYEKILLERMINIGAME,
     2: PARKERMINIGAME,
-    3: GAMERSHOPMINIGAME,
+    3: HOONMINIGAME,
+    5: GAMERSHOPMINIGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
@@ -48,6 +50,7 @@ const initAllMiniGames = () => {
     new ShopMiniGame();
     new MazeMiniGame();
     new GamerPointsStoreMiniGame();
+    new BettingMiniGame();
 }
 
 // is for Alt
@@ -584,6 +587,67 @@ class ParkerMiniGame extends MiniGame {
         const alt = this.thinkingOfBestie();
 
         const container = this.setupGameHeader(ele, room, callback, alt ? "Bestie is so great :)" : "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", alt ? "Shoot whenever you feel like :)" : `She goes off every ${this.speed} seconds! There are ${this.defense} valid targets!`, alt?"images/Parker_pixel_by_the_guide_with_bestie.png":"images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
+
+    }
+}
+
+
+
+/*
+GUESS WHETHER ITS HIGH OR LOW BUT BE CAREFUL IF YOU GET TOO GREEDY
+YOU MIGHT START SEEMING...MONSTROUS
+*/
+
+class BettingMiniGame extends MiniGame {
+    constructor() {
+        super(HOONMINIGAME);
+    }
+
+    startGame = (ele, room, callback) => {
+        const radio = createElementWithClassAndParent("img",ele, "radio-happy");
+        radio.src="images/radioForFriend.gif";
+        radio.style.width = "50px";
+        radio.style.position="absolute";
+        radio.style.top = "-45px";
+        radio.style.left="15px"
+        const deck = createDeckFromSource("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/cards/8Bit/")
+        
+        const bettingContainer = createElementWithClassAndParent("div", ele);
+        bettingContainer.style.width = "225px";
+        bettingContainer.style.marginLeft = "auto";
+        bettingContainer.style.marginRight = "auto";
+
+
+        const secondaryHeader = createElementWithClassAndParent("div", bettingContainer, "secondary-header");
+        secondaryHeader.innerText = "Will the next card drawn be higher or lower?"
+        secondaryHeader.style.textAlign="center";
+        secondaryHeader.style.marginBottom="25px";
+
+        const chosenCard = pickFrom(deck.all_cards);
+
+        const cardEle = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
+        cardEle.src = chosenCard.src;
+
+        const buttonContainer = createElementWithClassAndParent("div", bettingContainer);
+        buttonContainer.style.display="flex";
+        buttonContainer.style.justifyContent = "space-between"
+        buttonContainer.style.marginTop = "25px";
+
+        const lowerButton = createElementWithClassAndParent("button", buttonContainer);
+        lowerButton.innerText = "LOWER"
+
+        const higherButton = createElementWithClassAndParent("button", buttonContainer);
+        higherButton.innerText = "HIGHER"
+
+        
+
+
+    }
+
+    render = (ele, room, callback) => {
+        this.initializeRender(ele);
+
+        const container = this.setupGameHeader(ele, room, callback, "How Much Are You Willing To Risk", "(but be careful, obsession is a dangerous thing)", "images/Hoon_by_guide.png")
 
     }
 }
