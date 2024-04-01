@@ -2,6 +2,7 @@
 more complex mini games will get their own file, especially if they need maintenence and debugging
 but as much as possible keep all in this one file
 */
+//debug with ?debugMiniGame=BETTING or whatever the key is
 
 //each mini game is a singleton that handles adding itself to this map and knows what its own key is
 const globalMiniGames = {
@@ -9,13 +10,14 @@ const globalMiniGames = {
 }
 
 //CONSTANTS
+//debug with ?debugMiniGame=BETTING or whatever the key is
 const EYEKILLERMINIGAME = "EYEKILLER";
 const LOCKEDMINIGAME = "LOCKED";
 const RABBITMINIGAME = "RABBIT";
 const BUTTONMINIGAME = "BUTTON";
 const CONFESSIONMINIGAME = "CONFESSION";
 const SHOPMINIGAME = "SHOP";
-const GAMERSHOPMINIGAME = "POINTS STORE";
+const GAMERSHOPMINIGAME = "POINTS";
 const LAUNDRYMINIGAME = "LAUNDRY";
 const MAZEMINIGAME = "MAZE";
 const PARKERMINIGAME = "GUN";
@@ -623,10 +625,15 @@ class BettingMiniGame extends MiniGame {
         secondaryHeader.style.textAlign="center";
         secondaryHeader.style.marginBottom="25px";
 
-        const chosenCard = pickFrom(deck.all_cards);
+        let currentCard = pickFrom(deck.all_cards);
+        let nextCard = pickFrom(deck.all_cards);
+
 
         const cardEle = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
-        cardEle.src = chosenCard.src;
+        cardEle.src = currentCard.src;
+
+        const cardEle2 = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
+        cardEle2.src = deck.cardBackSrc;
 
         const buttonContainer = createElementWithClassAndParent("div", bettingContainer);
         buttonContainer.style.display="flex";
@@ -636,10 +643,40 @@ class BettingMiniGame extends MiniGame {
         const lowerButton = createElementWithClassAndParent("button", buttonContainer);
         lowerButton.innerText = "LOWER"
 
+        const youLose = ()=>{
+            alert('you lose')
+        }
+
+        const youWin = ()=>{
+            alert('you win')
+        }
+
+        lowerButton.onclick = async ()=>{
+            secondaryHeader.innerText = "You guessed: Lower!";
+
+            cardEle2.src = nextCard.src;
+            await sleep(100)
+            if(nextCard.value < currentCard.value){
+                youWin();
+            }else{ //if its a tie you lose no matter what
+                youLose();
+            }
+        }
+
         const higherButton = createElementWithClassAndParent("button", buttonContainer);
         higherButton.innerText = "HIGHER"
 
-        
+        higherButton.onclick = async()=>{
+            secondaryHeader.innerText = "You guessed: Higher!";
+            cardEle2.src = nextCard.src;
+            await sleep(100)
+
+            if(nextCard.value > currentCard.value){
+                youWin();
+            }else{ //if its a tie you lose no matter what
+                youLose();
+            }
+        }
 
 
     }
