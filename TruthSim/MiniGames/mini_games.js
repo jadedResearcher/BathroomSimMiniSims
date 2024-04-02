@@ -612,71 +612,144 @@ class BettingMiniGame extends MiniGame {
         radio.style.position="absolute";
         radio.style.top = "-45px";
         radio.style.left="15px"
-        const deck = createDeckFromSource("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/cards/8Bit/")
-        
+
         const bettingContainer = createElementWithClassAndParent("div", ele);
         bettingContainer.style.width = "225px";
         bettingContainer.style.marginLeft = "auto";
         bettingContainer.style.marginRight = "auto";
 
-
-        const secondaryHeader = createElementWithClassAndParent("div", bettingContainer, "secondary-header");
-        secondaryHeader.innerText = "Will the next card drawn be higher or lower?"
-        secondaryHeader.style.textAlign="center";
-        secondaryHeader.style.marginBottom="25px";
-
-        let currentCard = pickFrom(deck.all_cards);
-        let nextCard = pickFrom(deck.all_cards);
+        const bettingLabel = createElementWithClassAndParent("label", bettingContainer);
+        bettingLabel.innerText = "How much Truth will you bet?";
+        bettingLabel.style.marginBottom="13px"
+        bettingLabel.style.display="block"
 
 
-        const cardEle = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
-        cardEle.src = currentCard.src;
+        const bettingInput = createElementWithClassAndParent("input", bettingContainer);
+        bettingInput.type="number";
+        bettingInput.max = globalDataObject.truthCurrentValue;
+        bettingInput.style.display="block"
+        bettingInput.style.marginBottom="13px"
 
-        const cardEle2 = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
-        cardEle2.src = deck.cardBackSrc;
+        const bettingButton = createElementWithClassAndParent("button", bettingContainer);
+        bettingButton.innerText = "Bet.";
+        const winRate = 2.0;
+        bettingButton.onclick = ()=>{
+            const bet = Math.min(Math.ceil(globalDataObject.truthCurrentValue/2),parseInt(bettingInput.value));
+            let winnings =  bet * winRate;
+            const h1 = document.querySelector("h1");
+            const betLabel = createElementWithClassAndParent("div",h1);
+            
 
-        const buttonContainer = createElementWithClassAndParent("div", bettingContainer);
-        buttonContainer.style.display="flex";
-        buttonContainer.style.justifyContent = "space-between"
-        buttonContainer.style.marginTop = "25px";
-
-        const lowerButton = createElementWithClassAndParent("button", buttonContainer);
-        lowerButton.innerText = "LOWER"
-
-        const youLose = ()=>{
-            alert('you lose')
-        }
-
-        const youWin = ()=>{
-            alert('you win')
-        }
-
-        lowerButton.onclick = async ()=>{
-            secondaryHeader.innerText = "You guessed: Lower!";
-
-            cardEle2.src = nextCard.src;
-            await sleep(100)
-            if(nextCard.value < currentCard.value){
-                youWin();
-            }else{ //if its a tie you lose no matter what
-                youLose();
+            const syncBetLabelToPotentialWinnings = ()=>{
+                betLabel.innerText = `Bet: ${bet}, Potential Winnings: ${winnings}`
             }
-        }
 
-        const higherButton = createElementWithClassAndParent("button", buttonContainer);
-        higherButton.innerText = "HIGHER"
+            syncBetLabelToPotentialWinnings();
 
-        higherButton.onclick = async()=>{
-            secondaryHeader.innerText = "You guessed: Higher!";
-            cardEle2.src = nextCard.src;
-            await sleep(100)
+            decreaseTruthBy(bet);
+            bettingContainer.innerHTML = "";
+            const deck = createDeckFromSource("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/cards/8Bit/")
+            const secondaryHeader = createElementWithClassAndParent("div", bettingContainer, "secondary-header");
+            secondaryHeader.innerHTML = "Will the next card drawn be higher or lower?";
+            secondaryHeader.style.textAlign="center";
+            secondaryHeader.style.marginBottom="25px";
 
-            if(nextCard.value > currentCard.value){
-                youWin();
-            }else{ //if its a tie you lose no matter what
-                youLose();
+            let currentCard = pickFrom(deck.all_cards);
+            let nextCard = pickFrom(deck.all_cards);
+
+
+            const cardEle = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
+            cardEle.src = currentCard.src;
+
+            const cardEle2 = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
+            cardEle2.src = deck.cardBackSrc;
+
+            const buttonContainer = createElementWithClassAndParent("div", bettingContainer);
+            buttonContainer.style.display="flex";
+            buttonContainer.style.justifyContent = "space-between"
+            buttonContainer.style.marginTop = "25px";
+
+            const lowerButton = createElementWithClassAndParent("button", buttonContainer);
+            lowerButton.innerText = "LOWER"
+
+            const youLose = ()=>{
+                const prevButton = document.querySelector(".cash-out-button");
+                if(prevButton){
+                    prevButton.remove();
+                }
+                secondaryHeader.innerHTML += " You lost :(";
+                buttonContainer.remove();
             }
-        }
+
+            const youWin = ()=>{
+                secondaryHeader.innerHTML += " You won!!!";
+                const prevButton = document.querySelector(".cash-out-button");
+                if(prevButton){
+                    prevButton.remove();
+                }
+                const button = createElementWithClassAndParent("button", ele, "cash-out-button");
+                button.innerText = `Cash Out ${winnings} Winnings and Leave?`;
+                let cashedOut = false;
+                button.onclick = () => {
+                    if(!cashedOut){
+                        cashedOut = true;
+                        increaseTruthBy(winnings);
+                        callback(globalDataObject.currentMaze);
+                        renderMazeTab();
+                    }
+                }
+                currentCard = nextCard;
+                nextCard = pickFrom(deck.all_cards);
+                cardEle.src = currentCard.src;
+                cardEle2.src = deck.cardBackSrc;
+                winnings = winnings * winRate;
+                syncBetLabelToPotentialWinnings();
+            }
+
+            lowerButton.onclick = async ()=>{
+                secondaryHeader.innerText = "You guessed: Lower!";
+
+                cardEle2.src = nextCard.src;
+                await sleep(100)
+
+                //shitty hack for aces high
+                if(currentCard.value === 1){
+                    return youWin();
+                }
+
+                if(nextCard.value === 1){
+                    return youLose();
+                }
+
+                if(nextCard.value < currentCard.value){
+                    youWin();
+                }else{ //if its a tie you lose no matter what
+                    youLose();
+                }
+            }
+
+            const higherButton = createElementWithClassAndParent("button", buttonContainer);
+            higherButton.innerText = "HIGHER"
+
+            higherButton.onclick = async()=>{
+                secondaryHeader.innerText = "You guessed: Higher!";
+                cardEle2.src = nextCard.src;
+                await sleep(100)
+                //shitty hack for aces high
+                if(currentCard.value === 1){
+                    return youLose();
+                }
+
+                if(nextCard.value === 1){
+                    return youWin();
+                }
+                if(nextCard.value > currentCard.value){
+                    youWin();
+                }else{ //if its a tie you lose no matter what
+                    youLose();
+                }
+            }
+    }
 
 
     }

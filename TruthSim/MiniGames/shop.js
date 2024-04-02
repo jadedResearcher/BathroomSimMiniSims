@@ -36,7 +36,8 @@ class GamerPointsStoreMiniGame extends MiniGame{
     }
 
 }
-
+//one of the survivors made this
+//https://uquiz.com/quiz/wxVQTg/i-am-a-normal-uquiz-i-will-not-pull-you-down-an-inescapable-rabbit-hole
 class ShopMiniGame extends MiniGame {
     constructor() {
         super(SHOPMINIGAME);
@@ -46,7 +47,8 @@ class ShopMiniGame extends MiniGame {
     valuableCustomer = (ele, callback) => {
         const button = createElementWithClassAndParent("button", ele);
         button.innerText = "Thank You Valuable Customer: Click Here To Complete This Room";
-        button.onclick = () => {
+        button.onclick = async () => {
+            await truthPopup("You bought objects!", "Don't spend it all in one place!", "Hmm... it would seem you are not satisfied with the perfect maze I designed for you? Well. If you insist on changing it. I can hardly stop you.");
             callback(globalDataObject.currentMaze);
             renderMazeTab();
         }
