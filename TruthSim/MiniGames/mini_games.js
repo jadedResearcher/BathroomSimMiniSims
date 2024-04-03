@@ -55,6 +55,52 @@ const initAllMiniGames = () => {
     new BettingMiniGame();
 }
 
+const emitSass = (ele,sass) => {
+        const existingSass = document.querySelector(".sass");
+        if(existingSass){
+            existingSass.remove();
+        }
+        let sassEle = createElementWithClassAndParent("div", ele, "sass");
+        sassEle.innerText = sass;
+
+        setTimeout(() => {
+            if (sassEle) {
+                sassEle.className = "sass fadeout";
+            }
+        }, 5000);
+
+        setTimeout(() => {
+            if (sassEle) {
+                sassEle.remove();
+            }
+
+        }, 10000);
+}
+
+const emitRadioSass = (ele,sass) => {
+    //unlike regular sass is allowed to layer itself, tone layers on itself more chaotic
+    //also it can be empty
+    if(!sass){
+        return;
+    }
+
+    let sassEle = createElementWithClassAndParent("div", ele, "sass radio");
+    sassEle.innerText = sass;
+
+    /*setTimeout(() => {
+        if (sassEle) {
+            sassEle.className = "sass fadeout";
+        }
+    }, 5000);
+
+    setTimeout(() => {
+        if (sassEle) {
+            sassEle.remove();
+        }
+
+    }, 10000);*/
+}
+
 // is for Alt
 class MiniGame {
     id; //how will things refer to you/ what is your key in globalMiniGames
@@ -222,7 +268,9 @@ class MiniGame {
         }
 
         if (sprite) {
-            const img = createElementWithClassAndParent("img", ele, "blorbo");
+            const imgContainer = createElementWithClassAndParent("div", ele, "blorbo-container");
+
+            const img = createElementWithClassAndParent("img", imgContainer, "blorbo");
             img.src = sprite;
         }
 
@@ -606,12 +654,15 @@ class BettingMiniGame extends MiniGame {
     }
 
     startGame = (ele, room, callback) => {
-        const radio = createElementWithClassAndParent("img",ele, "radio-happy");
+        const radioContainer = createElementWithClassAndParent("div",ele, "radio-container");
+
+        radioContainer.style.position="absolute";
+        radioContainer.style.top = "-45px";
+        radioContainer.style.left="15px"
+        const radio = createElementWithClassAndParent("img",radioContainer, "radio radio-happy");
         radio.src="images/radioForFriend.gif";
         radio.style.width = "50px";
-        radio.style.position="absolute";
-        radio.style.top = "-45px";
-        radio.style.left="15px"
+
 
         const bettingContainer = createElementWithClassAndParent("div", ele);
         bettingContainer.style.width = "225px";
@@ -673,6 +724,8 @@ class BettingMiniGame extends MiniGame {
             lowerButton.innerText = "LOWER"
 
             const youLose = ()=>{
+                const sassOptions = ["Nothin' personal, kid.", "Them's the breaks. ", "It happens.","Sucks to be you.","Better luck next time, kid.", "Luck of the draw's rough.", "Fate's a bitch like that, yeah.", "We all gotta pack up our bags sometime."]
+                emitSass(document.querySelector(".blorbo-container"), pickFrom(sassOptions))
                 const prevButton = document.querySelector(".cash-out-button");
                 if(prevButton){
                     prevButton.remove();
@@ -681,7 +734,20 @@ class BettingMiniGame extends MiniGame {
                 buttonContainer.remove();
             }
 
+            //no infinite money cheats, the Radio knows
+            let numberOfWins = 0;
+            //https://www.reddit.com/r/statistics/comments/yssivj/q_highlow_card_game_statistics/
             const youWin = ()=>{
+                //http://www.farragofiction.com/RadioTranscript/
+                const sassOptions = ["Congrats.","You're pretty lucky, huh.","Three times? Now ain't that hard to believe.","Four. Sure.","You're cheating.","I don't care how clever you think you are, you need to stop.","A monster, s'what you are. You're a damn monster.","I oughta put you down."];
+                const radioSassOptions = [undefined, undefined, undefined, "WARNING","WARNING. ALL OPERATIVES ARE TO SUPRESS THE BREACH IN PROGRESS. THIS IS THE SECOND ALERT.", "WARNING. CLASS 3 BREACH IN PROGRESS. SURPRESS THE ABNORMALITY.", "SURPRESS IT IMMEDIATELY.", "EXTERMINATE THEM. YOU CANNOT FAIL.", "NEUTRALIZE THE TARGET.", "KILL IT KILL IT NOW WHY AREN'T YOU KILLING IT"];
+                if(numberOfWins>sassOptions.length){
+                    alert("HOON IS GOING TO BREECH")
+                }
+                emitSass(document.querySelector(".blorbo-container"), sassOptions[numberOfWins]);
+                emitRadioSass(document.querySelector(".radio-container"), radioSassOptions[numberOfWins]);
+
+                numberOfWins ++;
                 secondaryHeader.innerHTML += " You won!!!";
                 const prevButton = document.querySelector(".cash-out-button");
                 if(prevButton){
@@ -884,3 +950,20 @@ class ButtonMiniGame extends MiniGame {
 
     }
 }
+
+/*
+i think we don't dig into that enough
+oblivous neville
+who just stares into space thinking about soup for hours
+takes the time to dye his hair 
+i mean
+he also wears snazzy shades
+he clearly has opinions on how he presents
+while devona vibes like she rolls out of bed wearing the days clothing and thats as far as she's going to think about it 
+(she goes to bed wearing the next days clothing because What If There Is a Fire she doesn't want to waste time looking for outside clothes)
+meanwhile neville is TERRIFIED OF FIRE and also has zero plans for if one happens because if he thinks about fire for two seconds he shuts down
+devona's blessing and curse is how resilliant she is 
+she is strong enough to be actually look at all the things that scare her and then make plans against them
+this is 
+exhausting
+*/
