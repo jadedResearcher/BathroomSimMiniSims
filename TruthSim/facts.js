@@ -49,8 +49,10 @@ class Fact{
 
 //  constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler){
 
+
+console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB IS IMPLEMENTED, PARSE NEW LINES AS BR")
 //title should be unique
-const TESTFACT = new Fact("Test Fact", "This is just a test of the emergency fact system.",[GUIDING], 1, 10, 1);
+const TESTFACT = new Fact("Test Fact", "test",[GUIDING], 1, 10, 1);
 
 //the eye killer considers herself the Final Girl of a horror movie. she is desparate and scared and willing to kill to survive. and so full of adrenaline and fear that the slightest surprise is treated as a jump scare you should stab. 
 const KILLEROWNSBLADE = new Fact("The Eye Killer Wields the Quatro Blade", "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. Any cut made with it can not be perceived, even as blood loss slowly builds up. Anyone who dies while bleeding from this blade will not be percieved by any means. It is said the Eye Killer does not even know she wields it. All she knows is that the kills she makes to warn off Hunters never seem to get found. Never seem to scare off predators. So her kills get more and more gruesome, more and more artistic,  to try to acomplish her goals. Do not look for her. Do not Hunt her. Do not make Wodin's mistake.",[KILLING, OBFUSCATION], 2, 0.5, 0.5)
@@ -74,9 +76,63 @@ const PARKERSlOVESGUNTAN = new Fact("Parkers Loves Gun-Tan", "Parker loves Gun-T
 const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and K", "When Parker burrowed out of his home universe he made sure to steal away all his favorite blorbos he loved watching through his cameras. Witherby and K are especially fun to watch, because of how often they interact with the others. Parker loves watching.",[SPYING], 1, 1,1);
 const PARKERRUNSABBQ = new Fact("Parker Owns a BBQ", "Despite how filthy Parker is, he can work a mean grill. He and [REDACTED] run a literal hole in the wall BBQ that has long lines whenever it pops up.",[FLESH, BURIED], 1, 1, 1);
 
+//illusionists shipping manifesto https://docs.google.com/presentation/d/1YtZE1QL3rgQUIxI7Kb0P9Evn34OqP4Jkzb1pLCayIvk/edit#slide=id.p
+const VIKANDKHAVEACOMPLICATEDRELATIONSHIP1 = new Fact("Page 1: [REDACTED] talking about K", `He's fine. 
+
+Or she's fine, or they're fine... I haven't had time to ask. Neither has he. I think I'll tolerate the trivialities and switch across them, for the time being. That kind of fastidious care directed towards her is something they would have liked, anyway.
+
+So, fine. We can talk about Khana. 
+
+I've known for a while that's not her name. We've all known, really. K is not a technically adept liar, though he's a brazer and confident one, which may as well be the same thing. There was no way I wouldn't notice an employee had changed heights recently. But the Corporation, damn it to hell or whatever is close to it, didn't give me time to decide if this new employee was a keeper or a binner. It was having half an employee or losing two, and I chose to keep half.
+
+So we kept him. And to their credit, she didn't die. That is higher praise than what it sounds like.
+
+But that's then, and this is now. We're different people now, if we even count as people anymore. We don't measure success in survivability as much as we measure it in the, as K himself so eloquently put it when we discussed the Training Team, 'the Who's-the-biggest-freak-olympics'. They liked to punctuate that joke by mimicking someone carrying a large torch like in some of the booklets we'd found down here. It was, to my chagrin, insufferably funny. 
+
+Am I turning into Witherby? Do I just say everything between grit teeth, like I'm incapable of having a heart? It was a nice moment and I enjoyed it, and that is the fact of the matter. I welcome Parker to shoot me otherwise.
+Anyway, Khana was not her name. It's not like he would tell us. It was funny to them to pretend like it was, or like we were fooled... though I'm sure he knew we knew, and just delighted on keeping that away from us. With Yongki it was easy. Trivial, even. Not so much with me. But we found something to bond in that, I think. She was content with me not knowing, or at least pretending not to know. That attention fed him. It's their... peculiarity, and that's the problem I find myself in today, isn't it? Too many of those these days. A lot more monster in everyone's souls like they didn't know what to do with the first one.
+
+So here's the thesis: it looks like K doesn't just turn when he receives too much attention now. She turns when they receive too little.
+
+And that's our problem.
+
+(page 1 of ???)
+`,[OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
+const VIKANDKHAVEACOMPLICATEDRELATIONSHIP2 = new Fact("Page 2: [REDACTED] talking about K", `The Angel is simple, not to be confused with The Doctor. That's *Doctor* Slaughter. The Angel thrives on very binary criteria: you look at it and it's satisfied, you don't and it lashes out. Of course, there's abnormalities with much simpler desires, but The Angel was easily a very dangerous one. A blink or two it might tolerate, but letting your mind slip off of it was unacceptable. Try looking at an image without losing concentration. If you fail, imagine yourself getting swiftly decapitated. That is the essence of The Angel.
+
+You can imagine, then, that containing something by giving it your pure, concentrated gaze is very, very hard. Khana's taken aspects of this monster, which makes their previous condition... precarious.
+
+Of course, we found out about it much like Witherby let us know. She broke down. 
+
+We weren't in great terms, Khana and I. Correction: we *aren't* in great terms. I find it hard to say when it started, but it's easy to say when it hit critical mass. It was Yongki, really. He couldn't stand Yongki. That Yongki got more attention from me, that I treated him better. That he did not respect her, or changed opinions too quickly. That I punished his deaths harder than theirs-- and I did. How could I not? Yongki, he was not stable. He couldn't be. So I took care of him, and Khana bit back. They did so often and enthusiastically, as if to teach me a lesson. Then they started transforming into that damn box, and that is when...
+We used to talk more often. We really did. There is trust in a shared secret like one's name. Tension. Devona brought this notion to me while I was helping her study a better understanding of her captain's unflatteringly high sexual drive: no bond can occur without tension. Bond comes from band, an object that binds. A bond that can't be broken is a prison. There is no drive in fighting a bond that cannot be broken, because from the beginning the outcome is determined. Friend comes from bond, comes from band, comes from chain. It would not have been the same if I could not break our little game. And how much have I dreamed of it. Of rubbing it in her smug face.
+ 
+And yet I keep secrets. I keep many good secrets.
+
+(Page 2 of ???)`,[OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
+
+
+const VIKANDKHAVEACOMPLICATEDRELATIONSHIP3 = new Fact("Page 2: [REDACTED] talking about K", 
+`When did I get into the habit of playing executioner?
+
+No, no. I remember. It was the first time he did his little... anomaly magic trick on me. When we found out they had an anomaly to worry about. We did not all start as monsters, as I've posited before. But we were bound to become them, and some of us thrive in that sort of spotlight.
+
+She said many, many things to me when I locked her in that cage. That I was a worthless cripple. That I should have died with the Captain, that I should have killed myself when I got hurt, or that I should have picked up the pace and killed myself then. Any weak spot he could pry at and get a reaction out of me, he attacked and attacked ferociously, as if he could rip me in such a way that maybe they'd get me to look at them. We both know exactly why she did that. In retrospective, it is... 
+
+We agreed to doctor it. As if it never happened. Neither of us had apologies to give. So I hid it away.
+
+That was the first time. Later, when we ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇, I gave them the choice in the matter, and they agreed. When I ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇, sure enough, they let it happen. 'Whatever, if it fixes things'. It did not matter what I cut, as long as we kept our... bubblingly hostile, but otherwise cordial status quo. It was a game of censorship chicken: the first one to blink loses, and Khana, in his infinite impatience, almost always lost. For all his accolades, she does not know how to play poker.
+
+I do not know Khana's name. The actual one. I knew, once. I am sure I could find it if I dug, but I was, and am, very, very thorough. 
+
+Now he has turned into a tree yearning for our attention. If overfed, he will turn into a machine yearning for our misery.
+
+Our containment procedures will have to change accordingly.`,[OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
+
+
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, PARKERSlOVESGUNTAN, PARKERSTHINKSWIBBYANDKARENEAT,CLOSERISGREATATKEYS];
+const factsForSale = [CLOSERISGREATATFACTS, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, PARKERSlOVESGUNTAN, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3];
 
 //every fact the CFO can give you
 const factsForGaming = [CLOSERISGREATATROOMS];

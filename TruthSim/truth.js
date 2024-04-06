@@ -32,12 +32,13 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, HOONMINIGAME, GAMERSHOPMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME,MAZEMINIGAME, HOONMINIGAME, GAMERSHOPMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
 };
 
+//restore to this after debugging
 let globalDataObjectREAL = {
   truthPerSecond: 1,
   startedPlayingTimeCode: Date.now(),
