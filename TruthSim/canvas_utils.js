@@ -38,6 +38,31 @@ const transformCanvasIntoAnimationWithTransform = (canvas, transform_array) => {
   return bigBoi;
 }
 
+//stacked vertically, not horizontally
+const transformCanvasIntoAnimationWithTransformVertical = (canvas, transform_array) => {
+  const original = document.createElement("canvas");
+  const context = original.getContext("2d");
+  context.drawImage(canvas, 0, 0);
+
+  const bigBoi = document.createElement("canvas");
+  bigBoi.width = canvas.width;
+  bigBoi.height = canvas.height * transform_array.length;
+  const bigContext = bigBoi.getContext("2d");
+  let index = 0;
+  for (let transform of transform_array) {
+    const copy = document.createElement("canvas");
+    const context = copy.getContext("2d");
+    context.drawImage(original, 0, 0);
+    transform(copy);
+    bigContext.drawImage(copy,0,canvas.height * index);
+    index++;
+  }
+  //bigContext.drawImage(original,25,25);
+
+
+  return bigBoi;
+}
+
 //given an already loaded image, render it to the target canvas.
 const renderImageToCanvas = (img, canvas) => {
   const context = canvas.getContext("2d");

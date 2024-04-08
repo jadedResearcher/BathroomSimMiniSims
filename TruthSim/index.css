@@ -361,9 +361,25 @@ button img {
   height: 50px;
 }
 
+
+.sass-radio{
+  filter: grayscale(1);
+}
+
+.animated-bg-vertical {
+  animation: animated-bg-animation-vertical 0.4s steps(3) infinite;
+}
+
 @keyframes animated-bg-animation {
   100% {
     background-position: -150px;
+  }
+}
+
+@keyframes animated-bg-animation-vertical {
+  100% {
+    background-position-y: -75px;
+    font-style: italic; /* for radio static*/
   }
 }
 

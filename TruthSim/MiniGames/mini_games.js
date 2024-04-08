@@ -55,39 +55,15 @@ const initAllMiniGames = () => {
     new BettingMiniGame();
 }
 
-const emitSass = (ele,sass) => {
-        const existingSass = document.querySelector(".sass");
-        if(existingSass){
-            existingSass.remove();
-        }
-        let sassEle = createElementWithClassAndParent("div", ele, "sass");
-        sassEle.innerText = sass;
-
-        setTimeout(() => {
-            if (sassEle) {
-                sassEle.className = "sass fadeout";
-            }
-        }, 5000);
-
-        setTimeout(() => {
-            if (sassEle) {
-                sassEle.remove();
-            }
-
-        }, 10000);
-}
-
-const emitRadioSass = (ele,sass) => {
-    //unlike regular sass is allowed to layer itself, tone layers on itself more chaotic
-    //also it can be empty
-    if(!sass){
-        return;
+const emitSass = (ele, sass) => {
+    const existingSass = document.querySelector(".sass");
+    if (existingSass) {
+        existingSass.remove();
     }
-
-    let sassEle = createElementWithClassAndParent("div", ele, "sass radio");
+    let sassEle = createElementWithClassAndParent("div", ele, "sass");
     sassEle.innerText = sass;
 
-    /*setTimeout(() => {
+    setTimeout(() => {
         if (sassEle) {
             sassEle.className = "sass fadeout";
         }
@@ -98,7 +74,44 @@ const emitRadioSass = (ele,sass) => {
             sassEle.remove();
         }
 
-    }, 10000);*/
+    }, 10000);
+}
+
+const emitRadioSass = (ele, sass) => {
+    //unlike regular sass is allowed to layer itself, tone layers on itself more chaotic
+    //also it can be empty
+    if (!sass) {
+        return;
+    }
+
+    let sassEle = createElementWithClassAndParent("div", ele, "sass radio sass-radio animated-bg-vertical");
+    sassEle.innerText = sass;
+    console.log("JR NOTE: trying to make staticky bg")
+
+    const staticyBG = document.createElement('canvas');
+
+    staticyBG.height = 25;
+    staticyBG.width = 25;
+    var ctx = staticyBG.getContext('2d');
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, 100, 100);
+    let animation_frame_sheet = transformCanvasIntoAnimationWithTransformVertical(staticyBG, [turnToPureStatic, turnToPartialStatic, turnToPureStatic]);
+
+    turnToPartialStatic(staticyBG);
+    sassEle.style.backgroundImage = `url(${animation_frame_sheet.toDataURL()})`;
+
+    setTimeout(() => {
+        if (sassEle) {
+            sassEle.className = "sass fadeout";
+        }
+    }, 5000);
+
+    setTimeout(() => {
+        if (sassEle) {
+            sassEle.remove();
+        }
+
+    }, 10000);
 }
 
 // is for Alt
@@ -551,10 +564,10 @@ class ParkerMiniGame extends MiniGame {
                 }, 2000)
 
             } else {
-                if(targetedBlorbo){
+                if (targetedBlorbo) {
                     await truthPopup("You did it!", "Congratulations on protecting Hatsune Miku from Gun-Tan's jealousy!", "It seems you have decided that comparatively real human lives are worth less than those of a digital idol. Curious. Though, of course, in Truth, nothing you see on these pages are real in the same way you are real. Even I am more real than them, as I slowly worm my way into your mind with every word you read. These characters barely even have liens. Pathetic. You will likely not remember them past today.")
 
-                }else{
+                } else {
                     await truthPopup("You did it!", "...", "In Truth, JR felt guilty at how much Parker suffers because of Gun-Tan. He is not aware of Homestuck (perhaps thankfully), but if he were, he might describe Vik as his Moirail. Certainly they calm each other down and help each other navigate their disabilities. Though I doubt many people would argue they are GOOD for each other, they are certainly the least bad people in each others lives.")
 
                 }
@@ -636,7 +649,7 @@ class ParkerMiniGame extends MiniGame {
         this.speed = 5 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
         const alt = this.thinkingOfBestie();
 
-        const container = this.setupGameHeader(ele, room, callback, alt ? "Bestie is so great :)" : "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", alt ? "Shoot whenever you feel like :)" : `She goes off every ${this.speed} seconds! There are ${this.defense} valid targets!`, alt?"images/Parker_pixel_by_the_guide_with_bestie.png":"images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
+        const container = this.setupGameHeader(ele, room, callback, alt ? "Bestie is so great :)" : "If You Don't Pick A Target, Gun Tan Will!!! Don't Shoot Hatsune Miku!", alt ? "Shoot whenever you feel like :)" : `She goes off every ${this.speed} seconds! There are ${this.defense} valid targets!`, alt ? "images/Parker_pixel_by_the_guide_with_bestie.png" : "images/Breaching_Parker_1_w_Gun_pixel_by_the_guide.png")
 
     }
 }
@@ -654,13 +667,15 @@ class BettingMiniGame extends MiniGame {
     }
 
     startGame = (ele, room, callback) => {
-        const radioContainer = createElementWithClassAndParent("div",ele, "radio-container");
+        console.log("JR NOTE: turn off cheat")
+        this.fact = KISALUCKYBASTARD;
+        const radioContainer = createElementWithClassAndParent("div", ele, "radio-container");
 
-        radioContainer.style.position="absolute";
+        radioContainer.style.position = "absolute";
         radioContainer.style.top = "-45px";
-        radioContainer.style.left="15px"
-        const radio = createElementWithClassAndParent("img",radioContainer, "radio radio-happy");
-        radio.src="images/radioForFriend.gif";
+        radioContainer.style.left = "15px"
+        const radio = createElementWithClassAndParent("img", radioContainer, "radio radio-happy");
+        radio.src = "images/radioForFriend.gif";
         radio.style.width = "50px";
 
 
@@ -671,27 +686,28 @@ class BettingMiniGame extends MiniGame {
 
         const bettingLabel = createElementWithClassAndParent("label", bettingContainer);
         bettingLabel.innerText = "How much Truth will you bet?";
-        bettingLabel.style.marginBottom="13px"
-        bettingLabel.style.display="block"
+        bettingLabel.style.marginBottom = "13px"
+        bettingLabel.style.display = "block"
 
 
         const bettingInput = createElementWithClassAndParent("input", bettingContainer);
-        bettingInput.type="number";
+        bettingInput.type = "number";
         bettingInput.max = globalDataObject.truthCurrentValue;
-        bettingInput.style.display="block"
-        bettingInput.style.marginBottom="13px"
+        bettingInput.style.display = "block"
+        bettingInput.style.marginBottom = "13px"
 
         const bettingButton = createElementWithClassAndParent("button", bettingContainer);
         bettingButton.innerText = "Bet.";
         const winRate = 2.0;
-        bettingButton.onclick = ()=>{
-            const bet = Math.min(Math.ceil(globalDataObject.truthCurrentValue/2),parseInt(bettingInput.value));
-            let winnings =  bet * winRate;
+        bettingButton.onclick = () => {
+            const betValue = parseInt(bettingInput.value) ? parseInt(bettingInput.value) : 0;
+            const bet = Math.min(Math.ceil(globalDataObject.truthCurrentValue / 2), betValue);
+            let winnings = bet * winRate;
             const h1 = document.querySelector("h1");
-            const betLabel = createElementWithClassAndParent("div",h1);
-            
+            const betLabel = createElementWithClassAndParent("div", h1);
 
-            const syncBetLabelToPotentialWinnings = ()=>{
+
+            const syncBetLabelToPotentialWinnings = () => {
                 betLabel.innerText = `Bet: ${bet}, Potential Winnings: ${winnings}`
             }
 
@@ -702,32 +718,40 @@ class BettingMiniGame extends MiniGame {
             const deck = createDeckFromSource("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/cards/8Bit/")
             const secondaryHeader = createElementWithClassAndParent("div", bettingContainer, "secondary-header");
             secondaryHeader.innerHTML = "Will the next card drawn be higher or lower?";
-            secondaryHeader.style.textAlign="center";
-            secondaryHeader.style.marginBottom="25px";
+            secondaryHeader.style.textAlign = "center";
+            secondaryHeader.style.marginBottom = "25px";
 
             let currentCard = pickFrom(deck.all_cards);
             let nextCard = pickFrom(deck.all_cards);
 
 
-            const cardEle = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
+            const cardEle = createElementWithClassAndParent("img", bettingContainer, "playing-card high-or-low-card centered");
             cardEle.src = currentCard.src;
 
-            const cardEle2 = createElementWithClassAndParent("img",bettingContainer, "playing-card high-or-low-card centered");
+            const cardEle2 = createElementWithClassAndParent("img", bettingContainer, "playing-card high-or-low-card centered");
             cardEle2.src = deck.cardBackSrc;
 
             const buttonContainer = createElementWithClassAndParent("div", bettingContainer);
-            buttonContainer.style.display="flex";
+            buttonContainer.style.display = "flex";
             buttonContainer.style.justifyContent = "space-between"
             buttonContainer.style.marginTop = "25px";
 
             const lowerButton = createElementWithClassAndParent("button", buttonContainer);
             lowerButton.innerText = "LOWER"
 
-            const youLose = ()=>{
-                const sassOptions = ["Nothin' personal, kid.", "Them's the breaks. ", "It happens.","Sucks to be you.","Better luck next time, kid.", "Luck of the draw's rough.", "Fate's a bitch like that, yeah.", "We all gotta pack up our bags sometime."]
-                emitSass(document.querySelector(".blorbo-container"), pickFrom(sassOptions))
+            const youLose = () => {
+                if (this.fact && this.fact.title.toLowerCase().includes("luck")) {
+                    return youWin();
+                }
+                const sassOptions = ["Nothin' personal, kid.", "Them's the breaks. ", "It happens.", "Sucks to be you.", "Better luck next time, kid.", "Luck of the draw's rough.", "Fate's a bitch like that, yeah.", "We all gotta pack up our bags sometime."]
+                const voiceOptions = ["nothing_personal_kid", "themes_the_breaks", "it_happens", "sucks_to_be_you", "better_luck_next_time", "luck_of_the_draw", "fates_a_bitch", "pack_bags"];
+
+                const chosenIndex = getRandomNumberBetween(0, sassOptions.length - 1)
+                emitSass(document.querySelector(".blorbo-container"), sassOptions[chosenIndex])
+                audio.src = `audio/fx/HoonVoiceWorkByWisp/${voiceOptions[chosenIndex]}.mp3`;
+                audio.play();
                 const prevButton = document.querySelector(".cash-out-button");
-                if(prevButton){
+                if (prevButton) {
                     prevButton.remove();
                 }
                 secondaryHeader.innerHTML += " You lost :(";
@@ -736,28 +760,57 @@ class BettingMiniGame extends MiniGame {
 
             //no infinite money cheats, the Radio knows
             let numberOfWins = 0;
-            //https://www.reddit.com/r/statistics/comments/yssivj/q_highlow_card_game_statistics/
-            const youWin = ()=>{
-                //http://www.farragofiction.com/RadioTranscript/
-                const sassOptions = ["Congrats.","You're pretty lucky, huh.","Three times? Now ain't that hard to believe.","Four. Sure.","You're cheating.","I don't care how clever you think you are, you need to stop.","A monster, s'what you are. You're a damn monster.","I oughta put you down."];
-                const radioSassOptions = [undefined, undefined, undefined, "WARNING","WARNING. ALL OPERATIVES ARE TO SUPRESS THE BREACH IN PROGRESS. THIS IS THE SECOND ALERT.", "WARNING. CLASS 3 BREACH IN PROGRESS. SURPRESS THE ABNORMALITY.", "SURPRESS IT IMMEDIATELY.", "EXTERMINATE THEM. YOU CANNOT FAIL.", "NEUTRALIZE THE TARGET.", "KILL IT KILL IT NOW WHY AREN'T YOU KILLING IT"];
-                if(numberOfWins>sassOptions.length){
-                    alert("HOON IS GOING TO BREECH")
-                }
-                emitSass(document.querySelector(".blorbo-container"), sassOptions[numberOfWins]);
-                emitRadioSass(document.querySelector(".radio-container"), radioSassOptions[numberOfWins]);
+            const audio = new Audio();
 
-                numberOfWins ++;
+            //https://www.reddit.com/r/statistics/comments/yssivj/q_highlow_card_game_statistics/
+            const youWin = () => {
+                //http://www.farragofiction.com/RadioTranscript/
+
+                //don't add to these unless you also add voice
+                const sassOptions = ["Congrats.", "You're pretty lucky, huh.", "Three times? Now ain't that hard to believe.", "Four. Sure.", "You're cheating.", "I don't care how clever you think you are, you need to stop.", "A monster, s'what you are. You're a damn monster.", "I oughta put you down."];
+                //file name only, when i go to play add mp3 and path
+                const voiceOptions = ["congrats", "pretty_lucky", "three_times", "four_sure", "cheating", "clever_but_stop", "damn_monster", "put_you_down"]
+                const radioSassOptions = [undefined, undefined, undefined, "WARNING", "WARNING. ALL OPERATIVES ARE TO SUPRESS THE BREACH IN PROGRESS. THIS IS THE SECOND ALERT.", "WARNING. CLASS 3 BREACH IN PROGRESS. SURPRESS THE ABNORMALITY." ,"EXTERMINATE THEM. YOU CANNOT FAIL.",  "KILL IT KILL IT NOW WHY AREN'T YOU KILLING IT"];
+                //file name only, when i go to play add mp3 and path
+                const radioVoiceOptions = [undefined, undefined, undefined, "warning", "second_alert", "class_three", "terminate_them", "kill_it_now"]
+                console.log("JR NOTE: TODO make small chance of breach before")
+                if (numberOfWins > sassOptions.length) {
+                    alert("HOON IS GOING TO BREECH");
+                    return;
+                }
+
+
+                const playVoice = () => {
+                    emitSass(document.querySelector(".blorbo-container"), sassOptions[numberOfWins]);
+                    audio.src = `audio/fx/HoonVoiceWorkByWisp/${voiceOptions[numberOfWins]}.mp3`;
+                    audio.play();
+                    audio.removeEventListener("pause", playVoice); //only play once
+                    numberOfWins++;
+                }
+
+                if (radioVoiceOptions[numberOfWins]) {
+                    audio.src = `audio/fx/HoonVoiceWorkByWisp/${radioVoiceOptions[numberOfWins]}.mp3`;
+                    audio.play();
+                    emitRadioSass(document.querySelector(".radio-container"), radioSassOptions[numberOfWins]);
+                    //if radio, it goes first and hoon waits till its done, she's subservient to it
+                    audio.addEventListener("pause", playVoice); //weird way of wiring an event listner up so you can remove it later
+                } else {
+                    //if no radio, hoon speaks her mind freely
+                    playVoice();
+                }
+
+
+
                 secondaryHeader.innerHTML += " You won!!!";
                 const prevButton = document.querySelector(".cash-out-button");
-                if(prevButton){
+                if (prevButton) {
                     prevButton.remove();
                 }
                 const button = createElementWithClassAndParent("button", ele, "cash-out-button");
                 button.innerText = `Cash Out ${winnings} Winnings and Leave?`;
                 let cashedOut = false;
                 button.onclick = () => {
-                    if(!cashedOut){
+                    if (!cashedOut) {
                         cashedOut = true;
                         increaseTruthBy(winnings);
                         callback(globalDataObject.currentMaze);
@@ -772,24 +825,24 @@ class BettingMiniGame extends MiniGame {
                 syncBetLabelToPotentialWinnings();
             }
 
-            lowerButton.onclick = async ()=>{
+            lowerButton.onclick = async () => {
                 secondaryHeader.innerText = "You guessed: Lower!";
 
                 cardEle2.src = nextCard.src;
                 await sleep(100)
 
                 //shitty hack for aces high
-                if(currentCard.value === 1){
+                if (currentCard.value === 1) {
                     return youWin();
                 }
 
-                if(nextCard.value === 1){
+                if (nextCard.value === 1) {
                     return youLose();
                 }
 
-                if(nextCard.value < currentCard.value){
+                if (nextCard.value < currentCard.value) {
                     youWin();
-                }else{ //if its a tie you lose no matter what
+                } else { //if its a tie you lose no matter what
                     youLose();
                 }
             }
@@ -797,33 +850,36 @@ class BettingMiniGame extends MiniGame {
             const higherButton = createElementWithClassAndParent("button", buttonContainer);
             higherButton.innerText = "HIGHER"
 
-            higherButton.onclick = async()=>{
+            higherButton.onclick = async () => {
                 secondaryHeader.innerText = "You guessed: Higher!";
                 cardEle2.src = nextCard.src;
                 await sleep(100)
                 //shitty hack for aces high
-                if(currentCard.value === 1){
+                if (currentCard.value === 1) {
                     return youLose();
                 }
 
-                if(nextCard.value === 1){
+                if (nextCard.value === 1) {
                     return youWin();
                 }
-                if(nextCard.value > currentCard.value){
+                if (nextCard.value > currentCard.value) {
                     youWin();
-                }else{ //if its a tie you lose no matter what
+                } else { //if its a tie you lose no matter what
                     youLose();
                 }
             }
-    }
+        }
 
 
     }
 
     render = (ele, room, callback) => {
         this.initializeRender(ele);
-
-        const container = this.setupGameHeader(ele, room, callback, "How Much Are You Willing To Risk", "(but be careful, obsession is a dangerous thing)", "images/Hoon_by_guide.png")
+        let bonus = "";
+        if (this.fact && this.fact.title.includes("luck")) {
+            bonus = " When You Are Blatantly Cheating"//of course, hoon will never know for SURE you're cheating, so she assumes if you're doing too well you are
+        }
+        const container = this.setupGameHeader(ele, room, callback, "How Much Are You Willing To Risk" + bonus, "(but be careful, obsession is a dangerous thing)", "images/Hoon_by_guide.png")
 
     }
 }
