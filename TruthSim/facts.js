@@ -50,7 +50,7 @@ class Fact{
 //  constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler){
 
 
-console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB IS IMPLEMENTED, PARSE NEW LINES AS BR")
+console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROOM IS IMPLEMENTED, PARSE NEW LINES AS BR")
 //title should be unique
 const TESTFACT = new Fact("Test Fact", "test",[GUIDING], 1, 10, 1);
 const KISALUCKYBASTARD = new Fact("K Is A Lucky Bastard", "K should have died a thousand times over even before making it to this Universe. Somehow... he/she/xe/fae/they/it always come out on top.",[LIGHT], 1, 1, 1);
@@ -78,6 +78,7 @@ const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and K
 const PARKERRUNSABBQ = new Fact("Parker Owns a BBQ", "Despite how filthy Parker is, he can work a mean grill. He and [REDACTED] run a literal hole in the wall BBQ that has long lines whenever it pops up.",[FLESH, BURIED], 1, 1, 1);
 
 //illusionists shipping manifesto https://docs.google.com/presentation/d/1YtZE1QL3rgQUIxI7Kb0P9Evn34OqP4Jkzb1pLCayIvk/edit#slide=id.p
+//a lot of these long ones IC wrote
 const VIKANDKHAVEACOMPLICATEDRELATIONSHIP1 = new Fact("Page 1: [REDACTED] talking about K", `He's fine. 
 
 Or she's fine, or they're fine... I haven't had time to ask. Neither has he. I think I'll tolerate the trivialities and switch across them, for the time being. That kind of fastidious care directed towards her is something they would have liked, anyway.
@@ -130,10 +131,56 @@ Now he has turned into a tree yearning for our attention. If overfed, he will tu
 
 Our containment procedures will have to change accordingly.`,[OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
 
+const CAMELLIACANSEEJOHNSTIMESTITCHING = new Fact("Camellia Can See John's Time Stitching", `We've had a curious development recently: the Hundmaster has brought me someone who'd tried to break into our holy sanctum, that, or he brought himself in. His smile is smug and horribly insufferable even as the dog easily strongarms him, as if he's exactly where he wants to be, and I would suspect he isn't wrong. She tells me he's her 'puppy's' boyfriend, 'or something like that'-- he won't deny it, and he looks actually interested in that line of thought. I don't care what kind of disgusting relations he has, but she thinks it's relevant. So, fine. We will operate under that assumption, as flawed and demented as it may be.
+
+He's from Italy, so he says-- or he works there. This doesn't mean anything. No one is truly born. They have all kept themselves busy on the other continent; it appears It has willed for the mafia to become more prevalent, and so it does, and my demonic counterpart has decided to split that 'puppy' in half, thus creating them, who create him as he stands now. And so it does. 
+
+What is most apparent is that I feel the same relation to causality in him as I feel in myself. And yet it's out of place. Different. The mechanisms of time and thus the will of my god flows through me, taking me to where I need to be, where I must be. This one is broken. Shambling.
+
+He did not notice that I could see him. But for a moment while he played with one of the ornamental vases I saw him shatter as he split into shards, different versions of him-- the vase dropped to the floor a dozen times before he could find the timeline where he didn't knock it over, and the one where he manages to do a sad little trick with it, and he stitched them together. The result is a world in which he is suave enough to do such a trick and competent enough to not fail.
+
+That did catch my attention.
+As unimpressed as I may be at such wanton usage of a blessing, this one may still serve purpose. Not now, at the moment, but a purpose he can serve. Having one made of strings and one that can sever them is... useful. This world seems to work in such minutiae.
+
+I will be waiting accordingly.`,[TIME, ANGELS], 2, 0.5, 1.5);
+
+/*
+jr thoughts on CAMELLIACANSEEJOHNSTIMESTITCHING
+
+yeah
+hes defensively self focused
+wants to exert control over himself after so long feeling like a puppet
+his time powers are....
+huh
+his time powers are like someone who feels entirely not in control of themselves 
+
+how THEY would parse self control
+"if i could just take the thousand little random forces that push and pull me and only pick the good ones, THAT is self control"
+its never about gaining skills or learning to control yourself and the world
+its about firmly ceding the world as being in control of you but longing to be luckier
+rava would probably hate that
+in both directions?
+control is an arrow from master to dog
+the dogs job is to control the self to enact the masters will
+john ceding self control is, again, more like a cat being unpredictable and fickle
+but at the same time finding ways to wiggle out of the path set before him
+john cant be trained because he rejects the fundamental premise that control of the self is even possible
+punishments and rewards are random fate that you can game
+
+not related to anything youre doing
+he just picks the Frankenstein timeline where he gets what he wants regardless of his actions
+i am
+enthralled with this read
+external locus of control but the ability to try to be a perfectionist about it
+his sad lil trick
+will NEVER be the result of practice or skill
+he has decided either he is born lucky enough to do it in SOME timeline or it never happens
+thems the breaks
+*/
 
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD,EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, PARKERSlOVESGUNTAN, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD,EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS,CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, PARKERSlOVESGUNTAN, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3];
 
 //every fact the CFO can give you
 const factsForGaming = [CLOSERISGREATATROOMS];

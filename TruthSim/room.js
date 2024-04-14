@@ -552,3 +552,73 @@ class Room {
   }
 
 } 
+
+/*
+suddenly im thinking of an au where like
+wodin and todd were twins purely so wodin can starve todd in the womb and then be fucked up about it later, like that stephen king book
+the dark half or whatever
+the Witness doens't exist and neither do the arms except they clearly also do
+the Thief of Space hoards what fragments he can find and the Maid of Space spreads the out as far as she can
+and the Witness provides a realm for the forgotten and irrelevant to tell their own stories  (dream bubbles, aproximately)
+but thats the point of west right now: we only get flashes
+*/
+
+
+/*
+
+despap, as the resident grace, provides their team with various hacking tools
+i.e how you are PLAYING tge various games instead of merely observing
+the pap hands on lohae or butlerbot on lomat are examples
+for peewee, despap "helpfully" provided various cybernetics to help his streaming career
+but once he enters sburb the observers past the furthest ring squirm their way inside
+*/
+
+/*
+theres an area of gopher where the wanderer finds themselves pouring over information and unresponsive
+and if you go in the right order
+you BECOME that self pouring over information
+reading it as the wanderer sort of half remembering regrets about wodin
+is fun
+*/
+
+/*
+
+the god that never was
+thats always been how wodin and todd worked really
+todd pushed to the edges of relevance while wodin took up all the room
+wodin never meant for that to be how it went
+but it always was*/
+
+/*
+East was about the Intern, and how they related to Wodin/The Wanderer/Wanda.EastEast was about Peewee and how they related to the Echidna Universe from outside it (West).EastEastEast, which is to say, this bathroom, is about combinbing the two.The Intern, now the Witness, following the thread created by Peewee in the East and the Observers in the west in order to bridge the gap.The Witness will be our next viewpoint character to the West.From West: ```In the split second before the Observers leave you WITNESS their boogie through the void. This changes EVERYTHING.```.East and West are now connected sufficiently. The Bathroom is the bridge.
+*/
+
+
+/*
+the INTERN has witnessed the path through which the observers travel the void
+
+an invite the observers in to similarly witness the various arms
+
+wants to show them the memory leak
+
+the arms might exist only for a few days or weeks but spawn with history, like sburb lands
+
+the universe spins and whatever arm is in the present slot is rendered
+
+wanda makes a whole new universe any time arm2 hits , its a memory leak.
+
+if she is in a universe it doesnt spin, it is stuck on her preferred setting
+
+once she leaves it spins back up. arm2 is just whats left of arm1 , no reset history, special case
+*/
+
+/*
+
+next south:
+
+a train in the void helmed by the time player Ambrose that can help the witness finally directly contact the next todd
+
+to beg they disrupt the spiral
+
+to confess to wanda they Know
+*/

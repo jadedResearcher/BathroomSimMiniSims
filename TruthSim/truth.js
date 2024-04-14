@@ -6,6 +6,8 @@
 //but i wouldn't  want you to be bored
 //so i make sure theres enrichment for you in the code
 
+
+// new wiki who this https://zampaniosim.miraheze.org/wiki/Main_Page
 const globalBGMusic = new Audio("audio/music/funky_beat_by_ic.mp3");
 let globalContainer;//the whole 'screen'
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
@@ -32,7 +34,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME,MAZEMINIGAME, HOONMINIGAME, GAMERSHOPMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, HOONMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -122,6 +124,11 @@ const truthPopup = async (title, text, secret) => {
   });
 
   return myPromise;
+}
+
+const deleteSave = ()=>{
+  localStorage.removeItem(SAVE_KEY);
+
 }
 
 const save = () => {
@@ -445,6 +452,17 @@ const renderSaveTab = () => {
   const stats = createElementWithClassAndParent("div", globalTabContent, "stats");
 
   const section1 = createElementWithClassAndParent("div", stats);
+
+  const deleteButton = createElementWithClassAndParent("button", section1);
+  deleteButton.innerText = "Delete Save?";
+  deleteButton.onclick = ()=>{
+    if(window.confirm("Are you sure? You can not undo this... Do you have a backup?")){
+      truthLog("...","... Do not forget me."); //technically you won't see this before the page refreshes, unless you keep logging cached
+      deleteSave();
+      window.location.href = window.location.href;
+    }
+
+  }
 
   const startedPlaying = createElementWithClassAndParent("div", section1);
   startedPlaying.innerHTML = `<b>Started Playing:</b> ` + `${new Date(globalDataObject.startedPlayingTimeCode).toLocaleDateString()},  ${new Date(globalDataObject.startedPlayingTimeCode).toLocaleTimeString()}`;

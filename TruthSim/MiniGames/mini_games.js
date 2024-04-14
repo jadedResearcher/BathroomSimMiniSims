@@ -55,6 +55,11 @@ const initAllMiniGames = () => {
     new BettingMiniGame();
 }
 
+const makeScreenRed = (ele)=>{
+    createElementWithClassAndParent("div", ele, "red-overlay");
+
+}
+
 const emitSass = (ele, sass) => {
     const existingSass = document.querySelector(".sass");
     if (existingSass) {
@@ -372,6 +377,7 @@ class EyeKillerMiniGame extends MiniGame {
                 if (intersects(cultist_container, blorbo)) {
                     if (!dead) {
                         dead = true;
+                        makeScreenRed(ele);
                         await truthPopup("You were hunted down!", "Better luck next time!", "It seems you need to, as the CFO of Eyedol Games would say, 'git gud'.");
                         renderMazeTab();
                     }
@@ -397,7 +403,6 @@ class EyeKillerMiniGame extends MiniGame {
                                 dmg.innerText = cultist.dataset.hp;
                                 fx.play();
                                 if (hp <= 0) {
-                                    console.log("JR NOTE: cultist bled out: ", number_killed)
                                     cultist.dataset.dead = true;
 
                                     cultist.style.display = "none";
@@ -739,7 +744,15 @@ class BettingMiniGame extends MiniGame {
             const lowerButton = createElementWithClassAndParent("button", buttonContainer);
             lowerButton.innerText = "LOWER"
 
-            const youLose = () => {
+            //she thinks its you breaching. but its her, too
+            const breach = async ()=>{
+                makeScreenRed(ele);
+                await truthPopup("You got greedy...", `Oh no! Hoon thought you must be cheating to win so much. Luckily death is not a thing in my Horridors, but you DID lose your initial bet of ${bet} a second time when she looted your temporary corpse. (And thank you to the Wisp for voicing Hoon and the Radio!)`, "Wow. It is almost like Hoon's radio is unfair and arbitrary in who it kills. Who would have thought.");
+                decreaseTruthBy(bet)
+                renderMazeTab();
+            }
+
+            const youLose = async () => {
                 if (this.fact && this.fact.title.toLowerCase().includes("luck")) {
                     return youWin();
                 }
@@ -756,6 +769,8 @@ class BettingMiniGame extends MiniGame {
                 }
                 secondaryHeader.innerHTML += " You lost :(";
                 buttonContainer.remove();
+                await truthPopup("You lost", `Thems the breaks. You do not get to keep your bet of ${bet}. (And thank you to the Wisp for voicing Hoon and the Radio!)`, "Wow. It is almost like Hoon's radio is unfair and arbitrary in who it kills. Who would have thought.");
+
             }
 
             //no infinite money cheats, the Radio knows
@@ -764,6 +779,8 @@ class BettingMiniGame extends MiniGame {
 
             //https://www.reddit.com/r/statistics/comments/yssivj/q_highlow_card_game_statistics/
             const youWin = () => {
+                numberOfWins++;
+                const numberOfWinsPrev = numberOfWins -1;
                 //http://www.farragofiction.com/RadioTranscript/
 
                 //don't add to these unless you also add voice
@@ -773,25 +790,28 @@ class BettingMiniGame extends MiniGame {
                 const radioSassOptions = [undefined, undefined, undefined, "WARNING", "WARNING. ALL OPERATIVES ARE TO SUPRESS THE BREACH IN PROGRESS. THIS IS THE SECOND ALERT.", "WARNING. CLASS 3 BREACH IN PROGRESS. SURPRESS THE ABNORMALITY." ,"EXTERMINATE THEM. YOU CANNOT FAIL.",  "KILL IT KILL IT NOW WHY AREN'T YOU KILLING IT"];
                 //file name only, when i go to play add mp3 and path
                 const radioVoiceOptions = [undefined, undefined, undefined, "warning", "second_alert", "class_three", "terminate_them", "kill_it_now"]
-                console.log("JR NOTE: TODO make small chance of breach before")
-                if (numberOfWins > sassOptions.length) {
-                    alert("HOON IS GOING TO BREECH");
+                //hoon breaches if you win too much, more odds each time till theres no more quips (but only if the radio says to)
+                if (numberOfWinsPrev > sassOptions.length || (radioVoiceOptions[numberOfWinsPrev] && Math.random() < ((numberOfWinsPrev-3)) /5)) {
+                    audio.src = `audio/fx/HoonVoiceWorkByWisp/${radioVoiceOptions[numberOfWinsPrev]}.mp3`;
+                    audio.play();
+                    emitRadioSass(document.querySelector(".radio-container"), radioSassOptions[numberOfWinsPrev]);
+                    
+                    breach();
                     return;
                 }
 
 
                 const playVoice = () => {
-                    emitSass(document.querySelector(".blorbo-container"), sassOptions[numberOfWins]);
-                    audio.src = `audio/fx/HoonVoiceWorkByWisp/${voiceOptions[numberOfWins]}.mp3`;
+                    emitSass(document.querySelector(".blorbo-container"), sassOptions[numberOfWinsPrev]);
+                    audio.src = `audio/fx/HoonVoiceWorkByWisp/${voiceOptions[numberOfWinsPrev]}.mp3`;
                     audio.play();
                     audio.removeEventListener("pause", playVoice); //only play once
-                    numberOfWins++;
                 }
 
                 if (radioVoiceOptions[numberOfWins]) {
-                    audio.src = `audio/fx/HoonVoiceWorkByWisp/${radioVoiceOptions[numberOfWins]}.mp3`;
+                    audio.src = `audio/fx/HoonVoiceWorkByWisp/${radioVoiceOptions[numberOfWinsPrev]}.mp3`;
                     audio.play();
-                    emitRadioSass(document.querySelector(".radio-container"), radioSassOptions[numberOfWins]);
+                    emitRadioSass(document.querySelector(".radio-container"), radioSassOptions[numberOfWinsPrev]);
                     //if radio, it goes first and hoon waits till its done, she's subservient to it
                     audio.addEventListener("pause", playVoice); //weird way of wiring an event listner up so you can remove it later
                 } else {
