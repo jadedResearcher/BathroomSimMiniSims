@@ -672,8 +672,8 @@ class BettingMiniGame extends MiniGame {
     }
 
     startGame = (ele, room, callback) => {
-        console.log("JR NOTE: turn off cheat")
-        this.fact = KISALUCKYBASTARD;
+        //console.log("JR NOTE: turn off cheat")
+        //this.fact = KISALUCKYBASTARD;
         const radioContainer = createElementWithClassAndParent("div", ele, "radio-container");
 
         radioContainer.style.position = "absolute";
@@ -770,7 +770,7 @@ class BettingMiniGame extends MiniGame {
                 secondaryHeader.innerHTML += " You lost :(";
                 buttonContainer.remove();
                 await truthPopup("You lost", `Thems the breaks. You do not get to keep your bet of ${bet}. (And thank you to the Wisp for voicing Hoon and the Radio!)`, "Wow. It is almost like Hoon's radio is unfair and arbitrary in who it kills. Who would have thought.");
-
+                renderMazeTab();
             }
 
             //no infinite money cheats, the Radio knows
