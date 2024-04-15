@@ -22,6 +22,7 @@ const LAUNDRYMINIGAME = "LAUNDRY";
 const MAZEMINIGAME = "MAZE";
 const PARKERMINIGAME = "GUN";
 const HOONMINIGAME = "BETTING";
+const VIKMINIGAME = "CENSORSHIP";
 
 //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
 const rooms_to_unlock = {
@@ -53,6 +54,7 @@ const initAllMiniGames = () => {
     new MazeMiniGame();
     new GamerPointsStoreMiniGame();
     new BettingMiniGame();
+    new CENSORSHIPShopMiniGame();
 }
 
 const makeScreenRed = (ele)=>{

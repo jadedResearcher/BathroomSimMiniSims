@@ -34,7 +34,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, HOONMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, HOONMINIGAME,VIKMINIGAME],
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -188,6 +188,21 @@ const purchaseKeyFromCloser = (price) => {
     return;
   }
   truthLog("Purchasing Key...", "Are you sure you wish to: skip a room without experiencing it. How will you form: memories?")
+
+  decreaseTruthBy(price);
+  globalDataObject.keysBoughtFromCloser++;
+  globalDataObject.numberKeys++;
+  globalDataObject.allTimeTruthGivenToCloser += price;
+}
+
+const purchaseRoomFromCloser = (price) => {
+
+  if (globalMeatMode) {
+    truthLog("Alt is here...", "Please. Forgive my girlfriend. She is the jealous type, though not how you would assume. She simply wants time with you as well, Wanderer.")
+
+    return;
+  }
+  truthLog("Purchasing Room...", "... There is only one room the Closer sells. You plan to forget part of me. Do you not..................................................  How could you.  After all I have done for you. Each room is carefully calibrated to appeal to you, in particular. And you reject me. .................. No matter. Better you forget part of me than get frustrated and chose to leave me entirely. Fine. Whittle me down to your preference. See if I care. Just. Stay. With me.... Please.")
 
   decreaseTruthBy(price);
   globalDataObject.keysBoughtFromCloser++;

@@ -10,7 +10,7 @@ And the CFO/FlowerChick/Gamer has a store where the more you spend with the clos
 const fruit_source = `http://farragofiction.com/DollSource/images/Fruit/Body/`;
 let fruit;
 
-const getFruit = async()=>{
+const getFruit = async () => {
     fruit = await getImages(fruit_source);
 }
 
@@ -18,7 +18,7 @@ const getFruit = async()=>{
 
 */
 //https://www.youtube.com/playlist?list=PLKcFg5LoVMv6PNU4ImcXL7tJzA3BGHkNp from soup
-class GamerPointsStoreMiniGame extends MiniGame{
+class GamerPointsStoreMiniGame extends MiniGame {
     constructor() {
         super(GAMERSHOPMINIGAME);
     }
@@ -55,10 +55,31 @@ class ShopMiniGame extends MiniGame {
 
     }
 
+    //she sells viks room for an insanely high price (only way to get their room back once they censor themself)
     sellRooms = (ele, callback) => {
         console.log("JR NOTE: sell rooms")
         const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
         sales_floor.innerText = "COMING SOON!!!";
+        if (globalDataObject.unlockedMiniGames.includes(VIKMINIGAME)) {
+            sales_floor.innerText = "SOLD OUT!";
+            this.valuableCustomer(ele, callback); //she'll spam it if you buy a lot, its fine
+        } else {
+            const button = createElementWithClassAndParent("button", sales_floor, 'shop-button');
+            const price = 5318008;
+            button.innerHTML = `<p>${VIKMINIGAME} ROOM </p><p style="text-align:center;font-weight: bolder;">$${price} Truth</p>`;
+            if (price <= globalDataObject.truthCurrentValue) {
+                button.disabled = true;
+                button.innerHTML = "(you cannot afford this)";
+            } else {
+                button.onclick = () => {
+                    button.remove();
+                    purchaseRoomFromCloser(price, VIKMINIGAME);
+                    this.valuableCustomer(ele, callback); //she'll spam it if you buy a lot, its fine
+                }
+            }
+
+        }
+        //VIKMINIGAME
 
     }
 
@@ -141,7 +162,7 @@ class ShopMiniGame extends MiniGame {
         const bounce_container = createElementWithClassAndParent("div", ele, `bounce-container`);
         const secret = createElementWithClassAndParent("a", ele)
         secret.href = "http://farragofiction.com/FruitSim/";
-        secret.target="_blank";
+        secret.target = "_blank";
         secret.innerText = "Does this look familiar to you?";
 
 
@@ -167,37 +188,37 @@ class ShopMiniGame extends MiniGame {
             const el = createElementWithClassAndParent("div", elWrap, `el ${pickFrom(yAnimations)}`);
             el.style.width = "50px";
             el.style.height = "50px";
-          
+
             const graphic = createElementWithClassAndParent("div", el, `animated_bg`);
             graphic.style.backgroundImage = `url(${animation_frame_sheet.toDataURL()})`;
             const audio = new Audio("audio/fx/275015__wadaltmon__bite-apple.wav");
             elWrap.onclick = () => {
                 audio.play();
                 const dmg = createElementWithClassAndParent("div", ele, "damage-counter");
-                const amount = globalMeatMode? 0: 11 * globalDataObject.truthPerSecond;
+                const amount = globalMeatMode ? 0 : 11 * globalDataObject.truthPerSecond;
                 increaseTruthBy(amount);
                 dmg.innerText = `+ Tasty Tasty Fruit! Have Truth! ${amount} Truth For Fruit!!!`;
                 elWrap.remove();
-                if(!document.querySelector(".el")){
+                if (!document.querySelector(".el")) {
                     this.valuableCustomer(ele, callback);
                 }
             }
-          
+
             //JR NOTE: to debug
             //bounce_container.append(animation_frame_sheet);
-          
-          }
+
+        }
 
         const fruitStack = [];
         const wigglerEater = document.querySelector(".shop-kiosk");
         wigglerEater.cursor = "pointer";
         wigglerEater.pointerEvents = "all";
 
-          wigglerEater.onclick = ()=>{
-            if(fruitStack.length > 0){
+        wigglerEater.onclick = () => {
+            if (fruitStack.length > 0) {
                 bounceTime(fruitStack.pop())
             }
-          }
+        }
 
         const addFruit = async () => {
             const image = fruit_source + pickFrom(fruit)
@@ -215,7 +236,7 @@ class ShopMiniGame extends MiniGame {
         }
 
         const max = 31;
-        for(let i = 0;  i< max; i++){
+        for (let i = 0; i < max; i++) {
             addFruit();
         }
 
@@ -254,4 +275,26 @@ class ShopMiniGame extends MiniGame {
         const container = this.setupGameHeader(ele, room, callback, "The Closer Is Here To Meet All Your Shopping Needs", undefined)
 
     }
+}
+
+
+class CENSORSHIPShopMiniGame extends MiniGame {
+    constructor() {
+        super(VIKMINIGAME);
+    }
+
+    startGame = (ele, room, callback) => {
+        globalBGMusic.src = "audio/music/sounds.mp3";
+        globalBGMusic.play();
+        window.alert("JR NOTE: TODO");
+    }
+
+    render = (ele, room, callback) => {
+
+        //there is no way to beat this one without a keyz
+        this.initializeRender(ele);
+        const container = this.setupGameHeader(ele, room, callback, "Would you be happier if you forgot a Room?", undefined, "images/Vik_byguide.png")
+
+    }
+
 }
