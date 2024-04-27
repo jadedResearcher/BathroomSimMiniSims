@@ -374,6 +374,8 @@ const renderMazeTab = () => {
   if (!globalDataObject.currentMaze) {
     globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried, globalDataObject.truthPerSecond);
     globalDataObject.mazesTried++;
+  }else if(globalDataObject.unlockedMiniGames.length === 0){
+    fuckShitUpVikStyle(); //why did you forget EVERYTHING?
   }
   const header = createElementWithClassAndParent("h1", globalTabContent, "maze-title");
   header.innerText = globalDataObject.currentMaze.title;

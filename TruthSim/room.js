@@ -520,7 +520,12 @@ class Room {
       }
 
       ele.onclick = () => {
-        console.log("JR NOTE: trying to render", this.miniGameKey, globalTabContent)
+        //no. you forgot this. i don't care if you found some other way to access it, the part of your soul that recognizes this has rotten away
+        //did you really think there would be no consequences to using [CENSORED] so blithely?
+        if(globalDataObject.rottenMiniGames.includes(this.miniGameKey)){
+          fuckShitUpVikStyle();
+          return;
+        }
         globalMiniGames[this.miniGameKey].render(globalTabContent,this, this.incrementTimesBeaten);
         if (globalMeatMode && globalMeatGrowing) {
           growMeat();
