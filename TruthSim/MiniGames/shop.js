@@ -48,7 +48,7 @@ class ShopMiniGame extends MiniGame {
         const button = createElementWithClassAndParent("button", ele);
         button.innerText = "Thank You Valuable Customer: Click Here To Complete This Room";
         button.onclick = async () => {
-            await truthPopup("You bought objects!", "Don't spend it all in one place!", "Hmm... it would seem you are not satisfied with the perfect maze I designed for you? Well. If you insist on changing it. I can hardly stop you.");
+            await truthPopup("You bought objects!", "Avoid spending it all in one place!", "Hmm... it would seem you are not satisfied with the perfect maze I designed for you? Well. If you insist on changing it. I can hardly stop you.");
             callback(globalDataObject.currentMaze);
             renderMazeTab();
         }
@@ -57,19 +57,17 @@ class ShopMiniGame extends MiniGame {
 
     //she sells viks room for an insanely high price (only way to get their room back once they censor themself)
     sellRooms = (ele, callback) => {
-        console.log("JR NOTE: sell rooms")
         const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
-        sales_floor.innerText = "COMING SOON!!!";
         if (globalDataObject.unlockedMiniGames.includes(VIKMINIGAME)) {
             sales_floor.innerText = "SOLD OUT!";
             this.valuableCustomer(ele, callback); //she'll spam it if you buy a lot, its fine
         } else {
             const button = createElementWithClassAndParent("button", sales_floor, 'shop-button');
             const price = 5318008;
-            button.innerHTML = `<p>${VIKMINIGAME} ROOM </p><p style="text-align:center;font-weight: bolder;">$${price} Truth</p>`;
-            if (price <= globalDataObject.truthCurrentValue) {
+            button.innerHTML = `<p>${VIKMINIGAME} ROOM </p><p style="text-align:center;font-weight: bolder;">${price} Truth</p>`;
+            if (price >= globalDataObject.truthCurrentValue) {
                 button.disabled = true;
-                button.innerHTML = "(you cannot afford this)";
+                button.innerHTML += "(you cannot afford this)";
             } else {
                 button.onclick = () => {
                     button.remove();
@@ -283,7 +281,19 @@ class CENSORSHIPShopMiniGame extends MiniGame {
         super(VIKMINIGAME);
     }
 
+    valuableCustomer = (ele, callback) => {
+        const button = createElementWithClassAndParent("button", ele);
+        button.innerText = "You Do Not Need To Look At The Void";
+        button.onclick = async () => {
+            await truthPopup("You Avoided the Void!", "Probably a smart idea! Who KNOWS what would happen if you gave part of our soul to it...", "I... appreciate you not rotting off pieces of the maze for your convinience. Thank you. I... did not consider that you valued me that highly.");
+            callback(globalDataObject.currentMaze);
+            renderMazeTab();
+        }
+
+    }
+
     startGame = (ele, room, callback) => {
+        this.valuableCustomer(ele, callback); //she'll spam it if you buy a lot, its fine
         globalBGMusic.src = "audio/music/sounds.mp3";
         globalBGMusic.play();
 
