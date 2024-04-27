@@ -200,7 +200,7 @@ const isThisPixelRelevant = (x, y, virtual_canvas, most_frequent_color) => {
     return true;
   }
 }
-
+//http://farragofiction.com/PerfectHeist/
 const handleMouseMoveEvents = (canvas, virtual_canvas, most_frequent_color) => {
   canvas.onmousemove = (e) => {
     var ctx = canvas.getContext('2d');

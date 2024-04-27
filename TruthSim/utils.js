@@ -476,3 +476,44 @@ class SeededRandom {
   }
 }
 
+
+const fuckShitUpVikStyle = () => {
+  const body = document.querySelector("body");
+  globalBGMusic.src = "audio/music/sometimes_you_have_fun.mp3";
+  globalBGMusic.play();
+  for(let i = 0; i<31; i++){
+    const censorship = createElementWithClassAndParent("div", body, "vik");
+    censorship.innerText = "THE CENSORSHIP WAS FOR YOUR PROTECTION";
+  }
+
+  const divs = document.querySelectorAll("div");
+
+
+  const paragraphs = document.querySelectorAll("p");
+  const spans = document.querySelectorAll("span");
+  for (let p of paragraphs) {
+    const css = getBullshitCSS();
+    p.setAttribute("style", css);
+    p.classList.add("visible");
+    p.classList.add("glitch");
+    p.title = p.innerText;
+  }
+
+  for (let p of spans) {
+    const css = getBullshitCSS();
+    p.setAttribute("style", css);
+    p.classList.add("visible");
+    p.classList.add("glitch");
+    p.title = p.innerText;
+  }
+
+  
+  for (let p of divs) {
+    const css = getBullshitCSS();
+    p.setAttribute("style", css);
+    p.classList.add("visible");
+    p.classList.add("glitch");
+    p.title = p.innerText;
+  }
+
+}

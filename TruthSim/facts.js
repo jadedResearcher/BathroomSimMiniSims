@@ -180,10 +180,53 @@ thems the breaks
 
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD,EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS,CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, PARKERSlOVESGUNTAN, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD,EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS,CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, PARKERSlOVESGUNTAN,CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3];
 
 //every fact the CFO can give you
 const factsForGaming = [CLOSERISGREATATROOMS];
 
 //every fact the slot machines can give you
 const factsForGambling = [CLOSERADDICTEDTOFRUIT]
+
+
+/*
+IC: i feel like the oft missed concept is that hoon comes from disciplinary
+she's had to put a lot of people down, guilty or not, and from her pov the manager gave orders and the day flowed until one day they disappeared and everything went to shi
+
+JR: yupyup
+the third gen blorbos are all dealing with the fact that the manger (me) just fucking vainished out of nowhere after kinda making everyone irrelevant
+i made everyone immortal and stopped using them at all to cheat at just progressing the game
+and that causes an
+ennui
+
+IC: river's been coping about not being able to help her team despite being put on an important position at a young age by ennui, hoon never recovered from the dependent attachment, and leehunter. well
+they're lesbians first of all
+but second of all when all of your coworkers don't work and thus don't get to form a personality you all start melding together
+the difference between lee and hunter is functionally nil because jr has no idea who they are either 
+
+sometimes the horror is that god thinks you and your shitty ex are fundamentally close enough the same person
+
+
+*/
+
+
+/*
+JR:
+i like vik as a way to articulate my time in my wheelchair and walker
+i know that its toxic to think only ppl in a category can write about that category
+but
+i also like that vik as a character entirely
+almost begs for that kind of toxic debate
+is it problematic to have a disabled character with flaws? well what if the creator is disabled.
+is it more problematic to pretend disabled chars dont exist in our universe or are 2 dimensional puppets?
+i think what i like best about vik
+is that
+their disability is almost irrelevant?
+because the core of who they are , as a person 
+is a CAREGIVER
+one who goes too far, sacrifices too much for others
+sure maybe they got injured from that impulse
+but they voided the details
+we dont get to know and its honestly not important
+so many stories, i think, have the disabled person as the one receiving care
+this feels good to me*/

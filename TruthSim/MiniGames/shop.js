@@ -286,7 +286,44 @@ class CENSORSHIPShopMiniGame extends MiniGame {
     startGame = (ele, room, callback) => {
         globalBGMusic.src = "audio/music/sounds.mp3";
         globalBGMusic.play();
-        window.alert("JR NOTE: TODO");
+
+        const parent = createElementWithClassAndParent("div", ele, "shop");
+        const dropdown = createElementWithClassAndParent("select", parent);
+
+        for (let o of globalDataObject.unlockedMiniGames) {
+            const option = document.createElement("option")
+            option.innerText = o + " ROOM";
+            option.value = o ;
+            dropdown.append(option);
+        }
+        const button = createElementWithClassAndParent("button", parent);
+        button.innerText = `Give up ALL your truth and go back to 1 truth per second AND roll a new maze in exchange for permanently forgetting the chosen room?`;
+        button.style.marginTop="31px"
+        
+        button.onclick = async ()=>{
+            globalDataObject.currentMaze = null;
+            globalDataObject.truthCurrentValue = 0;
+            globalDataObject.allTimeTruthValue = 0;
+            globalDataObject.truthPerSecond = 1;
+            globalDataObject.rottenMiniGames.push(dropdown.value);
+            removeItemOnce(globalDataObject.unlockedMiniGames, dropdown.value);
+            removeItemOnce(globalDataObject.unlockedMiniGames, VIKMINIGAME); //doesn't rot it but you can only do it the one time without paying again
+
+            globalBGMusic.src = "audio/music/sometimes_you_have_fun.mp3";
+            globalBGMusic.play();
+            await truthPopup("Uh. I feel weird...", "What was I doing? Where are you? Oh. Sorry about the glitch! Let me just... uh. Make a new maze? I guess? How did you end up in the Void?", "I am scared...");
+            renderMazeTab();
+
+            //currentTruth is zero
+            //truth per second is zero
+            //unlocked mini games no longer has the chosen one
+            //reroll maze
+            //add room name to the rotten rooms array
+        }
+
+
+
+
     }
 
     render = (ele, room, callback) => {

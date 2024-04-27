@@ -34,7 +34,8 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, HOONMINIGAME,VIKMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, HOONMINIGAME,VIKMINIGAME, SHOPMINIGAME],
+  rottenMiniGames: [], //did you think the things vik erases sleep peacefully?
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
@@ -60,6 +61,7 @@ let globalDataObjectREAL = {
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
   unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
+  rottenMiniGames: [], //did you think the things vik erases sleep peacefully?
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
