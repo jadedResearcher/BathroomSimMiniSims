@@ -324,9 +324,9 @@ class LockMiniGame extends MiniGame {
     }
 
     render = (ele, room, callback) => {
-        //there is no way to beat this one without a keyz
+        //there is no way to beat this one without a key
         this.initializeRender(ele);
-        const container = this.setupGameHeader(ele, room, callback, "There is a lock inside.", undefined, undefined)
+        const container = this.setupGameHeader(ele, room, callback, "There is a lock inside. (The Illusionist of Twisted Dolls Hates It)", undefined, undefined)
 
     }
 }

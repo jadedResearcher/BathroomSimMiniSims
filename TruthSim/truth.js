@@ -17,9 +17,9 @@ const globalRand = new SeededRandom(13);
 //the Witness doens't exist and neither do the arms except they clearly also do
 
 let globalDataObject = {
-  truthPerSecond: 100,
+  truthPerSecond: 1000,
   startedPlayingTimeCode: Date.now(),
-  numberKeys: 0,
+  numberKeys: 31, //thanks illusionist
   keysBoughtFromCloser: 0,
   allTimeTruthGivenToCloser: 0,
   lastLoadTimeCode: 0,
@@ -197,7 +197,7 @@ const purchaseKeyFromCloser = (price) => {
   globalDataObject.allTimeTruthGivenToCloser += price;
 }
 
-const purchaseRoomFromCloser = (price) => {
+const purchaseRoomFromCloser = (price, room) => {
 
   if (globalMeatMode) {
     truthLog("Alt is here...", "Please. Forgive my girlfriend. She is the jealous type, though not how you would assume. She simply wants time with you as well, Wanderer.")
@@ -210,6 +210,7 @@ const purchaseRoomFromCloser = (price) => {
   globalDataObject.keysBoughtFromCloser++;
   globalDataObject.numberKeys++;
   globalDataObject.allTimeTruthGivenToCloser += price;
+  globalDataObject.unlockedMiniGames.push(room)
 }
 
 const purchaseFactFromCloser = (price, fact) => {
@@ -744,10 +745,11 @@ const handleRewards = (numberBeaten, bonus) => {
   let truthBulkReward = 0; //might not get this
 
   let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
-  if (!unlockedRoom && keyReward) {
+
+  //shout out to the Illusionist of Twisted Dolls for realizing this meant you would KEEP UNLOCKING LOCKED MINIGAMES
+  if (!unlockedRoom && keyReward && !globalDataObject.unlockedMiniGames.includes("LOCKED")) {
     unlockedRoom = "LOCKED"
   }
-  console.log("JR NOTE: unlocked room", unlockedRoom)
 
 
 
