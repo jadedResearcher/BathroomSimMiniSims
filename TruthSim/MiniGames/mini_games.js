@@ -12,7 +12,7 @@ const globalMiniGames = {
 //CONSTANTS
 //debug with ?debugMiniGame=BETTING or whatever the key is
 const EYEKILLERMINIGAME = "EYEKILLER";
-const LOCKEDMINIGAME = "LOCKED";
+const LOCKEDMINIGAME = "LOCKED"; //this gets unlocked special if you have a key and no other room is unlocked
 const RABBITMINIGAME = "RABBIT";
 const BUTTONMINIGAME = "BUTTON";
 const CONFESSIONMINIGAME = "CONFESSION";

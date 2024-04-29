@@ -23,8 +23,20 @@ class GamerPointsStoreMiniGame extends MiniGame {
         super(GAMERSHOPMINIGAME);
     }
 
+    valuableCustomer = (ele, callback) => {
+        const button = createElementWithClassAndParent("button", ele);
+        button.innerText = "Thank You Valuable Customer: Click Here To Complete This Room";
+        button.onclick = async () => {
+            await truthPopup("You are a real gamer!", "Wow! It seems you are having so much fun earning points and leveling up by participating in capitalism!", "While I value the Chief Financial Officer of Eyedol Game's ability to draw people in, my hot maze gf is much, much better.");
+            callback(globalDataObject.currentMaze);
+            renderMazeTab();
+        }
+
+    }
+
     startGame = (ele, room, callback) => {
         window.alert("JR NOTE: TODO");
+        this.valuableCustomer(ele, callback);
     }
 
     render = (ele, room, callback) => {

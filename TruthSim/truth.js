@@ -747,7 +747,7 @@ const handleRewards = (numberBeaten, bonus) => {
   let unlockedRoom = rooms_to_unlock[globalDataObject.mazesBeaten]; //if its undefined ignore
 
   //shout out to the Illusionist of Twisted Dolls for realizing this meant you would KEEP UNLOCKING LOCKED MINIGAMES
-  if (!unlockedRoom && keyReward && !globalDataObject.unlockedMiniGames.includes("LOCKED")) {
+  if (!unlockedRoom && keyReward && !globalDataObject.unlockedMiniGames.includes(LOCKEDMINIGAME) && !globalDataObject.rottenMiniGames.includes(LOCKEDMINIGAME)) {
     unlockedRoom = "LOCKED"
   }
 
