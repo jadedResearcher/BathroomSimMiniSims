@@ -18,6 +18,75 @@ const getFruit = async () => {
 
 */
 //https://www.youtube.com/playlist?list=PLKcFg5LoVMv6PNU4ImcXL7tJzA3BGHkNp from soup
+
+/*
+
+a points reward knows 
+* what unlocks it
+* what to do on unlock
+
+things that can be added on unlock:
+* (level +1 ) points per 100 truth spend with the closer
+* an optional  random procedural fact about yourself based on the level like the Player Is A Level 10 Heir of Pizza (theme italian) (want a spammy amount of facts for K)
+* an optional random bee
+* an optional  random amount of truth
+* every 3 levels give you a fact from the CFO 
+* extremely rarely a key
+*/
+const pointsRewardTiers = ["Aluminum", "Nickle", "Tin", "Lead", "Iron", "Zinc", "Steel", "Copper", "Bronze", "Silver", "Gold", "Tungsten", "Titanium", "Platinum", "Diamond", "Mithril", "Adamantium", "Unubtanium", "Brass"]
+
+class PointsReward {
+    truth = 0;
+    key = false;
+    fact;
+
+    // in order to make a points reward ALL we need to know is how many closer loyalty points this is for
+    constructor(gamer_level, disabled = false) {
+        this.disabled = disabled;
+        const rand = new SeededRandom(gamer_level);
+        rand.nextDouble() //stir shit
+        this.label = `${pointsRewardTiers[gamer_level % pointsRewardTiers.length]} Level ${gamer_level}`;
+        if(this.disabled){
+            this.label += "(not enough points)"
+        }
+        //between three seconds and five  minutes of truth
+        this.truth = rand.getRandomNumberBetween(0, 5*60*parseInt(globalDataObject.truthPerSecond));
+        console.log("JR NOTE: gamer level is",{gamer_level: gamer_level, rand: rand})
+        this.key = rand.nextDouble() > 0.9;
+        if(rand.nextDouble()>0.5){
+            this.fact = randomFact(rand);
+        }
+    }
+
+    render(parent){
+        const level_ele = createElementWithClassAndParent("div", parent, "gamer-tier");
+        if(this.disabled){
+            level_ele.classList.add("room-locked")
+        }
+        const level_ele_label = createElementWithClassAndParent("div", level_ele);
+        level_ele_label.innerText = this.label;
+
+        const unordered_list = createElementWithClassAndParent("ul", level_ele);
+
+        if(this.truth>0){
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `Truth: ${this.truth}!!!`;
+        }
+
+        if(this.key){
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `A Key!!!`;
+        }
+
+        if(this.fact){
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `Fact: ${this.fact.title}`;
+        }
+
+    }
+
+}
+
 class GamerPointsStoreMiniGame extends MiniGame {
     constructor() {
         super(GAMERSHOPMINIGAME);
@@ -36,7 +105,24 @@ class GamerPointsStoreMiniGame extends MiniGame {
 
     startGame = (ele, room, callback) => {
         window.alert("JR NOTE: TODO");
+        const current_gamer_level = Math.ceil(globalDataObject.allTimeTruthGivenToCloser / 1000);
         this.valuableCustomer(ele, callback);
+        const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
+        sales_floor.style.backgroundColor = "white";
+        sales_floor.style.margin = "31px";
+
+        const reward = new PointsReward(current_gamer_level +1, true);
+        reward.render(sales_floor);
+
+        //don't render ALL possible levels, just current + 1 and then 9 fewer (if extant)
+        for (let i = 0; i < 9; i++) {
+            const level = current_gamer_level - i;
+            if (level > 0) {
+                const reward = new PointsReward(current_gamer_level - i);
+                reward.render(sales_floor);
+            }
+        }
+
     }
 
     render = (ele, room, callback) => {
@@ -48,6 +134,8 @@ class GamerPointsStoreMiniGame extends MiniGame {
     }
 
 }
+
+
 //one of the survivors made this
 //https://uquiz.com/quiz/wxVQTg/i-am-a-normal-uquiz-i-will-not-pull-you-down-an-inescapable-rabbit-hole
 class ShopMiniGame extends MiniGame {
@@ -316,14 +404,14 @@ class CENSORSHIPShopMiniGame extends MiniGame {
         for (let o of globalDataObject.unlockedMiniGames) {
             const option = document.createElement("option")
             option.innerText = o + " ROOM";
-            option.value = o ;
+            option.value = o;
             dropdown.append(option);
         }
         const button = createElementWithClassAndParent("button", parent);
         button.innerText = `Give up ALL your truth and go back to 1 truth per second AND roll a new maze in exchange for permanently forgetting the chosen room?`;
-        button.style.marginTop="31px"
-        
-        button.onclick = async ()=>{
+        button.style.marginTop = "31px"
+
+        button.onclick = async () => {
             globalDataObject.currentMaze = null;
             globalDataObject.truthCurrentValue = 0;
             globalDataObject.allTimeTruthValue = 0;

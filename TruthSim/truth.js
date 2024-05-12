@@ -17,7 +17,7 @@ const globalRand = new SeededRandom(13);
 //the Witness doens't exist and neither do the arms except they clearly also do
 
 let globalDataObject = {
-  truthPerSecond: 1000,
+  truthPerSecond: 10,
   startedPlayingTimeCode: Date.now(),
   numberKeys: 31, //thanks illusionist
   keysBoughtFromCloser: 0,

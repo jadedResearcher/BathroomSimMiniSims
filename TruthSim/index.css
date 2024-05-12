@@ -729,6 +729,12 @@ button img {
   font-size: 72px;
 }
 
+.gamer-tier{
+  color: black;
+  border: 3px solid black;
+  padding: 31px;
+}
+
 
 .glitch{
   animation: glitch 1s linear infinite;

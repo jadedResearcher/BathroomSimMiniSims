@@ -220,7 +220,27 @@ const handleMouseMoveEvents = (canvas, virtual_canvas, most_frequent_color) => {
 
 
 
-
+/*
+sometimes i feel like a warped glass
+an illusion of transparency
+the clear and shining surface putting people at ease
+entirely unaware theyve seen nothing from deeper in 
+people always seem so surprised by my facets
+its partly my fault
+i can never bring myself to communicate clearly about things, even as i try so hard
+and the things i do manage to say are sincere and honest and vulnerable
+but never complete
+the truth is layered
+theres always so much unseen, even in the middle of an unsettlingly personal ramble 
+sometimes its just the relentless deluge never gives people time to think, to proccess
+sometimes its missing perspectives
+sometimes i think ive done it
+shown a light straight through to my core
+but always it scatters and warps and everything is misunderstood in some way
+sometimes i twist specifically to hide the core
+gain the catharsis of a ramble safe in the knowledge it will never be seen
+not in a way that matters
+*/
 
 
 

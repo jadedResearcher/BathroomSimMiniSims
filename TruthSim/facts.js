@@ -13,6 +13,14 @@ const getAllUnlockedFactTitles = ()=>{
   return ret;
 }
 
+//picks a theme and makes a bullshit fact about it
+const randomFact = (rand)=>{
+  const theme = rand.pickFrom(Object.values(all_themes));
+  console.log("JR NOTE: theme is", theme)
+  return new Fact("Placeholder Fact", "This is just a test, JR needs to make this funny madlibs later.",[theme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
+
+}
+
 class Fact{
   title = "Firsty"; //should be unique
   lore_snippet = "This is the first fact, and JR created it on february 27th 2024."
