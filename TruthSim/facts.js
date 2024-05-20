@@ -17,7 +17,7 @@ const getAllUnlockedFactTitles = ()=>{
 const randomFact = (rand)=>{
   const theme = rand.pickFrom(Object.values(all_themes));
   console.log("JR NOTE: theme is", theme)
-  return new Fact("Placeholder Fact", "This is just a test, JR needs to make this funny madlibs later.",[theme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
+  return new Fact(`${titleCase(theme.key)} Fact`, "This is just a test, JR needs to make this funny madlibs later.",[theme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
 
 }
 

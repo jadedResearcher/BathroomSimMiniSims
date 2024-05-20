@@ -49,15 +49,15 @@ class PointsReward {
         if(this.disabled){
             this.label += "(not enough points)"
         }
-        //between three seconds and five  minutes of truth
-        this.truth = rand.getRandomNumberBetween(0, 5*60*parseInt(globalDataObject.truthPerSecond));
-        console.log("JR NOTE: gamer level is",{gamer_level: gamer_level, rand: rand})
-        this.key = rand.nextDouble() > 0.9;
         if(rand.nextDouble()>0.5){
             this.fact = randomFact(rand);
         }
-    }
+        //between three seconds and five  minutes of truth
+        this.truth = rand.getRandomNumberBetween(0, 5*60*parseInt(globalDataObject.truthPerSecond));
+        this.key = rand.nextDouble() > 0.9;
 
+    }
+//http://knucklessux.com/PuzzleBox/Secrets/WatcherOfThreads/dreams.pdf
     render(parent){
         const level_ele = createElementWithClassAndParent("div", parent, "gamer-tier");
         if(this.disabled){
@@ -80,7 +80,7 @@ class PointsReward {
 
         if(this.fact){
             const ele = createElementWithClassAndParent("li", unordered_list);
-            ele.innerHTML = `Fact: ${this.fact.title}`;
+            ele.innerHTML = `${this.fact.title}`;
         }
 
     }
@@ -103,23 +103,57 @@ class GamerPointsStoreMiniGame extends MiniGame {
 
     }
 
+    generateRewards = (current_gamer_level, ele, room, callback)=>{
+        //this happens because a button was clicked
+        alert("JR NOTE: todo")
+        /*
+            first, for every level under and INCLUDING the current_gamer_level create a PointsReward
+
+
+            then, for each PointsReward, star collating the total reward (number of truth, number of keys, array of facts, etc) (don't do it for each, less efficient and i also need to render them)
+
+            then, set globalDataObject.allTimeTruthGivenToCloser to zero
+
+            then if   maximumGamerLevelAchieved is less than the current_gamer_level, change that
+
+            then, render a Rewards screen detailing all these things they just unlocked (which has a button to return to map just like regular rewards screen)
+
+        */
+    }
+
     startGame = (ele, room, callback) => {
-        window.alert("JR NOTE: TODO");
         const current_gamer_level = Math.ceil(globalDataObject.allTimeTruthGivenToCloser / 1000);
         this.valuableCustomer(ele, callback);
-        const sales_floor = createElementWithClassAndParent("div", ele, "sales-floor");
-        sales_floor.style.backgroundColor = "white";
-        sales_floor.style.margin = "31px";
+        const container = createElementWithClassAndParent("div", ele);
+        container.style.backgroundColor = "white";
+        container.style.margin = "31px";
+        container.style.padding="13px";
+
+
+        const header = createElementWithClassAndParent("div", container);
+        const body = createElementWithClassAndParent("div", container, "sales-floor");
+        body.style.backgroundColor = "white";
+        body.style.margin = "31px";
+
+        const instructions = createElementWithClassAndParent("div", header);
+        instructions.style.color="black";
+        instructions.innerText = "Okay sooooooo... Here's how it works. For every 1000 Truth you spend with my wife over in the shop, You'll earn a Gamer Level! At any time you can trade all your Gamer Levels for sweet loot, but if you do you gotta start back over at level 1, so the longer you grind the better your gains, yeah?"
+
+        const button = createElementWithClassAndParent("button", header);
+        button.innerText = "Cash In Gamer Levels? (warning: resets level)";
+        button.onclick = ()=>this.generateRewards(current_gamer_level, room, callback)
+        button.style.marginTop="13px"
+
 
         const reward = new PointsReward(current_gamer_level +1, true);
-        reward.render(sales_floor);
+        reward.render(body);
 
         //don't render ALL possible levels, just current + 1 and then 9 fewer (if extant)
         for (let i = 0; i < 9; i++) {
             const level = current_gamer_level - i;
             if (level > 0) {
                 const reward = new PointsReward(current_gamer_level - i);
-                reward.render(sales_floor);
+                reward.render(body);
             }
         }
 

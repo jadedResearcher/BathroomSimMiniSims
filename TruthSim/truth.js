@@ -22,6 +22,7 @@ let globalDataObject = {
   numberKeys: 31, //thanks illusionist
   keysBoughtFromCloser: 0,
   allTimeTruthGivenToCloser: 0,
+  maximumGamerLevelAchieved: 0,
   lastLoadTimeCode: 0,
   totalTimeInMeatMode: 0,
   lastSaveTimeCode: 0,
@@ -44,6 +45,7 @@ let globalDataObject = {
 //restore to this after debugging
 let globalDataObjectREAL = {
   truthPerSecond: 1,
+  maximumGamerLevelAchieved: 0,
   startedPlayingTimeCode: Date.now(),
   numberKeys: 0,
   keysBoughtFromCloser: 0,
