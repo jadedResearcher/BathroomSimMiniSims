@@ -37,8 +37,8 @@ const pointsRewardTiers = ["Aluminum", "Nickle", "Tin", "Lead", "Iron", "Zinc", 
 
 class PointsReward {
     truth = 0;
-    key = false;
-    fact;
+    key = 0;//the collated reward has more than one, but otherwise just one or zero
+    facts = []; //the collated reward has more than one, but otherwise just one or zero
 
     // in order to make a points reward ALL we need to know is how many closer loyalty points this is for
     constructor(gamer_level, disabled = false) {
@@ -46,21 +46,31 @@ class PointsReward {
         const rand = new SeededRandom(gamer_level);
         rand.nextDouble() //stir shit
         this.label = `${pointsRewardTiers[gamer_level % pointsRewardTiers.length]} Level ${gamer_level}`;
-        if(this.disabled){
+        if (this.disabled) {
             this.label += "(not enough points)"
         }
-        if(rand.nextDouble()>0.5){
-            this.fact = randomFact(rand);
+        if (rand.nextDouble() > 0.5) {
+            this.facts.push(randomFact(rand));
         }
         //between three seconds and five  minutes of truth
-        this.truth = rand.getRandomNumberBetween(0, 5*60*parseInt(globalDataObject.truthPerSecond));
-        this.key = rand.nextDouble() > 0.9;
+        this.truth = rand.getRandomNumberBetween(0, 5 * 60 * parseInt(globalDataObject.truthPerSecond));
+        if(rand.nextDouble()>0.9){
+            this.key = 1;
+        }
 
     }
-//http://knucklessux.com/PuzzleBox/Secrets/WatcherOfThreads/dreams.pdf
-    render(parent){
+
+    addRewardToSelf(reward) {
+        console.log("JR NOTE: adding reward to self",{this: this,reward})
+        this.truth += reward.truth;
+        this.key += reward.key;
+        this.facts = this.facts.concat(reward.facts);
+    }
+
+    //http://knucklessux.com/PuzzleBox/Secrets/WatcherOfThreads/dreams.pdf
+    render(parent) {
         const level_ele = createElementWithClassAndParent("div", parent, "gamer-tier");
-        if(this.disabled){
+        if (this.disabled) {
             level_ele.classList.add("room-locked")
         }
         const level_ele_label = createElementWithClassAndParent("div", level_ele);
@@ -68,19 +78,19 @@ class PointsReward {
 
         const unordered_list = createElementWithClassAndParent("ul", level_ele);
 
-        if(this.truth>0){
+        if (this.truth > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `Truth: ${this.truth}!!!`;
         }
 
-        if(this.key){
+        if (this.key > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `A Key!!!`;
         }
 
-        if(this.fact){
+        if (this.facts.length > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
-            ele.innerHTML = `${this.fact.title}`;
+            ele.innerHTML = `${this.facts[0].title}`;
         }
 
     }
@@ -103,14 +113,21 @@ class GamerPointsStoreMiniGame extends MiniGame {
 
     }
 
-    generateRewards = (current_gamer_level, ele, room, callback)=>{
+    generateRewards = (current_gamer_level, ele, room, callback) => {
         //this happens because a button was clicked
-        alert("JR NOTE: todo")
+        let numberRewards = 1;
+        const reward = new PointsReward(1);
+        for (let i = 2; i <= current_gamer_level; i++) {
+            console.log("JR NOTE: generating reward for gamer level", i)
+            reward.addRewardToSelf(new PointsReward(i));
+            numberRewards++;
+        }
+        const title = `Collected ${numberRewards} levels of Gamer Loot!`;
         /*
             first, for every level under and INCLUDING the current_gamer_level create a PointsReward
 
 
-            then, for each PointsReward, star collating the total reward (number of truth, number of keys, array of facts, etc) (don't do it for each, less efficient and i also need to render them)
+            then, for each PointsReward, start collating the total reward (number of truth, number of keys, array of facts, etc) (don't do it for each, less efficient and i also need to render them)
 
             then, set globalDataObject.allTimeTruthGivenToCloser to zero
 
@@ -119,6 +136,40 @@ class GamerPointsStoreMiniGame extends MiniGame {
             then, render a Rewards screen detailing all these things they just unlocked (which has a button to return to map just like regular rewards screen)
 
         */
+        ele.innerHTML = "";
+        globalBGMusic.src = "audio/music/dear_god.mp3";
+        globalBGMusic.play();
+
+        const div = createElementWithClassAndParent("div", ele, "victory");
+        const header = createElementWithClassAndParent("h1", div);
+        header.innerText = title;
+
+        const header2 = createElementWithClassAndParent("h2", div);
+        header2.innerText = "Rewards:"
+
+        const unordered_list = createElementWithClassAndParent("ul", div);
+
+        console.log("JR NOTE: rendering reward", reward)
+        if (reward.truth > 0) {
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `Truth: ${reward.truth}!!!`;
+        }
+
+        if (reward.key > 0) {
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `${reward.key} Keys!!!`;
+        }
+
+        if (reward.facts.length > 0) {
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `Facts: `;
+            const unordered_list2 = createElementWithClassAndParent("ul", unordered_list);
+            for (let fact of reward.facts) {
+                const ele = createElementWithClassAndParent("li", unordered_list2);
+                ele.innerHTML = fact.title;
+            }
+
+        }
     }
 
     startGame = (ele, room, callback) => {
@@ -127,7 +178,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
         const container = createElementWithClassAndParent("div", ele);
         container.style.backgroundColor = "white";
         container.style.margin = "31px";
-        container.style.padding="13px";
+        container.style.padding = "13px";
 
 
         const header = createElementWithClassAndParent("div", container);
@@ -136,16 +187,16 @@ class GamerPointsStoreMiniGame extends MiniGame {
         body.style.margin = "31px";
 
         const instructions = createElementWithClassAndParent("div", header);
-        instructions.style.color="black";
+        instructions.style.color = "black";
         instructions.innerText = "Okay sooooooo... Here's how it works. For every 1000 Truth you spend with my wife over in the shop, You'll earn a Gamer Level! At any time you can trade all your Gamer Levels for sweet loot, but if you do you gotta start back over at level 1, so the longer you grind the better your gains, yeah?"
 
         const button = createElementWithClassAndParent("button", header);
         button.innerText = "Cash In Gamer Levels? (warning: resets level)";
-        button.onclick = ()=>this.generateRewards(current_gamer_level, room, callback)
-        button.style.marginTop="13px"
+        button.onclick = () => this.generateRewards(current_gamer_level, ele, room, callback)
+        button.style.marginTop = "13px"
 
 
-        const reward = new PointsReward(current_gamer_level +1, true);
+        const reward = new PointsReward(current_gamer_level + 1, true);
         reward.render(body);
 
         //don't render ALL possible levels, just current + 1 and then 9 fewer (if extant)
