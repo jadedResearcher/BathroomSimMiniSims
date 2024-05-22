@@ -36,6 +36,7 @@ things that can be added on unlock:
 const pointsRewardTiers = ["Aluminum", "Nickle", "Tin", "Lead", "Iron", "Zinc", "Steel", "Copper", "Bronze", "Silver", "Gold", "Tungsten", "Titanium", "Platinum", "Diamond", "Mithril", "Adamantium", "Unubtanium", "Brass"]
 
 class PointsReward {
+    //note if you add more things here add them to the max out function
     truth = 0;
     key = 0;//the collated reward has more than one, but otherwise just one or zero
     facts = []; //the collated reward has more than one, but otherwise just one or zero
@@ -54,14 +55,20 @@ class PointsReward {
         }
         //between three seconds and five  minutes of truth
         this.truth = rand.getRandomNumberBetween(0, 5 * 60 * parseInt(globalDataObject.truthPerSecond));
-        if(rand.nextDouble()>0.9){
+        if (rand.nextDouble() > 0.9) {
             this.key = 1;
         }
 
     }
 
+    maxOut(){
+        this.truth = 9999999;
+        this.key = 9999;
+        this.facts = [new Fact(`lol you're a l337 hax0r`, "lol you really did it huh? good thing i have a error handler in here. can you IMAGINE if it tried to individually calculate all those rewards? your computer would crash. smdh. wastes, amirite? anyways, say 'thank you, jr' for me rewarding cheating instead of trying to prevent it. glhf",[WASTE], 113, 113, 113)];
+    }
+
     addRewardToSelf(reward) {
-        console.log("JR NOTE: adding reward to self",{this: this,reward})
+        console.log("JR NOTE: adding reward to self", { this: this, reward })
         this.truth += reward.truth;
         this.key += reward.key;
         this.facts = this.facts.concat(reward.facts);
@@ -104,7 +111,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
 
     valuableCustomer = (ele, callback) => {
         const button = createElementWithClassAndParent("button", ele);
-        button.innerText = "Thank You Valuable Customer: Click Here To Complete This Room";
+        button.innerText = "Sweet Loot! Take Me Back to the Grind!!!!!!";
         button.onclick = async () => {
             await truthPopup("You are a real gamer!", "Wow! It seems you are having so much fun earning points and leveling up by participating in capitalism!", "While I value the Chief Financial Officer of Eyedol Game's ability to draw people in, my hot maze gf is much, much better.");
             callback(globalDataObject.currentMaze);
@@ -117,18 +124,26 @@ class GamerPointsStoreMiniGame extends MiniGame {
         //this happens because a button was clicked
         globalDataObject.allTimeTruthGivenToCloser = 0;//resets
 
-        if(globalDataObject.maximumGamerLevelAchieved < current_gamer_level){
+        if (globalDataObject.maximumGamerLevelAchieved < current_gamer_level) {
             globalDataObject.maximumGamerLevelAchieved = current_gamer_level;
         }
-        
+
         let numberRewards = 1;
-        const reward = new PointsReward(1);
-        for (let i = 2; i <= current_gamer_level; i++) {
-            console.log("JR NOTE: generating reward for gamer level", i)
-            reward.addRewardToSelf(new PointsReward(i));
-            numberRewards++;
+        let reward = new PointsReward(1);       
+        let title;
+        if (current_gamer_level <= 9000) {
+            for (let i = 2; i <= current_gamer_level; i++) {
+                console.log("JR NOTE: generating reward for gamer level", i)
+                reward.addRewardToSelf(new PointsReward(i));
+                numberRewards++;
+            }
+             title = `Collected ${numberRewards} levels of Gamer Loot!`;
+
+        }else{
+            reward.maxOut();
+            title = `Haha! Wow!!!!!! Were you cheating?????????? Sweet, here's just a buncha shit. No sense crashing your computer trying to calculate all that you feel me? Have fun you crazy Waste!`;
+
         }
-        const title = `Collected ${numberRewards} levels of Gamer Loot!`;
         /*
             first, for every level under and INCLUDING the current_gamer_level create a PointsReward
 
@@ -166,7 +181,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
         if (reward.key > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `${reward.key} Keys!!!`;
-            globalDataObject.numberKeys++;
+            globalDataObject.numberKeys+= reward.key;
 
         }
 
@@ -182,11 +197,12 @@ class GamerPointsStoreMiniGame extends MiniGame {
             }
 
         }
+        this.valuableCustomer(div, callback);
+
     }
 
     startGame = (ele, room, callback) => {
         const current_gamer_level = Math.ceil(globalDataObject.allTimeTruthGivenToCloser / 1000);
-        this.valuableCustomer(ele, callback);
         const container = createElementWithClassAndParent("div", ele);
         container.style.backgroundColor = "white";
         container.style.margin = "31px";

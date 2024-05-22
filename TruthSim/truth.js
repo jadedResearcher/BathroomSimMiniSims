@@ -17,7 +17,7 @@ const globalRand = new SeededRandom(13);
 //the Witness doens't exist and neither do the arms except they clearly also do
 
 let globalDataObject = {
-  truthPerSecond: 10,
+  truthPerSecond: 1000,
   startedPlayingTimeCode: Date.now(),
   numberKeys: 31, //thanks illusionist
   keysBoughtFromCloser: 0,
@@ -35,7 +35,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME,GAMERSHOPMINIGAME ],
   rottenMiniGames: [], //did you think the things vik erases sleep peacefully?
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
