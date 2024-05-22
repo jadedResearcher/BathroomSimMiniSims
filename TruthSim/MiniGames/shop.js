@@ -115,6 +115,12 @@ class GamerPointsStoreMiniGame extends MiniGame {
 
     generateRewards = (current_gamer_level, ele, room, callback) => {
         //this happens because a button was clicked
+        globalDataObject.allTimeTruthGivenToCloser = 0;//resets
+
+        if(globalDataObject.maximumGamerLevelAchieved < current_gamer_level){
+            globalDataObject.maximumGamerLevelAchieved = current_gamer_level;
+        }
+        
         let numberRewards = 1;
         const reward = new PointsReward(1);
         for (let i = 2; i <= current_gamer_level; i++) {
@@ -153,11 +159,15 @@ class GamerPointsStoreMiniGame extends MiniGame {
         if (reward.truth > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `Truth: ${reward.truth}!!!`;
+            increaseTruthBy(reward.truth);
+
         }
 
         if (reward.key > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `${reward.key} Keys!!!`;
+            globalDataObject.numberKeys++;
+
         }
 
         if (reward.facts.length > 0) {
@@ -167,6 +177,8 @@ class GamerPointsStoreMiniGame extends MiniGame {
             for (let fact of reward.facts) {
                 const ele = createElementWithClassAndParent("li", unordered_list2);
                 ele.innerHTML = fact.title;
+                globalDataObject.factsUnlocked.push(fact);
+
             }
 
         }
