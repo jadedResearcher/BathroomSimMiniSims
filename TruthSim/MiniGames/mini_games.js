@@ -23,13 +23,15 @@ const MAZEMINIGAME = "MAZE";
 const PARKERMINIGAME = "GUN";
 const HOONMINIGAME = "BETTING";
 const VIKMINIGAME = "CENSORSHIP";
+const TWINSMINIEGAME = "LIGHT AND VOID";
 
 //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
 const rooms_to_unlock = {
     1: EYEKILLERMINIGAME,
     2: PARKERMINIGAME,
     3: HOONMINIGAME,
-    5: GAMERSHOPMINIGAME,
+    4: GAMERSHOPMINIGAME,
+    5: TWINSMINIEGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
@@ -42,7 +44,7 @@ const rooms_to_unlock = {
 const rareMiniGames = [EYEKILLERMINIGAME];
 
 //max of once per maze
-const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME];
+const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME, TWINSMINIEGAME];
 
 const initAllMiniGames = () => {
     new LockMiniGame();
@@ -55,6 +57,7 @@ const initAllMiniGames = () => {
     new GamerPointsStoreMiniGame();
     new BettingMiniGame();
     new CENSORSHIPShopMiniGame();
+    new TwinsMiniGame();
 }
 
 const makeScreenRed = (ele)=>{
