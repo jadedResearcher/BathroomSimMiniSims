@@ -21,8 +21,24 @@ const randomFact = (rand)=>{
 
 }
 
+//only doc slaughter can reveal these. its her religion, to expose secrets. 
+//devona would if she COULD but Fragment of the Universe prevents her from doing so without driving the listener mad
+class Secrets{
+  video;
+  audio;
+  image;
+  html;
+  constructor(video,audio,image,html){
+    video = video;
+    audio= audio;
+    image = image;
+    html = html
+  }
+}
+
 class Fact{
   title = "Firsty"; //should be unique
+  secrets;
   lore_snippet = "This is the first fact, and JR created it on february 27th 2024."
   mini_game_key; //will only be set if its assigned to a type of room to modify (and then its not available for other rooms)
   theme_key_array = [TWISTING]; //most facts are associated with themes
@@ -31,9 +47,10 @@ class Fact{
   speed_multipler = 0.5;
   is_viral = false; //might not do anythign with this but the plan is for facts to be able to spread in weird ways
  
-  constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler){
+  constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler,secrets){
     this.title = title;
     this.lore_snippet = lore_snippet;
+    this.secret = secret;
     this.theme_key_array = theme_key_array;
     this.damage_multiplier = damage_multiplier;
     this.defense_multipler = defense_multipler;
@@ -190,9 +207,89 @@ he has decided either he is born lucky enough to do it in SOME timeline or it ne
 thems the breaks
 */
 
+const neville_secret = new Secrets(null, null, image, `<p><strong><u><span style="font-size:11pt;">Neville&apos;s Secret:</span></u></strong></p>
+<p><br></p>
+<p><span style="font-size:11pt;">If you ask just about anyone they&apos;ll tell you that Neville is cool as a cucumber. Unflappable.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">But.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">If you ask Devona. She&apos;ll shake just a bit more than usual. As she tells you you&apos;re right, haha! Her twinsey is the bravest person she knows.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">She means it, too, but understands that you don&apos;t understand.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">She won&apos;t tell you about how all the times she held his hand as he waded through crowds. About how he always seems distracted, almost. Always humming lightly to himself (wrong, bad, Neville hates making meaningless noises), relaxed and just strolling through the press of bodies and the roaring voices.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">She won&apos;t tell you about how they always make it through the press of humanity and find somewhere quiet and after a few minutes the humming stops. A few minutes more and Neville finally looks at her, every time.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;Oh hey. We made it :) Glad you were around, Devy, so I didn&apos;t get lost :) &quot; She won&apos;t tell you about how relieved she is when he finally swims up from that Void.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">What doesn&apos;t get said is oceans.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Devona trembles with the tide of them. With the Knowledge of all the times she found Neville blithely, with a gentle smile and a little hum, walking into walls. Off ledges. Into danger. Because she wasn&apos;t there to help him.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He... simply chooses not to see anything that bothers him. To not be there for it.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">If you asked Devona she wouldn&apos;t tell you about how it&apos;s better that way. Better for him to Flee Reality, to go to his Happy Place instead of that instinctual Fight his high Fortitude stat affords. She wouldn&apos;t tell you about how close Neville had been to attacking the Punishing Bird all those years ago..</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Still.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">If you asked Devona.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Even though she wouldn&apos;t tell you so so many things.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">She&apos;d tremble with the desire to. To just spill forth all the things she knows, whether or not its about what you asked. To become a deluge of knowledge and words and sound until your mind no longer can find meaning in anything at all. Until even just a Fragment of the Universe shoves its way past your psyche and takes up residence in what used to be your mind but no longer has room for you at all.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The Censorship is for your protection, after all.</span></p>`);
+const NevilleFact = new Fact("Neville is a Chill and Cool Guy :)", "Literally nothing seems to bother Neville. They don't call him 'soup himbo' for nothing. He loves his bf Witherby (and is totally cool with his bisexual awakening) and he loves his sworn sibling, Devona. Everything's great :) ",[OBFUSCATION], 1, 1, 1, neville_secret);
+
+
+const devona_secret = new Secrets(null, null, image, `<p><strong><u><span style="font-size:11pt;">Devona&apos;s Secret</span></u></strong></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Neville isn&apos;t much of a talker. If you ask him about his sister he&apos;ll tell you she&apos;s his twin sister and that&apos;s all there is to say on the matter.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He won&apos;t find it all too relevant to point out that they&apos;re not blood related or anything. Not literal twins. Devona is two years older than him and what does that have anything to do with being twins?</span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;">Nah, he knows deep in his unknowable depths that age and genetics have nothing to do with being twins. They complete each other in a way that simply isn&apos;t possible for most people. Strengths and weaknesses inverted and supporting each other forever and ever.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He also won&apos;t find it all too relevant to point out that some people who REALLY need to learn when to shut up might take issue with the fact that Devona is a &quot;sister&quot; at all. What kinda parts you were born with barely even matter compared to how brave and smart and capable his sister is.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Still. There&apos;s things he finds plenty relevant that he ALSO won&apos;t bring up. The way her hair looks all crusted with blood after some drunk asshole with an expired license hit her when she was walking home from the soup shop down the street.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Getting.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Getting the soup.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He asked for.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Because he was sick of eating mall soup.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The blood on her hair the blood on her hair she looks so small and limp and and and and &nbsp;the feathers the rage the no no no no no no no</span></p>
+<p><br></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Everything is fine :) &nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He becomes the Scariest Thing and then he Punishes anything that hurts him and it hurts hurts hurts hurts to lose Devona his twin his sister part of him the Light part of him part of him is missing it hurts it hurts it hurts so that means he has to Punish because because then he&apos;s in control and it won&apos;t happen again he won&apos;t be hurt again he can&apos;t can&apos;t can&apos;t can&apos;t can&apos;t he can&apos;t find the Bad Thing he&apos;s looking and looking but he can&apos;t because the part of him that FINDS THINGS IS DEAD!</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Everything is fine!</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The Bad Thing is gone and Witherby is talking to him and he likes Witherby. Witherby is nice.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">They are in a nice room and there are no doors and no windows and &nbsp;he isn&apos;t a bird anymore and Witherby seems so sad so he hugs Wibby and tells him he loves him and he&apos;s glad they could get away for a while, just the two of them.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The rest of the world can go to hell, for all he cares. It&apos;s irrelevant.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Witherby seemed so sad when he said that. That&apos;s okay though because hugs will make it all better and then they can have&nbsp;</span><s><span style="font-size:11pt;">soup</span></s><span style="font-size:11pt;">&nbsp;some tasty food and watch some movies and Everything is fine :)&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The 27th of March will never happen again.</span></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>`);
+const DevonaFact = new Fact("Devona is So So Scared All The Time", "Even though Devona is afraid of pretty much everything, she somehow finds the strength to act as the Training Team's scout, exploring deep within the Mall Maze and beyond. She brings everything she finds back to Neville, who trims it down to just the essentials and passes it off to Ria, who figures out what it all means in the Big Picture. And of course, Camille is in charge of everyone. She has so many people she cares about she is grateful, all things considered, that she's AroAce. Who has time for dating when there's so much to focus on? ",[KNOWING], 1, 1, 1, devona_secret);
+
+
+const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the Twins gets hurt, the other turns into a hulking bird with a slavering maw in their chest and hunts down whoever is responsible in order to eat them in a single bite. It's usually Neville doing The Hunt, since Devona is extremely easy to harm. Unfortunately, his tracking skills leave a lot to be desired, so it can take a very long time for him to finally consume the perpetrator. He won't stop to eat or drink or rest until he does, though.  When Devona is instead the Hunter, she knows *exactly* where her target is, but can take a long time to reach them because of her low stamina and massive frame. She rests a lot and eats and drinks and makes slow and steady progress towards the exact location she needs to be at.",[KILLING,HUNTING], 3, 3, 3, devona_secret);
+
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD,EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS,CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, PARKERSlOVESGUNTAN,CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD,EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS,CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact,PARKERSlOVESGUNTAN,CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,NevilleFact,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3,BreachedTwinFact];
 
 
 

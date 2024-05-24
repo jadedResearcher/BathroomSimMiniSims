@@ -29,7 +29,7 @@ class TwinsMiniGame extends MiniGame {
     render = (ele, room, callback) => {
 
         this.initializeRender(ele);
-        const container = this.setupGameHeader(ele, room, callback, "The Twins, Neville and Devona will allow you to Destroy Ignorance And Irrelevancy! ", undefined, "images/twins_by_guide.png")
+        const container = this.setupGameHeader(ele, room, callback, "The Twins, Neville and Devona will allow you to Destroy Irrelevancy and Ignorance! ", undefined, "images/twins_by_guide.png")
 
     }
 }
