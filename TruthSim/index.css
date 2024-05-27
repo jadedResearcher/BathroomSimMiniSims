@@ -4,7 +4,8 @@
 }
 
 @font-face {
-  font-family: ware; /*IC insisted*/
+  font-family: ware;
+  /*IC insisted*/
   src: url("warioware-original/warioware-original.ttf");
 }
 
@@ -114,6 +115,27 @@ textarea {
 
 .room-locked {
   opacity: 0.25;
+}
+
+
+.void {
+  background-color: #00135d;
+  border: 1px solid #0d1b4a;
+  color: white;
+}
+
+.neville-button::before {
+  content: "Neville says: 'you might be happier forgetting it tho :)'";
+}
+
+.neville-button {
+  background-image: url("images/neville_twin_by_guide.png");
+  background-size: 20px 31px;
+  background-repeat: no-repeat;
+  height: 31px;
+  padding-left: 31px;
+  display: block;
+  margin-bottom: 31px;
 }
 
 .room-unlocked {
@@ -245,7 +267,7 @@ button img {
   width: 125px;
 }
 
-.blorbo-container{
+.blorbo-container {
   position: relative;
   width: fit-content;
 }
@@ -362,11 +384,11 @@ button img {
 }
 
 
-.sass-radio{
+.sass-radio {
   filter: grayscale(1);
 }
 
-.red-overlay{
+.red-overlay {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -391,7 +413,8 @@ button img {
 @keyframes animated-bg-animation-vertical {
   100% {
     background-position-y: -75px;
-    font-style: italic; /* for radio static*/
+    font-style: italic;
+    /* for radio static*/
   }
 }
 
@@ -408,29 +431,29 @@ button img {
   cursor: pointer;
 }
 
-.targeting-reticule{
+.targeting-reticule {
   position: absolute;
   pointer-events: none;
 }
 
-.meat-bg{
+.meat-bg {
   background-color: #bd6e6e;
   border: none;
   outline: none;
   color: white;
-  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%), url("images/meat.png");
 }
 
-.target{
+.target {
   display: inline-block;
   background-size: cover;
 }
 
-.high-or-low-card{
+.high-or-low-card {
   width: 100px;
 }
 
-.centered{
+.centered {
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -444,11 +467,11 @@ button img {
 
 .meat-bg::-webkit-scrollbar-thumb {
   background-color: #bd6e6e;
-  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%), url("images/meat.png");
 
 }
 
-.meat-button{
+.meat-button {
   border: none;
   outline: none;
   padding: 10px;
@@ -456,12 +479,12 @@ button img {
   margin: 30px;
   color: white;
   background-color: #bd6e6e;
-  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%), url("images/meat.png");
 
 }
 
 /*truth and alt are mimicking each other but truth is meat*/
-.truth-popup{
+.truth-popup {
   color: red;
   font-family: 'Courier New', Courier, monospace;
   margin-left: auto;
@@ -480,7 +503,7 @@ button img {
 }
 
 /*alt*/
-.meat-popup{
+.meat-popup {
   color: white;
   font-family: 'Courier New', Courier, monospace;
   margin-left: auto;
@@ -497,7 +520,7 @@ button img {
   overflow-y: auto;
   border: 1px solid black;
   z-index: 4556;
-  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%), url("images/meat.png");
 }
 
 .meat-popup::-webkit-scrollbar {
@@ -508,11 +531,11 @@ button img {
 
 .meat-popup::-webkit-scrollbar-thumb {
   background-color: #bd6e6e;
-  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%),url("images/meat.png");
+  background-image: radial-gradient(circle at 50% 50%, transparent 30%, #460707 100%), url("images/meat.png");
 
 }
 
-.meat-overlay{
+.meat-overlay {
   width: 100%;
   height: 100%;
   z-index: 1000;
@@ -525,9 +548,9 @@ button img {
   left: 0px;
 }
 
-.sass{
+.sass {
   border: 2px solid black;
-  white-space:nowrap;
+  white-space: nowrap;
   z-index: 12;
   border-radius: 5px;
   padding: 2px;
@@ -548,7 +571,7 @@ button img {
   transition: opacity 1s linear;
 }
 
-.sass.fadeout{
+.sass.fadeout {
   opacity: 0;
 }
 
@@ -584,27 +607,59 @@ button img {
   animation: tremble 1s linear infinite;
 }
 
-.cultist img{
+.cultist img {
   width: 75px;
 }
 
-.key-icon{
+.key-icon {
   width: 31;
   vertical-align: middle;
 }
 
 @keyframes tremble {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 @keyframes approach-top-left {
@@ -615,8 +670,8 @@ button img {
   }
 }
 
-.game-container{
-  position:relative;
+.game-container {
+  position: relative;
   width: 100%;
   height: 100%;
 }
@@ -628,7 +683,7 @@ button img {
   opacity: 0;
 }
 
-.button-row{
+.button-row {
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -723,77 +778,91 @@ button img {
   }
 }
 
-.vik{
+.vik {
   color: red;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 72px;
 }
 
-.gamer-tier{
+.gamer-tier {
   color: black;
   border: 3px solid black;
   padding: 31px;
 }
 
 
-.glitch{
+.glitch {
   animation: glitch 1s linear infinite;
   display: inline-block;
 }
 
 
-@keyframes glitch{
-  2%,64%{
-    transform: translate(2px,0) skew(0deg);
+@keyframes glitch {
+
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
   }
-  4%,60%{
-    transform: translate(-2px,0) skew(0deg);
+
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
   }
-  62%{
-    transform: translate(0,0) skew(5deg); 
+
+  62% {
+    transform: translate(0, 0) skew(5deg);
   }
 }
 
 .glitch:before,
-.glitch:after{
+.glitch:after {
   content: attr(title);
   position: absolute;
   left: 0;
 }
 
-.glitch:before{
+.glitch:before {
   animation: glitchTop 1s linear infinite;
   clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
 }
 
-@keyframes glitchTop{
-  2%,64%{
-    transform: translate(2px,-2px);
+@keyframes glitchTop {
+
+  2%,
+  64% {
+    transform: translate(2px, -2px);
   }
-  4%,60%{
-    transform: translate(-2px,2px);
+
+  4%,
+  60% {
+    transform: translate(-2px, 2px);
   }
-  62%{
-    transform: translate(13px,-1px) skew(-13deg); 
+
+  62% {
+    transform: translate(13px, -1px) skew(-13deg);
   }
 }
 
-.glitch:after{
+.glitch:after {
   animation: glitchBotom 1.5s linear infinite;
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
-@keyframes glitchBotom{
-  2%,64%{
-    transform: translate(-2px,0);
+@keyframes glitchBotom {
+
+  2%,
+  64% {
+    transform: translate(-2px, 0);
   }
-  4%,60%{
-    transform: translate(-2px,0);
+
+  4%,
+  60% {
+    transform: translate(-2px, 0);
   }
-  62%{
-    transform: translate(-22px,5px) skew(21deg); 
+
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
   }
 }
-
