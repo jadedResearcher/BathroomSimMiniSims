@@ -16,8 +16,44 @@ const getAllUnlockedFactTitles = ()=>{
 //picks a theme and makes a bullshit fact about it
 const randomFact = (rand)=>{
   const theme = rand.pickFrom(Object.values(all_themes));
-  console.log("JR NOTE: theme is", theme)
-  return new Fact(`${titleCase(theme.key)} Fact`, "This is just a test, JR needs to make this funny madlibs later.",[theme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
+  
+  const person = chosenTheme.pickPossibilityFor(PERSON);
+  const adj = chosenTheme.pickPossibilityFor(ADJ);
+  const compliment = chosenTheme.pickPossibilityFor(COMPLIMENT);
+  const insult = chosenTheme.pickPossibilityFor(INSULT);
+  const supermove = chosenTheme.pickPossibilityFor(SUPERMOVE);
+  const object = chosenTheme.pickPossibilityFor(OBJECT);
+  const location = chosenTheme.pickPossibilityFor(LOCATION);
+
+  const childbackstory = chosenTheme.pickPossibilityFor(CHILDBACKSTORY);
+  const generalbackstory = chosenTheme.pickPossibilityFor(GENERALBACKSTORY);
+  const miracle = chosenTheme.pickPossibilityFor(MIRACLE);
+  const philosophy =chosenTheme.pickPossibilityFor(PHILOSOPHY);
+  const loc_desc = chosenTheme.pickPossibilityFor(LOC_DESC);
+  const monster_desc =chosenTheme.pickPossibilityFor(MONSTER_DESC);
+  const smell = chosenTheme.pickPossibilityFor(SMELL);
+  const taste = chosenTheme.pickPossibilityFor(TASTE);
+  const feeling = chosenTheme.pickPossibilityFor(FEELING);
+  const sound = chosenTheme.pickPossibilityFor(SOUND);
+  const effects = chosenTheme.pickPossibilityFor(EFFECTS);
+
+  const noun = rand.pickFrom([person, adj, location, object]);
+
+  const nameTemplates = [`${supermove} is really cool.`, `${titleCase(noun)} Fact`, `The ${noun} is ${compliment}.`,`The ${noun} is ${insult}.`,`The ${noun} is ${adj}.`,`The ${noun} smells like ${smell}.`,`The ${noun} tastes like ${taste}.`,`The ${noun} sounds like ${sound}.`,`The ${noun} feels like ${feeling}.`];
+  const templates = [
+    `I am afraid all of the time. ${monster_desc}`,
+    `There is ${loc_desc}.`,
+    `Zampanio is a really fun game and you are already playing it.`,
+    `The ${person} can ${miracle}.`,
+    `The ${person} ${childbackstory}.`,
+    `They ${generalbackstory}.`,
+    `${philosophy}`,
+    `When the ${person} walks ${effects}.`
+  ];
+  const chosenName = titleCase(rand.pickFrom(nameTemplates));
+  const chosenDescription = `${rand.pickFrom(templates)} ${rand.pickFrom(templates)} ${rand.pickFrom(templates)}`;
+
+  return new Fact(chosenName, chosenDescription,[theme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
 
 }
 
@@ -50,7 +86,7 @@ class Fact{
   constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler,secrets){
     this.title = title;
     this.lore_snippet = lore_snippet;
-    this.secret = secret;
+    this.secret = secrets;
     this.theme_key_array = theme_key_array;
     this.damage_multiplier = damage_multiplier;
     this.defense_multipler = defense_multipler;
@@ -207,7 +243,7 @@ he has decided either he is born lucky enough to do it in SOME timeline or it ne
 thems the breaks
 */
 
-const neville_secret = new Secrets(null, null, image, `<p><strong><u><span style="font-size:11pt;">Neville&apos;s Secret:</span></u></strong></p>
+const neville_secret = new Secrets(null, null, null, `<p><strong><u><span style="font-size:11pt;">Neville&apos;s Secret:</span></u></strong></p>
 <p><br></p>
 <p><span style="font-size:11pt;">If you ask just about anyone they&apos;ll tell you that Neville is cool as a cucumber. Unflappable.</span></p>
 <p><br></p>
@@ -248,7 +284,7 @@ const neville_secret = new Secrets(null, null, image, `<p><strong><u><span style
 const NevilleFact = new Fact("Neville is a Chill and Cool Guy :)", "Literally nothing seems to bother Neville. They don't call him 'soup himbo' for nothing. He loves his bf Witherby (and is totally cool with his bisexual awakening) and he loves his sworn sibling, Devona. Everything's great :) ",[OBFUSCATION], 1, 1, 1, neville_secret);
 
 
-const devona_secret = new Secrets(null, null, image, `Devona's Secret
+const devona_secret = new Secrets(null, null, null, `Devona's Secret
 
 Neville isn't much of a talker. If you ask him about his sister he'll tell you she's his twin sister and that's all there is to say on the matter.
 
