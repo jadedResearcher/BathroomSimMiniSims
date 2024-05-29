@@ -8,6 +8,7 @@ class TwinsMiniGame extends MiniGame {
     constructor() {
         super(TWINSMINIEGAME);
     }
+    offerMade = false;
 
     singleFactInfoDump = (fact, ele, room, callback) => {
         const devonalabel = createElementWithClassAndParent("div", ele);
@@ -22,13 +23,13 @@ class TwinsMiniGame extends MiniGame {
         infodump.style.width = "50%";
         infodump.style.marginBottom = "13px";
         infodump.innerHTML = fact.lore_snippet;
-        if(fact.isIrrelevant){
-            infodump.onmouseenter = ()=>{
-                this.offerToErase();
+        if (fact.isIrrelevant) {
+            infodump.onmouseenter = () => {
+                this.offerToErase(ele, room, callback);
             }
 
-            infodump.onclick = ()=>{
-                this.offerToErase();
+            infodump.onclick = () => {
+                this.offerToErase(ele, room, callback);
             }
         }
 
@@ -48,7 +49,12 @@ class TwinsMiniGame extends MiniGame {
         }
     }
 
-    offerToErase = () => {
+    offerToErase = (ele, room, callback) => {
+        if (this.offerMade) {
+            return; //only make it once per visit
+        }
+        this.offerMade = true;
+
         const popup = createElementWithClassAndParent("div", document.querySelector("body"), "void-popup");
         const popupbody = createElementWithClassAndParent("div", popup);
         //i am not masochistic enough to put all this in the stylesheet like the other neville bit but i WILL commit to the bit enough to make most of the text faded instead of bolding the call to action
@@ -56,10 +62,43 @@ class TwinsMiniGame extends MiniGame {
   <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/neville_twin_by_guide.png">
   <p><span style="opacity: 55%">haha whoops, looks like some irrelevant facts snuck in there :)<br><br><br><br> all pretending to make sense and untill you can barely even see what matters...</span> <br><br><br><br>want me to get rid of them all for you? </p>`;
 
+        const buttonContainer = createElementWithClassAndParent("div", popupbody);
+
+        const buttonYes = createElementWithClassAndParent("button", buttonContainer);
+        buttonYes.innerText = "sure thing :)";
+        const buttonNo = createElementWithClassAndParent("button", buttonContainer);
+        buttonNo.innerText = "No I Kin Devona In Case That Was Not Clear And Prefer The Clutter Because What If Its Useful?";
+
+
         const myPromise = new Promise((resolve, reject) => {
-            popup.onclick = () => {
+            buttonNo.onclick = () => {
                 popup.remove();
                 //just in case somehow theres multiple
+                document.querySelectorAll(".void-popup").forEach((x) => x.remove());
+                resolve(true);
+            }
+
+            /*
+            it works
+            my precious boi
+            so useful
+            honeslty neville and vik are keeping me sane
+            it turns out the infinitely spiralling maze ends up being really cluttery without void players
+            no WONDER the echidna is so fucked if wanda doesn't have the Witness to counter her
+            */
+            buttonYes.onclick = () => {
+                popup.remove();
+                for (let fact of globalDataObject.factsUnlocked) {
+                    if (fact.isIrrelevant) {
+                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
+
+                        if (fact === this.fact) {
+                            this.fact = undefined; //forget about it
+                        }
+                    }
+                }
+                this.startGame(ele, room, callback);
+
                 document.querySelectorAll(".void-popup").forEach((x) => x.remove());
                 resolve(true);
             }
