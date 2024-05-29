@@ -17,25 +17,25 @@ const getAllUnlockedFactTitles = ()=>{
 const randomFact = (rand)=>{
   const chosenTheme = rand.pickFrom(Object.values(all_themes));
   
-  const person = chosenTheme.pickPossibilityFor(PERSON);
-  const adj = chosenTheme.pickPossibilityFor(ADJ);
-  const compliment = chosenTheme.pickPossibilityFor(COMPLIMENT);
-  const insult = chosenTheme.pickPossibilityFor(INSULT);
-  const supermove = chosenTheme.pickPossibilityFor(SUPERMOVE);
-  const object = chosenTheme.pickPossibilityFor(OBJECT);
-  const location = chosenTheme.pickPossibilityFor(LOCATION);
+  const person = chosenTheme.pickPossibilityFor(PERSON,rand);
+  const adj = chosenTheme.pickPossibilityFor(ADJ,rand);
+  const compliment = chosenTheme.pickPossibilityFor(COMPLIMENT,rand);
+  const insult = chosenTheme.pickPossibilityFor(INSULT,rand);
+  const supermove = chosenTheme.pickPossibilityFor(SUPERMOVE,rand);
+  const object = chosenTheme.pickPossibilityFor(OBJECT,rand);
+  const location = chosenTheme.pickPossibilityFor(LOCATION,rand);
 
-  const childbackstory = chosenTheme.pickPossibilityFor(CHILDBACKSTORY);
-  const generalbackstory = chosenTheme.pickPossibilityFor(GENERALBACKSTORY);
-  const miracle = chosenTheme.pickPossibilityFor(MIRACLE);
-  const philosophy =chosenTheme.pickPossibilityFor(PHILOSOPHY);
-  const loc_desc = chosenTheme.pickPossibilityFor(LOC_DESC);
-  const monster_desc =chosenTheme.pickPossibilityFor(MONSTER_DESC);
-  const smell = chosenTheme.pickPossibilityFor(SMELL);
-  const taste = chosenTheme.pickPossibilityFor(TASTE);
-  const feeling = chosenTheme.pickPossibilityFor(FEELING);
-  const sound = chosenTheme.pickPossibilityFor(SOUND);
-  const effects = chosenTheme.pickPossibilityFor(EFFECTS);
+  const childbackstory = chosenTheme.pickPossibilityFor(CHILDBACKSTORY,rand);
+  const generalbackstory = chosenTheme.pickPossibilityFor(GENERALBACKSTORY,rand);
+  const miracle = chosenTheme.pickPossibilityFor(MIRACLE,rand);
+  const philosophy =chosenTheme.pickPossibilityFor(PHILOSOPHY,rand);
+  const loc_desc = chosenTheme.pickPossibilityFor(LOC_DESC,rand);
+  const monster_desc =chosenTheme.pickPossibilityFor(MONSTER_DESC,rand);
+  const smell = chosenTheme.pickPossibilityFor(SMELL,rand);
+  const taste = chosenTheme.pickPossibilityFor(TASTE,rand);
+  const feeling = chosenTheme.pickPossibilityFor(FEELING,rand);
+  const sound = chosenTheme.pickPossibilityFor(SOUND,rand);
+  const effects = chosenTheme.pickPossibilityFor(EFFECTS,rand);
 
   const noun = rand.pickFrom([person, adj, location, object]);
 
@@ -53,8 +53,9 @@ const randomFact = (rand)=>{
   const chosenName = titleCase(rand.pickFrom(nameTemplates));
   const chosenDescription = `${rand.pickFrom(templates)} ${rand.pickFrom(templates)} ${rand.pickFrom(templates)}`;
 
-  return new Fact(chosenName, chosenDescription,[chosenTheme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
-
+  const fact= new Fact(chosenName, chosenDescription,[chosenTheme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
+  fact.isIrrelevant = true;
+  return fact;
 }
 
 //only doc slaughter can reveal these. its her religion, to expose secrets. 
@@ -75,6 +76,7 @@ class Secrets{
 class Fact{
   title = "Firsty"; //should be unique
   secrets;
+  isIrrelevant = false; //its irrelevant if its random, helps neville know what to KILL
   lore_snippet = "This is the first fact, and JR created it on february 27th 2024."
   mini_game_key; //will only be set if its assigned to a type of room to modify (and then its not available for other rooms)
   theme_key_array = [TWISTING]; //most facts are associated with themes

@@ -22,30 +22,59 @@ class TwinsMiniGame extends MiniGame {
         infodump.style.width = "50%";
         infodump.style.marginBottom = "13px";
         infodump.innerHTML = fact.lore_snippet;
+        if(fact.isIrrelevant){
+            infodump.onmouseenter = ()=>{
+                this.offerToErase();
+            }
+
+            infodump.onclick = ()=>{
+                this.offerToErase();
+            }
+        }
 
         const buttonLabel = createElementWithClassAndParent("div", ele, "void neville-button"); //while neville is entirely css, even the text, don't worry you don't need to see anything :) :) :)
 
         const button = createElementWithClassAndParent("button", buttonLabel); //while neville is entirely css, even the text, don't worry you don't need to see anything :) :) :)
-        button.innerText= "Forget?"
+        button.innerText = "Forget?"
         button.onclick = async () => {
-            increaseTruthBy(globalDataObject.truthPerSecond* 60); //neville gives you a full minute of truth if you delete a specific fact but doesn't tell you , void players amirite
+            increaseTruthBy(globalDataObject.truthPerSecond * 60); //neville gives you a full minute of truth if you delete a specific fact but doesn't tell you , void players amirite
 
             globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
 
-            if(fact === this.fact){
+            if (fact === this.fact) {
                 this.fact = undefined; //forget about it
             }
             this.startGame(ele, room, callback);
         }
     }
 
-    startGame = (ele, room, callback) => {
-        ele.innerHTML="";
-        if(this.fact){
-            this.singleFactInfoDump(this.fact, ele, room, callback);
-        }else{
+    offerToErase = () => {
+        const popup = createElementWithClassAndParent("div", document.querySelector("body"), "void-popup");
+        const popupbody = createElementWithClassAndParent("div", popup);
+        //i am not masochistic enough to put all this in the stylesheet like the other neville bit but i WILL commit to the bit enough to make most of the text faded instead of bolding the call to action
+        popupbody.innerHTML = `
+  <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/neville_twin_by_guide.png">
+  <p><span style="opacity: 55%">haha whoops, looks like some irrelevant facts snuck in there :)<br><br><br><br> all pretending to make sense and untill you can barely even see what matters...</span> <br><br><br><br>want me to get rid of them all for you? </p>`;
 
-            for(let fact of globalDataObject.factsUnlocked){
+        const myPromise = new Promise((resolve, reject) => {
+            popup.onclick = () => {
+                popup.remove();
+                //just in case somehow theres multiple
+                document.querySelectorAll(".void-popup").forEach((x) => x.remove());
+                resolve(true);
+            }
+        });
+
+        return myPromise;
+    }
+
+    startGame = (ele, room, callback) => {
+        ele.innerHTML = "";
+        if (this.fact) {
+            this.singleFactInfoDump(this.fact, ele, room, callback);
+        } else {
+
+            for (let fact of globalDataObject.factsUnlocked) {
                 this.singleFactInfoDump(fact, ele, room, callback);
             }
         }

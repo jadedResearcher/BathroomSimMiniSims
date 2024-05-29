@@ -502,6 +502,25 @@ button img {
   z-index: 4556;
 }
 
+.void-popup {
+  background-color: #00135d;
+  border: 1px solid #0d1b4a;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: fixed;
+  top: 10%;
+  left: 25%;
+  padding: 50px;
+  font-size: 14px;
+  width: 50vw;
+  overflow-y: auto;
+  border: 3px solid white;
+  z-index: 4556;
+}
+
 /*alt*/
 .meat-popup {
   color: white;
