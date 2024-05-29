@@ -28,6 +28,8 @@ class TwinsMiniGame extends MiniGame {
         const button = createElementWithClassAndParent("button", buttonLabel); //while neville is entirely css, even the text, don't worry you don't need to see anything :) :) :)
         button.innerText= "Forget?"
         button.onclick = async () => {
+            increaseTruthBy(globalDataObject.truthPerSecond* 60); //neville gives you a full minute of truth if you delete a specific fact but doesn't tell you , void players amirite
+
             globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
 
             if(fact === this.fact){

@@ -15,7 +15,7 @@ const getAllUnlockedFactTitles = ()=>{
 
 //picks a theme and makes a bullshit fact about it
 const randomFact = (rand)=>{
-  const theme = rand.pickFrom(Object.values(all_themes));
+  const chosenTheme = rand.pickFrom(Object.values(all_themes));
   
   const person = chosenTheme.pickPossibilityFor(PERSON);
   const adj = chosenTheme.pickPossibilityFor(ADJ);
@@ -39,7 +39,7 @@ const randomFact = (rand)=>{
 
   const noun = rand.pickFrom([person, adj, location, object]);
 
-  const nameTemplates = [`${supermove} is really cool.`, `${titleCase(noun)} Fact`, `The ${noun} is ${compliment}.`,`The ${noun} is ${insult}.`,`The ${noun} is ${adj}.`,`The ${noun} smells like ${smell}.`,`The ${noun} tastes like ${taste}.`,`The ${noun} sounds like ${sound}.`,`The ${noun} feels like ${feeling}.`];
+  const nameTemplates = [`${supermove} is ${rand.pickFrom(["really cool","awesome","totally swag","l337","fuckin awesome", "impressive","op","overpowered","really needing to be nerfed","objectively the best final attack","so totally awesome"])}`, `${titleCase(noun)} Fact`, `The ${noun} is ${compliment}.`,`The ${noun} is ${insult}.`,`The ${noun} is ${adj}.`,`The ${noun} smells like ${smell}.`,`The ${noun} tastes like ${taste}.`,`The ${noun} sounds like ${sound}.`,`The ${noun} feels like ${feeling}.`];
   const templates = [
     `I am afraid all of the time. ${monster_desc}`,
     `There is ${loc_desc}.`,
@@ -53,7 +53,7 @@ const randomFact = (rand)=>{
   const chosenName = titleCase(rand.pickFrom(nameTemplates));
   const chosenDescription = `${rand.pickFrom(templates)} ${rand.pickFrom(templates)} ${rand.pickFrom(templates)}`;
 
-  return new Fact(chosenName, chosenDescription,[theme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
+  return new Fact(chosenName, chosenDescription,[chosenTheme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
 
 }
 
