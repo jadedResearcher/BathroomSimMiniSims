@@ -30,6 +30,7 @@ let globalDataObject = {
   truthCurrentValue: 0,
   mazesBeaten: 0,
   mazesTried: 0,
+  hiveMap:{},
   currentMaze: undefined, //what maze are you currently exploring (serialized)
   storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
   saveUnlocked: false,
@@ -82,6 +83,9 @@ const debugMode = (game)=>{
 window.onload = () => {
 
   initThemes();
+  if(!globalDataObject.hiveMap[FIRE]){
+    globalDataObject.hiveMap[FIRE] = new BeeHive(globalRand,FIRE)
+  }
   initAllMiniGames();
   load();
   const queryString = window.location.search;
@@ -179,6 +183,7 @@ const load = () => {
       globalDataObject.storedMazes[i] = new Maze(globalRand, -1, globalDataObject.truthPerSecond);
       globalDataObject.storedMazes[i].loadFromJSON(json_stored)
     }
+    //bees
 
   }
 
