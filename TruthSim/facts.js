@@ -286,6 +286,170 @@ const neville_secret = new Secrets(null, null, null, `<p><strong><u><span style=
 const NevilleFact = new Fact("Neville is a Chill and Cool Guy :)", "Literally nothing seems to bother Neville. They don't call him 'soup himbo' for nothing. He loves his bf Witherby (and is totally cool with his bisexual awakening) and he loves his sworn sibling, Devona. Everything's great :) ",[OBFUSCATION], 1, 1, 1, neville_secret);
 
 
+const witherby_secret = new Secrets(null,null,null, `
+<p><span style="font-size:11pt;">You follow the signs in the airport. Terminal E. Baggage Claim. Bathrooms. Food court. Duty free shopping. Terminal C. International travelers. Terminal J.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Where is terminal A? You thought you were going down the alphabet but... J?</span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;">Maybe you got turned around.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">There&apos;s a tightness in your chest but not as bad as back when you were boarding. THEN you could have missed your flight. &nbsp;Now all you need to worry about is finding your hotel so you can finally just rest.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Terminal B.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You must be getting close.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You surge forward with renewed energy and there it is! Finally! The bright lights seem dim somehow. Faded. And the shops and restaurants of the inevitable food court are poorly staffed but you&apos;re HERE!</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Now just to find the exit.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Surely there&apos;s signs?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Surely?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Okay. Maybe someone to ask?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Wait.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Where is everyone?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Those stores aren&apos;t just poorly staffed... they&apos;re.... empty?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">No janitors.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">No security.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">No one waiting for a flight or loitering in the food court or.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Is it getting darker?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">For the first time you focus on your surroundings instead of just scanning for a sign.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">MinoBurger? EyesCream? Endpanada Hut?&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">What are these names?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You move closer, trying to read the specials, the prices, the advertisements plastering the wall and your eyes don&apos;t quite focus. The text swirls and changes, always on the edge of making sense but...&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You swallow. Your skin feels clammy with the adrenaline now coursing through your body.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You pick a direction and &nbsp;start running. Yelling.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">SOMEONE has to be here.&nbsp;</span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;">You can&apos;t be all alone in this. In this.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You can&apos;t.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You&apos;ll find someone and ask for directions and and and.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">THERE!</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You burst around a corner and see a well dressed man, probably older than you, casually walking your way, a gentle grin on his face and a little wave when he sees you.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You skid to a stop and hunch over, gasping for breath. He says something but your pounding heart and heaving breath overpowers it.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The relief of it all floods you and you allow yourself to fall to a sitting position.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The well dressed man squats next to you, concern written on his face. He patiently waits for you to finally regain composure.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Finally, you huff out &quot;I&apos;m trying to find the exit&quot;. As if that explains everything. As if just ignoring the strangeness of it all will make it go away. An icicle pierces your chest as you suddenly wonder if its just you. What if this man doesn&apos;t see the weird writing or the missing crowds or the strange brands or...&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Before you can spiral too long he stands up and offers you a hand. When you take it, he smiles, helps you up, and seamlessly turns it into a handshake.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;I had thought as much. This area can be difficult to navigate, and I&apos;m glad I found you in time.&quot;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;In time for what?&quot; you say without thinking, wincing internally as you realize you aren&apos;t sure you want to know.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;Luckily, it no longer matters. I can help you find the exit, if you will?&quot; he makes to begin walking but waits to make sure you&apos;ll follow.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Gratitude floods you. You don&apos;t know what you&apos;d do if you hadn&apos;t found this man. Or if he&apos;d simply walked off and left you behind and you got separated and.... Your arm twitches slightly at the thought of being alone and lost again.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The two of you begin walking.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;So, what brings you to such a less traveled area... Apologies, I&apos;m afraid I didn&apos;t catch your name&quot;&quot;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Oh. Right.&quot;Sorry, uh, right, I&apos;m Doran...&quot;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He smiles. &quot;Nice to meet you, Doran, even under such unpleasant circumstances. So, how did you end up lost here?&quot;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;Oh. Um. Well. The clerk was telling everyone that the exit was near Terminal A and I THOUGHT I found it but... well. &nbsp;Uh. Everything... got weird?&quot; you finish lamely.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;Ah&quot;, he says, as if you&apos;ve explained everything. &quot;Trying to get away from it all?&quot;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;Just until everything blows over. I didn&apos;t mean to kill her.&quot; you say, and then freeze in horror. WHY DID YOU SAY THAT OUTLOUD!?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He continues sauntering forward, not missing a beat. He glances back at you as if puzzled by your change in pace. &quot;I imagine that sort of thing would make a change in scenery welcome&quot;.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">It all comes pouring out of you. The accident. The accusations. The empty pillow beside you at night. The decision to finally just... LEAVE. Not forever. Not permanently. At least not yet. But just. Temporarily. Find a new place. See if you like it. Somewhere normal and ordinary and boring even. Toronto seemed like so much the polar opposite of Orlando that maybe you could finally leave it all behind and instead of the gaping absences in your life the solitude would start to feel natural. Normal. Maybe you could even make new friends.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He nods as you talk, hums agreement occasionally. Seeming to have all the time in the world as the two of you stand in this broken airport terminal shopping center that should be teaming with people.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You&apos;re panting again, exhausted as your heart pounds with the sheer fear and thrill of saying such personal things to a stranger. You&apos;ve never been more vulnerable in your life.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The man accepts it all. His eyes don&apos;t narrow with judgment. &nbsp;He doesn&apos;t insist on what you SHOULD have done, as if you had the tiniest ounce of ability to affect the past. He doesn&apos;t yell at you or call you selfish or ask him to consider his own feelings about any of this. He simply listens.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">And then.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">And then.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He says...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;I don&apos;t think any of that was really your fault. I think your friends were being unreasonable. You aren&apos;t a bad person, Doran.&quot;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">And you start to cry.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Helplessly, in large ugly bawls like a child lost and alone, utterly and with abandon.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He offers you something soft and cloth and you glance at him through blurry tears to confirm it&apos;s a handkerchief and you can blow your nose in it. You make a disgusting mess of it before you can see well enough to realize that its probably SILK and its got this little spiraling wavy embroidered design along the edge and you&apos;ve RUINED IT haven&apos;t you.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He laughs softly, and the warmth fills you to your toes and says you can keep it. &quot;Call it a souvenir&quot; he says. &quot;Now. Let&apos;s get you home, shall we?&quot; and helps you to your feet once again.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You have never trusted someone more in your entire life as you walk slowly behind him.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">It feels like no time at all before he stops you, and looks solemnly into your eyes. His eyes are gray and deep, like the ocean.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;Doran. This is very important. I need you to listen to me very closely, okay? It&apos;s very important that you trust me.&quot;. You nod, not trusting yourself to speak. &quot;Doran. You cannot come back here. You can not try to reach Toronto again. If possible, I think you should try to build a new life in Orlando. Your friends don&apos;t deserve you and you can make new ones there. If you have to leave, then try for Westerville, Ohio, alright? You got that? Westerville, Ohio. &nbsp;I don&apos;t personally recommend Italy&quot;.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He scowls at this, and his entire face seems to transform... He looks... So young. So.... human? &nbsp;So...present? You&apos;re not sure how to describe it. Like somehow everything you&apos;d seen up to now was some kind of mask. You don&apos;t like it. It scares you. Who is this person?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">His face returns and you... can&apos;t quite shake the feeling that its wrong in some way. Inhuman. Cold.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">&quot;Doran?&quot; he asks, concern painted on his face that no longer seems like a face. &quot;Are you alright? Can you repeat what I said back to me?&quot;</span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;">You swallow and dutifully say &quot;Go back to Orlando.Never go to Toronto again. If I have to leave, go to Westerville, Ohio. Nowhere else.&quot;</span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;">His grin is warm and approving and the ice grows in your belly. Something is wrong. His eyes... deep like oceans... do they even see you? Is there anyone even inside of them?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Are you alone?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He gestures you to move forward, to turn a corner already glowing with light that simply wasn&apos;t present in the strange space.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You unreasonably don&apos;t want to turn your back to him. Some part of you doesn&apos;t want to lose the warm presence, the understanding person who knows your darkest secret and likes you anyways. To go back to Orlando where you are alone and misunderstood. &nbsp;But the ice in your stomach is slowly worming its way up to your heart and it is screaming at you that you are alone you&apos;re alone right now and if you don&apos;t step forwards if you don&apos;t RUN forwards you&apos;ll be alone until you die.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">You don&apos;t look back as you scurry into the light and the noise and press of a crowd. You have a plane ticket to buy.</span></p>
+<p><br></p>
+<p><br></p>
+<p><span style="font-size:11pt;">~~~</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Witherby watches the Resident scurry forwards with a relieved sigh. He loosens his tie a bit and leans against a wall, pulling out a cigarette, not to smoke, but to cup his hands around the warmth of its glowing tip.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">His breath comes out in a puff of mist.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">It had been a rough one. A Kill, sure, but not one that caused the more.... unpleasant effects. Easily Forgiven, all things considered.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">But something about this particular Resident had tugged on him in ways he was not proud of. Like she was somehow...MORE.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He feels more energy than he has all loop. More. Fed. Then after a baker&apos;s dozen of other confessions.&nbsp;</span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;">He needs to tell someone. Ria maybe? She seemed to be doing well still, not in any of her myriad relapses. She might know what it meant that his monstrous nature was so easy to pull forwards right now. How best to contain him, if it came to that.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He&apos;s still the best member of Training to intercept the Residents before they began to transform, is the thing. It&apos;s still his job to keep the Residents calm and placated while extracting them. &nbsp;If he tells someone, maybe they&apos;ll ask him to stop doing his job. Maybe the Residents will just be left to rot into wood and ball joints and blank faces to be trapped forever alone in this infinitely spiraling maze abnormality..&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Unbidden, the Resident&apos;s own painfully human face with wide eyes and trembling fear of being separated came back to him. The cigarette&apos;s tip frosts over with a soft sound, unnoticed.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Yeah.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">He needs to tell Ria.&nbsp;</span></p>
+<p><br></p>
+`);
+
+const WibbyFact = new Fact("Witherby Will Hear Your Confession", "Witherby is in charge of doing attachment work for the Training team, which means befriending monsters, randos, and monstrous randos. He's good at his job, a key component of which is staying proffesional and not getting too attached. He's one cool operator.",[SPYING], 1, 2, 1, witherby_secret);
+
 const devona_secret = new Secrets(null, null, null, `Devona's Secret
 
 Neville isn't much of a talker. If you ask him about his sister he'll tell you she's his twin sister and that's all there is to say on the matter.
