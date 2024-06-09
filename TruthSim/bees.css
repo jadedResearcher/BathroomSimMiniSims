@@ -1,0 +1,17 @@
+.hives-container{
+  width: 100%;
+  display: flex;
+  gap: 13px;
+  padding: 13px;
+  justify-content: space-between;
+
+}
+
+.hive{
+  width: 100px;
+  height: 150px;
+  background-color: yellow;
+  color: black;
+  padding: 10px;
+  border-top: 10px solid white;
+}

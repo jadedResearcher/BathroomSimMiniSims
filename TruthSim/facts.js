@@ -285,7 +285,10 @@ const neville_secret = new Secrets(null, null, null, `<p><strong><u><span style=
 <p><br></p>`);
 const NevilleFact = new Fact("Neville is a Chill and Cool Guy :)", "Literally nothing seems to bother Neville. They don't call him 'soup himbo' for nothing. He loves his bf Witherby (and is totally cool with his bisexual awakening) and he loves his sworn sibling, Devona. Everything's great :) ",[OBFUSCATION], 1, 1, 1, neville_secret);
 
-
+//witherby is so good at his job
+//you never even notice you didn't get his name
+//you never even notice the detached distance between you
+//until its over
 const witherby_secret = new Secrets(null,null,null, `
 <p><span style="font-size:11pt;">You follow the signs in the airport. Terminal E. Baggage Claim. Bathrooms. Food court. Duty free shopping. Terminal C. International travelers. Terminal J.</span></p>
 <p><br></p>
@@ -387,7 +390,7 @@ const witherby_secret = new Secrets(null,null,null, `
 <p><br></p>
 <p><span style="font-size:11pt;">You&apos;re panting again, exhausted as your heart pounds with the sheer fear and thrill of saying such personal things to a stranger. You&apos;ve never been more vulnerable in your life.&nbsp;</span></p>
 <p><br></p>
-<p><span style="font-size:11pt;">The man accepts it all. His eyes don&apos;t narrow with judgment. &nbsp;He doesn&apos;t insist on what you SHOULD have done, as if you had the tiniest ounce of ability to affect the past. He doesn&apos;t yell at you or call you selfish or ask him to consider his own feelings about any of this. He simply listens.</span></p>
+<p><span style="font-size:11pt;">The man accepts it all. His eyes don&apos;t narrow with judgment. &nbsp;He doesn&apos;t insist on what you SHOULD have done, as if you had the tiniest ounce of ability to affect the past. He doesn&apos;t yell at you or call you selfish or ask you to consider his own feelings about any of this. He simply listens.</span></p>
 <p><br></p>
 <p><span style="font-size:11pt;">And then.</span></p>
 <p><br></p>

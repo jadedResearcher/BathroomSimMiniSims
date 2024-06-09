@@ -30,13 +30,13 @@ let globalDataObject = {
   truthCurrentValue: 0,
   mazesBeaten: 0,
   mazesTried: 0,
-  hiveMap:{},
+  hiveMap: {},
   currentMaze: undefined, //what maze are you currently exploring (serialized)
   storedMazes: [], //up to three (or so?) mazes you stored because they are especially useful for grinding
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME,GAMERSHOPMINIGAME ],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, GAMERSHOPMINIGAME],
   rottenMiniGames: [], //did you think the things vik erases sleep peacefully?
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
@@ -70,10 +70,10 @@ let globalDataObjectREAL = {
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
 };
 
-const debugMode = (game)=>{
-  if(globalMiniGames[game]){
-    globalMiniGames[game].render(document.querySelector("body"),this, ()=>{alert("you did it!")});
-  }else{
+const debugMode = (game) => {
+  if (globalMiniGames[game]) {
+    globalMiniGames[game].render(document.querySelector("body"), this, () => { alert("you did it!") });
+  } else {
     alert("NO MINI GAME FOUND CALLED " + game + " ARE YOU SURE YOURE WASTING RIGHT???");
     console.log("JR NOTE: game was", game, "and globalMiniGAmes is", globalMiniGames)
   }
@@ -83,15 +83,15 @@ const debugMode = (game)=>{
 window.onload = () => {
 
   initThemes();
-  if(!globalDataObject.hiveMap[FIRE]){
-    globalDataObject.hiveMap[FIRE] = new BeeHive(globalRand,FIRE)
+  if (!globalDataObject.hiveMap[FIRE]) {
+    globalDataObject.hiveMap[FIRE] = new BeeHive(globalRand, FIRE)
   }
   initAllMiniGames();
   load();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   debugMiniGame = urlParams.get('debugMiniGame');
-  if(debugMiniGame){
+  if (debugMiniGame) {
     debugMode(debugMiniGame);
     return;
   }
@@ -126,7 +126,7 @@ const truthPopup = async (title, text, secret) => {
     popup.onclick = () => {
       popup.remove();
       //just in case somehow theres multiple
-      document.querySelectorAll(".truth-popup").forEach((x)=>x.remove());
+      document.querySelectorAll(".truth-popup").forEach((x) => x.remove());
       resolve(true);
     }
   });
@@ -134,7 +134,7 @@ const truthPopup = async (title, text, secret) => {
   return myPromise;
 }
 
-const deleteSave = ()=>{
+const deleteSave = () => {
   localStorage.removeItem(SAVE_KEY);
 
 }
@@ -286,7 +286,7 @@ const renderHeader = () => {
   handleTruthTabButton(header);
   handleSaveTabButton(header);
   handleMazeTabButton(header);
-
+  handleBeeTabButton(header);
 
 }
 
@@ -349,6 +349,32 @@ const highlightTab = (ele) => {
   ele.classList.add("active");
 }
 
+const handleBeeTabButton = (header) => {
+  const beeTab = createElementWithClassAndParent("div", header, 'tab');
+  beeTab.id = "bee-tab-button";
+  beeTab.onclick = () => {
+    renderBeeTab();
+    highlightTab(beeTab);
+
+  }
+  const label = createElementWithClassAndParent("div", beeTab);
+  label.innerText = "Bees";
+  label.style.textAlign = "center";
+  label.style.marginTop = "30px";
+
+  if (Object.keys(globalDataObject.hiveMap).length === 0) {
+    mazeTab.style.display = "none";
+    const monitorObsession = () => {
+      if (Object.keys(globalDataObject.hiveMap).length > 0) {
+        mazeTab.style.display = "block";
+        return;
+      }
+      setTimeout(monitorObsession, 1000);
+    }
+    monitorObsession();
+  }
+}
+
 const handleMazeTabButton = (header) => {
   const mazeTab = createElementWithClassAndParent("div", header, 'tab');
   mazeTab.id = "maze-tab-button";
@@ -375,6 +401,37 @@ const handleMazeTabButton = (header) => {
   }
 }
 
+const renderBeeTab = () => {
+  globalTabContent.innerHTML = "TODO: know how long its been since visit, generate loot and more bees, render loot section, cfo points store gives you random bees";
+  let hives = Object.values(globalDataObject.hiveMap);
+  const container = createElementWithClassAndParent("div", globalTabContent, "hives-container");
+
+  for (let hive of hives) {
+    const hiveEle = createElementWithClassAndParent("div", container, "hive");
+
+    let rotation = 0;
+    for (let theme of [hive.theme1Key, hive.theme2Key]) {
+      console.log("JR NOTE: theme to rotate is ", theme)
+      if(theme){//theme 2 can be null
+        rotation += themeToColorRotation(theme);
+        console.log("JR NOTE: rotation is", rotation)
+      }
+    }
+
+    hiveEle.title = [hive.theme1, hive.theme2].map((item) => item).sort().join(", ");
+
+
+    const header = createElementWithClassAndParent("h2", hiveEle, "hive-title");
+    header.innerText = hive.classpect;
+
+    const counter = createElementWithClassAndParent("div", hiveEle, "hive-counter");
+
+    counter.innerHTML += `<img class='key-icon' src='images/beetest.gif'> x ${hive.amountOfBees}`;
+    hiveEle.style.filter = `hue-rotate(${rotation}deg) contrast(2.0)`;
+  }
+
+}
+
 const renderMazeTab = () => {
   globalTabContent.innerHTML = "";
   globalBGMusic.src = globalMeatMode ? "audio/music/waiting_music_var1.mp3" : "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
@@ -382,7 +439,7 @@ const renderMazeTab = () => {
   if (!globalDataObject.currentMaze) {
     globalDataObject.currentMaze = new Maze(globalRand, globalDataObject.mazesTried, globalDataObject.truthPerSecond);
     globalDataObject.mazesTried++;
-  }else if(globalDataObject.unlockedMiniGames.length === 0){
+  } else if (globalDataObject.unlockedMiniGames.length === 0) {
     fuckShitUpVikStyle(); //why did you forget EVERYTHING?
   }
   const header = createElementWithClassAndParent("h1", globalTabContent, "maze-title");
@@ -482,9 +539,9 @@ const renderSaveTab = () => {
 
   const deleteButton = createElementWithClassAndParent("button", section1);
   deleteButton.innerText = "Delete Save?";
-  deleteButton.onclick = ()=>{
-    if(window.confirm("Are you sure? You can not undo this... Do you have a backup?")){
-      truthLog("...","... Do not forget me."); //technically you won't see this before the page refreshes, unless you keep logging cached
+  deleteButton.onclick = () => {
+    if (window.confirm("Are you sure? You can not undo this... Do you have a backup?")) {
+      truthLog("...", "... Do not forget me."); //technically you won't see this before the page refreshes, unless you keep logging cached
       deleteSave();
       window.location.href = window.location.href;
     }

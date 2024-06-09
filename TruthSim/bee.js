@@ -39,10 +39,9 @@ const processBee = (theme1Key, theme2Key)=>{
 
 }
 
-//no matter what, always have "Bee" in your classpect
+//no matter what, always have "Hive" in your classpect
 //if you pass in an adj i'll assume the object is Bee, otherwise work it into your object
 const beeClasspecting = (rand, themes) => {
-  console.log("JR NOTE: making bee claspect", {rand, themes})
 
   const generateTemplates = (rand, person, object, adj) => {
       let templates = [`${person} of ${object}`, `${object} ${person}`, `${object} ${person}`];
@@ -58,7 +57,7 @@ const beeClasspecting = (rand, themes) => {
 
   if (themes.length === 1) {
       const nouns = [themes[0].pickPossibilityFor(OBJECT, rand), themes[0].pickPossibilityFor(LOCATION, rand), themes[0].pickPossibilityFor(PERSON, rand)]
-      return generateTemplates(rand, "Bee", rand.pickFrom(nouns))
+      return generateTemplates(rand, "Hive", rand.pickFrom(nouns))
   } else if (themes.length === 2) {
       let nouns;
       let adj;
@@ -69,7 +68,7 @@ const beeClasspecting = (rand, themes) => {
           nouns = [themes[0].pickPossibilityFor(OBJECT, rand), themes[0].pickPossibilityFor(rand, LOCATION), themes[0].pickPossibilityFor(PERSON, rand)]
           adj = [themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(COMPLIMENT, rand), themes[1].pickPossibilityFor(INSULT, rand)]
       }
-      return generateTemplates(rand, "Bee", rand.pickFrom(nouns), rand.pickFrom(adj))
+      return generateTemplates(rand, "Hive", rand.pickFrom(nouns), rand.pickFrom(adj))
 
   }
   return "??? Bee";
