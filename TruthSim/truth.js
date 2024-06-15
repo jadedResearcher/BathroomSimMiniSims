@@ -24,6 +24,7 @@ let globalDataObject = {
   allTimeTruthGivenToCloser: 0,
   maximumGamerLevelAchieved: 0,
   lastLoadTimeCode: 0,
+  lastBeeTimeCode: 0,
   totalTimeInMeatMode: 0,
   lastSaveTimeCode: 0,
   factsUnlocked: [],
@@ -52,6 +53,7 @@ let globalDataObjectREAL = {
   keysBoughtFromCloser: 0,
   allTimeTruthGivenToCloser: 0,
   lastLoadTimeCode: 0,
+  lastBeeTimeCode: 0,
   totalTimeInMeatMode: 0,
   lastSaveTimeCode: 0,
   factsUnlocked: [],
@@ -402,17 +404,25 @@ const handleMazeTabButton = (header) => {
 }
 
 const renderBeeTab = () => {
+  const oldTimeCode = globalDataObject.lastBeeTimeCode;
+  globalDataObject.lastBeeTimeCode = Date.now();
+
   globalTabContent.innerHTML = "TODO: know how long its been since visit, generate loot and more bees, render loot section, cfo points store gives you random bees";
   let hives = Object.values(globalDataObject.hiveMap);
   const container = createElementWithClassAndParent("div", globalTabContent, "hives-container");
 
   for (let hive of hives) {
+    const hiveRand = new SeededRandom(stringtoseed(hive.classpect));
+    hiveRand.nextDouble(); //just in case
+    if (oldTimeCode) {
+      updateHiveOverTime(hive, globalDataObject.lastBeeTimeCode - oldTimeCode)
+    }
     const hiveEle = createElementWithClassAndParent("div", container, "hive");
 
     let rotation = 0;
     for (let theme of [hive.theme1Key, hive.theme2Key]) {
       console.log("JR NOTE: theme to rotate is ", theme)
-      if(theme){//theme 2 can be null
+      if (theme) {//theme 2 can be null
         rotation += themeToColorRotation(theme);
         console.log("JR NOTE: rotation is", rotation)
       }
@@ -428,6 +438,21 @@ const renderBeeTab = () => {
 
     counter.innerHTML += `<img class='key-icon' src='images/beetest.gif'> x ${hive.amountOfBees}`;
     hiveEle.style.filter = `hue-rotate(${rotation}deg) contrast(2.0)`;
+    const lootContainer = createElementWithClassAndParent("div", hiveEle, "loot-container");
+
+    for(let loot of hive.loot){
+      const loot_counter = createElementWithClassAndParent("div", lootContainer, "hive-counter");
+      let chosenTheme = all_themes[hive.theme1Key];
+      if(hiveRand.nextDouble() >0.5 && hive.theme2Key ){
+        chosenTheme = all_themes[hive.theme2Key];
+      }
+      const chosenFloorObject = chosenTheme.pickPossibilityFor(FLOORFOREGROUND,hiveRand);
+      const chosen_icon = chosenFloorObject.src;
+      loot_counter.title = chosenFloorObject.desc;
+      loot_counter.alt = chosenFloorObject.name;
+
+      loot_counter.innerHTML += `<img class='key-icon honey-icon' src='images/top_floor_objects/${chosen_icon}'> x ${loot.quantity} (Level ${loot.quality})`;
+    }
   }
 
 }

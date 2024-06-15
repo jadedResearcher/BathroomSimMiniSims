@@ -14,27 +14,41 @@ can feed a THEME HIVE a fact that shares its themes to get one minute of progres
 */
 
 
-class ThemeHoney{
-  theme_key;
-  quality; // quality = odds winning in slot machine
+class ThemeHoney {
+  classpect; //same as hive
+  theme1Key;
+  theme2Key;  //can be used in EITHER slot machine if multiple themes
+  quality; // quality = prize lot for slot machine
+  /*
+25% of facts automatically map to an Eyes or an INFINITE ART MACHINE image if they have no secret for docs room.  honey tier 2 only grabs these facts
+
+tier 3 grabs ones with actual Secrets
+  */
   quantity; //you can have more than one in a stack, but all must be at some quality
+  constructor(classpect, theme1Key, theme2Key, quality, quantity) {
+    this.classpect = classpect;
+    this.theme1Key = theme1Key;
+    this.theme2Key = theme2Key;
+    this.quality = quality;
+    this.quantity = quantity;
+  }
 }
 
-const getBeeKeyFromThemes = (theme1Key, theme2Key)=>theme1Key+theme2Key?"+"+theme2Key:"";
+const getBeeKeyFromThemes = (theme1Key, theme2Key) => theme1Key + (theme2Key ? "+" + theme2Key : "");
 
 /*
 if you find a bee, add it to the hive that matches its theming. 
 if no hive does, generate one and set its classpect and make its amountOfBees be 1. 
 */
-const processBee = (theme1Key, theme2Key)=>{
-  if(!globalSaveData.hiveMap){
-    globalSaveData.hiveMap = {};
+const processBee = (theme1Key, theme2Key) => {
+  if (!globalDataObject.hiveMap) {
+    globalDataObject.hiveMap = {};
   }
-  const hive = globalSaveData.hiveMap[getBeeKeyFromThemes(theme1Key, theme2Key)];
-  if(hive){
+  const hive = globalDataObject.hiveMap[getBeeKeyFromThemes(theme1Key, theme2Key)];
+  if (hive) {
     hive.amountOfBees += 1;
-  }else{
-    globalSaveData.hiveMap[getBeeKeyFromThemes(theme1Key, theme2Key)] =new BeeHive(globalRand, theme1Key, theme2Key);
+  } else {
+    globalDataObject.hiveMap[getBeeKeyFromThemes(theme1Key, theme2Key)] = new BeeHive(globalRand, theme1Key, theme2Key);
   }
 
 }
@@ -44,51 +58,76 @@ const processBee = (theme1Key, theme2Key)=>{
 const beeClasspecting = (rand, themes) => {
 
   const generateTemplates = (rand, person, object, adj) => {
-      let templates = [`${person} of ${object}`, `${object} ${person}`, `${object} ${person}`];
-      if (adj) {
-          templates = [];
-          templates.push(`${adj} ${person} of ${object}`);
-          templates.push(`${person} of ${adj} ${object}`)
-          templates.push(`${adj} ${person}`)
-          templates.push(`${adj} ${object} ${person}`)
-      }
-      return rand.pickFrom(templates);
+    let templates = [`${person} of ${object}`, `${object} ${person}`, `${object} ${person}`];
+    if (adj) {
+      templates = [];
+      templates.push(`${adj} ${person} of ${object}`);
+      templates.push(`${person} of ${adj} ${object}`)
+      templates.push(`${adj} ${person}`)
+      templates.push(`${adj} ${object} ${person}`)
+    }
+    return rand.pickFrom(templates);
   }
 
   if (themes.length === 1) {
-      const nouns = [themes[0].pickPossibilityFor(OBJECT, rand), themes[0].pickPossibilityFor(LOCATION, rand), themes[0].pickPossibilityFor(PERSON, rand)]
-      return generateTemplates(rand, "Hive", rand.pickFrom(nouns))
+    const nouns = [themes[0].pickPossibilityFor(OBJECT, rand), themes[0].pickPossibilityFor(LOCATION, rand), themes[0].pickPossibilityFor(PERSON, rand)]
+    return generateTemplates(rand, "Hive", rand.pickFrom(nouns))
   } else if (themes.length === 2) {
-      let nouns;
-      let adj;
-      if (rand.nextDouble() > 0.5) {
-          nouns = [themes[1].pickPossibilityFor(OBJECT, rand), themes[1].pickPossibilityFor(LOCATION, rand), themes[1].pickPossibilityFor(PERSON, rand)]
-          adj = [themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(COMPLIMENT, rand), themes[0].pickPossibilityFor(INSULT, rand)]
-      } else {
-          nouns = [themes[0].pickPossibilityFor(OBJECT, rand), themes[0].pickPossibilityFor(rand, LOCATION), themes[0].pickPossibilityFor(PERSON, rand)]
-          adj = [themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(COMPLIMENT, rand), themes[1].pickPossibilityFor(INSULT, rand)]
-      }
-      return generateTemplates(rand, "Hive", rand.pickFrom(nouns), rand.pickFrom(adj))
+    let nouns;
+    let adj;
+    if (rand.nextDouble() > 0.5) {
+      nouns = [themes[1].pickPossibilityFor(OBJECT, rand), themes[1].pickPossibilityFor(LOCATION, rand), themes[1].pickPossibilityFor(PERSON, rand)]
+      adj = [themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(ADJ, rand), themes[0].pickPossibilityFor(COMPLIMENT, rand), themes[0].pickPossibilityFor(INSULT, rand)]
+    } else {
+      nouns = [themes[0].pickPossibilityFor(OBJECT, rand), themes[0].pickPossibilityFor(LOCATION, rand), themes[0].pickPossibilityFor(PERSON, rand)]
+      adj = [themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(ADJ, rand), themes[1].pickPossibilityFor(COMPLIMENT, rand), themes[1].pickPossibilityFor(INSULT, rand)]
+    }
+    return generateTemplates(rand, "Hive", rand.pickFrom(nouns), rand.pickFrom(adj))
 
   }
   return "??? Bee";
 }
 
+const updateHiveOverTime = (hive, timeInMillis) => {
+  //if a stack of honey already exists for the given quality in the hive just up its quantity
+  const addLootHoneyOfQualityAndQuantity = (hive, quantity, quality) => {
+    let found = false;
+    for (let loot of hive.loot) {
+      if (loot.quality === quality) {
+        found = true;
+        loot.quantity += quantity;
+      }
+    }
+    if (!found) {
+      hive.loot.push(new ThemeHoney(hive.classpect + " Honey", hive.theme1Key, hive.theme2Key, quality, quantity))
+    }
+  }
+
+  console.log(`JR NOTE:  ${hive.classpect} is trying to update from ${timeInMillis} ms. I should give it loot and more bees, as appropriate.`)
+  console.log("JR NOTE: actually do the math for amount of bees and loot")
+  hive.amountOfBees++;
+  addLootHoneyOfQualityAndQuantity(hive, 1, 1);
+  addLootHoneyOfQualityAndQuantity(hive, 1, 2);
+
+}
+
 
 //if this has any functions in it it can't be laoded for free
-class BeeHive{
+class BeeHive {
   theme1Key;
   theme2Key;//could be null or undefined
   classpect; //if its a hive of Stolen Fire then it make Stolen Fire Honey and if you find a Fire/Thief bee it will be called a Stolen Fire bee. 
   amountOfBees = 1; // every X minutes, generates a new bee (iff there are 2+ bees)
   loot = []; //every minute generates more ThemeHoney (but the tab handles that, not the bee)
 
-  constructor(rand, theme1Key, theme2Key){
+  constructor(rand, theme1Key, theme2Key) {
     this.theme1Key = theme1Key;
     this.theme2Key = theme2Key;
     const themes = [all_themes[theme1Key]];
     theme2Key && themes.push(all_themes[theme2Key])
     this.classpect = titleCase(beeClasspecting(rand, themes));
   }
+
+
 
 }
