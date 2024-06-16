@@ -41,15 +41,16 @@ if you find a bee, add it to the hive that matches its theming.
 if no hive does, generate one and set its classpect and make its amountOfBees be 1. 
 */
 const processBee = (theme1Key, theme2Key) => {
-  console.log("JR NOTE: processing bee for", theme1Key, theme2Key)
   if (!globalDataObject.hiveMap) {
     globalDataObject.hiveMap = {};
   }
   const hive = globalDataObject.hiveMap[getBeeKeyFromThemes(theme1Key, theme2Key)];
   if (hive) {
     hive.amountOfBees += 1;
+    return hive;
   } else {
     globalDataObject.hiveMap[getBeeKeyFromThemes(theme1Key, theme2Key)] = new BeeHive(globalRand, theme1Key, theme2Key);
+    return globalDataObject.hiveMap[getBeeKeyFromThemes(theme1Key, theme2Key)];
   }
 
 }
@@ -158,10 +159,8 @@ const updateHiveOverTime = (hive, timeInMillis) => {
     hive.amountOfBees += Math.round(beesBorn);
 
     if(Math.random() >0.9){ //actually random chance of hybridizing
-      console.log("JR NOTE: whoa we're gonna hybridize")
       let secondHive = pickFrom(Object.values(globalDataObject.hiveMap));
       const themes = [hive.theme1Key, hive.theme2Key, secondHive.theme1Key, secondHive.theme2Key].filter(Boolean).sort()//remove undefineds, alphabatize (so fire/light is the same as light/fire)
-      console.log("JR NOTE: themes are", themes)
       const theme1Key = pickFrom(themes);
       const theme2Key = pickFrom(themes);
       if(theme1Key === theme2Key){

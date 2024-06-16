@@ -38,6 +38,7 @@ const pointsRewardTiers = ["Aluminum", "Nickle", "Tin", "Lead", "Iron", "Zinc", 
 class PointsReward {
     //note if you add more things here add them to the max out function
     truth = 0;
+    beeThemes = []; //only one at a time unless maxing out;
     key = 0;//the collated reward has more than one, but otherwise just one or zero
     facts = []; //the collated reward has more than one, but otherwise just one or zero
 
@@ -50,8 +51,13 @@ class PointsReward {
         if (this.disabled) {
             this.label += "(not enough points)"
         }
-        if (rand.nextDouble() > 0.5) {
+        if (rand.nextDouble() > 0.25) {
             this.facts.push(randomFact(rand));
+        }
+
+        if (rand.nextDouble() > 0.5) {
+            console.log("JR NOTE: there is a bee")
+            this.beeThemes.push(rand.pickFrom(Object.keys(all_themes)));
         }
         //between three seconds and five  minutes of truth
         this.truth = rand.getRandomNumberBetween(0, 5 * 60 * parseInt(globalDataObject.truthPerSecond));
@@ -64,14 +70,16 @@ class PointsReward {
     maxOut(){
         this.truth = 9999999;
         this.key = 9999;
+        this.beeThemes = Object.keys(all_themes);//all the bees. all of them
         this.facts = [new Fact(`lol you're a l337 hax0r`, "lol you really did it huh? good thing i have a error handler in here. can you IMAGINE if it tried to individually calculate all those rewards? your computer would crash. smdh. wastes, amirite? anyways, say 'thank you, jr' for me rewarding cheating instead of trying to prevent it. glhf",[WASTE], 113, 113, 113)];
     }
 
     addRewardToSelf(reward) {
-        console.log("JR NOTE: adding reward to self", { this: this, reward })
         this.truth += reward.truth;
         this.key += reward.key;
         this.facts = this.facts.concat(reward.facts);
+        this.beeThemes = this.beeThemes.concat(reward.beeThemes);
+
     }
 
     //http://knucklessux.com/PuzzleBox/Secrets/WatcherOfThreads/dreams.pdf
@@ -93,6 +101,11 @@ class PointsReward {
         if (this.key > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `A Key!!!`;
+        }
+
+        if (this.beeThemes.length > 0) {
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `One ${titleCase(this.beeThemes[0])} Bee!`;
         }
 
         if (this.facts.length > 0) {
@@ -182,6 +195,18 @@ class GamerPointsStoreMiniGame extends MiniGame {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `${reward.key} Keys!!!`;
             globalDataObject.numberKeys+= reward.key;
+
+        }
+
+        if (reward.beeThemes.length > 0) {
+            const ele = createElementWithClassAndParent("li", unordered_list);
+            ele.innerHTML = `Bees: `;
+            const unordered_list2 = createElementWithClassAndParent("ul", unordered_list);
+            for (let bee of reward.beeThemes) {
+                const hive = processBee(bee);
+                const ele = createElementWithClassAndParent("li", unordered_list2);
+                ele.innerHTML = `${hive.classpect} Bee!`;
+            }
 
         }
 
