@@ -41,6 +41,7 @@ if you find a bee, add it to the hive that matches its theming.
 if no hive does, generate one and set its classpect and make its amountOfBees be 1. 
 */
 const processBee = (theme1Key, theme2Key) => {
+  console.log("JR NOTE: processing bee for", theme1Key, theme2Key)
   if (!globalDataObject.hiveMap) {
     globalDataObject.hiveMap = {};
   }
@@ -89,25 +90,100 @@ const beeClasspecting = (rand, themes) => {
 }
 
 const updateHiveOverTime = (hive, timeInMillis) => {
+  const minutes = Math.round(timeInMillis / 1000 / 60); //convert to seconds by dividing by 1000, convert to minutes by dividing by 60
+  console.log("JR NOTE: you were gone this many minutes", minutes)
   //if a stack of honey already exists for the given quality in the hive just up its quantity
   const addLootHoneyOfQualityAndQuantity = (hive, quantity, quality) => {
+    if (Math.round(quantity) === 0) {
+      return;
+    }
+    if (quantity < 0) {
+      //:) :) :) spiral is fun
+      quantity = getRandomNumberBetween(1, Math.abs(quantity) * 13);
+    }
     let found = false;
     for (let loot of hive.loot) {
       if (loot.quality === quality) {
         found = true;
-        loot.quantity += quantity;
+        loot.quantity += Math.round(quantity);
       }
     }
     if (!found) {
-      hive.loot.push(new ThemeHoney(hive.classpect + " Honey", hive.theme1Key, hive.theme2Key, quality, quantity))
+      hive.loot.push(new ThemeHoney(hive.classpect + " Honey", hive.theme1Key, hive.theme2Key, quality, Math.round(quantity)))
     }
   }
 
-  console.log(`JR NOTE:  ${hive.classpect} is trying to update from ${timeInMillis} ms. I should give it loot and more bees, as appropriate.`)
-  console.log("JR NOTE: actually do the math for amount of bees and loot")
-  hive.amountOfBees++;
-  addLootHoneyOfQualityAndQuantity(hive, 1, 1);
-  addLootHoneyOfQualityAndQuantity(hive, 1, 2);
+  let attack = 0;
+  let defense = 0;
+  let speed = 0;
+
+  for (let themeKey of [hive.theme1Key, hive.theme2Key]) {
+    if (themeKey) {
+      attack += themeToAttackMultiplier(themeKey)
+      defense += themeToDefenseMultiplier(themeKey)
+      speed += themeToSpeedMultiplier(themeKey)
+    }
+  }
+  //zero is not a valid amount
+  if (attack === 0) {
+    attack = 0.1;
+  }
+
+  if (defense === 0) {
+    defense = 0.1;
+  }
+
+  if (speed === 0) {
+    speed = 0.1;
+  }
+
+
+  let beesBorn = 0;
+  if (hive.amountOfBees >= 2) {
+    if(hive.amountOfBees <100){
+      beesBorn = (hive.amountOfBees * minutes * speed) / attack;
+    }else if(hive.amountOfBees < 5318008 ){
+      beesBorn = ((hive.amountOfBees/10 * minutes * speed) / attack)/100;
+    }else{
+      beesBorn = 1; //won't STOP them but this is a frankly absurd amount of bees and i don't feel like figuring out how cookie clicker guy got over big int, so you get the funny boob number, k
+    }
+  }
+  if (beesBorn < 0) {
+    //the spiral theme specifically exists to fuck with future me
+    //future me is going to be SO CONFUSED AND UPSET when the numbers are weird but here we are
+    beesBorn = getRandomNumberBetween(1, Math.abs(beesBorn) * 13);
+  }
+
+  if (beesBorn > 0) {
+    hive.amountOfBees += Math.round(beesBorn);
+
+    if(Math.random() >0.9){ //actually random chance of hybridizing
+      console.log("JR NOTE: whoa we're gonna hybridize")
+      let secondHive = pickFrom(Object.values(globalDataObject.hiveMap));
+      const themes = [hive.theme1Key, hive.theme2Key, secondHive.theme1Key, secondHive.theme2Key].filter(Boolean).sort()//remove undefineds, alphabatize (so fire/light is the same as light/fire)
+      console.log("JR NOTE: themes are", themes)
+      const theme1Key = pickFrom(themes);
+      const theme2Key = pickFrom(themes);
+      if(theme1Key === theme2Key){
+        processBee(theme1Key)
+      }else{
+        processBee(theme1Key, theme2Key)
+      }
+    }
+  }//a spiralling labyrinth is what my code always was meant to become
+  //theres something so cathartic about not needing to rigidly do my best to write maintainable code
+  //like in my day job
+
+  //(number of bees X number of minutes x THEMESPEED)/THEMEDEFENSE = amount of honey
+  //then a modifier for how rare it should be based on quality
+  addLootHoneyOfQualityAndQuantity(hive, ((hive.amountOfBees * minutes * speed) / defense), 1);
+  if (hive.amountOfBees > 100) {
+    addLootHoneyOfQualityAndQuantity(hive, ((hive.amountOfBees * minutes * speed) / defense) / 100, 2);
+  }
+
+  if(hive.amountOfBees >1000){
+    addLootHoneyOfQualityAndQuantity(hive, ((hive.amountOfBees * minutes * speed) / defense) / 1000, 3);
+  }
 
 }
 

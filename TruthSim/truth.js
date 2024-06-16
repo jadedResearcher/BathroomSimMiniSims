@@ -404,6 +404,8 @@ const handleMazeTabButton = (header) => {
 }
 
 const renderBeeTab = () => {
+  globalBGMusic.src = globalMeatMode ? "audio/music/waiting_music_var1.mp3" : "audio/music/funky_bees.mp3";
+  globalBGMusic.play();
   const oldTimeCode = globalDataObject.lastBeeTimeCode;
   globalDataObject.lastBeeTimeCode = Date.now();
 
@@ -421,10 +423,8 @@ const renderBeeTab = () => {
 
     let rotation = 0;
     for (let theme of [hive.theme1Key, hive.theme2Key]) {
-      console.log("JR NOTE: theme to rotate is ", theme)
       if (theme) {//theme 2 can be null
         rotation += themeToColorRotation(theme);
-        console.log("JR NOTE: rotation is", rotation)
       }
     }
 
