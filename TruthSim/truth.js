@@ -44,7 +44,7 @@ let globalDataObject = {
   obsessionCurrentValue: 0,//lifetime  value for seconds in game
 };
 
-//restore to this after debugging
+//restore to this after debugging (its named such to fuck with future me and or wastes because its not actually real, its a backup)
 let globalDataObjectREAL = {
   truthPerSecond: 1,
   maximumGamerLevelAchieved: 0,
@@ -85,9 +85,6 @@ const debugMode = (game) => {
 window.onload = () => {
 
   initThemes();
-  if (!globalDataObject.hiveMap[FIRE]) {
-    globalDataObject.hiveMap[FIRE] = new BeeHive(globalRand, FIRE)
-  }
   initAllMiniGames();
   load();
   const queryString = window.location.search;

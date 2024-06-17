@@ -106,7 +106,16 @@ const updateHiveOverTime = (hive, timeInMillis) => {
     for (let loot of hive.loot) {
       if (loot.quality === quality) {
         found = true;
-        loot.quantity += Math.round(quantity);
+        //the more you have the harder it is to get more
+        if(hive.quantity <10){
+          loot.quantity += Math.round(quantity);
+        }else if(hive.quantity <100){
+          loot.quantity += Math.round(quantity/10);
+        }else if (hive.quantity<1000){
+          loot.quantity += Math.round(quantity/1000);
+        }else{
+          loot.quantity += 1;
+        }
       }
     }
     if (!found) {
@@ -175,13 +184,18 @@ const updateHiveOverTime = (hive, timeInMillis) => {
 
   //(number of bees X number of minutes x THEMESPEED)/THEMEDEFENSE = amount of honey
   //then a modifier for how rare it should be based on quality
-  addLootHoneyOfQualityAndQuantity(hive, ((hive.amountOfBees * minutes * speed) / defense), 1);
+
+  let baseAmount = (hive.amountOfBees * minutes * speed) / defense;
+ 
+
+  addLootHoneyOfQualityAndQuantity(hive, baseAmount, 1);
+
   if (hive.amountOfBees > 100) {
-    addLootHoneyOfQualityAndQuantity(hive, ((hive.amountOfBees * minutes * speed) / defense) / 100, 2);
+    addLootHoneyOfQualityAndQuantity(hive, baseAmount / 100, 2);
   }
 
   if(hive.amountOfBees >1000){
-    addLootHoneyOfQualityAndQuantity(hive, ((hive.amountOfBees * minutes * speed) / defense) / 1000, 3);
+    addLootHoneyOfQualityAndQuantity(hive, baseAmount / 1000, 3);
   }
 
 }

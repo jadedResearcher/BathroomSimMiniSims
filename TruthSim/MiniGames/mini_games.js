@@ -146,7 +146,6 @@ class MiniGame {
     temporarilySetFact = () => {
         for (let fact of globalDataObject.factsUnlocked) {
             if (fact.mini_game_key === this.id) {
-                console.log("JR NOTE: returning fact: ", fact)
                 this.fact = fact;
             }
 
@@ -156,19 +155,14 @@ class MiniGame {
     getAttack = (room) => {
         let rotation = room.getAttack();
         const fact = this.fact;
-        console.log("JR NOTE: getting attack, fact is")
         if (!fact) {
-            console.log("JR NOTE: returning base room because there is no fact")
             return rotation;
         }
         const themes = fact.theme_key_array.map((item) => all_themes[item])
-        console.log("JR NOTE: fact themes are", themes)
         for (let theme of themes) {
             rotation += themeToAttackMultiplier(theme.key)
         }
         rotation += fact.damage_multiplier;
-        console.log("JR NOTE: fact attack is", fact.attack)
-        console.log("JR NOTE: attack is", rotation)
         return rotation;
     }
 
