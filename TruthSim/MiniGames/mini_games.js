@@ -9,6 +9,13 @@ const globalMiniGames = {
 
 }
 
+const rando_source = `http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/randos/`;
+let randos;
+
+const getRandos = async () => {
+    randos = await getImages(rando_source);
+}
+
 //CONSTANTS
 //debug with ?debugMiniGame=BETTING or whatever the key is
 const EYEKILLERMINIGAME = "EYEKILLER";
@@ -514,13 +521,7 @@ class ParkerMiniGame extends MiniGame {
         targetingReticule.src = "images/ReticalForFriendLARGE.png"
 
 
-        const rando_source = `http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/randos/`;
-        let randos;
 
-        const getRandos = async () => {
-            randos = await getImages(rando_source);
-        }
-        await getRandos();
 
 
 

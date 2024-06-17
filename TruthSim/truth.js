@@ -82,9 +82,10 @@ const debugMode = (game) => {
 
 }
 
-window.onload = () => {
+window.onload = async () => {
 
   initThemes();
+  await getRandos();
   initAllMiniGames();
   load();
   const queryString = window.location.search;
@@ -437,18 +438,31 @@ const renderBeeTab = () => {
     hiveEle.style.filter = `hue-rotate(${rotation}deg) contrast(2.0)`;
     const lootContainer = createElementWithClassAndParent("div", hiveEle, "loot-container");
 
-    for(let loot of hive.loot){
+    for (let loot of hive.loot) {
       const loot_counter = createElementWithClassAndParent("div", lootContainer, "hive-counter");
       let chosenTheme = all_themes[hive.theme1Key];
-      if(hiveRand.nextDouble() >0.5 && hive.theme2Key ){
+      if (hiveRand.nextDouble() > 0.5 && hive.theme2Key) {
         chosenTheme = all_themes[hive.theme2Key];
       }
-      const chosenFloorObject = chosenTheme.pickPossibilityFor(FLOORFOREGROUND,hiveRand);
-      const chosen_icon = chosenFloorObject.src;
+      //bypass error handling so i can do custom error handling
+      console.log("JR NOTE: chosen theme is", chosenTheme)
+      let chosen_icon;
+      let chosenFloorObject = chosenTheme.string_possibilities[FLOORFOREGROUND] ? hiveRand.pickFrom(chosenTheme.string_possibilities[FLOORFOREGROUND]) : null;
+      if (!chosenFloorObject) {
+        chosenFloorObject = {};
+        chosenFloorObject.src = rando_source + pickFrom(randos);
+        chosenFloorObject.desc = "It's people. The bees are making honey from people."
+        chosenFloorObject.name = "Rando Honey"
+        chosen_icon = chosenFloorObject.src;
+
+      } else {
+        chosen_icon = "images/top_floor_objects/" + chosenFloorObject.src;
+      }
+
       loot_counter.title = chosenFloorObject.desc;
       loot_counter.alt = chosenFloorObject.name;
 
-      loot_counter.innerHTML += `<img class='key-icon honey-icon' src='images/top_floor_objects/${chosen_icon}'> x ${loot.quantity} (Level ${loot.quality})`;
+      loot_counter.innerHTML += `<img class='key-icon honey-icon ${chosenTheme.key}' src='${chosen_icon}'> x ${loot.quantity} (Level ${loot.quality})`;
     }
   }
 
