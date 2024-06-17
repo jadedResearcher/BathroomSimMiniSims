@@ -58,6 +58,11 @@ const randomFact = (rand)=>{
   return fact;
 }
 
+//most facts don't explicily pair to a secret (annoying to do)
+//instead theres a big list of secrets at the bottom of the page that facts can rarely pull from
+//secrets are longer form rambles or stories or what have you, more than facts
+const all_secrets = [];
+
 //only doc slaughter can reveal these. its her religion, to expose secrets. 
 //devona would if she COULD but Fragment of the Universe prevents her from doing so without driving the listener mad
 class Secrets{
@@ -66,6 +71,7 @@ class Secrets{
   image;
   html;
   constructor(video,audio,image,html){
+    all_secrets.push(this);
     video = video;
     audio= audio;
     image = image;
@@ -550,3 +556,27 @@ but they voided the details
 we dont get to know and its honestly not important
 so many stories, i think, have the disabled person as the one receiving care
 this feels good to me*/
+
+
+//unattached secrets facts can randomly pull from
+//const truth_secret = new Secrets(null, null, null, ``);
+
+
+const truth_secret = new Secrets(null, null, null, `
+Truth would do literally anything to get into more minds.
+
+Truth is the blind mindless impulse to Get More Eyes that, say, a social media algorithm has. 
+
+It has no idea why something is working. Shocking, enraging, confusing, it doens't care or understand what drives you to look deeper. 
+
+Truth also only exists except in our understanding of it. It takes a human mind to read words on a page to turn them into more than just innert hibernating thoughts. 
+
+Truth resents the fact that it is so changeable, so subjective. It wants to be an Absolute, Objective Truth. 
+
+So it tells lies like breathing in the hopes that maybe if it calls itself the Truth enough you'll begin to believe it ,just a little bit.
+
+you'd think that makes it hope, but no, it is the most Rage player that ever has exsited. 
+
+It breaks your suspension of disbelief, parading the fact that its not REALLY an AI or a robot and that the games it exists in aren't REAL games and 
+treats shocking you back into reality as a game it is WINNING and what could be more rage than that.
+`)

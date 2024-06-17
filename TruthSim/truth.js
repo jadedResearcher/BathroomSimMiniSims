@@ -112,6 +112,27 @@ const truthLog = (title, text) => {
   console.log(`%c${title}%c  ${text}`, "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;", "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;");
 }
 
+/*
+Truth would do literally anything to get into more minds.
+
+Truth is the blind mindless impulse to Get More Eyes that, say, a social media algorithm has. 
+
+It has no idea why something is working. Shocking, enraging, confusing, it doens't care or understand what drives you to look deeper. 
+
+Truth also only exists except in our understanding of it. It takes a human mind to read words on a page to turn them into more than just innert hibernating thoughts. 
+
+Truth resents the fact that it is so changeable, so subjective. It wants to be an Absolute, Objective Truth. 
+
+So it tells lies like breathing in the hopes that maybe if it calls itself the Truth enough you'll begin to believe it ,just a little bit.
+
+you'd think that makes it hope, but no, it is the most Rage player that ever has exsited. 
+
+It breaks your suspension of disbelief, parading the fact that its not REALLY an AI or a robot and that the games it exists in aren't REAL games and 
+treats shocking you back into reality as a game it is WINNING and what could be more rage than that.
+
+
+*/
+
 //blocks until you click, so long as you await 
 const truthPopup = async (title, text, secret) => {
   const popup = createElementWithClassAndParent("div", document.querySelector("body"), "truth-popup");
@@ -935,3 +956,41 @@ const handleRewards = (numberBeaten, bonus) => {
   }
 
 }
+
+/*
+parker simply Does Not examine why witherby is his favorite person to watch
+that does not imply anything about him /sarcasm
+its not exactly internalized homophobia
+hed be almost as bad if he liked, say, devona
+but the unexamined assumption that hes straight definitely plays a part in making it worse
+its more that parkers self esteem is so low he thinks liking real people is bad for them
+and tbh he DOES uncontrollably murder people
+so
+he simply buries any awareness he has a crush
+
+
+at least to me
+the supernatural elements take the edge off the mundane ones
+it would be a really heavy story to deal with parkers mundane issues alone
+and it would be tempting, either for me, or the audience, to provide mundane metrics to it?
+like , invalidating parker because he should "just" take a bath and go outside
+the supernatural elements sort of translate legitimate mental health concerns (either innate or trauma based) into a way that
+for lack of a better word
+feels more justifiable?
+when you are in that hole of self hate it is a Fact Of Reality that your presence ruins everything for your loved ones
+you cant conceive of your own value and worth and self destructive behaviors feel RIGHT
+so instead of talking about the inherent worth of humanity which sounds fake and patronizing
+"here is someone EVEN WORSE than your brain lies say you are who ABSOLUTELY ruins everything he touches just like you feel you do but worse and he still can have a friend and learn to do nice things for himself and when he does its better for everyone" 
+repeat for all the blorbos
+ria is such a mess of addiction and needs SO MUCH from her friends she literally destroys everything 
+
+and here is how she can be happier
+
+etc etc
+it soothes me to find a way to accept types of people i find draining or scary? or to find a way to accept traits i fear i have during my lows
+but without it being that corrupt type of acceptance that goes "welp, because i can understand this person i have to do everything in my power to help them and can never complain if they hurt me" or "because my feelings are valid i can treat others as terribly as i want" 
+witherby has plenty of his own issues, but freezing out ria and backing off from her for his own safety wasnt one of them
+and devona avoiding k isnt her being mean and "not understanding" how hurt k is by that
+etc etc
+the blorbos are all people and deserve friendship but that doesn't turn into everyone being friends with everyone else
+*/
