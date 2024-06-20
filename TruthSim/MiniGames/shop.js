@@ -19,6 +19,42 @@ const getFruit = async () => {
 */
 //https://www.youtube.com/playlist?list=PLKcFg5LoVMv6PNU4ImcXL7tJzA3BGHkNp from soup
 
+
+
+/*
+    for every hive you have, spawns a slot machine for it that takes honey from that hive
+    (if you have no hives or no honey you have no choice but to spend a key to get past)
+
+    you can put in a single honey to get a chance of truth, keys and themed facts
+    higher grade honey gets higher grade facts (defined by having real or fake secrets (fake in the sense that its just the eyes or spooky images, not in the sense of lies))
+
+    ria will also let you burn things if you give her the right fact (up to your whole save file, but also facts/rooms/truth/truthpersecond/keys (why would you for some of these?))
+    unlike vik things she burns doesn't stay burned
+
+    she's always the hope that something better will sprout from the ashes
+
+    she has no nuance. if you want to burn "rooms" you lose *every* room. (what does that even do? fire mode???)
+    (i think if she burns all rooms you keep button room and mazes beaten goes back to 1 (so you reunlock them all))
+*/
+
+class SlotsMiniGame extends MiniGame {
+    constructor() {
+        super(RIAMINIGAME);
+    }
+
+    startGame = (ele, room, callback) => {
+        window.alert("JR NOTE: TODO");
+    }
+
+    render = (ele, room, callback) => {
+        truthLog("Slots", `The Truth is that JR played... an unsettling amount of Binding of Issac leading up to making this experience. And is surprisingly suceptible to gambling mechanics.`)
+
+        this.initializeRender(ele);
+        const container = this.setupGameHeader(ele, room, callback, "Burn All Your Honey On These Altars Of Hope", undefined, "images/RiaByGuide.png")
+
+    }
+}
+
 /*
 
 a points reward knows 

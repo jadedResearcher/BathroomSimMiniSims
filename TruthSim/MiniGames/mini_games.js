@@ -31,6 +31,7 @@ const PARKERMINIGAME = "GUN";
 const HOONMINIGAME = "BETTING";
 const VIKMINIGAME = "CENSORSHIP";
 const TWINSMINIEGAME = "LIGHT AND VOID";
+const RIAMINIGAME = "SLOTS";
 
 //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
 const rooms_to_unlock = {
@@ -38,7 +39,8 @@ const rooms_to_unlock = {
     2: PARKERMINIGAME,
     3: HOONMINIGAME,
     4: GAMERSHOPMINIGAME,
-    5: TWINSMINIEGAME,
+    5: RIAMINIGAME,
+    7: TWINSMINIEGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
@@ -65,6 +67,7 @@ const initAllMiniGames = () => {
     new BettingMiniGame();
     new CENSORSHIPShopMiniGame();
     new TwinsMiniGame();
+    new SlotsMiniGame();
 }
 
 const makeScreenRed = (ele)=>{
