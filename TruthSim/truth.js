@@ -428,7 +428,7 @@ const renderBeeTab = () => {
   const oldTimeCode = globalDataObject.lastBeeTimeCode;
   globalDataObject.lastBeeTimeCode = Date.now();
 
-  globalTabContent.innerHTML = "TODO: know how long its been since visit, generate loot and more bees, render loot section, cfo points store gives you random bees";
+  globalTabContent.innerHTML = "";
   let hives = Object.values(globalDataObject.hiveMap);
   const container = createElementWithClassAndParent("div", globalTabContent, "hives-container");
 

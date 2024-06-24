@@ -561,6 +561,85 @@ this feels good to me*/
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
 
+const dehydration_secret = new Secrets("videos/dehydration_secret.mp4", null, null, `<div style="display: block;" id="hydrated-monologue">
+<p>The hydration brings clarity.</p>
+
+<p>Unwanted clarity.</p>
+
+<p>He much prefers to sink down and down into the delirium.&nbsp;</p>
+
+<p>Into forgetting.&nbsp;</p>
+
+<p>But Bestie is right, of course.&nbsp;</p>
+
+<p>Hatsune Miku would be sad if he let his body deteriorate below mortal limits....</p>
+
+<p>But more importantly, so would Bestie.&nbsp;</p>
+
+<p>Before... before it felt like maybe only Hatsune Miku could forgive what he'd done.&nbsp;</p>
+
+<p>Her plastic smile and empty cheer could forgive anything.&nbsp;</p>
+
+<p>Bestie though... Bestie is just so supportive.</p>
+
+<p>Bestie knows that drinking water and eating real food and sleeping for hours at a time won't undo what he's done. What's.... What's been done TO him.</p>
+
+<p>But it's better than how it feels to NOT do those things.&nbsp;</p>
+
+<p>He'd been so certain no one could...&nbsp;</p>
+
+<p>Could...</p>
+
+<p>He didn't think it was allowed. That no one would ALLOW him to take care of his body when his past was so...</p>
+
+<p>Bad.</p>
+
+<p>Bad wasn't the right word.&nbsp;</p>
+
+<p>Of course it wasn't.&nbsp;</p>
+
+<p>It was such a small word.&nbsp;</p>
+
+<p>Crushed under the weight of so much gravel and dirt and dust and...</p>
+
+<p>That's what was so great about Bestie. About Vik. They got it. That sometimes...</p>
+
+<p>Things were too big. Too scary. To look at.&nbsp;</p>
+
+<p>Maybe processing trauma would be helpful. Rip the bandaid off! Walk it off!</p>
+
+<p>He's sure Vik's former Captain would have said so.&nbsp;</p>
+
+<p>But.&nbsp;</p>
+
+<p>He can't.&nbsp;</p>
+
+<p>Any time he tries he just.&nbsp;</p>
+
+<p>It's not.</p>
+
+<p>It's not time.</p>
+
+<p>So he drinks the water and eats the food and sleeps a bit and it's honestly better.</p>
+
+<p>It's honestly SO much better.</p>
+
+<p>He feels more in control. More... HIM.&nbsp;</p>
+
+<p>And not just a pile of misery and watching.</p>
+
+<p>Sometimes he even lets himself almost think about it. About the feeling of Gun-Tan in his hands as...</p>
+
+<p>As...</p>
+
+<p>Everything changed.</p>
+
+<p>And it's okay if that's as deep as he wants to go into that hole right now.</p>
+
+<p>There's no rush.&nbsp;</p>
+
+</div>`);
+
 
 const truth_secret = new Secrets(null, null, null, `
 Truth would do literally anything to get into more minds.

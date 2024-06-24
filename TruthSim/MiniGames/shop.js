@@ -42,8 +42,41 @@ class SlotsMiniGame extends MiniGame {
         super(RIAMINIGAME);
     }
 
+    
+    valuableCustomer = (ele, callback) => {
+        const button = createElementWithClassAndParent("button", ele);
+        button.innerText = "I've finished burning it all away. I hope it was worth it.";
+        button.onclick = async () => {
+            await truthPopup("Obsession is a dangerous thing...", "Be very careful, Player... It's easy to get addicted to gambling. Are you sure you don't need a break? When's the last time you drank water? Are you tired? Do you need to eat? Maybe get up and stretch? It will be here when you come back!","After all, you are no use to me if you burn yourself out on that Burning Witch's siren singing machine. Zampanio, and I, need you to live a long life. Take care of your body because you are no longer living merely for yourself.");
+            callback(globalDataObject.currentMaze);
+            renderMazeTab();
+        }
+
+    }
+
     startGame = (ele, room, callback) => {
         window.alert("JR NOTE: TODO");
+        this.valuableCustomer(ele, callback);
+
+        let hives = Object.values(globalDataObject.hiveMap);
+        const container = createElementWithClassAndParent("div", ele, "hives-container");
+      
+        for (let hive of hives) {
+            console.log("JR NOTE: hive is", hive)
+            const slotContainer = createElementWithClassAndParent("div", container, "slot-container");
+            const slotImg = createElementWithClassAndParent("img", slotContainer, "slot");
+            slotImg.src = "images/SlotMachineForFriendLARGE.png"
+            let rotation = 0;
+            slotContainer.title = [hive.theme1, hive.theme2].map((item) => item).sort().join(", ") + "Slot Machine";
+
+            for (let theme of [hive.theme1Key, hive.theme2Key]) {
+              if (theme) {//theme 2 can be null
+                rotation += themeToColorRotation(theme);
+              }
+            }
+            slotContainer.style.filter = `hue-rotate(${rotation}deg)`;
+
+        }
     }
 
     render = (ele, room, callback) => {

@@ -16,6 +16,7 @@ body {
   font-size: 12px;
 }
 
+
 .tab {
   padding: 10px;
   width: 100px;
@@ -240,6 +241,10 @@ textarea {
 
 button img {
   height: 50px;
+}
+
+.slot{
+  width: 150px;
 }
 
 .damage-counter {
@@ -756,6 +761,8 @@ button img {
   animation: pumpkin-flicker 10s ease-in infinite;
 
 }
+
+
 
 .toilet {
   cursor: pointer;
