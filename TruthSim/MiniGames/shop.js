@@ -42,12 +42,12 @@ class SlotsMiniGame extends MiniGame {
         super(RIAMINIGAME);
     }
 
-    
+
     valuableCustomer = (ele, callback) => {
         const button = createElementWithClassAndParent("button", ele);
         button.innerText = "I've finished burning it all away. I hope it was worth it.";
         button.onclick = async () => {
-            await truthPopup("Obsession is a dangerous thing...", "Be very careful, Player... It's easy to get addicted to gambling. Are you sure you don't need a break? When's the last time you drank water? Are you tired? Do you need to eat? Maybe get up and stretch? It will be here when you come back!","After all, you are no use to me if you burn yourself out on that Burning Witch's siren singing machine. Zampanio, and I, need you to live a long life. Take care of your body because you are no longer living merely for yourself.");
+            await truthPopup("Obsession is a dangerous thing...", "Be very careful, Player... It's easy to get addicted to gambling. Are you sure you don't need a break? When's the last time you drank water? Are you tired? Do you need to eat? Maybe get up and stretch? It will be here when you come back!", "After all, you are no use to me if you burn yourself out on that Burning Witch's siren singing machine. Zampanio, and I, need you to live a long life. Take care of your body because you are no longer living merely for yourself.");
             callback(globalDataObject.currentMaze);
             renderMazeTab();
         }
@@ -60,22 +60,54 @@ class SlotsMiniGame extends MiniGame {
 
         let hives = Object.values(globalDataObject.hiveMap);
         const container = createElementWithClassAndParent("div", ele, "hives-container");
-      
+
         for (let hive of hives) {
             console.log("JR NOTE: hive is", hive)
             const slotContainer = createElementWithClassAndParent("div", container, "slot-container");
+            const slotHeader = createElementWithClassAndParent("div", slotContainer, "slot-header");
+            slotHeader.innerText = hive.classpect + "Slot Machine"
+
             const slotImg = createElementWithClassAndParent("img", slotContainer, "slot");
             slotImg.src = "images/SlotMachineForFriendLARGE.png"
             let rotation = 0;
-            slotContainer.title = [hive.theme1, hive.theme2].map((item) => item).sort().join(", ") + "Slot Machine";
+            slotContainer.title = [hive.theme1Key, hive.theme2Key].map((item) => item).sort().join(", ");
 
             for (let theme of [hive.theme1Key, hive.theme2Key]) {
-              if (theme) {//theme 2 can be null
-                rotation += themeToColorRotation(theme);
-              }
+                if (theme) {//theme 2 can be null
+                    rotation += themeToColorRotation(theme);
+                }
             }
             slotContainer.style.filter = `hue-rotate(${rotation}deg)`;
 
+            for (let loot of hive.loot) {
+                if (loot.quantity > 0) {
+                    const buttonContainer = createElementWithClassAndParent("div", slotContainer, "slot-button-container");
+
+
+                    const oneHoney = createElementWithClassAndParent("button", buttonContainer);
+                    oneHoney.innerHTML = `Bet <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
+                    oneHoney.onclick = () => {
+                        alert("TODO")
+                    }
+                    
+                    if (loot.quantity > 1) {
+                        const allHoney = createElementWithClassAndParent("button", buttonContainer);
+                        allHoney.innerHTML = `Bet ${loot.quantity} <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
+                        allHoney.onclick = () => {
+                            alert("TODO")
+                        }
+                    }
+                }
+
+            }
+
+
+
+        }
+        const burnItAll = createElementWithClassAndParent("button", container);
+        burnItAll.innerHTML = `It's too much. I'll never understand it all. Let's just burn it all at once and be done with it.`;
+        burnItAll.onclick = () => {
+            alert("TODO")
         }
     }
 
@@ -136,11 +168,11 @@ class PointsReward {
 
     }
 
-    maxOut(){
+    maxOut() {
         this.truth = 9999999;
         this.key = 9999;
         this.beeThemes = Object.keys(all_themes);//all the bees. all of them
-        this.facts = [new Fact(`lol you're a l337 hax0r`, "lol you really did it huh? good thing i have a error handler in here. can you IMAGINE if it tried to individually calculate all those rewards? your computer would crash. smdh. wastes, amirite? anyways, say 'thank you, jr' for me rewarding cheating instead of trying to prevent it. glhf",[WASTE], 113, 113, 113)];
+        this.facts = [new Fact(`lol you're a l337 hax0r`, "lol you really did it huh? good thing i have a error handler in here. can you IMAGINE if it tried to individually calculate all those rewards? your computer would crash. smdh. wastes, amirite? anyways, say 'thank you, jr' for me rewarding cheating instead of trying to prevent it. glhf", [WASTE], 113, 113, 113)];
     }
 
     addRewardToSelf(reward) {
@@ -211,7 +243,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
         }
 
         let numberRewards = 1;
-        let reward = new PointsReward(1);       
+        let reward = new PointsReward(1);
         let title;
         if (current_gamer_level <= 9000) {
             for (let i = 2; i <= current_gamer_level; i++) {
@@ -219,9 +251,9 @@ class GamerPointsStoreMiniGame extends MiniGame {
                 reward.addRewardToSelf(new PointsReward(i));
                 numberRewards++;
             }
-             title = `Collected ${numberRewards} levels of Gamer Loot!`;
+            title = `Collected ${numberRewards} levels of Gamer Loot!`;
 
-        }else{
+        } else {
             reward.maxOut();
             title = `Haha! Wow!!!!!! Were you cheating?????????? Sweet, here's just a buncha shit. No sense crashing your computer trying to calculate all that you feel me? Have fun you crazy Waste!`;
 
@@ -263,7 +295,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
         if (reward.key > 0) {
             const ele = createElementWithClassAndParent("li", unordered_list);
             ele.innerHTML = `${reward.key} Keys!!!`;
-            globalDataObject.numberKeys+= reward.key;
+            globalDataObject.numberKeys += reward.key;
 
         }
 

@@ -17,6 +17,7 @@ can feed a THEME HIVE a fact that shares its themes to get one minute of progres
 class ThemeHoney {
   classpect; //same as hive
   theme1Key;
+  image; //undefined at first, truth.js will set this for caching
   theme2Key;  //can be used in EITHER slot machine if multiple themes
   quality; // quality = prize lot for slot machine
   /*

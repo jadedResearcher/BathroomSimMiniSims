@@ -447,7 +447,7 @@ const renderBeeTab = () => {
       }
     }
 
-    hiveEle.title = [hive.theme1, hive.theme2].map((item) => item).sort().join(", ");
+    hiveEle.title = [hive.theme1Key, hive.theme2Key].map((item) => item).sort().join(", ");
 
 
     const header = createElementWithClassAndParent("h2", hiveEle, "hive-title");
@@ -482,6 +482,10 @@ const renderBeeTab = () => {
 
       loot_counter.title = chosenFloorObject.desc;
       loot_counter.alt = chosenFloorObject.name;
+
+      if(!loot.image){
+        loot.image = chosen_icon; //store it so the slot machine can use it
+      }
 
       loot_counter.innerHTML += `<img class='key-icon honey-icon ${chosenTheme.key}' src='${chosen_icon}'> x ${loot.quantity} (Level ${loot.quality})`;
     }

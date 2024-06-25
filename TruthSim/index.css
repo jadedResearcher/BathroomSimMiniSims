@@ -243,8 +243,41 @@ button img {
   height: 50px;
 }
 
+button{
+  cursor: pointer;
+}
+
 .slot{
   width: 150px;
+}
+
+.slot-button-container{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+
+}
+
+.slot-container button{
+  font-size: 8px;
+  width: 70px;
+  max-width: 70px;
+  overflow: hidden;
+  padding-left: 3px;
+  padding-right: 3px;
+  text-wrap: nowrap; /*i need you to know how funny i find it how far these things can go off screen*/
+}
+
+.slot-icon {
+  height: 13px;
+  width: 13px !important;
+  object-fit: contain;
+}
+
+.slot-header{
+  width: min-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .damage-counter {
