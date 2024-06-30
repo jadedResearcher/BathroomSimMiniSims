@@ -60,7 +60,7 @@ class SlotsMiniGame extends MiniGame {
 
         let hives = Object.values(globalDataObject.hiveMap);
         const container = createElementWithClassAndParent("div", ele, "hives-container");
-        let test_animation = "slots-spinning";
+        let test_animation = "slots-eye-a";
         for (let hive of hives) {
             console.log("JR NOTE: hive is", hive)
             const slotContainer = createElementWithClassAndParent("div", container, "slot-container");

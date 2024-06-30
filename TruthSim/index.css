@@ -257,16 +257,275 @@ button{
   animation: slots-go-whir linear 500ms infinite;
 }
 
+.slots-paperclip-a{
+  animation: slots-go-paperclip-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-paperclip-b{
+  animation: slots-go-paperclip-b ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-paperclip-c{
+  animation: slots-go-paperclip-c ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-paperclip-d{
+  animation: slots-go-paperclip-d ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-heart-a{
+  animation: slots-go-heart-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-heart-b{
+  animation: slots-go-heart-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-heart-c{
+  animation: slots-go-heart-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-fail-a{
+  animation: slots-go-fail-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-fail-b{
+  animation: slots-go-fail-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-fail-c{
+  animation: slots-go-fail-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-key-a{
+  animation: slots-go-key-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-key-b{
+  animation: slots-go-key-b ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-star-a{
+  animation: slots-go-star-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-star-b{
+  animation: slots-go-star-b ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.slots-eye-a{
+  animation: slots-go-eye-a ease-out 1s 1;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+
+
 @keyframes slots-go-whir {
 
   0% {
-    background-position: 0px;
+    background-position-y: 0px;
   }
 
   100% {
-    transform: 1113px;
+    background-position-y: 1113px;
   }
 }
+
+@keyframes slots-go-paperclip-a {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: 10px;
+  }
+}
+
+@keyframes slots-go-heart-a {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: 0px;
+  }
+}
+
+@keyframes slots-go-fail-a {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -9px;
+  }
+}
+
+@keyframes slots-go-star-a {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -18px;
+  }
+}
+
+@keyframes slots-go-eye-a {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -27px;
+  }
+}
+
+@keyframes slots-go-paperclip-b {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -36px;
+  }
+}
+
+@keyframes slots-go-key-a {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -45px;
+  }
+}
+
+@keyframes slots-go-heart-b {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -54px;
+  }
+}
+
+@keyframes slots-go-star-b {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -63px;
+  }
+}
+
+@keyframes slots-go-paperclip-c {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -72px;
+  }
+}
+
+@keyframes slots-go-fail-b {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -81px;
+  }
+}
+
+@keyframes slots-go-key-b {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -90px;
+  }
+}
+
+@keyframes slots-go-heart-c {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -99px;
+  }
+}
+
+@keyframes slots-go-paperclip-d {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -108px;
+  }
+}
+
+@keyframes slots-go-fail-c {
+
+  0% {
+    background-position-y: 0px;
+  }
+
+  100% {
+    background-position-y: -117px;
+  }
+}
+
+
 
 .slot-button-container{
   display: flex;
