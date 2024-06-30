@@ -249,6 +249,23 @@ button{
 
 .slot{
   width: 150px;
+  position: absolute;
+  height: 150px;
+}
+
+.slots-spinning{
+  animation: slots-go-whir linear 500ms infinite;
+}
+
+@keyframes slots-go-whir {
+
+  0% {
+    background-position: 0px;
+  }
+
+  100% {
+    transform: 1113px;
+  }
 }
 
 .slot-button-container{
@@ -256,6 +273,34 @@ button{
   gap: 10px;
   margin-bottom: 10px;
 
+}
+
+.slot-machine{
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.slot-icons{
+  position: absolute;
+  width: 9px;
+  height: 27px;
+  top: 45px;
+}
+
+.slot-icons.one{
+  left: 46px;
+  background-position-y: 13px; /*slot machine animation is handled via animating on the background position */
+}
+
+.slot-icons.two{
+  left: 69px;
+  background-position-y: 113px;
+}
+
+.slot-icons.three{
+  left: 91px;
+  background-position-y: 333px;
 }
 
 .slot-container button{

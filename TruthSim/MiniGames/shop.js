@@ -60,15 +60,28 @@ class SlotsMiniGame extends MiniGame {
 
         let hives = Object.values(globalDataObject.hiveMap);
         const container = createElementWithClassAndParent("div", ele, "hives-container");
-
+        let test_animation = "slots-spinning";
         for (let hive of hives) {
             console.log("JR NOTE: hive is", hive)
             const slotContainer = createElementWithClassAndParent("div", container, "slot-container");
             const slotHeader = createElementWithClassAndParent("div", slotContainer, "slot-header");
             slotHeader.innerText = hive.classpect + "Slot Machine"
+            const slotMachine = createElementWithClassAndParent("div", slotContainer, "slot-machine");
 
-            const slotImg = createElementWithClassAndParent("img", slotContainer, "slot");
+            const slotImg = createElementWithClassAndParent("img", slotMachine, "slot");
             slotImg.src = "images/SlotMachineForFriendLARGE.png"
+
+            const slotsIcons1 = createElementWithClassAndParent("div", slotMachine, `slot-icons one ${test_animation}`);
+            slotsIcons1.style.backgroundImage = "url(images/slots.png)"
+
+            const slotsIcons2 = createElementWithClassAndParent("div", slotMachine, `slot-icons two ${test_animation}`);
+            slotsIcons2.style.backgroundImage = "url(images/slots.png)"
+
+            const slotIcons3 = createElementWithClassAndParent("div", slotMachine, `slot-icons three ${test_animation}`);
+            slotIcons3.style.backgroundImage = "url(images/slots.png)"
+            test_animation = "";
+
+
             let rotation = 0;
             slotContainer.title = [hive.theme1Key, hive.theme2Key].map((item) => item).sort().join(", ");
 
