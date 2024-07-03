@@ -561,6 +561,39 @@ this feels good to me*/
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
 
+const todd_secret = new Secrets(null,null, "images/wodin_and_todd.jpg", `
+<p>wodin clearly was getting too used to todd doing all the labor in their friendship</p>
+<p>crush or not</p>
+<p>i think Todd&apos;s voidy ass would have eventually faded away</p>
+<p>and wodin would have regretted that his whole life, but always thought &quot;some day&quot; they would reconnect</p>
+<p>until reading that obituary snapped something inside, some regret worth finally grabbing control of the setting instinctively</p>
+<p>but even repeating things over... wodin always repeats the mistakes</p>
+<p>just more fantastical</p>
+<p>locking himself away with his hyper focus, ignoring todds attempts to reach out</p>
+<p>dying</p>
+<p>then wanda realizing how much she regretted everything when its too late, she&apos;s too different to reconnect right</p>
+<p>till its nearly over again</p>
+<p>even the witness</p>
+<p>is just spiralling on mistakes</p>
+<p>sure the witness is entirely locked out of arm1</p>
+<p>but</p>
+<p>hes also not trying</p>
+<p>the witness is still todd</p>
+<p>back turned to a door that wont open up for him, finally accepting that it is killing him to keep trying</p>
+<p>moving on</p>
+<p>and regretting the loss of wanda forever&nbsp;</p>
+<p><br></p>
+<p>but no longer having the spoons to keep trying</p>
+<p>thats the thing right</p>
+<p>todd inspires wodin to give him nothing back</p>
+<p>muse of void</p>
+<p>all the effort todd puts in, the attempts to keep their friendship going, to keep wodin graduating</p>
+<p>its only fruit is wodin learning he can put less and less attention on those things</p>
+<p>they orbit each other because theyre too deep in each others shit</p>
+<p><br></p>
+<p>but can never quite reach each other &nbsp;because of those exact same forces</p>
+`)
+
 const dehydration_secret = new Secrets("videos/dehydration_secret.mp4", null, null, `<div style="display: block;" id="hydrated-monologue">
 <p>The hydration brings clarity.</p>
 
