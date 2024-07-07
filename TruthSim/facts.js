@@ -561,6 +561,40 @@ this feels good to me*/
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
 
+const space_secret = new Secrets(null,null, "images/wodin_and_todd.jpg", `
+a space loop is much more dangerous than a time loop
+<br>
+a time loop circles in on itself, neatly tying off its past and future into one oroboros where ending and begining are one and the same
+<br>
+a space loop spirals around always similar but never the same, each circle remaining distinct from all the others
+<br>
+a space loop never touches its begining again and in fact goes only ever further away
+<br>
+fragile little cast off shells of universes left without their purpose, their primacy, lost to the void
+<br>
+in a space loop there is a thousand thousand versions of each person native to the universe
+<br>
+each ever so slightly different yet somehow more themselves than before
+<br>
+as common paths get worn into groves in reality
+<br>
+and anything not in these groves get sanded smooth
+<br>
+flanderization is a law of reality in a space loop
+<br>
+so is the eventual collapse of all things when it turns out
+<br>
+nothing is designed to let a single universe
+<br>
+spiral out of control
+<br>
+and become bigger than a thousand thousand universes all in one spot
+<br>
+don't let anyone tell you that the echidna universe
+<br>
+is caught in a time loop
+`);
+
 const todd_secret = new Secrets(null,null, "images/wodin_and_todd.jpg", `
 <p>wodin clearly was getting too used to todd doing all the labor in their friendship</p>
 <p>crush or not</p>
@@ -569,7 +603,7 @@ const todd_secret = new Secrets(null,null, "images/wodin_and_todd.jpg", `
 <p>until reading that obituary snapped something inside, some regret worth finally grabbing control of the setting instinctively</p>
 <p>but even repeating things over... wodin always repeats the mistakes</p>
 <p>just more fantastical</p>
-<p>locking himself away with his hyper focus, ignoring todds attempts to reach out</p>
+<p>locking himself away with his hyper focus of zampanio, ignoring todds attempts to reach out</p>
 <p>dying</p>
 <p>then wanda realizing how much she regretted everything when its too late, she&apos;s too different to reconnect right</p>
 <p>till its nearly over again</p>

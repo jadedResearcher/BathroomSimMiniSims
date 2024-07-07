@@ -54,8 +54,87 @@ class SlotsMiniGame extends MiniGame {
 
     }
 
+    handleWinnings = (ele, room, callback, loot, slot1Value, slot2Value, slot3Value)=>{
+        console.log(`JR NOTE: loot ${loot.classpect} got ${slot1Value}, ${slot2Value}, ${slot3Value}, do you win anything?`)
+        
+        //detect match via split on "-" and check element 1 
+        //if all three don't match lose sound 
+        //JR NOTE TODO: if all three do match, win sound
+        //JR NOTE TODO: map of matching word to winnings
+        //JR NOTE TODO: popup has ria in it with a comment on what you won (deranged speculation), list of winnings, button to close
+ 
+    }
+
+    rollSlots = async (ele, room, callback, loot, bet, slot1, slot2, slot3) => {
+        //JR NOTE TODO: deduct bet from loot
+        loot.quantity += -1 * bet;
+        //start slots noise/music
+        //i_think_its_finished_priska_turbo_time
+        globalBGMusic.src = "audio/music/i_think_its_finished_priska_turbo_time.mp3";//priska is in the same universe as piper/camillia was from iirc
+        globalBGMusic.play();
+
+        //JR NOTE TODO: from all three slots thingies  start spinning
+        slot1.classList.add("slots-spinning")
+        slot2.classList.add("slots-spinning")
+        slot3.classList.add("slots-spinning")
+        //JR NOTE TODO: wait three seconds
+        await sleep(3000);
+
+        //JR NOTE TODO: from array of possible class names, pick three
+
+        let numberEnded = 0;
+        const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a"]
+
+        const slot1Choice = pickFrom(slotPositions);
+        const slot2Choice = pickFrom(slotPositions);
+        const slot3Choice = pickFrom(slotPositions);
+
+        //JR NOTE TODO: on animation end, play ting!
+        //JR NOTE TODO: when all animation end, stop music,
+        const animationEnded = (choice) => {
+            console.log("JR NOTE: animation ended", choice)
+            const fx = new Audio("audio/fx/chip.mp3")
+            fx.loop = false;
+            fx.play();
+            numberEnded++;
+            if (numberEnded >= 3) {
+                globalBGMusic.pause();
+                this.handleWinnings(ele, room, callback,loot, slot1Choice, slot2Choice, slot3Choice )
+            }
+        }
+
+        //JR NOTE TODO: set slots to animate to those three
+
+        slot1.classList.remove("slots-spinning");
+        slot1.classList.add(slot1Choice);
+        await sleep(100);
+        slot1.onanimationend = () => animationEnded(slot1Choice);
+
+
+        await sleep(1000);
+
+        slot2.classList.remove("slots-spinning");
+        slot2.classList.add(slot2Choice);
+        await sleep(100);
+        slot2.onanimationend = () => animationEnded(slot2Choice);
+
+
+        await sleep(1000);
+
+        slot3.classList.remove("slots-spinning");
+        slot3.classList.add(slot3Choice);
+        await sleep(100);
+        slot3.onanimationend = () => animationEnded(slot3Choice);
+
+        await sleep(10000);
+                //IMPORTANT: IF ITS BEEN TEN SECONDS AND ANIMATIONS HAVEN'T ENDED SOMETHING HAS GONE WRONG, PROCESS WINNINGS ANYWAYS (not all browser and computers will work right)
+
+        if(numberEnded <3){
+            animationEnded("ERROR: ANIMATIONS DID NOT END, FALLING BACK")
+        }
+   }
+
     startGame = (ele, room, callback) => {
-        window.alert("JR NOTE: TODO");
         this.valuableCustomer(ele, callback);
 
         let hives = Object.values(globalDataObject.hiveMap);
@@ -77,8 +156,8 @@ class SlotsMiniGame extends MiniGame {
             const slotsIcons2 = createElementWithClassAndParent("div", slotMachine, `slot-icons two ${test_animation}`);
             slotsIcons2.style.backgroundImage = "url(images/slots.png)"
 
-            const slotIcons3 = createElementWithClassAndParent("div", slotMachine, `slot-icons three ${test_animation}`);
-            slotIcons3.style.backgroundImage = "url(images/slots.png)"
+            const slotsIcons3 = createElementWithClassAndParent("div", slotMachine, `slot-icons three ${test_animation}`);
+            slotsIcons3.style.backgroundImage = "url(images/slots.png)"
             test_animation = "";
 
 
@@ -100,14 +179,15 @@ class SlotsMiniGame extends MiniGame {
                     const oneHoney = createElementWithClassAndParent("button", buttonContainer);
                     oneHoney.innerHTML = `Bet <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
                     oneHoney.onclick = () => {
-                        alert("TODO")
+                        slotImg.src = "images/SlotMachineForFriendPulled.png"
+                        this.rollSlots(ele, room, callback, loot, 1, slotsIcons1, slotsIcons2, slotsIcons3)
                     }
-                    
+
                     if (loot.quantity > 1) {
                         const allHoney = createElementWithClassAndParent("button", buttonContainer);
                         allHoney.innerHTML = `Bet ${loot.quantity} <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
                         allHoney.onclick = () => {
-                            alert("TODO")
+                            this.rollSlots(ele, room, callback, loot, loot.quantity, slotsIcons1, slotsIcons2, slotsIcons3)
                         }
                     }
                 }
