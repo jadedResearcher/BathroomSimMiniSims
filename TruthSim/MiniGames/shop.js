@@ -170,7 +170,7 @@ class SlotsMiniGame extends MiniGame {
                 }
             }
             slotContainer.style.filter = `hue-rotate(${rotation}deg)`;
-
+//https://www.tiktok.com/@junior.elizuki/video/7387475649579224325
             for (let loot of hive.loot) {
                 if (loot.quantity > 0) {
                     const buttonContainer = createElementWithClassAndParent("div", slotContainer, "slot-button-container");
