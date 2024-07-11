@@ -9,43 +9,106 @@
     let parent;
     let numButtonsClicked = 0;
     let numButtons = 0;
+    let music;
+    const audio = new Audio();
 
     let rand = new SeededRandom(13)
-    window.onload = () => {
-      parent = document.querySelector('#buttons-container')
+
+    const audioExtensionsFruit = [
+      "mp3", "wav"
+    ];
+    const filePatternAudioFruit = new RegExp('<a href="([^?]*?)">', 'g');
+
+    const extensionPatternAudioFruit = new RegExp(`\\\.(${audioExtensionsFruit.join("|")})\$`);
+
+
+    const getWeirdMusic = async (url) => {
+
+      let promise = new Promise(async (resolve, reject) => {
+        try {
+          const rawText = await httpGetAsync(url);
+
+          let files = [];
+          const match = rawText.matchAll(filePatternAudioFruit);
+          const matches = Array.from(match, (res) => res);
+          for (let m of matches) {
+            const item = m[1];
+            if (item.match(extensionPatternAudioFruit)) {
+              files.push(item);
+            }
+          }
+          //console.log("JR NOTE: returned from network for", url)
+          resolve(files);
+        } catch (e) {
+          console.log("JR NOTE: error", e)
+          reject();
+          return [];
+        }
+      })
+      return promise;
     }
+
+
+    window.onload = async () => {
+      parent = document.querySelector('#buttons-container')
+      music = await getWeirdMusic("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/");
+    }
+
+
 
     //numButtons controls what it looks like initially
     //but how many buttons have been clicked so far decides what it does
-    const warpButtonBasedOnNumbers = (button, numButtons, numButtonsClicked)=>{
+    const warpButtonBasedOnNumbers = (button, index) => {
 
       //deciding filter status
-      if(numButtons<=3){
+      if (index <= 3) {
         return;
-      }else if(numButtons >3 && numButtons<13){
-        button.style.filter=`saturate(${2*rand.nextDouble()})`
-      }else{
+      } else if (index > 3 && index < 13) {
+        button.style.filter = `saturate(${2 * rand.nextDouble()})`
+      } else {
         const filters = getBullshitFilters();
 
         const chosenFilters = [];
-        let amount = Math.min(3, numButtons/13);
-        for(let i = 0; i<amount; i++){
+        let amount = Math.min(3, index / 13);
+        for (let i = 0; i < amount; i++) {
           chosenFilters.push(rand.pickFrom(filters));
         }
-        button.style.filter=` ${chosenFilters.join(" ")}`;
+        button.style.filter = ` ${chosenFilters.join(" ")}`;
 
+      }
+      let fuckeryFactor;
+      button.onclick = () => {
+        renderOneButton();
+        numButtonsClicked++;
+        if (!fuckeryFactor) { //locks it in at click time
+          fuckeryFactor = index + numButtonsClicked;
+        }
+        console.log("JR NOTE: fuckeryFactor", fuckeryFactor)
+
+
+        if (fuckeryFactor <= 13) {
+          audio.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/ender_sounds_like_clown.wav";
+          audio.play();
+        } else if (fuckeryFactor > 13) {
+          audio.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/" + rand.pickFrom(music);
+          audio.play();
+        }
+
+        if (fuckeryFactor > 113) {
+          const css = getBullshitCSS(true);
+          button.style.cssText = css;
+        } else if (fuckeryFactor > 33) {
+          fuckShitUPAnimation(button);
+        }
       }
     }
 
     const renderOneButton = () => {
-      numButtons ++;
+      numButtons++;
       const absolute_bullshit = createElementWithClassAndParent("img", parent, "fake-button");
       absolute_bullshit.src = "uhoh.png";
-      warpButtonBasedOnNumbers(absolute_bullshit, numButtons,numButtonsClicked)
-      absolute_bullshit.onclick = () => {
-        renderOneButton();
-        numButtonsClicked ++;
-      }
+      warpButtonBasedOnNumbers(absolute_bullshit, numButtons)
+
     }
 
 

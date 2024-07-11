@@ -68,7 +68,7 @@ const fuckShitUPAnimation = (ele) => {
 const getBullshitFilters = (wildBlur=false)=>{
   const filters = ["contrast(2)", "grayscale(1)","contrast(1.5)", "hue-rotate(45deg)", "hue-rotate(90deg)", "hue-rotate(180deg)", "hue-rotate(270deg)", "blur(1px)"];
   if(wildBlur){
-    filter.concat(["blur(5px)", "blur(10px)", "blur(15px)", "blur(25px)", "blur(20px)", "blur(30px)", "blur(35px)", "blur(40px)"])
+    filters.concat(["blur(5px)", "blur(10px)", "blur(15px)", "blur(25px)", "blur(20px)", "blur(30px)", "blur(35px)", "blur(40px)"])
   }
   for (let i = 0; i < 13; i++) {
     filters.push(`contrast(${i / 5})`);
