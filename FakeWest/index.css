@@ -1,0 +1,10 @@
+.fake-button{
+  width: 200px;
+  cursor: pointer;
+}
+
+.buttons-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}

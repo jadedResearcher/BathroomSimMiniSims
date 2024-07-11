@@ -1,0 +1,65 @@
+<html>
+
+<head>
+  <title>Settlers From The Bathroom</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="utils.js"></script>
+  <script src="canvas_utils.js"></script>
+  <script>
+    let body;
+    window.onload = () => {
+      body = document.querySelector('body')
+    }
+
+    const renderOneButton = () => {
+      const absolute_bullshit = createElementWithClassAndParent("img", body, "fake-button");
+      absolute_bullshit.src = "uhoh.png";
+      absolute_bullshit.onclick = () => {
+        renderOneButton();
+      }
+    }
+
+
+    const onMouseDown = () => {
+      const b = document.querySelector("#button");
+      b.remove();
+
+      for (let i = 0; i < 113; i++) {
+        renderOneButton();
+      }
+      handleScrolling();
+
+    }
+
+    const handleScrolling = () => {
+      //throw("JR NOTE: turn scrolling back on later.")
+      let lastScrollTime = 0; //not to spam events
+      window.onscroll = () => {
+        const newTime = new Date().getTime();
+        if (((newTime - lastScrollTime)) < 100) {
+          return;
+        }
+        lastScrollTime = newTime;
+
+        window.requestAnimationFrame(() => {
+          for (let i = 0; i < 13; i++) {
+            renderOneButton();
+          }
+        });
+
+      };
+    }
+
+  </script>
+</head>
+
+<body style="background:black;color: red;">
+  <center> <img id="button" onmousedown="onMouseDown()" onmouseup="onMouseUp()" style="cursor:pointer;"
+      src="button.png" />
+
+    <div class="buttons-container"></div>
+    <p>You were warned.</p>
+  </center>
+</body>
+
+</html>
