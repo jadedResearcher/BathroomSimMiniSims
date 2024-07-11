@@ -560,6 +560,89 @@ this feels good to me*/
 
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
+c
+
+const arg_secret_by_ic = new Secrets(null, null, null, `IC says:
+<ul>
+    <li style="list-style-type:none;font-size:12pt;">
+        <p><span style="font-size:12pt;">It&apos;s strange referring to Zampanio as an &apos;ARG&apos;. It&apos;s because there&apos;s no culmination to this, you know. It&apos;s not building up to anything. It doesn&apos;t end. There&apos;s not a moment where they break out of the white room, or they confront The Operator, or they all fight Gabriel, or you get promoted to manager by the fairies. There&apos;s no last episode or conclusion or climax to anyone&apos;s character arcs. It&apos;s weird creepy liminal shit in all directions, forever and ever. &apos;ARG&apos; implies something like a puzzle that can be solved, which is a good way to frustrate yourself. You may trick yourself into thinking it&apos;s possible. You can&apos;t. You can&apos;t solve ZampanioSim. It&apos;s like trying to solve the sea by counting all the fish-- there&apos;s too much going on, and the information you could get from that still wouldn&apos;t give you a clear picture. It doesn&apos;t even have narrative arcs, either. Or proper characters. Any characters in Zampanio are more mirrors into another reality in which Zampanio exists than story leads walking towards some sort of conclusion. In fact, they can&apos;t get to one. The nature of the maze doesn&apos;t allow that. It&apos;s all looping eternally in however many ways it can recycle its own concept material. In a nature very similar to its own birth fandom Homestuck-- in both a narrative and metanarrative sense-- ZampanioSim needs it all to keep going forever, which means that the plots get discarded or get zanier, flanderized and deconstructed and flanderized again. The only way for it all to end is one of the following:</span></p>
+        <ol>
+            <li style="list-style-type:decimal;font-size:12pt;">
+                <p><span style="font-size:12pt;">JR&apos;s server to combust into flames, killing years and years of rot in one blow;</span></p>
+            </li>
+            <li style="list-style-type:decimal;font-size:12pt;">
+                <p><span style="font-size:12pt;">Find Zampanio once and for all, at which point everything else becomes moot;</span></p>
+            </li>
+            <li style="list-style-type:decimal;font-size:12pt;">
+                <p><span style="font-size:12pt;">Stop playing the game.</span></p>
+            </li>
+        </ol>
+    </li>
+    <li style="list-style-type:none;font-size:12pt;">
+        <p><span style="font-size:12pt;">(edited)</span></p>
+    </li>
+    <li style="list-style-type:none;font-size:12pt;">
+        <p style="text-align: right;"><span style="font-size:12pt;">[</span></p>
+    </li>
+    <li style="list-style-type:none;font-size:12pt;">
+        <p style="text-align: right;"><span style="font-size:12pt;">11:18 AM</span></p>
+    </li>
+    <li style="list-style-type:none;font-size:12pt;">
+        <p style="text-align: right;"><span style="font-size:12pt;">]</span></p>
+    </li>
+    <li style="list-style-type:none;font-size:12pt;">
+        <p><span style="font-size:12pt;">By this logic (AKA: that it&apos;s all endless and there&apos;s no one story), it&apos;s easy to see that ZampanioSim is easier to understand, because it&apos;s all breaking down out of a very limited set of myths; that is, there are only three true stories in Zampanio. The meta read is that one of them is about what happened in the years post end of development for Farragnarok. The in-narrative read is about a SBURB fan-universe developing a form of cancer, OR about JR attempting to recreate Zampanio. The third, the &apos;creation myth&apos;, is about two best friends and what happens after one disappears in an obsessive spree. Everything else that happens is a variation of one of these three facts. Learning the &apos;intricacies&apos; is mostly unnecessary. You could even summarize the premise further: ZampanioSim is a project about an idea that devours everything it touches. Attempt to make something out of the bones before you get lost in it</span></p>
+    </li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+`);
+
+const rava_secret_by_ic = new Secrets(null, null, null, `
+<p><span style="font-size:11pt;">So. Writing. She asked me to write.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">I&apos;m not a writer. But the boss-- which apparently is not the same as The Boss, fucking somehow?-- keeps telling me that writing is &apos;an anchor, what anchors us in time and allows us to be seen, observed&apos;... so whatever. She&apos;s not been wrong so far. I&apos;m not going to start biting the hand that feeds now.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Things are fine. More than fine. My pup&apos;s kept themselves busy barking at the boss&apos; personal pet, and that keeps them happy. The boss keeps me busy hunting &apos;unbelievers&apos; here and there, scaring them, playing the part of the scary dog on the news, all that good stuff. Don&apos;t know why she keeps making us wear the garbs though. This is a religious thing, right? You&apos;d think we wouldn&apos;t want to draw attention to ourselves, but here we are. Turns out it&apos;s &apos;predestined&apos;. What a big word to say that all od what &apos;this&apos; is is meant to somehow happen in the order she expects it to, or something.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">But that doesn&apos;t make sense. I just dropped in out of nowhere. My puppy came out of a maze. She knows that. All the mutts did, as far as I can sniff out. I don&apos;t know how to break it to her that this whole time thing matters a lot less than she thinks it does, if people can just show up like they&apos;ve always been here...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">But again, she&apos;s the boss. She can handle me. If she thinks it&apos;s so important, fuck it.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">That&apos;s not the point though. The point is that I found a weird one today.</span></p>
+<p><span style="font-size:11pt;">The group of people she&apos;s put me to work tracking are a little mutt pack full of commons living inside a mall. Turns out her own pet knows where they are, and he&apos;s got trouble with them, so that&apos;s where I come in-- I come bark until they get the point and bite if they don&apos;t. That&apos;s what a hund does, and it works well. I work well.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">So I did. I went and scared them. I was just supposed to scare off the gray-haired one, with all those crosses and that weird... aura of his. Back him off from our little Hand-pet. But...&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">One of them. She caught me by surprise, the little runt. The one that smells like a bird, she&apos;s small, got these flipper-like things for hair. Reeks of spine like I do, but also of foot... the way the commonalities fit in this universe is still too fucking weird. Who even knows if it&apos;s that what I saw.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">She found me while I was making my way in. Just about to make the turn to that preacher guy&apos;s room, she found me with that little camera of hers and she...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">I don&apos;t know. I think she told me something. I saw her lips move and then I heard a ring so hard in my ears I must&apos;ve yowled or something, and next thing I know I&apos;m outside.&nbsp;</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The weird thing? I felt...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">I must&apos;ve told that preacher guy something about myself. I was told not to do that. I don&apos;t remember talking to him, but I Know I did, as much as I know anything else. It&apos;s like she put a bowl in my head, and she just filled it with stuff until I...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Broke? Or broke enough to confess?</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">It. It doesn&apos;t feel right. Lighter feels worse. It&apos;s almost like something got taken from me. I don&apos;t know what. My tongue still feels tight from talking. I had a weight on me and now it&apos;s gone, but now I just feel...</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">The sly dog must&apos;ve done something to me. And she helped.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">Whatever. That&apos;s enough writing. They&apos;re weak. But trickier than I gave them credit for.</span></p>
+<p><br></p>
+<p><span style="font-size:11pt;">I need to find Twig. If I don&apos;t I think I&apos;ll chew myself alive.</span></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+`);
+
+
+const lost_secret = new Secrets(null,null,null,`lost media, at its core is "look what you missed, now obsess over its scraps knowing you will never truly have the full picture"<br><br>
+zampanio is not an arg or a game or a story but a creepy pasta about lost media and the vibe if lost media, the vibe that no matter how hard you look youll ALWAYS be missing something and that you wont have the same experience as someone else in the fandom `)
 
 const space_secret = new Secrets(null,null, "images/wodin_and_todd.jpg", `
 a space loop is much more dangerous than a time loop

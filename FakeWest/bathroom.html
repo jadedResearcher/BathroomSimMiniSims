@@ -6,16 +6,45 @@
   <script src="utils.js"></script>
   <script src="canvas_utils.js"></script>
   <script>
-    let body;
+    let parent;
+    let numButtonsClicked = 0;
+    let numButtons = 0;
+
+    let rand = new SeededRandom(13)
     window.onload = () => {
-      body = document.querySelector('body')
+      parent = document.querySelector('#buttons-container')
+    }
+
+    //numButtons controls what it looks like initially
+    //but how many buttons have been clicked so far decides what it does
+    const warpButtonBasedOnNumbers = (button, numButtons, numButtonsClicked)=>{
+
+      //deciding filter status
+      if(numButtons<=3){
+        return;
+      }else if(numButtons >3 && numButtons<13){
+        button.style.filter=`saturate(${2*rand.nextDouble()})`
+      }else{
+        const filters = getBullshitFilters();
+
+        const chosenFilters = [];
+        let amount = Math.min(3, numButtons/13);
+        for(let i = 0; i<amount; i++){
+          chosenFilters.push(rand.pickFrom(filters));
+        }
+        button.style.filter=` ${chosenFilters.join(" ")}`;
+
+      }
     }
 
     const renderOneButton = () => {
-      const absolute_bullshit = createElementWithClassAndParent("img", body, "fake-button");
+      numButtons ++;
+      const absolute_bullshit = createElementWithClassAndParent("img", parent, "fake-button");
       absolute_bullshit.src = "uhoh.png";
+      warpButtonBasedOnNumbers(absolute_bullshit, numButtons,numButtonsClicked)
       absolute_bullshit.onclick = () => {
         renderOneButton();
+        numButtonsClicked ++;
       }
     }
 
@@ -42,7 +71,7 @@
         lastScrollTime = newTime;
 
         window.requestAnimationFrame(() => {
-          for (let i = 0; i < 13; i++) {
+          for (let i = 0; i < 3; i++) {
             renderOneButton();
           }
         });
@@ -57,7 +86,7 @@
   <center> <img id="button" onmousedown="onMouseDown()" onmouseup="onMouseUp()" style="cursor:pointer;"
       src="button.png" />
 
-    <div class="buttons-container"></div>
+    <div id="buttons-container"></div>
     <p>You were warned.</p>
   </center>
 </body>

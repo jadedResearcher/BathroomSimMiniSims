@@ -65,16 +65,22 @@ const fuckShitUPAnimation = (ele) => {
   ele.style.animation = animation;
 }
 
-//from info token reader!
-const getBullshitCSS = (allowFilters) => {
-  let css = "";
-  const filters = ["contrast(2)", "contrast(1.5)", "hue-rotate(45deg)", "hue-rotate(90deg)", "hue-rotate(180deg)", "hue-rotate(270deg)", "blur(1px)", "blur(5px)", "blur(10px)", "blur(15px)", "blur(25px)", "blur(20px)", "blur(30px)", "blur(35px)", "blur(40px)"];
-
+const getBullshitFilters = (wildBlur=false)=>{
+  const filters = ["contrast(2)", "grayscale(1)","contrast(1.5)", "hue-rotate(45deg)", "hue-rotate(90deg)", "hue-rotate(180deg)", "hue-rotate(270deg)", "blur(1px)"];
+  if(wildBlur){
+    filter.concat(["blur(5px)", "blur(10px)", "blur(15px)", "blur(25px)", "blur(20px)", "blur(30px)", "blur(35px)", "blur(40px)"])
+  }
   for (let i = 0; i < 13; i++) {
     filters.push(`contrast(${i / 5})`);
     filters.push(`hue-rotate(${i * 10}deg)`);
 
   }
+  return filters;
+}
+//from info token reader!
+const getBullshitCSS = (allowFilters) => {
+  let css = "";
+  const filters = getBullshitFilters(true);
 
   var terribleCSSOptions = [["text-align", "center"], ["text-align", "right"], ["text-align", "left"], ["text-align", "justify"], ["position: ", "fixed"], ["float: ", "left"], ["float: ", "right"], ["width: ", "????"], ["height: ", "????"]];
   var reallyRand = getRandomNumberBetween(1, 10);
