@@ -96,12 +96,10 @@
           audio.play();
         }
 
-        if (fuckeryFactor > 33) {
+        if (fuckeryFactor > 33 && fuckeryFactor % 2 === 0) {
           const css = getBullshitCSS(true);
           button.style.cssText = css;
-        }
-        
-        if (fuckeryFactor % 13 === 0) {
+        }else if (fuckeryFactor % 5 === 0) {
           fuckShitUPAnimation(button);
         }
       }
