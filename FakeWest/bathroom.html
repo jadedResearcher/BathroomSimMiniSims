@@ -62,7 +62,7 @@
 
       //deciding filter status
       if (index <= 3) {
-        return;
+        //nothing
       } else if (index > 3 && index < 13) {
         button.style.filter = `saturate(${2 * rand.nextDouble()})`
       } else {
@@ -78,6 +78,7 @@
       }
       let fuckeryFactor;
       button.onclick = () => {
+        console.log("JR NOTE: click")
         renderOneButton();
         numButtonsClicked++;
         if (!fuckeryFactor) { //locks it in at click time
@@ -87,17 +88,20 @@
 
 
         if (fuckeryFactor <= 13) {
-          audio.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/ender_sounds_like_clown.wav";
+          console.log("JR NOTE: playing chip")
+          audio.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/chip.mp3";
           audio.play();
         } else if (fuckeryFactor > 13) {
           audio.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/" + rand.pickFrom(music);
           audio.play();
         }
 
-        if (fuckeryFactor > 113) {
+        if (fuckeryFactor > 33) {
           const css = getBullshitCSS(true);
           button.style.cssText = css;
-        } else if (fuckeryFactor > 33) {
+        }
+        
+        if (fuckeryFactor % 13 === 0) {
           fuckShitUPAnimation(button);
         }
       }
