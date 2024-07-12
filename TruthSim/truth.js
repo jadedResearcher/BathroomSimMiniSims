@@ -384,10 +384,10 @@ const handleBeeTabButton = (header) => {
   label.style.marginTop = "30px";
 
   if (Object.keys(globalDataObject.hiveMap).length === 0) {
-    mazeTab.style.display = "none";
+    beeTab.style.display = "none";
     const monitorObsession = () => {
       if (Object.keys(globalDataObject.hiveMap).length > 0) {
-        mazeTab.style.display = "block";
+        beeTab.style.display = "block";
         return;
       }
       setTimeout(monitorObsession, 1000);
