@@ -101,7 +101,9 @@ class SlotsMiniGame extends MiniGame {
         //JR NOTE TODO: from array of possible class names, pick three
 
         let numberEnded = 0;
-        const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a", "slots-eye-a", "slots-eye-a", "slots-eye-a"]
+        //odds are REALLY bad if i let all the icons show up, so the zampanio way is to always leave you thinking theres more you could be seeing
+        //const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a", "slots-eye-a", "slots-eye-a", "slots-eye-a"]
+        const slotPositions = ["slots-paperclip-a","slots-paperclip-c","slots-heart-c","slots-heart-b","slots-heart-a","slots-key-b"]; //you can win truth, facts or keys
 
         const slot1Choice = pickFrom(slotPositions);
         const slot2Choice = pickFrom(slotPositions);
@@ -119,7 +121,7 @@ class SlotsMiniGame extends MiniGame {
                 globalBGMusic.pause();
                 this.handleWinnings(ele, room, callback, loot, slot1Choice, slot2Choice, slot3Choice);
 
-                await sleep(1000);
+                await sleep(3000);
                 const buttons = buttonContainer.querySelectorAll("button");
                 buttons.forEach((button) => {
                     button.disabled = false;
@@ -166,7 +168,7 @@ class SlotsMiniGame extends MiniGame {
 
         let hives = Object.values(globalDataObject.hiveMap);
         const container = createElementWithClassAndParent("div", ele, "hives-container");
-        let test_animation = "slots-eye-a";
+        let test_animation = "";
         for (let hive of hives) {
             const slotContainer = createElementWithClassAndParent("div", container, "slot-container");
             const slotHeader = createElementWithClassAndParent("div", slotContainer, "slot-header");
