@@ -560,7 +560,20 @@ this feels good to me*/
 
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
-c
+
+const arg_secret_by_ic2 = new Secrets(null, null, null, `IC says: 
+During one of the many business management books I had to digest in college, I came across a concept that it called 'the First Follower'. If you've done any kind of business-related degree, you may know it as the Leadership Lessons from a Dancing Guy video. You can't miss it.
+
+I'll play by play it for you. It's a video about a lone guy dancing in a crowd. Then, he's joined by a second guy, and he invites his friends to join in. Soon it becomes three, and from there it becomes a crowd where everyone's now dancing, as it by fever. Managers use it to illustrate the power of having someone to 1. give legitimacy to the ideas presented by the lone nut, and 2. show people exactly how to join in. People are hypersocial, after all. They like going with what the group is doing.
+
+My point is that it's funny that the Witness is so utterly denied his follower role by way of narrative. There's moments in which that lapse is bridged, sure, but... those can't last for longer than the time you're taking reading this sentence. Todd and Wanda are meant to be dancing together, it's by design. Muse and Lord, or whatever will have you, and they complement each other as much as they doom each other to two very, very similar fates. Though it's subjective, I guess. They're about as doomed as you and I are to die, but there's always other shit going on. They're mostly having very separate bad times, but very separate good times as well...
+
+See? I just spoke that into your head right now. Now it's gone.
+That's the fun part about Zampanio being a hellish browser experience instead of a book or comic or what have you: the breadth between each nugget of lore is long enough that this 'portal' into that reality just opened and closed in your mind before you could acknowledge it. And now you have to reread this paragraph or find another one.
+
+Isn't that interesting?
+`);
+
 
 const arg_secret_by_ic = new Secrets(null, null, null, `IC says:
 <ul>
