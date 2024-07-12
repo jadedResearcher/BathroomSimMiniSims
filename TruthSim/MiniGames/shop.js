@@ -62,7 +62,7 @@ class SlotsMiniGame extends MiniGame {
         console.log("JR NOTE: ", { s1v, s2v, s3v, won: s1v == s2v && s2v == s3v })
         if (s1v == s2v && s2v == s3v) {
             globalBGMusic.src = "audio/music/icbattlemusic.mp3"
-            globalBGMusic.play();            
+            globalBGMusic.play();
             //JR NOTE TODO: map of matching word to winnings
             //JR NOTE TODO: popup has ria in it with a comment on what you won (deranged speculation), list of winnings, button to close
         } else {
@@ -74,7 +74,12 @@ class SlotsMiniGame extends MiniGame {
 
     }
 
-    rollSlots = async (ele, room, callback, loot, bet, slot1, slot2, slot3) => {
+    rollSlots = async (buttonContainer, room, callback, loot, bet, slot1, slot2, slot3) => {
+        //JR NOTE TODO: disable buttons
+        const buttons = buttonContainer.querySelectorAll("button");
+        buttons.forEach((button) => {
+            button.disabled = true;
+        })
         //JR NOTE TODO: deduct bet from loot
         loot.quantity += -1 * bet;
         //start slots noise/music
@@ -83,6 +88,10 @@ class SlotsMiniGame extends MiniGame {
         globalBGMusic.play();
 
         //JR NOTE TODO: from all three slots thingies  start spinning
+        slot1.classList.add("slots-spinning")
+        slot2.classList.add("slots-spinning")
+        slot3.classList.add("slots-spinning")
+
         slot1.classList.add("slots-spinning")
         slot2.classList.add("slots-spinning")
         slot3.classList.add("slots-spinning")
@@ -100,7 +109,7 @@ class SlotsMiniGame extends MiniGame {
 
         //JR NOTE TODO: on animation end, play ting!
         //JR NOTE TODO: when all animation end, stop music,
-        const animationEnded = (choice) => {
+        const animationEnded = async (ele, choice) => {
             console.log("JR NOTE: animation ended", choice)
             const fx = new Audio("audio/fx/chip.mp3")
             fx.loop = false;
@@ -108,7 +117,16 @@ class SlotsMiniGame extends MiniGame {
             numberEnded++;
             if (numberEnded >= 3) {
                 globalBGMusic.pause();
-                this.handleWinnings(ele, room, callback, loot, slot1Choice, slot2Choice, slot3Choice)
+                this.handleWinnings(ele, room, callback, loot, slot1Choice, slot2Choice, slot3Choice);
+
+                await sleep(1000);
+                const buttons = buttonContainer.querySelectorAll("button");
+                buttons.forEach((button) => {
+                    button.disabled = false;
+                });
+                slot1.classList.remove(slot1Choice)
+                slot2.classList.remove(slot2Choice)
+                slot3.classList.remove(slot3Choice)
             }
         }
 
@@ -117,7 +135,7 @@ class SlotsMiniGame extends MiniGame {
         slot1.classList.remove("slots-spinning");
         slot1.classList.add(slot1Choice);
         await sleep(100);
-        slot1.onanimationend = () => animationEnded(slot1Choice);
+        slot1.onanimationend = () => animationEnded(slot1, slot1Choice);
 
 
         await sleep(1000);
@@ -125,7 +143,7 @@ class SlotsMiniGame extends MiniGame {
         slot2.classList.remove("slots-spinning");
         slot2.classList.add(slot2Choice);
         await sleep(100);
-        slot2.onanimationend = () => animationEnded(slot2Choice);
+        slot2.onanimationend = () => animationEnded(slot2, slot2Choice);
 
 
         await sleep(1000);
@@ -133,7 +151,7 @@ class SlotsMiniGame extends MiniGame {
         slot3.classList.remove("slots-spinning");
         slot3.classList.add(slot3Choice);
         await sleep(100);
-        slot3.onanimationend = () => animationEnded(slot3Choice);
+        slot3.onanimationend = () => animationEnded(slot3, slot3Choice);
 
         await sleep(10000);
         //IMPORTANT: IF ITS BEEN TEN SECONDS AND ANIMATIONS HAVEN'T ENDED SOMETHING HAS GONE WRONG, PROCESS WINNINGS ANYWAYS (not all browser and computers will work right)
@@ -178,24 +196,26 @@ class SlotsMiniGame extends MiniGame {
                 }
             }
             slotContainer.style.filter = `hue-rotate(${rotation}deg)`;
+            const buttonContainerContainer = createElementWithClassAndParent("div", slotContainer);
+
             //https://www.tiktok.com/@junior.elizuki/video/7387475649579224325
             for (let loot of hive.loot) {
                 if (loot.quantity > 0) {
-                    const buttonContainer = createElementWithClassAndParent("div", slotContainer, "slot-button-container");
+                    const buttonContainer = createElementWithClassAndParent("div", buttonContainerContainer, "slot-button-container");
 
 
                     const oneHoney = createElementWithClassAndParent("button", buttonContainer);
                     oneHoney.innerHTML = `Bet <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
                     oneHoney.onclick = () => {
                         slotImg.src = "images/SlotMachineForFriendPulled.png"
-                        this.rollSlots(ele, room, callback, loot, 1, slotsIcons1, slotsIcons2, slotsIcons3)
+                        this.rollSlots(buttonContainerContainer, room, callback, loot, 1, slotsIcons1, slotsIcons2, slotsIcons3)
                     }
 
                     if (loot.quantity > 1) {
                         const allHoney = createElementWithClassAndParent("button", buttonContainer);
                         allHoney.innerHTML = `Bet ${loot.quantity} <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
                         allHoney.onclick = () => {
-                            this.rollSlots(ele, room, callback, loot, loot.quantity, slotsIcons1, slotsIcons2, slotsIcons3)
+                            this.rollSlots(buttonContainerContainer, room, callback, loot, loot.quantity, slotsIcons1, slotsIcons2, slotsIcons3)
                         }
                     }
                 }
@@ -216,7 +236,7 @@ class SlotsMiniGame extends MiniGame {
         truthLog("Slots", `The Truth is that JR played... an unsettling amount of Binding of Issac leading up to making this experience. And is surprisingly suceptible to gambling mechanics.`)
 
         this.initializeRender(ele);
-        const container = this.setupGameHeader(ele, room, callback, "Burn All Your Honey On These Altars Of Hope", undefined, "images/RiaByGuide.png")
+        const container = this.setupGameHeader(ele, room, callback, "Burn All Your Honey On These Altars Of Hope", undefined, "images/RiabyGuide.png")
 
     }
 }

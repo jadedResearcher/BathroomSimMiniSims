@@ -347,6 +347,10 @@ button{
   animation-fill-mode: forwards;
 }
 
+button:disabled{
+  opacity: 50%;
+}
+
 
 
 @keyframes slots-go-whir {
