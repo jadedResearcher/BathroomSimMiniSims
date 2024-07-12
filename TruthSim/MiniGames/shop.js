@@ -54,23 +54,24 @@ class SlotsMiniGame extends MiniGame {
 
     }
 
-    handleWinnings = (ele, room, callback, loot, slot1Value, slot2Value, slot3Value)=>{
+    handleWinnings = (ele, room, callback, loot, slot1Value, slot2Value, slot3Value) => {
         console.log(`JR NOTE: loot ${loot.classpect} got ${slot1Value}, ${slot2Value}, ${slot3Value}, do you win anything?`)
         const s1v = slot1Value.split("-")[1];
         const s2v = slot2Value.split("-")[1];
         const s3v = slot3Value.split("-")[1];
-        console.log("JR NOTE: ", {s1v, s2v, s3v, won: s1v == s2v && s2v == s3v})
-        if(s1v == s2v && s2v == s3v){
-            alert("WIN!!!")
-        }else{
-            alert("LOSE :(")
+        console.log("JR NOTE: ", { s1v, s2v, s3v, won: s1v == s2v && s2v == s3v })
+        if (s1v == s2v && s2v == s3v) {
+            globalBGMusic.src = "audio/music/icbattlemusic.mp3"
+            globalBGMusic.play();            
+            //JR NOTE TODO: map of matching word to winnings
+            //JR NOTE TODO: popup has ria in it with a comment on what you won (deranged speculation), list of winnings, button to close
+        } else {
+            const fx = new Audio("audio/fx/nope.mp3")
+            fx.loop = false;
+            fx.play();
         }
 
-        //if all three don't match lose sound 
-        //JR NOTE TODO: if all three do match, win sound
-        //JR NOTE TODO: map of matching word to winnings
-        //JR NOTE TODO: popup has ria in it with a comment on what you won (deranged speculation), list of winnings, button to close
- 
+
     }
 
     rollSlots = async (ele, room, callback, loot, bet, slot1, slot2, slot3) => {
@@ -91,7 +92,7 @@ class SlotsMiniGame extends MiniGame {
         //JR NOTE TODO: from array of possible class names, pick three
 
         let numberEnded = 0;
-        const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d","slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d","slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d","slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a","slots-key-b", "slots-key-a","slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a","slots-eye-a","slots-eye-a","slots-eye-a"]
+        const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a", "slots-eye-a", "slots-eye-a", "slots-eye-a"]
 
         const slot1Choice = pickFrom(slotPositions);
         const slot2Choice = pickFrom(slotPositions);
@@ -107,7 +108,7 @@ class SlotsMiniGame extends MiniGame {
             numberEnded++;
             if (numberEnded >= 3) {
                 globalBGMusic.pause();
-                this.handleWinnings(ele, room, callback,loot, slot1Choice, slot2Choice, slot3Choice )
+                this.handleWinnings(ele, room, callback, loot, slot1Choice, slot2Choice, slot3Choice)
             }
         }
 
@@ -135,12 +136,12 @@ class SlotsMiniGame extends MiniGame {
         slot3.onanimationend = () => animationEnded(slot3Choice);
 
         await sleep(10000);
-                //IMPORTANT: IF ITS BEEN TEN SECONDS AND ANIMATIONS HAVEN'T ENDED SOMETHING HAS GONE WRONG, PROCESS WINNINGS ANYWAYS (not all browser and computers will work right)
+        //IMPORTANT: IF ITS BEEN TEN SECONDS AND ANIMATIONS HAVEN'T ENDED SOMETHING HAS GONE WRONG, PROCESS WINNINGS ANYWAYS (not all browser and computers will work right)
 
-        if(numberEnded <3){
+        if (numberEnded < 3) {
             animationEnded("ERROR: ANIMATIONS DID NOT END, FALLING BACK")
         }
-   }
+    }
 
     startGame = (ele, room, callback) => {
         this.valuableCustomer(ele, callback);
@@ -177,7 +178,7 @@ class SlotsMiniGame extends MiniGame {
                 }
             }
             slotContainer.style.filter = `hue-rotate(${rotation}deg)`;
-//https://www.tiktok.com/@junior.elizuki/video/7387475649579224325
+            //https://www.tiktok.com/@junior.elizuki/video/7387475649579224325
             for (let loot of hive.loot) {
                 if (loot.quantity > 0) {
                     const buttonContainer = createElementWithClassAndParent("div", slotContainer, "slot-button-container");
