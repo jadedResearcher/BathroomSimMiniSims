@@ -56,8 +56,16 @@ class SlotsMiniGame extends MiniGame {
 
     handleWinnings = (ele, room, callback, loot, slot1Value, slot2Value, slot3Value)=>{
         console.log(`JR NOTE: loot ${loot.classpect} got ${slot1Value}, ${slot2Value}, ${slot3Value}, do you win anything?`)
-        
-        //detect match via split on "-" and check element 1 
+        const s1v = slot1Value.split("-")[1];
+        const s2v = slot2Value.split("-")[1];
+        const s3v = slot3Value.split("-")[1];
+        console.log("JR NOTE: ", {s1v, s2v, s3v, won: s1v == s2v && s2v == s3v})
+        if(s1v == s2v && s2v == s3v){
+            alert("WIN!!!")
+        }else{
+            alert("LOSE :(")
+        }
+
         //if all three don't match lose sound 
         //JR NOTE TODO: if all three do match, win sound
         //JR NOTE TODO: map of matching word to winnings
@@ -83,7 +91,7 @@ class SlotsMiniGame extends MiniGame {
         //JR NOTE TODO: from array of possible class names, pick three
 
         let numberEnded = 0;
-        const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a"]
+        const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d","slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d","slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d","slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a","slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a","slots-key-b", "slots-key-a","slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a","slots-eye-a","slots-eye-a","slots-eye-a"]
 
         const slot1Choice = pickFrom(slotPositions);
         const slot2Choice = pickFrom(slotPositions);
@@ -141,7 +149,6 @@ class SlotsMiniGame extends MiniGame {
         const container = createElementWithClassAndParent("div", ele, "hives-container");
         let test_animation = "slots-eye-a";
         for (let hive of hives) {
-            console.log("JR NOTE: hive is", hive)
             const slotContainer = createElementWithClassAndParent("div", container, "slot-container");
             const slotHeader = createElementWithClassAndParent("div", slotContainer, "slot-header");
             slotHeader.innerText = hive.classpect + "Slot Machine"
