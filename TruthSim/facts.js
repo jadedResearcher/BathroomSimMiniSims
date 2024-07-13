@@ -567,10 +567,11 @@ the immune system
 then we got those actively creating zampanio through eyedol games
 and then we have the mafia just, basically being a containment zone for the eye killer as they slowly twist
 and this upstart cult faction doing something*/
+//ic made this. my take is: red is rava, blue is camellia and black is john
 const cult_secret2 = new Secrets(null,null, "images/wattbyIC___bywhichimeanNAM.png", `NAM honestly just tries to live his life in the echidna. He tries to help out the Eye Killer to be less, you know, stabby, and is relieved when she ends up finding her Mafia Family to further calm her down. He can't control the philosophy so he mostly stays quiet. Ronin took it upon himself to take NAM under his wing and he's an intern at the Closer's consulting firm, sometimes.  The fact that NAM loops but Ronin does not makes it really awkward for NAM though and he never knows what to say if Ronin says something he already knows but shouldn't.`)
 
 //i am so excited that i realized the cult faction has *literally* all our movie monsters.  werewolves and vampires and evil cults.  the fact that camellia is a piper time clone is so perfect, because pipe (and by extension the Eye Killer) are SO into horror movies. 
-const cult_secret = new Secrets(null,null, "images/cult_faction_conspiracywall.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
+const cult_secret = new Secrets(null,null, "images/cult_faction_conspiracywall_by_IC.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
 
 
 //he's basically retired from caring about zampanio

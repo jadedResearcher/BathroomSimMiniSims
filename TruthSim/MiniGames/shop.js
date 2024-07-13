@@ -63,6 +63,11 @@ class SlotsMiniGame extends MiniGame {
         if (s1v == s2v && s2v == s3v) {
             globalBGMusic.src = "audio/music/icbattlemusic.mp3"
             globalBGMusic.play();
+            const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
+            const popupbody = createElementWithClassAndParent("div", popup);
+            popupbody.innerHTML = `  
+            <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/RiabyGuide.png">      
+                 You won! I just knew if you kept at it eventually burning it all would pay off! Now...what did you win? `
             //JR NOTE TODO: map of matching word to winnings
             //JR NOTE TODO: popup has ria in it with a comment on what you won (deranged speculation), list of winnings, button to close
         } else {
@@ -74,14 +79,17 @@ class SlotsMiniGame extends MiniGame {
 
     }
 
-    rollSlots = async (buttonContainer, room, callback, loot, bet, slot1, slot2, slot3) => {
+    rollSlots = async (buttonContainer, slotImage, room, callback, loot, bet, slot1, slot2, slot3) => {
         //JR NOTE TODO: disable buttons
         const buttons = buttonContainer.querySelectorAll("button");
         buttons.forEach((button) => {
             button.disabled = true;
         })
         //JR NOTE TODO: deduct bet from loot
+        console.log("JR NOTE: loot quantity before bet", loot.quantity)
         loot.quantity += -1 * bet;
+        console.log("JR NOTE: loot quantity after bet", loot.quantity)
+
         //start slots noise/music
         //i_think_its_finished_priska_turbo_time
         globalBGMusic.src = "audio/music/i_think_its_finished_priska_turbo_time.mp3";//priska is in the same universe as piper/camillia was from iirc
@@ -103,7 +111,7 @@ class SlotsMiniGame extends MiniGame {
         let numberEnded = 0;
         //odds are REALLY bad if i let all the icons show up, so the zampanio way is to always leave you thinking theres more you could be seeing
         //const slotPositions = ["slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-paperclip-a", "slots-paperclip-b", "slots-paperclip-c", "slots-paperclip-d", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-fail-c", "slots-fail-b", "slots-fail-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-key-b", "slots-key-a", "slots-star-b", "slots-star-a", "slots-eye-a", "slots-eye-a", "slots-eye-a", "slots-eye-a"]
-        const slotPositions = ["slots-paperclip-a","slots-paperclip-c","slots-heart-c","slots-heart-b","slots-heart-a","slots-key-b"]; //you can win truth, facts or keys
+        const slotPositions = ["slots-paperclip-a", "slots-paperclip-c", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-key-b"]; //you can win truth, facts or keys
 
         const slot1Choice = pickFrom(slotPositions);
         const slot2Choice = pickFrom(slotPositions);
@@ -126,6 +134,8 @@ class SlotsMiniGame extends MiniGame {
                 buttons.forEach((button) => {
                     button.disabled = false;
                 });
+                slotImage.src = "images/SlotMachineForFriendLARGE.png"
+
                 slot1.classList.remove(slot1Choice)
                 slot2.classList.remove(slot2Choice)
                 slot3.classList.remove(slot3Choice)
@@ -206,19 +216,46 @@ class SlotsMiniGame extends MiniGame {
                     const buttonContainer = createElementWithClassAndParent("div", buttonContainerContainer, "slot-button-container");
 
 
+
                     const oneHoney = createElementWithClassAndParent("button", buttonContainer);
                     oneHoney.innerHTML = `Bet <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
+
+                    //remove it if not applicable but need to update
+                    const allHoney = createElementWithClassAndParent("button", buttonContainer);
+
+                    const disableIfZero = (button)=>{
+                        if(loot.quantity === 0){
+                            button.disabled = true; //wont stick, animation keeps turning it back on
+                            button.onclick = ()=>{} //stop gap while we do the timeout
+                            setTimeout(()=>{button.disabled = true;},5000);
+                            button.innerHTML = "NO HONEY :("
+                            button.style.color="red";
+                            button.style.border="2px solid red";
+                        }
+                    }
+
                     oneHoney.onclick = () => {
                         slotImg.src = "images/SlotMachineForFriendPulled.png"
-                        this.rollSlots(buttonContainerContainer, room, callback, loot, 1, slotsIcons1, slotsIcons2, slotsIcons3)
+
+                        //update amount
+                        this.rollSlots(buttonContainerContainer, slotImg, room, callback, loot, 1, slotsIcons1, slotsIcons2, slotsIcons3)
+                        allHoney.innerHTML = `Bet ${loot.quantity} <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
+                        disableIfZero(allHoney);
+                        disableIfZero(oneHoney);
+
                     }
 
                     if (loot.quantity > 1) {
-                        const allHoney = createElementWithClassAndParent("button", buttonContainer);
                         allHoney.innerHTML = `Bet ${loot.quantity} <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
                         allHoney.onclick = () => {
-                            this.rollSlots(buttonContainerContainer, room, callback, loot, loot.quantity, slotsIcons1, slotsIcons2, slotsIcons3)
+                            //it'll be reduced by however much
+                            this.rollSlots(buttonContainerContainer, slotImg, room, callback, loot, loot.quantity, slotsIcons1, slotsIcons2, slotsIcons3)
+                            allHoney.innerHTML = `Bet ${loot.quantity} <img class='key-icon slot-icon' src="${loot.image}"> (L${loot.quality})?`;
+                            disableIfZero(allHoney);
+                            disableIfZero(oneHoney);
                         }
+                    } else {
+                        allHoney.remove(); //do not bother rendiering
                     }
                 }
 
