@@ -561,6 +561,12 @@ this feels good to me*/
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
 
+//i am so excited that i realized the cult faction has *literally* all our movie monsters.  werewolves and vampires and evil cults.  the fact that camellia is a piper time clone is so perfect, because pipe (and by extension the Eye Killer) are SO into horror movies. 
+const cult_secret = new Secrets(null,null, "images/wattbyIC___bywhichimeanNAM.png", `NAM honestly just tries to live his life in the echidna. He tries to help out the Eye Killer to be less, you know, stabby, and is relieved when she ends up finding her Mafia Family to further calm her down. He can't control the philosophy so he mostly stays quiet. Ronin took it upon himself to take NAM under his wing and he's an intern at the Closer's consulting firm, sometimes.  The fact that NAM loops but Ronin does not makes it really awkward for NAM though and he never knows what to say if Ronin says something he already knows but shouldn't.`)
+
+
+const nam_secret = new Secrets(null,null, "images/john_andcamellia_andrava___gueststarringtwig_byic.png", `Camellia leads a cult that worships [???] and Rava just sort of showed up one day and never left.  And the absolute second Camellia saw how badly John uses what time powers he manages to cobble together in this timeless universe she was so entertained at his fail boi energy she kept him on as a sort of jester.  Rava, of course, is Twig's master. And John is exes with Sam and is currently dating Twig and this is Really Normal of him and he just thinks they're like, twins, but Twig ran away, maybe?  (they are not)`)
+
 const arg_secret_by_ic2 = new Secrets(null, null, null, `IC says: 
 During one of the many business management books I had to digest in college, I came across a concept that it called 'the First Follower'. If you've done any kind of business-related degree, you may know it as the Leadership Lessons from a Dancing Guy video. You can't miss it.
 
