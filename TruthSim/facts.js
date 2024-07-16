@@ -5,41 +5,41 @@ have rooms where you can define your own facts
 zampanio style
 */
 
-const getAllUnlockedFactTitles = ()=>{
+const getAllUnlockedFactTitles = () => {
   const ret = [];
-  for(let fact of globalDataObject.factsUnlocked){
+  for (let fact of globalDataObject.factsUnlocked) {
     ret.push(fact.title);
   }
   return ret;
 }
 
 //picks a theme and makes a bullshit fact about it
-const randomFact = (rand)=>{
+const randomFact = (rand) => {
   const chosenTheme = rand.pickFrom(Object.values(all_themes));
-  
-  const person = chosenTheme.pickPossibilityFor(PERSON,rand);
-  const adj = chosenTheme.pickPossibilityFor(ADJ,rand);
-  const compliment = chosenTheme.pickPossibilityFor(COMPLIMENT,rand);
-  const insult = chosenTheme.pickPossibilityFor(INSULT,rand);
-  const supermove = chosenTheme.pickPossibilityFor(SUPERMOVE,rand);
-  const object = chosenTheme.pickPossibilityFor(OBJECT,rand);
-  const location = chosenTheme.pickPossibilityFor(LOCATION,rand);
 
-  const childbackstory = chosenTheme.pickPossibilityFor(CHILDBACKSTORY,rand);
-  const generalbackstory = chosenTheme.pickPossibilityFor(GENERALBACKSTORY,rand);
-  const miracle = chosenTheme.pickPossibilityFor(MIRACLE,rand);
-  const philosophy =chosenTheme.pickPossibilityFor(PHILOSOPHY,rand);
-  const loc_desc = chosenTheme.pickPossibilityFor(LOC_DESC,rand);
-  const monster_desc =chosenTheme.pickPossibilityFor(MONSTER_DESC,rand);
-  const smell = chosenTheme.pickPossibilityFor(SMELL,rand);
-  const taste = chosenTheme.pickPossibilityFor(TASTE,rand);
-  const feeling = chosenTheme.pickPossibilityFor(FEELING,rand);
-  const sound = chosenTheme.pickPossibilityFor(SOUND,rand);
-  const effects = chosenTheme.pickPossibilityFor(EFFECTS,rand);
+  const person = chosenTheme.pickPossibilityFor(PERSON, rand);
+  const adj = chosenTheme.pickPossibilityFor(ADJ, rand);
+  const compliment = chosenTheme.pickPossibilityFor(COMPLIMENT, rand);
+  const insult = chosenTheme.pickPossibilityFor(INSULT, rand);
+  const supermove = chosenTheme.pickPossibilityFor(SUPERMOVE, rand);
+  const object = chosenTheme.pickPossibilityFor(OBJECT, rand);
+  const location = chosenTheme.pickPossibilityFor(LOCATION, rand);
+
+  const childbackstory = chosenTheme.pickPossibilityFor(CHILDBACKSTORY, rand);
+  const generalbackstory = chosenTheme.pickPossibilityFor(GENERALBACKSTORY, rand);
+  const miracle = chosenTheme.pickPossibilityFor(MIRACLE, rand);
+  const philosophy = chosenTheme.pickPossibilityFor(PHILOSOPHY, rand);
+  const loc_desc = chosenTheme.pickPossibilityFor(LOC_DESC, rand);
+  const monster_desc = chosenTheme.pickPossibilityFor(MONSTER_DESC, rand);
+  const smell = chosenTheme.pickPossibilityFor(SMELL, rand);
+  const taste = chosenTheme.pickPossibilityFor(TASTE, rand);
+  const feeling = chosenTheme.pickPossibilityFor(FEELING, rand);
+  const sound = chosenTheme.pickPossibilityFor(SOUND, rand);
+  const effects = chosenTheme.pickPossibilityFor(EFFECTS, rand);
 
   const noun = rand.pickFrom([person, adj, location, object]);
 
-  const nameTemplates = [`${supermove} is ${rand.pickFrom(["really cool","awesome","totally swag","l337","fuckin awesome", "impressive","op","overpowered","really needing to be nerfed","objectively the best final attack","so totally awesome"])}`, `${titleCase(noun)} Fact`, `The ${noun} is ${compliment}.`,`The ${noun} is ${insult}.`,`The ${noun} is ${adj}.`,`The ${noun} smells like ${smell}.`,`The ${noun} tastes like ${taste}.`,`The ${noun} sounds like ${sound}.`,`The ${noun} feels like ${feeling}.`];
+  const nameTemplates = [`${supermove} is ${rand.pickFrom(["really cool", "awesome", "totally swag", "l337", "fuckin awesome", "impressive", "op", "overpowered", "really needing to be nerfed", "objectively the best final attack", "so totally awesome"])}`, `${titleCase(noun)} Fact`, `The ${noun} is ${compliment}.`, `The ${noun} is ${insult}.`, `The ${noun} is ${adj}.`, `The ${noun} smells like ${smell}.`, `The ${noun} tastes like ${taste}.`, `The ${noun} sounds like ${sound}.`, `The ${noun} feels like ${feeling}.`];
   const templates = [
     `I am afraid all of the time. ${monster_desc}`,
     `There is ${loc_desc}.`,
@@ -53,7 +53,7 @@ const randomFact = (rand)=>{
   const chosenName = titleCase(rand.pickFrom(nameTemplates));
   const chosenDescription = `${rand.pickFrom(templates)} ${rand.pickFrom(templates)} ${rand.pickFrom(templates)}`;
 
-  const fact= new Fact(chosenName, chosenDescription,[chosenTheme.key], rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13), rand.getRandomNumberBetween(0,13));
+  const fact = new Fact(chosenName, chosenDescription, [chosenTheme.key], rand.getRandomNumberBetween(0, 13), rand.getRandomNumberBetween(0, 13), rand.getRandomNumberBetween(0, 13));
   fact.isIrrelevant = true;
   return fact;
 }
@@ -65,21 +65,21 @@ const all_secrets = [];
 
 //only doc slaughter can reveal these. its her religion, to expose secrets. 
 //devona would if she COULD but Fragment of the Universe prevents her from doing so without driving the listener mad
-class Secrets{
+class Secrets {
   video;
   audio;
   image;
   html;
-  constructor(video,audio,image,html){
+  constructor(video, audio, image, html) {
     all_secrets.push(this);
     video = video;
-    audio= audio;
+    audio = audio;
     image = image;
     html = html
   }
 }
 
-class Fact{
+class Fact {
   title = "Firsty"; //should be unique
   secrets;
   isIrrelevant = false; //its irrelevant if its random, helps neville know what to KILL
@@ -90,8 +90,8 @@ class Fact{
   defense_multipler = 0.5;
   speed_multipler = 0.5;
   is_viral = false; //might not do anythign with this but the plan is for facts to be able to spread in weird ways
- 
-  constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler,secrets){
+
+  constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler, secrets) {
     this.title = title;
     this.lore_snippet = lore_snippet;
     this.secret = secrets;
@@ -121,34 +121,34 @@ class Fact{
 
 console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROOM IS IMPLEMENTED, PARSE NEW LINES AS BR")
 //title should be unique
-const TESTFACT = new Fact("Test Fact", "test",[GUIDING], 1, 10, 1);
+const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
 
 //http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Flower&data=N4IgdghgtgpiBcIAqALGACAYgGwPYHcYAnEAGhABMYBnASwHNIAXW3MBEAGQFoBVbgAwCALGRBFa1ANYcAgpwCiABQASYpmljUOAcVkBZAJIA5HaXQBGCwGZzmTgHkASrPMXzAdVkBlJArc25k4Kvi4mSObW7ugKABpIJgDCCQ7G5gBM6XYuyfLe5gCsdiayxon+loHoAEKODgAiAdZi1EwQTNqIcX5OxvKk1raG+kqyCQrGEQVFwfKGvoaJpFa2ibxOhg68+cLCpI4Amv2ZpBMKTjoKCUsrpDrGDt7zpAAcBWIwAB4QAMZM2ABPAD6GiIMBgINoAAdOlw+IIRGJaGBWsi-hxErgoFA2OZMdjceh8TiwHisSSyQT2ORkXR6CgmBjyYTiSzmaSiezKSSxO02j8ULAwIzEKyOWLuWyqZLqeIYFCwdQ6GwmdLOWqJeqKVqVeRWhAAEa0bC0JjA7AwABuMGwHAsYjBFCBVAAZjAUXBEAIAHTvcj4FCmiGu93UT0gH1+kAG7C-KTOmBuj0cSNiKEQC0JpNhu3egRIqD0IHUIg-DgMphQ+AAemrLogRCIEHouBdtD+rDA3p+WOrAC1oOmwKwVLh-sipHW8IQiN6oWB6C0mLgiMCqG1jbDvGh0BRcOgDRgobGAcj0JaARRWPRoDRvepofbEDx+EJhAByajobxtI0ms2cgArsKxC7rgNDoGAY67jAPxghAYYHgC6DIkwxC-CwbDoPgpooOg1CAQaABWsEdPe5AsFC6RyC6aFEOgY5oPREBQVAGa0BBKAQBQB7wQKMA8S6K7oBA6D0E2YA8cubTYAxLroG8u4QAC1DmC+CLCLxMC-GgPE9sKEDIkKTDkSAlHNIgsi0aB6lvugNA-BAUI0OYdFQMi7SdnJInYLJjGgSxWLsRBh49lo6DAW6CG0DGMDelggFEBoxA4mCrloLQ9H6n+prIRa1rYF+VBwdpYY8RQTaoo5vkAveAC+QA
-const APOCALYPSEFACT = new Fact("The CFO of Eyedol Games Will End The World", "She doesn't mean to. You can see it in her eye. You can see it in the way she tries so dillgently to avoid hurting anyone, even her auditors. But the fact of the matter is she was born to end a world and her fate is not too picky about which. If Wanda moves on for any reason, she blossoms. But... she also doesn't. She's worked so hard at self control. Know restraint, that's the Waste's mantra right? She has seen how fragile this simulated reality really is and she would NEVER do something to risk it. Except. Well. Except for that one time. She was young. And impulsive.  And Nidhogg brought its poisoned candy (https://archiveofourown.org/works/35438083/chapters/91817125#workskin) into the Universe and everone partook. How could she possibly restrain herself while Trickster? All candy colored and frentic. She hacked herself to make it forever. The party never stops. Then she hacked everything else too. Even the rules that say that once Wanda leaves a place everyone she Knows about is dragged along with her. Apocalypse Chick spreads and spreads and spreads like a weed in Wanda's wake. Never able to leave the destroyed remnants of Arm1, but perfectly able to stabelize it enough to turn it into a second arm. Arm2. She can't reach Arm 3, the Mundane arm. Or the fourth. The God arm. Or the fifth, the Faerie Arm or the sixth or seventh or however many pointless irrelevant arms of this Universe the Witness has spiralled out in his grief for his lost friend. But she's having fun. Just ask her yourself.  https://eyedolgames.com/East ",[APOCALYPSE], 13, 13, 3);
+const APOCALYPSEFACT = new Fact("The CFO of Eyedol Games Will End The World", "She doesn't mean to. You can see it in her eye. You can see it in the way she tries so dillgently to avoid hurting anyone, even her auditors. But the fact of the matter is she was born to end a world and her fate is not too picky about which. If Wanda moves on for any reason, she blossoms. But... she also doesn't. She's worked so hard at self control. Know restraint, that's the Waste's mantra right? She has seen how fragile this simulated reality really is and she would NEVER do something to risk it. Except. Well. Except for that one time. She was young. And impulsive.  And Nidhogg brought its poisoned candy (https://archiveofourown.org/works/35438083/chapters/91817125#workskin) into the Universe and everone partook. How could she possibly restrain herself while Trickster? All candy colored and frentic. She hacked herself to make it forever. The party never stops. Then she hacked everything else too. Even the rules that say that once Wanda leaves a place everyone she Knows about is dragged along with her. Apocalypse Chick spreads and spreads and spreads like a weed in Wanda's wake. Never able to leave the destroyed remnants of Arm1, but perfectly able to stabelize it enough to turn it into a second arm. Arm2. She can't reach Arm 3, the Mundane arm. Or the fourth. The God arm. Or the fifth, the Faerie Arm or the sixth or seventh or however many pointless irrelevant arms of this Universe the Witness has spiralled out in his grief for his lost friend. But she's having fun. Just ask her yourself.  https://eyedolgames.com/East ", [APOCALYPSE], 13, 13, 3);
 
-const KISALUCKYBASTARD = new Fact("K Is A Lucky Bastard", "K should have died a thousand times over even before making it to this Universe. Somehow... he/she/xe/fae/they/it always come out on top.",[LIGHT], 1, 1, 1);
+const KISALUCKYBASTARD = new Fact("K Is A Lucky Bastard", "K should have died a thousand times over even before making it to this Universe. Somehow... he/she/xe/fae/they/it always come out on top.", [LIGHT], 1, 1, 1);
 //https://archive.org/details/zammy-dreams
 //the eye killer considers herself the Final Girl of a horror movie. she is desparate and scared and willing to kill to survive. and so full of adrenaline and fear that the slightest surprise is treated as a jump scare you should stab. 
-const KILLEROWNSBLADE = new Fact("The Eye Killer Wields the Quatro Blade", "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. Any cut made with it can not be perceived, even as blood loss slowly builds up. Anyone who dies while bleeding from this blade will not be percieved by any means. It is said the Eye Killer does not even know she wields it. All she knows is that the kills she makes to warn off Hunters never seem to get found. Never seem to scare off predators. So her kills get more and more gruesome, more and more artistic,  to try to acomplish her goals. Do not look for her. Do not Hunt her. Do not make Wodin's mistake.",[KILLING, OBFUSCATION], 2, 0.5, 0.5)
-const EYEKILLERISHUNTED = new Fact("The Eye Killer Is Hunted", "The Eye Killer is hunted by the Cult of the Nameless One, for reasons she does not understand. She was one of the, once.",[HUNTING], 1, 1, 2);
-const EYEKILLERKILLSCULTISTS = new Fact("The Eye Killer Kills Cultists", "The Eye Killer kills only in self defense, but makes increasingly gruesome 'art pieces' to try to scare off future hunters. She does not know why it never seems to work.",[KILLING], 2, 1, 1);
-const EYEKILLERFOUNDFAMILY = new Fact("The Eye Killer Has Found A Family", "The Eye Killer misses the cult that raises her, even as they hunt her now. She's finally found a new one she trusts in the Mafia. The Hostage she rescued and the Himbo who helped her are her friends, through every Loop.",[DEFENSE, FAMILY], 1, 10, 1);
+const KILLEROWNSBLADE = new Fact("The Eye Killer Wields the Quatro Blade", "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. Any cut made with it can not be perceived, even as blood loss slowly builds up. Anyone who dies while bleeding from this blade will not be percieved by any means. It is said the Eye Killer does not even know she wields it. All she knows is that the kills she makes to warn off Hunters never seem to get found. Never seem to scare off predators. So her kills get more and more gruesome, more and more artistic,  to try to acomplish her goals. Do not look for her. Do not Hunt her. Do not make Wodin's mistake.", [KILLING, OBFUSCATION], 2, 0.5, 0.5)
+const EYEKILLERISHUNTED = new Fact("The Eye Killer Is Hunted", "The Eye Killer is hunted by the Cult of the Nameless One, for reasons she does not understand. She was one of the, once.", [HUNTING], 1, 1, 2);
+const EYEKILLERKILLSCULTISTS = new Fact("The Eye Killer Kills Cultists", "The Eye Killer kills only in self defense, but makes increasingly gruesome 'art pieces' to try to scare off future hunters. She does not know why it never seems to work.", [KILLING], 2, 1, 1);
+const EYEKILLERFOUNDFAMILY = new Fact("The Eye Killer Has Found A Family", "The Eye Killer misses the cult that raises her, even as they hunt her now. She's finally found a new one she trusts in the Mafia. The Hostage she rescued and the Himbo who helped her are her friends, through every Loop.", [DEFENSE, FAMILY], 1, 10, 1);
 
 
 //closer will NOT stock any facts about herself, thank you very much, besides marketing spiels
 
-const CLOSERISGREATATFACTS = new Fact("The Closer Provides You With Best Value FACTS", "The Closer is a highly competent sales proffesional who will work tirelessly to make sure YOU have the fact you need to make sense of this crazy world.",[GUIDING], 1, 2, 1);
-const CLOSERISGREATATKEYS = new Fact("The Closer Provides You With Best Value KEYS", "The Closer is a highly competent sales proffesional who will work tirelessly to make sure YOU have the keys you need to make sense of this crazy world.",[GUIDING], 1, 2, 1);
-const CLOSERISGREATATROOMS = new Fact("The Closer Provides You With Best Value ROOMS", "The Closer is a highly competent sales proffesional who will work tirelessly to make sure YOU have the rooms you need to make sense of this crazy world.",[GUIDING], 1, 2, 1);
+const CLOSERISGREATATFACTS = new Fact("The Closer Provides You With Best Value FACTS", "The Closer is a highly competent sales proffesional who will work tirelessly to make sure YOU have the fact you need to make sense of this crazy world.", [GUIDING], 1, 2, 1);
+const CLOSERISGREATATKEYS = new Fact("The Closer Provides You With Best Value KEYS", "The Closer is a highly competent sales proffesional who will work tirelessly to make sure YOU have the keys you need to make sense of this crazy world.", [GUIDING], 1, 2, 1);
+const CLOSERISGREATATROOMS = new Fact("The Closer Provides You With Best Value ROOMS", "The Closer is a highly competent sales proffesional who will work tirelessly to make sure YOU have the rooms you need to make sense of this crazy world.", [GUIDING], 1, 2, 1);
 
-const CLOSEREATSBABIES = new Fact("The Closer Eats Babies", "Baby Lamia grow on trees as 'fruit babs'. While they are moderately ambulatory at this stage ('wiggling') they are not generally considered sapient until they cocoon and their fruit innards become actual organs, veins and nervous systems",[KILLING, BUGS], 2, 1, 1);
-const CLOSERADDICTEDTOFRUIT = new Fact("The Closer Is Addicted To Fruit", "In the Closer's Home Universe, her race was known for being obsessively addicted to eating fruit. It is a sign of great will power to resist for even a moment.",[ADDICTION, PLANTS], 1, 1, 2);
+const CLOSEREATSBABIES = new Fact("The Closer Eats Babies", "Baby Lamia grow on trees as 'fruit babs'. While they are moderately ambulatory at this stage ('wiggling') they are not generally considered sapient until they cocoon and their fruit innards become actual organs, veins and nervous systems", [KILLING, BUGS], 2, 1, 1);
+const CLOSERADDICTEDTOFRUIT = new Fact("The Closer Is Addicted To Fruit", "In the Closer's Home Universe, her race was known for being obsessively addicted to eating fruit. It is a sign of great will power to resist for even a moment.", [ADDICTION, PLANTS], 1, 1, 2);
 
 
-const PARKERSBESTIEISVIC = new Fact("Parker's Bestie is [REDACTED]", "When Parker is with [REDACTED] its like they can't hear the call of Gun-Tan anymore. They will weaken slowly, because Gun-Tan is how they live now. But it is nice, for just a little while, to be a danger to no one.",[OBFUSCATION, CENSORSHIP], 0, 0, 0);
-const PARKERSlOVESGUNTAN = new Fact("Parkers Loves Gun-Tan", "Parker loves Gun-Tan so much he never lets her go. Even if he thinks he has she is right back in his hands when its time to pull the trigger again. She loves him THAT much.",[KILLING, BURIED], 10, 1,10);
-const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and K", "When Parker burrowed out of his home universe he made sure to steal away all his favorite blorbos he loved watching through his cameras. Witherby and K are especially fun to watch, because of how often they interact with the others. Parker loves watching.",[SPYING], 1, 1,1);
-const PARKERRUNSABBQ = new Fact("Parker Owns a BBQ", "Despite how filthy Parker is, he can work a mean grill. He and [REDACTED] run a literal hole in the wall BBQ that has long lines whenever it pops up.",[FLESH, BURIED], 1, 1, 1);
+const PARKERSBESTIEISVIC = new Fact("Parker's Bestie is [REDACTED]", "When Parker is with [REDACTED] its like they can't hear the call of Gun-Tan anymore. They will weaken slowly, because Gun-Tan is how they live now. But it is nice, for just a little while, to be a danger to no one.", [OBFUSCATION, CENSORSHIP], 0, 0, 0);
+const PARKERSlOVESGUNTAN = new Fact("Parkers Loves Gun-Tan", "Parker loves Gun-Tan so much he never lets her go. Even if he thinks he has she is right back in his hands when its time to pull the trigger again. She loves him THAT much.", [KILLING, BURIED], 10, 1, 10);
+const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and K", "When Parker burrowed out of his home universe he made sure to steal away all his favorite blorbos he loved watching through his cameras. Witherby and K are especially fun to watch, because of how often they interact with the others. Parker loves watching.", [SPYING], 1, 1, 1);
+const PARKERRUNSABBQ = new Fact("Parker Owns a BBQ", "Despite how filthy Parker is, he can work a mean grill. He and [REDACTED] run a literal hole in the wall BBQ that has long lines whenever it pops up.", [FLESH, BURIED], 1, 1, 1);
 
 //illusionists shipping manifesto https://docs.google.com/presentation/d/1YtZE1QL3rgQUIxI7Kb0P9Evn34OqP4Jkzb1pLCayIvk/edit#slide=id.p
 //a lot of these long ones IC wrote
@@ -172,7 +172,7 @@ So here's the thesis: it looks like K doesn't just turn when he receives too muc
 And that's our problem.
 
 (page 1 of ???)
-`,[OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
+`, [OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
 const VIKANDKHAVEACOMPLICATEDRELATIONSHIP2 = new Fact("Page 2: [REDACTED] talking about K", `The Angel is simple, not to be confused with The Doctor. That's *Doctor* Slaughter. The Angel thrives on very binary criteria: you look at it and it's satisfied, you don't and it lashes out. Of course, there's abnormalities with much simpler desires, but The Angel was easily a very dangerous one. A blink or two it might tolerate, but letting your mind slip off of it was unacceptable. Try looking at an image without losing concentration. If you fail, imagine yourself getting swiftly decapitated. That is the essence of The Angel.
 
 You can imagine, then, that containing something by giving it your pure, concentrated gaze is very, very hard. Khana's taken aspects of this monster, which makes their previous condition... precarious.
@@ -184,11 +184,11 @@ We used to talk more often. We really did. There is trust in a shared secret lik
  
 And yet I keep secrets. I keep many good secrets.
 
-(Page 2 of ???)`,[OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
+(Page 2 of ???)`, [OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
 
 
-const VIKANDKHAVEACOMPLICATEDRELATIONSHIP3 = new Fact("Page 2: [REDACTED] talking about K", 
-`When did I get into the habit of playing executioner?
+const VIKANDKHAVEACOMPLICATEDRELATIONSHIP3 = new Fact("Page 2: [REDACTED] talking about K",
+  `When did I get into the habit of playing executioner?
 
 No, no. I remember. It was the first time he did his little... anomaly magic trick on me. When we found out they had an anomaly to worry about. We did not all start as monsters, as I've posited before. But we were bound to become them, and some of us thrive in that sort of spotlight.
 
@@ -202,7 +202,7 @@ I do not know Khana's name. The actual one. I knew, once. I am sure I could find
 
 Now he has turned into a tree yearning for our attention. If overfed, he will turn into a machine yearning for our misery.
 
-Our containment procedures will have to change accordingly.`,[OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
+Our containment procedures will have to change accordingly.`, [OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
 
 const CAMELLIACANSEEJOHNSTIMESTITCHING = new Fact("Camellia Can See John's Time Stitching", `We've had a curious development recently: the Hundmaster has brought me someone who'd tried to break into our holy sanctum, that, or he brought himself in. His smile is smug and horribly insufferable even as the dog easily strongarms him, as if he's exactly where he wants to be, and I would suspect he isn't wrong. She tells me he's her 'puppy's' boyfriend, 'or something like that'-- he won't deny it, and he looks actually interested in that line of thought. I don't care what kind of disgusting relations he has, but she thinks it's relevant. So, fine. We will operate under that assumption, as flawed and demented as it may be.
 
@@ -215,7 +215,7 @@ He did not notice that I could see him. But for a moment while he played with on
 That did catch my attention.
 As unimpressed as I may be at such wanton usage of a blessing, this one may still serve purpose. Not now, at the moment, but a purpose he can serve. Having one made of strings and one that can sever them is... useful. This world seems to work in such minutiae.
 
-I will be waiting accordingly.`,[TIME, ANGELS], 2, 0.5, 1.5);
+I will be waiting accordingly.`, [TIME, ANGELS], 2, 0.5, 1.5);
 
 /*
 jr thoughts on CAMELLIACANSEEJOHNSTIMESTITCHING
@@ -289,13 +289,13 @@ const neville_secret = new Secrets(null, null, null, `<p><strong><u><span style=
 <p><br></p>
 <p><span style="font-size:11pt;">The Censorship is for your protection, after all.</span></p>
 <p><br></p>`);
-const NevilleFact = new Fact("Neville is a Chill and Cool Guy :)", "Literally nothing seems to bother Neville. They don't call him 'soup himbo' for nothing. He loves his bf Witherby (and is totally cool with his bisexual awakening) and he loves his sworn sibling, Devona. Everything's great :) ",[OBFUSCATION], 1, 1, 1, neville_secret);
+const NevilleFact = new Fact("Neville is a Chill and Cool Guy :)", "Literally nothing seems to bother Neville. They don't call him 'soup himbo' for nothing. He loves his bf Witherby (and is totally cool with his bisexual awakening) and he loves his sworn sibling, Devona. Everything's great :) ", [OBFUSCATION], 1, 1, 1, neville_secret);
 
 //witherby is so good at his job
 //you never even notice you didn't get his name
 //you never even notice the detached distance between you
 //until its over
-const witherby_secret = new Secrets(null,null,null, `
+const witherby_secret = new Secrets(null, null, null, `
 <p><span style="font-size:11pt;">You follow the signs in the airport. Terminal E. Baggage Claim. Bathrooms. Food court. Duty free shopping. Terminal C. International travelers. Terminal J.</span></p>
 <p><br></p>
 <p><span style="font-size:11pt;">Where is terminal A? You thought you were going down the alphabet but... J?</span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;"><br></span><span style="font-size:11pt;">Maybe you got turned around.</span></p>
@@ -457,7 +457,7 @@ const witherby_secret = new Secrets(null,null,null, `
 <p><br></p>
 `);
 
-const WibbyFact = new Fact("Witherby Will Hear Your Confession", "Witherby is in charge of doing attachment work for the Training team, which means befriending monsters, randos, and monstrous randos. He's good at his job, a key component of which is staying proffesional and not getting too attached. He's one cool operator.",[SPYING], 1, 2, 1, witherby_secret);
+const WibbyFact = new Fact("Witherby Will Hear Your Confession", "Witherby is in charge of doing attachment work for the Training team, which means befriending monsters, randos, and monstrous randos. He's good at his job, a key component of which is staying proffesional and not getting too attached. He's one cool operator.", [SPYING], 1, 2, 1, witherby_secret);
 
 const devona_secret = new Secrets(null, null, null, `Devona's Secret
 
@@ -500,19 +500,19 @@ The 27th of March will never happen again.
 
 
 `);
-const DevonaFact = new Fact("Devona is So So Scared All The Time", "Even though Devona is afraid of pretty much everything, she somehow finds the strength to act as the Training Team's scout, exploring deep within the Mall Maze and beyond. She brings everything she finds back to Neville, who trims it down to just the essentials and passes it off to Ria, who figures out what it all means in the Big Picture. And of course, Camille is in charge of everyone. She has so many people she cares about she is grateful, all things considered, that she's AroAce. Who has time for dating when there's so much to focus on? ",[KNOWING], 1, 1, 1, devona_secret);
+const DevonaFact = new Fact("Devona is So So Scared All The Time", "Even though Devona is afraid of pretty much everything, she somehow finds the strength to act as the Training Team's scout, exploring deep within the Mall Maze and beyond. She brings everything she finds back to Neville, who trims it down to just the essentials and passes it off to Ria, who figures out what it all means in the Big Picture. And of course, Camille is in charge of everyone. She has so many people she cares about she is grateful, all things considered, that she's AroAce. Who has time for dating when there's so much to focus on? ", [KNOWING], 1, 1, 1, devona_secret);
 
 
-const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the Twins gets hurt, the other turns into a hulking bird with a slavering maw in their chest and hunts down whoever is responsible in order to eat them in a single bite. It's usually Neville doing The Hunt, since Devona is extremely easy to harm. Unfortunately, his tracking skills leave a lot to be desired, so it can take a very long time for him to finally consume the perpetrator. He won't stop to eat or drink or rest until he does, though.  When Devona is instead the Hunter, she knows *exactly* where her target is, but can take a long time to reach them because of her low stamina and massive frame. She rests a lot and eats and drinks and makes slow and steady progress towards the exact location she needs to be at.",[KILLING,HUNTING], 3, 3, 3, devona_secret);
+const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the Twins gets hurt, the other turns into a hulking bird with a slavering maw in their chest and hunts down whoever is responsible in order to eat them in a single bite. It's usually Neville doing The Hunt, since Devona is extremely easy to harm. Unfortunately, his tracking skills leave a lot to be desired, so it can take a very long time for him to finally consume the perpetrator. He won't stop to eat or drink or rest until he does, though.  When Devona is instead the Hunter, she knows *exactly* where her target is, but can take a long time to reach them because of her low stamina and massive frame. She rests a lot and eats and drinks and makes slow and steady progress towards the exact location she needs to be at.", [KILLING, HUNTING], 3, 3, 3, devona_secret);
 
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD,EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS,CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2,KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact,PARKERSlOVESGUNTAN,CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,NevilleFact,VIKANDKHAVEACOMPLICATEDRELATIONSHIP1,CLOSERISGREATATKEYS,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3,BreachedTwinFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact];
 
 
 
 //every fact the slot machines can give you
-const factsForGambling = [CLOSERADDICTEDTOFRUIT,APOCALYPSEFACT,CLOSERISGREATATROOMS]
+const factsForGambling = [CLOSERADDICTEDTOFRUIT, APOCALYPSEFACT, CLOSERISGREATATROOMS]
 
 
 /*
@@ -561,6 +561,39 @@ this feels good to me*/
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
 
+
+const confessional_secret_byic = new Secrets(null, null, null, `<ul>
+<li style="list-style-type:none;font-size:12pt;">
+    <ul>
+        <li style="font-size: 16px;border: 0px;">
+            <div tabindex="-1" aria-setsize="-1" aria-roledescription="Message" style="font-size: 16px;border: 0px;">
+                <div style="font-size: 16px;border: 0px;">
+                    <div style="color: var(--text-normal);font-size: 1rem;border: 0px;">
+                        <pre style="font-size: 0.75rem;border: 0px;"><div style="font-size: 12px;border: 0px;"><code style="color: var(--text-normal);font-size: 0.875rem;border: 1px solid var(--background-tertiary);">Witherby&apos;s not a big fan of the confessional. 
+
+His is a small thing, made of photobooth plastic and plywood and cardboard-- the improvised housing he could find in this mall of theirs. He tends to it daily. He rebuilds it every loop, because he has to. He dreads to think that he knows the inside of the confessional he builds better than anything or anyone else. To be so intimate with this altar to his burden and nothing else.
+
+And he&apos;s intimate, sure, but he doesn&apos;t love it. Its purpose is practical, or obsessive, or both; it stills the ringing in his ears and nothing more.
+
+He hears from the ache in his skull that his god is a sufferer&apos;s god. Or maybe a suffering god-- he does not know the difference. In that respect, the confessional serves a purely masochistic purpose: for him to keep the sins of others, and for others to wallow in pain for a chance at self-redemption. You don&apos;t just cleanse your sins once, anyway-- as long as the guilt is present, there is always more forgiveness, and one would find the human body is in no short supply of it.
+
+So he knows it intimately, this confessional. Every board and every nail and every decision made in building it, over, and over. There&apos;d be callouses in his hands if this world had any respect for physical memory.
+
+And still, Neville knows the walls of that confessional-- that shelter of his-- any better than he himself ever might. Or maybe he knows something more. Like if the four walls aren&apos;t just four walls-- less a space and more containment, like there&apos;s a tangible difference between &apos;here&apos; and &apos;there&apos;.
+
+It scares him, a little, that Neville may not know that.
+
+It horrifies him that he might.</code></div></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</li>
+</ul>
+<p><br></p>`);
+
+
 /*theres a reason i think
 that the most active of our blorbos are, well , the blorbos
 the immune system
@@ -568,15 +601,15 @@ then we got those actively creating zampanio through eyedol games
 and then we have the mafia just, basically being a containment zone for the eye killer as they slowly twist
 and this upstart cult faction doing something*/
 //ic made this. my take is: red is rava, blue is camellia and black is john
-const cult_secret2 = new Secrets(null,null, "images/wattbyIC___bywhichimeanNAM.png", `NAM honestly just tries to live his life in the echidna. He tries to help out the Eye Killer to be less, you know, stabby, and is relieved when she ends up finding her Mafia Family to further calm her down. He can't control the philosophy so he mostly stays quiet. Ronin took it upon himself to take NAM under his wing and he's an intern at the Closer's consulting firm, sometimes.  The fact that NAM loops but Ronin does not makes it really awkward for NAM though and he never knows what to say if Ronin says something he already knows but shouldn't.`)
+const cult_secret2 = new Secrets(null, null, "images/wattbyIC___bywhichimeanNAM.png", `NAM honestly just tries to live his life in the echidna. He tries to help out the Eye Killer to be less, you know, stabby, and is relieved when she ends up finding her Mafia Family to further calm her down. He can't control the philosophy so he mostly stays quiet. Ronin took it upon himself to take NAM under his wing and he's an intern at the Closer's consulting firm, sometimes.  The fact that NAM loops but Ronin does not makes it really awkward for NAM though and he never knows what to say if Ronin says something he already knows but shouldn't.`)
 
 //i am so excited that i realized the cult faction has *literally* all our movie monsters.  werewolves and vampires and evil cults.  the fact that camellia is a piper time clone is so perfect, because pipe (and by extension the Eye Killer) are SO into horror movies. 
-const cult_secret = new Secrets(null,null, "images/cult_faction_conspiracywall_by_IC.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
+const cult_secret = new Secrets(null, null, "images/cult_faction_conspiracywall_by_IC.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
 
 
 //he's basically retired from caring about zampanio
 //good for him
-const nam_secret = new Secrets(null,null, "images/john_andcamellia_andrava___gueststarringtwig_byic.png", `Camellia leads a cult that worships [???] and Rava just sort of showed up one day and never left.  And the absolute second Camellia saw how badly John uses what time powers he manages to cobble together in this timeless universe she was so entertained at his fail boi energy she kept him on as a sort of jester.  Rava, of course, is Twig's master. And John is exes with Sam and is currently dating Twig and this is Really Normal of him and he just thinks they're like, twins, but Twig ran away, maybe?  (they are not)`)
+const nam_secret = new Secrets(null, null, "images/john_andcamellia_andrava___gueststarringtwig_byic.png", `Camellia leads a cult that worships [???] and Rava just sort of showed up one day and never left.  And the absolute second Camellia saw how badly John uses what time powers he manages to cobble together in this timeless universe she was so entertained at his fail boi energy she kept him on as a sort of jester.  Rava, of course, is Twig's master. And John is exes with Sam and is currently dating Twig and this is Really Normal of him and he just thinks they're like, twins, but Twig ran away, maybe?  (they are not)`)
 
 const arg_secret_by_ic2 = new Secrets(null, null, null, `IC says: 
 During one of the many business management books I had to digest in college, I came across a concept that it called 'the First Follower'. If you've done any kind of business-related degree, you may know it as the Leadership Lessons from a Dancing Guy video. You can't miss it.
@@ -671,10 +704,10 @@ const rava_secret_by_ic = new Secrets(null, null, null, `
 `);
 
 
-const lost_secret = new Secrets(null,null,null,`lost media, at its core is "look what you missed, now obsess over its scraps knowing you will never truly have the full picture"<br><br>
+const lost_secret = new Secrets(null, null, null, `lost media, at its core is "look what you missed, now obsess over its scraps knowing you will never truly have the full picture"<br><br>
 zampanio is not an arg or a game or a story but a creepy pasta about lost media and the vibe if lost media, the vibe that no matter how hard you look youll ALWAYS be missing something and that you wont have the same experience as someone else in the fandom `)
 
-const space_secret = new Secrets(null,null, "images/wodin_and_todd.jpg", `
+const space_secret = new Secrets(null, null, "images/wodin_and_todd.jpg", `
 a space loop is much more dangerous than a time loop
 <br>
 a time loop circles in on itself, neatly tying off its past and future into one oroboros where ending and begining are one and the same
@@ -708,7 +741,7 @@ don't let anyone tell you that the echidna universe
 is caught in a time loop
 `);
 
-const todd_secret = new Secrets(null,null, "images/wodin_and_todd.jpg", `
+const todd_secret = new Secrets(null, null, "images/wodin_and_todd.jpg", `
 <p>wodin clearly was getting too used to todd doing all the labor in their friendship</p>
 <p>crush or not</p>
 <p>i think Todd&apos;s voidy ass would have eventually faded away</p>

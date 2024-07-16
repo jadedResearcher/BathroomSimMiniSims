@@ -110,8 +110,8 @@ class SlotsMiniGame extends MiniGame {
 
         let numberEnded = 0;
         //odds are REALLY bad if i let all the icons show up, so the zampanio way is to always leave you thinking theres more you could be seeing
-        const slotPositionsBak = ["slots-paperclip-a", "slots-paperclip-c", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-key-b"]; //you can win truth, facts or keys
-        const slotPositions = ["slots-paperclip-a"]; //debug, can win only truth
+        const slotPositions = ["slots-paperclip-a", "slots-paperclip-c", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-key-b"]; //you can win truth, facts or keys
+        //const slotPositions = ["slots-paperclip-a"]; //debug, can win only truth
 
         const slot1Choice = pickFrom(slotPositions);
         const slot2Choice = pickFrom(slotPositions);
