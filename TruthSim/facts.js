@@ -79,14 +79,46 @@ class Secrets {
   }
 }
 
+const all_facts = [];
+
+//all facts that aren't procedural can modify a mini game 
+//well, i suppose a procedural fact could COINCIDENTALLY modify a mini game (they respond to words in the title)
+//but thems the break, you're not intended to use them that way but i am not bothered if you do
+//but NEVILLE and RIA aren't going to realize you can
+//anyways, this has to happen once all mini games and all facts have been created so that we can 
+//figure out how they relate
+//fingers twisted it works, as a friend would say
+const processFacts = ()=>{
+
+  const minigames = Object.values(globalMiniGames);
+  console.log(`JR NOTE: processing ${all_facts.length} facts across ${minigames.length} games. btw there are ${all_secrets.length} secrets. Better hope there's not more secrets than facts!!!`)
+  for(let fact  of all_facts){
+    console.log("JR NOTE: processing fact: ", fact.title)
+    for(let game of minigames){
+      if(game.respondsToFact(fact)){
+        fact.changesAMiniGame = true;
+        console.log(`JR NOTE: Fact ${fact.title} modifies ${game.id}, who knew?`)
+        break;
+      }
+    }
+  } 
+}
+
+const getAllFactsWithThemeAndTier =(theme_key, tier)=>{
+  //level 1 is all facts of theme (theme_key_array on fact)
+  //level 2 is all facts of theme that control a mini game (changesAMiniGame on fact)
+  //level 3 is all facts of theme that have a Secret (secret on fact)
+}
+
 class Fact {
   title = "Firsty"; //should be unique
-  secrets;
+  secret;
   isIrrelevant = false; //its irrelevant if its random, helps neville know what to KILL
   lore_snippet = "This is the first fact, and JR created it on february 27th 2024."
   mini_game_key; //will only be set if its assigned to a type of room to modify (and then its not available for other rooms)
   theme_key_array = [TWISTING]; //most facts are associated with themes
   damage_multiplier = 10;
+  changesAMiniGame = false;
   defense_multipler = 0.5;
   speed_multipler = 0.5;
   is_viral = false; //might not do anythign with this but the plan is for facts to be able to spread in weird ways
@@ -99,6 +131,7 @@ class Fact {
     this.damage_multiplier = damage_multiplier;
     this.defense_multipler = defense_multipler;
     this.speed_multipler = speed_multipler;
+    all_facts.push(this);
   }
 }
 

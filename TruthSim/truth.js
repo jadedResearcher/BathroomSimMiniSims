@@ -87,6 +87,7 @@ window.onload = async () => {
   initThemes();
   await getRandos();
   initAllMiniGames();
+  processFacts(); //has to happen after mini games because it uses both
   load();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);

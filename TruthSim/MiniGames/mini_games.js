@@ -153,6 +153,11 @@ class MiniGame {
         window.alert("this should never be called, has a game forgotten how to start itself?")
     }
 
+    respondsToFact = (fact)=>{
+        console.error("JR NOTE: future jr, smdh, you were supposed to remember to have each new mini game override this with if they respond to the passed in fact or not")
+        return false;
+    }
+
     temporarilySetFact = () => {
         for (let fact of globalDataObject.factsUnlocked) {
             if (fact.mini_game_key === this.id) {
