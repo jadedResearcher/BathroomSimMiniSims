@@ -561,8 +561,65 @@ this feels good to me*/
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
 
+
+//john does not even notice that camellia complimented him for doing something "in his first try"
+//he would shit himself if he realized his boss could SEE all his redos
+/*re two time players: 
+IC: without what's around it the idea of the gem is empty
+it needs things to draw on
+
+JR: the center is not the center
+the center is empty
+it has to feed
+*/
+const time_secret_by_ic = new Secrets(null, null, null, `Two Time Players Discuss Time (which is Fake): 
+
+<br><br>
+<p>&quot;Okay, fine. I&apos;ll bite. What&apos;s time like, then?&quot;</p>
+<p><br></p>
+<p>John dangles a foot off the bed as he watches his boss. She&apos;s deep in some book about spirals, or something or other-- the scriptures for this month-- when she raises her eyes off of her book and onto him, annoyed.</p>
+<p><br></p>
+<p>&quot;Facets,&quot; she says, eyes going back to her read. &quot;Like a prism. There&apos;s many faces, but they all happen at once. Going from one to the other just changes the perspective.&quot;</p>
+<p><br></p>
+<p>&quot;Don&apos;t get it.&quot; He raises the gem to his eye as he toys with the flashlight nearby. Red, green, and red, and green. &quot;See? That changes the reflection too. Didn&apos;t have to move at all.&quot;&nbsp;</p>
+<p><br></p>
+<p>&quot;It doesn&apos;t matter. The eye is the observer. This world is the prism. What&apos;s in the prism is what the observer sees.&quot;</p>
+<p><br></p>
+<p>&quot;And what&apos;s outside the prism? This room, and you, and everything?&quot;</p>
+<p><br></p>
+<p>She acknowledges him for a second time in the conversation, her hands reaching for the gem in his hand. She twists the crystal in her hands. The edges sparkle. Red, green. Red.</p>
+<p><br></p>
+<p>&quot;It&apos;s what the prism captures,&quot; she settles on. &quot;It captures the light.&quot;</p>
+<p><br></p>
+<p>He huffs-- part indignation, and half resignation. &quot;That&apos;s just stupid and you know it.&quot;&nbsp;</p>
+<p><br></p>
+<p>&quot;Enlighten me, then, John.&quot; Her eyes spell something between disdain and murder. &quot;What&apos;s so &apos;stupid&apos; about it?&quot;</p>
+<p>John crosses his arms, leaning back on the bed. &quot;So the world is a prism, and you can stare at it, but also everything else outside the universe also exists. You time travel by switching what you&apos;re looking at, but...&quot;</p>
+<p><br></p>
+<p>&quot;But?&quot;</p>
+<p><br></p>
+<p>&quot;You&apos;re not looking at anything! It&apos;s a prism, prisms are clear, they&apos;re just showing whatever&apos;s around it.&quot; He tosses the crystal against the wall, shattering it. Its crystal pieces split into three, all of them shining that same red and green. &quot;And now there&apos;s three prisms. That&apos;s three things to look at, and you can only look at one.&quot;</p>
+<p><br></p>
+<p>Camellia sighs and puts her book down on her lap. &quot;Get to the point.&quot;</p>
+<p><br></p>
+<p>&quot;So it&apos;s not even looking through time.&quot; He throws his hands behind his head. &quot;There&apos;s no order to when you look at the faces, you&apos;re just moving to whatever is hitting the light in the right spot. And if no one&apos;s looking at it, or if you put it in a dark place, then there&apos;s nothing to look at.&quot;</p>
+<p><br></p>
+<p>There&apos;s a shine to the eye she lets him see as she looks at him. For a moment he feels a chill up his spine, enough to make him want to roll the conversation back. But it&apos;s a new feeling. He swears that, for the first time he&apos;s noticed, she&apos;s...</p>
+<p><br></p>
+<p>For all this time, she&apos;s only stared in his direction. It feels ike she&apos;s actually *looking* at him.</p>
+<p><br></p>
+<p>&quot;Said it in your first try,&quot; she hums. It&apos;s something that may even be approval. &quot;Maybe there&apos;s hope for you.&quot;</p>
+<p><br></p>
+<p>&quot;You&apos;re not even answering my question.&quot;</p>
+<p><br></p>
+<p>&quot;You&apos;ll figure it out in time.&quot;</p>
+<p><br></p>
+<p>He sighs, defeated and not, as he leaves her to her reading. He only hears the click of the lightswitch behind him, and the room goes dark.</p>
+
+`);
+
 const watcher_secret = new Secrets(null, null, null, `
-The Archiving Watcher of Threads says this:
+The Archiving Watcher of Threads (https://lostinzampanio.neocities.org/) says this:
 <br>
 <p>The core of Zampanio... It&apos;s an interesting question. It has no core by definition. It&apos;s a spiral without a center. It&apos;s whatever you want it to be. Zampanio is something you deeply desire, something you obsess over, even far after it would be reasonable. What&apos;s at the core of the House of Leaves? I think JR wrote it somewhere. There is no House, no film, no manuscript, only you. Your own desire to find the bottom of the whole mess, the feeling that you will understand everything if you stay long enough. But you wont, because it&apos;s the feeling itself that causes it, it&apos;s the ouroboros. You try to make sense of a maze by creating your own, and other people start to get lost in that one too.</p>
 <p><br></p>
