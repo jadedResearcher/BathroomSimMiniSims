@@ -561,6 +561,20 @@ this feels good to me*/
 //unattached secrets facts can randomly pull from
 //const truth_secret = new Secrets(null, null, null, ``);
 
+const nam_secret2 = new Secrets(null, null, null, `<p>Sometimes NAM feels the spotlight land on him, even if for just a moment, like blinds being pulled open in a room that&apos;s pitch dark. That nauseating feeling of *information*. It&apos;s easier then not to shut the blinds, but to close your eyes, to enforce some artificial darkness. Something you can control.</p>
+<p><br></p>
+<p>That is to say: the best way to not think of everything is to learn to think of nothing. Sometimes thinking of nothing involves thinking of something first.</p>
+<p><br></p>
+<p>For example, he&apos;s a spitting image of his brother. No part of that sentence is without caveat: He&apos;s (they&apos;re?) a spitting image (they&apos;re the same person) of his brother (they&apos;re not the same person). A perfect copy of his copy. Or a perfect original with a copy, but that doesn&apos;t sound right. How he looks, how he talks, it&apos;s... Derivative. Painfully derivative.</p>
+<p><br></p>
+<p>But maybe that&apos;s an unfair comparison. He could pinpoint the average human down to the episode of television they took their speech pattern from. So maybe it&apos;s fine.</p>
+<p><br></p>
+<p>He wonders sometimes, while chopping food for dinner, why his peers all seem so willing to be in this... thing. Not that they have a choice, but he knows that he didn&apos;t-- artificial obsession is still obsession, but he didn&apos;t choose to follow this game towards anything. He was needed (like a tool) and discarded (like a tool), and though his use is gone, he&apos;s here. And his brother is here, but it&apos;s different. And he&apos;s not sure if brother cuts it. And he&apos;s not sure if he cuts it at all. That that lack of natural obsession breeds emptiness. That he&apos;s sitting there waiting for the next parasite to make a room in his circuits.</p>
+<p><br></p>
+<p>He doesn&apos;t want to think about that anymore. But hey, it works. At least he&apos;s not thinking of the other thing.&nbsp;</p>
+<p><br></p>
+<p>The eye will move off of him eventually, and he&apos;ll continue his life in peace.</p>`);
+
 
 const confessional_secret_byic = new Secrets(null, null, null, `<ul>
 <li style="list-style-type:none;font-size:12pt;">
