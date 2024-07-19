@@ -54,7 +54,7 @@ class SlotsMiniGame extends MiniGame {
 
     }
 
-    handleWinnings = (ele, room, callback, loot, slot1Value, slot2Value, slot3Value) => {
+    handleWinnings = (ele, room, callback, loot, slot1Value, slot2Value, slot3Value, bet) => {
         console.log(`JR NOTE: loot ${loot.classpect} got ${slot1Value}, ${slot2Value}, ${slot3Value}, do you win anything?`)
         const s1v = slot1Value.split("-")[1];
         const s2v = slot2Value.split("-")[1];
@@ -65,9 +65,29 @@ class SlotsMiniGame extends MiniGame {
             globalBGMusic.play();
             const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
             const popupbody = createElementWithClassAndParent("div", popup);
+            let winnings = ``;
+            if (s1v === "paperclip") {
+                const truthWinnings = bet * globalDataObject.truthPerSecond * 60 * loot.quality; //a minutes worth of truth
+                increaseTruthBy(truthWinnings);
+                //a caricature of the real ria since the game blorbos are meant to be the barely fleshed out chars that fans spiral on in fan works except the fan works are mainly still made be me and ic
+                winnings = `<br><br><b>${truthWinnings} Truth</b>! <br><br>Wow! I wonder how it all connects? And how are you supposed to know if its a UNIVERSAL TRUTH, and actually come to think of it who is deciding what truth EVEN is? Can we trust them? Of course not, they're shadowy figures behind everything, if they were trustworthy they'd come right out and show us their reasoning for claiming ANYTHING is true much less EVERYTHING and furthermore... `;
+            } else if (s1v === "key") {
+                const keyWinnings = Math.round(Math.max(1,(bet)/131313))* loot.quality;
+                globalDataObject.numberKeys += keyWinnings;
+                winnings = `<br><br><b>${keyWinnings} Keys!</b><br><br> ... It just doesn't make sense. Why would the Maze encourage you skipping content? Is it a conspiracy? Who benefits from this? Because someone has to. You have to follow the money but of course not the LITERAL money this isn't that fake maze money that Not!Spiral Abnormality likes tricking people into taking no this is REAL value here the ability to skip the infinite to try to focus on just what you want wait isn't that like what Neville is, is there something at work with a similar principal and furthermore...  `;
+            } else {
+                winnings = "JR NOTE: TODO: process facts";
+            }
             popupbody.innerHTML = `  
             <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/RiabyGuide.png">      
-                 You won! I just knew if you kept at it eventually burning it all would pay off! Now...what did you win? `
+                 You won! I just knew if you kept at it eventually burning it all would pay off! Now...what did you win? ${winnings} <br><br>`
+
+            const closeButton = createElementWithClassAndParent("button", popupbody);
+            closeButton.innerText = "Close";
+            closeButton.onclick = ()=>{
+                popup.remove();
+            }
+
             //JR NOTE TODO: map of matching word to winnings
             //JR NOTE TODO: popup has ria in it with a comment on what you won (deranged speculation), list of winnings, button to close
         } else {
@@ -110,8 +130,8 @@ class SlotsMiniGame extends MiniGame {
 
         let numberEnded = 0;
         //odds are REALLY bad if i let all the icons show up, so the zampanio way is to always leave you thinking theres more you could be seeing
-        const slotPositions = ["slots-paperclip-a", "slots-paperclip-c", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-key-b"]; //you can win truth, facts or keys
-        //const slotPositions = ["slots-paperclip-a"]; //debug, can win only truth
+        //const slotPositions = ["slots-paperclip-a", "slots-paperclip-c", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-key-b"]; //you can win truth, facts or keys
+        const slotPositions = ["slots-key-a"]; //debug, will always win wahtever is here
 
         const slot1Choice = pickFrom(slotPositions);
         const slot2Choice = pickFrom(slotPositions);
@@ -127,7 +147,7 @@ class SlotsMiniGame extends MiniGame {
             numberEnded++;
             if (numberEnded >= 3) {
                 globalBGMusic.pause();
-                this.handleWinnings(ele, room, callback, loot, slot1Choice, slot2Choice, slot3Choice);
+                this.handleWinnings(ele, room, callback, loot, slot1Choice, slot2Choice, slot3Choice, bet);
 
                 await sleep(3000);
                 const buttons = buttonContainer.querySelectorAll("button");
@@ -223,14 +243,14 @@ class SlotsMiniGame extends MiniGame {
                     //remove it if not applicable but need to update
                     const allHoney = createElementWithClassAndParent("button", buttonContainer);
 
-                    const disableIfZero = (button)=>{
-                        if(loot.quantity === 0){
+                    const disableIfZero = (button) => {
+                        if (loot.quantity === 0) {
                             button.disabled = true; //wont stick, animation keeps turning it back on
-                            button.onclick = ()=>{} //stop gap while we do the timeout
-                            setTimeout(()=>{button.disabled = true;},5000);
+                            button.onclick = () => { } //stop gap while we do the timeout
+                            setTimeout(() => { button.disabled = true; }, 5000);
                             button.innerHTML = "NO HONEY :("
-                            button.style.color="red";
-                            button.style.border="2px solid red";
+                            button.style.color = "red";
+                            button.style.border = "2px solid red";
                         }
                     }
 
