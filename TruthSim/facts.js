@@ -104,6 +104,29 @@ const processFacts = ()=>{
   } 
 }
 
+const pleaseABHelpMeFindMissingFacts = ()=>{
+  let all_themes_keys = Object.keys(all_themes)
+  for(let theme of all_themes_keys){
+    const facts = getAllFactsWithTheme(theme);
+    console.log(`AB NOTE: It seems that there are ${facts.length} facts about ${theme}.`);
+    if(facts.length === 0){
+      console.error(`AB NOTE: ERROR ${theme} has no facts. It seems, JR, that you need to get to work.`);
+    }
+  }
+}
+
+//if this is slow, store the facts on the theme object after the first time
+const getAllFactsWithTheme = (theme_key)=>{
+  console.log("JR NOTE: don't forget to call pleaseABHelpMeFindMissingFacts to make sure theres no themes with no facts")
+  const ret = [];
+  for(let fact of all_facts){
+    if(fact.theme_key_array.includes(theme_key)){
+      ret.push(fact);
+    }
+  }
+  return ret;
+}
+
 const getAllFactsWithThemeAndTier =(theme_key, tier)=>{
   //level 1 is all facts of theme (theme_key_array on fact)
   //level 2 is all facts of theme that control a mini game (changesAMiniGame on fact)
