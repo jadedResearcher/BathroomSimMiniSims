@@ -88,49 +88,87 @@ const all_facts = [];
 //anyways, this has to happen once all mini games and all facts have been created so that we can 
 //figure out how they relate
 //fingers twisted it works, as a friend would say
-const processFacts = ()=>{
+const processFacts = () => {
 
   const minigames = Object.values(globalMiniGames);
   console.log(`JR NOTE: processing ${all_facts.length} facts across ${minigames.length} games. btw there are ${all_secrets.length} secrets. Better hope there's not more secrets than facts!!!`)
-  for(let fact  of all_facts){
+  for (let fact of all_facts) {
     console.log("JR NOTE: processing fact: ", fact.title)
-    for(let game of minigames){
-      if(game.respondsToFact(fact)){
+    for (let game of minigames) {
+      if (game.respondsToFact(fact)) {
         fact.changesAMiniGame = true;
         console.log(`JR NOTE: Fact ${fact.title} modifies ${game.id}, who knew?`)
         break;
       }
     }
-  } 
+  }
 }
 
-const pleaseABHelpMeFindMissingFacts = ()=>{
+const pleaseABHelpMeFindMissingFacts = () => {
   let all_themes_keys = Object.keys(all_themes)
-  for(let theme of all_themes_keys){
-    const facts = getAllFactsWithTheme(theme);
-    console.log(`AB NOTE: It seems that there are ${facts.length} facts about ${theme}.`);
-    if(facts.length === 0){
+  for (let theme of all_themes_keys) {
+    const facts1 = getAllFactsWithThemeAndTier(theme,1);
+    const facts2 = getAllFactsWithThemeAndTier(theme,2);
+    const facts3 = getAllFactsWithThemeAndTier(theme,3);
+
+    const totalFactCount = facts1.length + facts2.length + facts3.length;
+
+    console.log(`AB NOTE: It seems that there are ${totalFactCount} facts about ${theme}. ${facts1.length} are Tier1. ${facts2.length} are Tier2. ${facts3.length} are Tier3.`);
+    if (totalFactCount === 0) {
       console.error(`AB NOTE: ERROR ${theme} has no facts. It seems, JR, that you need to get to work.`);
+    }
+
+    if (facts1.length === 0) {
+      console.error(`AB NOTE: ERROR ${theme} has no Tier1 Facts. It seems, JR, that you need to get to work.`);
+    }
+
+    if (facts2.length === 0) {
+      console.error(`AB NOTE: ERROR ${theme} has no Tier2 Facts. It seems, JR, that you need to get to work.`);
+    }
+
+    if (facts3.length === 0) {
+      console.error(`AB NOTE: ERROR ${theme} has no Tier3 Facts. It seems, JR, that you need to get to work.`);
     }
   }
 }
 
 //if this is slow, store the facts on the theme object after the first time
-const getAllFactsWithTheme = (theme_key)=>{
+const getAllFactsWithTheme = (theme_key) => {
   console.log("JR NOTE: don't forget to call pleaseABHelpMeFindMissingFacts to make sure theres no themes with no facts")
   const ret = [];
-  for(let fact of all_facts){
-    if(fact.theme_key_array.includes(theme_key)){
+  for (let fact of all_facts) {
+    if (fact.theme_key_array.includes(theme_key)) {
       ret.push(fact);
     }
   }
   return ret;
 }
 
-const getAllFactsWithThemeAndTier =(theme_key, tier)=>{
-  //level 1 is all facts of theme (theme_key_array on fact)
-  //level 2 is all facts of theme that control a mini game (changesAMiniGame on fact)
-  //level 3 is all facts of theme that have a Secret (secret on fact)
+const getAllFactsWithThemeAndTier = (theme_key, tier) => {
+  console.log("JR NOTE: don't forget to call pleaseABHelpMeFindMissingFacts to make sure theres no themes with no facts")
+
+  //sure could call getAllFactsWithTheme but why loop to get the facts then loop again to get the tiers
+  const ret = [];
+  for (let fact of all_facts) {
+    if (fact.theme_key_array.includes(theme_key)) {
+      if (tier === 1) {
+        //level 1 is all facts of theme (theme_key_array on fact)
+        ret.push(fact);
+      } else if (tier === 2) {
+        //level 2 is all facts of theme that control a mini game (changesAMiniGame on fact)
+        if (fact.changesAMiniGame) {
+          ret.push(fact);
+        }
+      } else if (tier === 3) {
+        //level 3 is all facts of theme that have a Secret (secret on fact)
+
+        if (fact.secret) {
+          ret.push(fact);
+        }
+      }
+    }
+  }
+  return ret;
 }
 
 class Fact {
@@ -178,6 +216,9 @@ class Fact {
 console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROOM IS IMPLEMENTED, PARSE NEW LINES AS BR")
 //title should be unique
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
+
+
+const CLOWNFACT = new Fact("Zampanio Thinks Hunting Is For Clowns", "Back when I first wrote what became ZampanioSimNorth I had a really fun glitch where hunt aligned players were just not working right. I discovered that for some reason it was overriding the values for HUNTING with CLOWNS.  So that sort of became a meme that keeps going.  I used to call the Eye Killer 'Hunt Chick' and she IS just a funny lil guy. I'll leave it as an excercise to the Observer how much clowning Devona and Neville get up to.", [CLOWNS, HUNTING], 1, 2, 1);
 
 //http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Flower&data=N4IgdghgtgpiBcIAqALGACAYgGwPYHcYAnEAGhABMYBnASwHNIAXW3MBEAGQFoBVbgAwCALGRBFa1ANYcAgpwCiABQASYpmljUOAcVkBZAJIA5HaXQBGCwGZzmTgHkASrPMXzAdVkBlJArc25k4Kvi4mSObW7ugKABpIJgDCCQ7G5gBM6XYuyfLe5gCsdiayxon+loHoAEKODgAiAdZi1EwQTNqIcX5OxvKk1raG+kqyCQrGEQVFwfKGvoaJpFa2ibxOhg68+cLCpI4Amv2ZpBMKTjoKCUsrpDrGDt7zpAAcBWIwAB4QAMZM2ABPAD6GiIMBgINoAAdOlw+IIRGJaGBWsi-hxErgoFA2OZMdjceh8TiwHisSSyQT2ORkXR6CgmBjyYTiSzmaSiezKSSxO02j8ULAwIzEKyOWLuWyqZLqeIYFCwdQ6GwmdLOWqJeqKVqVeRWhAAEa0bC0JjA7AwABuMGwHAsYjBFCBVAAZjAUXBEAIAHTvcj4FCmiGu93UT0gH1+kAG7C-KTOmBuj0cSNiKEQC0JpNhu3egRIqD0IHUIg-DgMphQ+AAemrLogRCIEHouBdtD+rDA3p+WOrAC1oOmwKwVLh-sipHW8IQiN6oWB6C0mLgiMCqG1jbDvGh0BRcOgDRgobGAcj0JaARRWPRoDRvepofbEDx+EJhAByajobxtI0ms2cgArsKxC7rgNDoGAY67jAPxghAYYHgC6DIkwxC-CwbDoPgpooOg1CAQaABWsEdPe5AsFC6RyC6aFEOgY5oPREBQVAGa0BBKAQBQB7wQKMA8S6K7oBA6D0E2YA8cubTYAxLroG8u4QAC1DmC+CLCLxMC-GgPE9sKEDIkKTDkSAlHNIgsi0aB6lvugNA-BAUI0OYdFQMi7SdnJInYLJjGgSxWLsRBh49lo6DAW6CG0DGMDelggFEBoxA4mCrloLQ9H6n+prIRa1rYF+VBwdpYY8RQTaoo5vkAveAC+QA
 const APOCALYPSEFACT = new Fact("The CFO of Eyedol Games Will End The World", "She doesn't mean to. You can see it in her eye. You can see it in the way she tries so dillgently to avoid hurting anyone, even her auditors. But the fact of the matter is she was born to end a world and her fate is not too picky about which. If Wanda moves on for any reason, she blossoms. But... she also doesn't. She's worked so hard at self control. Know restraint, that's the Waste's mantra right? She has seen how fragile this simulated reality really is and she would NEVER do something to risk it. Except. Well. Except for that one time. She was young. And impulsive.  And Nidhogg brought its poisoned candy (https://archiveofourown.org/works/35438083/chapters/91817125#workskin) into the Universe and everone partook. How could she possibly restrain herself while Trickster? All candy colored and frentic. She hacked herself to make it forever. The party never stops. Then she hacked everything else too. Even the rules that say that once Wanda leaves a place everyone she Knows about is dragged along with her. Apocalypse Chick spreads and spreads and spreads like a weed in Wanda's wake. Never able to leave the destroyed remnants of Arm1, but perfectly able to stabelize it enough to turn it into a second arm. Arm2. She can't reach Arm 3, the Mundane arm. Or the fourth. The God arm. Or the fifth, the Faerie Arm or the sixth or seventh or however many pointless irrelevant arms of this Universe the Witness has spiralled out in his grief for his lost friend. But she's having fun. Just ask her yourself.  https://eyedolgames.com/East ", [APOCALYPSE], 13, 13, 3);
