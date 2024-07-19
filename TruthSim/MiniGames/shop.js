@@ -55,11 +55,9 @@ class SlotsMiniGame extends MiniGame {
     }
 
     handleWinnings = (ele, room, callback, loot, slot1Value, slot2Value, slot3Value, bet) => {
-        console.log(`JR NOTE: loot ${loot.classpect} got ${slot1Value}, ${slot2Value}, ${slot3Value}, do you win anything?`)
         const s1v = slot1Value.split("-")[1];
         const s2v = slot2Value.split("-")[1];
         const s3v = slot3Value.split("-")[1];
-        console.log("JR NOTE: ", { s1v, s2v, s3v, won: s1v == s2v && s2v == s3v })
         if (s1v == s2v && s2v == s3v) {
             globalBGMusic.src = "audio/music/icbattlemusic.mp3"
             globalBGMusic.play();
@@ -72,11 +70,34 @@ class SlotsMiniGame extends MiniGame {
                 //a caricature of the real ria since the game blorbos are meant to be the barely fleshed out chars that fans spiral on in fan works except the fan works are mainly still made be me and ic
                 winnings = `<br><br><b>${truthWinnings} Truth</b>! <br><br>Wow! I wonder how it all connects? And how are you supposed to know if its a UNIVERSAL TRUTH, and actually come to think of it who is deciding what truth EVEN is? Can we trust them? Of course not, they're shadowy figures behind everything, if they were trustworthy they'd come right out and show us their reasoning for claiming ANYTHING is true much less EVERYTHING and furthermore... `;
             } else if (s1v === "key") {
-                const keyWinnings = Math.round(Math.max(1,(bet)/131313))* loot.quality;
+                const keyWinnings = Math.round(Math.max(1, (bet) / 131313)) * loot.quality;
                 globalDataObject.numberKeys += keyWinnings;
                 winnings = `<br><br><b>${keyWinnings} Keys!</b><br><br> ... It just doesn't make sense. Why would the Maze encourage you skipping content? Is it a conspiracy? Who benefits from this? Because someone has to. You have to follow the money but of course not the LITERAL money this isn't that fake maze money that Not!Spiral Abnormality likes tricking people into taking no this is REAL value here the ability to skip the infinite to try to focus on just what you want wait isn't that like what Neville is, is there something at work with a similar principal and furthermore...  `;
             } else {
-                winnings = "JR NOTE: TODO: process facts";
+                const facts = getAllFactsWithThemeAndTier(pickFrom([loot.theme1Key, loot.theme2Key].filter(Boolean)), loot.quality); //get rid of undefined, pick one of the themes randomly
+                let chosenFacts = [];
+                const numberWinnings = Math.min(13, Math.round(Math.max(1, (bet) / 1313)));
+
+                if (facts.length > 0) {
+                    for (let i = 0; i < numberWinnings; i++) {
+                        chosenFacts.push(pickFrom(facts));
+                    }
+                }
+
+                chosenFacts = uniq(chosenFacts).filter(Boolean);
+
+
+                if (chosenFacts.length > 0) {
+                    for (let fact of chosenFacts) {
+                        globalDataObject.factsUnlocked.push(fact);
+
+                    }
+                    console.log("JR NOTE: chosen facts is", chosenFacts)
+                    winnings = `<br><br><b>the fact that: ${chosenFacts.map((o)=>o.title).join(" and ")} </b><br><br> ... But can you really trust that? Who SAYS that. It doens't say does it and if it doesn't say it could be ANYONE why would you just assume its someone trustworthy why am i the weird one for asking these sorts of questions its just obvious you cant trust random facts you find on the internet right?????`
+                } else {
+                    winnings = "Wait. What? Nothing? No. No! You were....you were supposed to get a fact. How. How is that fair? This rotten world can only be clensed in fire. Please. Let me do it. The Universe wasn't meant to be this way :(";
+
+                }
             }
             popupbody.innerHTML = `  
             <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/RiabyGuide.png">      
@@ -84,7 +105,7 @@ class SlotsMiniGame extends MiniGame {
 
             const closeButton = createElementWithClassAndParent("button", popupbody);
             closeButton.innerText = "Close";
-            closeButton.onclick = ()=>{
+            closeButton.onclick = () => {
                 popup.remove();
             }
 
@@ -130,8 +151,8 @@ class SlotsMiniGame extends MiniGame {
 
         let numberEnded = 0;
         //odds are REALLY bad if i let all the icons show up, so the zampanio way is to always leave you thinking theres more you could be seeing
-        //const slotPositions = ["slots-paperclip-a", "slots-paperclip-c", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-key-b"]; //you can win truth, facts or keys
-        const slotPositions = ["slots-key-a"]; //debug, will always win wahtever is here
+        const slotPositions = ["slots-paperclip-a", "slots-paperclip-c", "slots-heart-c", "slots-heart-b", "slots-heart-a", "slots-key-b"]; //you can win truth, facts or keys
+        //const slotPositions = ["slots-heart-a"]; //debug, will always win wahtever is here
 
         const slot1Choice = pickFrom(slotPositions);
         const slot2Choice = pickFrom(slotPositions);
