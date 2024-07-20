@@ -335,6 +335,15 @@ class LockMiniGame extends MiniGame {
         //there kinda isn't a game
     }
 
+    respondsToFact = (fact)=>{
+        console.error("JR NOTE: future jr, i think it would be hilarous for this to mutate in response to a fact, but into what? maybe wibbys confessional tbh, unlock ppls hearts")
+        return false;
+    }
+
+    
+
+
+
     render = (ele, room, callback) => {
         //there is no way to beat this one without a key
         this.initializeRender(ele);
@@ -353,6 +362,10 @@ class EyeKillerMiniGame extends MiniGame {
     tint = 0;
     constructor() {
         super(EYEKILLERMINIGAME);
+    }
+
+    respondsToFact = (fact)=>{
+        return fact.title.includes("Quatro Blade");
     }
 
     startGame = (ele, room, callback) => {
@@ -384,10 +397,8 @@ class EyeKillerMiniGame extends MiniGame {
             cultist_container.style.left = `${left}%`;
             const duration = distance(0, 0, top, left) / 5 / speed;
             cultist_container.style.animationDuration = `${duration}s`
-            console.log("JR NOTE: cultists constantly move towards upper left, if they reach 0,0, alert that you lost and render the maze tab without the callback (you did not win)")
 
             cultist_container.onanimationend = async () => {
-                console.log("JR NOTE: cultist animation ended but did they get ya?", blorbo)
                 if (intersects(cultist_container, blorbo)) {
                     if (!dead) {
                         dead = true;
@@ -518,6 +529,10 @@ class ParkerMiniGame extends MiniGame {
         return false;
     }
 
+    respondsToFact = (fact)=>{
+        return fact.title.toUpperCase().includes("BESTIE");
+    }
+
     startGame = async (ele, room, callback) => {
         globalBGMusic.src = "audio/music/i_think_its_finished_priska_turbo_time.mp3";
         globalBGMusic.play();
@@ -587,7 +602,6 @@ class ParkerMiniGame extends MiniGame {
                 callback(globalDataObject.currentMaze);
                 renderMazeTab();
             }
-            console.log("JR NOTE: TODO pick a random blorbo (unless you hovered over them) and kill them (even if it wasn't time)");
 
         }
         var rect = ele.getBoundingClientRect();
@@ -679,6 +693,10 @@ class BettingMiniGame extends MiniGame {
         super(HOONMINIGAME);
     }
 
+    respondsToFact = (fact)=>{
+        return fact.title.toUpperCase().includes("LUCK");
+    }
+
     startGame = (ele, room, callback) => {
         //console.log("JR NOTE: turn off cheat")
         //this.fact = KISALUCKYBASTARD;
@@ -761,7 +779,7 @@ class BettingMiniGame extends MiniGame {
             }
 
             const youLose = async () => {
-                if (this.fact && this.fact.title.toLowerCase().includes("luck")) {
+                if (this.fact && this.fact.title.toLowerCase().includes("LUCK")) {
                     return youWin();
                 }
                 const sassOptions = ["Nothin' personal, kid.", "Them's the breaks. ", "It happens.", "Sucks to be you.", "Better luck next time, kid.", "Luck of the draw's rough.", "Fate's a bitch like that, yeah.", "We all gotta pack up our bags sometime."]
@@ -904,7 +922,7 @@ class BettingMiniGame extends MiniGame {
     render = (ele, room, callback) => {
         this.initializeRender(ele);
         let bonus = "";
-        if (this.fact && this.fact.title.includes("luck")) {
+        if (this.fact && this.fact.title.toUpperCase().includes("LUCK")) {
             bonus = " When You Are Blatantly Cheating"//of course, hoon will never know for SURE you're cheating, so she assumes if you're doing too well you are
         }
         const container = this.setupGameHeader(ele, room, callback, "How Much Are You Willing To Risk" + bonus, "(but be careful, obsession is a dangerous thing)", "images/Hoon_by_guide.png")
@@ -920,6 +938,10 @@ IF YOU DON'T KNOW ANY PASSWORDS YOU CAN'T MOVE FORWARD
 class RabbitMiniGame extends MiniGame {
     constructor() {
         super(RABBITMINIGAME);
+    }
+
+    respondsToFact = (fact)=>{
+        console.log("JR NOTE: i don't think i actually have the rabbit mini game wired up, replaced it with secrets")
     }
 
     startGame = (ele, room, callback) => {
@@ -957,6 +979,11 @@ CLICK ENOUGH TIMES AND YOU WIN, SUPER SIMPLE (DISTACTION)
 class ButtonMiniGame extends MiniGame {
     constructor() {
         super(BUTTONMINIGAME);
+    }
+
+    respondsToFact = (fact)=>{
+        console.log("JR NOTE: could do a more general version of AmazonWareHouse sim (pending) here")
+        return false;
     }
 
     startGame = (ele, room, callback) => {

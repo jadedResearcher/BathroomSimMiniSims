@@ -105,7 +105,10 @@ const processFacts = () => {
 }
 
 const pleaseABHelpMeFindMissingFacts = () => {
-  let all_themes_keys = Object.keys(all_themes)
+  let all_themes_keys = Object.keys(all_themes);
+  let numberTier1 = 0;
+  let numberTier2 = 0;
+  let numberTier3 = 0;
   for (let theme of all_themes_keys) {
     const facts1 = getAllFactsWithThemeAndTier(theme,1);
     const facts2 = getAllFactsWithThemeAndTier(theme,2);
@@ -120,16 +123,23 @@ const pleaseABHelpMeFindMissingFacts = () => {
 
     if (facts1.length === 0) {
       console.error(`AB NOTE: ERROR ${theme} has no Tier1 Facts. It seems, JR, that you need to get to work.`);
+    }else{
+      numberTier1++;
     }
 
     if (facts2.length === 0) {
       console.error(`AB NOTE: ERROR ${theme} has no Tier2 Facts. It seems, JR, that you need to get to work.`);
+    }else{
+      numberTier2++;
     }
 
     if (facts3.length === 0) {
       console.error(`AB NOTE: ERROR ${theme} has no Tier3 Facts. It seems, JR, that you need to get to work.`);
+    }else{
+      numberTier3++;
     }
   }
+  console.log(`AB NOTE: It seems there are ${numberTier1} Tier 1 Facts (which is to say, total facts), ${numberTier2} Tier 2 Facts and ${numberTier3} Tier 3 Facts`)
 }
 
 //if this is slow, store the facts on the theme object after the first time
@@ -218,6 +228,10 @@ console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROO
 //title should be unique
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
 
+/*
+if having trouble thinking of a fact, link to another part of zampaniosim, including my puzzlebox
+or in extreme cases other peoples branches (tho cant control if we rot at different rates)
+*/
 
 const CLOWNFACT = new Fact("Zampanio Thinks Hunting Is For Clowns", "Back when I first wrote what became ZampanioSimNorth I had a really fun glitch where hunt aligned players were just not working right. I discovered that for some reason it was overriding the values for HUNTING with CLOWNS.  So that sort of became a meme that keeps going.  I used to call the Eye Killer 'Hunt Chick' and she IS just a funny lil guy. I'll leave it as an excercise to the Observer how much clowning Devona and Neville get up to.", [CLOWNS, HUNTING], 1, 2, 1);
 const CLOWNFACT2 = new Fact("Zampanio Thinks Clowery Is For Predators and Prey", "In Clown Diary Sim, Yongki finds the notebook from Parker (who tried to get a notebook with Gun-Tan on it but zampanio immediately replaced it with a clown). But also Yongki (the writer of ClownDiarySim) is a Stranger, which has strong Clown associations.", [CLOWNS, HUNTING, CHOICES], 1, 2, 1);
