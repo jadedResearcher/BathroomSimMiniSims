@@ -107,6 +107,12 @@ class TwinsMiniGame extends MiniGame {
         return myPromise;
     }
 
+
+    respondsToFact = (fact)=>{
+        console.log("JR NOTE: twins should respond to a fact involving one of them dying by breaching")
+        return false;
+    }
+
     startGame = (ele, room, callback) => {
         ele.innerHTML = "";
         if (this.fact) {

@@ -47,6 +47,10 @@ class MazeMiniGame extends MiniGame {
         super(MAZEMINIGAME);
     }
 
+    respondsToFact = (fact)=>{
+        return false; //alt is not a traditional room in this maze
+    }
+
     /*
     the kind of reward alt would PREFER to give out is not appropriate for this setting
     */
