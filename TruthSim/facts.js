@@ -106,6 +106,9 @@ const processFacts = () => {
 
 const pleaseABHelpMeFindMissingFacts = () => {
   let all_themes_keys = Object.keys(all_themes);
+
+  let resultsTable = {};
+
   let numberTier1 = 0;
   let numberTier2 = 0;
   let numberTier3 = 0;
@@ -113,6 +116,7 @@ const pleaseABHelpMeFindMissingFacts = () => {
     const facts1 = getAllFactsWithThemeAndTier(theme,1);
     const facts2 = getAllFactsWithThemeAndTier(theme,2);
     const facts3 = getAllFactsWithThemeAndTier(theme,3);
+    resultsTable[theme] = {tier1: facts1.length, tier2: facts2.length, tier3: facts3.length}
 
     const totalFactCount = facts1.length + facts2.length + facts3.length;
 
@@ -139,6 +143,10 @@ const pleaseABHelpMeFindMissingFacts = () => {
       numberTier3++;
     }
   }
+
+  //i had literally never heard of this command till i went to (of all things) a java proffesional converence
+  //and i almost never get to use it
+  console.table(resultsTable);
   console.log(`AB NOTE: It seems there are ${numberTier1} Tier 1 Facts (which is to say, total facts), ${numberTier2} Tier 2 Facts and ${numberTier3} Tier 3 Facts`)
 }
 

@@ -215,7 +215,7 @@ class SlotsMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact)=>{
-        console.error("JR NOTE: ria should respond to facts with BURN, FIRE or HOPELESS in them and replace all the slot machiens with a big button that says 'burn it all', maybe responod to LEEHUNTER facts with a lil musical interlude?")
+        console.log("JR NOTE: ria should respond to facts with BURN, FIRE or HOPELESS in them and replace all the slot machiens with a big button that says 'burn it all', maybe responod to LEEHUNTER facts with a lil musical interlude?")
         return false;
     }
 
@@ -535,7 +535,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact)=>{
-        console.error("JR NOTE: flower chick reacts to APOCALYPSE or CHEAT or TRICKSTER facts and  should unlock your save editing (rather than it being on the save tab)")
+        console.log("JR NOTE: flower chick reacts to APOCALYPSE or CHEAT or TRICKSTER facts and  should unlock your save editing (rather than it being on the save tab)")
         return false;
     }
 

@@ -336,7 +336,7 @@ class LockMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact)=>{
-        console.error("JR NOTE: future jr, i think it would be hilarous for this to mutate in response to a fact, but into what? maybe wibbys confessional tbh, unlock ppls hearts")
+        console.log("JR NOTE: future jr, i think it would be hilarous for this to mutate in response to a fact, but into what? maybe wibbys confessional tbh, unlock ppls hearts")
         return false;
     }
 
