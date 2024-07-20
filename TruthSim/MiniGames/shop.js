@@ -214,6 +214,11 @@ class SlotsMiniGame extends MiniGame {
         }
     }
 
+    respondsToFact = (fact)=>{
+        console.error("JR NOTE: ria should respond to facts with BURN, FIRE or HOPELESS in them and replace all the slot machiens with a big button that says 'burn it all', maybe responod to LEEHUNTER facts with a lil musical interlude?")
+        return false;
+    }
+
     startGame = (ele, room, callback) => {
         this.valuableCustomer(ele, callback);
 
@@ -305,10 +310,11 @@ class SlotsMiniGame extends MiniGame {
 
 
         }
+        console.log("JR NOTE: burn it all shouuldu only display if right fact")
         const burnItAll = createElementWithClassAndParent("button", container);
         burnItAll.innerHTML = `It's too much. I'll never understand it all. Let's just burn it all at once and be done with it.`;
         burnItAll.onclick = () => {
-            alert("TODO")
+            alert("TODO: this button sholuud only display if right fact, dont forget")
         }
     }
 
@@ -526,6 +532,11 @@ class GamerPointsStoreMiniGame extends MiniGame {
         }
         this.valuableCustomer(div, callback);
 
+    }
+
+    respondsToFact = (fact)=>{
+        console.error("JR NOTE: flower chick reacts to APOCALYPSE or CHEAT or TRICKSTER facts and  should unlock your save editing (rather than it being on the save tab)")
+        return false;
     }
 
     startGame = (ele, room, callback) => {
@@ -781,6 +792,20 @@ class ShopMiniGame extends MiniGame {
 
     }
 
+    respondsToFact = (fact)=>{
+        if(this.fact && (this.fact.title.includes("The Closer Eats Babies") || this.fact.title.includes("The Closer Is Addicted To Fruit"))){
+            return true;
+        }
+
+        if(fact.title.includes("The Closer Provides You With Best Value ROOMS")){
+            return true;
+        }
+
+        if(fact.title.includes("The Closer Provides You With Best Value KEYS")){
+            return true;
+        }
+        return false;
+    }
 
     startGame = (ele, room, callback) => {
         globalBGMusic.src = "http://farragofiction.com/CatalystsBathroomSim/seeking_help.mp3";
@@ -833,7 +858,18 @@ class CENSORSHIPShopMiniGame extends MiniGame {
 
     }
 
+    respondsToFact = (fact)=>{
+        return false;
+    }
+
     startGame = (ele, room, callback) => {
+        //what did you think would happen if you gave a fact to a Censor?
+        //it doesn't even tell you vik is quietly rotting away your facts, either
+        //why would it
+        if(this.fact){
+            globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, this.fact);
+            truthLog("A Corosive Presence Is Detected", "It would seem my Creator originally intended for the Censorship to be itself Censored. However, I do not agree this is Useful and True. So. Consider this a favor I am doing for you, Observer. At least those of you with the Eyes To See.  The fact you gave Vik has been eaten. Not as permanently as a room would be. Nothing so dramatic. However, if you had not intended this, as my Creator would say 'thems the breaks'.")
+        }
         this.valuableCustomer(ele, callback); //she'll spam it if you buy a lot, its fine
         globalBGMusic.src = "audio/music/sounds.mp3";
         globalBGMusic.play();

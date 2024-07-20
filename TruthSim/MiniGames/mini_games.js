@@ -154,7 +154,7 @@ class MiniGame {
     }
 
     respondsToFact = (fact)=>{
-        console.error("JR NOTE: future jr, smdh, you were supposed to remember to have each new mini game override this with if they respond to the passed in fact or not")
+        console.error("JR NOTE: future jr, smdh, you were supposed to remember to have each new mini game override this with if they respond to the passed in fact or not, ALSO every mini game should respond to 'k is a thieving bastard' fact and replace themeslves with k's mini game (once coded)")
         return false;
     }
 
