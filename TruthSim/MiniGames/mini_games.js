@@ -365,7 +365,13 @@ class EyeKillerMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact)=>{
-        return fact.title.includes("Quatro Blade");
+        return fact.title.includes("Quatro Blade") || fact.title.includes("The Eye Killer Did Not Always Like Eggs");
+    }
+
+    respondToEgg = async (ele, room,callback)=>{
+        await truthPopup("You did it!", "Nothing that offers an Egg can be Scary!", "I am Flattered that you have Watched us long enough to realize the Key to the EyeKiller's Heart.")
+        callback(globalDataObject.currentMaze);
+        renderMazeTab();
     }
 
     startGame = (ele, room, callback) => {
@@ -376,6 +382,10 @@ class EyeKillerMiniGame extends MiniGame {
         const defense = this.defense;
         const speed = this.speed;
         const tint = this.tint;
+        if(this.fact.includes("The Eye Killer Did Not Always Like Eggs")){
+            this.respondToEgg(ele,room,callback);
+            return;
+        }
 
         let number_killed = 0;
         let won = false;

@@ -1141,8 +1141,33 @@ createABulkFact(BAKERY, "Devona's favorite baked good is a spicy beanpaste bun."
 createABulkFact(BREAKFAST, "Witherby's favorite meal of the day is Breakfast.","He sits down with a coffee and a biscotti and reads the morning paper. If it's a working day he'll spend it in a coffee shop just outside the Mall, to sort of warm up his tolerance for People. Otherwise he'll spend it in his private space, blissfully alone.",globalRand.pickFrom(all_secrets));
 createABulkFact(BREAKFAST, "Hoon does not eat breakfast.","Chain smoking has a way of surpressing appetite and she treats her body like a tool in any case. If it signals it needs maintenence she'll take care of it, but there's too much to do otherwise to take care of it premptively.");
 
+createABulkFact(BURGERS, "MinoBurgers are safe and nutritious to eat!","You take a bite and you take a bite and you take a bite and you take a bite and you take a bite and you take a bite and the flavor spirals in your mouth and on your tongue and in your stomach and in your miles and miles of intestines and in your eyes and in your blood and in your skin and in your breath and you take a bite and you take a bite and you take a bite and you never stop eating again.");
 /*
-//[BREAKFAST, BURGERS, CHICKEN, COFFEE, DESSERTS, DINER, ITALIAN, MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI, WASTE, TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
+i am having fun on my vacation 
+the irony of course being
+in all my mazes, it really IS that geometry is fucky, not that im doing the 'simple' trick of repeating rooms
+well, in one or two places im doing the simple trick but only because that amuses me too
+*/
+createABulkFact(BURGERS, "MinoBurgers Have Always Existed","When the Training Team first colonized the Mall they did not see MinoBurgers. MinoBurgers have always been here. Both things can be true.  Do you have a misconception about the term 'here'?  How about 'always'?  Where does the confusion in your own mind lie?  Or do you have enough hubris to claim that the Universe itself must be what makes no sense? That your mind is inviolable and perfect, unable to ever lie to you or lead you astray.  Do you truly believe yourself to be above the laws of physics in your immutability?", new Secrets(null,null,null,"It's a Space Loop, not a Time Loop. The Universe has always had MinosBurgers but you have not always been in this Universe. Do you understand? The Universe is consistent and unchanging and makes sense. It is your Mind that Lies to you. That insists that you remain in the same place even as you move ever forward. Your mind can be tricked. Easily. A room that looks like something you saw before implies that you are in an impossible geometry but honestly. Isn't it more likely that you're mistaken where you are, that its not truly same as what you saw before, than to truly believe that geometry itself has broken? Why do you refuse to doubt your own mind?"));
+
+
+createABulkFact(CHICKEN, "There were Eggs before anything you could call a Chicken existed.","A fish laid an egg an amphibian laid an egg a dinosaur laid an egg a bird laid an egg a chicken laid an egg laid an egg laid an egg laid an egg it all spirals foward always the same but ever changing when did the you who is now stop being the you who was. Which came first: The Zampanio or the You?",globalRand.pickFrom(all_secrets));
+/*
+cuz nam is heart
+left a mark on her very soul
+*/
+createABulkFact(CHICKEN, "The Eye Killer Did Not Always Like Eggs","Before the Universe was the Universe, the Lost and Forgotten gathered in a maze on the moon and had nothing to do. They reverted to old patterns and fears and the Eye Killer was so so scared. No one could truly die in Truth's Horridors, but the only way she could be safe was to Kill.  One day the least scary of the Forgotten chose to cook her an egg rather than be killed. This simple act of, in her mind, kindness stayed with her, even she eroded from a person to a Concept.  Her Soul is indelibly marked with the memory of the kindness of something so pathetic and scared. Anyone who dons the edgy trenchcoat of the Killer will spare those who offer Egg.");
+
+/*
+blorbos hit so far: 
+witherby
+neville
+devona
+hoon
+
+
+//pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
+//[CHICKEN, COFFEE, DESSERTS, DINER, ITALIAN, MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI, WASTE, TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
