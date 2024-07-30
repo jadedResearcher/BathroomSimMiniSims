@@ -12,7 +12,6 @@ const globalBGMusic = new Audio("audio/music/funky_beat_by_ic.mp3");
 let globalContainer;//the whole 'screen'
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
 const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
-const globalRand = new SeededRandom(13);
 
 //the Witness doens't exist and neither do the arms except they clearly also do
 

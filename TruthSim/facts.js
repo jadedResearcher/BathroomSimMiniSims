@@ -1116,9 +1116,10 @@ treats shocking you back into reality as a game it is WINNING and what could be 
 
 //secret can be blank, this will handle picking random stats
 const createABulkFact = (theme_key, title, text, secret) => {
+  console.log("JR NOTE: creating a bulk fact for", theme_key)
 
   const randomStat = () => {
-    return rand.getRandomNumberBetween(1, 3) * rand.nextDouble(); //allows values less than 1
+    return globalRand.getRandomNumberBetween(1, 3) * globalRand.nextDouble(); //allows values less than 1
   }
 
   return new Fact(title, text, [theme_key], randomStat(), randomStat(), randomStat(), secret)
@@ -1132,19 +1133,19 @@ NOTE TO FUTURE JR: THESE FACTS *HAVE* TO BE AFTER ALL THE SECRETS BECAUSE THEY C
 
 */
 
-
+console.log("JR NOTE: going to begin creating bulk facts")
 createABulkFact(BAKERY, "Neville will only eat baked goods from a specific chain.","Devona spent one of the first loops any of them can remember sampling every single bakery in the Greater Westerville Area to find which one was MOST like the Corporation's shitty bland cafeteria baked goods so Neville could actually eat something other than instant noodles. When the Information Team finally spawned in they really valued her research on local food options. It arguably was the deciding factor that prevented outright war between the two teams.",new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/DevonaFears/'>Devona was so so scared to meet the Information Team.</a>`));
 createABulkFact(BAKERY, "Devona's favorite baked good is a spicy beanpaste bun.","Devona craves Sensation in all its forms. If she's not experiencing something then that's room for the Anxiety to creep in and she can't have that. Her living space is a cacaphony of sounds and scents and color and texture and hiding spots and nooks and crannies. Neville, by contrast, basically lives in a blank white room, silent and happy. Witherby likes his miniamlist design aesthetics and feels guilty any time he brings a small gift that Neville will proudly display, as if his presence in Neville's life is an unwanted mar on the pristine void.");
 
 
-createABulkFact(BREAKFAST, "Witherby's favorite meal of the day is Breakfast.","He sits down with a coffee and a biscotti and reads the morning paper. If it's a working day he'll spend it in a coffee shop just outside the Mall, to sort of warm up his tolerance for People. Otherwise he'll spend it in his private space, blissfully alone.",rand.pickFrom(all_secrets));
+createABulkFact(BREAKFAST, "Witherby's favorite meal of the day is Breakfast.","He sits down with a coffee and a biscotti and reads the morning paper. If it's a working day he'll spend it in a coffee shop just outside the Mall, to sort of warm up his tolerance for People. Otherwise he'll spend it in his private space, blissfully alone.",globalRand.pickFrom(all_secrets));
 createABulkFact(BREAKFAST, "Hoon does not eat breakfast.","Chain smoking has a way of surpressing appetite and she treats her body like a tool in any case. If it signals it needs maintenence she'll take care of it, but there's too much to do otherwise to take care of it premptively.");
 
 /*
 //[BREAKFAST, BURGERS, CHICKEN, COFFEE, DESSERTS, DINER, ITALIAN, MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI, WASTE, TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
-createABulkFact(BAKERY, "","",rand.pickFrom(all_secrets));
+createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
 createABulkFact(BAKERY, "","");
 
 */
