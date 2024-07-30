@@ -758,12 +758,14 @@ const initSongs = () => {
     song_possibilities[WASTE] = ["youbrokeit.mp3"];
 
     song_possibilities[LONELY] = ["Finish.mp3"];
+    song_possibilities[KILLING] = ["piper_motif.mp3","get_it_because_pipe_organ.mp3", "IC_castlevaniaishloop.mp3"];
     song_possibilities[HUNTING] = ["piper_motif.mp3","get_it_because_pipe_organ.mp3", "IC_castlevaniaishloop.mp3"];
     song_possibilities[GUIDING] = ["icbattlemusic.mp3", "chill_ocarina song.mp3", "i_literally_dont_even_remember_making_this_by_ic.mp3"];
     song_possibilities[ENDINGS] = ["dead.mp3"];
     song_possibilities[CLOWNS] = ["dear_god.mp3", "funky_beat.mp3"];
     song_possibilities[ROYALTY] = ["i_dont_remember_making_this_either_by_ic.mp3"];
     song_possibilities[ADDICTION] = ["i_think_its_finished_priska_turbo_time.mp3"];
+    song_possibilities[LIGHT] = ["i_think_its_finished_priska_turbo_time.mp3"];
 
     song_possibilities[ZAP] = ["watt_3_but_jr_owns_it.mp3","turntablist.mp3","no_gods_no_master.mp3","newwatt.mp3","4-_Wattathon.mp3", "glitchy_song.mp3", "good_luck_w_your_ears_honestly.mp3"];
     song_possibilities[BUGS] = ["funky_bees.mp3", "beeshitpost.mp3", "584661__felixblume__bee-recorded-individually-natacha.wav"]

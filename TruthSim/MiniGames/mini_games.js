@@ -53,7 +53,7 @@ const rooms_to_unlock = {
 const rareMiniGames = [EYEKILLERMINIGAME];
 
 //max of once per maze
-const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME, TWINSMINIEGAME,GAMERSHOPMINIGAME];
+const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME, TWINSMINIEGAME, GAMERSHOPMINIGAME];
 
 const initAllMiniGames = () => {
     new LockMiniGame();
@@ -70,7 +70,7 @@ const initAllMiniGames = () => {
     new SlotsMiniGame();
 }
 
-const makeScreenRed = (ele)=>{
+const makeScreenRed = (ele) => {
     createElementWithClassAndParent("div", ele, "red-overlay");
 
 }
@@ -153,7 +153,7 @@ class MiniGame {
         window.alert("this should never be called, has a game forgotten how to start itself?")
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         console.error("JR NOTE: future jr, smdh, you were supposed to remember to have each new mini game override this with if they respond to the passed in fact or not, ALSO every mini game should respond to 'k is a thieving bastard' fact and replace themeslves with k's mini game (once coded)")
         return false;
     }
@@ -231,8 +231,20 @@ class MiniGame {
         this.temporarilySetFact();
     }
 
+    //most games will overwrite this but the fact applied will change the music by defualt
+    handleMusic = () => {
+        if (this.fact) {
+            let chosen_theme = all_themes[pickFrom(this.fact.theme_key_array)];
+            const music = chosen_theme.pickPossibilityFor(SONG, globalRand);
+            if (music && (music.includes(".mp3") || music.includes(".wav"))) {//ignore the ominous bullshit
+                globalBGMusic.src = "audio/music/" + music;
+                globalBGMusic.play();
+            }
+        }
+    }
+
     setupGameHeader = (ele, room, winCallback, title, difficulty_guide, sprite) => {
-        console.log("JR NOTE: setting up game header for", this.id)
+        this.handleMusic();
         const header = createElementWithClassAndParent("div", ele, "game-header");
 
         const h1 = createElementWithClassAndParent("h1", header);
@@ -335,12 +347,12 @@ class LockMiniGame extends MiniGame {
         //there kinda isn't a game
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         console.log("JR NOTE: future jr, i think it would be hilarous for this to mutate in response to a fact, but into what? maybe wibbys confessional tbh, unlock ppls hearts")
         return false;
     }
 
-    
+
 
 
 
@@ -364,11 +376,11 @@ class EyeKillerMiniGame extends MiniGame {
         super(EYEKILLERMINIGAME);
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         return fact.title.includes("Quatro Blade") || fact.title.includes("The Eye Killer Did Not Always Like Eggs");
     }
 
-    respondToEgg = async (ele, room,callback)=>{
+    respondToEgg = async (ele, room, callback) => {
         await truthPopup("You did it!", "Nothing that offers an Egg can be Scary!", "I am Flattered that you have Watched us long enough to realize the Key to the EyeKiller's Heart.")
         callback(globalDataObject.currentMaze);
         renderMazeTab();
@@ -382,8 +394,8 @@ class EyeKillerMiniGame extends MiniGame {
         const defense = this.defense;
         const speed = this.speed;
         const tint = this.tint;
-        if(this.fact.title.includes("The Eye Killer Did Not Always Like Eggs")){
-            this.respondToEgg(ele,room,callback);
+        if (this.fact.title.includes("The Eye Killer Did Not Always Like Eggs")) {
+            this.respondToEgg(ele, room, callback);
             return;
         }
 
@@ -539,7 +551,7 @@ class ParkerMiniGame extends MiniGame {
         return false;
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         return fact.title.toUpperCase().includes("BESTIE");
     }
 
@@ -703,7 +715,7 @@ class BettingMiniGame extends MiniGame {
         super(HOONMINIGAME);
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         return fact.title.toUpperCase().includes("LUCK");
     }
 
@@ -781,7 +793,7 @@ class BettingMiniGame extends MiniGame {
             lowerButton.innerText = "LOWER"
 
             //she thinks its you breaching. but its her, too
-            const breach = async ()=>{
+            const breach = async () => {
                 makeScreenRed(ele);
                 await truthPopup("You got greedy...", `Oh no! Hoon thought you must be cheating to win so much. Luckily death is not a thing in my Horridors, but you DID lose your initial bet of ${bet} a second time when she looted your temporary corpse. (And thank you to the Wisp for voicing Hoon and the Radio!)`, "Wow. It is almost like Hoon's radio is unfair and arbitrary in who it kills. Who would have thought.");
                 decreaseTruthBy(bet)
@@ -816,22 +828,22 @@ class BettingMiniGame extends MiniGame {
             //https://www.reddit.com/r/statistics/comments/yssivj/q_highlow_card_game_statistics/
             const youWin = () => {
                 numberOfWins++;
-                const numberOfWinsPrev = numberOfWins -1;
+                const numberOfWinsPrev = numberOfWins - 1;
                 //http://www.farragofiction.com/RadioTranscript/
 
                 //don't add to these unless you also add voice
                 const sassOptions = ["Congrats.", "You're pretty lucky, huh.", "Three times? Now ain't that hard to believe.", "Four. Sure.", "You're cheating.", "I don't care how clever you think you are, you need to stop.", "A monster, s'what you are. You're a damn monster.", "I oughta put you down."];
                 //file name only, when i go to play add mp3 and path
                 const voiceOptions = ["congrats", "pretty_lucky", "three_times", "four_sure", "cheating", "clever_but_stop", "damn_monster", "put_you_down"]
-                const radioSassOptions = [undefined, undefined, undefined, "WARNING", "WARNING. ALL OPERATIVES ARE TO SUPRESS THE BREACH IN PROGRESS. THIS IS THE SECOND ALERT.", "WARNING. CLASS 3 BREACH IN PROGRESS. SURPRESS THE ABNORMALITY." ,"EXTERMINATE THEM. YOU CANNOT FAIL.",  "KILL IT KILL IT NOW WHY AREN'T YOU KILLING IT"];
+                const radioSassOptions = [undefined, undefined, undefined, "WARNING", "WARNING. ALL OPERATIVES ARE TO SUPRESS THE BREACH IN PROGRESS. THIS IS THE SECOND ALERT.", "WARNING. CLASS 3 BREACH IN PROGRESS. SURPRESS THE ABNORMALITY.", "EXTERMINATE THEM. YOU CANNOT FAIL.", "KILL IT KILL IT NOW WHY AREN'T YOU KILLING IT"];
                 //file name only, when i go to play add mp3 and path
                 const radioVoiceOptions = [undefined, undefined, undefined, "warning", "second_alert", "class_three", "terminate_them", "kill_it_now"]
                 //hoon breaches if you win too much, more odds each time till theres no more quips (but only if the radio says to)
-                if (numberOfWinsPrev > sassOptions.length || (radioVoiceOptions[numberOfWinsPrev] && Math.random() < ((numberOfWinsPrev-3)) /5)) {
+                if (numberOfWinsPrev > sassOptions.length || (radioVoiceOptions[numberOfWinsPrev] && Math.random() < ((numberOfWinsPrev - 3)) / 5)) {
                     audio.src = `audio/fx/HoonVoiceWorkByWisp/${radioVoiceOptions[numberOfWinsPrev]}.mp3`;
                     audio.play();
                     emitRadioSass(document.querySelector(".radio-container"), radioSassOptions[numberOfWinsPrev]);
-                    
+
                     breach();
                     return;
                 }
@@ -950,7 +962,7 @@ class RabbitMiniGame extends MiniGame {
         super(RABBITMINIGAME);
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         console.log("JR NOTE: i don't think i actually have the rabbit mini game wired up, replaced it with secrets")
     }
 
@@ -991,16 +1003,14 @@ class ButtonMiniGame extends MiniGame {
         super(BUTTONMINIGAME);
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         console.log("JR NOTE: could do a more general version of AmazonWareHouse sim (pending) here")
         return false;
     }
 
     startGame = (ele, room, callback) => {
         //there kinda isn't a game
-        const savedSrc = globalBGMusic.src;
-        globalBGMusic.src = "audio/music/i_literally_dont_even_remember_making_this_by_ic.mp3";
-        globalBGMusic.play();
+
         const buttonParent = createElementWithClassAndParent("div", ele, "clicker-game-button-parent");
 
         const button = createElementWithClassAndParent("button", buttonParent, "clicker-game-button");
@@ -1055,8 +1065,6 @@ class ButtonMiniGame extends MiniGame {
             if (clicks > 10) {
                 globalBGMusic.pause();
                 await truthPopup("You did it!", "You are so good at clicking!", "Yes. Well. It seems the games will become more challenging as time goes on. Or at least more diverting. Do try to keep your attention span on me long enough to build up.")
-                globalBGMusic.src = savedSrc;
-                globalBGMusic.play();
                 callback(globalDataObject.currentMaze);
                 renderMazeTab();
             }
