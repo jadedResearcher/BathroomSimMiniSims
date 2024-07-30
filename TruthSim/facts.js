@@ -632,9 +632,6 @@ const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED,
 
 
 
-//every fact the slot machines can give you
-const factsForGambling = [CLOSERADDICTEDTOFRUIT, APOCALYPSEFACT, CLOSERISGREATATROOMS]
-
 
 /*
 IC: i feel like the oft missed concept is that hoon comes from disciplinary
@@ -1133,7 +1130,8 @@ NOTE TO FUTURE JR: THESE FACTS *HAVE* TO BE AFTER ALL THE SECRETS BECAUSE THEY C
 
 */
 
-console.log("JR NOTE: going to begin creating bulk facts")
+
+
 createABulkFact(BAKERY, "Neville will only eat baked goods from a specific chain.","Devona spent one of the first loops any of them can remember sampling every single bakery in the Greater Westerville Area to find which one was MOST like the Corporation's shitty bland cafeteria baked goods so Neville could actually eat something other than instant noodles. When the Information Team finally spawned in they really valued her research on local food options. It arguably was the deciding factor that prevented outright war between the two teams.",new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/DevonaFears/'>Devona was so so scared to meet the Information Team.</a>`));
 createABulkFact(BAKERY, "Devona's favorite baked good is a spicy beanpaste bun.","Devona craves Sensation in all its forms. If she's not experiencing something then that's room for the Anxiety to creep in and she can't have that. Her living space is a cacaphony of sounds and scents and color and texture and hiding spots and nooks and crannies. Neville, by contrast, basically lives in a blank white room, silent and happy. Witherby likes his miniamlist design aesthetics and feels guilty any time he brings a small gift that Neville will proudly display, as if his presence in Neville's life is an unwanted mar on the pristine void.");
 
@@ -1156,7 +1154,9 @@ createABulkFact(CHICKEN, "There were Eggs before anything you could call a Chick
 cuz nam is heart
 left a mark on her very soul
 */
-createABulkFact(CHICKEN, "The Eye Killer Did Not Always Like Eggs","Before the Universe was the Universe, the Lost and Forgotten gathered in a maze on the moon and had nothing to do. They reverted to old patterns and fears and the Eye Killer was so so scared. No one could truly die in Truth's Horridors, but the only way she could be safe was to Kill.  One day the least scary of the Forgotten chose to cook her an egg rather than be killed. This simple act of, in her mind, kindness stayed with her, even she eroded from a person to a Concept.  Her Soul is indelibly marked with the memory of the kindness of something so pathetic and scared. Anyone who dons the edgy trenchcoat of the Killer will spare those who offer Egg.");
+const egg_fact = createABulkFact(CHICKEN, "The Eye Killer Did Not Always Like Eggs","Before the Universe was the Universe, the Lost and Forgotten gathered in a maze on the moon and had nothing to do. They reverted to old patterns and fears and the Eye Killer was so so scared. No one could truly die in Truth's Horridors, but the only way she could be safe was to Kill.  One day the least scary of the Forgotten chose to cook her an egg rather than be killed. This simple act of, in her mind, kindness stayed with her, even she eroded from a person to a Concept.  Her Soul is indelibly marked with the memory of the kindness of something so pathetic and scared. Anyone who dons the edgy trenchcoat of the Killer will spare those who offer Egg.", new Secrets(null,null,null,"<a target='_blank' href='https://archiveofourown.org/works/34792621'>The Story</a>"));
+factsForSale.push(egg_fact);
+
 
 /*
 blorbos hit so far: 
@@ -1165,6 +1165,36 @@ neville
 devona
 hoon
 
+//wiggler eater: https://archiveofourown.org/works/36742426/chapters/91657357
+//wiggler eater 2: https://archiveofourown.org/works/39322080
+//jr ships: https://archiveofourown.org/works/35265706/chapters/87885928
+//cfo gets a letter: https://archiveofourown.org/works/50145511
+// flower chick selling real estate https://archiveofourown.org/works/34718575
+//flower chick selling real estate https://archiveofourown.org/works/34792432
+//flwoer chick selling real estate 2 https://archiveofourown.org/works/34937671
+//flower chick an wander er https://archiveofourown.org/works/34532071
+//wanda's origin: https://archiveofourown.org/works/34647190
+//JR meets Wanda: https://archiveofourown.org/works/34656403
+//piper describing killing the camellia within: https://archiveofourown.org/works/41879811
+//one of parkers victims: https://archiveofourown.org/works/39648690
+//jr uploads their os: https://archiveofourown.org/works/35373568
+//jr uploads 2 https://archiveofourown.org/works/36665881
+//the intern debut https://archiveofourown.org/works/35075182
+//ronin gets a letter: https://archiveofourown.org/works/36665806
+//nam gets a letter: https://archiveofourown.org/works/36087904
+//christmas is real and closer and ronin celebrate: https://archiveofourown.org/works/36765802
+//weaver (closer) scribe (flower chick) and herald (nam) and the artist (eye killer) https://archiveofourown.org/works/41879976
+//nam makes eyekiller an egg https://archiveofourown.org/works/34792621
+//nam origin: https://archiveofourown.org/works/34731520/chapters/86477287
+//ronin watches the Innocent while the Eye Killerl rescues the Hostage: https://archiveofourown.org/works/35841556
+//ronin gets a therapy: https://archiveofourown.org/works/35755471
+//letters to legion: https://archiveofourown.org/works/35588422
+//oxbow lake: https://archiveofourown.org/works/35438083/chapters/88335073
+//the wisp wrote this but its p much canon: https://archiveofourown.org/works/46552111
+//the wisp wrote this and also p much canon: https://archiveofourown.org/works/48684361
+//guides guide: https://archiveofourown.org/works/41083818
+//guides zampanio faq: https://archiveofourown.org/works/40961847
+//lavinraca fan work: https://archiveofourown.org/works/51166669
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
 //[CHICKEN, COFFEE, DESSERTS, DINER, ITALIAN, MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI, WASTE, TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];

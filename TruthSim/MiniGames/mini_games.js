@@ -53,7 +53,7 @@ const rooms_to_unlock = {
 const rareMiniGames = [EYEKILLERMINIGAME];
 
 //max of once per maze
-const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME, TWINSMINIEGAME];
+const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME, TWINSMINIEGAME,GAMERSHOPMINIGAME];
 
 const initAllMiniGames = () => {
     new LockMiniGame();
@@ -382,7 +382,7 @@ class EyeKillerMiniGame extends MiniGame {
         const defense = this.defense;
         const speed = this.speed;
         const tint = this.tint;
-        if(this.fact.includes("The Eye Killer Did Not Always Like Eggs")){
+        if(this.fact.title.includes("The Eye Killer Did Not Always Like Eggs")){
             this.respondToEgg(ele,room,callback);
             return;
         }

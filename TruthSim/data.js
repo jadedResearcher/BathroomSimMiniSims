@@ -1,9 +1,9 @@
 //https://genders.wtf/gauntlet/
 
 //this is NOT the save data, ,this is theme and procedural stuff
-const first_names = ["Alaya","Amadeus","Vivienne ","Masego","Akua","Catherine","Harkam","Indrani","Benoit","Lloyd","Yor","Anya","Tony","Ben","Karen","Ennis","Dallas","Berga","Eve","Adam","Nice","Luck","Lucky","Maiza","Miria","Czeslaw","Ladd","Marcoccio","Issac","Firo","Claire","Vino","Jacuzzi","Chane","Mike","Dracula","Sypha","Alucard","Trevor","Power","Denji","Aki","Kobeni","Tom","Amelie","Wanda","Wodin","Piper","Jasna","Brian","Todd","Joshua","Wyatt","Joshua","Penny","Jake", "Rachel", "Tobias", "Marco", "Cassie", "Tom", "Erek", "Camille", "Yongki", "Parker", "Ria", "Devona", "Neville", "Witherby", "Hoon", "River", "Khana", "Vik", "Craig", "John", "Jude", "Jade", "Joey", "Rose", "Roxy", "Jeff", "Dave", "Dirk", "Jove", "Jake", "Sophie", "Jaxon", "Basira", "Daisy", "Martin", "Georgie", "Sasha", "James", "Taylor", "Victoria", "Jean-Paul", "Bob", "Alice", "Carol", "Eve", "Adam", "Rachel", "Brian", "Aisha", "Alexandra", "Alex", "Tobias", "Marco", "Cassie", "Tom", "Lisa", "Sarah", " Sylvester", "Gordon", "Helen", "Jamie", "Lillian", "Mary", "Ashton", "Peter", "Zawhei", "Eirikr", "Volour", "Okarin", "Peewee", "Hagala", "Despap", "Othala", "Gertrude", "Mike", "Michael", "Peter", "Simon", "Manuela", "Annabel"];
+const first_names = ["Alaya", "Amadeus", "Vivienne ", "Masego", "Akua", "Catherine", "Harkam", "Indrani", "Benoit", "Lloyd", "Yor", "Anya", "Tony", "Ben", "Karen", "Ennis", "Dallas", "Berga", "Eve", "Adam", "Nice", "Luck", "Lucky", "Maiza", "Miria", "Czeslaw", "Ladd", "Marcoccio", "Issac", "Firo", "Claire", "Vino", "Jacuzzi", "Chane", "Mike", "Dracula", "Sypha", "Alucard", "Trevor", "Power", "Denji", "Aki", "Kobeni", "Tom", "Amelie", "Wanda", "Wodin", "Piper", "Jasna", "Brian", "Todd", "Joshua", "Wyatt", "Joshua", "Penny", "Jake", "Rachel", "Tobias", "Marco", "Cassie", "Tom", "Erek", "Camille", "Yongki", "Parker", "Ria", "Devona", "Neville", "Witherby", "Hoon", "River", "Khana", "Vik", "Craig", "John", "Jude", "Jade", "Joey", "Rose", "Roxy", "Jeff", "Dave", "Dirk", "Jove", "Jake", "Sophie", "Jaxon", "Basira", "Daisy", "Martin", "Georgie", "Sasha", "James", "Taylor", "Victoria", "Jean-Paul", "Bob", "Alice", "Carol", "Eve", "Adam", "Rachel", "Brian", "Aisha", "Alexandra", "Alex", "Tobias", "Marco", "Cassie", "Tom", "Lisa", "Sarah", " Sylvester", "Gordon", "Helen", "Jamie", "Lillian", "Mary", "Ashton", "Peter", "Zawhei", "Eirikr", "Volour", "Okarin", "Peewee", "Hagala", "Despap", "Othala", "Gertrude", "Mike", "Michael", "Peter", "Simon", "Manuela", "Annabel"];
 
-const last_names = ["Blanc","Forger","Jefferson","Genoard","Holystone","Gandor","Quates","Harvent","Meyer","Russo","Dian","Prochainezo","Stanfield","Splot","Laforet","Peyote","Blightheart","Gilbert","Howard","Davidson","Vastheight","Gillespie","Mann","Rusting","Researcher","Gently","Egbert","Claire","Lalonde","Strider","Hussain","King","Stoker","Sims","Blackwood","Barker","James","Blake","Dalon","Vasil","Hebert","Jensen","Lindt","Newell","Laborn","Fell","Wilbourn","Livsey","Lamb","Bacama","Kharun","Reynolds","Braggi","Seelee","Cassan","Folnir","Citato","Grigor","Crew","Robertson","Fairchild","Lukas","Richardson","Dominguez","Cane","Salesa","Shelly"];
+const last_names = ["Blanc", "Forger", "Jefferson", "Genoard", "Holystone", "Gandor", "Quates", "Harvent", "Meyer", "Russo", "Dian", "Prochainezo", "Stanfield", "Splot", "Laforet", "Peyote", "Blightheart", "Gilbert", "Howard", "Davidson", "Vastheight", "Gillespie", "Mann", "Rusting", "Researcher", "Gently", "Egbert", "Claire", "Lalonde", "Strider", "Hussain", "King", "Stoker", "Sims", "Blackwood", "Barker", "James", "Blake", "Dalon", "Vasil", "Hebert", "Jensen", "Lindt", "Newell", "Laborn", "Fell", "Wilbourn", "Livsey", "Lamb", "Bacama", "Kharun", "Reynolds", "Braggi", "Seelee", "Cassan", "Folnir", "Citato", "Grigor", "Crew", "Robertson", "Fairchild", "Lukas", "Richardson", "Dominguez", "Cane", "Salesa", "Shelly"];
 
 const lameGenderRaw = `Male
 Female
@@ -532,27 +532,27 @@ const checkIfAllKeysPresent = () => {
     }
 }
 
-const initEmojis = ()=>{
-    emoji_possibilities[BAKERY] = ["🥖","🥐","🥯","🍩"];
-    emoji_possibilities[BREAKFAST] = ["🥞","🍳","🥓","🧇"];
-    emoji_possibilities[BURGERS ] = ["🍔","🍟"];
+const initEmojis = () => {
+    emoji_possibilities[BAKERY] = ["🥖", "🥐", "🥯", "🍩"];
+    emoji_possibilities[BREAKFAST] = ["🥞", "🍳", "🥓", "🧇"];
+    emoji_possibilities[BURGERS] = ["🍔", "🍟"];
     emoji_possibilities[CHICKEN] = ["🍗"];
-    emoji_possibilities[COFFEE ] = ["☕","🍩"];
-    emoji_possibilities[DESSERTS ] = ["🥧","🎂","🍰","🧁"];
-    emoji_possibilities[DINER] = ["🍔","🍟","🥔","🥙","🍲","🥘","🧆","🍽️"];
-    emoji_possibilities[ITALIAN ] = ["🍝"];
-    emoji_possibilities[MEXICAN ] = ["🌮","🌯"];
-    emoji_possibilities[PIZZA ] = ["🍕"];
-    emoji_possibilities[PREMIUM ] = ["🥖","🥔","🥩","🍖"];
-    emoji_possibilities[SALAD ] = ["🥗"];
-    emoji_possibilities[SANDWICHES ] = ["🌯","🥙","🥪","🍞"];
-    emoji_possibilities[SEAFOOD ] = ["🍤","🦐"];
-    emoji_possibilities[SUSHI ] = ["🥠","🥟","🍱","🍣","🍙","🍜","🥡","🍛"];
+    emoji_possibilities[COFFEE] = ["☕", "🍩"];
+    emoji_possibilities[DESSERTS] = ["🥧", "🎂", "🍰", "🧁"];
+    emoji_possibilities[DINER] = ["🍔", "🍟", "🥔", "🥙", "🍲", "🥘", "🧆", "🍽️"];
+    emoji_possibilities[ITALIAN] = ["🍝"];
+    emoji_possibilities[MEXICAN] = ["🌮", "🌯"];
+    emoji_possibilities[PIZZA] = ["🍕"];
+    emoji_possibilities[PREMIUM] = ["🥖", "🥔", "🥩", "🍖"];
+    emoji_possibilities[SALAD] = ["🥗"];
+    emoji_possibilities[SANDWICHES] = ["🌯", "🥙", "🥪", "🍞"];
+    emoji_possibilities[SEAFOOD] = ["🍤", "🦐"];
+    emoji_possibilities[SUSHI] = ["🥠", "🥟", "🍱", "🍣", "🍙", "🍜", "🥡", "🍛"];
 
 
-    emoji_possibilities[ART ] = ["🎨"];
-    emoji_possibilities[TECHNOLOGY] = ["💻","🖥️"];
-    emoji_possibilities[TIME] = ["⏲️","⏰","🕰️"];
+    emoji_possibilities[ART] = ["🎨"];
+    emoji_possibilities[TECHNOLOGY] = ["💻", "🖥️"];
+    emoji_possibilities[TIME] = ["⏲️", "⏰", "🕰️"];
     emoji_possibilities[SPACE] = ["🪐"];
     emoji_possibilities[OCEAN] = ["🌊"];
     emoji_possibilities[LONELY] = ["🌫️"];
@@ -560,11 +560,11 @@ const initEmojis = ()=>{
     emoji_possibilities[FREEDOM] = ["🐦"];
     emoji_possibilities[STEALING] = ["💰"];
     emoji_possibilities[BURIED] = ["🕳️"];
-    emoji_possibilities[FLESH] =["🥩","🍖","🩸","🦴"];
+    emoji_possibilities[FLESH] = ["🥩", "🍖", "🩸", "🦴"];
     emoji_possibilities[SCIENCE] = ["🧪"];
     emoji_possibilities[MATH] = ["🧮"];
     emoji_possibilities[TWISTING] = ["😵"];
-    emoji_possibilities[DEATH] = ["💀","👻"];
+    emoji_possibilities[DEATH] = ["💀", "👻"];
     emoji_possibilities[APOCALYPSE] = ["☢️"];
     emoji_possibilities[ANGELS] = ["😇"];
     emoji_possibilities[SERVICE] = ["🛎️"];
@@ -572,7 +572,7 @@ const initEmojis = ()=>{
     emoji_possibilities[MAGIC] = ["🧚"];
     emoji_possibilities[LIGHT] = ["☀️"];
     emoji_possibilities[HEALING] = ["🚑"];
-    emoji_possibilities[PLANTS] = ["🌳","🌸"];
+    emoji_possibilities[PLANTS] = ["🌳", "🌸"];
     emoji_possibilities[HUNTING] = ["🔫"];
     emoji_possibilities[DECAY] = ["🤢"];
     emoji_possibilities[CHOICES] = ["🛣️"];
@@ -580,15 +580,15 @@ const initEmojis = ()=>{
     emoji_possibilities[LOVE] = ["❤️"];
     emoji_possibilities[SOUL] = ["❄️"];
     emoji_possibilities[ANGER] = ["😡"];
-    emoji_possibilities[WEB] = ["🕷️","🕸️"];
+    emoji_possibilities[WEB] = ["🕷️", "🕸️"];
     emoji_possibilities[ROYALTY] = ["👑"];
     emoji_possibilities[ENDINGS] = ["⌛"];
     emoji_possibilities[KNOWING] = ["📕"];
     emoji_possibilities[GUIDING] = ["🧭"];
-    emoji_possibilities[CRAFTING] = ["🧵","🔨"];
+    emoji_possibilities[CRAFTING] = ["🧵", "🔨"];
     emoji_possibilities[LANGUAGE] = ["👌"];
-    emoji_possibilities[BUGS] = ["🐜","🦟","🐝"];
-    emoji_possibilities[ADDICTION] = ["💉","🃏"];
+    emoji_possibilities[BUGS] = ["🐜", "🦟", "🐝"];
+    emoji_possibilities[ADDICTION] = ["💉", "🃏"];
     emoji_possibilities[SPYING] = ["👁️"];
     emoji_possibilities[CLOWNS] = ["🤡"];
     emoji_possibilities[DOLLS] = ["🎎 "];
@@ -596,7 +596,7 @@ const initEmojis = ()=>{
     emoji_possibilities[CENSORSHIP] = ["⛔"];
 
     emoji_possibilities[DARKNESS] = ["🕶️"];
-    emoji_possibilities[KILLING] = ["🩸","🔪"];
+    emoji_possibilities[KILLING] = ["🩸", "🔪"];
     emoji_possibilities[MUSIC] = ["🎵"];
     emoji_possibilities[DEFENSE] = ["🛡️"];
     emoji_possibilities[QUESTING] = ["❗"];
@@ -606,20 +606,20 @@ const initEmojis = ()=>{
 
 const initPeople = () => {
     person_posibilities[BAKERY] = ["baker"];
-    person_posibilities[BREAKFAST] = ["farmer","logger","lumberjack"];
-    person_posibilities[BURGERS ] = ["parker","piggy","grillmaster","big boy","rancher","cowboy"];
-    person_posibilities[CHICKEN] = ["chicken","chick","chicky"];
-    person_posibilities[COFFEE ] = ["barista"];
-    person_posibilities[DESSERTS ] = ["Baker","Fairy","Unicorn"];
-    person_posibilities[DINER] = ["piggy","piggy","Cook","Diner","piggy","piggy","piggy","piggy","piggy"];
-    person_posibilities[ITALIAN ] = ["Chef"];
-    person_posibilities[MEXICAN ] = ["Chef","Cowboy"];
-    person_posibilities[PIZZA ] = ["Chef"];
-    person_posibilities[PREMIUM ] = ["critic","chef","gourmet"];
-    person_posibilities[SALAD ] = ["Chef"];
-    person_posibilities[SANDWICHES ] = ["Chef","Baker"];
-    person_posibilities[SEAFOOD ] = ["Captain","Skipper","Sailor","Pirate","Smuggler"];
-    person_posibilities[SUSHI ] = ["Chef","Shogun","Ninja","Samurai"];
+    person_posibilities[BREAKFAST] = ["farmer", "logger", "lumberjack"];
+    person_posibilities[BURGERS] = ["parker", "piggy", "grillmaster", "big boy", "rancher", "cowboy"];
+    person_posibilities[CHICKEN] = ["chicken", "chick", "chicky"];
+    person_posibilities[COFFEE] = ["barista"];
+    person_posibilities[DESSERTS] = ["Baker", "Fairy", "Unicorn"];
+    person_posibilities[DINER] = ["piggy", "piggy", "Cook", "Diner", "piggy", "piggy", "piggy", "piggy", "piggy"];
+    person_posibilities[ITALIAN] = ["Chef"];
+    person_posibilities[MEXICAN] = ["Chef", "Cowboy"];
+    person_posibilities[PIZZA] = ["Chef"];
+    person_posibilities[PREMIUM] = ["critic", "chef", "gourmet"];
+    person_posibilities[SALAD] = ["Chef"];
+    person_posibilities[SANDWICHES] = ["Chef", "Baker"];
+    person_posibilities[SEAFOOD] = ["Captain", "Skipper", "Sailor", "Pirate", "Smuggler"];
+    person_posibilities[SUSHI] = ["Chef", "Shogun", "Ninja", "Samurai"];
 
     person_posibilities[ART] = ["artist", "painter", "sculpter", "curator"];
     person_posibilities[TECHNOLOGY] = ["engineer", "programmer", "hacker", "coder"];
@@ -674,21 +674,21 @@ const initPeople = () => {
 }
 
 const initAdjs = () => {
-    adj_possibilities[BAKERY] = ["small","large","medium","hot","fresh","warm","toasted"];
-    adj_possibilities[BREAKFAST] = ["small","large","medium","hot","smothered","stacked","sizzling","sweet"];
-    adj_possibilities[BURGERS ] = ["ranch","create-your-own","small","large","medium","barbecue","bbq","texas","smokey","heartattack","mino","hot","stacked","fried","mondo","huge","mega","heart attack","flame-broiled","grilled","smoked","chicken","pork"];
-    adj_possibilities[CHICKEN] = ["small","large","medium","barbecue","bbq","buffalo","smokey","hot","grilled","crispy","crunchy","spicy","fried","baked","broiled","roasted","spiced","herb and garlic","herb"];
-    adj_possibilities[COFFEE ] = ["small","large","medium","hot","iced","cold","light-roast","dark-roast"];
-    adj_possibilities[DESSERTS ] = ["small","large","medium","hot","iced","frosted","sweet","decadent","sinful","guilty"];
-    adj_possibilities[DINER] = ["small","large","medium","heartattack","smokey","hot","fried","baked","sliced","stuffed","special","sale"];
-    adj_possibilities[ITALIAN ] = ["homestyle","wine","vodka","pomodoro","pesto","marinara","small","large","medium","hot","garlic","parmesan","cream","sauce","stuffed"];
-    adj_possibilities[MEXICAN ] = ["fiesta","pastor","chicharron","barbacoa","carne asada","carnitas","chorizo","pollo","caribe","queso","quacamole","venezuelan","dominican","mexican","cuban","lingua","supreme","supremo","adobo","small","large","medium","tex mex","spicy","hot","crunchy","soft","gringo","sizzling","mexi"];
-    adj_possibilities[PIZZA ] = ["marinara","bianca","italian","milano","create-your-own","3 topping","2 topping","1 topping","small","large","medium","california","new york","detroit","chicago","deep-dish","neopolitan","white","meat-lovers","vegetarian","supreme","hot","large","extra-large","personal","sliced","wood-oven","brick-fired"];
-    adj_possibilities[PREMIUM ] = ["house made","small","large","medium","salted","confit","premium","rare","gourmet","juicy"];
-    adj_possibilities[SALAD ] = ["create-your-own","small","large","medium","fresh","healthy","organic"];
-    adj_possibilities[SANDWICHES ] = ["create-your-own","small","large","medium","sliced","hot","cold","crunchy","spicy","fried"];
-    adj_possibilities[SEAFOOD ] = ["sea","ocean","lake","riverside","small","large","medium","breaded","hot","fried","boiled","blackened","broiled","baked"];
-    adj_possibilities[SUSHI ] = ["ginger","basil","mixed","peanut","garlic","chinese","thai","korean","japanese","small","large","medium","spicy","crunchy","sweet and sour","sesame","fried","steamed","soy","teriyaki"];
+    adj_possibilities[BAKERY] = ["small", "large", "medium", "hot", "fresh", "warm", "toasted"];
+    adj_possibilities[BREAKFAST] = ["small", "large", "medium", "hot", "smothered", "stacked", "sizzling", "sweet"];
+    adj_possibilities[BURGERS] = ["ranch", "create-your-own", "small", "large", "medium", "barbecue", "bbq", "texas", "smokey", "heartattack", "mino", "hot", "stacked", "fried", "mondo", "huge", "mega", "heart attack", "flame-broiled", "grilled", "smoked", "chicken", "pork"];
+    adj_possibilities[CHICKEN] = ["small", "large", "medium", "barbecue", "bbq", "buffalo", "smokey", "hot", "grilled", "crispy", "crunchy", "spicy", "fried", "baked", "broiled", "roasted", "spiced", "herb and garlic", "herb"];
+    adj_possibilities[COFFEE] = ["small", "large", "medium", "hot", "iced", "cold", "light-roast", "dark-roast"];
+    adj_possibilities[DESSERTS] = ["small", "large", "medium", "hot", "iced", "frosted", "sweet", "decadent", "sinful", "guilty"];
+    adj_possibilities[DINER] = ["small", "large", "medium", "heartattack", "smokey", "hot", "fried", "baked", "sliced", "stuffed", "special", "sale"];
+    adj_possibilities[ITALIAN] = ["homestyle", "wine", "vodka", "pomodoro", "pesto", "marinara", "small", "large", "medium", "hot", "garlic", "parmesan", "cream", "sauce", "stuffed"];
+    adj_possibilities[MEXICAN] = ["fiesta", "pastor", "chicharron", "barbacoa", "carne asada", "carnitas", "chorizo", "pollo", "caribe", "queso", "quacamole", "venezuelan", "dominican", "mexican", "cuban", "lingua", "supreme", "supremo", "adobo", "small", "large", "medium", "tex mex", "spicy", "hot", "crunchy", "soft", "gringo", "sizzling", "mexi"];
+    adj_possibilities[PIZZA] = ["marinara", "bianca", "italian", "milano", "create-your-own", "3 topping", "2 topping", "1 topping", "small", "large", "medium", "california", "new york", "detroit", "chicago", "deep-dish", "neopolitan", "white", "meat-lovers", "vegetarian", "supreme", "hot", "large", "extra-large", "personal", "sliced", "wood-oven", "brick-fired"];
+    adj_possibilities[PREMIUM] = ["house made", "small", "large", "medium", "salted", "confit", "premium", "rare", "gourmet", "juicy"];
+    adj_possibilities[SALAD] = ["create-your-own", "small", "large", "medium", "fresh", "healthy", "organic"];
+    adj_possibilities[SANDWICHES] = ["create-your-own", "small", "large", "medium", "sliced", "hot", "cold", "crunchy", "spicy", "fried"];
+    adj_possibilities[SEAFOOD] = ["sea", "ocean", "lake", "riverside", "small", "large", "medium", "breaded", "hot", "fried", "boiled", "blackened", "broiled", "baked"];
+    adj_possibilities[SUSHI] = ["ginger", "basil", "mixed", "peanut", "garlic", "chinese", "thai", "korean", "japanese", "small", "large", "medium", "spicy", "crunchy", "sweet and sour", "sesame", "fried", "steamed", "soy", "teriyaki"];
 
     adj_possibilities[ART] = ["artistic", "aesthetic", "beautiful", "moving", "balanced"];
     adj_possibilities[TECHNOLOGY] = ["technological", "advanced", "smart", "programmatic", "procedural"];
@@ -742,14 +742,34 @@ const initAdjs = () => {
     adj_possibilities[QUESTING] = ["questing", "searching", "exploring", "seeking", "hopeful", "faithful"];
 }
 
+//you can safely assume most/all of the music is created by IC
 const initSongs = () => {
-    song_possibilities[TWISTING] = ["no_gods_no_master.mp3", "good_luck_w_your_ears_honestly.mp3"];
-    song_possibilities[ANGELS] = ["watt_3_but_jr_owns_it.mp3", "get_it_because_pipe_organ.mp3"];
+    song_possibilities[TWISTING] = ["turntablist.mp3","justifiedRecursion.mp3","Take3.mp3", "Take2WhoopsItsAFractal.mp3", "Take1.mp3", "458627__tetrisrocker__clock.mp3", "Backrooms.mp3", "Drone1.mp3", "Drone2Fractal.mp3", "Drone3.mp3"];
+    /*
+        song_possibilities[LONELY] = ["Finish.mp3"];
+
+    */
+    song_possibilities[OCEAN] = ["icsongchillsave.mp3"];
+    song_possibilities[TECHNOLOGY] = ["riku_completed_i_think_idefk_anymore.mp3"];//id forgotten how much i like this one
+    song_possibilities[OBFUSCATION] = ["sounds.mp3","sometimes_you_have_fun.mp3"];
+    song_possibilities[CENSORSHIP] = ["sounds.mp3","sometimes_you_have_fun.mp3"];
+
+    song_possibilities[MUSIC] = ["waiting_music_var1.mp3","waiting_music_var2.mp3"];
+    song_possibilities[WASTE] = ["youbrokeit.mp3"];
+
     song_possibilities[LONELY] = ["Finish.mp3"];
-    song_possibilities[DARKNESS] = ["turntablist.mp3"];
-    song_possibilities[DECAY] = ["dear_god.mp3"];
-    song_possibilities[TECHNOLOGY] = ["i_think_its_finished_priska_turbo_time.mp3"];
-    song_possibilities[MUSIC] = ["riku_completed_i_think_idefk_anymore.mp3"];
+    song_possibilities[HUNTING] = ["piper_motif.mp3","get_it_because_pipe_organ.mp3", "IC_castlevaniaishloop.mp3"];
+    song_possibilities[GUIDING] = ["icbattlemusic.mp3", "chill_ocarina song.mp3", "i_literally_dont_even_remember_making_this_by_ic.mp3"];
+    song_possibilities[ENDINGS] = ["dead.mp3"];
+    song_possibilities[CLOWNS] = ["dear_god.mp3", "funky_beat.mp3"];
+    song_possibilities[ROYALTY] = ["i_dont_remember_making_this_either_by_ic.mp3"];
+    song_possibilities[ADDICTION] = ["i_think_its_finished_priska_turbo_time.mp3"];
+
+    song_possibilities[ZAP] = ["watt_3_but_jr_owns_it.mp3","turntablist.mp3","no_gods_no_master.mp3","newwatt.mp3","4-_Wattathon.mp3", "glitchy_song.mp3", "good_luck_w_your_ears_honestly.mp3"];
+    song_possibilities[BUGS] = ["funky_bees.mp3", "beeshitpost.mp3", "584661__felixblume__bee-recorded-individually-natacha.wav"]
+    song_possibilities[BURIED] = ["scratch1.mp3","scratch2.mp3","scratch3.mp3","scratch4.mp3","scratch5.mp3","scratch6.mp3","scratch7.mp3","scratch8.mp3","scratch9.mp3","scratch10.mp3","scratch11.mp3","scratch12.mp3","scratch13.mp3"];
+
+
 }
 
 const initFilters = () => {
@@ -1145,8 +1165,8 @@ const initWallPossibilities = () => {
 }
 
 
-const themeToAttackMultiplier = (key)=>{
-    const rotation ={};
+const themeToAttackMultiplier = (key) => {
+    const rotation = {};
     rotation[ART] = 1.5;
     rotation[TECHNOLOGY] = 2.0;
     rotation[TIME] = 1.5;
@@ -1164,7 +1184,7 @@ const themeToAttackMultiplier = (key)=>{
     rotation[DEATH] = 5.0;
     rotation[APOCALYPSE] = 5.0;
     rotation[ANGELS] = 0.5;
-    rotation[SERVICE] =1.5;
+    rotation[SERVICE] = 1.5;
     rotation[FAMILY] = 1.5;
     rotation[MAGIC] = 2.0;
     rotation[LIGHT] = 2.0;
@@ -1194,15 +1214,15 @@ const themeToAttackMultiplier = (key)=>{
     rotation[DARKNESS] = 3.0;
     rotation[KILLING] = 10.0; //obvious
     rotation[MUSIC] = 1.5;
-    rotation[DEFENSE] = 0.1; 
+    rotation[DEFENSE] = 0.1;
     rotation[QUESTING] = 2.0;
 
-    return rotation[key]?rotation[key]:0;
+    return rotation[key] ? rotation[key] : 0;
 }
 
 
-const themeToSpeedMultiplier = (key)=>{
-    const rotation ={};
+const themeToSpeedMultiplier = (key) => {
+    const rotation = {};
     rotation[ART] = 0.9;
     rotation[TECHNOLOGY] = 2.0;
     rotation[TIME] = 10.0;
@@ -1220,7 +1240,7 @@ const themeToSpeedMultiplier = (key)=>{
     rotation[DEATH] = 0.4;
     rotation[APOCALYPSE] = 0.5;
     rotation[ANGELS] = 2.0;
-    rotation[SERVICE] =1.4;
+    rotation[SERVICE] = 1.4;
     rotation[FAMILY] = 1.4;
     rotation[MAGIC] = 1.5;
     rotation[LIGHT] = 5.0;
@@ -1250,15 +1270,15 @@ const themeToSpeedMultiplier = (key)=>{
     rotation[DARKNESS] = 1.5;
     rotation[KILLING] = 3.0;
     rotation[MUSIC] = 2.0;
-    rotation[DEFENSE] = 0.5; 
+    rotation[DEFENSE] = 0.5;
     rotation[QUESTING] = 2.0;
 
-    return rotation[key]?rotation[key]:0;
+    return rotation[key] ? rotation[key] : 0;
 }
 
 
-const themeToDefenseMultiplier = (key)=>{
-    const rotation ={};
+const themeToDefenseMultiplier = (key) => {
+    const rotation = {};
     rotation[ART] = 1.5;
     rotation[TECHNOLOGY] = 2.0;
     rotation[TIME] = 0.5;
@@ -1276,7 +1296,7 @@ const themeToDefenseMultiplier = (key)=>{
     rotation[DEATH] = 0.5;
     rotation[APOCALYPSE] = 0.5;
     rotation[ANGELS] = 3.0;
-    rotation[SERVICE] =2.0;
+    rotation[SERVICE] = 2.0;
     rotation[FAMILY] = 2.0;
     rotation[MAGIC] = 1.5;
     rotation[LIGHT] = 0.5;
@@ -1309,11 +1329,11 @@ const themeToDefenseMultiplier = (key)=>{
     rotation[DEFENSE] = 10.0; //i mean, duh
     rotation[QUESTING] = 2.0;
 
-    return rotation[key]?rotation[key]:0;
+    return rotation[key] ? rotation[key] : 0;
 }
 
- const themeToColorRotation = (key)=>{
-    const rotation ={};
+const themeToColorRotation = (key) => {
+    const rotation = {};
     rotation[ART] = 0;
     rotation[TECHNOLOGY] = 10;
     rotation[TIME] = 20;
@@ -1331,7 +1351,7 @@ const themeToDefenseMultiplier = (key)=>{
     rotation[DEATH] = 140;
     rotation[APOCALYPSE] = 150;
     rotation[ANGELS] = 160;
-    rotation[SERVICE] =170;
+    rotation[SERVICE] = 170;
     rotation[FAMILY] = 180;
     rotation[MAGIC] = 190;
     rotation[LIGHT] = 200;
@@ -1364,7 +1384,7 @@ const themeToDefenseMultiplier = (key)=>{
     rotation[DEFENSE] = 255;
     rotation[QUESTING] = 245;
 
-    return rotation[key]?rotation[key]:0;
+    return rotation[key] ? rotation[key] : 0;
 }
 
 
@@ -1422,21 +1442,21 @@ const initSuperNames = () => {
 }
 
 const initLocations = () => {
-    location_possibilities[BAKERY] = ["hut","shop","bakery","oven","restaurant","kitchen","house"];
-    location_possibilities[BREAKFAST] = ["hut","restaurant","kitchen","house"];
-    location_possibilities[BURGERS ] = ["barbecue","bbq","bbq","bbq","hut","shack","restaurant","kitchen","house"];
-    location_possibilities[CHICKEN] = ["hut","coop","restaurant","kitchen","house"];
-    location_possibilities[COFFEE ] = ["hut","cafe","restaurant","kitchen","house"];
-    location_possibilities[DESSERTS ] = ["hut","parlor","restaurant","kitchen","house"];
-    location_possibilities[DINER] = ["barbecue","hut","bbq","bbq","bbq","bbq","bbq","bbq","smokehouse","cafeteria","diner","restaurant","kitchen","house","spoon","eatery"];
-    location_possibilities[ITALIAN ] = ["hut","restaurant","kitchen","house"];
-    location_possibilities[MEXICAN ] = ["hut","restaurant","kitchen","house","taqueria"];
-    location_possibilities[PIZZA ] = ["shack","kitchen","pizzeria","restaurant"];
-    location_possibilities[PREMIUM ] = ["hut","bistro","restaurant","kitchen","house","steakhouse"];
-    location_possibilities[SALAD ] = ["hut","restaurant","kitchen","house"];
-    location_possibilities[SANDWICHES ] = ["hut","shop","delicatessen","deli","bistro","restaurant","kitchen","house"];
-    location_possibilities[SEAFOOD ] = ["hut","cove","restaurant","kitchen","house"];
-    location_possibilities[SUSHI ] = ["hut","restaurant","kitchen","house"];
+    location_possibilities[BAKERY] = ["hut", "shop", "bakery", "oven", "restaurant", "kitchen", "house"];
+    location_possibilities[BREAKFAST] = ["hut", "restaurant", "kitchen", "house"];
+    location_possibilities[BURGERS] = ["barbecue", "bbq", "bbq", "bbq", "hut", "shack", "restaurant", "kitchen", "house"];
+    location_possibilities[CHICKEN] = ["hut", "coop", "restaurant", "kitchen", "house"];
+    location_possibilities[COFFEE] = ["hut", "cafe", "restaurant", "kitchen", "house"];
+    location_possibilities[DESSERTS] = ["hut", "parlor", "restaurant", "kitchen", "house"];
+    location_possibilities[DINER] = ["barbecue", "hut", "bbq", "bbq", "bbq", "bbq", "bbq", "bbq", "smokehouse", "cafeteria", "diner", "restaurant", "kitchen", "house", "spoon", "eatery"];
+    location_possibilities[ITALIAN] = ["hut", "restaurant", "kitchen", "house"];
+    location_possibilities[MEXICAN] = ["hut", "restaurant", "kitchen", "house", "taqueria"];
+    location_possibilities[PIZZA] = ["shack", "kitchen", "pizzeria", "restaurant"];
+    location_possibilities[PREMIUM] = ["hut", "bistro", "restaurant", "kitchen", "house", "steakhouse"];
+    location_possibilities[SALAD] = ["hut", "restaurant", "kitchen", "house"];
+    location_possibilities[SANDWICHES] = ["hut", "shop", "delicatessen", "deli", "bistro", "restaurant", "kitchen", "house"];
+    location_possibilities[SEAFOOD] = ["hut", "cove", "restaurant", "kitchen", "house"];
+    location_possibilities[SUSHI] = ["hut", "restaurant", "kitchen", "house"];
 
     location_possibilities[ART] = ["museum", "studio", "craft shop", "workshop"];
     location_possibilities[TECHNOLOGY] = ["server farm", "office", "isp"];
@@ -1492,21 +1512,21 @@ const initLocations = () => {
 
 const initObjects = () => {
 
-    object_possibilities[BAKERY] = ["bread","roll","baguette","muffin","slice","pastries","piece"];
-    object_possibilities[BREAKFAST] = ["pancakes","bacon","eggs","waffles","toast","french toast","scramble"];
-    object_possibilities[BURGERS ] = ["onion ring","cheese","fries","burger","fries","shake","tots","milkshake","butt","ribs","chicken","pork"];
-    object_possibilities[CHICKEN] = ["drumstick","leg","fry","chicken","wing","thigh","chicken breast","tender","fries"];
-    object_possibilities[COFFEE ] = ["coffee","americano","mocha","espresso","java","bean","tea","cafe","latte","cappuccino","mug"];
-    object_possibilities[DESSERTS ] = ["pie","cake","cupcake","ice cream","snow cone","gelato","sherbert","sorbet","italian ice","custard","frozen yogurt","milkshake","treat"];
-    object_possibilities[DINER] = ["casserole","soup","salad","stew","special","burger","fries","potato","wrap","bowl","soup","plate","special"];
-    object_possibilities[ITALIAN ] = ["ravioli","pasta","spaghetti","lasagna","parmesan","ziti","penne","noodles","tomato","eggplant"];
-    object_possibilities[MEXICAN ] = ["bean","torta","cubano","nacho","tostada","enchilada","mole","taco","burrito","fajita","arepa","empanada","taquito","quesadilla","salsa","dip"];
-    object_possibilities[PIZZA ] = ["slice","pizza","cheese","mozarella","calzone","stromboli","sandwich"];
-    object_possibilities[PREMIUM ] = ["lamb","veal","lobster","crab","fresh baked bread","potato","steak","chop"];
-    object_possibilities[SALAD ] = ["salad","fry","soup","breadbowl"];
-    object_possibilities[SANDWICHES ] = ["wrap","pita","sandwich","hoagie","sub"];
-    object_possibilities[SEAFOOD ] = ["fry","shrimp","fish","crab","seafood","lobster","boil","tilapia","hush puppies"];
-    object_possibilities[SUSHI ] = ["sushi","ramen","udon","katsu","salad","soup","satay","curry","hibachi","roll","bowl","fry","sashimi","nigiri","ball","tempura","dumpling","rice","gyoza","fried rice","noodle"];
+    object_possibilities[BAKERY] = ["bread", "roll", "baguette", "muffin", "slice", "pastries", "piece"];
+    object_possibilities[BREAKFAST] = ["pancakes", "bacon", "eggs", "waffles", "toast", "french toast", "scramble"];
+    object_possibilities[BURGERS] = ["onion ring", "cheese", "fries", "burger", "fries", "shake", "tots", "milkshake", "butt", "ribs", "chicken", "pork"];
+    object_possibilities[CHICKEN] = ["drumstick", "leg", "fry", "chicken", "wing", "thigh", "chicken breast", "tender", "fries"];
+    object_possibilities[COFFEE] = ["coffee", "americano", "mocha", "espresso", "java", "bean", "tea", "cafe", "latte", "cappuccino", "mug"];
+    object_possibilities[DESSERTS] = ["pie", "cake", "cupcake", "ice cream", "snow cone", "gelato", "sherbert", "sorbet", "italian ice", "custard", "frozen yogurt", "milkshake", "treat"];
+    object_possibilities[DINER] = ["casserole", "soup", "salad", "stew", "special", "burger", "fries", "potato", "wrap", "bowl", "soup", "plate", "special"];
+    object_possibilities[ITALIAN] = ["ravioli", "pasta", "spaghetti", "lasagna", "parmesan", "ziti", "penne", "noodles", "tomato", "eggplant"];
+    object_possibilities[MEXICAN] = ["bean", "torta", "cubano", "nacho", "tostada", "enchilada", "mole", "taco", "burrito", "fajita", "arepa", "empanada", "taquito", "quesadilla", "salsa", "dip"];
+    object_possibilities[PIZZA] = ["slice", "pizza", "cheese", "mozarella", "calzone", "stromboli", "sandwich"];
+    object_possibilities[PREMIUM] = ["lamb", "veal", "lobster", "crab", "fresh baked bread", "potato", "steak", "chop"];
+    object_possibilities[SALAD] = ["salad", "fry", "soup", "breadbowl"];
+    object_possibilities[SANDWICHES] = ["wrap", "pita", "sandwich", "hoagie", "sub"];
+    object_possibilities[SEAFOOD] = ["fry", "shrimp", "fish", "crab", "seafood", "lobster", "boil", "tilapia", "hush puppies"];
+    object_possibilities[SUSHI] = ["sushi", "ramen", "udon", "katsu", "salad", "soup", "satay", "curry", "hibachi", "roll", "bowl", "fry", "sashimi", "nigiri", "ball", "tempura", "dumpling", "rice", "gyoza", "fried rice", "noodle"];
 
     object_possibilities[ART] = ["chisel", "paint brush", "paint pot", "sponge", "apron", "canvas"];
     object_possibilities[TECHNOLOGY] = ["computer", "lap-top", "phone", "tablet"];
@@ -1715,21 +1735,21 @@ const initThemeOpinions = () => {
 
 //i would expect a/n [BLANK] individual such as yourself to come to such a conclusion, yes.
 const initCompliments = () => {
-    compliment_possibilities[BAKERY] = ["soft","flaky","tasty","delicious","yummy","hot","fresh","warm","toasted"];
-    compliment_possibilities[BREAKFAST] = ["tasty","delicious","yummy","hot","smothered","stacked","sizzling","sweet"];
-    compliment_possibilities[BURGERS ] = ["tasty","delicious","yummy","hot","stacked","fried","mondo","huge","mega","heart attack","flame-broiled","grilled","smoked"];
-    compliment_possibilities[CHICKEN] = ["tasty","delicious","yummy","hot","grilled","crispy","crunchy","spicy","fried","baked","broiled","roasted","spiced","herb and garlic","herb"];
-    compliment_possibilities[COFFEE ] = ["strong","tasty","delicious","yummy","hot","iced","cold"];
-    compliment_possibilities[DESSERTS ] = ["tasty","delicious","yummy","hot","iced","frosted","sweet","decadent","sinful","guilty"];
-    compliment_possibilities[DINER] = ["tasty","delicious","yummy","hot","fried","baked","sliced","stuffed","special","sale"];
-    compliment_possibilities[ITALIAN ] = ["tasty","delicious","yummy","baked","hot","garlic","parmesan","cream","sauce","stuffed"];
-    compliment_possibilities[MEXICAN ] = ["tasty","delicious","yummy","hot","crunchy","soft","gringo","sizzling","mexi"];
-    compliment_possibilities[PIZZA ] = ["tasty","delicious","yummy","hot","large","extra-large","personal","sliced","wood-oven","brick-fired"];
-    compliment_possibilities[PREMIUM ] = ["juicy","tasty","delicious","yummy","confit","premium","rare","gourmet","juicy"];
-    compliment_possibilities[SALAD ] = ["tasty","delicious","yummy","fresh","healthy","organic"];
-    compliment_possibilities[SANDWICHES ] = ["tasty","delicious","yummy","cold","hot","crunchy","spicy","fried","italian"];
-    compliment_possibilities[SEAFOOD ] = ["tasty","delicious","yummy","fried","boiled","blackened","broiled","baked"];
-    compliment_possibilities[SUSHI ] = ["tasty","delicious","yummy","spicy","crunchy","sweet and sour","sesame","fried","steamed","soy","teriyaki"];
+    compliment_possibilities[BAKERY] = ["soft", "flaky", "tasty", "delicious", "yummy", "hot", "fresh", "warm", "toasted"];
+    compliment_possibilities[BREAKFAST] = ["tasty", "delicious", "yummy", "hot", "smothered", "stacked", "sizzling", "sweet"];
+    compliment_possibilities[BURGERS] = ["tasty", "delicious", "yummy", "hot", "stacked", "fried", "mondo", "huge", "mega", "heart attack", "flame-broiled", "grilled", "smoked"];
+    compliment_possibilities[CHICKEN] = ["tasty", "delicious", "yummy", "hot", "grilled", "crispy", "crunchy", "spicy", "fried", "baked", "broiled", "roasted", "spiced", "herb and garlic", "herb"];
+    compliment_possibilities[COFFEE] = ["strong", "tasty", "delicious", "yummy", "hot", "iced", "cold"];
+    compliment_possibilities[DESSERTS] = ["tasty", "delicious", "yummy", "hot", "iced", "frosted", "sweet", "decadent", "sinful", "guilty"];
+    compliment_possibilities[DINER] = ["tasty", "delicious", "yummy", "hot", "fried", "baked", "sliced", "stuffed", "special", "sale"];
+    compliment_possibilities[ITALIAN] = ["tasty", "delicious", "yummy", "baked", "hot", "garlic", "parmesan", "cream", "sauce", "stuffed"];
+    compliment_possibilities[MEXICAN] = ["tasty", "delicious", "yummy", "hot", "crunchy", "soft", "gringo", "sizzling", "mexi"];
+    compliment_possibilities[PIZZA] = ["tasty", "delicious", "yummy", "hot", "large", "extra-large", "personal", "sliced", "wood-oven", "brick-fired"];
+    compliment_possibilities[PREMIUM] = ["juicy", "tasty", "delicious", "yummy", "confit", "premium", "rare", "gourmet", "juicy"];
+    compliment_possibilities[SALAD] = ["tasty", "delicious", "yummy", "fresh", "healthy", "organic"];
+    compliment_possibilities[SANDWICHES] = ["tasty", "delicious", "yummy", "cold", "hot", "crunchy", "spicy", "fried", "italian"];
+    compliment_possibilities[SEAFOOD] = ["tasty", "delicious", "yummy", "fried", "boiled", "blackened", "broiled", "baked"];
+    compliment_possibilities[SUSHI] = ["tasty", "delicious", "yummy", "spicy", "crunchy", "sweet and sour", "sesame", "fried", "steamed", "soy", "teriyaki"];
 
     compliment_possibilities[ART] = ["artistic"];
     compliment_possibilities[TECHNOLOGY] = ["technological"];
@@ -1837,21 +1857,21 @@ const initMiracles = () => {
 }
 
 const initInsults = () => {
-    insult_possibilities[BAKERY] = ["flavorless","gross","disgusting","room temperature","luke-warm","soggy","discount","burnt","day-old","canned","limp","over-cooked","frozen","stale"];
-    insult_possibilities[BREAKFAST] = ["flavorless","soggy","burnt","canned","limp","over-cooked","frozen","greasy"];
-    insult_possibilities[BURGERS ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","burnt","canned","limp","over-cooked","frozen","greasy"];
-    insult_possibilities[CHICKEN] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","frozen","greasy"];
-    insult_possibilities[COFFEE ] = ["weak","flavorless","watery","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","frozen","greasy"];
-    insult_possibilities[DESSERTS ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","room-temperature","melted","canned","limp","over-cooked","frozen"];
-    insult_possibilities[DINER] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","frozen","greasy"];
-    insult_possibilities[ITALIAN ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","frozen"];
-    insult_possibilities[MEXICAN ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","frozen"];
-    insult_possibilities[PIZZA ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","frozen"];
-    insult_possibilities[PREMIUM ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","snooty","over-priced"];
-    insult_possibilities[SALAD ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked"];
-    insult_possibilities[SANDWICHES ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","greasy","stale","thin"];
-    insult_possibilities[SEAFOOD ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked"];
-    insult_possibilities[SUSHI ] = ["flavorless","room temperature","luke-warm","soggy","discount","burnt","canned","limp","over-cooked","cheap"];
+    insult_possibilities[BAKERY] = ["flavorless", "gross", "disgusting", "room temperature", "luke-warm", "soggy", "discount", "burnt", "day-old", "canned", "limp", "over-cooked", "frozen", "stale"];
+    insult_possibilities[BREAKFAST] = ["flavorless", "soggy", "burnt", "canned", "limp", "over-cooked", "frozen", "greasy"];
+    insult_possibilities[BURGERS] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "burnt", "canned", "limp", "over-cooked", "frozen", "greasy"];
+    insult_possibilities[CHICKEN] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "frozen", "greasy"];
+    insult_possibilities[COFFEE] = ["weak", "flavorless", "watery", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "frozen", "greasy"];
+    insult_possibilities[DESSERTS] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "room-temperature", "melted", "canned", "limp", "over-cooked", "frozen"];
+    insult_possibilities[DINER] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "frozen", "greasy"];
+    insult_possibilities[ITALIAN] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "frozen"];
+    insult_possibilities[MEXICAN] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "frozen"];
+    insult_possibilities[PIZZA] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "frozen"];
+    insult_possibilities[PREMIUM] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "snooty", "over-priced"];
+    insult_possibilities[SALAD] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked"];
+    insult_possibilities[SANDWICHES] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "greasy", "stale", "thin"];
+    insult_possibilities[SEAFOOD] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked"];
+    insult_possibilities[SUSHI] = ["flavorless", "room temperature", "luke-warm", "soggy", "discount", "burnt", "canned", "limp", "over-cooked", "cheap"];
 
     insult_possibilities[ART] = ["trite"];
     insult_possibilities[TECHNOLOGY] = ["hacky"];
@@ -2231,21 +2251,21 @@ const initTastes = () => {
 }
 
 const initSmells = () => {
-    smell_possibilities[BAKERY] = ["warm bread","cinnamon","butter","yeast","burnt-toast"];
-    smell_possibilities[BREAKFAST] = ["bacon","maple syrup","sausage","rotten eggs"];
-    smell_possibilities[BURGERS ] = ["grease","beef","mustard","ketchup"];
-    smell_possibilities[CHICKEN] = ["grease","sage","tarragon"];
-    smell_possibilities[COFFEE ] = ["coffee","tea"];
-    smell_possibilities[DESSERTS ] = ["chocolate","vanilla","cinnamon","butter"];
-    smell_possibilities[DINER] = ["grease","coffee","bacon"];
-    smell_possibilities[ITALIAN ] = ["garlic","parsley","basil","garlic","garlic","garlic"];
-    smell_possibilities[MEXICAN ] = ["peppers","cumin","chilis"];
-    smell_possibilities[PIZZA ] = ["garlic","garlic","anchovies"];
-    smell_possibilities[PREMIUM ] = ["truffles","saffron","caviar","spices"];
-    smell_possibilities[SALAD ] = ["garlic","parsley","chives","grass"];
-    smell_possibilities[SANDWICHES ] = ["garlic","warm bread"];
-    smell_possibilities[SEAFOOD ] = ["the ocean","rotten fish","garlic","spices"];
-    smell_possibilities[SUSHI ] = ["rotten fish","sea salt","the ocean"];
+    smell_possibilities[BAKERY] = ["warm bread", "cinnamon", "butter", "yeast", "burnt-toast"];
+    smell_possibilities[BREAKFAST] = ["bacon", "maple syrup", "sausage", "rotten eggs"];
+    smell_possibilities[BURGERS] = ["grease", "beef", "mustard", "ketchup"];
+    smell_possibilities[CHICKEN] = ["grease", "sage", "tarragon"];
+    smell_possibilities[COFFEE] = ["coffee", "tea"];
+    smell_possibilities[DESSERTS] = ["chocolate", "vanilla", "cinnamon", "butter"];
+    smell_possibilities[DINER] = ["grease", "coffee", "bacon"];
+    smell_possibilities[ITALIAN] = ["garlic", "parsley", "basil", "garlic", "garlic", "garlic"];
+    smell_possibilities[MEXICAN] = ["peppers", "cumin", "chilis"];
+    smell_possibilities[PIZZA] = ["garlic", "garlic", "anchovies"];
+    smell_possibilities[PREMIUM] = ["truffles", "saffron", "caviar", "spices"];
+    smell_possibilities[SALAD] = ["garlic", "parsley", "chives", "grass"];
+    smell_possibilities[SANDWICHES] = ["garlic", "warm bread"];
+    smell_possibilities[SEAFOOD] = ["the ocean", "rotten fish", "garlic", "spices"];
+    smell_possibilities[SUSHI] = ["rotten fish", "sea salt", "the ocean"];
     smell_possibilities[ART] = ["paint", "dust", "paper"];
     smell_possibilities[TECHNOLOGY] = ["ozone", "plastic", "dust"];
     smell_possibilities[SPACE] = ["vacuum", "wind", "void"];
@@ -2499,11 +2519,11 @@ const imageLocation = "http://eyedolgames.com/Zampanini/images/";
 const getRestaurantName = (rand, theme_keys, weird) => {
 
     const quick = (key, cap) => {
-      return pickARandomThemeFromListAndGrabKey(rand, theme_keys, key, cap)
+        return pickARandomThemeFromListAndGrabKey(rand, theme_keys, key, cap)
     };
-  
-    const firstName = ()=>rand.pickFrom(first_names);
-    const lastName = ()=>rand.pickFrom(last_names);
+
+    const firstName = () => rand.pickFrom(first_names);
+    const lastName = () => rand.pickFrom(last_names);
     const goodwordsraw = `Happy
     Joy
     Blushing
@@ -2518,53 +2538,53 @@ const getRestaurantName = (rand, theme_keys, weird) => {
     Awesome
     Ultimate`;
     const goodwords = goodwordsraw.split("\n")
-  
+
     const possibilities = [
-      `${rand.pickFrom(['Mr','Miss','Mrs',"Mx","Master","Mistress","Lord","Lady"])}  ${quick(OBJECT, true)}`,
-      `${rand.pickFrom(['Mr','Miss','Mrs',"Mx","Master","Mistress"])} ${quick(ADJ, true)} ${quick(OBJECT, true)}`,
-      ` ${quick(OBJECT, true)} ${rand.pickFrom(["Master","Mistress","Lord","Lady"])}`,
-  
-      `${quick(ADJ, true)} ${quick(OBJECT, true)}`,
-      `${quick(ADJ, true)} ${quick(OBJECT, true)}`,
-  
-      `${quick(COMPLIMENT, true)} ${quick(OBJECT, true)}`,
-      `${quick( PERSON, true)}'s ${quick(OBJECT, true)}`,
-      `${quick( PERSON, true)}'s ${quick(OBJECT, true)}s`,
-      `${quick( PERSON, true)}'s ${quick(OBJECT, true)}s`,
-  
-      `${quick( PERSON, true)}'s ${quick(LOCATION, true)}`,
-      `${quick( PERSON, true)}'s ${quick(LOCATION, true)}`,
-      `${quick( PERSON, true)}'s ${quick(LOCATION, true)}`,
-      `${quick( PERSON, true)}'s ${quick(LOCATION, true)}`,
-  
-      `${quick( ADJ, true)} ${quick(LOCATION, true)}`,
-      `The ${quick( ADJ, true)} ${quick(LOCATION, true)}`,
-      `The ${quick(COMPLIMENT, true)} ${quick(OBJECT, true)}`,
-      `The ${rand.pickFrom(goodwords)} ${quick(OBJECT, true)}`,
-  
-      `${quick(ADJ, true)} ${quick( OBJECT, true)} ${quick(LOCATION, true)}`,
-      `${quick(COMPLIMENT, true)} ${quick(OBJECT, true)} ${quick(LOCATION, true)}`,
-      `${firstName()}'s ${quick( OBJECT, true)} ${quick(LOCATION, true)}`,
-      `${firstName()}'s ${quick( OBJECT, true)}`,
-      `${lastName()}'s ${quick( OBJECT, true)} ${quick(LOCATION, true)}`,
-      `${lastName()}'s ${quick( OBJECT, true)}`,
-      `${lastName()}'s`,
-  
-      `${lastName()}'s ${quick(COMPLIMENT, true)} ${quick( OBJECT, true)}`,
-      `${firstName()}'s ${quick(COMPLIMENT, true)} ${quick( OBJECT, true)}`,
-      `${lastName()}'s ${quick(ADJ, true)} ${quick( OBJECT, true)}`,
-      `${firstName()}'s ${quick(ADJ, true)} ${quick( OBJECT, true)}`,
-  
-      `${quick(OBJECT, true)} ${quick(LOCATION, true)}`
+        `${rand.pickFrom(['Mr', 'Miss', 'Mrs', "Mx", "Master", "Mistress", "Lord", "Lady"])}  ${quick(OBJECT, true)}`,
+        `${rand.pickFrom(['Mr', 'Miss', 'Mrs', "Mx", "Master", "Mistress"])} ${quick(ADJ, true)} ${quick(OBJECT, true)}`,
+        ` ${quick(OBJECT, true)} ${rand.pickFrom(["Master", "Mistress", "Lord", "Lady"])}`,
+
+        `${quick(ADJ, true)} ${quick(OBJECT, true)}`,
+        `${quick(ADJ, true)} ${quick(OBJECT, true)}`,
+
+        `${quick(COMPLIMENT, true)} ${quick(OBJECT, true)}`,
+        `${quick(PERSON, true)}'s ${quick(OBJECT, true)}`,
+        `${quick(PERSON, true)}'s ${quick(OBJECT, true)}s`,
+        `${quick(PERSON, true)}'s ${quick(OBJECT, true)}s`,
+
+        `${quick(PERSON, true)}'s ${quick(LOCATION, true)}`,
+        `${quick(PERSON, true)}'s ${quick(LOCATION, true)}`,
+        `${quick(PERSON, true)}'s ${quick(LOCATION, true)}`,
+        `${quick(PERSON, true)}'s ${quick(LOCATION, true)}`,
+
+        `${quick(ADJ, true)} ${quick(LOCATION, true)}`,
+        `The ${quick(ADJ, true)} ${quick(LOCATION, true)}`,
+        `The ${quick(COMPLIMENT, true)} ${quick(OBJECT, true)}`,
+        `The ${rand.pickFrom(goodwords)} ${quick(OBJECT, true)}`,
+
+        `${quick(ADJ, true)} ${quick(OBJECT, true)} ${quick(LOCATION, true)}`,
+        `${quick(COMPLIMENT, true)} ${quick(OBJECT, true)} ${quick(LOCATION, true)}`,
+        `${firstName()}'s ${quick(OBJECT, true)} ${quick(LOCATION, true)}`,
+        `${firstName()}'s ${quick(OBJECT, true)}`,
+        `${lastName()}'s ${quick(OBJECT, true)} ${quick(LOCATION, true)}`,
+        `${lastName()}'s ${quick(OBJECT, true)}`,
+        `${lastName()}'s`,
+
+        `${lastName()}'s ${quick(COMPLIMENT, true)} ${quick(OBJECT, true)}`,
+        `${firstName()}'s ${quick(COMPLIMENT, true)} ${quick(OBJECT, true)}`,
+        `${lastName()}'s ${quick(ADJ, true)} ${quick(OBJECT, true)}`,
+        `${firstName()}'s ${quick(ADJ, true)} ${quick(OBJECT, true)}`,
+
+        `${quick(OBJECT, true)} ${quick(LOCATION, true)}`
     ];
-  
+
     if (weird) {
-      possibilities.push(`${pickARandomThemeFromListAndGrabKey(rand, theme_keys, INSULT, true)} ${pickARandomThemeFromListAndGrabKey(rand, theme_keys, OBJECT, true)}`,)
-      possibilities.push(`${pickARandomThemeFromListAndGrabKey(rand, theme_keys, INSULT, true)} ${pickARandomThemeFromListAndGrabKey(rand, theme_keys, OBJECT, true)} ${pickARandomThemeFromListAndGrabKey(rand, theme_keys, LOCATION, true)}`,)
+        possibilities.push(`${pickARandomThemeFromListAndGrabKey(rand, theme_keys, INSULT, true)} ${pickARandomThemeFromListAndGrabKey(rand, theme_keys, OBJECT, true)}`,)
+        possibilities.push(`${pickARandomThemeFromListAndGrabKey(rand, theme_keys, INSULT, true)} ${pickARandomThemeFromListAndGrabKey(rand, theme_keys, OBJECT, true)} ${pickARandomThemeFromListAndGrabKey(rand, theme_keys, LOCATION, true)}`,)
     }
     return rand.pickFrom(possibilities);
-  }
-  
+}
+
 
 
 //auto populated by creating themes. 
@@ -2599,17 +2619,17 @@ class Theme {
         all_themes[key] = this;
     }
 
-    getImages = async ()=>{
-        if(!food_keys.includes(this.key)){
+    getImages = async () => {
+        if (!food_keys.includes(this.key)) {
             return [];
         }
-        if(this.images && this.images.length != 0){
+        if (this.images && this.images.length != 0) {
             return this.images;
-        }else{
+        } else {
             //this.images = await getImages("http://farragofiction.com/99RoomsSim/images/Rooms/");
 
-            let tmp = await getImages(imageLocation+this.key+"/");
-            this.images =tmp.map((item)=>imageLocation+this.key+"/"+item);
+            let tmp = await getImages(imageLocation + this.key + "/");
+            this.images = tmp.map((item) => imageLocation + this.key + "/" + item);
             return this.images;
         }
     }
@@ -2627,7 +2647,7 @@ class Theme {
     getPossibilitiesFor = (key) => {
         //console.log("JR NOTE: picking possibilities for ",key, "i am", this.key)
         if (!this.string_possibilities) {
-            return  ["we chose not to escape","the end is never the end","i am so scared", "why doesn't this end", "where is the end", "how do i get out", "???", "don't follow us", "don't come closer", "leave now", "forget this", "Zampiano"];
+            return ["we chose not to escape", "the end is never the end", "i am so scared", "why doesn't this end", "where is the end", "how do i get out", "???", "don't follow us", "don't come closer", "leave now", "forget this", "Zampiano"];
         }
         if ((key in this.string_possibilities) && this.string_possibilities[key]) {
             return this.string_possibilities[key];
@@ -2635,7 +2655,7 @@ class Theme {
             if (this.key !== "waste" && (food_keys.indexOf(this.key) === -1)) {
                 console.error(`[ERROR: ${key} NOT FOUND in ${this.key} ]`, this.string_possibilities);
             }
-            return  ["we chose not to escape","the end is never the end","i am so scared", "why doesn't this end", "where is the end", "how do i get out", "???", "don't follow us", "don't come closer", "leave now", "forget this", "Zampiano"];
+            return ["we chose not to escape", "the end is never the end", "i am so scared", "why doesn't this end", "where is the end", "how do i get out", "???", "don't follow us", "don't come closer", "leave now", "forget this", "Zampiano"];
         }
     }
 
