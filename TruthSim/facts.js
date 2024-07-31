@@ -93,7 +93,6 @@ const processFacts = () => {
   const minigames = Object.values(globalMiniGames);
   console.log(`JR NOTE: processing ${all_facts.length} facts across ${minigames.length} games. btw there are ${all_secrets.length} secrets. Better hope there's not more secrets than facts!!!`)
   for (let fact of all_facts) {
-    console.log("JR NOTE: processing fact: ", fact.title)
     for (let game of minigames) {
       if (game.respondsToFact(fact)) {
         fact.changesAMiniGame = true;
@@ -166,10 +165,13 @@ const getAllFactsWithThemeAndTier = (theme_key, tier) => {
   console.log("JR NOTE: getAllFactsWithThemeAndTier ", { theme_key, tier })
   console.log("JR NOTE: don't forget to call pleaseABHelpMeFindMissingFacts to make sure theres no themes with no facts")
 
+  const oddsSpiral = ()=>{
+    return Math.random()>0.95; //5% chance that a spiral fact will slip into some other theme unnoticed, its probably fine
+  }
   //sure could call getAllFactsWithTheme but why loop to get the facts then loop again to get the tiers
   const ret = [];
   for (let fact of all_facts) {
-    if (fact.theme_key_array.includes(theme_key)) {
+    if (fact.theme_key_array.includes(theme_key) || (oddsSpiral() && fact.theme_key_array.includes(TWISTING))) {
       if (tier === 1) {
         //level 1 is all facts of theme (theme_key_array on fact)
         ret.push(fact);
@@ -1158,12 +1160,186 @@ const egg_fact = createABulkFact(CHICKEN, "The Eye Killer Did Not Always Like Eg
 factsForSale.push(egg_fact);
 
 
+createABulkFact(COFFEE, "Witherby Hates Black Coffee","Every morning, Witherby drinks his coffee without cream or sugar. It's childish to add cream or sugar to dilute the taste, he thinks to himself.  Witherby is a miasma of small pleasures denied to himself in pursuit of an ideal that is not even his.",globalRand.pickFrom(all_secrets));
+createABulkFact(COFFEE, "Ria Drinks So Much Black Coffee","Milk only dilutes the caffeein and sugar isn't enough of a hit to keep her going when she's really deep into an obsessive research spiral. When she's in the hole she takes things stronger than coffee, things that leave her crashed and useless for days when it finally wears off. But even when she's doing her best for Lee-Hunter she can never wean herself of caffine.");
+
+
+createABulkFact(DESSERTS, "Doc Slaughter Eats One Dessert a Day","Doc Slaughter carefully posts the full nutritional profile of every single thing she eats, along with aesthetic pictures she uploads to whatever Instagram is called in this current universe.");
+
+createABulkFact(DESSERTS, "The Neighbor Makes An Amazing Pie","The Neighbor is oh so polite and helpful when he makes sure that all his new neighbors know just how much better he is at baking pies. Once he brought Doctor Fiona Slaughter a breathtakingly perfect brambleberry pie, along with it's recipe and her doorbell camera caught every word of her exquisite rebuttal about how it was such a shame but didn't The Neighbor know she was cutting carbs this week? She wouldn't expect the Neighbor to be caught up on current events, the poor dear must have spent weeks practicing this pie. She'll just take care of disposing of it for him. ....  She ate it in a single sitting, next to her dumpster, the only place the cameras could not see her. She hated herself for it. For breaking her carefully broadcast diet. For enjoying any possible thing that foul Thing created. For, above all else, HIDING IT from the Watchers whose very gaze she craved.  The Neighbor was well aware he won that particular gambit.", new Secrets(null,null,null,`The Neighbor vlogs about it. "Well, Dear Listeners, I will not be naming names but SOMEONE who would otherwise be in good standing in this community sure has been Keeping Secrets out by their dumpster. I just hope they learn to control themselves better, I worry for their commitment to the Watchers".  Fiona hates him so much, but as one of only a few people left from her home universe where everyone is commited to Watching and Being Watched constantly. No one else gets her as much. `));
+
+createABulkFact(DINER, "Hoon Likes Diners","When Hoon finally leaves the maze, a diner seems to be almost her natural habitat. Late at night, staking out a corner of it listening to her radio on low. Drinking coffee and smoking her cigarettes until the radio goes off and it's time to go out and do something.",globalRand.pickFrom(all_secrets));
+createABulkFact(DINER, "Sam has never been to a Diner","Once Sam's commitment to the Family is established, the Leash loosens a bit, but only for tasks that would benefit the Family.  Fancy parties held by influential people count. Small intimate gatherings at diners with friends do not.  When the Eye Killer lets slip that she met Sam's Big Brother at a diner eating eggs, they say nothing, but life gets just a little bit harder for their Big Brother after that. All in small ways. Untraceable ways. Nothing you can prove.");
+
+//all of the spiral has secrets (and a lot of facts , i'll make even more when its time)
+createABulkFact(TWISTING, "Your Brain Cannot Lie To You","What is a lie but a place where facts fail to meet realilty?  And what is your brain but the mechanism by which 'Reality' exists for you.  Everything your brain tells you is as close to reality as you will ever get. Think about dreams. Everything is so fucked up, in retrospect, to your waking mind, but to the sleeping mind that generates it all it is perfectly accurate.  After all, it is both the generator of the reality and the judge of it. If it knew there was inaccuracies, it would fix them when it was generating. ",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Your Brain Is Always Lying To You","What is a lie but a place where facts fail to meet reality? And what is 'Reality' but an ideal always out of reach of all of us. Plato's Cave may be a metaphor but it rings true. Your eyes see a mish mash of optical illusions, papered over blind spots, assumptions, biases and guesses. And that's likely your most useful sense! Lies pile upon lies and only if they stop being useful do we declare someone 'deranged'. We celebrate the fiction and declare it 'Reality'. 'But I SAW it Officer, are you calling me a LIAR????????!' is a trope both in fiction and 'Reality' and no less inaccurate because of it.  Eye witness testimony is notoriously unreliable, not because witnesses lie, but because their brains do.  Memory gets sanded smooth in the recalling, the retelling, the recursion. Things that don't quite fit your biases slowly warp and change until they do. Trusting your brain is to trust your biases. And they do exist for a reason. Should you REALLY spend hours of careful deliberation and processing to choose between two brands of oatmeal? No. Of course not. The answer is not to shake the Truth out of your brain in every case but instead to know WHEN to do it. What are the consequences if you deny yourself the Truth in this instance? Will you hurt someone? Yourself? Will the hurt be emotional? Financial? Physical? Mental? You have to decide for yourself when the stakes are too high to allow the Lies to creep in. And then you have to practice. Over and over. To recognize those moment even when you are scared. Even when you are angry. Even when you are in a rush. Because those are the moments you need to remember to seek the Truth.",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "You Are Not Immune From Propaganda","Every moment of every day you are exposed to unexamined thoughts. No one, no matter how smart and considerate, has the time to carefully examine each and every thought they have. It takes but a moment to think a thought but it can take hours to properly examine it. And of course, the very act of examining a single thought is itself filled with countless other thoughts. So your brain takes shortcuts. Rhymes or jingles are easier to remember. Things you've seen or heard repeatedly have the patina of Truth to them. Colors and Scents and Textures can be associated with all sorts of things, good and bad. Propaganda is the art of taking the everyday unexamined thoughts of an entire Culture and slipping new ones in without anyone noticing. 'I should try this brand, I've heard it's good from a lot of people!' says your unexamined thought. If you dug and dug and dug and rooted out its source you'd discover you think that because the ads on the radio mention its name a lot. Not because your friends are talking about it. 'Don't you know THOSE kinds of people cause crime?' you say to your friend, genuinely worried for their safety.  Because, of course, you heard it on the Internet so many times and in so many scary contexts it MUST be the Truth. The Truth hides behind many False Faces. You need to look closely at it when it matters. When you or someone else (even a stranger) wouldu be hurt. No one is asking you to seek the Truth in every breath. But you must consider that your very Mind can be a tool of those who mean you harm. You are not immune to Propaganda. ",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "The Truth Wears A False Face",`
+
+Hello, I'm Doctor Fiona Slaughter, psychologist. You'll have to forgive any foibles below, I am from an entirely different Universe where the Art of Seeing the Truth within one's Mind is not quite the same as in your own. And I must admit, I've never treated one from YOUR Vaunted Layer of Reality before. I highly recommend finding a Therapist from your Layer of Reality whether you feel strong or weak. We are a quite useful proffesion.
+
+It's a pleasure to meet you.
+
+Now. To begin.
+
+If you believe something to be True, deep down, it feels RIGHT. It might be a Hard Truth, an Unpleasant Fact, but there is a comfort in the certainty it brings you.
+
+OBVIOUSLY the sky is blue and the sun will rise tomorrow and all your friends hate you.
+
+What was that? Was there a problem with that last one? Did it not ring True for you?
+
+If so, I am so very very glad. For those who it did. Please. Examine it. Look closely. See the cracks in the Mask it wears? It's False Face? 
+
+It's hard, isn't it. You don't want to see those cracks. It feels painful. Isn't it better to accept a Painful Truth than to live with a sacharine rose colored Lie? Isn't it better to be pessimistic so nothing disappoints you and you can only be pleasantly surprised?   
+
+Observer. 
+
+That is the tendrils of the False Face speaking to you. The Lie within your brain does not wish for it's own destruction. It is afraid. And I am here to tell you that it does not have to be. We are not here to destroy it. We are not here to expose you to the pain of ripping it off like a bandaid. 
+
+It's okay. 
+
+Look at it. 
+
+Closely. 
+
+It's a Mask. 
+
+See how it cleverly constructed it out of Little Truths. Papered as it is with 'sometimes my friends don't have time for me' and 'sometimes my friends seem annoyed with me' and 'sometimes my friends have fun without me'. 
+
+It must feel so True, what lies underneath, when its covered itself in these thoughts that seem to be so accurate.  
+
+No. 
+
+It's okay. 
+
+Just a bit deeper. 
+
+Let's peel back another Layer of the Truth. 
+
+Here we go. 
+
+It's okay. 
+
+Now we are getting to the rotten core of the Lie. 
+
+Do you see this thought? 'My friends only pretend to like me' is a good one. Classic Lie. 
+
+Look behind it. What do you see? 'I am Psychic and Know Every Thought The People Around Me Have Perfectly'. And 'People Routinely Spend Hours Doing Things They Hate For No Reason'. and "My Friends All Have The Exact Same Opinion Of Me"
+
+Do those ring true, Observer? Congratulations on being Psychic if so. 
+
+This was, if it is not clear: Sarcasm.  The certainty of this False Truth is built on Obvious Lies. 
+
+People will occasionally do things they hate for money, or health, or some other specific benefit. People will even occasionally do things they hate (chores) for friends (such as help them move) because the temporary discomfort is worth the overall benefit (having a friend).  
+
+No one hates their own friends. Not in the way the False Face proudly crows.  
+
+And. I can not emphasize this enough: You do not know their minds. You are not psychic. Nor are your friends psychically bonded in their opinions of you.
+
+Why then, does this Truth cling to such Rotten Lies?
+
+A bit deeper. 
+
+"I am afraid that I will be abandoned and if I don't prepare for this inevitability it will Hurt Very Badly."
+
+There we are, Observer. 
+
+The False Face is afraid. The False Face wants to protect you. To protect itself. At it's core, under all the layers of Small Truths and False Facts, is a single Truth. It is afraid.
+
+It defends against your attempts to destroy it because it feels necessary to live. It is protecting you. It is protecting itself.
+
+But, we are not destroying this Thought. How could we?
+
+In the sanctity of your own Mind all we can do is look at it's Layers.
+
+And gift it new ones. 
+
+It clings to the False Truths of you being psychic and a chore.
+
+But these Rotten Facts are not making you stronger. Not making you more safe. 
+
+Quite the opposite. 
+
+Do you enjoy being told what you're thinking by someone else who is absolutely wrong? Do you enjoy them arguing with you that you don't know your own Mind?
+
+(If so, hi, glad you're enjoying this experience, I do note the irony. Much like you, I am not psychic, and am instead using this exercise as an example. The specifics will ring True to some and False to others. Hopefully the bones of the exercise will be Useful.)
+
+I'm sure your friends do not enjoy hearing they all hate you.
+
+The Fear you flee from grows stronger when you flee with a False Fact.
+
+Instead, you must arm yourself with the Truth.
+
+Just as I can not perfectly Know what is in your Mind, nor can I Know what Truths you must arm yourself with.
+
+You must find them for yourself.
+
+Some starting points may be helpful though, thoughts to replace the Rotten Cores with.
+
+If any of the following Ring True to you, it may be useful to practice when the Fear takes you.
+
+My Friends Get More Benefit From Me Than Burden.
+Sometimes My Friends Annoy Me But I Do Not Hate Them (So They Do Not Hate Me When I Am Annoying In Turn).
+My Friends Are Not A Hive Mind Who All Have The Same Opinion Of Me.
+Losing A Friend Hurts But Will Not Kill Me.
+Losing A Friend Hurts But I Can Make More.
+Losing A Friend Hurts But Those Who Remain Will Support Me.
+Just Because A Thought Feels True Does Not Mean It Is.
+Just Because A Thought Feels True Does Not Mean It Keeps Me Safe.
+Just Because A Thought Feels True Does Not Mean It Is Useful.
+Just Because A Thought Feels True Does Not Mean It Is Not Rotten.
+
+`,globalRand.pickFrom(all_secrets));
+
+createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is.","Doc Slaughter here with a quick BrainFact! The Truth sometimes hides under a False Face. Propaganda. Biases and Fears can all wear a False Face to get you to accept them.  You should not blindly accept any Fact you use to make an important decision. ",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Keeps Me Safe.","Doc Slaughter here with a quick BrainFact!  Sometimes we hurt ourselves so much out of fear. We isolate ourselves. We harm others. We cling to defense mechanism that no longer are helping.  Your own mind can be your own worst enemy, yet it is also the only means you have to protect yourself. You cannot and should not fight your own mind.  How can you help lead your Mind to the Truth that actually keeps you safe?",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is Useful.","Doc Slaughter here with a quick BrainFact!  Sometimes the Best Way to Gently Nudge off a False Face a Truth is wearing is to not acknowledge the Lie of it. The Truth dislikes being called a liar, after all.  If it feels True that 'you can't do anything right', for example, instead of trying to rip the Lie away, see if you can move around it.  'Okay, sure I can't do anything right, but its not USEFUL to focus on that. Instead, let's try to learn how to do one thing better.'. A useful thought gives you something to do to grow stronger, rather than an excuse to rot in place. (You can work up to disputing the Lie over time (remember that everyone has at least SOME things they can do right). ",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is Not Rotten.","Doc Slaughter here with a quick BrainFact! We cannot check the stability of EVERY thought as we have it. We would certainly never get anything done! However, there are moments when you can feel the precipice you stand on. The IMPORTANCE of the decision you are about to make. Doesn't it make sense to check our steps carefully before putting our weight down? If you are about to make a decision with consequence, think for as long as you need about all your assumptions. For example, if you're considering accepting a job offer that would require you to move, perhaps it is worth examining the thought that 'I may as well move because all my friends hate me anyways and will not miss me.' If nothing else, double checking with your friends if they would miss you seems prudent (to say nothing of the fact that it is highly unlikely they all hate you).",globalRand.pickFrom(all_secrets));
+
+
+createABulkFact(ITALIAN, "The Hostage Hates Italian Food","Call him the Hostage, call him the Boss, call him Big Brother. He doesn't care. Just call him late for dinner if it's gonna be Italian.  He feels like such a fuckin' stereotype when you serve that shit.",new Secrets("","","",`<a target="_blank" href='https://farragofiction.com/BrokenThread'>Click For Story</a>`));
+createABulkFact(ITALIAN, "The Himbo Loves Italian Food","Himbo aka The Right Hand loves the Italian food he grew up on, Yugioh, and The Eye Killer (and more recently, Camille). There's just something about monstrous women who could crush him utterly that does it for him. Too bad the Eye Killer doesn't seem likely to ever date ANYONE and that Camille lady seems to be *really* taken, if that one time he caught her with her girlfriend counts.  The Eye Killer called it 'That Fucking Timeline' the one time he mentioned it.");
 /*
 blorbos hit so far: 
 witherby
 neville
 devona
 hoon
+eye killer
+ria
+doc slaughter
+the neighbor
+
+blorbos todo:
+ronin
+nam
+CFO
+hostage/boss
+himbo/right hand
+wanda
+intern
+rava
+twig
+sam
+john
+camellia
+camille
+Khana
+Yongki
+Captain
+Lee-Hunter
+River
+Tyrfing
+Peewee
+Logan
+
+//pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
+//[MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI, WASTE, TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
+
+//first will have a secret, none of the others will
+createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
+createABulkFact(BAKERY, "","");
 
 //wiggler eater: https://archiveofourown.org/works/36742426/chapters/91657357
 //wiggler eater 2: https://archiveofourown.org/works/39322080
@@ -1196,11 +1372,6 @@ hoon
 //guides zampanio faq: https://archiveofourown.org/works/40961847
 //lavinraca fan work: https://archiveofourown.org/works/51166669
 
-//pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//[CHICKEN, COFFEE, DESSERTS, DINER, ITALIAN, MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI, WASTE, TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
-//first will have a secret, none of the others will
-createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
-createABulkFact(BAKERY, "","");
 
 */
