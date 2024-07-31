@@ -753,6 +753,7 @@ const initSongs = () => {
     song_possibilities[TECHNOLOGY] = ["riku_completed_i_think_idefk_anymore.mp3"];//id forgotten how much i like this one
     song_possibilities[OBFUSCATION] = ["sounds.mp3","sometimes_you_have_fun.mp3"];
     song_possibilities[CENSORSHIP] = ["sounds.mp3","sometimes_you_have_fun.mp3"];
+    song_possibilities[DARKNESS] = ["darkness.mp3"];
 
     song_possibilities[MUSIC] = ["waiting_music_var1.mp3","waiting_music_var2.mp3"];
     song_possibilities[WASTE] = ["youbrokeit.mp3"];
