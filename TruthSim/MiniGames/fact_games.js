@@ -13,7 +13,7 @@ class TwinsMiniGame extends MiniGame {
     singleFactInfoDump = (fact, ele, room, callback) => {
         const devonalabel = createElementWithClassAndParent("div", ele);
         //she adds all the emphasis she can to the point its hard to tell whats going on
-        devonalabel.innerHTML = `<hr><u><img height="31" src='images/devona_twin_by_guide.png'>Devona says: 'Here's Everything I Know About <i><b>'${fact.title}'</b></i> I Hope It's Okay!'</u><br><br>` //because she is too much information all at once not using css for her, she is all in the html, a mess of content and design that is practically unreadable
+        devonalabel.innerHTML = `<hr><u style='font-family: Courier New'><img height="31" src='images/devona_twin_by_guide.png'>Devona says: 'Here's Everything I Know About <i><b>'${fact.title}'</b></i> I Hope It's Okay!'</u><br><br>` //because she is too much information all at once not using css for her, she is all in the html, a mess of content and design that is practically unreadable
 
         const infodump = createElementWithClassAndParent("div", ele);
         infodump.style.padding = '31px';
@@ -95,15 +95,9 @@ class TwinsMiniGame extends MiniGame {
             */
             buttonYes.onclick = () => {
                 popup.remove();
-                for (let fact of globalDataObject.factsUnlocked) {
-                    if (fact.isIrrelevant) {
-                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
-
-                        if (fact === this.fact) {
-                            this.fact = undefined; //forget about it
-                        }
-                    }
-                }
+                removeAllIrrelevantFactsFromData();
+                this.fact = undefined; //get distracted from focusing on just one and look at what remains (easier on me)
+                console.log("JR NOTE: trying to restart game")
                 this.startGame(ele, room, callback);
 
                 document.querySelectorAll(".void-popup").forEach((x) => x.remove());
@@ -121,6 +115,7 @@ class TwinsMiniGame extends MiniGame {
     }
 
     startGame = (ele, room, callback) => {
+        console.log("JR NOTE: starting game LIGHT AND VOID")
         ele.innerHTML = "";
         const container = createElementWithClassAndParent("div", ele, "void");
 

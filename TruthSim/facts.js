@@ -103,6 +103,19 @@ const processFacts = () => {
   }
 }
 
+const removeAllIrrelevantFactsFromData = ()=>{
+  const factsToLoop = [...globalDataObject.factsUnlocked];
+  for (let fact of factsToLoop) {
+    if (fact.isIrrelevant) {
+        console.log("JR NOTE: before deleting irrelevant fact " + fact.title ,globalDataObject.factsUnlocked.length)
+        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
+        console.log("JR NOTE: after deleting irrelevant fact",globalDataObject.factsUnlocked.length)
+    }else{
+        console.log(`JR NOTE: ${fact.title} is not irrelevant.`)
+    }
+}
+}
+
 const pleaseABHelpMeFindMissingFacts = () => {
   let all_themes_keys = Object.keys(all_themes);
 
