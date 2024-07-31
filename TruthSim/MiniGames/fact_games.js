@@ -13,7 +13,9 @@ class TwinsMiniGame extends MiniGame {
     singleFactInfoDump = (fact, ele, room, callback) => {
         const devonalabel = createElementWithClassAndParent("div", ele);
         //she adds all the emphasis she can to the point its hard to tell whats going on
-        devonalabel.innerHTML = `<hr><u style='font-family: Courier New'><img height="31" src='images/devona_twin_by_guide.png'>Devona says: 'Here's Everything I Know About <i><b>'${fact.title}'</b></i> I Hope It's Okay!'</u><br><br>` //because she is too much information all at once not using css for her, she is all in the html, a mess of content and design that is practically unreadable
+        const isItUseful = fact.changesAMiniGame ? `You Can Use It For Something! (Sorry I Can't Say :())` : ``; //the Fragmnts of the Univere that spill from her mouth would drive you mad
+        const doesItHaveSecrets = fact.secret ? `It Has A Secret (Sorry I Can't Say :())` : "";//the Fragmnts of the Univere that spill from her mouth would drive you mad
+        devonalabel.innerHTML = `<hr><u style='font-family: Courier New'><img height="31" src='images/devona_twin_by_guide.png'>Devona says: 'Here's Everything I Know About <i><b>'${fact.title}'</b></i> I Hope It's Okay! ${isItUseful} ${doesItHaveSecrets}'</u><br><br>` //because she is too much information all at once not using css for her, she is all in the html, a mess of content and design that is practically unreadable
 
         const infodump = createElementWithClassAndParent("div", ele);
         infodump.style.padding = '31px';
@@ -29,7 +31,7 @@ class TwinsMiniGame extends MiniGame {
 
 
         infodump.style.marginBottom = "13px";
-        infodump.innerHTML = fact.lore_snippet.replaceAll("\n","<br>");
+        infodump.innerHTML = fact.lore_snippet.replaceAll("\n", "<br>");
         if (fact.isIrrelevant) {
             infodump.onmouseenter = () => {
                 this.offerToErase(ele, room, callback);
@@ -109,7 +111,7 @@ class TwinsMiniGame extends MiniGame {
     }
 
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         console.log("JR NOTE: twins should respond to a fact involving one of them dying by breaching")
         return false;
     }
@@ -118,6 +120,18 @@ class TwinsMiniGame extends MiniGame {
         console.log("JR NOTE: starting game LIGHT AND VOID")
         ele.innerHTML = "";
         const container = createElementWithClassAndParent("div", ele, "void");
+        const header = createElementWithClassAndParent("div", container);
+        header.innerHTML = `<u>${globalDataObject.factsUnlocked.length} Facts Total<br><br><hr>`;
+
+        const button = createElementWithClassAndParent("button", container);
+        button.innerText = "Erase All Facts With No Purpose?"
+        button.onclick = () => {
+            if (window.confirm("Even if You Do Not Know What Criteria 'Purpose' Has?")) {
+                removeAllFactsThatHaveNoUseOrSecret();
+                this.startGame(ele, room, callback);
+            }
+        }
+
 
         if (this.fact) {
             this.singleFactInfoDump(this.fact, container, room, callback);
