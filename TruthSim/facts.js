@@ -146,7 +146,7 @@ const pleaseABHelpMeFindMissingFacts = () => {
   //i had literally never heard of this command till i went to (of all things) a java proffesional converence
   //and i almost never get to use it
   console.table(resultsTable);
-  console.log(`AB NOTE: It seems there are ${numberTier1} Tier 1 Facts (which is to say, total facts), ${numberTier2} Tier 2 Facts and ${numberTier3} Tier 3 Facts`)
+  console.log(`AB NOTE: It seems there are ${numberTier1} Tier 1 Facts (which is to say, total facts), ${numberTier2} Tier 2 Facts and ${numberTier3} Tier 3 Facts. Oh Mighty Creator, please, do not forget that you allowed for TWISTING facts to show up with True Randomness. Because, it seems, you hate me and my task. For example: that fucking cat girl. `)
 }
 
 //if this is slow, store the facts on the theme object after the first time

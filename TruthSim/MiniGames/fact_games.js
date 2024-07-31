@@ -21,8 +21,15 @@ class TwinsMiniGame extends MiniGame {
         infodump.style.marginLeft = "auto";
         infodump.style.marginRight = "auto";
         infodump.style.width = "50%";
+        infodump.style.background = "black";
+        infodump.style.lineHeight = "18px";
+        infodump.style.fontSize = "14px";
+        infodump.style.fontFamily = "Courier New";
+
+
+
         infodump.style.marginBottom = "13px";
-        infodump.innerHTML = fact.lore_snippet;
+        infodump.innerHTML = fact.lore_snippet.replaceAll("\n","<br>");
         if (fact.isIrrelevant) {
             infodump.onmouseenter = () => {
                 this.offerToErase(ele, room, callback);
@@ -115,16 +122,18 @@ class TwinsMiniGame extends MiniGame {
 
     startGame = (ele, room, callback) => {
         ele.innerHTML = "";
+        const container = createElementWithClassAndParent("div", ele, "void");
+
         if (this.fact) {
-            this.singleFactInfoDump(this.fact, ele, room, callback);
+            this.singleFactInfoDump(this.fact, container, room, callback);
         } else {
 
             for (let fact of globalDataObject.factsUnlocked) {
-                this.singleFactInfoDump(fact, ele, room, callback);
+                this.singleFactInfoDump(fact, container, room, callback);
             }
         }
 
-        this.valuableCustomer(ele, callback);
+        this.valuableCustomer(container, callback);
 
     }
 

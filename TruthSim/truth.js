@@ -36,7 +36,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME, GAMERSHOPMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
   rottenMiniGames: [], //did you think the things vik erases sleep peacefully?
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down

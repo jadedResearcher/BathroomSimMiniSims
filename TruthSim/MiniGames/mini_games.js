@@ -38,9 +38,9 @@ const rooms_to_unlock = {
     1: EYEKILLERMINIGAME,
     2: PARKERMINIGAME,
     3: HOONMINIGAME,
-    4: GAMERSHOPMINIGAME,
-    5: RIAMINIGAME,
-    7: TWINSMINIEGAME,
+    4: TWINSMINIEGAME,
+    5: GAMERSHOPMINIGAME,
+    6: RIAMINIGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
@@ -232,9 +232,16 @@ class MiniGame {
     }
 
     //most games will overwrite this but the fact applied will change the music by defualt
-    handleMusic = () => {
+    handleMusic = (room) => {
+        let chosen_theme;
+
         if (this.fact) {
-            let chosen_theme = all_themes[pickFrom(this.fact.theme_key_array)];
+            chosen_theme = all_themes[pickFrom(this.fact.theme_key_array)];
+        } else if (room.themeKeys && room.themeKeys.length > 0) {
+            chosen_theme = all_themes[pickFrom(room.themeKeys)];
+        }
+
+        if (chosen_theme) {
             const music = chosen_theme.pickPossibilityFor(SONG, globalRand);
             if (music && (music.includes(".mp3") || music.includes(".wav"))) {//ignore the ominous bullshit
                 globalBGMusic.src = "audio/music/" + music;
@@ -244,7 +251,7 @@ class MiniGame {
     }
 
     setupGameHeader = (ele, room, winCallback, title, difficulty_guide, sprite) => {
-        this.handleMusic();
+        this.handleMusic(room);
         const header = createElementWithClassAndParent("div", ele, "game-header");
 
         const h1 = createElementWithClassAndParent("h1", header);
@@ -693,6 +700,7 @@ class ParkerMiniGame extends MiniGame {
 
     render = (ele, room, callback) => {
         this.initializeRender(ele);
+        //more target is easier game
         this.defense = Math.max(13 - Math.round(room.difficulty / 10 * this.getDefense(room)), 1); //on average three randos to kill instead of hatsune miku (less randos is more difficult)
 
         this.speed = 5 - Math.round(Math.min(this.getSpeed(room), 1)); //don't mess with speed much
