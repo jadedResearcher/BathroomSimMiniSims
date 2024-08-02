@@ -1077,6 +1077,54 @@ button:disabled{
   justify-content: space-evenly;
 }
 
+.secrets-container{
+  padding: 13px;
+  font-family: 'Courier New', Courier, monospace;
+  border: 2px dotted rgb(224, 159, 170);
+  background: pink;
+  color: rgb(206, 36, 64);
+}
+
+.secrets-container svg{
+  fill: pink;
+  height: 12px;
+  width: 12px;
+}
+
+.secret-img{
+  width: -webkit-fill-available;
+}
+
+.secret-vid{
+  width: -webkit-fill-available;
+}
+
+.secret-html{
+  margin: 13px;
+  background-color: #e4e4e4;
+  color: black;
+  line-height: 14px;
+  padding: 13px;
+}
+
+.secrets-container path{
+  stroke: rgb(226, 86, 109);
+}
+
+
+.secret-ele{
+  padding: 13px;
+  margin: 13px;
+  border: 2px dashed rgb(230, 97, 119);
+  background: white;
+  border-left-style: groove;
+  border-right-style: groove;
+  border-top-style: double;
+  border-bottom-style: none;
+  border-radius: 31px;
+  color: rgb(206, 36, 64);
+}
+
 #tab-header {
   border: 1px dashed #c4c4c4;
   width: 100%;

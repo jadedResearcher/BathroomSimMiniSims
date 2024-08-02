@@ -298,7 +298,6 @@ class MiniGame {
                     factsSelector.append(o.option);
                 }
                 factsSelector.onchange = (e) => {
-                    console.log("JR NOTE: change to value", factsSelector.value)
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === factsSelector.value) {
                             fact.mini_game_key = this.id;

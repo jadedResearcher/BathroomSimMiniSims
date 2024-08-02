@@ -72,10 +72,10 @@ class Secrets {
   html;
   constructor(video, audio, image, html) {
     all_secrets.push(this);
-    video = video;
-    audio = audio;
-    image = image;
-    html = html
+    this.video = video;
+    this.audio = audio;
+    this.image = image;
+    this.html = html
   }
 }
 
@@ -119,6 +119,59 @@ const removeAllIrrelevantFactsFromData = () => {
       globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
     }
   }
+}
+
+// if its debug mode grab all tier 3 facts, not just all tier 3 facts in your data unlock
+//she shows up if you pass a fact with the word "secret" in it
+//because she is well aware secrets aren't supposed to be exposed but they are just too juicy to keep to herself
+const docSlaughtersSecretEmporium =(debug=true)=>{
+  globalBGMusic.pause();
+  const facts = debug? all_facts:globalDataObject.factsUnlocked;
+  const tier3Facts  = facts.filter((f)=> f.secret);
+  globalTabContent.innerHTML = "";
+  const secretsContainer = createElementWithClassAndParent("div", globalTabContent, "secrets-container");
+
+  const imgContainer = createElementWithClassAndParent("div", secretsContainer, "blorbo-container");
+  const h1 = createElementWithClassAndParent("h1", secretsContainer);
+  h1.innerText = "Oh, my Darling Eyes, let me help you See the Secrets that have been cruely hidden from you!"
+  const img = createElementWithClassAndParent("img", imgContainer, "blorbo");
+  img.src = "images/Doctor_Fiona_Slaughter_by_guide.png";
+  const difficulty = createElementWithClassAndParent("div", secretsContainer, "difficulty-guide");
+  difficulty.innerHTML = "Where are my manners? I am Doctor Fiona Slaughter, licensed Pyschotherapist. Obviously none of these secrets are ones I am Legally Liable to keep. What an absurd law this Unvierse has! Imagine, information not being free!<br><br>"
+  const secretsContentContainer = createElementWithClassAndParent("div", secretsContainer);
+
+  for(let fact of tier3Facts){
+    const secretEle = createElementWithClassAndParent("div", secretsContentContainer, "secret-ele");
+    const title = createElementWithClassAndParent("div", secretEle);
+    title.innerHTML = '<b><u><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>' + fact.title + '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></b></u>';
+    const secret = fact.secret;
+    console.log("JR NOTE: secret is", secret)
+
+    if(secret.image){
+      const img = createElementWithClassAndParent("img", secretEle, "secret-img");
+      img.src = secret.image;
+    }
+
+    
+    if(secret.video){
+      const v = createElementWithClassAndParent("video", secretEle, "secret-vid");
+      v.src = secret.video;
+    }
+
+    if(secret.audio){
+      const a = createElementWithClassAndParent("audio", secretEle, "secret-audio");
+      a.src = secret.audio;
+      a.controls = true;
+    }
+
+    if(secret.html){
+      const html = createElementWithClassAndParent("div", secretEle, "secret-html");
+      html.innerHTML = secret.html;
+    }
+
+
+  }
+
 }
 
 const pleaseABHelpMeFindMissingFacts = () => {
@@ -601,44 +654,44 @@ const witherby_secret = new Secrets(null, null, null, `
 const WibbyFact = new Fact("Witherby Will Hear Your Confession", "Witherby is in charge of doing attachment work for the Training team, which means befriending monsters, randos, and monstrous randos. He's good at his job, a key component of which is staying proffesional and not getting too attached. He's one cool operator.", [SPYING], 1, 2, 1, witherby_secret);
 
 const devona_secret = new Secrets(null, null, null, `Devona's Secret
-
+<br><br>
 Neville isn't much of a talker. If you ask him about his sister he'll tell you she's his twin sister and that's all there is to say on the matter.
-
+<br><br>
 He won't find it all too relevant to point out that they're not blood related or anything. Not literal twins. Devona is two years older than him and what does that have anything to do with being twins?
-
+<br><br>
 Nah, he knows deep in his unknowable depths that age and genetics have nothing to do with being twins. They complete each other in a way that simply isn't possible for most people. Strengths and weaknesses inverted and supporting each other forever and ever.
-
+<br><br>
 He also won't find it all too relevant to point out that some people who REALLY need to learn when to shut up might take issue with the fact that Devona is a "sister" at all. What kinda parts you were born with barely even matter compared to how brave and smart and capable his sister is.
-
+<br><br>
 Still. There's things he finds plenty relevant that he ALSO won't bring up. The way her hair looks all crusted with blood after some drunk asshole with an expired license hit her when she was walking home from the soup shop down the street.
-
+<br><br>
 Getting.
-
+<br><br>
 Getting the soup.
-
+<br><br>
 He asked for.
-
+<br><br>
 Because he was sick of eating preserved mall food. 
-
+<br><br>
 The blood on her hair the blood on her hair she looks so small and limp and and and and  the feathers the rage the no no no no no no no
-
+<br><br>
 
 Everything is fine :)  
-
+<br><br>
 He becomes the Scariest Thing and then he Punishes anything that hurts him and it hurts hurts hurts hurts to lose Devona his twin his sister part of him the Light part of him part of him is missing it hurts it hurts it hurts so that means he has to Punish because because then he's in control and it won't happen again he won't be hurt again he can't can't can't can't can't he can't find the Bad Thing he's looking and looking but he can't because the part of him that FINDS THINGS IS DEAD!
-
+<br><br>
 Everything is fine!
-
+<br><br>
 The Bad Thing is gone and Witherby is talking to him and he likes Witherby. Witherby is nice. 
-
+<br><br>
 They are in a nice room and there are no doors and no windows and  he isn't a bird anymore and Witherby seems so sad so he hugs Wibby and tells him he loves him and he's glad they could get away for a while, just the two of them. 
-
+<br><br>
 The rest of the world can go to hell, for all he cares. It's irrelevant.
-
+<br><br>
 Witherby seemed so sad when he said that. That's okay though because hugs will make it all better and then they can have soup some tasty food and watch some movies and Everything is fine :) 
-
+<br><br>
 The 27th of March will never happen again.
-
+<br><br>
 
 `);
 const DevonaFact = new Fact("Devona is So So Scared All The Time", "Even though Devona is afraid of pretty much everything, she somehow finds the strength to act as the Training Team's scout, exploring deep within the Mall Maze and beyond. She brings everything she finds back to Neville, who trims it down to just the essentials and passes it off to Ria, who figures out what it all means in the Big Picture. And of course, Camille is in charge of everyone. She has so many people she cares about she is grateful, all things considered, that she's AroAce. Who has time for dating when there's so much to focus on? ", [KNOWING, LIGHT, HUNTING, SPYING], 1, 1, 1, devona_secret);
@@ -836,14 +889,14 @@ const nam_secret = new Secrets(null, null, "images/john_andcamellia_andrava___gu
 
 const arg_secret_by_ic2 = new Secrets(null, null, null, `IC says: 
 During one of the many business management books I had to digest in college, I came across a concept that it called 'the First Follower'. If you've done any kind of business-related degree, you may know it as the Leadership Lessons from a Dancing Guy video. You can't miss it.
-
+<br><br>
 I'll play by play it for you. It's a video about a lone guy dancing in a crowd. Then, he's joined by a second guy, and he invites his friends to join in. Soon it becomes three, and from there it becomes a crowd where everyone's now dancing, as it by fever. Managers use it to illustrate the power of having someone to 1. give legitimacy to the ideas presented by the lone nut, and 2. show people exactly how to join in. People are hypersocial, after all. They like going with what the group is doing.
-
+<br><br>
 My point is that it's funny that the Witness is so utterly denied his follower role by way of narrative. There's moments in which that lapse is bridged, sure, but... those can't last for longer than the time you're taking reading this sentence. Todd and Wanda are meant to be dancing together, it's by design. Muse and Lord, or whatever will have you, and they complement each other as much as they doom each other to two very, very similar fates. Though it's subjective, I guess. They're about as doomed as you and I are to die, but there's always other shit going on. They're mostly having very separate bad times, but very separate good times as well...
-
+<br><br>
 See? I just spoke that into your head right now. Now it's gone.
 That's the fun part about Zampanio being a hellish browser experience instead of a book or comic or what have you: the breadth between each nugget of lore is long enough that this 'portal' into that reality just opened and closed in your mind before you could acknowledge it. And now you have to reread this paragraph or find another one.
-
+<br><br>
 Isn't that interesting?
 `);
 
@@ -1076,6 +1129,8 @@ const dehydration_secret = new Secrets("videos/dehydration_secret.mp4", null, nu
 
 </div>`);
 
+const waste_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/jr.mp4","http://knucklessux.com/JR/AudioLogs/Raw/looping_spiral_without_stability.mp3","http://knucklessux.com/JR/AudioLogs/images/advice_crow.gif");
+const grace_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/graces.mp4","http://knucklessux.com/JR/AudioLogs/Raw/wanderer_coffin.mp3","http://knucklessux.com/JR/AudioLogs/images/0616.png","A Grace of Rage broke session 85 and the memory leak that resulted from it became Zampanio. Or. Not quite? It became a Universe with a Lord who controlled the setting and didn't know they were a Lord. What would your subconscious remake the very space of your Universe into if it had the power? For this Lord, it was their favorite creepy pasta.")
 
 const truth_secret = new Secrets(null, null, null, `
 Truth would do literally anything to get into more minds.
@@ -1308,16 +1363,22 @@ Just Because A Thought Feels True Does Not Mean It Keeps Me Safe.
 Just Because A Thought Feels True Does Not Mean It Is Useful.
 Just Because A Thought Feels True Does Not Mean It Is Not Rotten.
 
-`, globalRand.pickFrom(all_secrets));
+`, new Secrets(null,null,null,"<a target='_blank' href ='https://www.tumblr.com/brytning/730846616018468864?source=share'>https://www.tumblr.com/brytning/730846616018468864?source=share</a>"));
 
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is.", "Doc Slaughter here with a quick BrainFact! The Truth sometimes hides under a False Face. Propaganda. Biases and Fears can all wear a False Face to get you to accept them.  You should not blindly accept any Fact you use to make an important decision. ", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Keeps Me Safe.", "Doc Slaughter here with a quick BrainFact!  Sometimes we hurt ourselves so much out of fear. We isolate ourselves. We harm others. We cling to defense mechanism that no longer are helping.  Your own mind can be your own worst enemy, yet it is also the only means you have to protect yourself. You cannot and should not fight your own mind.  How can you help lead your Mind to the Truth that actually keeps you safe?", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is Useful.", "Doc Slaughter here with a quick BrainFact!  Sometimes the Best Way to Gently Nudge off a False Face a Truth is wearing is to not acknowledge the Lie of it. The Truth dislikes being called a liar, after all.  If it feels True that 'you can't do anything right', for example, instead of trying to rip the Lie away, see if you can move around it.  'Okay, sure I can't do anything right, but its not USEFUL to focus on that. Instead, let's try to learn how to do one thing better.'. A useful thought gives you something to do to grow stronger, rather than an excuse to rot in place. (You can work up to disputing the Lie over time (remember that everyone has at least SOME things they can do right). ", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is Not Rotten.", "Doc Slaughter here with a quick BrainFact! We cannot check the stability of EVERY thought as we have it. We would certainly never get anything done! However, there are moments when you can feel the precipice you stand on. The IMPORTANCE of the decision you are about to make. Doesn't it make sense to check our steps carefully before putting our weight down? If you are about to make a decision with consequence, think for as long as you need about all your assumptions. For example, if you're considering accepting a job offer that would require you to move, perhaps it is worth examining the thought that 'I may as well move because all my friends hate me anyways and will not miss me.' If nothing else, double checking with your friends if they would miss you seems prudent (to say nothing of the fact that it is highly unlikely they all hate you).", globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Zampanio is a Really Fun Game","Zampanio Is A Really Fun Game And You Are Already Playing It.",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Some Facts Have Secrets","Within this maze there are both secrets and Secrets :) :) ;)",globalRand.pickFrom(all_secrets));
 
 
-createABulkFact(ITALIAN, "The Hostage Hates Italian Food", "Call him the Hostage, call him the Boss, call him Big Brother. He doesn't care. Just call him late for dinner if it's gonna be Italian.  He feels like such a fuckin' stereotype when you serve that shit.", new Secrets("", "", "", `<a target="_blank" href='https://farragofiction.com/BrokenThread'>Click For Story</a>`));
+createABulkFact(ITALIAN, "The Hostage Hates Italian Food", "Call him the Hostage, call him the Boss, call him Big Brother. He doesn't care. Just call him late for dinner if it's gonna be Italian.  He feels like such a fuckin' stereotype when you serve that shit.", new Secrets("", "", "", `<a target="_blank" href='http://farragofiction.com/BrokenThread'>Click For Story</a>`));
 createABulkFact(ITALIAN, "The Himbo Loves Italian Food", "Himbo aka The Right Hand loves the Italian food he grew up on, Yugioh, and The Eye Killer (and more recently, Camille). There's just something about monstrous women who could crush him utterly that does it for him. Too bad the Eye Killer doesn't seem likely to ever date ANYONE and that Camille lady seems to be *really* taken, if that one time he caught her with her girlfriend counts.  The Eye Killer called it 'That Fucking Timeline' the one time he mentioned it.");
+
+createABulkFact(WASTE, "A Waste Breaks My Damn Code","Though....it really is designed for that, isn't it? ;) ;) ;)", waste_secret);
+createABulkFact(WASTE, "A Grace Teaches Other To Break My Damn Code","The more the merrier! Have you told your friends what lies within the javascript console? What about the DOM?", grace_secret);
+
 /*
 blorbos hit so far: 
 witherby
