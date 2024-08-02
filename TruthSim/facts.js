@@ -128,24 +128,31 @@ const docSlaughtersSecretEmporium =(debug=true)=>{
   globalBGMusic.pause();
   const facts = debug? all_facts:globalDataObject.factsUnlocked;
   const tier3Facts  = facts.filter((f)=> f.secret);
+
   globalTabContent.innerHTML = "";
   const secretsContainer = createElementWithClassAndParent("div", globalTabContent, "secrets-container");
 
   const imgContainer = createElementWithClassAndParent("div", secretsContainer, "blorbo-container");
   const h1 = createElementWithClassAndParent("h1", secretsContainer);
-  h1.innerText = "Oh, my Darling Eyes, let me help you See the Secrets that have been cruely hidden from you!"
+  h1.innerText = `Oh, my Darling Eyes, let me help you See the ${tier3Facts.length} Secrets (hidden within ${facts.length} Facts) that have been cruely hidden from you!`
   const img = createElementWithClassAndParent("img", imgContainer, "blorbo");
   img.src = "images/Doctor_Fiona_Slaughter_by_guide.png";
   const difficulty = createElementWithClassAndParent("div", secretsContainer, "difficulty-guide");
   difficulty.innerHTML = "Where are my manners? I am Doctor Fiona Slaughter, licensed Pyschotherapist. Obviously none of these secrets are ones I am Legally Liable to keep. What an absurd law this Unvierse has! Imagine, information not being free!<br><br>"
   const secretsContentContainer = createElementWithClassAndParent("div", secretsContainer);
 
+
+  if(tier3Facts.length === 0){
+    const secretEle = createElementWithClassAndParent("div", secretsContentContainer, "secret-ele");
+    secretEle.innerHTML = "Oh no! I am so sorry my Darling Eyes, but I simply have no secrets for you right now. You might need to collect more facts. <br><br>But have no fear. I have some squirreled away for just such an Occasion! <a target='_blank' href='http://farragofiction.com/DocSlaughterFileServer/'>here!</a> And of course, while these may not be SECRETS, of course, perhaps you would enjoy playing a <a target='_blank' href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night'>typing game</a> while you wait? "
+    return;
+  }
+  
   for(let fact of tier3Facts){
     const secretEle = createElementWithClassAndParent("div", secretsContentContainer, "secret-ele");
     const title = createElementWithClassAndParent("div", secretEle);
     title.innerHTML = '<b><u><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>' + fact.title + '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></b></u>';
     const secret = fact.secret;
-    console.log("JR NOTE: secret is", secret)
 
     if(secret.image){
       const img = createElementWithClassAndParent("img", secretEle, "secret-img");
@@ -308,6 +315,8 @@ class Fact {
 console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROOM IS IMPLEMENTED, PARSE NEW LINES AS BR")
 //title should be unique
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
+//any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
+const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.");
 
 /*
 if having trouble thinking of a fact, link to another part of zampaniosim, including my puzzlebox
@@ -701,7 +710,7 @@ const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the 
 
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact,secretFact,];
 
 
 

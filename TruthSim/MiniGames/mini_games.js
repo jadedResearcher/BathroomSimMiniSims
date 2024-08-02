@@ -298,6 +298,11 @@ class MiniGame {
                     factsSelector.append(o.option);
                 }
                 factsSelector.onchange = (e) => {
+                    ////any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
+                    if(factsSelector.value.toLowerCase().includes("secret")){
+                        docSlaughtersSecretEmporium(false);
+                        return;
+                    }
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === factsSelector.value) {
                             fact.mini_game_key = this.id;
