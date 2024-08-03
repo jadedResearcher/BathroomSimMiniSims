@@ -147,7 +147,7 @@ const docSlaughtersSecretEmporium =(debug=true)=>{
     secretEle.innerHTML = "Oh no! I am so sorry my Darling Eyes, but I simply have no secrets for you right now. You might need to collect more facts. <br><br>But have no fear. I have some squirreled away for just such an Occasion! <a target='_blank' href='http://farragofiction.com/DocSlaughterFileServer/'>here!</a> And of course, while these may not be SECRETS, of course, perhaps you would enjoy playing a <a target='_blank' href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night'>typing game</a> while you wait? "
     return;
   }
-  
+
   for(let fact of tier3Facts){
     const secretEle = createElementWithClassAndParent("div", secretsContentContainer, "secret-ele");
     const title = createElementWithClassAndParent("div", secretEle);
@@ -710,7 +710,7 @@ const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the 
 
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact,secretFact,];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact,secretFact,wasteFact, glitchFact];
 
 
 
@@ -1141,6 +1141,8 @@ const dehydration_secret = new Secrets("videos/dehydration_secret.mp4", null, nu
 const waste_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/jr.mp4","http://knucklessux.com/JR/AudioLogs/Raw/looping_spiral_without_stability.mp3","http://knucklessux.com/JR/AudioLogs/images/advice_crow.gif");
 const grace_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/graces.mp4","http://knucklessux.com/JR/AudioLogs/Raw/wanderer_coffin.mp3","http://knucklessux.com/JR/AudioLogs/images/0616.png","A Grace of Rage broke session 85 and the memory leak that resulted from it became Zampanio. Or. Not quite? It became a Universe with a Lord who controlled the setting and didn't know they were a Lord. What would your subconscious remake the very space of your Universe into if it had the power? For this Lord, it was their favorite creepy pasta.")
 
+//if a secret has nothing at all in it it will glitch out with doc slaughter
+const glitched_secret = new Secrets();
 const truth_secret = new Secrets(null, null, null, `
 Truth would do literally anything to get into more minds.
 
@@ -1385,9 +1387,9 @@ createABulkFact(TWISTING, "Some Facts Have Secrets","Within this maze there are 
 createABulkFact(ITALIAN, "The Hostage Hates Italian Food", "Call him the Hostage, call him the Boss, call him Big Brother. He doesn't care. Just call him late for dinner if it's gonna be Italian.  He feels like such a fuckin' stereotype when you serve that shit.", new Secrets("", "", "", `<a target="_blank" href='http://farragofiction.com/BrokenThread'>Click For Story</a>`));
 createABulkFact(ITALIAN, "The Himbo Loves Italian Food", "Himbo aka The Right Hand loves the Italian food he grew up on, Yugioh, and The Eye Killer (and more recently, Camille). There's just something about monstrous women who could crush him utterly that does it for him. Too bad the Eye Killer doesn't seem likely to ever date ANYONE and that Camille lady seems to be *really* taken, if that one time he caught her with her girlfriend counts.  The Eye Killer called it 'That Fucking Timeline' the one time he mentioned it.");
 
-createABulkFact(WASTE, "A Waste Breaks My Damn Code","Though....it really is designed for that, isn't it? ;) ;) ;)", waste_secret);
+const wasteFact =createABulkFact(WASTE, "A Waste Breaks My Damn Code","Though....it really is designed for that, isn't it? ;) ;) ;)  Or have you not checked out the javascript console to see how easy I made this 'game' to hack?", waste_secret);
 createABulkFact(WASTE, "A Grace Teaches Other To Break My Damn Code","The more the merrier! Have you told your friends what lies within the javascript console? What about the DOM?", grace_secret);
-
+const glitchFact = createABulkFact(WASTE, "Waste's Tend To Crash Reality","If you find yourself breaking all of reality, you may need to restart. (Most hacks you do should clear up if you refresh the page, but if you hacked your save file you may need a more thorough flame) http://farragofiction.com/SBURBSim/gnosis.html", glitched_secret);
 /*
 blorbos hit so far: 
 witherby
