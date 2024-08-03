@@ -4,7 +4,18 @@ whole facts are stored to memory which makes them resistent to patches but ALSO 
 have rooms where you can define your own facts
 zampanio style
 */
+let infinite_art = [];
+let eyes = [];
 
+const getCorruptedImages = async ()=>{
+  const infinite_art_source = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/infinte_art_machine/";
+  const eyes_source="http://farragofiction.com/ZampanioEyes4/";
+  infinite_art = await getImages(infinite_art_source)
+  infinite_art = infinite_art.map((i)=>infinite_art_source+i);
+  eyes = await getImages(eyes_source)
+  eyes = eyes.map((i)=> eyes_source+i);
+
+}
 const getAllUnlockedFactTitles = () => {
   const ret = [];
   for (let fact of globalDataObject.factsUnlocked) {
@@ -154,27 +165,43 @@ const docSlaughtersSecretEmporium =(debug=true)=>{
     title.innerHTML = '<b><u><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>' + fact.title + '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></b></u>';
     const secret = fact.secret;
 
+    let something = false;
     if(secret.image){
       const img = createElementWithClassAndParent("img", secretEle, "secret-img");
       img.src = secret.image;
+      something=true;
     }
 
     
     if(secret.video){
       const v = createElementWithClassAndParent("video", secretEle, "secret-vid");
       v.src = secret.video;
+      something=true;
     }
 
     if(secret.audio){
       const a = createElementWithClassAndParent("audio", secretEle, "secret-audio");
       a.src = secret.audio;
       a.controls = true;
+      something=true;
     }
 
     if(secret.html){
       const html = createElementWithClassAndParent("div", secretEle, "secret-html");
       html.innerHTML = secret.html;
+      something=true;
     }
+
+    //its a corrupt secret, empty of meaning
+    //don't worry, we have a way of injecting meaning to the void :) :) ;)
+    if(!something){
+      const img1 = createElementWithClassAndParent("img", secretEle, "corrupted-img");
+      img1.src = pickFrom(infinite_art);
+
+      const img2 = createElementWithClassAndParent("img", secretEle, "corrupted-img");
+      img2.src = pickFrom(eyes);
+    }
+    
 
 
   }
@@ -709,10 +736,6 @@ const DevonaFact = new Fact("Devona is So So Scared All The Time", "Even though 
 const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the Twins gets hurt, the other turns into a hulking bird with a slavering maw in their chest and hunts down whoever is responsible in order to eat them in a single bite. It's usually Neville doing The Hunt, since Devona is extremely easy to harm. Unfortunately, his tracking skills leave a lot to be desired, so it can take a very long time for him to finally consume the perpetrator. He won't stop to eat or drink or rest until he does, though.  When Devona is instead the Hunter, she knows *exactly* where her target is, but can take a long time to reach them because of her low stamina and massive frame. She rests a lot and eats and drinks and makes slow and steady progress towards the exact location she needs to be at.", [KILLING, HUNTING], 3, 3, 3, devona_secret);
 
 
-//every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact,secretFact,wasteFact, glitchFact];
-
-
 
 
 /*
@@ -1241,7 +1264,6 @@ cuz nam is heart
 left a mark on her very soul
 */
 const egg_fact = createABulkFact(CHICKEN, "The Eye Killer Did Not Always Like Eggs", "Before the Universe was the Universe, the Lost and Forgotten gathered in a maze on the moon and had nothing to do. They reverted to old patterns and fears and the Eye Killer was so so scared. No one could truly die in Truth's Horridors, but the only way she could be safe was to Kill.  One day the least scary of the Forgotten chose to cook her an egg rather than be killed. This simple act of, in her mind, kindness stayed with her, even she eroded from a person to a Concept.  Her Soul is indelibly marked with the memory of the kindness of something so pathetic and scared. Anyone who dons the edgy trenchcoat of the Killer will spare those who offer Egg.", new Secrets(null, null, null, "<a target='_blank' href='https://archiveofourown.org/works/34792621'>The Story</a>"));
-factsForSale.push(egg_fact);
 
 
 createABulkFact(COFFEE, "Witherby Hates Black Coffee", "Every morning, Witherby drinks his coffee without cream or sugar. It's childish to add cream or sugar to dilute the taste, he thinks to himself.  Witherby is a miasma of small pleasures denied to himself in pursuit of an ideal that is not even his.", globalRand.pickFrom(all_secrets));
@@ -1390,6 +1412,7 @@ createABulkFact(ITALIAN, "The Himbo Loves Italian Food", "Himbo aka The Right Ha
 const wasteFact =createABulkFact(WASTE, "A Waste Breaks My Damn Code","Though....it really is designed for that, isn't it? ;) ;) ;)  Or have you not checked out the javascript console to see how easy I made this 'game' to hack?", waste_secret);
 createABulkFact(WASTE, "A Grace Teaches Other To Break My Damn Code","The more the merrier! Have you told your friends what lies within the javascript console? What about the DOM?", grace_secret);
 const glitchFact = createABulkFact(WASTE, "Waste's Tend To Crash Reality","If you find yourself breaking all of reality, you may need to restart. (Most hacks you do should clear up if you refresh the page, but if you hacked your save file you may need a more thorough flame) http://farragofiction.com/SBURBSim/gnosis.html", glitched_secret);
+
 /*
 blorbos hit so far: 
 witherby
@@ -1465,3 +1488,8 @@ createABulkFact(BAKERY, "","");
 
 
 */
+
+//every fact the closer can give you
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact,egg_fact,secretFact];
+
+

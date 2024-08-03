@@ -85,6 +85,7 @@ window.onload = async () => {
 
   initThemes();
   await getRandos();
+  await getCorruptedImages();
   initAllMiniGames();
   processFacts(); //has to happen after mini games because it uses both
   load();
