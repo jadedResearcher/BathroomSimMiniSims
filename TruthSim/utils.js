@@ -53,6 +53,39 @@ function animateTitle(i, functionToCheckIfStop) {
     stopOrGo()
 }
 
+//modified from jackElope/lavinraca/lavinraca
+//animps comes from parent, decides if it spawns animating or not
+turnImageIntoGrid = async (parent, imagesrc, gridSize, animation_name) => {
+  let fucked_up_image_holder = createElementWithClassAndParent("div", parent, "holder");
+
+  fucked_up_image_holder.style.background = "black";
+  const size = gridSize;
+  let index = 0;
+  for (let y = 0; y < 475; y += size) {
+    for (let x = 0; x < 475; x += size) {
+      index ++;
+      //https://www.youtube.com/watch?v=7KTzcPmVZSY
+      let box = createElementWithClassAndParent("div", fucked_up_image_holder, "box");
+      box.style.pointerEvents = "none";
+      box.style.position = "absolute";
+      box.style.top = y + "px";
+      box.style.left = x + "px";
+      box.style.opacity = Math.random();
+      box.style.backgroundPositionY = 475 - y + "px";
+      box.style.backgroundPositionX = 475 - x + "px";
+      box.style.backgroundImage = `url('${imagesrc}')`;
+      box.style.width = size + "px";
+      box.style.height = size + "px";
+      box.style.setProperty("--animdel", `${index * Math.random()}ms`);
+      box.style.animation = `${animation_name} ${30*Math.random()}s infinite linear var(--animdel, 0s)`;
+      box.style.animationPlayState  = " var(--animps, paused)"
+    }
+
+  }
+  return fucked_up_image_holder;
+}
+
+
 
 const fuckShitUPAnimation = (ele) => {
   const mildAmount = getRandomNumberBetween(1, 15 * 5);

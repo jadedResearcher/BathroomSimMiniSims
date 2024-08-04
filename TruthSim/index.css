@@ -9,6 +9,16 @@
   src: url("warioware-original/warioware-original.ttf");
 }
 
+[data-animation] {
+  animation:
+    var(--animps, running);
+}
+
+.box{
+  animation-play-state: --animps;
+}
+
+
 body {
   background: black;
   color: white;
@@ -1096,9 +1106,11 @@ button:disabled{
 }
 
 .corrupted-img{
-  height: 50%;
+  height: 475px;
+  width: 475px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 
 .secret-vid{

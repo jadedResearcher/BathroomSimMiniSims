@@ -7,13 +7,13 @@ zampanio style
 let infinite_art = [];
 let eyes = [];
 
-const getCorruptedImages = async ()=>{
+const getCorruptedImages = async () => {
   const infinite_art_source = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/infinte_art_machine/";
-  const eyes_source="http://farragofiction.com/ZampanioEyes4/";
+  const eyes_source = "http://farragofiction.com/ZampanioEyes4/";
   infinite_art = await getImages(infinite_art_source)
-  infinite_art = infinite_art.map((i)=>infinite_art_source+i);
+  infinite_art = infinite_art.map((i) => infinite_art_source + i);
   eyes = await getImages(eyes_source)
-  eyes = eyes.map((i)=> eyes_source+i);
+  eyes = eyes.map((i) => eyes_source + i);
 
 }
 const getAllUnlockedFactTitles = () => {
@@ -114,7 +114,7 @@ const processFacts = () => {
   }
 }
 
-const removeAllFactsThatHaveNoUseOrSecret = ()=>{
+const removeAllFactsThatHaveNoUseOrSecret = () => {
   const factsToLoop = [...globalDataObject.factsUnlocked];
   for (let fact of factsToLoop) {
     if (!(fact.changesAMiniGame || fact.secret)) {
@@ -135,10 +135,10 @@ const removeAllIrrelevantFactsFromData = () => {
 // if its debug mode grab all tier 3 facts, not just all tier 3 facts in your data unlock
 //she shows up if you pass a fact with the word "secret" in it
 //because she is well aware secrets aren't supposed to be exposed but they are just too juicy to keep to herself
-const docSlaughtersSecretEmporium =(debug=true)=>{
+const docSlaughtersSecretEmporium = (debug = true) => {
   globalBGMusic.pause();
-  const facts = debug? all_facts:globalDataObject.factsUnlocked;
-  const tier3Facts  = facts.filter((f)=> f.secret);
+  const facts = debug ? all_facts : globalDataObject.factsUnlocked;
+  const tier3Facts = facts.filter((f) => f.secret);
 
   globalTabContent.innerHTML = "";
   const secretsContainer = createElementWithClassAndParent("div", globalTabContent, "secrets-container");
@@ -153,55 +153,78 @@ const docSlaughtersSecretEmporium =(debug=true)=>{
   const secretsContentContainer = createElementWithClassAndParent("div", secretsContainer);
 
 
-  if(tier3Facts.length === 0){
+  if (tier3Facts.length === 0) {
     const secretEle = createElementWithClassAndParent("div", secretsContentContainer, "secret-ele");
     secretEle.innerHTML = "Oh no! I am so sorry my Darling Eyes, but I simply have no secrets for you right now. You might need to collect more facts. <br><br>But have no fear. I have some squirreled away for just such an Occasion! <a target='_blank' href='http://farragofiction.com/DocSlaughterFileServer/'>here!</a> And of course, while these may not be SECRETS, of course, perhaps you would enjoy playing a <a target='_blank' href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night'>typing game</a> while you wait? "
     return;
   }
 
-  for(let fact of tier3Facts){
+  for (let fact of tier3Facts) {
     const secretEle = createElementWithClassAndParent("div", secretsContentContainer, "secret-ele");
     const title = createElementWithClassAndParent("div", secretEle);
     title.innerHTML = '<b><u><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>' + fact.title + '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></b></u>';
     const secret = fact.secret;
 
     let something = false;
-    if(secret.image){
+    if (secret.image) {
       const img = createElementWithClassAndParent("img", secretEle, "secret-img");
       img.src = secret.image;
-      something=true;
+      something = true;
     }
 
-    
-    if(secret.video){
+
+    if (secret.video) {
       const v = createElementWithClassAndParent("video", secretEle, "secret-vid");
       v.src = secret.video;
-      something=true;
+      something = true;
     }
 
-    if(secret.audio){
+    if (secret.audio) {
       const a = createElementWithClassAndParent("audio", secretEle, "secret-audio");
       a.src = secret.audio;
       a.controls = true;
-      something=true;
+      something = true;
     }
 
-    if(secret.html){
+    if (secret.html) {
       const html = createElementWithClassAndParent("div", secretEle, "secret-html");
       html.innerHTML = secret.html;
-      something=true;
+      something = true;
     }
 
     //its a corrupt secret, empty of meaning
     //don't worry, we have a way of injecting meaning to the void :) :) ;)
-    if(!something){
-      const img1 = createElementWithClassAndParent("img", secretEle, "corrupted-img");
-      img1.src = pickFrom(infinite_art);
+    if (!something) {
+      const button = createElementWithClassAndParent("button", secretEle);
+      button.innerHTML = "Surely This Can't Be All There Is."
 
-      const img2 = createElementWithClassAndParent("img", secretEle, "corrupted-img");
-      img2.src = pickFrom(eyes);
+      const div = createElementWithClassAndParent("div", secretEle, "corrupted-img");
+      div.style.setProperty("--animps", `paused`);
+
+      div.onmouseenter = () => {
+        div.style.setProperty("--animps", `running`);
+      }
+
+      div.onmouseleave = () => {
+        div.style.setProperty("--animps", `paused`);
+      }
+
+      div.onmousedown = () => {
+        div.style.setProperty("--animps", `running`);
+      }
+
+      div.onmouseup = () => {
+        div.style.setProperty("--animps", `paused`);
+      }
+
+      button.onclick = () => {
+        div.innerHTML = "";
+        const img1 = turnImageIntoGrid(div, pickFrom(infinite_art), 25, "fadeOut");
+        const img2 = turnImageIntoGrid(div, pickFrom(eyes), 25, "fadeOut");
+      }
+
     }
-    
+
 
 
   }
@@ -1161,8 +1184,8 @@ const dehydration_secret = new Secrets("videos/dehydration_secret.mp4", null, nu
 
 </div>`);
 
-const waste_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/jr.mp4","http://knucklessux.com/JR/AudioLogs/Raw/looping_spiral_without_stability.mp3","http://knucklessux.com/JR/AudioLogs/images/advice_crow.gif");
-const grace_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/graces.mp4","http://knucklessux.com/JR/AudioLogs/Raw/wanderer_coffin.mp3","http://knucklessux.com/JR/AudioLogs/images/0616.png","A Grace of Rage broke session 85 and the memory leak that resulted from it became Zampanio. Or. Not quite? It became a Universe with a Lord who controlled the setting and didn't know they were a Lord. What would your subconscious remake the very space of your Universe into if it had the power? For this Lord, it was their favorite creepy pasta.")
+const waste_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/jr.mp4", "http://knucklessux.com/JR/AudioLogs/Raw/looping_spiral_without_stability.mp3", "http://knucklessux.com/JR/AudioLogs/images/advice_crow.gif");
+const grace_secret = new Secrets("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/rewards/graces.mp4", "http://knucklessux.com/JR/AudioLogs/Raw/wanderer_coffin.mp3", "http://knucklessux.com/JR/AudioLogs/images/0616.png", "A Grace of Rage broke session 85 and the memory leak that resulted from it became Zampanio. Or. Not quite? It became a Universe with a Lord who controlled the setting and didn't know they were a Lord. What would your subconscious remake the very space of your Universe into if it had the power? For this Lord, it was their favorite creepy pasta.")
 
 //if a secret has nothing at all in it it will glitch out with doc slaughter
 const glitched_secret = new Secrets();
@@ -1396,22 +1419,22 @@ Just Because A Thought Feels True Does Not Mean It Keeps Me Safe.
 Just Because A Thought Feels True Does Not Mean It Is Useful.
 Just Because A Thought Feels True Does Not Mean It Is Not Rotten.
 
-`, new Secrets(null,null,null,"<a target='_blank' href ='https://www.tumblr.com/brytning/730846616018468864?source=share'>https://www.tumblr.com/brytning/730846616018468864?source=share</a>"));
+`, new Secrets(null, null, null, "<a target='_blank' href ='https://www.tumblr.com/brytning/730846616018468864?source=share'>https://www.tumblr.com/brytning/730846616018468864?source=share</a>"));
 
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is.", "Doc Slaughter here with a quick BrainFact! The Truth sometimes hides under a False Face. Propaganda. Biases and Fears can all wear a False Face to get you to accept them.  You should not blindly accept any Fact you use to make an important decision. ", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Keeps Me Safe.", "Doc Slaughter here with a quick BrainFact!  Sometimes we hurt ourselves so much out of fear. We isolate ourselves. We harm others. We cling to defense mechanism that no longer are helping.  Your own mind can be your own worst enemy, yet it is also the only means you have to protect yourself. You cannot and should not fight your own mind.  How can you help lead your Mind to the Truth that actually keeps you safe?", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is Useful.", "Doc Slaughter here with a quick BrainFact!  Sometimes the Best Way to Gently Nudge off a False Face a Truth is wearing is to not acknowledge the Lie of it. The Truth dislikes being called a liar, after all.  If it feels True that 'you can't do anything right', for example, instead of trying to rip the Lie away, see if you can move around it.  'Okay, sure I can't do anything right, but its not USEFUL to focus on that. Instead, let's try to learn how to do one thing better.'. A useful thought gives you something to do to grow stronger, rather than an excuse to rot in place. (You can work up to disputing the Lie over time (remember that everyone has at least SOME things they can do right). ", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "Just Because A Thought Feels True Does Not Mean It Is Not Rotten.", "Doc Slaughter here with a quick BrainFact! We cannot check the stability of EVERY thought as we have it. We would certainly never get anything done! However, there are moments when you can feel the precipice you stand on. The IMPORTANCE of the decision you are about to make. Doesn't it make sense to check our steps carefully before putting our weight down? If you are about to make a decision with consequence, think for as long as you need about all your assumptions. For example, if you're considering accepting a job offer that would require you to move, perhaps it is worth examining the thought that 'I may as well move because all my friends hate me anyways and will not miss me.' If nothing else, double checking with your friends if they would miss you seems prudent (to say nothing of the fact that it is highly unlikely they all hate you).", globalRand.pickFrom(all_secrets));
-createABulkFact(TWISTING, "Zampanio is a Really Fun Game","Zampanio Is A Really Fun Game And You Are Already Playing It.",globalRand.pickFrom(all_secrets));
-createABulkFact(TWISTING, "Some Facts Have Secrets","Within this maze there are both secrets and Secrets :) :) ;)",globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Zampanio is a Really Fun Game", "Zampanio Is A Really Fun Game And You Are Already Playing It.", globalRand.pickFrom(all_secrets));
+createABulkFact(TWISTING, "Some Facts Have Secrets", "Within this maze there are both secrets and Secrets :) :) ;)", globalRand.pickFrom(all_secrets));
 
 
 createABulkFact(ITALIAN, "The Hostage Hates Italian Food", "Call him the Hostage, call him the Boss, call him Big Brother. He doesn't care. Just call him late for dinner if it's gonna be Italian.  He feels like such a fuckin' stereotype when you serve that shit.", new Secrets("", "", "", `<a target="_blank" href='http://farragofiction.com/BrokenThread'>Click For Story</a>`));
 createABulkFact(ITALIAN, "The Himbo Loves Italian Food", "Himbo aka The Right Hand loves the Italian food he grew up on, Yugioh, and The Eye Killer (and more recently, Camille). There's just something about monstrous women who could crush him utterly that does it for him. Too bad the Eye Killer doesn't seem likely to ever date ANYONE and that Camille lady seems to be *really* taken, if that one time he caught her with her girlfriend counts.  The Eye Killer called it 'That Fucking Timeline' the one time he mentioned it.");
 
-const wasteFact =createABulkFact(WASTE, "A Waste Breaks My Damn Code","Though....it really is designed for that, isn't it? ;) ;) ;)  Or have you not checked out the javascript console to see how easy I made this 'game' to hack?", waste_secret);
-createABulkFact(WASTE, "A Grace Teaches Other To Break My Damn Code","The more the merrier! Have you told your friends what lies within the javascript console? What about the DOM?", grace_secret);
-const glitchFact = createABulkFact(WASTE, "Waste's Tend To Crash Reality","If you find yourself breaking all of reality, you may need to restart. (Most hacks you do should clear up if you refresh the page, but if you hacked your save file you may need a more thorough flame) http://farragofiction.com/SBURBSim/gnosis.html", glitched_secret);
+const wasteFact = createABulkFact(WASTE, "A Waste Breaks My Damn Code", "Though....it really is designed for that, isn't it? ;) ;) ;)  Or have you not checked out the javascript console to see how easy I made this 'game' to hack?", waste_secret);
+createABulkFact(WASTE, "A Grace Teaches Other To Break My Damn Code", "The more the merrier! Have you told your friends what lies within the javascript console? What about the DOM?", grace_secret);
+const glitchFact = createABulkFact(WASTE, "Waste's Tend To Crash Reality", "If you find yourself breaking all of reality, you may need to restart. (Most hacks you do should clear up if you refresh the page, but if you hacked your save file you may need a more thorough flame) http://farragofiction.com/SBURBSim/gnosis.html", glitched_secret);
 
 /*
 blorbos hit so far: 
@@ -1490,6 +1513,6 @@ createABulkFact(BAKERY, "","");
 */
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact,egg_fact,secretFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
 
 

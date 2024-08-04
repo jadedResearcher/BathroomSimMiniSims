@@ -813,7 +813,7 @@ class BettingMiniGame extends MiniGame {
             }
 
             const youLose = async () => {
-                if (this.fact && this.fact.title.toLowerCase().includes("LUCK")) {
+                if (this.fact && this.fact.title.toUpperCase().includes("LUCK")) {
                     return youWin();
                 }
                 const sassOptions = ["Nothin' personal, kid.", "Them's the breaks. ", "It happens.", "Sucks to be you.", "Better luck next time, kid.", "Luck of the draw's rough.", "Fate's a bitch like that, yeah.", "We all gotta pack up our bags sometime."]
