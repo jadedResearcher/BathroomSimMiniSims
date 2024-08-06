@@ -405,7 +405,7 @@ class EyeKillerMiniGame extends MiniGame {
         const defense = this.defense;
         const speed = this.speed;
         const tint = this.tint;
-        if (this.fact.title.includes("The Eye Killer Did Not Always Like Eggs")) {
+        if (this.fact?.title.includes("The Eye Killer Did Not Always Like Eggs")) {
             this.respondToEgg(ele, room, callback);
             return;
         }

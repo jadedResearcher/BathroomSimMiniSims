@@ -789,7 +789,7 @@ const renderGnosisTab = () => {
         quipEle.innerHTML = gnosisQuips[k];
       }
     }
-    globalDataObject.truthCurrentValue = 0; s
+    globalDataObject.truthCurrentValue = 0; 
   }
 
   const index = 0;

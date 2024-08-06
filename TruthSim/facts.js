@@ -299,6 +299,7 @@ const getAllFactsWithThemeAndTier = (theme_key, tier) => {
   //sure could call getAllFactsWithTheme but why loop to get the facts then loop again to get the tiers
   const ret = [];
   for (let fact of all_facts) {
+    console.log("JR NOTE: fact is", fact)
     if (fact.theme_key_array.includes(theme_key) || (oddsSpiral() && fact.theme_key_array.includes(TWISTING))) {
       if (tier === 1) {
         //level 1 is all facts of theme (theme_key_array on fact)
@@ -338,6 +339,9 @@ class Fact {
     this.lore_snippet = lore_snippet;
     this.secret = secrets;
     this.theme_key_array = theme_key_array;
+    if(!this.theme_key_array){
+      this.theme_key_array = [TWISTING];
+    }
     this.damage_multiplier = damage_multiplier;
     this.defense_multipler = defense_multipler;
     this.speed_multipler = speed_multipler;
