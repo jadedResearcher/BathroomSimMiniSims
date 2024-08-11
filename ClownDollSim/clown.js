@@ -75,14 +75,25 @@ class Doll {
         this.render(parent, dollContainer); //rerender over the last container
       }
 
-      if (l.allowColorEditing) {
-        const colorContainer = createElementWithClassAndParent("div", controls);
-        colorContainer.innerText = "JR NOTE: TODO"
-      }
+
 
 
       const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
       await waitForImage(layerImage, l.current_part);
+
+      if (l.allowColorEditing) {
+        const colorContainer = createElementWithClassAndParent("div", controls);
+        if (!l.colorMap[l.current_part]) {
+          l.colorMap[l.current_part] = uniqueColors(layerImage); //expensive call, cache it as you can
+        }
+        colorContainer.innerHTML = "JR NOTE: Unique Colors: " + colors.length + " <br>" + Object.keys(l.colorMap[l.current_part]).join(" ")
+        for (let color of l.colorMap) {
+          const colorPicker = createElementWithClassAndParent("input", colorContainer);
+          colorPicker.type = "color";
+          colorPicker.value=`${rgbToHex(color.red, color.green,color.blue)}`;
+        }
+      }
+
       if (canvas.width == 0) {
         canvas.width = layerImage.width;
         canvas.height = layerImage.height;
@@ -90,8 +101,10 @@ class Doll {
       }
 
       const context = canvas.getContext("2d");
+      context.imageSmoothingEnabled = false;
       context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
       layerImage.remove();
+
     }
     doll.append(canvas);
   }
@@ -102,6 +115,7 @@ class Layer {
   parts = []; //loaded from directory (it has to have an apache file structure type list)
   current_part = ""; //what has been chosen?
   allowColorEditing = false; //could be seriously expensive, don't do it unless the part has a limited pallete
+  colorMap = {}; //unless you enable scanning it for color editing, this will be empty, otherwise its keys are parts, and their values are a map of color pairings
   constructor(directory) {
     this.directory = directory;
   }

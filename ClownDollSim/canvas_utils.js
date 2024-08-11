@@ -1,6 +1,6 @@
 
 //modified from https://stackoverflow.com/questions/46399223/async-await-in-image-loading
-const waitForImage =(image, src)=>{
+const waitForImage = (image, src) => {
   return new Promise((resolve, reject) => {
     image.onload = () => resolve(true)
     image.onerror = reject
@@ -8,15 +8,32 @@ const waitForImage =(image, src)=>{
   })
 }
 
-const uniqueColors = (loaded_image)=>{
+const uniqueColors = (loaded_image) => {
   let canvas = document.createElement("canvas");
   canvas.width = loaded_image.width;
   canvas.height = loaded_image.height;
   const context = canvas.getContext("2d");
-  context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
-  const colors = [];
+  context.imageSmoothingEnabled= false;
+  context.drawImage(loaded_image, 0, 0, canvas.width, canvas.height);
+  const remembered_colors = {}; //map cuz its easier to not have repeats
   //TODO actually count colors
-  return colors;
+  var output = context.getImageData(0, 0, canvas.width, canvas.height);
+  var d = output.data;
+  for (var i = 0; i < d.length; i += 4) {
+    if (d[i + 3] > 0) { //not transparent
+      let red = d[i];
+      let green = d[i + 1];
+      let blue = d[i + 2];
+      if (!remembered_colors[`${red},${green},${blue}`]) {
+        remembered_colors[`${red},${green},${blue}`] = {red, green, blue}
+        if(remembered_colors.length > 113){
+          break; //don't stress yourself out, this isn't going to work
+        }
+      }
+    }
+
+  }
+  return remembered_colors;
 }
 
 
@@ -47,7 +64,7 @@ const transformCanvasIntoAnimationWithTransform = (canvas, transform_array) => {
     const context = copy.getContext("2d");
     context.drawImage(original, 0, 0);
     transform(copy);
-    bigContext.drawImage(copy,canvas.width * index,0);
+    bigContext.drawImage(copy, canvas.width * index, 0);
 
 
     index++;
@@ -75,7 +92,7 @@ const transformCanvasIntoAnimationWithTransformVertical = (canvas, transform_arr
     const context = copy.getContext("2d");
     context.drawImage(original, 0, 0);
     transform(copy);
-    bigContext.drawImage(copy,0,canvas.height * index);
+    bigContext.drawImage(copy, 0, canvas.height * index);
     index++;
   }
   //bigContext.drawImage(original,25,25);
@@ -86,19 +103,40 @@ const transformCanvasIntoAnimationWithTransformVertical = (canvas, transform_arr
 
 //given an already loaded image, render it to the target canvas.
 const renderImageToCanvas = (img, canvas) => {
+  if(!canvas){
+    canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+  }
   const context = canvas.getContext("2d");
   context.drawImage(img, 0, 0);
+  return canvas;
 }
 
 const renderImageToCanvasAndRandomizeColors = (img, canvas) => {
+  if(!canvas){
+    canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+  }
+  console.log("JR NOTE: img is",img,"canvas width is", canvas.width)
   const context = canvas.getContext("2d");
   context.drawImage(img, 0, 0);
   randomizeColors(canvas);
+  return canvas;
 
+}
+
+//https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 //doesn't care about palettes. just for every color it finds shoves it in a hash map and refers to it later
 const randomizeColors = (canvas) => {
+  console.log("JR NOTE: randomizing colors")
   //key is color in original image, value is color in new image (both in rgb)
   let remembered_colors = {}
   var ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -121,6 +159,8 @@ const randomizeColors = (canvas) => {
     }
 
   }
+  console.log("JR NOTE: randomizing colors remembered_colors is",remembered_colors)
+
   ctx.putImageData(output, 0, 0);
 }
 
@@ -159,7 +199,7 @@ const turnToPartialStatic = (canvas) => {
   var d = output.data;
   let offset = 0;
   for (var i = 0; i < d.length; i += 4) {
-    if (d[i + 3] > 0 && Math.random()>0.35) {
+    if (d[i + 3] > 0 && Math.random() > 0.35) {
       d[i] = getRandomNumberBetween(0, 255)
       d[i + 1] = getRandomNumberBetween(0, 255);
       d[i + 2] = getRandomNumberBetween(0, 255);
