@@ -20,9 +20,17 @@ class Doll {
     if (!dollContainer) {
       dollContainer = createElementWithClassAndParent("div", parent, "doll-container");
     } else {
-      dollContainer.innerHTML  = ""; //clear it out for a rerender
+      dollContainer.innerHTML = ""; //clear it out for a rerender
     }
     const doll = createElementWithClassAndParent("div", dollContainer, "doll");
+    const randomButton = createElementWithClassAndParent("button", doll);
+    randomButton.innerText = "Randomize Whole Doll";
+    randomButton.onclick = () => {
+      for (let l of this.layers) {
+        l.chooseRandomPart();
+      }
+      this.render(parent, dollContainer); //rerender over the last container
+    }
 
     const controls = createElementWithClassAndParent("div", dollContainer, "controls");
 
@@ -31,6 +39,8 @@ class Doll {
     canvas.height = 0;
     for (let l of this.layers) {
       const label = createElementWithClassAndParent("div", controls);
+
+
       const select = createElementWithClassAndParent("select", controls);
       select.disabled = l.parts.length <= 1;
       for (let part of l.parts) {
@@ -46,7 +56,12 @@ class Doll {
 
       const parts = l.directory.split("/");
       label.innerText = parts[parts.length - 2];
-
+      const randomButton = createElementWithClassAndParent("button", controls);
+      randomButton.innerText = "Randomize";
+      randomButton.onclick = () => {
+        l.chooseRandomPart();
+        this.render(parent, dollContainer); //rerender over the last container
+      }
       const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
       await waitForImage(layerImage, l.current_part);
       if (canvas.width == 0) {

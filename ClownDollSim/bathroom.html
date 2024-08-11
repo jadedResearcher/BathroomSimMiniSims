@@ -16,20 +16,30 @@
     let sexyDoll;
     let birbDoll;
 
-    window.onload = async()=>{
-      const clowns = ["http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/body/","http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/face/"];
-      const sexyMen = ["http://eyedolgames.com/Eyedlr/images/SexyMen/BG/","http://eyedolgames.com/Eyedlr/images/SexyMen/Base/","http://eyedolgames.com/Eyedlr/images/SexyMen/Shirt/","http://eyedolgames.com/Eyedlr/images/SexyMen/Pants/","http://eyedolgames.com/Eyedlr/images/SexyMen/Shoes/","http://eyedolgames.com/Eyedlr/images/SexyMen/Accessory/"];
-      const pigeon = ["http://farragofiction.com/DollSource/images/Pigeon/Body/","http://farragofiction.com/DollSource/images/Pigeon/Head/","http://farragofiction.com/DollSource/images/Pigeon/Tail/","http://farragofiction.com/DollSource/images/Pigeon/Wing/"]
-      
+    /*
+ its interestingly like
+using this as a lens to understand more about dollsim?
+its an inherently complex domain?
+and dollsim handled the complexity by frontloading it: these images need to be named a certain way and have a certain pallete and certain formatting or everything DIES so you better preprocess everything to hell and back and have strict metadata that requires so much effort to add even one new dollpart
+while this version backloads it: fuck it do whatever with whatever and we'll do a buncha math and programming to try to make a doll out of it with basically no preprocessing
+    */
+    window.onload = async () => {
+      const clowns = ["http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/body/", "http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/face/", "http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/extra/"];
+      const sexyMen = ["http://eyedolgames.com/Eyedlr/images/SexyMen/BG/", "http://eyedolgames.com/Eyedlr/images/SexyMen/Base/", "http://eyedolgames.com/Eyedlr/images/SexyMen/Shirt/", "http://eyedolgames.com/Eyedlr/images/SexyMen/Pants/", "http://eyedolgames.com/Eyedlr/images/SexyMen/Shoes/", "http://eyedolgames.com/Eyedlr/images/SexyMen/Accessory/"];
+      const pigeon = ["http://farragofiction.com/DollSource/images/Pigeon/Body/", "http://farragofiction.com/DollSource/images/Pigeon/Head/", "http://farragofiction.com/DollSource/images/Pigeon/Tail/", "http://farragofiction.com/DollSource/images/Pigeon/Wing/"]
+      const trolls = ["http://farragofiction.com/DollSource/images/Homestuck/Wings/", "http://farragofiction.com/DollSource/images/Homestuck/HairBack/", "http://farragofiction.com/DollSource/images/Homestuck/Body/", "http://farragofiction.com/DollSource/images/Homestuck/FacePaint/", "http://farragofiction.com/DollSource/images/Homestuck/CanonSymbol/", "http://farragofiction.com/DollSource/images/Homestuck/Mouth/", "http://farragofiction.com/DollSource/images/Homestuck/LeftEye/", "http://farragofiction.com/DollSource/images/Homestuck/RightEye/", "http://farragofiction.com/DollSource/images/Homestuck/Glasses/", "http://farragofiction.com/DollSource/images/Homestuck/HairFront/", "http://farragofiction.com/DollSource/images/Homestuck/LeftFin/", "http://farragofiction.com/DollSource/images/Homestuck/RightFin/", "http://farragofiction.com/DollSource/images/Homestuck/Glasses2/", "http://farragofiction.com/DollSource/images/Homestuck/LeftHorn/", "http://farragofiction.com/DollSource/images/Homestuck/RightHorn/"]
+
       clownDoll = await makeDollFromDirectories(clowns);
       sexyDoll = await makeDollFromDirectories(sexyMen);
       birbDoll = await makeDollFromDirectories(pigeon);
+      trollDoll = await makeDollFromDirectories(trolls);
 
       const parent = document.querySelector("#container")
 
       clownDoll.render(parent);
       sexyDoll.render(parent);
       birbDoll.render(parent);
+      trollDoll.render(parent);
 
 
     }
@@ -68,7 +78,7 @@
 
     }
 
-    .toilet{
+    .toilet {
       cursor: pointer;
       position: absolute;
     }
@@ -88,6 +98,7 @@
     }
 
     @keyframes tremble {
+
       0%,
       20%,
       40%,
