@@ -1,7 +1,6 @@
 
 //modified from https://stackoverflow.com/questions/46399223/async-await-in-image-loading
 const waitForImage =(image, src)=>{
-  console.log("JR NOTE:waitForImage ", image, src)
   return new Promise((resolve, reject) => {
     image.onload = () => resolve(true)
     image.onerror = reject

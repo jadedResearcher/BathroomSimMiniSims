@@ -17,19 +17,26 @@ class Doll {
   }
 
   render = async (parent) => {
-    const doll = createElementWithClassAndParent("div", parent, "doll");
+    const dollContainer = createElementWithClassAndParent("div", parent, "doll-container");
+    const doll = createElementWithClassAndParent("div", dollContainer, "doll");
+
+    const controls = createElementWithClassAndParent("div", dollContainer, "controls");
 
     let canvas = document.createElement("canvas");
     canvas.width = 0;
     canvas.height = 0;
     for (let l of this.layers) {
+      const label = createElementWithClassAndParent("div", controls);
+      const parts = l.directory.split("/");
+      console.log("JR NOTE: parts is", parts)
+      label.innerText = parts[parts.length -2];
+
       const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
-      console.log("JR NOTE: going to async load image")
       await waitForImage(layerImage, l.current_part);
-      console.log("JR NOTE: ???")
       if (canvas.width == 0) {
         canvas.width = layerImage.width;
         canvas.height = layerImage.height;
+        doll.style.width =layerImage.width+"px";
       }
 
       const context = canvas.getContext("2d");
