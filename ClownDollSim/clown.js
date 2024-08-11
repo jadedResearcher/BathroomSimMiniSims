@@ -16,8 +16,12 @@ class Doll {
     }
   }
 
-  render = async (parent) => {
-    const dollContainer = createElementWithClassAndParent("div", parent, "doll-container");
+  render = async (parent, dollContainer) => {
+    if (!dollContainer) {
+      dollContainer = createElementWithClassAndParent("div", parent, "doll-container");
+    } else {
+      dollContainer.innerHTML  = ""; //clear it out for a rerender
+    }
     const doll = createElementWithClassAndParent("div", dollContainer, "doll");
 
     const controls = createElementWithClassAndParent("div", dollContainer, "controls");
@@ -27,16 +31,28 @@ class Doll {
     canvas.height = 0;
     for (let l of this.layers) {
       const label = createElementWithClassAndParent("div", controls);
+      const select = createElementWithClassAndParent("select", controls);
+      select.disabled = l.parts.length <= 1;
+      for (let part of l.parts) {
+        const option = createElementWithClassAndParent("option", select);
+        option.value = part;
+        option.innerText = part;
+        option.selected = l.current_part.includes(part)
+      }
+      select.onchange = () => {
+        l.choosePart(select.value);
+        this.render(parent, dollContainer); //rerender over the last container
+      }
+
       const parts = l.directory.split("/");
-      console.log("JR NOTE: parts is", parts)
-      label.innerText = parts[parts.length -2];
+      label.innerText = parts[parts.length - 2];
 
       const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
       await waitForImage(layerImage, l.current_part);
       if (canvas.width == 0) {
         canvas.width = layerImage.width;
         canvas.height = layerImage.height;
-        doll.style.width =layerImage.width+"px";
+        doll.style.width = layerImage.width + "px";
       }
 
       const context = canvas.getContext("2d");
