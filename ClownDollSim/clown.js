@@ -23,6 +23,7 @@ class Doll {
       dollContainer.innerHTML = ""; //clear it out for a rerender
     }
     const doll = createElementWithClassAndParent("div", dollContainer, "doll");
+
     const randomButton = createElementWithClassAndParent("button", doll);
     randomButton.innerText = "Randomize Whole Doll";
     randomButton.onclick = () => {
@@ -35,8 +36,13 @@ class Doll {
     const controls = createElementWithClassAndParent("div", dollContainer, "controls");
 
     let canvas = document.createElement("canvas");
+    const funCanvas = document.createElement("canvas");
+    funCanvas.className="fun-canvas";
+
     canvas.width = 0;
     canvas.height = 0;
+    canvas.alt = "Press Me For A Surprise :o)"
+    canvas.title = "Press Me For A Surprise :o)";
     for (let l of this.layers) {
       const label = createElementWithClassAndParent("div", controls);
 
@@ -88,13 +94,13 @@ class Doll {
         }
 
         if (Object.keys(l.colorMap[l.current_part]).length < 31 && Object.keys(l.colorMap[l.current_part]).length > 0) {
-          
+
           const randomButton = createElementWithClassAndParent("button", colorContainer);
           randomButton.innerText = "Randomize All Colors";
           randomButton.onclick = () => {
-            for (let colorKey of Object.keys(l.colorMap[l.current_part])){
-              l.colorMap[l.current_part][colorKey] ={red: getRandomNumberBetween(0,255), green: getRandomNumberBetween(0,255), blue:getRandomNumberBetween(0,255)}
-            } 
+            for (let colorKey of Object.keys(l.colorMap[l.current_part])) {
+              l.colorMap[l.current_part][colorKey] = { red: getRandomNumberBetween(0, 255), green: getRandomNumberBetween(0, 255), blue: getRandomNumberBetween(0, 255) }
+            }
             this.render(parent, dollContainer); //rerender over the last container
           }
 
@@ -123,6 +129,8 @@ class Doll {
       if (canvas.width == 0) {
         canvas.width = layerImage.width;
         canvas.height = layerImage.height;
+        funCanvas.width = canvas.width;
+        funCanvas.height = canvas.height;
         doll.style.width = layerImage.width + "px";
       }
 
@@ -145,11 +153,25 @@ class Doll {
       } else {
         context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
       }
+      const funContext = funCanvas.getContext("2d");
+      funContext.imageSmoothingEnabled = true; //glitch it out as much as you can please :)
+
+      funContext.drawImage(layerImage, 0, 0, funCanvas.width, funCanvas.height);
 
       layerImage.remove();
 
     }
     doll.append(canvas);
+    doll.append(funCanvas);
+    canvas.onmouseenter = ()=>{
+      funCanvas.style.display = "block";
+    }
+
+    funCanvas.onmouseleave = ()=>{
+      funCanvas.style.display = "none";
+    }
+
+    haveFunGlitchingCanvas(funCanvas); //:) :) ;)
   }
 }
 

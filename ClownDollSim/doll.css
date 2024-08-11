@@ -2,6 +2,14 @@
   position: relative;
   width: 50%;
   height: fit-content;
+  cursor: pointer;
+}
+
+.fun-canvas{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 .doll-container{

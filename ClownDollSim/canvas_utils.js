@@ -142,7 +142,7 @@ function hexToRgb(hex) {
   } : null;
 }
 //colorMap is {[`${red},${green},${blue}`]: {red, green, blue}}
-const changeColorsFromPaletteMap = (canvas,colorMap) => {
+const changeColorsFromPaletteMap = (canvas, colorMap) => {
   var ctx = canvas.getContext('2d', { willReadFrequently: true });
   if (!ctx) {
     return;
@@ -167,6 +167,48 @@ const changeColorsFromPaletteMap = (canvas,colorMap) => {
   }
 
   ctx.putImageData(output, 0, 0);
+}
+
+const haveFunGlitchingCanvas = (canvas_that_is_in_dom) => {
+  let remembered_colors = {}
+  var ctx = canvas_that_is_in_dom.getContext('2d', { willReadFrequently: true });
+  if (!ctx) {
+    return;
+  }
+  //only need to get the colors once
+  var output = ctx.getImageData(0, 0, canvas_that_is_in_dom.width, canvas_that_is_in_dom.height);
+  var d = output.data;
+
+  const fuckWithColors = (d, remembered_colors) => {
+    for (var i = 0; i < d.length; i += 4) {
+      if (d[i + 3] > 0) {
+        let red = d[i];
+        let green = d[i + 1];
+        let blue = d[i + 2];
+        if (!remembered_colors[`${red},${green},${blue}`]) {
+          remembered_colors[`${red},${green},${blue}`] = { red: getRandomNumberBetween(0, 255), green: getRandomNumberBetween(0, 255), blue: getRandomNumberBetween(0, 255) }
+        }
+        d[i] = remembered_colors[`${red},${green},${blue}`].red;
+        d[i + 1] = remembered_colors[`${red},${green},${blue}`].green;
+        d[i + 2] = remembered_colors[`${red},${green},${blue}`].blue;
+      }
+
+    }
+    ctx.putImageData(output, 0, 0);
+  }
+  let timeout;
+
+  canvas_that_is_in_dom.onmousedown =()=>{
+    fuckWithColors(d,remembered_colors);
+    timeout = setInterval(()=>{
+      requestAnimationFrame(()=>fuckWithColors(d,remembered_colors));
+    }, 100)
+  }
+
+  canvas_that_is_in_dom.onmouseup=()=>{
+    clearInterval(timeout);
+  }
+
 }
 
 //doesn't care about palettes. just for every color it finds shoves it in a hash map and refers to it later
