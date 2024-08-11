@@ -1,0 +1,15 @@
+.doll{
+  position: relative;
+  border: 3px solid black;
+  background-color: white;
+  border-radius: 3px;
+  width: 50%;
+  height: fit-content;
+}
+
+.doll img{
+    max-width: 50%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
