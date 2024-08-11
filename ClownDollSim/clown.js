@@ -16,7 +16,7 @@ class Doll {
     }
   }
 
-  render = async (parent, dollContainer) => {
+  render = async (parent, dollContainer, allowColorEditing) => {
     if (!dollContainer) {
       dollContainer = createElementWithClassAndParent("div", parent, "doll-container");
     } else {
@@ -40,6 +40,18 @@ class Doll {
     for (let l of this.layers) {
       const label = createElementWithClassAndParent("div", controls);
 
+      const checkBoxContainer = createElementWithClassAndParent("div", controls);
+      const checkboxForColorEditing = createElementWithClassAndParent("input", checkBoxContainer);
+      checkboxForColorEditing.type = "checkbox";
+      checkboxForColorEditing.checked = l.allowColorEditing;
+
+      const checkLabel = createElementWithClassAndParent("span", checkBoxContainer);
+      checkLabel.innerText = "Allow Color Editing (slow)"
+      checkboxForColorEditing.onchange = () => {
+        l.allowColorEditing = !l.allowColorEditing;
+        this.render(parent, dollContainer); //rerender over the last container
+      }
+
 
       const select = createElementWithClassAndParent("select", controls);
       select.disabled = l.parts.length <= 1;
@@ -51,7 +63,7 @@ class Doll {
       }
       select.onchange = () => {
         l.choosePart(select.value);
-        this.render(parent, dollContainer); //rerender over the last container
+        this.render(parent, dollContainer, allowColorEditing); //rerender over the last container
       }
 
       const parts = l.directory.split("/");
@@ -62,6 +74,13 @@ class Doll {
         l.chooseRandomPart();
         this.render(parent, dollContainer); //rerender over the last container
       }
+
+      if (l.allowColorEditing) {
+        const colorContainer = createElementWithClassAndParent("div", controls);
+        colorContainer.innerText = "JR NOTE: TODO"
+      }
+
+
       const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
       await waitForImage(layerImage, l.current_part);
       if (canvas.width == 0) {
@@ -82,6 +101,7 @@ class Layer {
   directory = "http://farragofiction.com/404";
   parts = []; //loaded from directory (it has to have an apache file structure type list)
   current_part = ""; //what has been chosen?
+  allowColorEditing = false; //could be seriously expensive, don't do it unless the part has a limited pallete
   constructor(directory) {
     this.directory = directory;
   }

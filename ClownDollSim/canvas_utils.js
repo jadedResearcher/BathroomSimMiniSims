@@ -8,6 +8,17 @@ const waitForImage =(image, src)=>{
   })
 }
 
+const uniqueColors = (loaded_image)=>{
+  let canvas = document.createElement("canvas");
+  canvas.width = loaded_image.width;
+  canvas.height = loaded_image.height;
+  const context = canvas.getContext("2d");
+  context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
+  const colors = [];
+  //TODO actually count colors
+  return colors;
+}
+
 
 //async, give it an image source and it'll handle loading it and rendering it to the target canvas
 const kickoffImageRenderingToCanvas = (source, canvas) => {
