@@ -22,9 +22,14 @@
     top: 0px;
 }
 
+.color-picker{
+    display: block;
+}
+
 .controls{
     width: 50%;
     padding-left: 13px;
+    padding-bottom: 13px;
 }
 
 .controls div{
@@ -40,6 +45,10 @@
     font-weight: lighter;
 }
 
-.controls button{
-    margin-left: 13px;
+.select{
+    margin-right: 13px;
+}
+
+input[type="color"]{
+    margin-top: 5px;
 }

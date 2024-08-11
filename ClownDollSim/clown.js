@@ -86,11 +86,37 @@ class Doll {
         if (!l.colorMap[l.current_part]) {
           l.colorMap[l.current_part] = uniqueColors(layerImage); //expensive call, cache it as you can
         }
-        colorContainer.innerHTML = "JR NOTE: Unique Colors: " + colors.length + " <br>" + Object.keys(l.colorMap[l.current_part]).join(" ")
-        for (let color of l.colorMap) {
-          const colorPicker = createElementWithClassAndParent("input", colorContainer);
-          colorPicker.type = "color";
-          colorPicker.value=`${rgbToHex(color.red, color.green,color.blue)}`;
+
+        if (Object.keys(l.colorMap[l.current_part]).length < 31 && Object.keys(l.colorMap[l.current_part]).length > 0) {
+          
+          const randomButton = createElementWithClassAndParent("button", colorContainer);
+          randomButton.innerText = "Randomize All Colors";
+          randomButton.onclick = () => {
+            for (let colorKey of Object.keys(l.colorMap[l.current_part])){
+              l.colorMap[l.current_part][colorKey] ={red: getRandomNumberBetween(0,255), green: getRandomNumberBetween(0,255), blue:getRandomNumberBetween(0,255)}
+            } 
+            this.render(parent, dollContainer); //rerender over the last container
+          }
+
+          for (let colorKey of Object.keys(l.colorMap[l.current_part])) {
+            const color = l.colorMap[l.current_part][colorKey];
+            const colorPicker = createElementWithClassAndParent("input", colorContainer, 'color-picker');
+            colorPicker.type = "color";
+            colorPicker.value = `${rgbToHex(color.red, color.green, color.blue)}`;
+            colorPicker.onchange = () => {
+              const { red, green, blue } = hexToRgb(colorPicker.value);
+              console.log("JR NOTE: new red, green blue is", red, green, blue, "from", colorPicker.value)
+              //key will always be the original but value is the new value
+              l.colorMap[l.current_part][colorKey] = { red, green, blue };
+              this.render(parent, dollContainer); //rerender over the last container
+            }
+          }
+        } else if (Object.keys(l.colorMap[l.current_part]).length == 0) {
+          colorContainer.innerHTML = "JR NOTE: No Colors :( :( :(";
+
+        } else {
+          colorContainer.innerHTML = "JR NOTE: Sorry, this part has too many colors to recolor :( :( :(";
+
         }
       }
 
@@ -100,9 +126,26 @@ class Doll {
         doll.style.width = layerImage.width + "px";
       }
 
+
+
       const context = canvas.getContext("2d");
       context.imageSmoothingEnabled = false;
-      context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
+      if (l.allowColorEditing) {
+        console.log("JR NOTE: allowing color editing so recoloring this layer")
+        const recolorCanvas = document.createElement("canvas");
+        recolorCanvas.width = canvas.width;
+        recolorCanvas.height = canvas.height;
+        const recolorContext = recolorCanvas.getContext("2d");
+        recolorContext.imageSmoothingEnabled = false;
+        recolorContext.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
+
+        changeColorsFromPaletteMap(recolorCanvas, l.colorMap[l.current_part]);
+        context.drawImage(recolorCanvas, 0, 0, canvas.width, canvas.height);
+
+      } else {
+        context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
+      }
+
       layerImage.remove();
 
     }

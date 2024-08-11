@@ -13,7 +13,7 @@ const uniqueColors = (loaded_image) => {
   canvas.width = loaded_image.width;
   canvas.height = loaded_image.height;
   const context = canvas.getContext("2d");
-  context.imageSmoothingEnabled= false;
+  context.imageSmoothingEnabled = false;
   context.drawImage(loaded_image, 0, 0, canvas.width, canvas.height);
   const remembered_colors = {}; //map cuz its easier to not have repeats
   //TODO actually count colors
@@ -25,10 +25,7 @@ const uniqueColors = (loaded_image) => {
       let green = d[i + 1];
       let blue = d[i + 2];
       if (!remembered_colors[`${red},${green},${blue}`]) {
-        remembered_colors[`${red},${green},${blue}`] = {red, green, blue}
-        if(remembered_colors.length > 113){
-          break; //don't stress yourself out, this isn't going to work
-        }
+        remembered_colors[`${red},${green},${blue}`] = { red, green, blue }
       }
     }
 
@@ -103,7 +100,7 @@ const transformCanvasIntoAnimationWithTransformVertical = (canvas, transform_arr
 
 //given an already loaded image, render it to the target canvas.
 const renderImageToCanvas = (img, canvas) => {
-  if(!canvas){
+  if (!canvas) {
     canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
@@ -114,12 +111,11 @@ const renderImageToCanvas = (img, canvas) => {
 }
 
 const renderImageToCanvasAndRandomizeColors = (img, canvas) => {
-  if(!canvas){
+  if (!canvas) {
     canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
   }
-  console.log("JR NOTE: img is",img,"canvas width is", canvas.width)
   const context = canvas.getContext("2d");
   context.drawImage(img, 0, 0);
   randomizeColors(canvas);
@@ -128,15 +124,53 @@ const renderImageToCanvasAndRandomizeColors = (img, canvas) => {
 }
 
 //https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
 
 function rgbToHex(r, g, b) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    red: parseInt(result[1], 16),
+    green: parseInt(result[2], 16),
+    blue: parseInt(result[3], 16)
+  } : null;
+}
+//colorMap is {[`${red},${green},${blue}`]: {red, green, blue}}
+const changeColorsFromPaletteMap = (canvas,colorMap) => {
+  var ctx = canvas.getContext('2d', { willReadFrequently: true });
+  if (!ctx) {
+    return;
+  }
+  ctx.imageSmoothingEnabled = false;
+
+  var output = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  var d = output.data;
+  for (var i = 0; i < d.length; i += 4) {
+    if (d[i + 3] > 0) {
+      let red = d[i];
+      let green = d[i + 1];
+      let blue = d[i + 2];
+      const newValue = colorMap[`${red},${green},${blue}`]
+      if (newValue && (red != newValue.red || green != newValue.green || blue != newValue.blue)) {
+        d[i] = newValue.red;
+        d[i + 1] = newValue.green;
+        d[i + 2] = newValue.blue;
+      }
+    }
+
+  }
+
+  ctx.putImageData(output, 0, 0);
+}
+
 //doesn't care about palettes. just for every color it finds shoves it in a hash map and refers to it later
 const randomizeColors = (canvas) => {
-  console.log("JR NOTE: randomizing colors")
   //key is color in original image, value is color in new image (both in rgb)
   let remembered_colors = {}
   var ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -159,7 +193,6 @@ const randomizeColors = (canvas) => {
     }
 
   }
-  console.log("JR NOTE: randomizing colors remembered_colors is",remembered_colors)
 
   ctx.putImageData(output, 0, 0);
 }
