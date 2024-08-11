@@ -24,14 +24,6 @@ class Doll {
     }
     const doll = createElementWithClassAndParent("div", dollContainer, "doll");
 
-    const randomButton = createElementWithClassAndParent("button", doll);
-    randomButton.innerText = "Randomize Whole Doll";
-    randomButton.onclick = () => {
-      for (let l of this.layers) {
-        l.chooseRandomPart();
-      }
-      this.render(parent, dollContainer); //rerender over the last container
-    }
 
     const controls = createElementWithClassAndParent("div", dollContainer, "controls");
 
@@ -156,13 +148,30 @@ class Doll {
       const funContext = funCanvas.getContext("2d");
       funContext.imageSmoothingEnabled = true; //glitch it out as much as you can please :)
 
-      funContext.drawImage(layerImage, 0, 0, funCanvas.width, funCanvas.height);
-
+      funContext.drawImage(layerImage, 0, 0, canvas.width/3, canvas.height/3); //downscale for maximum aliasing
       layerImage.remove();
 
     }
     doll.append(canvas);
+    //upscale for maximum aliasing
+    const funContext = funCanvas.getContext("2d");
+    funContext.imageSmoothingEnabled = true; //glitch it out as much as you can please :)
+    funContext.drawImage(funCanvas, 0, 0, canvas.width*3, canvas.height*3);
+    funContext.clearRect(0,0, canvas.width/3, canvas.height/3); //remove tiny version left for anti aliasing purposes
+
     doll.append(funCanvas);
+
+    const randomButton = createElementWithClassAndParent("button", doll);
+    randomButton.innerText = "Randomize Whole Doll";
+    randomButton.onclick = () => {
+      for (let l of this.layers) {
+        l.chooseRandomPart();
+      }
+      this.render(parent, dollContainer); //rerender over the last container
+    }
+
+
+
     canvas.onmouseenter = ()=>{
       funCanvas.style.display = "block";
     }

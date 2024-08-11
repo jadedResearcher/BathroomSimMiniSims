@@ -10,6 +10,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    filter: saturate(0.5) brightness(0.75);
 }
 
 .doll-container{
@@ -24,7 +25,7 @@
   }
 
 .doll img{
-    max-width: 50%;
+    max-width: 500px;
     position: absolute;
     left: 0px;
     top: 0px;

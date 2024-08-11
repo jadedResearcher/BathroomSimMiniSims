@@ -58,6 +58,7 @@ const mapping = {
   ,429044: { video: "rewards/cool_stairs_bro.mp4", images: ["rewards/stairs2.PNG"] }
   ,333333333: {images: ["rewards/if_itshidden_then_bydefinition_youcare_bythetimeyoufindit___youwentlooking.PNG"] }
   ,4444: {video: "rewards/ill_stop_for_now.mp4",images:["rewards/stop.PNG"] }
+  ,46654665: {video: "rewards/maccus.mp4",images:["rewards/crowscare.png","rewards/smiley.png"] }
   ,4665: {video: "rewards/lavinraca_slash_lavinraca.mp4",images:["rewards/crowscare.png","rewards/smiley.png"] }
   ,107: {video: "rewards/k.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/k.png","http://farragofiction.com/TwoGayJokes/Stories/gaze_ego_do_you_see_this_shit.png","rewards/k.png","http://farragofiction.com/TwoGayJokes/Stories/loop2_infoteamandother.png"]}
   ,420: {video: "rewards/match.mp4",images:["http://farragofiction.com/TwoGayJokes/Stories/toxic.png","http://farragofiction.com/TwoGayJokes/Stories/propaganda.png","http://farragofiction.com/TwoGayJokes/Stories/the_goal_is_to_be_wrong_in_interesting_ways.png","rewards/match.png","http://farragofiction.com/TwoGayJokes/Stories/fire_girl.png","http://farragofiction.com/TwoGayJokes/Stories/training_team.png"]} //blaze it
