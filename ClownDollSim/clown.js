@@ -3,7 +3,7 @@ const makeDollFromDirectories = async (directory_list) => {
   await doll.init();
   return doll;
 }
-
+//https://archiveofourown.org/works/58111936
 class Doll {
   layers = [];
   constructor(layers) {
@@ -220,7 +220,7 @@ class Layer {
     }
     layerImage.remove();
   }
-
+//https://archiveofourown.org/works/58111936?view_adult=true
   handleAllowingColorEdits = (controls, dollContainer, callback) => {
     const checkBoxContainer = createElementWithClassAndParent("div", controls);
     const checkboxForColorEditing = createElementWithClassAndParent("input", checkBoxContainer);
