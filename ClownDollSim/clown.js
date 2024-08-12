@@ -17,7 +17,7 @@ class Doll {
   }
 
 
-  render = async (parent, dollContainer, allowColorEditing) => {
+  render = async (parent, dollContainer) => {
     const fuckery = isItFriday();
     if (!dollContainer) {
       dollContainer = createElementWithClassAndParent("div", parent, "doll-container section");
@@ -91,10 +91,6 @@ class Doll {
 
     }
 
-    doll.scrollIntoView(true);
-
-
-
   }
 }
 
@@ -135,7 +131,7 @@ class Layer {
     }
     select.onchange = () => {
       this.choosePart(select.value);
-      callback(parent, dollContainer); //rerender over the last container
+      callback(parent, dollContainer,select); //rerender over the last container
     }
 
     const parts = this.directory.split("/");
@@ -144,7 +140,7 @@ class Layer {
     randomButton.innerText = "Randomize";
     randomButton.onclick = () => {
       this.chooseRandomPart();
-      callback(parent, dollContainer); //rerender over the last container
+      callback(parent, dollContainer,randomButton); //rerender over the last container
     }
   }
 
@@ -162,7 +158,7 @@ class Layer {
         for (let colorKey of Object.keys(this.colorMap[this.current_part])) {
           this.colorMap[this.current_part][colorKey] = { red: getRandomNumberBetween(0, 255), green: getRandomNumberBetween(0, 255), blue: getRandomNumberBetween(0, 255) }
         }
-        callback(parent, dollContainer); //rerender over the last container
+        callback(parent, dollContainer,randomButton); //rerender over the last container
       }
 
       const colorInputContainer = createElementWithClassAndParent("div", colorContainer, 'color-input-container');
@@ -176,7 +172,7 @@ class Layer {
           const { red, green, blue } = hexToRgb(colorPicker.value);
           //key will always be the original but value is the new value
           this.colorMap[this.current_part][colorKey] = { red, green, blue };
-          callback(parent, dollContainer); //rerender over the last container
+          callback(parent, dollContainer,colorKey); //rerender over the last container
         }
       }
     } else if (Object.keys(this.colorMap[this.current_part]).length == 0) {
@@ -197,7 +193,7 @@ class Layer {
       doll.style.width = layerImage.width + "px";
       doll.parentElement.style.width = layerImage.width + "px";
 
-      controls.style.width = 1000-layerImage.width + "px";
+      controls.style.width = document.querySelector("body").clientWidth-layerImage.width + "px";
     }
 
     const context = canvas.getContext("2d");
@@ -235,7 +231,7 @@ class Layer {
     checkLabel.innerText = "Allow Color Editing (slow)"
     checkboxForColorEditing.onchange = () => {
       this.allowColorEditing = !this.allowColorEditing;
-      callback(parent, dollContainer); //rerender over the last container
+      callback(parent, dollContainer,false); //rerender over the last container but dont scroll (they want to change color)
     }
   }
 
