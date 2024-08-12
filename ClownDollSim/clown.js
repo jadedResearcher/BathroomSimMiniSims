@@ -16,7 +16,9 @@ class Doll {
     }
   }
 
+
   render = async (parent, dollContainer, allowColorEditing) => {
+    const fuckery = isItFriday();
     if (!dollContainer) {
       dollContainer = createElementWithClassAndParent("div", parent, "doll-container");
     } else {
@@ -29,137 +31,30 @@ class Doll {
 
     let canvas = document.createElement("canvas");
     const funCanvas = document.createElement("canvas");
-    funCanvas.className="fun-canvas";
+    funCanvas.className = "fun-canvas";
 
     canvas.width = 0;
     canvas.height = 0;
-    canvas.alt = "Press Me For A Surprise :o)"
-    canvas.title = "Press Me For A Surprise :o)";
-    for (let l of this.layers) {
-      const label = createElementWithClassAndParent("div", controls);
-
-      const checkBoxContainer = createElementWithClassAndParent("div", controls);
-      const checkboxForColorEditing = createElementWithClassAndParent("input", checkBoxContainer);
-      checkboxForColorEditing.type = "checkbox";
-      checkboxForColorEditing.checked = l.allowColorEditing;
-
-      const checkLabel = createElementWithClassAndParent("span", checkBoxContainer);
-      checkLabel.innerText = "Allow Color Editing (slow)"
-      checkboxForColorEditing.onchange = () => {
-        l.allowColorEditing = !l.allowColorEditing;
-        this.render(parent, dollContainer); //rerender over the last container
-      }
-
-
-      const select = createElementWithClassAndParent("select", controls);
-      select.disabled = l.parts.length <= 1;
-      for (let part of l.parts) {
-        const option = createElementWithClassAndParent("option", select);
-        option.value = part;
-        option.innerText = part;
-        option.selected = l.current_part.includes(part)
-      }
-      select.onchange = () => {
-        l.choosePart(select.value);
-        this.render(parent, dollContainer, allowColorEditing); //rerender over the last container
-      }
-
-      const parts = l.directory.split("/");
-      label.innerText = parts[parts.length - 2];
-      const randomButton = createElementWithClassAndParent("button", controls);
-      randomButton.innerText = "Randomize";
-      randomButton.onclick = () => {
-        l.chooseRandomPart();
-        this.render(parent, dollContainer); //rerender over the last container
-      }
-
-
-
-
-      const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
-      await waitForImage(layerImage, l.current_part);
-
-      if (l.allowColorEditing) {
-        const colorContainer = createElementWithClassAndParent("div", controls);
-        if (!l.colorMap[l.current_part]) {
-          l.colorMap[l.current_part] = uniqueColors(layerImage); //expensive call, cache it as you can
-        }
-
-        if (Object.keys(l.colorMap[l.current_part]).length < 31 && Object.keys(l.colorMap[l.current_part]).length > 0) {
-
-          const randomButton = createElementWithClassAndParent("button", colorContainer);
-          randomButton.innerText = "Randomize All Colors";
-          randomButton.onclick = () => {
-            for (let colorKey of Object.keys(l.colorMap[l.current_part])) {
-              l.colorMap[l.current_part][colorKey] = { red: getRandomNumberBetween(0, 255), green: getRandomNumberBetween(0, 255), blue: getRandomNumberBetween(0, 255) }
-            }
-            this.render(parent, dollContainer); //rerender over the last container
-          }
-
-          for (let colorKey of Object.keys(l.colorMap[l.current_part])) {
-            const color = l.colorMap[l.current_part][colorKey];
-            const colorPicker = createElementWithClassAndParent("input", colorContainer, 'color-picker');
-            colorPicker.type = "color";
-            colorPicker.value = `${rgbToHex(color.red, color.green, color.blue)}`;
-            colorPicker.onchange = () => {
-              const { red, green, blue } = hexToRgb(colorPicker.value);
-              console.log("JR NOTE: new red, green blue is", red, green, blue, "from", colorPicker.value)
-              //key will always be the original but value is the new value
-              l.colorMap[l.current_part][colorKey] = { red, green, blue };
-              this.render(parent, dollContainer); //rerender over the last container
-            }
-          }
-        } else if (Object.keys(l.colorMap[l.current_part]).length == 0) {
-          colorContainer.innerHTML = "JR NOTE: No Colors :( :( :(";
-
-        } else {
-          colorContainer.innerHTML = "JR NOTE: Sorry, this part has too many colors to recolor :( :( :(";
-
-        }
-      }
-
-      if (canvas.width == 0) {
-        canvas.width = layerImage.width;
-        canvas.height = layerImage.height;
-        funCanvas.width = canvas.width;
-        funCanvas.height = canvas.height;
-        doll.style.width = layerImage.width + "px";
-      }
-
-
-
-      const context = canvas.getContext("2d");
-      context.imageSmoothingEnabled = false;
-      if (l.allowColorEditing) {
-        console.log("JR NOTE: allowing color editing so recoloring this layer")
-        const recolorCanvas = document.createElement("canvas");
-        recolorCanvas.width = canvas.width;
-        recolorCanvas.height = canvas.height;
-        const recolorContext = recolorCanvas.getContext("2d");
-        recolorContext.imageSmoothingEnabled = false;
-        recolorContext.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
-
-        changeColorsFromPaletteMap(recolorCanvas, l.colorMap[l.current_part]);
-        context.drawImage(recolorCanvas, 0, 0, canvas.width, canvas.height);
-
-      } else {
-        context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
-      }
-      const funContext = funCanvas.getContext("2d");
-      funContext.imageSmoothingEnabled = true; //glitch it out as much as you can please :)
-
-      funContext.drawImage(layerImage, 0, 0, canvas.width/3, canvas.height/3); //downscale for maximum aliasing
-      layerImage.remove();
-
+    if (fuckery) {
+      canvas.alt = "Press Me For A Surprise :o)"
+      canvas.title = "Press Me For A Surprise :o)";
     }
+
+    for (let layer of this.layers) {
+      console.log("JR NOTE: layer is", layer)
+      await layer.render(doll, controls, canvas, funCanvas, fuckery, dollContainer,this.render);
+    }
+
     doll.append(canvas);
     //upscale for maximum aliasing
-    const funContext = funCanvas.getContext("2d");
-    funContext.imageSmoothingEnabled = true; //glitch it out as much as you can please :)
-    funContext.drawImage(funCanvas, 0, 0, canvas.width*3, canvas.height*3);
-    funContext.clearRect(0,0, canvas.width/3, canvas.height/3); //remove tiny version left for anti aliasing purposes
+    if (fuckery) {
+      const funContext = funCanvas.getContext("2d");
+      funContext.imageSmoothingEnabled = true; //glitch it out as much as you can please :)
+      funContext.drawImage(funCanvas, 0, 0, canvas.width * 3, canvas.height * 3);
+      funContext.clearRect(0, 0, canvas.width / 3, canvas.height / 3); //remove tiny version left for anti aliasing purposes
 
-    doll.append(funCanvas);
+      doll.append(funCanvas);
+    }
 
     const randomButton = createElementWithClassAndParent("button", doll);
     randomButton.innerText = "Randomize Whole Doll";
@@ -171,13 +66,14 @@ class Doll {
     }
 
 
+    if (fuckery) {
+      canvas.onmouseenter = () => {
+        funCanvas.style.display = "block";
+      }
 
-    canvas.onmouseenter = ()=>{
-      funCanvas.style.display = "block";
-    }
-
-    funCanvas.onmouseleave = ()=>{
-      funCanvas.style.display = "none";
+      funCanvas.onmouseleave = () => {
+        funCanvas.style.display = "none";
+      }
     }
 
     haveFunGlitchingCanvas(funCanvas); //:) :) ;)
@@ -206,5 +102,133 @@ class Layer {
   choosePart = (part) => {
     this.current_part = this.directory + part;
     return this.current_part;
+  }
+
+  handlePartsPicking = (controls, dollContainer, callback) => {
+    const label = createElementWithClassAndParent("div", controls);
+
+    const select = createElementWithClassAndParent("select", controls);
+    select.disabled = this.parts.length <= 1;
+    for (let part of this.parts) {
+      const option = createElementWithClassAndParent("option", select);
+      option.value = part;
+      option.innerText = part;
+      option.selected = this.current_part.includes(part)
+    }
+    select.onchange = () => {
+      this.choosePart(select.value);
+      callback(parent, dollContainer); //rerender over the last container
+    }
+
+    const parts = this.directory.split("/");
+    label.innerText = parts[parts.length - 2];
+    const randomButton = createElementWithClassAndParent("button", controls);
+    randomButton.innerText = "Randomize";
+    randomButton.onclick = () => {
+      this.chooseRandomPart();
+      callback(parent, dollContainer); //rerender over the last container
+    }
+  }
+
+  handleColorEditing = (layerImage,controls, dollContainer,callback) => {
+    const colorContainer = createElementWithClassAndParent("div", controls);
+    if (!this.colorMap[this.current_part]) {
+      this.colorMap[this.current_part] = uniqueColors(layerImage); //expensive call, cache it as you can
+    }
+
+    if (Object.keys(this.colorMap[this.current_part]).length < 31 && Object.keys(this.colorMap[this.current_part]).length > 0) {
+
+      const randomButton = createElementWithClassAndParent("button", colorContainer);
+      randomButton.innerText = "Randomize All Colors";
+      randomButton.onclick = () => {
+        for (let colorKey of Object.keys(this.colorMap[this.current_part])) {
+          this.colorMap[this.current_part][colorKey] = { red: getRandomNumberBetween(0, 255), green: getRandomNumberBetween(0, 255), blue: getRandomNumberBetween(0, 255) }
+        }
+        callback(parent, dollContainer); //rerender over the last container
+      }
+
+      for (let colorKey of Object.keys(this.colorMap[this.current_part])) {
+        const color = this.colorMap[this.current_part][colorKey];
+        const colorPicker = createElementWithClassAndParent("input", colorContainer, 'color-picker');
+        colorPicker.type = "color";
+        colorPicker.value = `${rgbToHex(color.red, color.green, color.blue)}`;
+        colorPicker.onchange = () => {
+          const { red, green, blue } = hexToRgb(colorPicker.value);
+          console.log("JR NOTE: new red, green blue is", red, green, blue, "from", colorPicker.value)
+          //key will always be the original but value is the new value
+          this.colorMap[this.current_part][colorKey] = { red, green, blue };
+          this.render(parent, dollContainer); //rerender over the last container
+        }
+      }
+    } else if (Object.keys(this.colorMap[this.current_part]).length == 0) {
+      colorContainer.innerHTML = "JR NOTE: No Colors :( :( :(";
+
+    } else {
+      colorContainer.innerHTML = "JR NOTE: Sorry, this part has too many colors to recolor :( :( :(";
+
+    }
+  }
+
+  handleActualRendering = (layerImage,doll, canvas, funCanvas, fuckery) => {
+    if (canvas.width == 0) {
+      canvas.width = layerImage.width;
+      canvas.height = layerImage.height;
+      funCanvas.width = canvas.width;
+      funCanvas.height = canvas.height;
+      doll.style.width = layerImage.width + "px";
+    }
+
+    const context = canvas.getContext("2d");
+    context.imageSmoothingEnabled = false;
+    if (this.allowColorEditing) {
+      const recolorCanvas = document.createElement("canvas");
+      recolorCanvas.width = canvas.width;
+      recolorCanvas.height = canvas.height;
+      const recolorContext = recolorCanvas.getContext("2d");
+      recolorContext.imageSmoothingEnabled = false;
+      recolorContext.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
+
+      changeColorsFromPaletteMap(recolorCanvas, this.colorMap[this.current_part]);
+      context.drawImage(recolorCanvas, 0, 0, canvas.width, canvas.height);
+
+    } else {
+      context.drawImage(layerImage, 0, 0, canvas.width, canvas.height);
+    }
+    if (fuckery) {
+      const funContext = funCanvas.getContext("2d");
+      funContext.imageSmoothingEnabled = true; //glitch it out as much as you can please :)
+
+      funContext.drawImage(layerImage, 0, 0, canvas.width / 3, canvas.height / 3); //downscale for maximum aliasing
+    }
+    layerImage.remove();
+  }
+
+  handleAllowingColorEdits = (controls,dollContainer, callback) => {
+    const checkBoxContainer = createElementWithClassAndParent("div", controls);
+    const checkboxForColorEditing = createElementWithClassAndParent("input", checkBoxContainer);
+    checkboxForColorEditing.type = "checkbox";
+    checkboxForColorEditing.checked = this.allowColorEditing;
+
+    const checkLabel = createElementWithClassAndParent("span", checkBoxContainer);
+    checkLabel.innerText = "Allow Color Editing (slow)"
+    checkboxForColorEditing.onchange = () => {
+      this.allowColorEditing = !this.allowColorEditing;
+      callback(parent, dollContainer); //rerender over the last container
+    }
+  }
+
+  render = async (doll, controls, canvas, funCanvas, fuckery,dollContainer, callback) => {
+    this.handleAllowingColorEdits(controls,dollContainer, callback);
+
+    this.handlePartsPicking(controls, dollContainer,callback);
+
+    const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
+    await waitForImage(layerImage, this.current_part);
+
+    if (this.allowColorEditing) {
+      this.handleColorEditing(layerImage,controls,dollContainer, callback); //has to happen after we have the image
+    }
+
+    this.handleActualRendering(layerImage,doll, canvas, funCanvas, fuckery); //has to happen after we get the image
   }
 }

@@ -2,7 +2,16 @@ let ele;
 
 let how_long_well_let_them_explore = 500;
 
+const isItFriday = () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const friday = urlParams.get('friday'); //you can escape friday if you say its not friday
+  if (((new Date().getDay() === 5 && friday !== "false") || friday === "true")) {
+    return true;
+  }
+  return false;
 
+}
 
 //from view-source:https://www.yyyyyyy.info/
   function animateTitle(i) {
