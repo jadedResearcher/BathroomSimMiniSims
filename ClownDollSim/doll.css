@@ -18,6 +18,10 @@
     src: url("Fonts/ifc_los_banditos/IFC\ LOS\ BANDITOS.ttf");
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #432a63;
     color: #ff5c39;

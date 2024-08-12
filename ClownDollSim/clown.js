@@ -91,6 +91,8 @@ class Doll {
 
     }
 
+    doll.scrollIntoView(true);
+
 
 
   }
