@@ -20,7 +20,7 @@ class Doll {
   render = async (parent, dollContainer, allowColorEditing) => {
     const fuckery = isItFriday();
     if (!dollContainer) {
-      dollContainer = createElementWithClassAndParent("div", parent, "doll-container");
+      dollContainer = createElementWithClassAndParent("div", parent, "doll-container section");
     } else {
       dollContainer.innerHTML = ""; //clear it out for a rerender
     }
@@ -104,7 +104,7 @@ class Layer {
   }
 
   handlePartsPicking = (controls, dollContainer, callback) => {
-    const label = createElementWithClassAndParent("div", controls);
+    const label = createElementWithClassAndParent("h2", controls,"part-label");
 
     const select = createElementWithClassAndParent("select", controls);
     select.disabled = this.parts.length <= 1;
@@ -130,14 +130,14 @@ class Layer {
   }
 
   handleColorEditing = (layerImage, controls, dollContainer, callback) => {
-    const colorContainer = createElementWithClassAndParent("div", controls);
+    const colorContainer = createElementWithClassAndParent("div", controls, 'color-container');
     if (!this.colorMap[this.current_part]) {
       this.colorMap[this.current_part] = uniqueColors(layerImage); //expensive call, cache it as you can
     }
 
     if (Object.keys(this.colorMap[this.current_part]).length < 31 && Object.keys(this.colorMap[this.current_part]).length > 0) {
 
-      const randomButton = createElementWithClassAndParent("button", colorContainer);
+      const randomButton = createElementWithClassAndParent("button", colorContainer, "randomize-all-colors-button");
       randomButton.innerText = "Randomize All Colors";
       randomButton.onclick = () => {
         for (let colorKey of Object.keys(this.colorMap[this.current_part])) {
@@ -146,9 +146,11 @@ class Layer {
         callback(parent, dollContainer); //rerender over the last container
       }
 
+      const colorInputContainer = createElementWithClassAndParent("div", colorContainer, 'color-input-container');
+
       for (let colorKey of Object.keys(this.colorMap[this.current_part])) {
         const color = this.colorMap[this.current_part][colorKey];
-        const colorPicker = createElementWithClassAndParent("input", colorContainer, 'color-picker');
+        const colorPicker = createElementWithClassAndParent("input", colorInputContainer, 'color-picker');
         colorPicker.type = "color";
         colorPicker.value = `${rgbToHex(color.red, color.green, color.blue)}`;
         colorPicker.onchange = () => {
@@ -159,10 +161,10 @@ class Layer {
         }
       }
     } else if (Object.keys(this.colorMap[this.current_part]).length == 0) {
-      colorContainer.innerHTML = "JR NOTE: No Colors :( :( :(";
+      colorContainer.innerHTML = "JR NOTE: No Colors :(";
 
     } else {
-      colorContainer.innerHTML = "JR NOTE: Sorry, this part has too many colors to recolor :( :( :(";
+      colorContainer.innerHTML = "JR NOTE: too many colors :(";
 
     }
   }
@@ -216,15 +218,18 @@ class Layer {
   }
 
   render = async (doll, controls, canvas, funCanvas, fuckery, dollContainer, callback) => {
-    this.handleAllowingColorEdits(controls, dollContainer, callback);
+    const layer_controls = createElementWithClassAndParent("div", controls, "layer-controls sub-section");
 
-    this.handlePartsPicking(controls, dollContainer, callback);
+
+    this.handlePartsPicking(layer_controls, dollContainer, callback);
 
     const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
     await waitForImage(layerImage, this.current_part);
 
+    this.handleAllowingColorEdits(layer_controls, dollContainer, callback);
+
     if (this.allowColorEditing) {
-      this.handleColorEditing(layerImage, controls, dollContainer, callback); //has to happen after we have the image
+      this.handleColorEditing(layerImage, layer_controls, dollContainer, callback); //has to happen after we have the image
     }
 
     this.handleActualRendering(layerImage, doll, canvas, funCanvas, fuckery); //has to happen after we get the image

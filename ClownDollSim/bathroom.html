@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Wait. Have you been here before?">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1000, initial-scale=1.0">
 
   <title>ClownSim</title>
   <link rel="stylesheet" href="doll.css">
@@ -45,80 +45,7 @@ while this version backloads it: fuck it do whatever with whatever and we'll do 
 
     }
   </script>
-  <style>
-    body {
-      background: black;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    #container {
-      position: relative;
-      margin-left: auto;
-      margin-right: auto;
-      width: 1000px;
-    }
-
-    .bg {
-      position: absolute;
-      width: 1000px;
-    }
-
-    .player {
-      position: absolute;
-      top: 225px;
-      left: 500px;
-      animation: tremble 3s linear infinite;
-
-    }
-
-    .enemy {
-      position: absolute;
-      left: 200px;
-      top: 153px;
-      animation: pumpkin-flicker 10s ease-in infinite;
-
-    }
-
-    .toilet {
-      cursor: pointer;
-      position: absolute;
-    }
-
-    @keyframes pumpkin-flicker {
-      0% {
-        transform: scale(1.05);
-      }
-
-      50% {
-        transform: scale(1.0);
-      }
-
-      100% {
-        transform: scale(1.05);
-      }
-    }
-
-    @keyframes tremble {
-
-      0%,
-      20%,
-      40%,
-      60%,
-      80%,
-      100% {
-        transform: translate(1px, 1px);
-
-      }
-
-      10%,
-      30%,
-      50%,
-      70%,
-      90% {
-        transform: translate(-1px, 0px);
-      }
-    }
-  </style>
+  
 
 </head>
 

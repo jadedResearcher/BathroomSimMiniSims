@@ -1,11 +1,74 @@
-.doll{
-  position: relative;
-  width: 50%;
-  height: fit-content;
-  cursor: pointer;
+@font-face {
+    font-family: bloodscratch;
+    src: url("Fonts/BloodScratchPersonalUse.ttf");
 }
 
-.fun-canvas{
+@font-face {
+    font-family: paincircus;
+    src: url("Fonts/pain_circus/Pain\ Circus.ttf");
+}
+
+@font-face {
+    font-family: GT America;
+    src: url("Fonts/GT-America/GT-America-Compressed-Regular-Trial.otf");
+}
+
+@font-face {
+    font-family: ouija;
+    src: url("Fonts/ifc_los_banditos/IFC\ LOS\ BANDITOS.ttf");
+}
+
+body {
+    background-color: #432a63;
+    color: #ff5c39;
+    font-weight: bolder;
+    left: 0px;
+    overflow: auto;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-family: "GT America", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%;
+}
+
+.section {
+    background: #8a859a;
+    color: #dfd3ff;
+    border-radius: 5px;
+    padding: 50px;
+    margin-top: 20px;
+
+}
+
+.sub-section {
+    background: #726695;
+    color: #dfd3ff;
+    border-radius: 5px;
+    padding: 50px;
+    border-width: 3px;
+    margin-top: 20px;
+
+}
+
+#container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+.doll {
+    position: relative;
+    width: 50%;
+    height: fit-content;
+    cursor: pointer;
+    margin-bottom: 0px;
+    margin-top: auto;
+}
+
+.fun-canvas {
     display: none;
     position: absolute;
     top: 0px;
@@ -13,40 +76,55 @@
     filter: saturate(0.5) brightness(0.75);
 }
 
-.doll-container{
+.doll-container {
     position: relative;
     border: 3px solid black;
-    background-color: white;
     border-radius: 3px;
     width: 100%;
     height: fit-content;
     display: flex;
-    flex-wrap: wrap;
-  }
+}
 
-.doll img{
+.doll img {
     max-width: 500px;
     position: absolute;
     left: 0px;
     top: 0px;
 }
 
-.color-picker{
+.color-picker {
     display: block;
 }
 
-.controls{
+.controls {
     width: 50%;
     padding-left: 13px;
     padding-bottom: 13px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.controls div{
-    padding-top: 13px;
+h2 {
     font-weight: bolder;
+    color: #ff5c39;
+    margin-top: 0px;
 }
 
-.controls span{
+button {
+    background-color: #ff5c39;
+    color: black;
+    border-radius: 13px;
+    padding: 7px;
+    padding-left: 13px;
+    padding-right: 13px;
+    margin-bottom: 13px;
+}
+
+.randomize-all-colors-button {
+    margin-top: 13px;
+}
+
+.controls span {
     font-size: 10px;
     vertical-align: top;
     display: inline-block;
@@ -54,10 +132,25 @@
     font-weight: lighter;
 }
 
-.select{
+select {
     margin-right: 13px;
+    max-width: 100px;
+    margin-bottom: 13px;
 }
 
-input[type="color"]{
+.color-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+}
+
+input[type="color"] {
     margin-top: 5px;
+}
+
+.layer-controls {
+    border: 3px solid #432a63;
+    padding: 13px;
+    margin: 13px;
+    width: 38%;
 }
