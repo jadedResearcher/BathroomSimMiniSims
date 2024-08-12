@@ -66,6 +66,18 @@ class Doll {
       this.render(parent, dollContainer); //rerender over the last container
     }
 
+    const downloadButton = createElementWithClassAndParent("button", doll, "randomize-whole-doll-button");
+    downloadButton.innerText = "Download Doll";
+    
+    downloadButton.onclick = ()=>{
+      const data = canvas.toDataURL();
+      const link = document.createElement("a");
+      link.download = "doll.png";
+      link.href = data;
+      link.click();
+    }
+
+
 
     if (fuckery) {
       canvas.onmouseenter = () => {
@@ -75,9 +87,12 @@ class Doll {
       funCanvas.onmouseleave = () => {
         funCanvas.style.display = "none";
       }
+      haveFunGlitchingCanvas(funCanvas); //:) :) ;)
+
     }
 
-    haveFunGlitchingCanvas(funCanvas); //:) :) ;)
+
+
   }
 }
 
