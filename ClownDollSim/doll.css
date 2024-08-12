@@ -33,11 +33,16 @@ body {
     margin-top: 1%;
 }
 
+h1{
+    font-family: "paincircus", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+}
+
 .section {
     background: #8a859a;
     color: #dfd3ff;
     border-radius: 5px;
-    padding: 50px;
+    padding: 13px;
     margin-top: 20px;
 
 }
@@ -46,7 +51,7 @@ body {
     background: #726695;
     color: #dfd3ff;
     border-radius: 5px;
-    padding: 50px;
+    padding: 13px;
     border-width: 3px;
     margin-top: 20px;
 
@@ -134,9 +139,18 @@ button {
 
 select {
     margin-right: 13px;
-    max-width: 100px;
+    width: 100px;
     margin-bottom: 13px;
+    display: block;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 14px;
+    color: black;
+    background-color: #888593;
 }
+
+select { text-align-last: right; }
+option { direction: rtl; }
 
 .color-input-container {
     display: flex;

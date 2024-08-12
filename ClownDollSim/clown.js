@@ -57,6 +57,8 @@ class Doll {
 
     const randomButton = createElementWithClassAndParent("button", doll);
     randomButton.innerText = "Randomize Whole Doll";
+    randomButton.scrollIntoView(false);
+
     randomButton.onclick = () => {
       for (let l of this.layers) {
         l.chooseRandomPart();
@@ -120,7 +122,7 @@ class Layer {
     }
 
     const parts = this.directory.split("/");
-    label.innerText = parts[parts.length - 2];
+    label.innerText = titleCase(parts[parts.length - 2]);
     const randomButton = createElementWithClassAndParent("button", controls);
     randomButton.innerText = "Randomize";
     randomButton.onclick = () => {
@@ -169,13 +171,14 @@ class Layer {
     }
   }
 
-  handleActualRendering = (layerImage, doll, canvas, funCanvas, fuckery) => {
+  handleActualRendering = (controls,layerImage, doll, canvas, funCanvas, fuckery) => {
     if (canvas.width == 0) {
       canvas.width = layerImage.width;
       canvas.height = layerImage.height;
       funCanvas.width = canvas.width;
       funCanvas.height = canvas.height;
       doll.style.width = layerImage.width + "px";
+      controls.style.width = 1000-layerImage.width + "px";
     }
 
     const context = canvas.getContext("2d");
@@ -232,6 +235,6 @@ class Layer {
       this.handleColorEditing(layerImage, layer_controls, dollContainer, callback); //has to happen after we have the image
     }
 
-    this.handleActualRendering(layerImage, doll, canvas, funCanvas, fuckery); //has to happen after we get the image
+    this.handleActualRendering(controls,layerImage, doll, canvas, funCanvas, fuckery); //has to happen after we get the image
   }
 }
