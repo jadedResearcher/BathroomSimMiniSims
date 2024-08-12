@@ -41,8 +41,7 @@ class Doll {
     }
 
     for (let layer of this.layers) {
-      console.log("JR NOTE: layer is", layer)
-      await layer.render(doll, controls, canvas, funCanvas, fuckery, dollContainer,this.render);
+      await layer.render(doll, controls, canvas, funCanvas, fuckery, dollContainer, this.render);
     }
 
     doll.append(canvas);
@@ -130,7 +129,7 @@ class Layer {
     }
   }
 
-  handleColorEditing = (layerImage,controls, dollContainer,callback) => {
+  handleColorEditing = (layerImage, controls, dollContainer, callback) => {
     const colorContainer = createElementWithClassAndParent("div", controls);
     if (!this.colorMap[this.current_part]) {
       this.colorMap[this.current_part] = uniqueColors(layerImage); //expensive call, cache it as you can
@@ -154,10 +153,9 @@ class Layer {
         colorPicker.value = `${rgbToHex(color.red, color.green, color.blue)}`;
         colorPicker.onchange = () => {
           const { red, green, blue } = hexToRgb(colorPicker.value);
-          console.log("JR NOTE: new red, green blue is", red, green, blue, "from", colorPicker.value)
           //key will always be the original but value is the new value
           this.colorMap[this.current_part][colorKey] = { red, green, blue };
-          this.render(parent, dollContainer); //rerender over the last container
+          callback(parent, dollContainer); //rerender over the last container
         }
       }
     } else if (Object.keys(this.colorMap[this.current_part]).length == 0) {
@@ -169,7 +167,7 @@ class Layer {
     }
   }
 
-  handleActualRendering = (layerImage,doll, canvas, funCanvas, fuckery) => {
+  handleActualRendering = (layerImage, doll, canvas, funCanvas, fuckery) => {
     if (canvas.width == 0) {
       canvas.width = layerImage.width;
       canvas.height = layerImage.height;
@@ -203,7 +201,7 @@ class Layer {
     layerImage.remove();
   }
 
-  handleAllowingColorEdits = (controls,dollContainer, callback) => {
+  handleAllowingColorEdits = (controls, dollContainer, callback) => {
     const checkBoxContainer = createElementWithClassAndParent("div", controls);
     const checkboxForColorEditing = createElementWithClassAndParent("input", checkBoxContainer);
     checkboxForColorEditing.type = "checkbox";
@@ -217,18 +215,18 @@ class Layer {
     }
   }
 
-  render = async (doll, controls, canvas, funCanvas, fuckery,dollContainer, callback) => {
-    this.handleAllowingColorEdits(controls,dollContainer, callback);
+  render = async (doll, controls, canvas, funCanvas, fuckery, dollContainer, callback) => {
+    this.handleAllowingColorEdits(controls, dollContainer, callback);
 
-    this.handlePartsPicking(controls, dollContainer,callback);
+    this.handlePartsPicking(controls, dollContainer, callback);
 
     const layerImage = createElementWithClassAndParent("img", doll, "doll-layer");
     await waitForImage(layerImage, this.current_part);
 
     if (this.allowColorEditing) {
-      this.handleColorEditing(layerImage,controls,dollContainer, callback); //has to happen after we have the image
+      this.handleColorEditing(layerImage, controls, dollContainer, callback); //has to happen after we have the image
     }
 
-    this.handleActualRendering(layerImage,doll, canvas, funCanvas, fuckery); //has to happen after we get the image
+    this.handleActualRendering(layerImage, doll, canvas, funCanvas, fuckery); //has to happen after we get the image
   }
 }
