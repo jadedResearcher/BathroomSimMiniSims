@@ -24,28 +24,35 @@ and dollsim handled the complexity by frontloading it: these images need to be n
 while this version backloads it: fuck it do whatever with whatever and we'll do a buncha math and programming to try to make a doll out of it with basically no preprocessing
     */
     window.onload = async () => {
-      //NOTE: needs to match the domain you're hosting from or can't do color fuckery
-      const clowns = ["http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/body/", "http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/face/", "http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/extra/"];
-      const sexyMen = ["http://farragofiction.com/SexyMen/BG/", "http://farragofiction.com/SexyMen/Base/", "http://farragofiction.com/SexyMen/Shirt/", "http://farragofiction.com/SexyMen/Pants/", "http://farragofiction.com/SexyMen/Shoes/", "http://farragofiction.com/SexyMen/Accessory/"];
-      const pigeon = ["http://farragofiction.com/DollSource/images/Pigeon/Body/", "http://farragofiction.com/DollSource/images/Pigeon/Head/", "http://farragofiction.com/DollSource/images/Pigeon/Tail/", "http://farragofiction.com/DollSource/images/Pigeon/Wing/"]
-      const trolls = ["http://farragofiction.com/DollSource/images/Homestuck/Wings/", "http://farragofiction.com/DollSource/images/Homestuck/HairBack/", "http://farragofiction.com/DollSource/images/Homestuck/Body/", "http://farragofiction.com/DollSource/images/Homestuck/FacePaint/", "http://farragofiction.com/DollSource/images/Homestuck/CanonSymbol/", "http://farragofiction.com/DollSource/images/Homestuck/Mouth/", "http://farragofiction.com/DollSource/images/Homestuck/LeftEye/", "http://farragofiction.com/DollSource/images/Homestuck/RightEye/", "http://farragofiction.com/DollSource/images/Homestuck/Glasses/", "http://farragofiction.com/DollSource/images/Homestuck/HairFront/", "http://farragofiction.com/DollSource/images/Homestuck/LeftFin/", "http://farragofiction.com/DollSource/images/Homestuck/RightFin/", "http://farragofiction.com/DollSource/images/Homestuck/Glasses2/", "http://farragofiction.com/DollSource/images/Homestuck/LeftHorn/", "http://farragofiction.com/DollSource/images/Homestuck/RightHorn/"]
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const param_doll_key = urlParams.get('doll_type'); //you can escape friday if you say its not friday
 
-      clownDoll = await makeDollFromDirectories(clowns);
-      sexyDoll = await makeDollFromDirectories(sexyMen);
-      birbDoll = await makeDollFromDirectories(pigeon);
-      trollDoll = await makeDollFromDirectories(trolls);
+      //NOTE: needs to match the domain you're hosting from or can't do color fuckery
+      const dolls = {};
+      dolls["CLOWNS"] = ["http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/body/", "http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/face/", "http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/EAST/images/ClownDollParts/extra/"];
+      dolls["EYEDLR"] = ["http://farragofiction.com/SexyMen/BG/", "http://farragofiction.com/SexyMen/Base/", "http://farragofiction.com/SexyMen/Shirt/", "http://farragofiction.com/SexyMen/Pants/", "http://farragofiction.com/SexyMen/Shoes/", "http://farragofiction.com/SexyMen/Accessory/"];
+      dolls["BIRB"] = ["http://farragofiction.com/DollSource/images/Pigeon/Body/", "http://farragofiction.com/DollSource/images/Pigeon/Head/", "http://farragofiction.com/DollSource/images/Pigeon/Tail/", "http://farragofiction.com/DollSource/images/Pigeon/Wing/"]
+      dolls["TROLL"] = ["http://farragofiction.com/DollSource/images/Homestuck/Wings/", "http://farragofiction.com/DollSource/images/Homestuck/HairBack/", "http://farragofiction.com/DollSource/images/Homestuck/Body/", "http://farragofiction.com/DollSource/images/Homestuck/FacePaint/", "http://farragofiction.com/DollSource/images/Homestuck/CanonSymbol/", "http://farragofiction.com/DollSource/images/Homestuck/Mouth/", "http://farragofiction.com/DollSource/images/Homestuck/LeftEye/", "http://farragofiction.com/DollSource/images/Homestuck/RightEye/", "http://farragofiction.com/DollSource/images/Homestuck/Glasses/", "http://farragofiction.com/DollSource/images/Homestuck/HairFront/", "http://farragofiction.com/DollSource/images/Homestuck/LeftFin/", "http://farragofiction.com/DollSource/images/Homestuck/RightFin/", "http://farragofiction.com/DollSource/images/Homestuck/Glasses2/", "http://farragofiction.com/DollSource/images/Homestuck/LeftHorn/", "http://farragofiction.com/DollSource/images/Homestuck/RightHorn/"]
+
+      let doll_key = "CLOWNS";
+
+      if(param_doll_key && Object.keys(dolls).includes(param_doll_key)){
+        doll_key=param_doll_key;
+      }
+
+      const chosenDollDirectories = dolls[doll_key];
+      doll = await makeDollFromDirectories(chosenDollDirectories);
+
 
       const parent = document.querySelector("#container")
 
-      clownDoll.render(parent);
-      sexyDoll.render(parent);
-      birbDoll.render(parent);
-      trollDoll.render(parent);
+      doll.render(parent);
 
 
     }
   </script>
-  
+
 
 </head>
 
