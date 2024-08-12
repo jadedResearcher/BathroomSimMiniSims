@@ -24,7 +24,8 @@ class Doll {
     } else {
       dollContainer.innerHTML = ""; //clear it out for a rerender
     }
-    const doll = createElementWithClassAndParent("div", dollContainer, "doll");
+    const dollWrapper = createElementWithClassAndParent("div", dollContainer, "doll-wrapper");
+    const doll = createElementWithClassAndParent("div", dollWrapper, "doll");
 
 
     const controls = createElementWithClassAndParent("div", dollContainer, "controls");
@@ -55,9 +56,8 @@ class Doll {
       doll.append(funCanvas);
     }
 
-    const randomButton = createElementWithClassAndParent("button", doll);
+    const randomButton = createElementWithClassAndParent("button", doll, "randomize-whole-doll-button");
     randomButton.innerText = "Randomize Whole Doll";
-    randomButton.scrollIntoView(false);
 
     randomButton.onclick = () => {
       for (let l of this.layers) {
@@ -178,6 +178,8 @@ class Layer {
       funCanvas.width = canvas.width;
       funCanvas.height = canvas.height;
       doll.style.width = layerImage.width + "px";
+      doll.parentElement.style.width = layerImage.width + "px";
+
       controls.style.width = 1000-layerImage.width + "px";
     }
 

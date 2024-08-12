@@ -33,9 +33,9 @@ body {
     margin-top: 1%;
 }
 
-h1{
+h1 {
     font-family: "paincircus", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  
+
 }
 
 .section {
@@ -64,13 +64,19 @@ h1{
     width: 1000px;
 }
 
+.randomize-whole-doll-button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 15px;
+}
+
 .doll {
-    position: relative;
+    position: fixed;
     width: 50%;
     height: fit-content;
     cursor: pointer;
-    margin-bottom: 0px;
-    margin-top: auto;
+    bottom: 0px;
 }
 
 .fun-canvas {
@@ -149,8 +155,13 @@ select {
     background-color: #888593;
 }
 
-select { text-align-last: right; }
-option { direction: rtl; }
+select {
+    text-align-last: right;
+}
+
+option {
+    direction: rtl;
+}
 
 .color-input-container {
     display: flex;
