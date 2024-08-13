@@ -68,8 +68,8 @@ class Doll {
 
     const downloadButton = createElementWithClassAndParent("button", doll, "randomize-whole-doll-button");
     downloadButton.innerText = "Download Doll";
-    
-    downloadButton.onclick = ()=>{
+
+    downloadButton.onclick = () => {
       const data = canvas.toDataURL();
       const link = document.createElement("a");
       link.download = "doll.png";
@@ -119,30 +119,42 @@ class Layer {
   }
 
   handlePartsPicking = (controls, dollContainer, callback) => {
-    const label = createElementWithClassAndParent("h2", controls,"part-label");
+    const label = createElementWithClassAndParent("h2", controls, "part-label");
 
-    const row = createElementWithClassAndParent("div", controls,"part-row");
+    const row = createElementWithClassAndParent("div", controls, "part-row");
 
-    const preview = createElementWithClassAndParent("img", row,"part-preview");
-    preview.src = this.current_part;
+
 
     const customSelect = createElementWithClassAndParent("div", row, "custom-select");
 
     //const select = createElementWithClassAndParent("select", row);
     customSelect.disabled = this.parts.length <= 1;
-    for (let part of this.parts) {
+    let index = 0;
+
+    const createOption = (part, index) => {
       const option = createElementWithClassAndParent("div", customSelect, "custom-option");
       option.value = part;
-      option.innerHTML = `<img src='${this.directory+part}'>`;
-      option.selected = this.current_part.includes(part)
-      if(option.selected){
-        option.scrollIntoView();
-      }
-      option.onclick = ()=>{
+      option.innerHTML = `${index}<img src='${this.directory + part}'>`;
+      const selected = this.current_part.includes(part)
+      option.setAttribute("selected", selected);
+      return option;
+    }
+
+    
+    //show what was selected at top
+    const option = createOption(this.current_part.replaceAll(this.directory,""), "&#10003;");
+    option.style.cursor="auto";
+    option.style.pointerEvents="none";
+
+    for (let part of this.parts) {
+      index++;
+      const option = createOption(part, index);
+      option.onclick = () => {
         this.choosePart(part);
         callback(parent, dollContainer); //rerender over the last container
 
       }
+
     }
 
     const parts = this.directory.split("/");
@@ -151,7 +163,7 @@ class Layer {
     randomButton.innerText = "Randomize";
     randomButton.onclick = () => {
       this.chooseRandomPart();
-      callback(parent, dollContainer,randomButton); //rerender over the last container
+      callback(parent, dollContainer, randomButton); //rerender over the last container
     }
   }
 
@@ -169,7 +181,7 @@ class Layer {
         for (let colorKey of Object.keys(this.colorMap[this.current_part])) {
           this.colorMap[this.current_part][colorKey] = { red: getRandomNumberBetween(0, 255), green: getRandomNumberBetween(0, 255), blue: getRandomNumberBetween(0, 255) }
         }
-        callback(parent, dollContainer,randomButton); //rerender over the last container
+        callback(parent, dollContainer, randomButton); //rerender over the last container
       }
 
       const colorInputContainer = createElementWithClassAndParent("div", colorContainer, 'color-input-container');
@@ -183,7 +195,7 @@ class Layer {
           const { red, green, blue } = hexToRgb(colorPicker.value);
           //key will always be the original but value is the new value
           this.colorMap[this.current_part][colorKey] = { red, green, blue };
-          callback(parent, dollContainer,colorKey); //rerender over the last container
+          callback(parent, dollContainer, colorKey); //rerender over the last container
         }
       }
     } else if (Object.keys(this.colorMap[this.current_part]).length == 0) {
@@ -195,7 +207,7 @@ class Layer {
     }
   }
 
-  handleActualRendering = (controls,layerImage, doll, canvas, funCanvas, fuckery) => {
+  handleActualRendering = (controls, layerImage, doll, canvas, funCanvas, fuckery) => {
     if (canvas.width == 0) {
       canvas.width = layerImage.width;
       canvas.height = layerImage.height;
@@ -204,7 +216,7 @@ class Layer {
       doll.style.width = layerImage.width + "px";
       doll.parentElement.style.width = layerImage.width + "px";
 
-      controls.style.width = document.querySelector("body").clientWidth-layerImage.width + "px";
+      controls.style.width = document.querySelector("body").clientWidth - layerImage.width + "px";
     }
 
     const context = canvas.getContext("2d");
@@ -229,9 +241,9 @@ class Layer {
 
       funContext.drawImage(layerImage, 0, 0, canvas.width / 3, canvas.height / 3); //downscale for maximum aliasing
     }
-    //layerImage.remove();
+    layerImage.remove();
   }
-//https://archiveofourown.org/works/58111936?view_adult=true
+  //https://archiveofourown.org/works/58111936?view_adult=true
   handleAllowingColorEdits = (controls, dollContainer, callback) => {
     const checkBoxContainer = createElementWithClassAndParent("div", controls);
     const checkboxForColorEditing = createElementWithClassAndParent("input", checkBoxContainer);
@@ -242,7 +254,7 @@ class Layer {
     checkLabel.innerText = "Allow Color Editing (slow)"
     checkboxForColorEditing.onchange = () => {
       this.allowColorEditing = !this.allowColorEditing;
-      callback(parent, dollContainer,false); //rerender over the last container but dont scroll (they want to change color)
+      callback(parent, dollContainer, false); //rerender over the last container but dont scroll (they want to change color)
     }
   }
 
@@ -261,6 +273,6 @@ class Layer {
       this.handleColorEditing(layerImage, layer_controls, dollContainer, callback); //has to happen after we have the image
     }
 
-    this.handleActualRendering(controls,layerImage, doll, canvas, funCanvas, fuckery); //has to happen after we get the image
+    this.handleActualRendering(controls, layerImage, doll, canvas, funCanvas, fuckery); //has to happen after we get the image
   }
 }

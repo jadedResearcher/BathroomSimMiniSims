@@ -113,9 +113,7 @@ h1 {
     top: 0px;
 }
 
-.part-preview{
-    height: 50px;
-}
+
 
 .color-picker {
     display: block;
@@ -166,23 +164,34 @@ button {
 
 .custom-select {
     margin-right: 13px;
-    width: 100px;
+    width: 100%;
     margin-bottom: 13px;
     display: block;
-    height: 100px;
+    height: 150px;
+    scrollbar-color: #13022a #432a63 ;
     overflow: auto;
     border-radius: 3px;
     font-size: 14px;
+    cursor: pointer;
     color: black;
-    background-color: #888593;
+    background-color: #8a859a;
 }
 
 .custom-option[selected="true"]{
-    background-color: #ff5c39;
+    background-color: #c4c4c4;
+    border: 1px solid black;
 }   
 
+.custom-option:hover{
+    background-color: rgb(147, 129, 69);
+}
+
+.custom-option{
+    padding-left: 3px;
+}
+
 .custom-option img{
-    height: 12px;
+    height: 50px;
 }
 
 .custom-select:disabled{
