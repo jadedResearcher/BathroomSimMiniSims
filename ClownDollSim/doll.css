@@ -93,6 +93,10 @@ h1 {
     filter: saturate(0.5) brightness(0.75);
 }
 
+.part-row{
+    display: flex;
+}
+
 .doll-container {
     position: relative;
     border: 3px solid black;
@@ -107,6 +111,10 @@ h1 {
     position: absolute;
     left: 0px;
     top: 0px;
+}
+
+.part-preview{
+    height: 50px;
 }
 
 .color-picker {
@@ -156,16 +164,29 @@ button {
     font-weight: lighter;
 }
 
-select {
+.custom-select {
     margin-right: 13px;
     width: 100px;
     margin-bottom: 13px;
     display: block;
-    height: 50px;
+    height: 100px;
+    overflow: auto;
     border-radius: 3px;
     font-size: 14px;
     color: black;
     background-color: #888593;
+}
+
+.custom-option[selected="true"]{
+    background-color: #ff5c39;
+}   
+
+.custom-option img{
+    height: 12px;
+}
+
+.custom-select:disabled{
+    opacity: 0.5;
 }
 
 select {

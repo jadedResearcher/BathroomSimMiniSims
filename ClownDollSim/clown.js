@@ -121,17 +121,28 @@ class Layer {
   handlePartsPicking = (controls, dollContainer, callback) => {
     const label = createElementWithClassAndParent("h2", controls,"part-label");
 
-    const select = createElementWithClassAndParent("select", controls);
-    select.disabled = this.parts.length <= 1;
+    const row = createElementWithClassAndParent("div", controls,"part-row");
+
+    const preview = createElementWithClassAndParent("img", row,"part-preview");
+    preview.src = this.current_part;
+
+    const customSelect = createElementWithClassAndParent("div", row, "custom-select");
+
+    //const select = createElementWithClassAndParent("select", row);
+    customSelect.disabled = this.parts.length <= 1;
     for (let part of this.parts) {
-      const option = createElementWithClassAndParent("option", select);
+      const option = createElementWithClassAndParent("div", customSelect, "custom-option");
       option.value = part;
-      option.innerText = part;
+      option.innerHTML = `<img src='${this.directory+part}'>`;
       option.selected = this.current_part.includes(part)
-    }
-    select.onchange = () => {
-      this.choosePart(select.value);
-      callback(parent, dollContainer,select); //rerender over the last container
+      if(option.selected){
+        option.scrollIntoView();
+      }
+      option.onclick = ()=>{
+        this.choosePart(part);
+        callback(parent, dollContainer); //rerender over the last container
+
+      }
     }
 
     const parts = this.directory.split("/");
@@ -218,7 +229,7 @@ class Layer {
 
       funContext.drawImage(layerImage, 0, 0, canvas.width / 3, canvas.height / 3); //downscale for maximum aliasing
     }
-    layerImage.remove();
+    //layerImage.remove();
   }
 //https://archiveofourown.org/works/58111936?view_adult=true
   handleAllowingColorEdits = (controls, dollContainer, callback) => {
