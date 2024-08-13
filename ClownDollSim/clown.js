@@ -198,6 +198,18 @@ class Layer {
           callback(parent, dollContainer, colorKey); //rerender over the last container
         }
       }
+      const restoreButton = createElementWithClassAndParent("button", colorContainer, "randomize-all-colors-button");
+      restoreButton.innerText = "Restore Original Colors";
+      restoreButton.onclick = () => {
+        for (let colorKey of Object.keys(this.colorMap[this.current_part])) {
+          const parts = colorKey.split(",");
+          const red = parts[0];
+          const green = parts[1];
+          const blue = parts[2];
+          this.colorMap[this.current_part][colorKey] = { red, green, blue }
+        }
+        callback(parent, dollContainer, randomButton); //rerender over the last container
+      }
     } else if (Object.keys(this.colorMap[this.current_part]).length == 0) {
       colorContainer.innerHTML = "JR NOTE: No Colors :(";
 
