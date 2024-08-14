@@ -1,0 +1,61 @@
+<html language="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Did you REALLY think it would be that easy??? :) :) ;)">
+
+  <title>JR's Attic :) :) :)</title>
+
+  <script src="utils.js"></script>
+  <script src="canvas_utils.js"></script>
+  <style>
+    body{
+      background-image: url(images/attic_jr.jpg);
+      background-size: contain;
+    }
+
+    #container{
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: auto;
+      margin-bottom: auto;
+      border-radius: 13px;
+      font-size: 31px;
+      padding-left: 31px;
+      padding-right: 31px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      text-align: center;
+      width: 93vw;
+      background-color: rgba(255,255,255,0.5);
+      color: #a10000;
+      font-family: 'Courier New', Courier, monospace;
+
+    }
+  </style>
+
+  <script>
+    let ticks=0;
+    window.onload = ()=>{
+      const container = document.querySelector("#container");
+      setInterval(()=>{
+        ticks ++;
+        container.innerHTML += ":) :) :)"
+        if(ticks >333){
+          alert("Did you REALLY think it would be that easy???")
+        }
+      },500)
+    }
+  </script>
+
+
+</head>
+
+<body>
+
+  <div id="container">
+    
+  </div>
+</body>
+
+</html>

@@ -99,6 +99,7 @@ class Layer {
   parts = []; //loaded from directory (it has to have an apache file structure type list)
   current_part = ""; //what has been chosen?
   allowColorEditing = false; //could be seriously expensive, don't do it unless the part has a limited pallete
+  allowPartsPreview = false; //slow machines or large doll parts could make this a problem, less mobile friendly
   colorMap = {}; //unless you enable scanning it for color editing, this will be empty, otherwise its keys are parts, and their values are a map of color pairings
   constructor(directory) {
     this.directory = directory;
@@ -120,47 +121,65 @@ class Layer {
 
   handlePartsPicking = (controls, dollContainer, callback) => {
     const label = createElementWithClassAndParent("h2", controls, "part-label");
-
+    const select = createElementWithClassAndParent("select", controls);
+    select.disabled = this.parts.length <= 1;
     const row = createElementWithClassAndParent("div", controls, "part-row");
 
+    this.handleAllowingPartsPreview(controls, dollContainer, callback);
 
-
-    const customSelect = createElementWithClassAndParent("div", row, "custom-select");
+    const customSelect = this.allowPartsPreview ? createElementWithClassAndParent("div", row, "custom-select") : null;
 
     //const select = createElementWithClassAndParent("select", row);
-    customSelect.disabled = this.parts.length <= 1;
+    if (this.allowPartsPreview) {
+      customSelect.disabled = this.parts.length <= 1;
+    }
     let index = 0;
 
     const createOption = (part, index) => {
-      const option = createElementWithClassAndParent("div", customSelect, "custom-option");
+      let customOption;
+      if (this.allowPartsPreview) {
+        customOption = createElementWithClassAndParent("div", customSelect, "custom-option");
+        customOption.value = part;
+        customOption.innerHTML = `${index}<img src='${this.directory + part}'>`;
+        customOption.setAttribute("selected", this.current_part.includes(part));
+      }
+
+      const option = createElementWithClassAndParent("option", select);
       option.value = part;
-      option.innerHTML = `${index}<img src='${this.directory + part}'>`;
-      const selected = this.current_part.includes(part)
-      option.setAttribute("selected", selected);
-      return option;
+      option.innerText = part;
+      option.selected = this.current_part.includes(part)
+      return customOption;
     }
 
-    
+
     //show what was selected at top
-    const option = createOption(this.current_part.replaceAll(this.directory,""), "&#10003;");
-    option.style.cursor="auto";
-    option.style.pointerEvents="none";
+    if (this.allowPartsPreview) {
+      const option = createOption(this.current_part.replaceAll(this.directory, ""), "&#10003;");
+      option.style.cursor = "auto";
+      option.style.pointerEvents = "none";
+    }
 
     for (let part of this.parts) {
       index++;
-      const option = createOption(part, index);
-      option.onclick = () => {
-        this.choosePart(part);
-        callback(parent, dollContainer); //rerender over the last container
-
+      const customOption = createOption(part, index);
+      if (customOption) { //only do for looped parts, not currently selected part
+        customOption.onclick = () => {
+          this.choosePart(part);
+          callback(parent, dollContainer); //rerender over the last container
+        }
       }
+    }
 
+    select.onchange = () => {
+      this.choosePart(select.value);
+      callback(parent, dollContainer, select); //rerender over the last container
     }
 
     const parts = this.directory.split("/");
     label.innerText = titleCase(parts[parts.length - 2]);
     const randomButton = createElementWithClassAndParent("button", controls);
     randomButton.innerText = "Randomize";
+    randomButton.style.marginTop ="5px";
     randomButton.onclick = () => {
       this.chooseRandomPart();
       callback(parent, dollContainer, randomButton); //rerender over the last container
@@ -266,6 +285,20 @@ class Layer {
     checkLabel.innerText = "Allow Color Editing (slow)"
     checkboxForColorEditing.onchange = () => {
       this.allowColorEditing = !this.allowColorEditing;
+      callback(parent, dollContainer, false); //rerender over the last container but dont scroll (they want to change color)
+    }
+  }
+
+  handleAllowingPartsPreview = (controls, dollContainer, callback) => {
+    const checkBoxContainer = createElementWithClassAndParent("div", controls);
+    const checkBox = createElementWithClassAndParent("input", checkBoxContainer);
+    checkBox.type = "checkbox";
+    checkBox.checked = this.allowPartsPreview;
+
+    const checkLabel = createElementWithClassAndParent("span", checkBoxContainer);
+    checkLabel.innerText = "Allow Parts Preview (slow)"
+    checkBox.onchange = () => {
+      this.allowPartsPreview = !this.allowPartsPreview;
       callback(parent, dollContainer, false); //rerender over the last container but dont scroll (they want to change color)
     }
   }
