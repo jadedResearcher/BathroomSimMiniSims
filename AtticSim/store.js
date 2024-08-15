@@ -713,7 +713,7 @@ I'm afraid I can only tell you what you can buy if you have enough Gopher Gold f
 
 
   }
-
+  f
   closerChat("Straight to the point. I like that. It's an admirable trait in someone.", hell);
   await sleep(1000)
   closerChat("But yes, you /can/ buy things here with Gopher Gold. Or Candy, in some places. That infection from the corn maze runs deep, one supposes.", hell);
@@ -779,13 +779,13 @@ that would be fun
       const textEle = createElementWithClassAndParent("div", options, 'closer-chat-option');
       const purchased = inventory && inventory.includes(item);
       textEle.innerHTML = `<p>${item.substring(item.length - 21, item.length)} </p>`
-      if(purchased){
-        textEle.innerHTML +=`Purchased!`;
+      if (purchased) {
+        textEle.innerHTML += `Purchased!`;
 
-      }else{
-        textEle.innerHTML +=`<p style="text-align:center;font-weight: bolder;">${price} GG</p>`;
+      } else {
+        textEle.innerHTML += `<p style="text-align:center;font-weight: bolder;">${price} GG</p>`;
       }
-      
+
       textEle.onclick = async () => {
         closerPopup.remove(); //you can open it back up later.
         if (!purchased) {
@@ -907,7 +907,7 @@ const everythingExtendsions = [
 
   }
 
-return TheCloser(); //if you close the popup you can reopen it
+  return TheCloser(); //if you close the popup you can reopen it
 
 }
 
@@ -916,7 +916,7 @@ return TheCloser(); //if you close the popup you can reopen it
 const TheCloser = () => {
   const defaultRamble = `I can take you to The Closer.`;
   const ramble = new CustomerServiceRamble(defaultRamble, []);
-  const handle = ()=>{
+  const handle = () => {
     handleCloserPopup();
     return ramble;
   }

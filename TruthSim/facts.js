@@ -1117,6 +1117,8 @@ const cult_secret2 = new Secrets(null, null, "images/wattbyIC___bywhichimeanNAM.
 //i am so excited that i realized the cult faction has *literally* all our movie monsters.  werewolves and vampires and evil cults.  the fact that camellia is a piper time clone is so perfect, because pipe (and by extension the Eye Killer) are SO into horror movies. 
 const cult_secret = new Secrets(null, null, "images/cult_faction_conspiracywall_by_IC.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
 
+
+//https://www.tumblr.com/roach-works/758817422452064256?source=share <-- literally rod core
 const echidna_secret = new Secrets(null,null,null,`The Echidna watched.
 
 The Echidna waited.

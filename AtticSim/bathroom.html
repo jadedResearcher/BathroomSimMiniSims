@@ -8,15 +8,44 @@
 
   <script src="utils.js"></script>
   <script src="canvas_utils.js"></script>
+  <script src="jr_store.js"></script>
+
   <style>
-    body{
+    body {
       background-image: url(images/attic_jr.jpg);
       background-size: contain;
     }
 
-    #container{
+    #shop {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 31px;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    button {
+      background-color: rgba(255, 255, 255, 0.75);
+      color: #a10000;
+      padding: 3px;
+      font-size: 21px;
+      overflow: hidden;
+      max-width: 333px;
+      text-align: right;
+      text-align-last: right;
+      direction: rtl;
+      padding-left: 13px;
+      padding-right: 13px;
+      cursor: pointer;
+      border-radius: 13px;
+      border: 1px solid #a10000;
+
+    }
+
+    #container {
       margin-left: auto;
       margin-right: auto;
+      cursor: pointer;
       margin-top: auto;
       margin-bottom: auto;
       border-radius: 13px;
@@ -27,7 +56,7 @@
       padding-bottom: 13px;
       text-align: center;
       width: 93vw;
-      background-color: rgba(255,255,255,0.5);
+      background-color: rgba(255, 255, 255, 0.5);
       color: #a10000;
       font-family: 'Courier New', Courier, monospace;
 
@@ -40,7 +69,12 @@
 <body>
 
   <div id="container">
-    JR: !!! Well hello there :) :) :)
+    <div id="jr-says">
+      JR: !!! well hello there :) :) :)
+    </div>
+    <div id="shop">
+    
+    </div>
   </div>
 </body>
 
