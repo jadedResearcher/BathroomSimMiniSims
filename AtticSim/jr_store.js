@@ -85,7 +85,7 @@ window.onload = async () => {
         } else {
           giggling.play();
           button.remove();
-          jrSays(`JR: lol you couldn't afford that you only have ${current_points_to_spend}, i'll remove the temptation :) :) :)`)
+          jrSays(`JR: lol you couldn't afford that you only have ${current_points_to_spend}, i'll remove the temptation :) :) :) <br><br>(if only there were SOME way you could hack your way into stealing all my secrets :) :) ;) :chrm_pot_of_gold: )`)
 
         }
 
