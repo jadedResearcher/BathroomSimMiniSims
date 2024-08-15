@@ -510,6 +510,9 @@ thems the breaks
 
 */
 
+
+
+//https://www.tumblr.com/verbosebabbler/758720377189957632/made-a-mockup-of-a-theoretical-zampaniosim-gameboy?source=share
 const sam_secret = new Secrets(null,null,null,`You know, I didn't ask for any of this, now did I?
 You think I wanted this? That I was slavering at the bit to be at the center of this shitty web?
 
@@ -1114,6 +1117,37 @@ const cult_secret2 = new Secrets(null, null, "images/wattbyIC___bywhichimeanNAM.
 //i am so excited that i realized the cult faction has *literally* all our movie monsters.  werewolves and vampires and evil cults.  the fact that camellia is a piper time clone is so perfect, because pipe (and by extension the Eye Killer) are SO into horror movies. 
 const cult_secret = new Secrets(null, null, "images/cult_faction_conspiracywall_by_IC.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
 
+const echidna_secret = new Secrets(null,null,null,`The Echidna watched.
+
+The Echidna waited.
+
+Its favorites, its Blorbos protected it while living their tiny lives.  Love and hate. Despair and Hope. 
+
+Such passionate lives they had.
+
+It was good The Echidna's Solemn had discovered the Monster of Naples, and through him, the Cult that came nipping at the Echidna's heels.
+
+The boy holding the Echidna squeezed it tighter, and its focus zoomed in on him.  The Dowsing Rod was watching the Devil of Spirals play with yet another new adopted child.  "Logan".  Understandably , he was anxious imagining yet another child abandoned.
+
+The Echidna vibrated slightly in sympathy.  The boy had so many feelings about his father, and though it could never truly welcome the Devil's presence it could acknowledge that his Dowsing Rod did.
+
+This Devil, of course, had been rendered toothless....though not before he had metastisized.
+
+The Echidna drew its attention back and back and back, drawing close to its second arm.  The Devil there gnashed and clawed through agony, drawing ever closer to the Echidna's very heart.  Each attempt ended in misery for the beast, and the inevitable  quiet Absolution the Echidna's White Night brought to reset it all.
+
+The Echidna's focus drew back again, taking in the endless array of arms and the countless beings within.
+
+The Eyes of the Void met the Echidna's gaze and grinned and the Echidna shuddered.  It did not know what would happen if the Devil reached its heart... but it did know that the Witness to its End was eagerly awaiting it.
+
+Unnerved, it sought comfort focusing on its heart.  Its Lord browsed the internet/wandered its horridors/attempted to pre invent a childrens card game.   There was a comfort in the unchangeable yet ever changing nature of the Echidna's Lord. 
+
+The Echidna did not ask to live.
+
+The Echidna did not ask to devour Relevancy and Space and Memory.
+
+But the Mother of Monsters would not go down without a fight.
+
+`);
 
 //he's basically retired from caring about zampanio
 //good for him
