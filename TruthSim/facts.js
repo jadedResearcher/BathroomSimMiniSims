@@ -506,7 +506,180 @@ his sad lil trick
 will NEVER be the result of practice or skill
 he has decided either he is born lucky enough to do it in SOME timeline or it never happens
 thems the breaks
+
+
 */
+
+const sam_secret = new Secrets(null,null,null,`You know, I didn't ask for any of this, now did I?
+You think I wanted this? That I was slavering at the bit to be at the center of this shitty web?
+
+Sure.
+
+You keep thinking that.
+
+Meanwhile *I* am stuck doing the REAL work of keeping this stupid crime family afloat. 
+
+It's not like anyone is going to help me.
+
+Not unless I MAKE them.
+
+You'd think self interest would be enough, y'know?
+
+People sure do have a way of surprising you.
+
+Like the day I found my brother merrily dismantling everything we'd built together. 
+
+I used to look up to him.  Respect him. 
+
+I threw away a lot to stick it out with him, you know. Not that I'm jealous of that stray Dog, you understand. But still, I didn't hafta slip that blindfold back on all snug like and take his hand like I was still some kinda child.
+
+But here we are.
+
+So yeah.  It broke my damn heart,  but when I realized Big Bro wasn't up to running the Family anymore, I took steps. 
+
+What else was I gonna do?
+
+Hell, its not like I wasn't half running it all myself anyways.  If Big Bro didn't care to use our computer who was I to shun the little blindspot he made for himself all tidy like.
+
+I started out just emailing out orders, sending little coded message in forums, that sorta thing. Before you know it the orders aren't exactly always coming from the Boss, if you take my meaning. 
+
+So when I had no choice but to step up, I call in all the most important  guys to heel.  Needed them to know which side their bread was buttered on. 
+
+Sure, I figured you'd get a few hold outs. Oblivious assholes who are more loyal to a NAME and a FACE than to the Family.  What did it matter if who is behind the Boss changes, so long as the money keeps coming in?  Assholes.
+
+But how was I supposed to know?
+
+The "Monster of Naples" was a staple, of course.  I'd run him for a few years, strictly online, no names, cuz I might be better at computers than the fuzz but I'm not thinking I'm the best there is so why take risks?
+
+And I'm not gonna ignore the head of our "comfort" ring, you know? Brings in more money than just 'bout anything but the drugs.  (which of fucking COURSE is what Big Bro was trying to tear down.  something about not letting "her" into his head? since when does he let a dame have that much power over him?)
+
+So yeah, he's part of the inner circle I invite to make sure they know that Big Bro is taking a nice quiet leave of absence and I'll be the one running the show.
+
+And then it's him.
+
+John.
+
+Some sick fucking joke on the part of my Big Bro, I figure. Can't ask him anymore, of course, but with how on top of everything he was, no way he didn't know he was my ex.
+
+Except...
+
+There's something wrong. 
+
+Sure I'd ran into him a time or two after he fucking ditched me for being "too controlling". Whatever THAT fuckin' means.
+
+Figured he was trying to mooch off the Family. Keep the benefits that came with dating me up without having to actually suck up to me anymore. 
+
+And I fucking called him out on it, of course I did. 
+
+But...
+
+Why didn't I see?
+
+Because in that fucking meeting, filled with my guys and people what hoped to become my guys...
+
+It was blindingly obvious.
+
+John was a Monster.
+
+Capital M.
+
+And that bright thread led directly from his teeth to my throat. 
+
+I'd DONE that to him. 
+
+Somehow.
+
+And now he couldn't live without the Family. Not easily.
+
+How was I to know I could do that?
+
+And we broke up...what, six YEARS ago? More?
+
+And he was a Monster all that time?
+
+I wanted to fuckin' apologize. To throw myself at his fuckin' feet and say I didn't know. I couldn't have known. Fuck. 
+
+But the guys were all there. Waiting. Watching. 
+
+Not the ones already on my side of course.  They already knew to keep their mouths shut and their heads down, you know?
+
+But all the people I brought in to check loyalty all at once was suddenly looking like a big fat mistake. 
+
+
+So I'm not about to show off my weakness in front of them. 
+
+So I spun up this tale, tried to sound as much like my Big Bro as possible about how a COURSE i'd always known John was the Monster of Naples, all according to plan and shit. 
+
+Figured I'd tell John the truth later, after all the mooks wandered off.
+
+Except.
+
+The words were barely out of my lips when I realized how massively I'd just shat the fuckin' bed. 
+
+Cuz somehow my dumb fucking mouth had been faster than I could remember. Remember all the times I'd yelled at John for sniffing around the family looking for scraps. How many times I told him to fuck off. 
+
+And how different that all sounded if you were thinking I KNEW. Knew I was the reason he was coming back and not cuz he had a hard time accepting rejection. Knew he was some kinda freaky monster just from having known me. 
+
+I had to flat out use the Threads to keep myself from wincing. From showing weakness. 
+
+Instead I kept my face all calm and blank, like Big Bro used to do as I looked him in the eye and.
+
+
+What I saw there.
+
+
+Was.
+
+
+
+Wrong.
+
+
+Like.
+
+Like he were barely hurt. 
+
+Like of course he knew I'd been that cruel to him.  
+
+Known for years. 
+
+
+He spat carefully at my desk plant, like if it hit anything else he'd be fucked and in the most tired voice I'd ever heard said that me and him were done. Through. 
+
+I pointed out he might die without the Family. Without the things we can provide for him. 
+
+He said he'd gladly take that Choice over our leash.
+
+And he left.
+
+I tried emailing him. Explaining it was all a lie. But. 
+
+Fuck man.
+
+I don't blame him for not writing back.  Even I think that sounds like a shitty lie someone would tell after misjudging how much they can fuck with a guy.
+
+
+So now that's it.
+
+I told him he needed us to live but...
+
+
+Big Bro fucked over our drugs arm.  And John leaving fucked over our sex arm. 
+
+
+We can limp along for a while with whats left but... 
+
+The Family can't fight off our rivals like this. 
+
+Without John, we die.
+
+
+And you think I'm HAPPY? Sitting here giddily smiling in the middle of my inherited web?
+
+FUCK no.
+
+I never asked for this shitty deal.
+`)
 
 const neville_secret = new Secrets(null, null, null, `<p><strong><u><span style="font-size:11pt;">Neville&apos;s Secret:</span></u></strong></p>
 <p><br></p>
