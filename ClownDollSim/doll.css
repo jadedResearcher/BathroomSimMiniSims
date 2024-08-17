@@ -136,6 +136,19 @@ h2 {
     margin-top: 0px;
 }
 
+a{
+    color: white;
+    opacity: .75;
+}
+
+a:visited{
+    color: white;
+}
+
+a:hover{
+    opacity: .9;
+}
+
 button {
     background-color: #ff5c39;
     color: black;

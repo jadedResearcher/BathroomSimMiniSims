@@ -50,7 +50,9 @@ window.onload = async () => {
   await jrSays("JR: guess i'll mimic that Gamer Gurl Flower Chick")
   await jrSays("JR: and only accept meta points (tm)")
   await jrSays(`JR: you've spent ${current_points_to_spend} in the closers bathroom shops so far`);
-  await jrSays(`JR: hope your ${current_points_to_spend} is enough :) :) ;)`)
+  await jrSays("JR: so thats what you have to spend with me")
+  await jrSays("JR: don't like it? go spend more Gopher Gold with the Closer lol")
+  await jrSays(`JR: hope your ${current_points_to_spend} points is enough :) :) ;)`)
 
   //href, size
   const data = await getGopherData(store_url);
@@ -71,30 +73,114 @@ window.onload = async () => {
       price = 0; //you already own this
     }
 
-
+    if (price === 0) {
+      button.classList.add('purchased');
+    }
     button.innerHTML = `${d.href}(${price})`
 
     button.onclick = () => {
+      let allowed = true;
       if (price != 0) {        //you already own it, don't worry
         if (current_points_to_spend >= price) {
           purchaseItem(d.href, price);
           audio.play();
+          price = 0;
           current_points_to_spend = localStorage[LOCAL_STORAGE_KEY_RUNNING_TOTAL];
           jrSays(`JR: happy to do business with you, you have ${current_points_to_spend} left`)
-
+          button.innerHTML = `${d.href}(${price})`
         } else {
+          allowed = false;
           giggling.play();
           button.remove();
-          jrSays(`JR: lol you couldn't afford that you only have ${current_points_to_spend}, i'll remove the temptation :) :) :) <br><br>(if only there were SOME way you could hack your way into stealing all my secrets :) :) ;) :chrm_pot_of_gold: )`)
+          jrSays(`JR: lol you couldn't afford that you only have ${current_points_to_spend}, i'll remove the temptation :) :) :) <br><br>(if only there were SOME way you could hack your way into stealing all my secrets :) :) ;) :chrm_pot_of_gold: :chrm_moon: )`)
 
         }
-
+      }
+      if (allowed) {
+        doPopup(d.href)
+      } else {
+        console.log("JR NOTE: you're not allowed to do that lol ")
       }
     }
 
   }
 
   console.log("JR NOTE: data", data)
+}
+
+const selectText = async (container, item) => {
+  container.innerHTML = "Loading..."
+  const rawText = await httpGetAsync(item); //only one that won't fetch itself
+  container.innerHTML = `<p style="padding: 20px;">${rawText.replaceAll("\n", "<br>")}</p>`;
+  const ele = document.querySelector(".text-option");
+  const prev = document.querySelector(".selected");
+  prev && prev.classList.remove("selected");
+  ele.classList.add("selected")
+}
+
+const selectImage = (container, item) => {
+  container.innerHTML = `<img style="padding: 20px;" src='${item}'>`;
+  const ele = document.querySelector(".image-option");
+  const prev = document.querySelector(".selected");
+  prev && prev.classList.remove("selected");
+  ele.classList.add("selected")
+}
+
+const selectMusic = (container, item) => {
+  container.innerHTML = `<audio controls autoplay src='${item}' loop style="padding:20px;">`;
+  const ele = document.querySelector(".music-option");
+  const prev = document.querySelector(".selected");
+  prev && prev.classList.remove("selected");
+  ele.classList.add("selected")
+}
+
+const selectVideo = (container, item) => {
+  container.innerHTML = `<video controls autoplay src='${item}' loop style="padding:20px;">`;
+  const ele = document.querySelector(".video-option");
+  const prev = document.querySelector(".selected");
+  prev && prev.classList.remove("selected");
+  ele.classList.add("selected")
+}
+
+const doPopup = (href) => {
+  const itemPopup = createElementWithClassAndParent("div", body, 'closer-chat-container');
+  const closerHeader = createElementWithClassAndParent("div", itemPopup, 'closer-chat-header');
+  const closerHeaderDiv = createElementWithClassAndParent("div", closerHeader);
+  closerHeaderDiv.style.display = "flex";
+  closerHeaderDiv.style.justifyContent = "space-between";
+  const closerHeaderItem = createElementWithClassAndParent("p", closerHeaderDiv);
+  closerHeaderItem.innerHTML = href;
+  const closerHeaderClose = createElementWithClassAndParent("p", closerHeaderDiv);
+  closerHeaderClose.innerHTML = "X";
+  closerHeaderClose.style.cursor = "pointer";
+
+  const closerBody = createElementWithClassAndParent("div", itemPopup, 'closer-chat-body');
+  const hell = createElementWithClassAndParent("div", closerBody, 'closer-customer-service-hell');
+  const hellInside = createElementWithClassAndParent("div", hell);
+
+  const textEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small text-option');
+  textEle.innerText = "View As Text File";
+  textEle.onclick = ()=>selectText(hellInside, href);
+
+
+  const imageEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small image-option');
+  imageEle.innerText = "View As Image File";
+  imageEle.onclick = ()=>selectImage(hellInside, href);
+
+  const musicEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small music-option');
+  musicEle.innerText = "View As Music File";
+  musicEle.onclick = ()=>selectMusic(hellInside, href);
+
+  const videoEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small video-option');
+  videoEle.innerText = "View As Video File";
+  videoEle.onclick = ()=>selectVideo(hellInside, href);
+
+  hellInside.innerHTML = "Loading..."
+
+  closerHeaderClose.onclick = () => {
+    //JR NOTE: TODO stop any audio/video playing
+    itemPopup.remove();
+  }
 }
 
 const jrSays = async (html) => {
