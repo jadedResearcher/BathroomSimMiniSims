@@ -85,6 +85,7 @@ window.onload = async () => {
         if (current_points_to_spend >= price) {
           purchaseItem(d.href, price);
           audio.play();
+          button.classList.add('purchased');
           price = 0;
           current_points_to_spend = localStorage[LOCAL_STORAGE_KEY_RUNNING_TOTAL];
           jrSays(`JR: happy to do business with you, you have ${current_points_to_spend} left`)
