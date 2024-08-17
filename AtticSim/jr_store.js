@@ -38,7 +38,7 @@ window.onload = async () => {
   jrSaysEle = document.querySelector("#jr-says");
   shop = document.querySelector("#shop");
 
-  incrementLocalStorageByAmount(LOCAL_STORAGE_KEY_CANDY, 1000); //free candy every time you visit here, but it only helps you if you then find a closer store afterwards rip
+  incrementLocalStorageByAmount(LOCAL_STORAGE_KEY_CANDY, 11300); //free candy every time you visit here, but it only helps you if you then find a closer store afterwards rip
   await jrSays("JR: !!!");
   await jrSays("JR: well hello there :) :) :)");
   await jrSays("JR: did you know i voice the Closer?");
@@ -52,6 +52,7 @@ window.onload = async () => {
   await jrSays(`JR: you've spent ${current_points_to_spend} in the closers bathroom shops so far`);
   await jrSays("JR: so thats what you have to spend with me")
   await jrSays("JR: don't like it? go spend more Gopher Gold with the Closer lol")
+  await jrSays("JR: here, i'll give you 13000 walking around gold as a favor :) :) :)") //once you find JR the previous mechanic of trying to earn gopher gold becomes irrelevant. jr likes destroying the premise of their own experiences
   await jrSays(`JR: hope your ${current_points_to_spend} points is enough :) :) ;)`)
 
   //href, size
@@ -156,26 +157,36 @@ const doPopup = (href) => {
 
   const closerBody = createElementWithClassAndParent("div", itemPopup, 'closer-chat-body');
   const hell = createElementWithClassAndParent("div", closerBody, 'closer-customer-service-hell');
-  const hellInside = createElementWithClassAndParent("div", hell);
 
   const textEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small text-option');
   textEle.innerText = "View As Text File";
-  textEle.onclick = ()=>selectText(hellInside, href);
 
 
   const imageEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small image-option');
   imageEle.innerText = "View As Image File";
-  imageEle.onclick = ()=>selectImage(hellInside, href);
 
   const musicEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small music-option');
   musicEle.innerText = "View As Music File";
-  musicEle.onclick = ()=>selectMusic(hellInside, href);
 
   const videoEle = createElementWithClassAndParent("div", hell, 'closer-chat-option small video-option');
   videoEle.innerText = "View As Video File";
-  videoEle.onclick = ()=>selectVideo(hellInside, href);
 
-  hellInside.innerHTML = "Loading..."
+
+  const hellInside = createElementWithClassAndParent("div", hell);
+  textEle.onclick = ()=>selectText(hellInside, store_url+ href);
+  imageEle.onclick = ()=>selectImage(hellInside, store_url+href);
+  musicEle.onclick = ()=>selectMusic(hellInside, store_url+href);
+  videoEle.onclick = ()=>selectVideo(hellInside, store_url+href);
+  const item = href;//im so lazy
+  if (item.includes(".txt")) {
+    selectText(hellInside, store_url+ href);
+  } else if (item.includes(".png") || item.includes(".PNG") || item.includes(".jpg") || item.includes(".jpeg")) {
+    selectImage(hellInside, store_url+ href);
+  } else if (item.includes(".wav") || item.includes(".mp3") || item.includes(".ogg")) {
+    selectMusic(hellInside, store_url+ href);
+  } else if (item.includes(".mp4")) {
+    selectVideo(hellInside, store_url+ href);
+  }
 
   closerHeaderClose.onclick = () => {
     //JR NOTE: TODO stop any audio/video playing
