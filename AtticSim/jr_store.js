@@ -70,7 +70,7 @@ window.onload = async () => {
       price = price * 1000;
     }
 
-    if (inventory.includes(d.href)) {
+    if (inventory?.includes(d.href)) {
       price = 0; //you already own this
     }
 
@@ -181,7 +181,7 @@ const doPopup = (href) => {
   const item = href;//im so lazy
   if (item.includes(".txt")) {
     selectText(hellInside, store_url+ href);
-  } else if (item.includes(".png") || item.includes(".PNG") || item.includes(".jpg") || item.includes(".jpeg")) {
+  } else if (item.includes(".png") || item.includes(".PNG") || item.includes(".jpg") || item.includes(".jpeg") || item.includes(".gif")) {
     selectImage(hellInside, store_url+ href);
   } else if (item.includes(".wav") || item.includes(".mp3") || item.includes(".ogg")) {
     selectMusic(hellInside, store_url+ href);

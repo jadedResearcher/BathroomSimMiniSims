@@ -442,6 +442,17 @@ const processBathroom = async (location, container, contents) => {
     container.classList.add("no-shop");
   }
 
+  
+  let ghost = await isThereGhost(location);
+  if (ghost) {
+    quipText.push(["I do not see it. Why do I not see it. What is in there?", "quips/I do not see it. Why do I not see it. What is in there.wav" ]);
+
+    contents.innerHTML += `<li>There is a ghost.`;
+    container.classList.add("ghost");
+  } else {
+    container.classList.add("no-ghost");
+  }
+
   let fruit = await isThereFruit(location);
   if (fruit) {
     quipText.push(["I do not understand why Alt hates the Closer so much. Non Robots are so illogical.", "quips/I do not understand why Alt hates the Closer so much. Non Robots are s.wav" ]);
@@ -575,6 +586,18 @@ const isThereStore = async (location) => {
 const isThereFruit = async (location) => {
   try {
     const data = await httpGetAsync(location + "/fruit_fuckery.js");
+    if (data) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
+
+const isThereGhost = async (location) => {
+  try {
+    const data = await httpGetAsync(location + "/ghosts.js");
     if (data) {
       return true;
     }
