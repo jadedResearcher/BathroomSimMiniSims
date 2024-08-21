@@ -461,6 +461,93 @@ Now he has turned into a tree yearning for our attention. If overfed, he will tu
 
 Our containment procedures will have to change accordingly.`, [OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
 
+
+const camellia_secret = new Secrets(null,null,null,`
+The chanting reached a crescendo. 
+
+Camellia let it wash over her, the feeling of unity calling to their god. 
+
+A single off key note from the cultist on her right.
+
+It was fine. One minor mistake wasn't going to ruin the ritual. 
+
+Another.
+
+The tiniest of twitches, at the corner of her right eye,  betrayed her, but none of the others noticed.
+
+It was fine.
+
+Disrupting the ritual to correct her neighbor wasn't going to help anyone.
+
+She did her best to relax her muscles, one by one. To join the crowd of voices without the burdens of self. 
+
+Someone stumbled over a line across from her.
+
+Her jaw clenched for the barest instant before she smoothed it. 
+
+It. Was. Fine. 
+
+Minor mistakes weren't worth ....
+
+
+Two cultists weren't even chanting. They were *whispering* to each other. Not paying attention.
+
+They were going to *ruin everything*. 
+
+The rest of the ritual was a blur to her as she dedicated her every fiber to not disrupting it.
+
+As expected, it failed.
+
+Their god did not reward their paltry efforts.
+
+The disappointed murmurs of her fellows washed over her like a revelation.
+
+They.
+
+Were.
+Animals..
+
+Spoiled, poorly trained animals. Dogs, perhaps. Or work horses left to grow fat in their pastures. Left to believe themselves SHEEP when they had a higher purpose.
+
+How could she blame them for acting according to their base natures.
+
+
+She stepped into the center of the congregation.
+
+Her mistake was thinking she was simply one of the crowd. That she bore no more responsibility than they did for their failures.
+
+Her mistake was thinking that she had no right to provide the guidance they so clearly desperately needed. 
+
+All eyes snapped onto her as she listed each and every failing in a crisp, clear voice. She pointed out individuals. She called them to her. She had them kneel. 
+
+There was fear in their eyes as they looked up at her. 
+
+This had been a congregation of equals.  To blame some and not others was unheard of. To act as if some were better than others...
+
+ The mob looked at those marked for Blame with hungry eyes.
+
+She promised them redemption.  These failed curs would be the Heralds of a New Order.  
+
+From now on, she promised them, they would simply succeed. And all it would take is for them to follow her directions, her *orders* as faithfully as a mindless beast. 
+
+She had the Failed Curs recite the chant. Each time they wavered, each time they deviated she stopped and corrected them while the Mob stared and stared. And then they restarted.
+
+Again.
+
+Again.
+
+Again.
+
+When finally their Discipline was plain to see she directed them to rejoin the Mob. 
+
+All eyes were on her as she deliberately did not rejoin the congregation.
+
+"Now." she said, panning her gaze on these formerly shepardless animals. The time was right.  "Everyone. Again."
+
+Their god smiled on them that night.
+
+`)//i wrote this one
+
 const CAMELLIACANSEEJOHNSTIMESTITCHING = new Fact("Camellia Can See John's Time Stitching", `We've had a curious development recently: the Hundmaster has brought me someone who'd tried to break into our holy sanctum, that, or he brought himself in. His smile is smug and horribly insufferable even as the dog easily strongarms him, as if he's exactly where he wants to be, and I would suspect he isn't wrong. She tells me he's her 'puppy's' boyfriend, 'or something like that'-- he won't deny it, and he looks actually interested in that line of thought. I don't care what kind of disgusting relations he has, but she thinks it's relevant. So, fine. We will operate under that assumption, as flawed and demented as it may be.
 
 He's from Italy, so he says-- or he works there. This doesn't mean anything. No one is truly born. They have all kept themselves busy on the other continent; it appears It has willed for the mafia to become more prevalent, and so it does, and my demonic counterpart has decided to split that 'puppy' in half, thus creating them, who create him as he stands now. And so it does. 
@@ -472,7 +559,7 @@ He did not notice that I could see him. But for a moment while he played with on
 That did catch my attention.
 As unimpressed as I may be at such wanton usage of a blessing, this one may still serve purpose. Not now, at the moment, but a purpose he can serve. Having one made of strings and one that can sever them is... useful. This world seems to work in such minutiae.
 
-I will be waiting accordingly.`, [TIME, ANGELS], 2, 0.5, 1.5);
+I will be waiting accordingly.`, [TIME, ANGELS], 2, 0.5, 1.5, camellia_secret);
 
 /*
 jr thoughts on CAMELLIACANSEEJOHNSTIMESTITCHING
