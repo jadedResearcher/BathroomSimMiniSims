@@ -47,6 +47,30 @@ body {
   animation-fill-mode: forwards;
 }
 
+.credits-friday{
+  position: sticky;
+  z-index: 1000;
+  bottom: 10px;
+  left: 0px;
+  height: 20px;
+  color: #a10000;
+  a{
+    color: red;
+  }
+  a:visited{
+    color: red;
+  }
+  a:hover{
+    color: #a10000;
+  }
+}
+
+.friday-video{
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  filter: invert(19) blur(1px) brightness(0.51) contrast(1919) grayscale(1)}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;

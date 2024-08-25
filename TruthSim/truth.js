@@ -81,7 +81,75 @@ const debugMode = (game) => {
 
 }
 
+
+const isItFriday = () => {
+  //midnight and fridays are wungle time
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const date = new Date();
+  if (urlParams.get("friday") === "plzjrwantsin") {
+    return false;
+  }
+  if (urlParams.get("friday") || date.getHours() == 0 || date.getDay() === 5) {
+    return true;
+  }
+  return false;
+}
+
+//the joke is its the friday night funkin mode IC made with Watt in it (aka NotAMinotaur)
+const fridayMode = async ()=>{
+  alert("Warning: Flashing Video Incoming")
+  const body = document.querySelector("body");
+  body.style.filter="saturate(0.5)";
+  body.innerHTML="";
+  let url = 'http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/store_inventory/zampaniofnfclips/clips/'
+  const video_clips = await getVideo(url);
+  const glitched_clips = video_clips.filter((item)=>item.includes("glitch"));
+  const videoEle = createElementWithClassAndParent("video",body,"friday-video");
+  const creditsEle = createElementWithClassAndParent("div",body,"credits-friday");
+  creditsEle.innerHTML="Streamer clips from : <a target='_blank' href='https://www.youtube.com/watch?v=SB3YZoJjYL4&t=7395s'>here</a>  ";
+
+
+  videoEle.src = url + pickFrom(glitched_clips);//guarantee first is glitch
+  videoEle.autoplay = true;
+  videoEle.play();
+  body.onclick = ()=>{
+    if(videoEle.paused){
+      videoEle.play();
+    }else{
+      videoEle.pause();
+    }
+  }
+  //  filter: invert(19) blur(1px) brightness(0.51) contrast(1919) grayscale(1)}
+  let invert = 1;
+  let blur = 5;
+  let brightness = 0.51;
+  let contrast = 1919;
+  let grayscale = 1;
+
+  videoEle.onended =()=>{
+    console.log("JR NOTE: ended", {invert, blur, brightness, contrast, grayscale})
+    invert = invert ? 0:1;
+    if(blur >0){
+      blur += -1;
+    }
+    brightness += 0.05;
+    contrast += -1* contrast/2;
+    grayscale += -0.03;
+    const filter =`invert(${invert}) blur(${blur}px) brightness(${brightness}) contrast(${contrast}) grayscale(${grayscale})`;
+    videoEle.style.filter = filter;
+    console.log("JR NOTE: filter is", filter)
+    videoEle.src = url + pickFrom(video_clips);
+    videoEle.play();
+  }
+
+}
+
 window.onload = async () => {
+  if(isItFriday()){
+    fridayMode();
+    return;
+  }
 
   initThemes();
   await getRandos();

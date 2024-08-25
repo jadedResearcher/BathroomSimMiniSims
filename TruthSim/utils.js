@@ -279,6 +279,8 @@ const updateURLParams = (params) => {
 const cachedImages = {}
 //key, value status
 const cachedAudio = {}
+//key, value status
+const cachedVideo = {}
 
 const imageExtendsions = [
   "png",
@@ -297,6 +299,14 @@ const audioExtensions = [
 const filePatternAudio = new RegExp('<a href="([^?]*?)">', 'g');
 
 const extensionPatternAudio = new RegExp(`\\\.(${audioExtensions.join("|")})\$`);
+
+
+const videoExtensions = [
+  "mp4",
+];
+const filePatternVideo = new RegExp('<a href="([^?]*?)">', 'g');
+
+const extensionPatternVideo = new RegExp(`\\\.(${videoExtensions.join("|")})\$`);
 
 function getTimeString(date) {
   var h = date.getHours();
@@ -323,6 +333,37 @@ const addImageProcess = (src) => {
     img.onerror = reject
     img.src = src
   })
+}
+
+const getVideo = async (url) => {
+  if (cachedVideo[url]) {
+    return cachedVideo[url];
+  }
+
+  let promise = new Promise(async (resolve, reject) => {
+    try {
+      const rawText = await httpGetAsync(url);
+
+      let files = [];
+      const match = rawText.matchAll(filePatternVideo);
+      const matches = Array.from(match, (res) => res);
+      for (let m of matches) {
+        const item = m[1];
+        if (item.match(extensionPatternVideo)) {
+          files.push(item);
+        }
+      }
+      cachedVideo[url] = files;
+      //console.log("JR NOTE: returned from network for", url)
+      resolve(files);
+    } catch (e) {
+      console.log("JR NOTE: error", e)
+      reject();
+      return [];
+    }
+  })
+  cachedVideo[url] = promise;
+  return promise;
 }
 
 const getAudio = async (url) => {
