@@ -102,7 +102,7 @@ const fuckWithAVideosAudio = (videoEle) => {
   const mediaSource = audioFucker.audioCtx.createMediaElementSource(videoEle);
   console.log("JR NOTE: mediaSource is", mediaSource)
   const muffleFilter = this.audioFucker.muffleFilter(500);
-  this.audioFucker.playDirectlyFromSource(mediaSource, false, 1, [ muffleFilter],0,()=>{
+  this.audioFucker.playDirectlyFromSource(mediaSource, false, 1, [ muffleFilter],videoEle.currentTime,()=>{
     console.log("JR NOTE: source was disconnected")
   })
 
@@ -125,7 +125,12 @@ const fridayMode = async () => {
 
   videoEle.src = url + pickFrom(glitched_clips);//guarantee first is glitch
   videoEle.autoplay = true;
+
+  videoEle.onplay =()=>{
+    fuckWithAVideosAudio(videoEle);
+  }
   videoEle.play();
+
   body.onclick = () => {
     if (videoEle.paused) {
       videoEle.play();
