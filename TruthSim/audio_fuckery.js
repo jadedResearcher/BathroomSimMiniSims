@@ -314,6 +314,7 @@ class AudioFucker {
 
   //returns an array of gain nodes you can control
   playDirectlyFromSource =(source, loop, playbackRate = 1, optionalSteps, offset = 0,callback)=> {
+    console.log("JR NOTE: source is", source)
     if (playbackRate) {
       source.playbackRate.value = playbackRate;
     }
