@@ -101,8 +101,8 @@ const fuckWithAVideosAudio = (videoEle) => {
   const audioFucker = new AudioFucker();
   const mediaSource = audioFucker.audioCtx.createMediaElementSource(videoEle);
   console.log("JR NOTE: mediaSource is", mediaSource)
-  const muffleFilter = this.audioFucker.muffleFilter(500);
-  this.audioFucker.playDirectlyFromSource(mediaSource, false, 1, [ muffleFilter],videoEle.currentTime,()=>{
+  const muffleFilter = audioFucker.muffleFilter(500);
+  audioFucker.playDirectlyFromSource(mediaSource, false, 1, [ muffleFilter],videoEle.currentTime,()=>{
     console.log("JR NOTE: source was disconnected")
   })
 
