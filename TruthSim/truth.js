@@ -97,7 +97,7 @@ const isItFriday = () => {
 }
 
 const fuckWithAVideosAudio = (videoEle) => {
-  videoEle.volume = 0;
+  //videoEle.volume = 0; // <--needed so i can hear the fucked with audio
   const audioFucker = new AudioFucker();
   const mediaSource = audioFucker.audioCtx.createMediaElementSource(videoEle);
   console.log("JR NOTE: mediaSource is", mediaSource)
@@ -268,6 +268,9 @@ const save = () => {
   }
 
   localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));
+  if(isItFriday()){
+    window.location.href = window.location.href; //refresh into spooky mode
+  }
 }
 
 
