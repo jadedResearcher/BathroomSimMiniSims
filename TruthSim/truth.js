@@ -127,7 +127,7 @@ const fridayMode = async () => {
   videoEle.autoplay = true;
 
   videoEle.onplay =()=>{
-    fuckWithAVideosAudio(videoEle);
+    //fuckWithAVideosAudio(videoEle);
   }
   videoEle.play();
 
@@ -268,6 +268,8 @@ const save = () => {
   }
 
   localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));
+  const saveNoise = new Audio("audio/fx/single_heart.mp3");
+  saveNoise.play();
   if(isItFriday()){
     window.location.href = window.location.href; //refresh into spooky mode
   }
