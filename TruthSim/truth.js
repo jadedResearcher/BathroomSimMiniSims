@@ -96,27 +96,40 @@ const isItFriday = () => {
   return false;
 }
 
+const fuckWithAVideosAudio = (videoEle) => {
+  videoEle.volume = 0;
+  const audioFucker = new AudioFucker();
+  const mediaSource = audioFucker.audioCtx.createMediaElementSource(videoEle);
+  console.log("JR NOTE: mediaSource is", mediaSource)
+  const muffleFilter = this.audioFucker.muffleFilter(500);
+  this.audioFucker.playDirectlyFromSource(mediaSource, false, 1, [ muffleFilter],0,()=>{
+    console.log("JR NOTE: source was disconnected")
+  })
+
+
+}
+
 //the joke is its the friday night funkin mode IC made with Watt in it (aka NotAMinotaur)
-const fridayMode = async ()=>{
+const fridayMode = async () => {
   alert("Warning: Flashing Video Incoming")
   const body = document.querySelector("body");
-  body.style.filter="saturate(0.5)";
-  body.innerHTML="";
+  body.style.filter = "saturate(0.5)";
+  body.innerHTML = "";
   let url = 'http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/store_inventory/zampaniofnfclips/clips/'
   const video_clips = await getVideo(url);
-  const glitched_clips = video_clips.filter((item)=>item.includes("glitch"));
-  const videoEle = createElementWithClassAndParent("video",body,"friday-video");
-  const creditsEle = createElementWithClassAndParent("div",body,"credits-friday");
-  creditsEle.innerHTML="Streamer clips from : <a target='_blank' href='https://www.youtube.com/watch?v=SB3YZoJjYL4&t=7395s'>here</a>  ";
+  const glitched_clips = video_clips.filter((item) => item.includes("glitch"));
+  const videoEle = createElementWithClassAndParent("video", body, "friday-video");
+  const creditsEle = createElementWithClassAndParent("div", body, "credits-friday");
+  creditsEle.innerHTML = "Streamer clips from : <a target='_blank' href='https://www.youtube.com/watch?v=SB3YZoJjYL4&t=7395s'>here</a>  ";
 
 
   videoEle.src = url + pickFrom(glitched_clips);//guarantee first is glitch
   videoEle.autoplay = true;
   videoEle.play();
-  body.onclick = ()=>{
-    if(videoEle.paused){
+  body.onclick = () => {
+    if (videoEle.paused) {
       videoEle.play();
-    }else{
+    } else {
       videoEle.pause();
     }
   }
@@ -127,16 +140,16 @@ const fridayMode = async ()=>{
   let contrast = 1919;
   let grayscale = 1;
 
-  videoEle.onended =()=>{
-    console.log("JR NOTE: ended", {invert, blur, brightness, contrast, grayscale})
-    invert = invert ? 0:1;
-    if(blur >0){
+  videoEle.onended = () => {
+    console.log("JR NOTE: ended", { invert, blur, brightness, contrast, grayscale })
+    invert = invert ? 0 : 1;
+    if (blur > 0) {
       blur += -1;
     }
     brightness += 0.05;
-    contrast += -1* contrast/2;
+    contrast += -1 * contrast / 2;
     grayscale += -0.03;
-    const filter =`invert(${invert}) blur(${blur}px) brightness(${brightness}) contrast(${contrast}) grayscale(${grayscale})`;
+    const filter = `invert(${invert}) blur(${blur}px) brightness(${brightness}) contrast(${contrast}) grayscale(${grayscale})`;
     videoEle.style.filter = filter;
     console.log("JR NOTE: filter is", filter)
     videoEle.src = url + pickFrom(video_clips);
@@ -146,7 +159,7 @@ const fridayMode = async ()=>{
 }
 
 window.onload = async () => {
-  if(isItFriday()){
+  if (isItFriday()) {
     fridayMode();
     return;
   }
@@ -552,7 +565,7 @@ const renderBeeTab = () => {
       loot_counter.title = chosenFloorObject.desc;
       loot_counter.alt = chosenFloorObject.name;
 
-      if(!loot.image){
+      if (!loot.image) {
         loot.image = chosen_icon; //store it so the slot machine can use it
       }
 
@@ -857,7 +870,7 @@ const renderGnosisTab = () => {
         quipEle.innerHTML = gnosisQuips[k];
       }
     }
-    globalDataObject.truthCurrentValue = 0; 
+    globalDataObject.truthCurrentValue = 0;
   }
 
   const index = 0;
