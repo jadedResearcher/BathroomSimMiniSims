@@ -977,6 +977,20 @@ const witherby_secret = new Secrets(null, null, null, `
 <p><br></p>
 `);
 
+const riaFact = new Fact("Ria Burns Everything In Despair","When all Hope is lost, Ria finds solace in the idea of starting anew. The fires of this False Hope burn her from within, consuming all and destorying the world in a blaze of choking tears. ",[FIRE, ANGER, APOCALYPSE], 1, 2, 1, new Secrets(null,null,null,`<div style="text-align: start;color: rgba(var(--black),.4)rgba(var(--white),.1);background-color: rgb(255, 255, 255);font-size: 16px;border: none;">
+<p style="font-size: 16px;border: none;">Ria is one that I always get confused by too (because she is defined by her oscillations between extremes) so I went to IC for clarification and this is what I got:&nbsp;<br><br>&quot;<em><em style="font-size: 16px;border: none;">Short answer: Ria&apos;s aspect is Rage. She inverts Hope. Long answer: While she roleplays at belief (and she plays this part very well), it&apos;s no coincidence that her train of thought focuses fiercely on what is real rather than the ideal (i.e: The World Is Going To End in Fire and this is good, for no other reason than burning the falsehood that is the Echidna). Longer answer: We ebbed a lot on this topic ourselves when we first started considering aspects as part of the mix. Is Ria Hope? Some of her earlier readings lean a lot more on the strange religion aspect of her Peewee-worshipping shenanigans because of this. However, we at some point nailed this to Rage for two reasons:</em></em></p>
+</div>
+<ol style="text-align: start;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 16px;border: none;">
+<li style="list-style-type: decimal;color: RGB(var(--black));font-size: 1rem;border: none;"><em><em style="font-size: 16px;border: none;">Witherby was a Hope player, thus no repeats (+ something else);</em></em></li>
+<li style="list-style-type: decimal;color: RGB(var(--black));font-size: 1rem;border: none;"><em><em style="font-size: 16px;border: none;">It made more sense in character for her to be absconding from her own aspect.</em></em></li>
+</ol>
+<div style="text-align: start;color: rgba(var(--black),.4)rgba(var(--white),.1);background-color: rgb(255, 255, 255);font-size: 16px;border: none;">
+<p style="font-size: 16px;border: none;"><em><em style="font-size: 16px;border: none;">You may notice that just like how Neville and Devona are opposites (Void and Light), Witherby and Ria are opposites (Hope and Rage). This was intended from the very start. Shorter answer: Yeah, basically.</em></em>&quot;</p>
+</div>
+<div style="text-align: start;color: rgba(var(--black),.4)rgba(var(--white),.1);background-color: rgb(255, 255, 255);font-size: 16px;border: none;">
+<p style="font-size: 16px;border: none;">And I absolutely agree with IC&apos;s take. &nbsp;I tend to be the one to write Witherby stuff and yeah he has a whole complex about how opposite he is to Ria.</p>
+</div>`))
+
 const WibbyFact = new Fact("Witherby Will Hear Your Confession", "Witherby is in charge of doing attachment work for the Training team, which means befriending monsters, randos, and monstrous randos. He's good at his job, a key component of which is staying proffesional and not getting too attached. He's one cool operator.", [SPYING], 1, 2, 1, witherby_secret);
 
 const devona_secret = new Secrets(null, null, null, `Devona's Secret
@@ -1813,6 +1827,6 @@ createABulkFact(BAKERY, "","");
 */
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, riaFact,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
 
 

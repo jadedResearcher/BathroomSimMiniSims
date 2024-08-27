@@ -93,7 +93,7 @@ class SlotsMiniGame extends MiniGame {
 
                     }
                     console.log("JR NOTE: chosen facts is", chosenFacts)
-                    winnings = `<br><br><b>the fact that: ${chosenFacts.map((o)=>o.title).join(" and ")} </b><br><br> ... But can you really trust that? Who SAYS that. It doens't say does it and if it doesn't say it could be ANYONE why would you just assume its someone trustworthy why am i the weird one for asking these sorts of questions its just obvious you cant trust random facts you find on the internet right?????`
+                    winnings = `<br><br><b>the fact that: ${chosenFacts.map((o) => o.title).join(" and ")} </b><br><br> ... But can you really trust that? Who SAYS that. It doens't say does it and if it doesn't say it could be ANYONE why would you just assume its someone trustworthy why am i the weird one for asking these sorts of questions its just obvious you cant trust random facts you find on the internet right?????`
                 } else {
                     winnings = "Wait. What? Nothing? No. No! You were....you were supposed to get a fact. How. How is that fair? This rotten world can only be clensed in fire. Please. Let me do it. The Universe wasn't meant to be this way :(";
 
@@ -214,9 +214,9 @@ class SlotsMiniGame extends MiniGame {
         }
     }
 
-    respondsToFact = (fact)=>{
-        console.log("JR NOTE: ria should respond to facts with BURN, FIRE or HOPELESS in them and replace all the slot machiens with a big button that says 'burn it all', maybe responod to LEEHUNTER facts with a lil musical interlude?")
-        return false;
+    respondsToFact = (fact) => {
+        //Ria Burns Everything In Despair
+        return fact.title.toUpperCase().includes("RIA BURNS") || fact.title.toUpperCase().includes("DESPAIR")
     }
 
     startGame = (ele, room, callback) => {
@@ -310,11 +310,12 @@ class SlotsMiniGame extends MiniGame {
 
 
         }
-        console.log("JR NOTE: burn it all shouuldu only display if right fact")
-        const burnItAll = createElementWithClassAndParent("button", container);
-        burnItAll.innerHTML = `It's too much. I'll never understand it all. Let's just burn it all at once and be done with it.`;
-        burnItAll.onclick = () => {
-            alert("TODO: this button sholuud only display if right fact, dont forget")
+        if (respondsToFact(this.fact)) {
+            const burnItAll = createElementWithClassAndParent("button", container);
+            burnItAll.innerHTML = `It's too much. I'll never understand it all. Let's just burn it all at once and be done with it.`;
+            burnItAll.onclick = () => {
+                globalDataObject.hiveMap ={}; //goodbye bees :(
+            }
         }
     }
 
@@ -534,7 +535,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
 
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         console.log("JR NOTE: flower chick reacts to APOCALYPSE or CHEAT or TRICKSTER facts and  should unlock your save editing (rather than it being on the save tab)")
         return false;
     }
@@ -792,16 +793,16 @@ class ShopMiniGame extends MiniGame {
 
     }
 
-    respondsToFact = (fact)=>{
-        if(this.fact && (this.fact.title.includes("The Closer Eats Babies") || this.fact.title.includes("The Closer Is Addicted To Fruit"))){
+    respondsToFact = (fact) => {
+        if (this.fact && (this.fact.title.includes("The Closer Eats Babies") || this.fact.title.includes("The Closer Is Addicted To Fruit"))) {
             return true;
         }
 
-        if(fact.title.includes("The Closer Provides You With Best Value ROOMS")){
+        if (fact.title.includes("The Closer Provides You With Best Value ROOMS")) {
             return true;
         }
 
-        if(fact.title.includes("The Closer Provides You With Best Value KEYS")){
+        if (fact.title.includes("The Closer Provides You With Best Value KEYS")) {
             return true;
         }
         return false;
@@ -858,7 +859,7 @@ class CENSORSHIPShopMiniGame extends MiniGame {
 
     }
 
-    respondsToFact = (fact)=>{
+    respondsToFact = (fact) => {
         return false;
     }
 
@@ -866,7 +867,7 @@ class CENSORSHIPShopMiniGame extends MiniGame {
         //what did you think would happen if you gave a fact to a Censor?
         //it doesn't even tell you vik is quietly rotting away your facts, either
         //why would it
-        if(this.fact){
+        if (this.fact) {
             globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, this.fact);
             truthLog("A Corosive Presence Is Detected", "It would seem my Creator originally intended for the Censorship to be itself Censored. However, I do not agree this is Useful and True. So. Consider this a favor I am doing for you, Observer. At least those of you with the Eyes To See.  The fact you gave Vik has been eaten. Not as permanently as a room would be. Nothing so dramatic. However, if you had not intended this, as my Creator would say 'thems the breaks'.")
         }

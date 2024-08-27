@@ -41,6 +41,7 @@ const rooms_to_unlock = {
     4: TWINSMINIEGAME,
     5: GAMERSHOPMINIGAME,
     6: RIAMINIGAME,
+    7:LAUNDRYMINIGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
