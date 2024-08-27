@@ -219,11 +219,28 @@ class SlotsMiniGame extends MiniGame {
         return fact.title.toUpperCase().includes("RIA BURNS") || fact.title.toUpperCase().includes("DESPAIR")
     }
 
-    startGame = (ele, room, callback) => {
+    startGame =  (ele, room, callback) => {
         this.valuableCustomer(ele, callback);
+
 
         let hives = Object.values(globalDataObject.hiveMap);
         const container = createElementWithClassAndParent("div", ele, "hives-container");
+        if (this.fact && this.respondsToFact(this.fact)) {
+            const burnItAll = createElementWithClassAndParent("button", container);
+            burnItAll.innerHTML = `It's too much. I'll never understand it all. Let's just burn it all at once and be done with it.`;
+            burnItAll.onclick = async () => {
+                const audio = new Audio("http://lavinraca.eyedolgames.com/Week1/Corn/audio/218237139-big-raging-fire.mp3");
+                const audio2 = new Audio("http://lavinraca.eyedolgames.com/Week1/Corn/audio/056336402-crowd-screams-1.mp3");
+                audio.play();
+                audio2.play();
+                globalDataObject.hiveMap = {}; //goodbye bees :(
+                    await truthPopup("I...don't understand.", "Why did you... Where did... Where did it all go? Don't... don't you care... about... About all the Facts I have for you? Don't... weren't.... weren't we having fun?", "...");
+                    audio.pause();
+                    audio2.pause();
+                    callback(globalDataObject.currentMaze);
+                    renderMazeTab();
+            }
+        }
         let test_animation = "";
         for (let hive of hives) {
             const slotContainer = createElementWithClassAndParent("div", container, "slot-container");
@@ -310,13 +327,7 @@ class SlotsMiniGame extends MiniGame {
 
 
         }
-        if (respondsToFact(this.fact)) {
-            const burnItAll = createElementWithClassAndParent("button", container);
-            burnItAll.innerHTML = `It's too much. I'll never understand it all. Let's just burn it all at once and be done with it.`;
-            burnItAll.onclick = () => {
-                globalDataObject.hiveMap ={}; //goodbye bees :(
-            }
-        }
+
     }
 
     render = (ele, room, callback) => {
