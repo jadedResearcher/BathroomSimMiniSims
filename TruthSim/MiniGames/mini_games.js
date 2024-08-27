@@ -64,6 +64,7 @@ const initAllMiniGames = () => {
     new ParkerMiniGame();
     new ShopMiniGame();
     new MazeMiniGame();
+    new LaundryMiniGame();
     new GamerPointsStoreMiniGame();
     new BettingMiniGame();
     new CENSORSHIPShopMiniGame();

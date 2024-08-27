@@ -65,6 +65,10 @@ body {
   }
 }
 
+.multi-select{
+  height: 50vh;
+}
+
 .friday-video{
   width: 100%;
   object-fit: cover;

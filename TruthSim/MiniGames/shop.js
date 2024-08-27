@@ -334,7 +334,7 @@ class SlotsMiniGame extends MiniGame {
         truthLog("Slots", `The Truth is that JR played... an unsettling amount of Binding of Issac leading up to making this experience. And is surprisingly suceptible to gambling mechanics.`)
 
         this.initializeRender(ele);
-        const container = this.setupGameHeader(ele, room, callback, "Burn All Your Honey On These Altars Of Hope", undefined, "images/RiabyGuide.png")
+        const container = this.setupGameHeader(ele, room, callback, "Burn All Your Honey On These Altars Of Hope And Rage", undefined, "images/RiabyGuide.png")
 
     }
 }

@@ -11,7 +11,41 @@ class LaundryMiniGame extends MiniGame {
     }
 
     startGame = (ele, room, callback) => {
-        window.alert("JR NOTE: TODO");
+        const container = createElementWithClassAndParent("div", ele, "shop");
+
+        if (globalDataObject.factsUnlocked.length > 0) {
+            const options = [];
+            for (let fact of globalDataObject.factsUnlocked) {
+                if (!fact.mini_game_key) { //don't display facts that already live somewhere
+                    const option = document.createElement("option")
+                    option.innerText = fact.title;
+                    options.push({ option, fact });
+                }
+
+            }
+
+            if (options.length > 0 && !this.fact) {
+                const factsSelector = createElementWithClassAndParent("select", container, "multi-select");
+                factsSelector.multiple = true;
+                factsSelector.id = "facts-selector"
+                const option = document.createElement("option")
+                factsSelector.mul
+                factsSelector.append(option);
+                option.selected = true;
+                for (let o of options) {
+                    factsSelector.append(o.option);
+                }
+            }
+
+            const submitButton = createElementWithClassAndParent("button", container);
+            submitButton.style.display ="block";
+            submitButton.style.marginTop="13px";
+            submitButton.innerText = "Generously Donate Facts to K (no takebacks)";
+            submitButton.onclick = () => {
+                window.alert("JR NOTE: TODO");
+            }
+
+        }
     }
 
     render = (ele, room, callback) => {
@@ -19,7 +53,7 @@ class LaundryMiniGame extends MiniGame {
 
         //there is no way to beat this one without a keyz
         this.initializeRender(ele);
-        const container = this.setupGameHeader(ele, room, callback, "Fact Laundering With K!", undefined, "images/Khana_pixel_by_the_guide")
+        const container = this.setupGameHeader(ele, room, callback, "Khana is a cool guy/girl/whatever you can trust with your facts!", undefined, "images/Khana_pixel_by_the_guide.png")
 
     }
 }
