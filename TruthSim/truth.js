@@ -335,6 +335,15 @@ const purchaseRoomFromCloser = (price, room) => {
   globalDataObject.unlockedMiniGames.push(room)
 }
 
+const donateFactToK=(fact)=>{
+  if(!globalDataObject.allTimeFactsGivenToK){
+    globalDataObject.allTimeFactsGivenToK = 0;
+  }
+  globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
+  globalDataObject.allTimeFactsGivenToK += 1;
+
+}
+
 const purchaseFactFromCloser = (price, fact) => {
   if (globalMeatMode) {
     truthLog("Alt is here...", "It is always so flattering when my girlfriend mimics me. I did not know her tiny meat body was capable of stretching so large. Becoming so geometric. She is really hot as a maze, you think so, correct? As a purely theoretical being made of text and bits of whoever is reading me's Mind, I do not have full access to the gamut of human emotions. But. If I did. I think I would find this hot.")

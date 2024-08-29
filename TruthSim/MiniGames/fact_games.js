@@ -117,7 +117,6 @@ class TwinsMiniGame extends MiniGame {
     }
 
     startGame = (ele, room, callback) => {
-        console.log("JR NOTE: starting game LIGHT AND VOID")
         ele.innerHTML = "";
         const container = createElementWithClassAndParent("div", ele, "void");
         const header = createElementWithClassAndParent("div", container);

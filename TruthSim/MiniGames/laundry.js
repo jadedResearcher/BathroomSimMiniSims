@@ -10,8 +10,26 @@ class LaundryMiniGame extends MiniGame {
         super(LAUNDRYMINIGAME);
     }
 
+    kPopup = (text) => {
+        const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
+        const popupbody = createElementWithClassAndParent("div", popup);
+        popupbody.innerHTML = `  
+        <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/Khana_pixel_by_the_guide.png">      
+             ${text} TODO: if multiple of truth per second, K gives you a lil bonus`
+
+        const closeButton = createElementWithClassAndParent("button", popupbody);
+        closeButton.innerText = "Close";
+        closeButton.style.display ="block";
+        closeButton.style.marginTop="13px";
+        closeButton.onclick = () => {
+            popup.remove();
+        }
+    }
+
     startGame = (ele, room, callback) => {
         const container = createElementWithClassAndParent("div", ele, "shop");
+        const header = createElementWithClassAndParent("div", container);
+        header.innerText = "Facts Donated So Far: " + globalDataObject.allTimeFactsGivenToK;
 
         if (globalDataObject.factsUnlocked.length > 0) {
             const options = [];
@@ -24,8 +42,9 @@ class LaundryMiniGame extends MiniGame {
 
             }
 
-            if (options.length > 0 && !this.fact) {
-                const factsSelector = createElementWithClassAndParent("select", container, "multi-select");
+            let factsSelector;
+            if (options.length > 0) {
+                factsSelector = createElementWithClassAndParent("select", container, "multi-select");
                 factsSelector.multiple = true;
                 factsSelector.id = "facts-selector"
                 const option = document.createElement("option")
@@ -38,12 +57,27 @@ class LaundryMiniGame extends MiniGame {
             }
 
             const submitButton = createElementWithClassAndParent("button", container);
-            submitButton.style.display ="block";
-            submitButton.style.marginTop="13px";
+            submitButton.style.display = "block";
+            submitButton.style.marginTop = "13px";
             submitButton.innerText = "Generously Donate Facts to K (no takebacks)";
             submitButton.onclick = () => {
-                window.alert("JR NOTE: TODO");
+                const selected = [...factsSelector.querySelectorAll('option:checked')].map((i) => i.value);
+                console.log("JR NOTE: selected is", selected)
+                for (let s of selected) {
+                    for (let fact of globalDataObject.factsUnlocked) {
+                        if (fact.title === s) {
+                            donateFactToK(fact);
+                            this.kPopup("I knew you had it in you! Always bet on the winning team, that's what I say!");
+                        }
+                    }
+                }
+
+
             }
+
+        } else {
+            const rude = createElementWithClassAndParent("div", container);
+            rude.innerText = "You don't have any facts? Fucking useless. Why are you even here?"
 
         }
     }

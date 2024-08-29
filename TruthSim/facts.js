@@ -460,7 +460,16 @@ I do not know Khana's name. The actual one. I knew, once. I am sure I could find
 Now he has turned into a tree yearning for our attention. If overfed, he will turn into a machine yearning for our misery.
 
 Our containment procedures will have to change accordingly.`, [OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
+//const static_secret = new Secrets(null,null,null,`<a target='_blank' href=''>The Attic</a>`)
 
+
+const ab_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/NORTH/NORTH/SOUTH/SOUTH/NORTH/bathroom.html'>AuthorBot</a>`)
+
+const static_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/NORTH/EAST/bathroom.html'>I barely remember making this.</a>`)
+
+const attic_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/bathroom.html'>The Attic</a>`)
+
+const interloper_secret = new Secrets(null,null,null,`<a target='_blank' href='https://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/bathroom'>The Interloper (try 1313 and 4665)</a>`)
 
 const camellia_secret = new Secrets(null,null,null,`
 The chanting reached a crescendo. 
