@@ -108,7 +108,6 @@ const emitRadioSass = (ele, sass) => {
 
     let sassEle = createElementWithClassAndParent("div", ele, "sass radio sass-radio animated-bg-vertical");
     sassEle.innerText = sass;
-    console.log("JR NOTE: trying to make staticky bg")
 
     const staticyBG = document.createElement('canvas');
 
@@ -300,6 +299,19 @@ class MiniGame {
                     factsSelector.append(o.option);
                 }
                 factsSelector.onchange = (e) => {
+
+                    //thems the breaks, it's time to go look at Khana now (also he's stealing your fact)
+                    if(factsSelector.value.toLowerCase().includes("khana")){
+                        this.fact = null;
+                        for (let fact of globalDataObject.factsUnlocked) {
+                            if (fact.title === factsSelector.value) {
+                                fact.mini_game_key = LAUNDRYMINIGAME;
+                                globalMiniGames[LAUNDRYMINIGAME].render(ele, room, winCallback);
+                            }
+                        }
+                        return;
+                    }
+
                     ////any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
                     if(factsSelector.value.toLowerCase().includes("secret")){
                         docSlaughtersSecretEmporium(false);

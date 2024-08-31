@@ -10,25 +10,62 @@ class LaundryMiniGame extends MiniGame {
         super(LAUNDRYMINIGAME);
     }
 
-    kPopup = (text) => {
+    respondsToFact = (fact) => {
+        return fact.title.toUpperCase().includes("KHANA"); //he's gonna steal it
+    }
+
+
+    kPopup = (text, size, callback) => {
         const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
         const popupbody = createElementWithClassAndParent("div", popup);
         popupbody.innerHTML = `  
-        <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/Khana_pixel_by_the_guide.png">      
+        <img style="width: ${size}; float:left; margin-right:42px; margin-bottom:42px;" src="images/Khana_pixel_by_the_guide.png">      
              ${text} TODO: if multiple of truth per second, K gives you a lil bonus`
 
         const closeButton = createElementWithClassAndParent("button", popupbody);
         closeButton.innerText = "Close";
-        closeButton.style.display ="block";
-        closeButton.style.marginTop="13px";
+        closeButton.style.display = "block";
+        closeButton.style.marginTop = "13px";
         closeButton.onclick = () => {
             popup.remove();
+            callback(globalDataObject.currentMaze);
+            renderMazeTab();
         }
     }
 
+    //the more you've been looking at K, the bigger he gets
+    //until he risks breahching
+    //and vik has to censor him
+    decideKSize = () => {
+        let base = 125;
+        for(let fact of globalDataObject.factsUnlocked){
+            if(this.respondsToFact(fact)){
+                base = base * 1.13;
+            }
+        }
+        return base;
+    }
+    //https://www.tiktok.com/@junior.elizuki/video/7393057875771411718
+    //https://www.tiktok.com/@junior.elizuki/video/7396053924609821957
+    //https://www.tiktok.com/@junior.elizuki/video/7398048484382838021
+    //https://www.tiktok.com/@junior.elizuki/photo/7398017994615475462
+    //https://www.tiktok.com/@junior.elizuki/video/7397431862832024838
+    //https://www.tiktok.com/@junior.elizuki/video/7395238699853761798
+    //https://www.tiktok.com/@junior.elizuki/photo/7394628936333921541
+    //https://www.tiktok.com/@junior.elizuki/video/7387475649579224325
+    //https://www.youtube.com/@JrElizuki
     startGame = (ele, room, callback) => {
+        const size = this.decideKSize();
+        const kHimself = document.querySelector(".blorbo");
+        kHimself.style.width = size+"px";
+        
         const container = createElementWithClassAndParent("div", ele, "shop");
         const header = createElementWithClassAndParent("div", container);
+        if (this.fact && this.respondsToFact(this.fact)) {
+            donateFactToK(this.fact);
+            truthLog("It seems the little gremlin has stolen your fact because it had his/xer/her/their/its name on it.", "No matter. I am certain you can obtain it again elsewhere.");
+            this.fact = null;//yoinked
+        }
         header.innerText = "Facts Donated So Far: " + globalDataObject.allTimeFactsGivenToK;
 
         if (globalDataObject.factsUnlocked.length > 0) {
@@ -67,7 +104,7 @@ class LaundryMiniGame extends MiniGame {
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === s) {
                             donateFactToK(fact);
-                            this.kPopup("I knew you had it in you! Always bet on the winning team, that's what I say!");
+                            this.kPopup("I knew you had it in you! Always bet on the winning team, that's what I say!", size, callback);
                         }
                     }
                 }
