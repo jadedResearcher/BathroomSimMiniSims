@@ -33,15 +33,43 @@ class LaundryMiniGame extends MiniGame {
         }
     }
 
+    vikPopup = (callback) => {
+        removeItemOnce(globalDataObject.unlockedMiniGames, this.id);
+        globalDataObject.currentMaze = null;
+        //vik doesnt ROT k, they're still friends
+        //this is more an intervention
+
+        const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
+        const popupbody = createElementWithClassAndParent("div", popup);
+        popupbody.innerHTML = `  
+        <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/Vik_byguide.png">      
+             Apologies. This one's head has gotten too big. Gonna let her cool his heels a bit. See if that helps xer.`
+
+        const closeButton = createElementWithClassAndParent("button", popupbody);
+        closeButton.innerText = "Close";
+        closeButton.style.display = "block";
+        closeButton.style.marginTop = "13px";
+        closeButton.onclick = () => {
+            popup.remove();
+            callback(globalDataObject.currentMaze);
+            renderMazeTab();
+        }
+    }
+
     //the more you've been looking at K, the bigger he gets
     //until he risks breahching
     //and vik has to censor him
-    decideKSize = () => {
+    decideKSize = (callback) => {
         let base = 125;
+        let facts = 0;
         for(let fact of globalDataObject.factsUnlocked){
             if(this.respondsToFact(fact)){
                 base = base * 1.13;
+                facts ++;
             }
+        }
+        if(facts >2){
+            this.vikPopup(callback);
         }
         return base;
     }
@@ -55,7 +83,7 @@ class LaundryMiniGame extends MiniGame {
     //https://www.tiktok.com/@junior.elizuki/video/7387475649579224325
     //https://www.youtube.com/@JrElizuki
     startGame = (ele, room, callback) => {
-        const size = this.decideKSize();
+        const size = this.decideKSize(callback);
         const kHimself = document.querySelector(".blorbo");
         kHimself.style.width = size+"px";
         
