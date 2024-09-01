@@ -1112,8 +1112,8 @@ class ButtonMiniGame extends MiniGame {
                 dmg.innerText = `+ ${amount} Truth`;
                 buttonParent.style.position = "absolute";
                 button.style.marginTop = "0px";
-                buttonParent.style.top = `${getRandomNumberBetween(0, 100)}%`;
-                buttonParent.style.left = `${getRandomNumberBetween(0, 100)}%`;
+                buttonParent.style.top = `${getRandomNumberBetween(0, 50)}%`;
+                buttonParent.style.left = `${getRandomNumberBetween(0, 50)}%`;
 
             } else {
                 const amount = globalMeatMode ? 0 : 1 * room.timesBeaten + 1 * globalDataObject.truthPerSecond;
