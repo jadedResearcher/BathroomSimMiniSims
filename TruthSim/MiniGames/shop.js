@@ -863,7 +863,7 @@ class CENSORSHIPShopMiniGame extends MiniGame {
         const button = createElementWithClassAndParent("button", ele);
         button.innerText = "You Do Not Need To Look At The Void";
         button.onclick = async () => {
-            await truthPopup("You Avoided the Void!", "Probably a smart idea! Who KNOWS what would happen if you gave part of our soul to it...", "I... appreciate you not rotting off pieces of the maze for your convinience. Thank you. I... did not consider that you valued me that highly.");
+            await truthPopup("You Avoided the Void!", "Probably a smart idea! Who KNOWS what would happen if you gave part of our soul to it...", "I... appreciate you not rotting off pieces of the maze for your convinience. Thank you. I... did not consider that you valued me that highly."); //our because truth is part of you know
             callback(globalDataObject.currentMaze);
             renderMazeTab();
         }

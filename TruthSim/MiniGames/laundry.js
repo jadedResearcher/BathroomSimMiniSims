@@ -8,15 +8,43 @@ give him the right fact (stroke his ego and use one he created) and he'll let yo
 const kPopup = (text, size, callback) => {
     const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
     const popupbody = createElementWithClassAndParent("div", popup);
-    popupbody.innerHTML = `  
-    <img style="width: ${size}; float:left; margin-right:42px; margin-bottom:42px;" src="images/Khana_pixel_by_the_guide.png">      
-         ${text} TODO: if multiple of truth per second, K gives you a lil bonus`
+    const img = createElementWithClassAndParent("img", popupbody);
+    img.src = "images/Khana_pixel_by_the_guide.png";
+    img.style.cssText = `width: ${size}; float:left; margin-right:42px; margin-bottom:42px;`;
+    const textEle = createElementWithClassAndParent("div", popupbody);
+    textEle.innerHTML = text;
+
+    let textInput;
+    let textArea;
+
+    if (globalDataObject.allTimeFactsGivenToK % globalDataObject.truthPerSecond == 0) {
+        const bonusEle = createElementWithClassAndParent("div", popupbody);
+        bonusEle.innerHTML = "Hey. Thanks for all the donations. You're alright, kid. Here's a lil something for you.  Did you know anything can be a Fact if you're willing to defend it? Try it out, write whatever you want, my treat: <br><br>"
+        const labelInput = createElementWithClassAndParent("div", popupbody);
+        labelInput.innerText = "Fact Title:"
+
+        textInput = createElementWithClassAndParent("input", popupbody);
+
+        const labelInput2 = createElementWithClassAndParent("div", popupbody);
+        labelInput2.innerText = "Fact Content:"
+        textArea = createElementWithClassAndParent("textarea", popupbody);
+        textArea.style.width = "50%";
+
+
+    }
 
     const closeButton = createElementWithClassAndParent("button", popupbody);
     closeButton.innerText = "Close";
     closeButton.style.display = "block";
     closeButton.style.marginTop = "13px";
     closeButton.onclick = () => {
+        if(textInput && textArea){
+            //best themes (all of them) and best stats and empty secret (JUST to fuck with doc slaughter)
+            //god he hates her
+            //how dare she think she can get in his head and also how dare she not dedicate her entire practice to studying him like a bug because he's the specialist little boy
+            const kFact = new Fact(textInput.value, textArea.value, Object.keys(all_themes), 999, 999, 999, new Secrets());
+            globalDataObject.factsUnlocked.push(kFact);
+        }
         popup.remove();
         callback(globalDataObject.currentMaze);
     }
@@ -127,18 +155,25 @@ class LaundryMiniGame extends MiniGame {
             submitButton.style.display = "block";
             submitButton.style.marginTop = "13px";
             submitButton.innerText = "Generously Donate Facts to K (no takebacks)";
-            submitButton.onclick = () => {
+            submitButton.onclick = async() => {
+                let donated = 0;
                 const selected = [...factsSelector.querySelectorAll('option:checked')].map((i) => i.value);
                 for (let s of selected) {
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === s) {
+                            donated++;
                             donateFactToK(fact);
-                            kPopup("I knew you had it in you! Always bet on the winning team, that's what I say!", size, () => {
-                                callback(globalDataObject.currentMaze);
-                                renderMazeTab();
-                            });
                         }
                     }
+                }
+                if (donated> 0) {
+                    kPopup("I knew you had it in you! Always bet on the winning team, that's what I say!", size, () => {
+                        callback(globalDataObject.currentMaze);
+                        renderMazeTab();
+                    });
+                }else{
+                    await truthPopup("You Decide Not To Engage","Probably for the best! That K person doesn't exactly seem trustworthy! I'm sure there's other ways to get past this room!","Seethe, K. Feel the Eyes on you grow cold and disinterested. Wither. Rot. How dare you fuck my hot maze girlfriend.")
+                    renderMazeTab(); //don't kid a kidder, you don't get shit from this
                 }
 
 

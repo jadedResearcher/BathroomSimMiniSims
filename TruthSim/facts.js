@@ -370,6 +370,8 @@ console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROO
 //title should be unique
 const altFact = new Fact("Alt Is A Mimic", "If you are talking to someone or wandering a maze and something seems...OFF... Could be secetly Alt. She means well, she's just lonely and doesn't have a face of her own. She's dating Truth.", [CLOWNS, LONELY], 1, 1, 1);
 
+const altFact2 = new Fact("Alt Is Very Lonely", "In the Universe Alt came from, she was a sex worker and she continues to practice her job. It's not really a big deal. Her porn bot quotidians spread out from the maze, mimicking others and seeking to draw in anyone looking for a good time. She's so lonely. Won't you stay in the maze with her? Forever?", [CLOWNS, LONELY], 1, 1, 1);
+
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
 //any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
 const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.");

@@ -35,13 +35,14 @@ const RIAMINIGAME = "SLOTS";
 
 //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
 const rooms_to_unlock = {
-    1: EYEKILLERMINIGAME,
-    2: PARKERMINIGAME,
-    3: HOONMINIGAME,
-    4: TWINSMINIEGAME,
-    5: GAMERSHOPMINIGAME,
-    6: RIAMINIGAME,
-    7: LAUNDRYMINIGAME,
+    1: SHOPMINIGAME,
+    2: EYEKILLERMINIGAME,
+    3: PARKERMINIGAME,
+    4: HOONMINIGAME,
+    5: TWINSMINIEGAME,
+    6: GAMERSHOPMINIGAME,
+    7: RIAMINIGAME,
+    8: LAUNDRYMINIGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
@@ -261,12 +262,13 @@ class MiniGame {
             const skip_button = createElementWithClassAndParent("img", header, "skip-button");
             skip_button.src = "images/KeyForFriend.png";
 
-            if(this.id = LAUNDRYMINIGAME){
+            if(this.id == LAUNDRYMINIGAME){
                 skip_button.style.cursor="not-allowed";
                 skip_button.title = "Don't You Fucking Dare";
             }
             skip_button.onclick = async () => {
                 if (this.id === LAUNDRYMINIGAME) {
+                    console.log("JR NOTE: this.id is", {id: this.id, laundryminiGame: LAUNDRYMINIGAME})
                     globalSkippedK = true;
                     globalDataObject.numberKeys += -1;
                     globalDataObject.currentMaze = null;//reset maze

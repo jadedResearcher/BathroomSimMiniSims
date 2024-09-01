@@ -181,6 +181,10 @@ textarea {
   opacity: 0.9;
 }
 
+.dev-log{
+  display:none;
+}
+
 .sales-floor {
   display: flex;
   gap: 31px;

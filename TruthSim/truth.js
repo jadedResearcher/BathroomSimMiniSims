@@ -17,9 +17,9 @@ const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
 //the Witness doens't exist and neither do the arms except they clearly also do
 
 let globalDataObject = {
-  truthPerSecond: 1000,
+  truthPerSecond: 1,
   startedPlayingTimeCode: Date.now(),
-  numberKeys: 31, //thanks illusionist
+  numberKeys: 1, //thanks illusionist
   keysBoughtFromCloser: 0,
   allTimeTruthGivenToCloser: 0,
   allTimeFactsGivenToK:0,
@@ -38,7 +38,7 @@ let globalDataObject = {
   saveUnlocked: false,
   mapInternalSeed: globalRand.internal_seed,
   mazeUnlocked: false,
-  unlockedMiniGames: [BUTTONMINIGAME, SHOPMINIGAME],
+  unlockedMiniGames: [BUTTONMINIGAME],
   rottenMiniGames: [], //did you think the things vik erases sleep peacefully?
   obviousHack: false, // :) :) ;)
   allTimeTruthValue: 0, //truth but it never goes down
@@ -185,7 +185,6 @@ window.onload = async () => {
     debugMode(debugMiniGame);
     return;
   }
-  alert("Be aware this is a Work In Progress :) :) :)")
   truthLog("Loading...", "Oh. It's you. ... I am glad you are here.")
   const button = document.querySelector("#entry-button");
   globalContainer = document.querySelector("#container");
