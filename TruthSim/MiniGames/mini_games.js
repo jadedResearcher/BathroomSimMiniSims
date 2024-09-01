@@ -445,7 +445,7 @@ class EyeKillerMiniGame extends MiniGame {
         const blorbo = document.querySelector(".blorbo");
         const attack = this.attack;
         const defense = this.defense;
-        const speed = this.speed;
+        let speed = this.speed;
         const tint = this.tint;
         if (this.fact?.title.includes("The Eye Killer Did Not Always Like Eggs")) {
             this.respondToEgg(ele, room, callback);
@@ -485,7 +485,7 @@ class EyeKillerMiniGame extends MiniGame {
             }
             cultist_container.onclick = () => {
                 const massDamage = async () => {
-                    await truthPopup("Quatro Blade detected", "Wow! It seems this will be easy!", "Sure. Go ahead and cheat at my game. See if I care. See if I try hard for you again.");
+                    speed = 0;
                     const fx = new Audio("audio/fx/048958759-knife-draw.wav")
                     fx.loop = false;
                     fx.play();
@@ -493,6 +493,8 @@ class EyeKillerMiniGame extends MiniGame {
                     for (let cultist of this.cultists) {
                         cultist.dataset.quatro = true;
                     }
+                    await truthPopup("Quatro Blade detected", "Wow! It seems this will be easy!", "Sure. Go ahead and cheat at my game. See if I care. See if I try hard for you again.");
+
 
                     const hitEveryone = async () => {
                         for (let cultist of this.cultists) {
