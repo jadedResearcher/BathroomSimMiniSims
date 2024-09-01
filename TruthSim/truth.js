@@ -10,6 +10,7 @@
 // new wiki who this https://zampaniosim.miraheze.org/wiki/Main_Page
 const globalBGMusic = new Audio("audio/music/funky_beat_by_ic.mp3");
 let globalContainer;//the whole 'screen'
+let globalSkippedK = false; //angry angry boi, burrowing heaven spreads everywhere
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
 const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
 

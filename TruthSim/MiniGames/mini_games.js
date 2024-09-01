@@ -41,7 +41,7 @@ const rooms_to_unlock = {
     4: TWINSMINIEGAME,
     5: GAMERSHOPMINIGAME,
     6: RIAMINIGAME,
-    7:LAUNDRYMINIGAME,
+    7: LAUNDRYMINIGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
@@ -260,11 +260,28 @@ class MiniGame {
         if (globalDataObject.numberKeys > 0) {
             const skip_button = createElementWithClassAndParent("img", header, "skip-button");
             skip_button.src = "images/KeyForFriend.png";
+
+            if(this.id = LAUNDRYMINIGAME){
+                skip_button.style.cursor="not-allowed";
+                skip_button.title = "Don't You Fucking Dare";
+            }
             skip_button.onclick = async () => {
-                await truthPopup("Room Skipped With Key!", "I am so sorry! I did not know you disliked this type of room...", "I suppose that my flawless diversion was insufficient for you? Ingrate.");
-                globalDataObject.numberKeys += -1;
-                winCallback(globalDataObject.currentMaze);
-                renderMazeTab();
+                if (this.id === LAUNDRYMINIGAME) {
+                    globalSkippedK = true;
+                    globalDataObject.numberKeys += -1;
+                    globalDataObject.currentMaze = null;//reset maze
+                    //dialog addapted from IC's west intermission
+                    await kPopup(`"You think you can disrespect me, huh? Think I'm less than the other games? That I'm not worth looking at. I warned you. You chose wrong. So if Vik's gonna kill me anyway... let's set you back to square zero, hm?"`, 333, () => {
+                        winCallback(globalDataObject.currentMaze);
+                        renderMazeTab();
+                    });
+
+                } else {
+                    await truthPopup("Room Skipped With Key!", "I am so sorry! I did not know you disliked this type of room...", "I suppose that my flawless diversion was insufficient for you? Ingrate.");
+                    globalDataObject.numberKeys += -1;
+                    winCallback(globalDataObject.currentMaze);
+                    renderMazeTab();
+                }
             }
         }
 
@@ -301,7 +318,7 @@ class MiniGame {
                 factsSelector.onchange = (e) => {
 
                     //thems the breaks, it's time to go look at Khana now (also he's stealing your fact)
-                    if(factsSelector.value.toLowerCase().includes("khana")){
+                    if (factsSelector.value.toLowerCase().includes("khana")) {
                         this.fact = null;
                         for (let fact of globalDataObject.factsUnlocked) {
                             if (fact.title === factsSelector.value) {
@@ -313,7 +330,7 @@ class MiniGame {
                     }
 
                     ////any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
-                    if(factsSelector.value.toLowerCase().includes("secret")){
+                    if (factsSelector.value.toLowerCase().includes("secret")) {
                         docSlaughtersSecretEmporium(false);
                         return;
                     }

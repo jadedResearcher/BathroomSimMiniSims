@@ -462,6 +462,7 @@ Now he has turned into a tree yearning for our attention. If overfed, he will tu
 Our containment procedures will have to change accordingly.`, [OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
 //const static_secret = new Secrets(null,null,null,`<a target='_blank' href=''>The Attic</a>`)
 
+const index_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/'>Behind The Curtain</a>`)
 
 const ab_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/NORTH/NORTH/SOUTH/SOUTH/NORTH/bathroom.html'>AuthorBot</a>`)
 

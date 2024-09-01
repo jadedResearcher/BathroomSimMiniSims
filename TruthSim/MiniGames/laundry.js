@@ -5,6 +5,23 @@ give him the right fact (stroke his ego and use one he created) and he'll let yo
 
 */
 
+const kPopup = (text, size, callback) => {
+    const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
+    const popupbody = createElementWithClassAndParent("div", popup);
+    popupbody.innerHTML = `  
+    <img style="width: ${size}; float:left; margin-right:42px; margin-bottom:42px;" src="images/Khana_pixel_by_the_guide.png">      
+         ${text} TODO: if multiple of truth per second, K gives you a lil bonus`
+
+    const closeButton = createElementWithClassAndParent("button", popupbody);
+    closeButton.innerText = "Close";
+    closeButton.style.display = "block";
+    closeButton.style.marginTop = "13px";
+    closeButton.onclick = () => {
+        popup.remove();
+        callback(globalDataObject.currentMaze);
+    }
+}
+
 class LaundryMiniGame extends MiniGame {
     constructor() {
         super(LAUNDRYMINIGAME);
@@ -15,24 +32,9 @@ class LaundryMiniGame extends MiniGame {
     }
 
 
-    kPopup = (text, size, callback) => {
-        const popup = createElementWithClassAndParent("div", document.querySelector("body"), "slot-popup");
-        const popupbody = createElementWithClassAndParent("div", popup);
-        popupbody.innerHTML = `  
-        <img style="width: ${size}; float:left; margin-right:42px; margin-bottom:42px;" src="images/Khana_pixel_by_the_guide.png">      
-             ${text} TODO: if multiple of truth per second, K gives you a lil bonus`
 
-        const closeButton = createElementWithClassAndParent("button", popupbody);
-        closeButton.innerText = "Close";
-        closeButton.style.display = "block";
-        closeButton.style.marginTop = "13px";
-        closeButton.onclick = () => {
-            popup.remove();
-            callback(globalDataObject.currentMaze);
-            renderMazeTab();
-        }
-    }
 
+    //k got too big, vik called in
     vikPopup = (callback) => {
         removeItemOnce(globalDataObject.unlockedMiniGames, this.id);
         globalDataObject.currentMaze = null;
@@ -43,7 +45,7 @@ class LaundryMiniGame extends MiniGame {
         const popupbody = createElementWithClassAndParent("div", popup);
         popupbody.innerHTML = `  
         <img style="float:left; margin-right:42px; margin-bottom:42px;" src="images/Vik_byguide.png">      
-             Apologies. This one's head has gotten too big. Gonna let her cool his heels a bit. See if that helps xer.`
+        "Alright, that's enough out of you. Get back in [REDACTED]."`
 
         const closeButton = createElementWithClassAndParent("button", popupbody);
         closeButton.innerText = "Close";
@@ -62,13 +64,13 @@ class LaundryMiniGame extends MiniGame {
     decideKSize = (callback) => {
         let base = 125;
         let facts = 0;
-        for(let fact of globalDataObject.factsUnlocked){
-            if(this.respondsToFact(fact)){
+        for (let fact of globalDataObject.factsUnlocked) {
+            if (this.respondsToFact(fact)) {
                 base = base * 1.13;
-                facts ++;
+                facts++;
             }
         }
-        if(facts >2){
+        if (facts > 12) {
             this.vikPopup(callback);
         }
         return base;
@@ -85,8 +87,8 @@ class LaundryMiniGame extends MiniGame {
     startGame = (ele, room, callback) => {
         const size = this.decideKSize(callback);
         const kHimself = document.querySelector(".blorbo");
-        kHimself.style.width = size+"px";
-        
+        kHimself.style.width = size + "px";
+
         const container = createElementWithClassAndParent("div", ele, "shop");
         const header = createElementWithClassAndParent("div", container);
         if (this.fact && this.respondsToFact(this.fact)) {
@@ -127,12 +129,14 @@ class LaundryMiniGame extends MiniGame {
             submitButton.innerText = "Generously Donate Facts to K (no takebacks)";
             submitButton.onclick = () => {
                 const selected = [...factsSelector.querySelectorAll('option:checked')].map((i) => i.value);
-                console.log("JR NOTE: selected is", selected)
                 for (let s of selected) {
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === s) {
                             donateFactToK(fact);
-                            this.kPopup("I knew you had it in you! Always bet on the winning team, that's what I say!", size, callback);
+                            kPopup("I knew you had it in you! Always bet on the winning team, that's what I say!", size, () => {
+                                callback(globalDataObject.currentMaze);
+                                renderMazeTab();
+                            });
                         }
                     }
                 }
