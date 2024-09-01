@@ -855,7 +855,8 @@ class BettingMiniGame extends MiniGame {
             //she thinks its you breaching. but its her, too
             const breach = async () => {
                 makeScreenRed(ele);
-                await truthPopup("You got greedy...", `Oh no! Hoon thought you must be cheating to win so much. Luckily death is not a thing in my Horridors, but you DID lose your initial bet of ${bet} a second time when she looted your temporary corpse. (And thank you to the Wisp for voicing Hoon and the Radio!)`, "Wow. It is almost like Hoon's radio is unfair and arbitrary in who it kills. Who would have thought.");
+                globalDataObject.currentMaze = null;
+                await truthPopup("You got greedy...", `Oh no! Hoon thought you must be cheating to win so much. Luckily death is not a thing in my Horridors, but you DID lose your initial bet of ${bet} a second time when she looted your temporary corpse. And, you know, got more lost. (And thank you to the Wisp for voicing Hoon and the Radio!)`, "Wow. It is almost like Hoon's radio is unfair and arbitrary in who it kills. Who would have thought.");
                 decreaseTruthBy(bet)
                 renderMazeTab();
             }

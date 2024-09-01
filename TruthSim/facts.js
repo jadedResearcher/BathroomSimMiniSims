@@ -1055,6 +1055,25 @@ const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the 
 
 
 
+const hoonSecret = new Secrets(null,null,null,`IC: i feel like the oft missed concept is that hoon comes from disciplinary
+she's had to put a lot of people down, guilty or not, and from her pov the manager gave orders and the day flowed until one day they disappeared and everything went to shi
+
+JR: yupyup
+the third gen blorbos are all dealing with the fact that the manger (me) just fucking vainished out of nowhere after kinda making everyone irrelevant
+i made everyone immortal and stopped using them at all to cheat at just progressing the game
+and that causes an
+ennui
+
+IC: river's been coping about not being able to help her team despite being put on an important position at a young age by ennui, hoon never recovered from the dependent attachment, and leehunter. well
+they're lesbians first of all
+but second of all when all of your coworkers don't work and thus don't get to form a personality you all start melding together
+the difference between lee and hunter is functionally nil because jr has no idea who they are either 
+
+sometimes the horror is that god thinks you and your shitty ex are fundamentally close enough the same person
+`)
+
+const hoonFact = new Fact("Hoon Listens To Her Radio","If the radio says to kill you, thems the breaks. She's given up her own Judgement long ago. It will never tell her to kill a safe abnormality, though. It's why she befriends Witherby. You can't get much safer than One Sin, Hundreds of Good Deeds.",[KILLING, WEB, ROYALTY], 1,1,1, hoonSecret)
+
 
 /*
 IC: i feel like the oft missed concept is that hoon comes from disciplinary
