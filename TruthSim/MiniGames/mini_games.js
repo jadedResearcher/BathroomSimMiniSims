@@ -270,9 +270,18 @@ class MiniGame {
                     globalSkippedK = true;
                     globalDataObject.numberKeys += -1;
                     globalDataObject.currentMaze = null;//reset maze
+                    //not quite enough to breech but.... pretty close
+                    //plus ALL of these will end up in the slot machine pool
+                    for(let i =0; i<10; i++){
+                        const kFact = new Fact("You Will Look At Khana", "So. Funny story. K has two main abnormalities associated with him/her/xer:  Burrowing Heaven, and Schadenfreude. With the former, if you ignore K too long, he breeches, and spreads in every direction to try to find your Gaze. With the latter, if you look too much at xer, xe breeches and rampages around killing people horribly. Vik can help contain the latter. The Censorship is for your protection against schadenfreude....but once Burrowing Heaven gets loose... Well. Best to let it run its course. Censorship only makes it worse, afterall.", Object.keys(all_themes), 999, 999, 999);
+                        if(globalRand.nextDouble()>0.5){
+                            factsForSale.push(kFact);
+                        }else{
+                            globalDataObject.factsUnlocked.push(kFact);
+                        }
+                    }
                     //dialog addapted from IC's west intermission
-                    await kPopup(`"You think you can disrespect me, huh? Think I'm less than the other games? That I'm not worth looking at. I warned you. You chose wrong. So if Vik's gonna kill me anyway... let's set you back to square zero, hm?"`, 333, () => {
-                        winCallback(globalDataObject.currentMaze);
+                    await kPopup(`"You think you can disrespect me, huh? Think I'm less than the other games? That I'm not worth looking at. I warned you. You chose wrong. So if Vik's gonna [REDACTED] me anyway... let's set you back to square zero, hm?"`, 333, () => {
                         renderMazeTab();
                     });
 

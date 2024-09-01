@@ -368,6 +368,8 @@ class Fact {
 
 console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROOM IS IMPLEMENTED, PARSE NEW LINES AS BR")
 //title should be unique
+const altFact = new Fact("Alt Is A Mimic", "If you are talking to someone or wandering a maze and something seems...OFF... Could be secetly Alt. She means well, she's just lonely and doesn't have a face of her own. She's dating Truth.", [CLOWNS, LONELY], 1, 1, 1);
+
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
 //any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
 const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.");
@@ -404,7 +406,7 @@ const CLOSERADDICTEDTOFRUIT = new Fact("The Closer Is Addicted To Fruit", "In th
 
 const PARKERSBESTIEISVIC = new Fact("Parker's Bestie is [REDACTED]", "When Parker is with [REDACTED] its like they can't hear the call of Gun-Tan anymore. They will weaken slowly, because Gun-Tan is how they live now. But it is nice, for just a little while, to be a danger to no one.", [OBFUSCATION, CENSORSHIP, BURIED, SPACE], 0, 0, 0);
 const PARKERSlOVESGUNTAN = new Fact("Parkers Loves Gun-Tan", "Parker loves Gun-Tan so much he never lets her go. Even if he thinks he has she is right back in his hands when its time to pull the trigger again. She loves him THAT much.", [KILLING, BURIED, SPACE], 10, 1, 10);
-const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and K", "When Parker burrowed out of his home universe he made sure to steal away all his favorite blorbos he loved watching through his cameras. Witherby and K are especially fun to watch, because of how often they interact with the others. Parker loves watching.", [SPYING, BURIED, LIGHT, LONELY], 1, 1, 1);
+const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and Khana", "When Parker burrowed out of his home universe he made sure to steal away all his favorite blorbos he loved watching through his cameras. Witherby and K are especially fun to watch, because of how often they interact with the others. Parker loves watching.", [SPYING, BURIED, LIGHT, LONELY], 1, 1, 1);
 const PARKERRUNSABBQ = new Fact("Parker Owns a BBQ", "Despite how filthy Parker is, he can work a mean grill. He and [REDACTED] run a literal hole in the wall BBQ that has long lines whenever it pops up.", [FLESH, BURIED, SPACE], 1, 1, 1);
 
 //illusionists shipping manifesto https://docs.google.com/presentation/d/1YtZE1QL3rgQUIxI7Kb0P9Evn34OqP4Jkzb1pLCayIvk/edit#slide=id.p
@@ -1837,6 +1839,6 @@ createABulkFact(BAKERY, "","");
 */
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC,VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, riaFact,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact,PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact,wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, riaFact,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
 
 

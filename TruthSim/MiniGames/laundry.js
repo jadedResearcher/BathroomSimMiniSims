@@ -147,7 +147,8 @@ class LaundryMiniGame extends MiniGame {
         } else {
             const rude = createElementWithClassAndParent("div", container);
             rude.innerText = "You don't have any facts? Fucking useless. Why are you even here?"
-
+            const kFact = new Fact("You Will Look At Khana", "So. Funny story. K has two main abnormalities associated with him/her/xer:  Burrowing Heaven, and Schadenfreude. With the former, if you ignore K too long, he breeches, and spreads in every direction to try to find your Gaze. With the latter, if you look too much at xer, xe breeches and rampages around killing people horribly. Vik can help contain the latter. The Censorship is for your protection against schadenfreude....but once Burrowing Heaven gets loose... Well. Best to let it run its course. Censorship only makes it worse, afterall.", Object.keys(all_themes), 999, 999, 999);
+            globalDataObject.factsUnlocked.push(kFact);
         }
     }
 

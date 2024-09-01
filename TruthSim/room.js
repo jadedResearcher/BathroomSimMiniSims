@@ -32,6 +32,9 @@ const getNewBabyMaze = () => {
 const makeRandomEasyRoom = (maze, row, col) => {
   const theme = maze.rand.nextDouble() > 0.3 ? undefined : pickFrom(Object.keys(all_themes));
   let possibleGames = [...globalDataObject.unlockedMiniGames];
+  if(globalSkippedK){
+    possibleGames = [LAUNDRYMINIGAME]
+  }
 
   for(let game of maze.miniGamesWithin){
 
@@ -59,7 +62,6 @@ const makeRoomFromJSon = (json) => {
 
 //mostly basic procedural rooms but occasionally special ones
 const makeRandomRoom = (maze, row, col) => {
-  console.log("JR NOTE: eventually if have more lifetime candy, pick harder rooms");
   const room =  makeRandomEasyRoom(maze, row, col);
   maze.miniGamesWithin.push(room.miniGameKey);
   return room;
@@ -85,6 +87,11 @@ class Maze {
   //each cell is either undefined or a room in the maze
   map = [];
   constructor(rand, number, difficulty) {
+    //bigger with more truthPerSecond
+    this.maxSize = Math.min(23,Math.max(3, globalDataObject.truthPerSecond*3));
+    this.minSize = Math.min(13,Math.max(3, globalDataObject.truthPerSecond));
+    console.log("JR NOTE: maze max size is", this.maxSize, this.minSize)
+
     this.rand = rand;
     this.difficulty = difficulty;
     this.title = "MAZE #"+number;
