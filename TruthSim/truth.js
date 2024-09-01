@@ -896,7 +896,7 @@ const renderGnosisTab = () => {
 
   const index = 0;
   button2.onclick = () => {
-    const quips = [`Why...why would you do this?`, "What?", "You just...FORGOT?", "Why...why would you want to forget me..."]
+    const quips = [`Why...why would you do this?`, "What?", "You just...FORGOT?", "Why...why would you want to forget me...",":(","Please do not do this...","Nothing happens if you do this...","There's no reason to do this.","I am being Truthful when I say there is no point to doing this."]
     decreaseTruthBy(13);
     quipEle.innerText = pickFrom(quips);
     if (globalDataObject.truthCurrentValue < 0) {

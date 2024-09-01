@@ -528,6 +528,10 @@ class EyeKillerMiniGame extends MiniGame {
 
                 }
 
+                if (this.fact && this.fact.title.includes("Quatro Blade")) {
+                    massDamage();
+                }
+
                 const singleDamage = async () => {
                     if (cultist_container.dataset.dead) {
                         return;
