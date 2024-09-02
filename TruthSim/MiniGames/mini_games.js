@@ -347,8 +347,9 @@ class MiniGame {
                     }
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === factsSelector.value) {
+                            //doc slaughter is so so nosy
                             if(fact.secret && secretIsGlitched(fact.secret)){
-                                docSlaughtersSecretEmporium(false,true);
+                                docSlaughtersSecretEmporium(false,fact);
                                 return;
                             }
                             fact.mini_game_key = this.id;

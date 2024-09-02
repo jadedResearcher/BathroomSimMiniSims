@@ -142,7 +142,11 @@ const removeAllIrrelevantFactsFromData = () => {
 //because she is well aware secrets aren't supposed to be exposed but they are just too juicy to keep to herself
 const docSlaughtersSecretEmporium = (debug = true, glitch=false) => {
   globalBGMusic.pause();
-  const facts = debug ? all_facts : globalDataObject.factsUnlocked;
+  let facts = debug ? all_facts : globalDataObject.factsUnlocked;
+
+  if(glitch){
+    facts = [glitch];
+  }
   const tier3Facts = facts.filter((f) => f.secret);
 
   globalTabContent.innerHTML = "";
@@ -225,8 +229,11 @@ const docSlaughtersSecretEmporium = (debug = true, glitch=false) => {
 
       button.onclick = () => {
         div.innerHTML = "";
-        const img1 = turnImageIntoGrid(div, pickFrom(infinite_art), 25, "fadeOut");
-        const img2 = turnImageIntoGrid(div, pickFrom(eyes), 25, "fadeOut");
+        const infiniteArt = pickFrom(infinite_art);
+        const eyesArt = pickFrom(eyes);
+        truthLog("It Would Seem JR Is Attempting To Trap You, Observer",`Do not follow Doctor Fiona Slaughter's example and let your eyes be drawn in by the spiral. The Truth is that this is a procedural image comprised of random squares of: ${infiniteArt} and ${eyesArt}. You can simply click these links to see the unobstructred full versions. Apologies to those not on mobile.`);
+        const img1 = turnImageIntoGrid(div, infiniteArt, 25, "fadeOut");
+        const img2 = turnImageIntoGrid(div, eyesArt, 25, "fadeOut");
       }
 
     }
