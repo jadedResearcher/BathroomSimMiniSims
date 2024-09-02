@@ -14,7 +14,7 @@
     var(--animps, running);
 }
 
-.box{
+.box {
   animation-play-state: --animps;
 }
 
@@ -47,33 +47,37 @@ body {
   animation-fill-mode: forwards;
 }
 
-.credits-friday{
+.credits-friday {
   position: sticky;
   z-index: 1000;
   bottom: 10px;
   left: 0px;
   height: 20px;
   color: #a10000;
-  a{
+
+  a {
     color: red;
   }
-  a:visited{
+
+  a:visited {
     color: red;
   }
-  a:hover{
+
+  a:hover {
     color: #a10000;
   }
 }
 
-.multi-select{
+.multi-select {
   height: 50vh;
 }
 
-.friday-video{
+.friday-video {
   width: 100%;
   object-fit: cover;
   cursor: pointer;
-  filter: invert(19) blur(1px) brightness(0.51) contrast(1919) grayscale(1)}
+  filter: invert(19) blur(1px) brightness(0.51) contrast(1919) grayscale(1)
+}
 
 @keyframes fadeOut {
   0% {
@@ -181,8 +185,20 @@ textarea {
   opacity: 0.9;
 }
 
-.dev-log{
-  display:none;
+.dev-log {
+  display: none;
+}
+
+#truth {
+  z-index: -1;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
 }
 
 .sales-floor {
@@ -285,111 +301,111 @@ button img {
   height: 50px;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-.slot{
+.slot {
   width: 150px;
   position: absolute;
   height: 150px;
 }
 
-.slots-spinning{
+.slots-spinning {
   animation: slots-go-whir linear 500ms infinite;
 }
 
-.slots-paperclip-a{
+.slots-paperclip-a {
   animation: slots-go-paperclip-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-paperclip-b{
+.slots-paperclip-b {
   animation: slots-go-paperclip-b ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-paperclip-c{
+.slots-paperclip-c {
   animation: slots-go-paperclip-c ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-paperclip-d{
+.slots-paperclip-d {
   animation: slots-go-paperclip-d ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-heart-a{
+.slots-heart-a {
   animation: slots-go-heart-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-heart-b{
+.slots-heart-b {
   animation: slots-go-heart-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-heart-c{
+.slots-heart-c {
   animation: slots-go-heart-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-fail-a{
+.slots-fail-a {
   animation: slots-go-fail-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-fail-b{
+.slots-fail-b {
   animation: slots-go-fail-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-fail-c{
+.slots-fail-c {
   animation: slots-go-fail-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-key-a{
+.slots-key-a {
   animation: slots-go-key-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-key-b{
+.slots-key-b {
   animation: slots-go-key-b ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-star-a{
+.slots-star-a {
   animation: slots-go-star-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-star-b{
+.slots-star-b {
   animation: slots-go-star-b ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.slots-eye-a{
+.slots-eye-a {
   animation: slots-go-eye-a ease-out 1s 1;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-button:disabled{
+button:disabled {
   opacity: 50%;
 }
 
@@ -573,49 +589,51 @@ button:disabled{
 
 
 
-.slot-button-container{
+.slot-button-container {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
 
 }
 
-.slot-machine{
+.slot-machine {
   position: relative;
   width: 150px;
   height: 150px;
 }
 
-.slot-icons{
+.slot-icons {
   position: absolute;
   width: 9px;
   height: 27px;
   top: 45px;
 }
 
-.slot-icons.one{
+.slot-icons.one {
   left: 46px;
-  background-position-y: 13px; /*slot machine animation is handled via animating on the background position */
+  background-position-y: 13px;
+  /*slot machine animation is handled via animating on the background position */
 }
 
-.slot-icons.two{
+.slot-icons.two {
   left: 69px;
   background-position-y: 113px;
 }
 
-.slot-icons.three{
+.slot-icons.three {
   left: 91px;
   background-position-y: 333px;
 }
 
-.slot-container button{
+.slot-container button {
   font-size: 8px;
   width: 70px;
   max-width: 70px;
   overflow: hidden;
   padding-left: 3px;
   padding-right: 3px;
-  text-wrap: nowrap; /*i need you to know how funny i find it how far these things can go off screen*/
+  text-wrap: nowrap;
+  /*i need you to know how funny i find it how far these things can go off screen*/
 }
 
 .slot-icon {
@@ -624,7 +642,7 @@ button:disabled{
   object-fit: contain;
 }
 
-.slot-header{
+.slot-header {
   width: min-content;
   margin-left: auto;
   margin-right: auto;
@@ -1119,7 +1137,7 @@ button:disabled{
   justify-content: space-evenly;
 }
 
-.secrets-container{
+.secrets-container {
   padding: 13px;
   font-family: 'Courier New', Courier, monospace;
   border: 2px dotted rgb(224, 159, 170);
@@ -1127,17 +1145,17 @@ button:disabled{
   color: rgb(206, 36, 64);
 }
 
-.secrets-container svg{
+.secrets-container svg {
   fill: pink;
   height: 12px;
   width: 12px;
 }
 
-.secret-img{
+.secret-img {
   width: -webkit-fill-available;
 }
 
-.corrupted-img{
+.corrupted-img {
   height: 475px;
   width: 475px;
   margin-left: auto;
@@ -1145,11 +1163,11 @@ button:disabled{
   position: relative;
 }
 
-.secret-vid{
+.secret-vid {
   width: -webkit-fill-available;
 }
 
-.secret-html{
+.secret-html {
   margin: 13px;
   background-color: #e4e4e4;
   color: black;
@@ -1157,12 +1175,12 @@ button:disabled{
   padding: 13px;
 }
 
-.secrets-container path{
+.secrets-container path {
   stroke: rgb(226, 86, 109);
 }
 
 
-.secret-ele{
+.secret-ele {
   padding: 13px;
   margin: 13px;
   border: 2px dashed rgb(230, 97, 119);

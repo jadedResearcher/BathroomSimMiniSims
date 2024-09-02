@@ -13,7 +13,7 @@ let globalContainer;//the whole 'screen'
 let globalSkippedK = false; //angry angry boi, burrowing heaven spreads everywhere
 let globalTabContent; //if you are messing only with the current tab (not the header), its this
 const SAVE_KEY = "TRUTH_AWAITS_INSIDE_ZAMPANIO";
-
+let truthEle;
 //the Witness doens't exist and neither do the arms except they clearly also do
 
 let globalDataObject = {
@@ -22,7 +22,7 @@ let globalDataObject = {
   numberKeys: 1, //thanks illusionist
   keysBoughtFromCloser: 0,
   allTimeTruthGivenToCloser: 0,
-  allTimeFactsGivenToK:0,
+  allTimeFactsGivenToK: 0,
   maximumGamerLevelAchieved: 0,
   lastLoadTimeCode: 0,
   lastBeeTimeCode: 0,
@@ -48,7 +48,7 @@ let globalDataObject = {
 //restore to this after debugging (its named such to fuck with future me and or wastes because its not actually real, its a backup)
 let globalDataObjectREAL = {
   truthPerSecond: 1,
-  allTimeFactsGivenToK:0,
+  allTimeFactsGivenToK: 0,
   maximumGamerLevelAchieved: 0,
   startedPlayingTimeCode: Date.now(),
   numberKeys: 0,
@@ -105,7 +105,7 @@ const fuckWithAVideosAudio = (videoEle) => {
   const mediaSource = audioFucker.audioCtx.createMediaElementSource(videoEle);
   console.log("JR NOTE: mediaSource is", mediaSource)
   const muffleFilter = audioFucker.muffleFilter(500);
-  audioFucker.playDirectlyFromSource(mediaSource, false, 1, [ muffleFilter],videoEle.currentTime,()=>{
+  audioFucker.playDirectlyFromSource(mediaSource, false, 1, [muffleFilter], videoEle.currentTime, () => {
     console.log("JR NOTE: source was disconnected")
   })
 
@@ -129,7 +129,7 @@ const fridayMode = async () => {
   videoEle.src = url + pickFrom(glitched_clips);//guarantee first is glitch
   videoEle.autoplay = true;
 
-  videoEle.onplay =()=>{
+  videoEle.onplay = () => {
     //fuckWithAVideosAudio(videoEle);
   }
   videoEle.play();
@@ -171,6 +171,7 @@ window.onload = async () => {
     fridayMode();
     return;
   }
+  truthEle = document.querySelector("#truth")
 
   initThemes();
   await getRandos();
@@ -198,7 +199,22 @@ window.onload = async () => {
 }
 
 const truthLog = (title, text) => {
-  console.log(`%c${title}%c  ${text}`, "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;", "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;");
+
+  const truthCSSTitle = "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;";
+  const truthCSSBody = "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;";
+  if (truthEle) {
+    const container = createElementWithClassAndParent("div",truthEle);
+    container.style.cssText = "padding: 10px;";
+    const titleEle = createElementWithClassAndParent("div",container);
+    titleEle.innerText = title;
+    titleEle.style.cssText = truthCSSTitle;
+    const textEle = createElementWithClassAndParent("div",container);
+    textEle.innerText = text;
+    textEle.style.cssText = truthCSSBody;
+    container.scrollIntoView();
+
+  }
+  console.log(`%c${title}%c  ${text}`, truthCSSTitle, truthCSSBody);
 }
 
 /*
@@ -272,7 +288,7 @@ const save = () => {
   localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));
   const saveNoise = new Audio("audio/fx/single_heart.mp3");
   saveNoise.play();
-  if(isItFriday()){
+  if (isItFriday()) {
     window.location.href = window.location.href; //refresh into spooky mode
   }
 }
@@ -335,8 +351,8 @@ const purchaseRoomFromCloser = (price, room) => {
   globalDataObject.unlockedMiniGames.push(room)
 }
 
-const donateFactToK=(fact)=>{
-  if(!globalDataObject.allTimeFactsGivenToK){
+const donateFactToK = (fact) => {
+  if (!globalDataObject.allTimeFactsGivenToK) {
     globalDataObject.allTimeFactsGivenToK = 0;
   }
   globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
@@ -896,7 +912,7 @@ const renderGnosisTab = () => {
 
   const index = 0;
   button2.onclick = () => {
-    const quips = [`Why...why would you do this?`, "What?", "You just...FORGOT?", "Why...why would you want to forget me...",":(","Please do not do this...","Nothing happens if you do this...","There's no reason to do this.","I am being Truthful when I say there is no point to doing this."]
+    const quips = [`Why...why would you do this?`, "What?", "You just...FORGOT?", "Why...why would you want to forget me...", ":(", "Please do not do this...", "Nothing happens if you do this...", "There's no reason to do this.", "I am being Truthful when I say there is no point to doing this."]
     decreaseTruthBy(13);
     quipEle.innerText = pickFrom(quips);
     if (globalDataObject.truthCurrentValue < 0) {
