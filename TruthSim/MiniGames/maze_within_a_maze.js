@@ -179,7 +179,8 @@ class MazeMiniGame extends MiniGame {
     //literally all she does is mimic the maze (meat mode)
     render = (ele, room, callback) => {
         truthLog("Alt Is Here", `Oh. Um. I see. She could have. Asked me if she wanted to spend some time with the Wanderer? I would have let her. But. Uh. I am sorry for hogging the attention. `)
-
+        const prevOpacity = truthEle.style.opacity ? parseFloat(truthEle.style.opacity): 0;
+        truthEle.style.opacity = `${prevOpacity+0.1}`
         globalMeatMode = true;
         if (timeEnteredMeatMode == 0) {
             timeEnteredMeatMode = Date.now();
