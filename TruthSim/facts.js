@@ -74,6 +74,11 @@ const randomFact = (rand) => {
 //secrets are longer form rambles or stories or what have you, more than facts
 const all_secrets = [];
 
+//like catnipt to doc slaughter
+const secretIsGlitched = (secret) => {
+  return (!secret.video && !secret.audio && !secret.image && !secret.html)
+}
+
 //only doc slaughter can reveal these. its her religion, to expose secrets. 
 //devona would if she COULD but Fragment of the Universe prevents her from doing so without driving the listener mad
 class Secrets {
@@ -135,7 +140,7 @@ const removeAllIrrelevantFactsFromData = () => {
 // if its debug mode grab all tier 3 facts, not just all tier 3 facts in your data unlock
 //she shows up if you pass a fact with the word "secret" in it
 //because she is well aware secrets aren't supposed to be exposed but they are just too juicy to keep to herself
-const docSlaughtersSecretEmporium = (debug = true) => {
+const docSlaughtersSecretEmporium = (debug = true, glitch=false) => {
   globalBGMusic.pause();
   const facts = debug ? all_facts : globalDataObject.factsUnlocked;
   const tier3Facts = facts.filter((f) => f.secret);
@@ -145,7 +150,8 @@ const docSlaughtersSecretEmporium = (debug = true) => {
 
   const imgContainer = createElementWithClassAndParent("div", secretsContainer, "blorbo-container");
   const h1 = createElementWithClassAndParent("h1", secretsContainer);
-  h1.innerText = `Oh, my Darling Eyes, let me help you See the ${tier3Facts.length} Secrets (hidden within ${facts.length} Facts) that have been cruely hidden from you!`
+  h1.innerText = glitch? "What is this? What a curious Fact! Where did you get it? Let me See...": `Oh, my Darling Eyes, let me help you See the ${tier3Facts.length} Secrets (hidden within ${facts.length} Facts) that have been cruely hidden from you!`
+
   const img = createElementWithClassAndParent("img", imgContainer, "blorbo");
   img.src = "images/Doctor_Fiona_Slaughter_by_guide.png";
   const difficulty = createElementWithClassAndParent("div", secretsContainer, "difficulty-guide");
@@ -339,7 +345,7 @@ class Fact {
     this.lore_snippet = lore_snippet;
     this.secret = secrets;
     this.theme_key_array = theme_key_array;
-    if(!this.theme_key_array){
+    if (!this.theme_key_array) {
       this.theme_key_array = [TWISTING];
     }
     this.damage_multiplier = damage_multiplier;
@@ -466,17 +472,17 @@ Now he has turned into a tree yearning for our attention. If overfed, he will tu
 Our containment procedures will have to change accordingly.`, [OBFUSCATION, DECAY, KNOWING, STEALING], 0, 0, 0);
 //const static_secret = new Secrets(null,null,null,`<a target='_blank' href=''>The Attic</a>`)
 
-const index_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/'>Behind The Curtain</a>`)
+const index_secret = new Secrets(null, null, null, `<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/'>Behind The Curtain</a>`)
 
-const ab_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/NORTH/NORTH/SOUTH/SOUTH/NORTH/bathroom.html'>AuthorBot</a>`)
+const ab_secret = new Secrets(null, null, null, `<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/NORTH/NORTH/SOUTH/SOUTH/NORTH/bathroom.html'>AuthorBot</a>`)
 
-const static_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/NORTH/EAST/bathroom.html'>I barely remember making this.</a>`)
+const static_secret = new Secrets(null, null, null, `<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/NORTH/EAST/bathroom.html'>I barely remember making this.</a>`)
 
-const attic_secret = new Secrets(null,null,null,`<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/bathroom.html'>The Attic</a>`)
+const attic_secret = new Secrets(null, null, null, `<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/bathroom.html'>The Attic</a>`)
 
-const interloper_secret = new Secrets(null,null,null,`<a target='_blank' href='https://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/bathroom'>The Interloper (try 1313 and 4665)</a>`)
+const interloper_secret = new Secrets(null, null, null, `<a target='_blank' href='https://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/bathroom'>The Interloper (try 1313 and 4665)</a>`)
 
-const camellia_secret = new Secrets(null,null,null,`
+const camellia_secret = new Secrets(null, null, null, `
 The chanting reached a crescendo. 
 
 Camellia let it wash over her, the feeling of unity calling to their god. 
@@ -614,7 +620,7 @@ thems the breaks
 
 
 //https://www.tumblr.com/verbosebabbler/758720377189957632/made-a-mockup-of-a-theoretical-zampaniosim-gameboy?source=share
-const sam_secret = new Secrets(null,null,null,`You know, I didn't ask for any of this, now did I?
+const sam_secret = new Secrets(null, null, null, `You know, I didn't ask for any of this, now did I?
 You think I wanted this? That I was slavering at the bit to be at the center of this shitty web?
 
 Sure.
@@ -991,7 +997,7 @@ const witherby_secret = new Secrets(null, null, null, `
 <p><br></p>
 `);
 
-const riaFact = new Fact("Ria Burns Everything In Despair","When all Hope is lost, Ria finds solace in the idea of starting anew. The fires of this False Hope burn her from within, consuming all and destorying the world in a blaze of choking tears. ",[FIRE, ANGER, APOCALYPSE], 1, 2, 1, new Secrets(null,null,null,`<div style="text-align: start;color: rgba(var(--black),.4)rgba(var(--white),.1);background-color: rgb(255, 255, 255);font-size: 16px;border: none;">
+const riaFact = new Fact("Ria Burns Everything In Despair", "When all Hope is lost, Ria finds solace in the idea of starting anew. The fires of this False Hope burn her from within, consuming all and destorying the world in a blaze of choking tears. ", [FIRE, ANGER, APOCALYPSE], 1, 2, 1, new Secrets(null, null, null, `<div style="text-align: start;color: rgba(var(--black),.4)rgba(var(--white),.1);background-color: rgb(255, 255, 255);font-size: 16px;border: none;">
 <p style="font-size: 16px;border: none;">Ria is one that I always get confused by too (because she is defined by her oscillations between extremes) so I went to IC for clarification and this is what I got:&nbsp;<br><br>&quot;<em><em style="font-size: 16px;border: none;">Short answer: Ria&apos;s aspect is Rage. She inverts Hope. Long answer: While she roleplays at belief (and she plays this part very well), it&apos;s no coincidence that her train of thought focuses fiercely on what is real rather than the ideal (i.e: The World Is Going To End in Fire and this is good, for no other reason than burning the falsehood that is the Echidna). Longer answer: We ebbed a lot on this topic ourselves when we first started considering aspects as part of the mix. Is Ria Hope? Some of her earlier readings lean a lot more on the strange religion aspect of her Peewee-worshipping shenanigans because of this. However, we at some point nailed this to Rage for two reasons:</em></em></p>
 </div>
 <ol style="text-align: start;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);font-size: 16px;border: none;">
@@ -1055,7 +1061,7 @@ const BreachedTwinFact = new Fact("Devona is Easier To Hurt", "If either of the 
 
 
 
-const hoonSecret = new Secrets(null,null,null,`IC: i feel like the oft missed concept is that hoon comes from disciplinary
+const hoonSecret = new Secrets(null, null, null, `IC: i feel like the oft missed concept is that hoon comes from disciplinary
 she's had to put a lot of people down, guilty or not, and from her pov the manager gave orders and the day flowed until one day they disappeared and everything went to shi
 
 JR: yupyup
@@ -1072,7 +1078,7 @@ the difference between lee and hunter is functionally nil because jr has no idea
 sometimes the horror is that god thinks you and your shitty ex are fundamentally close enough the same person
 `)
 
-const hoonFact = new Fact("Hoon Listens To Her Radio","If the radio says to kill you, thems the breaks. She's given up her own Judgement long ago. It will never tell her to kill a safe abnormality, though. It's why she befriends Witherby. You can't get much safer than One Sin, Hundreds of Good Deeds.",[KILLING, WEB, ROYALTY], 1,1,1, hoonSecret)
+const hoonFact = new Fact("Hoon Listens To Her Radio", "If the radio says to kill you, thems the breaks. She's given up her own Judgement long ago. It will never tell her to kill a safe abnormality, though. It's why she befriends Witherby. You can't get much safer than One Sin, Hundreds of Good Deeds.", [KILLING, WEB, ROYALTY], 1, 1, 1, hoonSecret)
 
 
 /*
@@ -1253,7 +1259,7 @@ const cult_secret = new Secrets(null, null, "images/cult_faction_conspiracywall_
 
 
 //https://www.tumblr.com/roach-works/758817422452064256?source=share <-- literally rod core
-const echidna_secret = new Secrets(null,null,null,`The Echidna watched.
+const echidna_secret = new Secrets(null, null, null, `The Echidna watched.
 
 The Echidna waited.
 
@@ -1860,6 +1866,6 @@ createABulkFact(BAKERY, "","");
 */
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact,PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT,VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact,wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, riaFact,VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, riaFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
 
 

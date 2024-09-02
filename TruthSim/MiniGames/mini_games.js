@@ -52,10 +52,10 @@ const rooms_to_unlock = {
 
 
 //half as common as other rooms
-const rareMiniGames = [EYEKILLERMINIGAME];
+const rareMiniGames = [EYEKILLERMINIGAME, LAUNDRYMINIGAME];
 
 //max of once per maze
-const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, SHOPMINIGAME, TWINSMINIEGAME, GAMERSHOPMINIGAME];
+const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, RIAMINIGAME,SHOPMINIGAME, TWINSMINIEGAME, GAMERSHOPMINIGAME];
 
 const initAllMiniGames = () => {
     new LockMiniGame();
@@ -342,11 +342,15 @@ class MiniGame {
 
                     ////any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
                     if (factsSelector.value.toLowerCase().includes("secret")) {
-                        docSlaughtersSecretEmporium(false);
+                        docSlaughtersSecretEmporium(false,false);
                         return;
                     }
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === factsSelector.value) {
+                            if(fact.secret && secretIsGlitched(fact.secret)){
+                                docSlaughtersSecretEmporium(false,true);
+                                return;
+                            }
                             fact.mini_game_key = this.id;
                             this.render(ele, room, winCallback);
                         }

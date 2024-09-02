@@ -93,7 +93,6 @@ const beeClasspecting = (rand, themes) => {
 
 const updateHiveOverTime = (hive, timeInMillis) => {
   const minutes = Math.round(timeInMillis / 1000 / 60); //convert to seconds by dividing by 1000, convert to minutes by dividing by 60
-  console.log("JR NOTE: you were gone this many minutes", minutes)
   //if a stack of honey already exists for the given quality in the hive just up its quantity
   const addLootHoneyOfQualityAndQuantity = (hive, quantity, quality) => {
     if (Math.round(quantity) === 0) {
@@ -159,11 +158,15 @@ const updateHiveOverTime = (hive, timeInMillis) => {
       beesBorn = 1; //won't STOP them but this is a frankly absurd amount of bees and i don't feel like figuring out how cookie clicker guy got over big int, so you get the funny boob number, k
     }
   }
+  //no more than ten percent of bees born any particular check. 
+  //there just isn't enough room for the eggs, they can't be stored
+  beesBorn = Math.min(beesBorn, hive.amountOfBees/10);
   if (beesBorn < 0) {
     //the spiral theme specifically exists to fuck with future me
     //future me is going to be SO CONFUSED AND UPSET when the numbers are weird but here we are
     beesBorn = getRandomNumberBetween(1, Math.abs(beesBorn) * 13);
   }
+  
 
   if (beesBorn > 0) {
     hive.amountOfBees += Math.round(beesBorn);
@@ -186,7 +189,9 @@ const updateHiveOverTime = (hive, timeInMillis) => {
   //(number of bees X number of minutes x THEMESPEED)/THEMEDEFENSE = amount of honey
   //then a modifier for how rare it should be based on quality
 
-  let baseAmount = (hive.amountOfBees * minutes * speed) / defense;
+  //a hive can't make more honey than 10% of its population no matter how long you wait
+  //there is no room
+  let baseAmount = Math.min(hive.amountOfBees/10,(hive.amountOfBees * minutes * speed) / defense);
  
 
   addLootHoneyOfQualityAndQuantity(hive, baseAmount, 1);

@@ -17,6 +17,16 @@ const kPopup = (text, size, callback) => {
     let textInput;
     let textArea;
 
+    //this means that K is more likely to help you if you're small and weak
+    /*
+    this isn't out of a sense of charity, though has the same effect
+    more
+    the less of a threat you are the more k doens't mind feeling a bit big by helping you
+
+    but if you even remotely could rival him/xer/her...
+
+    prepare to get wrenched
+    */
     if (globalDataObject.allTimeFactsGivenToK % globalDataObject.truthPerSecond == 0) {
         const bonusEle = createElementWithClassAndParent("div", popupbody);
         bonusEle.innerHTML = "Hey. Thanks for all the donations. You're alright, kid. Here's a lil something for you.  Did you know anything can be a Fact if you're willing to defend it? Try it out, write whatever you want, my treat: <br><br>"
