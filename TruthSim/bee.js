@@ -158,6 +158,7 @@ const updateHiveOverTime = (hive, timeInMillis) => {
       beesBorn = 1; //won't STOP them but this is a frankly absurd amount of bees and i don't feel like figuring out how cookie clicker guy got over big int, so you get the funny boob number, k
     }
   }
+
   //no more than ten percent of bees born any particular check. 
   //there just isn't enough room for the eggs, they can't be stored
   beesBorn = Math.min(beesBorn, hive.amountOfBees/10);
@@ -166,7 +167,9 @@ const updateHiveOverTime = (hive, timeInMillis) => {
     //future me is going to be SO CONFUSED AND UPSET when the numbers are weird but here we are
     beesBorn = getRandomNumberBetween(1, Math.abs(beesBorn) * 13);
   }
-  
+  if(globalMeatMode){
+    beesBorn +=1; //alt helps things fuck
+  }
 
   if (beesBorn > 0) {
     hive.amountOfBees += Math.round(beesBorn);
