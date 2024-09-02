@@ -682,6 +682,7 @@ const renderMazeTab = () => {
   header.innerText += ` (${allBeaten ? "All" : numberBeaten} Rooms Beaten) ${allUnlocked ? "Maze Fully Explored!" : ""} `;
   if (allUnlocked) {
     restartButton.innerText += " (And Gain a Reward)"
+    restartButton.className ="restart-button-prize"
   }
 
   if (allBeaten) {

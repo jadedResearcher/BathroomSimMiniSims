@@ -202,6 +202,18 @@ textarea {
   opacity:0;
 }
 
+.restart-button{
+  color: green;
+  background-color: mintcream;
+  font-size: 18px;
+}
+
+.restart-button-prize{
+  color: mintcream;
+  background-color: green;
+  font-size: 18px;
+}
+
 .sales-floor {
   display: flex;
   gap: 31px;
