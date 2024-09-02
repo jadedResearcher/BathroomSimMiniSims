@@ -819,7 +819,9 @@ class BettingMiniGame extends MiniGame {
         const winRate = 2.0;
         bettingButton.onclick = () => {
             const betValue = parseInt(bettingInput.value) ? parseInt(bettingInput.value) : 0;
-            const bet = Math.min(Math.ceil(globalDataObject.truthCurrentValue / 2), betValue);
+            //no more negative bets
+            const bet = Math.max(0,Math.min(Math.ceil(globalDataObject.truthCurrentValue / 2), betValue));
+
             let winnings = bet * winRate;
             const h1 = document.querySelector("h1");
             const betLabel = createElementWithClassAndParent("div", h1);
