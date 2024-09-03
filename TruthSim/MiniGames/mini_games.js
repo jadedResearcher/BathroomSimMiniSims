@@ -407,7 +407,7 @@ class LockMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact) => {
-        console.log("JR NOTE: future jr, i think it would be hilarous for this to mutate in response to a fact, but into what? maybe wibbys confessional tbh, unlock ppls hearts")
+        //console.log("JR NOTE: future jr, i think it would be hilarous for this to mutate in response to a fact, but into what? maybe wibbys confessional tbh, unlock ppls hearts")
         return false;
     }
 
@@ -1032,7 +1032,7 @@ class RabbitMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact) => {
-        console.log("JR NOTE: i don't think i actually have the rabbit mini game wired up, replaced it with secrets")
+        //console.log("JR NOTE: i don't think i actually have the rabbit mini game wired up, replaced it with secrets")
     }
 
     startGame = (ele, room, callback) => {
@@ -1073,7 +1073,7 @@ class ButtonMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact) => {
-        console.log("JR NOTE: could do a more general version of AmazonWareHouse sim (pending) here")
+        //console.log("JR NOTE: could do a more general version of AmazonWareHouse sim (pending) here")
         return false;
     }
 

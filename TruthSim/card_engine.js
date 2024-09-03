@@ -16,7 +16,7 @@ jokers are -1
 //as well as back.png
 //and a pair of jokers
 const createDeckFromSource = (url)=>{
-  console.log("JR NOTE: grabbing cards from ", url)
+  //console.log("JR NOTE: grabbing cards from ", url)
   let back;
   let cards = []
 

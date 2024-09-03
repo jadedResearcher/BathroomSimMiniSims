@@ -112,7 +112,7 @@ class TwinsMiniGame extends MiniGame {
 
 
     respondsToFact = (fact) => {
-        console.log("JR NOTE: twins should respond to a fact involving one of them dying by breaching")
+        //console.log("JR NOTE: twins should respond to a fact involving one of them dying by breaching")
         return false;
     }
 

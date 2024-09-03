@@ -547,7 +547,7 @@ class GamerPointsStoreMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact) => {
-        console.log("JR NOTE: flower chick reacts to APOCALYPSE or CHEAT or TRICKSTER facts and  should unlock your save editing (rather than it being on the save tab)")
+        //console.log("JR NOTE: flower chick reacts to APOCALYPSE or CHEAT or TRICKSTER facts and  should unlock your save editing (rather than it being on the save tab)")
         return false;
     }
 

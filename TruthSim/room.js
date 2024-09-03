@@ -90,7 +90,7 @@ class Maze {
     //bigger with more truthPerSecond
     this.maxSize = Math.min(23,Math.max(3, globalDataObject.truthPerSecond*3));
     this.minSize = Math.min(13,Math.max(3, globalDataObject.truthPerSecond));
-    console.log("JR NOTE: maze max size is", this.maxSize, this.minSize)
+    //console.log("JR NOTE: maze max size is", this.maxSize, this.minSize)
 
     this.rand = rand;
     this.difficulty = difficulty;
@@ -111,7 +111,7 @@ class Maze {
   }
 
   loadFromJSON = (json) => {
-    console.log("JR NOTE: json is", json)
+    //console.log("JR NOTE: json is", json)
     this.map = []
     this.title = json.title ? json.title : "FIRSTY";
     this.difficulty = json.difficulty;
@@ -266,7 +266,7 @@ class Room {
     if(globalMeatMode){
       return;
     }
-    console.log("JR NOTE: unlocking", this.title)
+    //console.log("JR NOTE: unlocking", this.title)
     this.unlocked = true;
   }
 

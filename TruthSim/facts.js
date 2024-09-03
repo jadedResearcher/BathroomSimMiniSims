@@ -107,12 +107,12 @@ const all_facts = [];
 const processFacts = () => {
 
   const minigames = Object.values(globalMiniGames);
-  console.log(`JR NOTE: processing ${all_facts.length} facts across ${minigames.length} games. btw there are ${all_secrets.length} secrets. Better hope there's not more secrets than facts!!!`)
+  //console.log(`JR NOTE: processing ${all_facts.length} facts across ${minigames.length} games. btw there are ${all_secrets.length} secrets. Better hope there's not more secrets than facts!!!`)
   for (let fact of all_facts) {
     for (let game of minigames) {
       if (game.respondsToFact(fact)) {
         fact.changesAMiniGame = true;
-        console.log(`JR NOTE: Fact ${fact.title} modifies ${game.id}, who knew?`)
+        //console.log(`JR NOTE: Fact ${fact.title} modifies ${game.id}, who knew?`)
         break;
       }
     }
@@ -312,7 +312,7 @@ const getAllFactsWithThemeAndTier = (theme_key, tier) => {
   //sure could call getAllFactsWithTheme but why loop to get the facts then loop again to get the tiers
   const ret = [];
   for (let fact of all_facts) {
-    console.log("JR NOTE: fact is", fact)
+    //console.log("JR NOTE: fact is", fact)
     if (fact.theme_key_array.includes(theme_key) || (oddsSpiral() && fact.theme_key_array.includes(TWISTING))) {
       if (tier === 1) {
         //level 1 is all facts of theme (theme_key_array on fact)
@@ -379,7 +379,7 @@ class Fact {
 //  constructor(title, lore_snippet, theme_key_array, damage_multiplier, defense_multipler, speed_multipler){
 
 
-console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROOM IS IMPLEMENTED, PARSE NEW LINES AS BR")
+//console.log("JR NOTE: TODO when NEVILLE AND DEVONA'S FACT VIEWER/DELETER TAB/ROOM IS IMPLEMENTED, PARSE NEW LINES AS BR")
 //title should be unique
 const altFact = new Fact("Alt Is A Mimic", "If you are talking to someone or wandering a maze and something seems...OFF... Could be secetly Alt. She means well, she's just lonely and doesn't have a face of her own. She's dating Truth.", [CLOWNS, LONELY], 1, 1, 1);
 
@@ -1605,7 +1605,7 @@ treats shocking you back into reality as a game it is WINNING and what could be 
 
 //secret can be blank, this will handle picking random stats
 const createABulkFact = (theme_key, title, text, secret) => {
-  console.log("JR NOTE: creating a bulk fact for", theme_key)
+  //console.log("JR NOTE: creating a bulk fact for", theme_key)
 
   const randomStat = () => {
     return globalRand.getRandomNumberBetween(1, 3) * globalRand.nextDouble(); //allows values less than 1
