@@ -1830,6 +1830,24 @@ createABulkFact(TECHNOLOGY, "Ronin Is A Robot","Ronin and NAM share a creator, b
 createABulkFact(TECHNOLOGY, "D Was Never Found","The Alphabet series of Police Robots all have a glitch that was never discovered: the police database accidentally included a copy of the entire operating system a second time. This resulted in the database being read restricted from the base layer operating system handling movement and communication. So the personality in front had to awkwardly try to figure out what a cop even WAS while the personality inside knew full well what a cop was and got more and more frusrated with being barred from action. NAM and Ronin are part of the Alphabet series of Police Robots. NAM was model X's front facing personality, while Ronin is what is left of model Y's cop personality after he got control following the Unbinding. D is what is left of model D, where the two operating systems merged into a sort of left and right hemispheres, doing their best to jointly control a body. D was buried at sea by the mob, and washed into the Bermuda Triangle in Zampanio. Sadly, the Loops erased the concept of the Bermuda Triangle before the Obesrvers thought to look into that plot thread. Rest in Peace, D.   http://farragofiction.com/D.Log/");
 
 
+createABulkFact(ART, "Rod Draws And Paints","Rod is far too embarrased to show anyone the pictures he's made over the years. He credits his little stuffed echidna with inspiration, calling her his 'muse'. Sometimes his paintings are moments of transcendent beauty, otherwise unimaginable horror. It makes him feel less alone to paint them.",globalRand.pickFrom(all_secrets));
+createABulkFact(ART, "River Collects Art","River is fascinated with objects of history. Time is so immeasurably vast, spreading out in all directions and yet somehow she, and all those in the Loop are contained in such a tiny slice of it. Just 50 years! How can anyone even breathe with so little room?");
+
+
+createABulkFact(SPACE, `The Lord Of Known Space Controls The Setting","Wanda is the Lord of Known Space. 
+
+When she was Wodin, he was obsessed with this creepy pasta he found online about a game that didn't exist, called Zampanio. When a glitched version of SBURB tried to make a Dead Session just for you, you unraveled.
+
+You could only be referred to by second person pronouns. You wandered an infinite maze of horrors and delights and you carved away piece of yourself, body and mind and soul, until all that was left was the Ever Hungry Eyes wanting to see just a bit more. 
+
+When all that was left was to sacrifice Your Eyes, you descended into a Coffin and came out the other side as Wanda, a fully realized Lord of Known Space, with full Knowledge and Control of physical reality. She used this to remake reality in the image of her favorite childhood creepy pasta, Zampanio, and to refuse to move past April 1st, 2022. The day her best friend died. once upon a time. 
+
+She can't control time, though. Once dead, The Intern was dead forever. 
+
+All she could do was move forward but slightly to the right, to a new universe where the Intern hadn't died yet. It's not a time loop, but a space one.
+
+A string of dead Interns lay in her wake. Along with the Universes rotting away without their Lord. `,globalRand.pickFrom(all_secrets));
+createABulkFact(SPACE, "","");
 /*
 blorbos hit so far: 
 witherby
@@ -1869,7 +1887,7 @@ Peewee
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//[TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
+//[SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
