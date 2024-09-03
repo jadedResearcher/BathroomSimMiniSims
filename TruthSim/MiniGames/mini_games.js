@@ -37,12 +37,13 @@ const RIAMINIGAME = "SLOTS";
 const rooms_to_unlock = {
     1: SHOPMINIGAME,
     2: PARKERMINIGAME,
-    3: HOONMINIGAME,
+    3: LOCKEDMINIGAME,
     4: EYEKILLERMINIGAME,
     5: TWINSMINIEGAME,
     6: GAMERSHOPMINIGAME,
     7: RIAMINIGAME,
-    8: LAUNDRYMINIGAME,
+    8: HOONMINIGAME,
+    9: LAUNDRYMINIGAME,
     10: MAZEMINIGAME
 };
 //medium^2 of spiders made these
@@ -52,7 +53,7 @@ const rooms_to_unlock = {
 
 
 //half as common as other rooms
-const rareMiniGames = [EYEKILLERMINIGAME, LAUNDRYMINIGAME];
+const rareMiniGames = [EYEKILLERMINIGAME, LAUNDRYMINIGAME,HOONMINIGAME];
 
 //max of once per maze
 const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, RIAMINIGAME,SHOPMINIGAME, TWINSMINIEGAME, GAMERSHOPMINIGAME];
@@ -483,7 +484,7 @@ class EyeKillerMiniGame extends MiniGame {
                     if (!dead) {
                         dead = true;
                         makeScreenRed(ele);
-                        await truthPopup("You were hunted down!", "Better luck next time!", "It seems you need to, as the CFO of Eyedol Games would say, 'git gud'.");
+                        await truthPopup("You were hunted down!", "Better luck next time! Maybe there's some sort of WEAPON you can give the Eye Killer?", "It seems you need to, as the CFO of Eyedol Games would say, 'git gud'.");
                         renderMazeTab();
                     }
                 }

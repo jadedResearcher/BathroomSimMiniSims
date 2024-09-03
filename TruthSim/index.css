@@ -107,6 +107,7 @@ textarea {
   color: red;
   font-family: 'Courier New', Courier, monospace;
   margin-left: 13px;
+  width: 75%;
 }
 
 .gnosis-button {
