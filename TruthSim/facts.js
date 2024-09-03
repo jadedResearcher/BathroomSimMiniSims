@@ -1639,6 +1639,7 @@ in all my mazes, it really IS that geometry is fucky, not that im doing the 'sim
 well, in one or two places im doing the simple trick but only because that amuses me too
 */
 createABulkFact(BURGERS, "MinoBurgers Have Always Existed", "When the Training Team first colonized the Mall they did not see MinoBurgers. MinoBurgers have always been here. Both things can be true.  Do you have a misconception about the term 'here'?  How about 'always'?  Where does the confusion in your own mind lie?  Or do you have enough hubris to claim that the Universe itself must be what makes no sense? That your mind is inviolable and perfect, unable to ever lie to you or lead you astray.  Do you truly believe yourself to be above the laws of physics in your immutability?", new Secrets(null, null, null, "It's a Space Loop, not a Time Loop. The Universe has always had MinosBurgers but you have not always been in this Universe. Do you understand? The Universe is consistent and unchanging and makes sense. It is your Mind that Lies to you. That insists that you remain in the same place even as you move ever forward. Your mind can be tricked. Easily. A room that looks like something you saw before implies that you are in an impossible geometry but honestly. Isn't it more likely that you're mistaken where you are, that its not truly same as what you saw before, than to truly believe that geometry itself has broken? Why do you refuse to doubt your own mind?"));
+createABulkFact(BURGERS, "CFO Loves Burgers", "The Girl With The Flower In Her Eye loves burgers. She's from a pre-industrial society (and also not) and also from a white void where she did math so like, hedonism is absolutely her JAM and what could be more hedonistic than bread and meat and cheese in excess?");
 
 
 createABulkFact(CHICKEN, "There were Eggs before anything you could call a Chicken existed.", "A fish laid an egg an amphibian laid an egg a dinosaur laid an egg a bird laid an egg a chicken laid an egg laid an egg laid an egg laid an egg it all spirals foward always the same but ever changing when did the you who is now stop being the you who was. Which came first: The Zampanio or the You?", globalRand.pickFrom(all_secrets));
@@ -1796,6 +1797,39 @@ const wasteFact = createABulkFact(WASTE, "A Waste Breaks My Damn Code", "Though.
 createABulkFact(WASTE, "A Grace Teaches Other To Break My Damn Code", "The more the merrier! Have you told your friends what lies within the javascript console? What about the DOM?", grace_secret);
 const glitchFact = createABulkFact(WASTE, "Waste's Tend To Crash Reality", "If you find yourself breaking all of reality, you may need to restart. (Most hacks you do should clear up if you refresh the page, but if you hacked your save file you may need a more thorough flame) http://farragofiction.com/SBURBSim/gnosis.html", glitched_secret);
 
+
+
+createABulkFact(MEXICAN, "Rebel Really Likes Mexican Food","Rebel seems to always be suggesting classmates, coworkers, friends and sportsball teammates that they go out for burritos. His treat!",globalRand.pickFrom(all_secrets));
+createABulkFact(MEXICAN, "Rod Can't Handle Spicy Food","Rod's stomach is too sensitive for anything spicy. He keeps milk on hand at all times to settle it (and for some reason this attracts all sorts of Maze Denizens to come to his house and drink his milk right from the carton? Neville was one thing, guy can be kinda oblivious but why is this scary mute lady drinking his milk at three in the morning???) ");
+
+createABulkFact(PIZZA, "Melon Tolerates Pizza","Rod worked really, REALLY hard to find an ecofriendly, ethically sourced pizza crust, vegan cheese and veggie toppings that didn't get too soggy when baked in his apartments mediocre oven (electric, not natural gas, or Melon wouldn't have come). Melon actually stayed for the entirety of that family dinner. Rod asked Wanda to please make sure his future self knew that worked.",globalRand.pickFrom(all_secrets));
+createABulkFact(PIZZA, "Rebel Brings The Pizza","When a friend is down, a coworker has something to celebrate or a teammate in sportsball needs to carb load, Rebel is there with a pizza or two.");
+
+
+createABulkFact(PREMIUM, "Doctor Fiona Slaughter Live Blogs Everything She Eats","Doctor Fiona Slaughter makes sure her devoted Eyes don't miss a single calories she eats, taking well staged pictures as well as posting ingredients list (or even recipes) of everything she eats. She focuses on high quality, nutritious meals that are a feast for the Eyes.",globalRand.pickFrom(all_secrets));
+createABulkFact(PREMIUM, "The Neighbor Is So So Hungry","The Neighbor brings the most delicious pies to everyone but never partakes himself. He laughs it off, saying he'll get fat.  But really... what he needs to eat is so so rare. Only Doctor Fiona Slaughter really has that Fear of the Eye he needs to really drive hom how much of a fake she is. How much more real HE is. This reality is a barren wasteland to his appetite. To say nothing of the lack of his Soul Mate.");
+
+
+createABulkFact(SALAD, "Doc Slaughter Eats A Lot Of Salads","When Doctor Fiona Slaugther live blogs her meals on Eyedlr she makes sure its colorful, vegetable focused meals.",globalRand.pickFrom(all_secrets));
+createABulkFact(SALAD, "Melon Mostly Eats Vegetables","Meat, cheese, animal products, all are killing the environment one bite at a time. Melon has absolutely no patience for anyone who would do that to the Universe. You almost begin to wonder if they have some kind of...beef....with a certain.... Universe-a-cidal absentee father figure. They may or may not have. (It's Peewee. They're pissed at Peewee) (Also I mean, that one time the Obervers made a big deal about recyling in front of baby Melon)  (Also Also the character named 'Melon' from the Universe NAM is from was an eco terrorist)");
+
+
+createABulkFact(SANDWICHES, "Neville Eats Sandwiches In Parts.","First all the bread. Then all of each type of meat. All of the cheese. Then the vegetables, sorted by type. There are no condiments. They would get everywhere and mess up the flavor of each layer of sammich.",globalRand.pickFrom(all_secrets));
+createABulkFact(SANDWICHES, "Devona Eats Sandwiches In a Messy Pile","Devona drowns her sandwiches in condiments and sauces until its a weird slurry of intense flavor. It could be literally any kind of meat or cheese or bread under there but all she can taste is the most fucked up mix of sriracha mayo, pickle flavored mustard and ranch dressing the world has ever known.");
+
+createABulkFact(SEAFOOD, "There Are Plenty Of Fish In The Sea","Florida and Italy both have thriving seafood industries. Ohio is entirely landlocked, despite not really having...any land to surround it. Don't think about it too hard.",globalRand.pickFrom(all_secrets));
+createABulkFact(SEAFOOD, "There Are Only So Many Fish In The Sea","It feels like the sea gets smaller and smaller each loop. As if someone in charge of rules of the setting grew up in a land locked american state and keeps forgetting the ocean exists.");
+
+createABulkFact(SUSHI, "Sam Loves Sushi","Sushi is a rare treat for Sam, since it requires leaving his Big Brother's giant mansion for something OTHER than a party. One of the Family's friends has a live in sushi chef though, and once Sam greases the right wheels he's invited over there fairly regularly.",globalRand.pickFrom(all_secrets));
+createABulkFact(SUSHI, "Parker Tries To Like Sushi","Just like his anime waifus. And Vik keeps reminding him its healthy to get more fish in his diet since he gets so little sun. But its so hard to actually convince restaurants to let him inside as filthy as he is, and gas station sushi is uh.... not great on his system.");
+
+
+createABulkFact(TECHNOLOGY, "CFO is a Gamer","The Flower Chick, also known as The Chief Financial Officer of Eyedol Games, is a huge gamer, a math genius and a burger afficionado. ",globalRand.pickFrom(all_secrets));
+createABulkFact(TECHNOLOGY, "NAM Is A Robot","The Thing That Is Not A Minotaur is both a robot and a ghost. His programming has been corrupted by the Octome, now a mix of forgetting parts of his own path and being flooded with the Useless Philosophy contained with the Tomes pages. He cannot control the Philosophy. Or the zaps. Sorry about that.");
+createABulkFact(TECHNOLOGY, "Ronin Is A Robot","Ronin and NAM share a creator, being different model numbers of the same basic concept. While NAM has the anxiety caused by having his police database blocked off (by the Ronin frustratedly lurking within his own head), Ronin is all copbot all the time. Everything would be so much easier if everyone just followed the rules :( :( :(   ");
+createABulkFact(TECHNOLOGY, "D Was Never Found","The Alphabet series of Police Robots all have a glitch that was never discovered: the police database accidentally included a copy of the entire operating system a second time. This resulted in the database being read restricted from the base layer operating system handling movement and communication. So the personality in front had to awkwardly try to figure out what a cop even WAS while the personality inside knew full well what a cop was and got more and more frusrated with being barred from action. NAM and Ronin are part of the Alphabet series of Police Robots. NAM was model X's front facing personality, while Ronin is what is left of model Y's cop personality after he got control following the Unbinding. D is what is left of model D, where the two operating systems merged into a sort of left and right hemispheres, doing their best to jointly control a body. D was buried at sea by the mob, and washed into the Bermuda Triangle in Zampanio. Sadly, the Loops erased the concept of the Bermuda Triangle before the Obesrvers thought to look into that plot thread. Rest in Peace, D.   http://farragofiction.com/D.Log/");
+
+
 /*
 blorbos hit so far: 
 witherby
@@ -1806,11 +1840,15 @@ eye killer
 ria
 doc slaughter
 the neighbor
+rod 
+rebel
+CFO
+nam
 
 blorbos todo:
 ronin
-nam
-CFO
+
+
 hostage/boss
 himbo/right hand
 wanda
@@ -1831,7 +1869,7 @@ Peewee
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//[MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI, WASTE, TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
+//[TECHNOLOGY, ART, SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
