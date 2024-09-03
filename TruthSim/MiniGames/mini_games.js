@@ -36,9 +36,9 @@ const RIAMINIGAME = "SLOTS";
 //if globalDataObject.mazesBeaten is this value, add this key to the unlocked rooms please
 const rooms_to_unlock = {
     1: SHOPMINIGAME,
-    2: EYEKILLERMINIGAME,
-    3: PARKERMINIGAME,
-    4: HOONMINIGAME,
+    2: PARKERMINIGAME,
+    3: HOONMINIGAME,
+    4: EYEKILLERMINIGAME,
     5: TWINSMINIEGAME,
     6: GAMERSHOPMINIGAME,
     7: RIAMINIGAME,
