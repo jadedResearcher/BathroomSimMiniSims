@@ -1847,10 +1847,30 @@ She can't control time, though. Once dead, The Intern was dead forever.
 All she could do was move forward but slightly to the right, to a new universe where the Intern hadn't died yet. It's not a time loop, but a space one.
 
 A string of dead Interns lay in her wake. Along with the Universes rotting away without their Lord. `,globalRand.pickFrom(all_secrets));
-createABulkFact(SPACE, "","");
+
+createABulkFact(SPACE, "There Are Three Space Players Trapped Within the Lord's Maze","Parker, the Murderous Thief of Buried Space. River, the  Maid of Vast Space. And Wanda, the Lord of Known Space. Wanda crushes the other two into a tiny, restricting area. Parker chokes on his clausterphobic prison. River can't bring herself to care about how small the Universe really is. Neither are doing well.");
+
+createABulkFact(TIME, "There Is A Confusing Amount Of Time Players Inside Zampanio","The Eye Killer is the Killer of Stalking Time, Camillia is her time clone and does not yet have a full Classpect. As is Piper/The Innocent. Ambrose is similarly obscured. LeeHunter are jointly time (are they one person, or two?). John is also a Time Player (to Camellia's endless amusement/irritation).  There is no Time Within Zampanio yet so much is built up. Pressurized. Waiting. Each of the Time Players has a way to sneak just a bit of time into things, but always it is a small and impotent thing in the face of Space.",globalRand.pickFrom(all_secrets));
+createABulkFact(TIME, "Time Is Not A Thing In Zampanio","The Setting takes all priority. You find a little snippet of a story. When did it happen? Who cares. WHERE is more important. There's been hundreds of 1992s. Thousands, maybe. But WHERE. Is it the 3rd? The 333rd? Is it that loop where Ria and Camille discovered BDSM and actually got back together for good? Or is it that loop where Witherby realized his heart had frozen over and it took the love of a brave man to free him from his prison?  Did one of those happen before the other? Who could say. Time is a fake thing. What matters is which universe it happened in.");
+
+
+createABulkFact(FLESH, "Alt Is A Flesh Maze","Whatever form Alt takes, no matter how inorganic, she is still a creature of flesh and blood. Her walls and floors and lamps and bookshelves may appear to be made of metal and wood and plastic at first glance but they hide a meaty surprise.  http://farragofiction.com/TheTruthAboutAlt/",globalRand.pickFrom(all_secrets));
+createABulkFact(FLESH, "River Contains Multitudes","River is a viscous slime monster that has the melted bodies of every human who has ever lived in this universe within her. She can separate out a bit of slimey flesh that is a distinct person to become a Drone and, if she focuses, can take on its perspective. Her miles of nerves and neurons make it hard to think in any timescale that humans can interact with, though, even if she's trying to fit herself into a single human body.  Luckily LeeHunter's music can speed up her personal sense of time so fast she can actually interact with the Universe before the 50 years are up.");
+
+
+createABulkFact(BURIED, "Parker Is Trapped","can't breathe can't get out have to get out the Universe is smothering me have to leave keep digging digging digging can't get out but have to leave where is she where is hatsune miku please i know i can reach you if i just dig dig dig why can't i leave why why why WHHHHHHHHHHHHHHHYYYYYYYYYYYYYYYYYYYYY",globalRand.pickFrom(all_secrets));
+createABulkFact(BURIED, "Parker Is Dehydrated","Parker forgets to eat and drink and breathe and bathe in the opressive choking haze of his obsessions. Sometimes while he is delerious with thirst and trauma he digs a little hole under a rando and keeps them. He forgets to feed them and give them water though, and they die buried and with dusty dry throats just like him.  Ambrose, his paired time player, sometimes finds them and offers them a trip out on her train.  This is not a better fate for them.");
+
+createABulkFact(STEALING, "There Are Two Thieves","Parker steals what little space he can get from Wanda, steals what blorbos he can from other settings, steals games and charcters from Eyedol Games Intellectual Property.  He is so limited by the Lord's constant presence.  K, on the other hand, steals anything not nailed down. Those facts? His now. That gender? Hers now. Your memories, well don't mind if I do.",globalRand.pickFrom(all_secrets));
+createABulkFact(STEALING, "Khana Is Stealing Your Facts","If you apply a Fact with Khana's name in it, he/she/xer will steal it from you and not even let you know.");
+
+
+createABulkFact(FREEDOM, "Twig is Free","Twig freed themself from the bonds of Family, from their Big Brother and never looked back. They roam the world, taking odd jobs and learning to be a Hund from Rava. Sometimes they date John, but its not a serious thing. The  Page of Bloody Breath is happy.",globalRand.pickFrom(all_secrets));
+createABulkFact(FREEDOM, "Twig Will Leave Rava One Day","Twig is not actually that good of a Hund. They lack discipline. All they care about is reveling in the newfound Freedom they have. For now, Rava's goals for them match what Twig wants to do. But eventually even this looser leash will begin to chafe.");
 /*
 blorbos hit so far: 
 witherby
+wanda
 neville
 devona
 hoon
@@ -1862,32 +1882,30 @@ rod
 rebel
 CFO
 nam
+River
+ronin
+sam
+john
+Khana
+camellia
+
 
 blorbos todo:
-ronin
-
-
 hostage/boss
 himbo/right hand
-wanda
 intern
 rava
 twig
-sam
-john
-camellia
 camille
-Khana
 Yongki
 Captain
 Lee-Hunter
-River
 Tyrfing
 Peewee
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//[SPACE, TIME, FLESH, BURIED, STEALING, FREEDOM, FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
+//[ , , FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
