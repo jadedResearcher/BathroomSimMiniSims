@@ -1867,6 +1867,12 @@ createABulkFact(STEALING, "Khana Is Stealing Your Facts","If you apply a Fact wi
 
 createABulkFact(FREEDOM, "Twig is Free","Twig freed themself from the bonds of Family, from their Big Brother and never looked back. They roam the world, taking odd jobs and learning to be a Hund from Rava. Sometimes they date John, but its not a serious thing. The  Page of Bloody Breath is happy.",globalRand.pickFrom(all_secrets));
 createABulkFact(FREEDOM, "Twig Will Leave Rava One Day","Twig is not actually that good of a Hund. They lack discipline. All they care about is reveling in the newfound Freedom they have. For now, Rava's goals for them match what Twig wants to do. But eventually even this looser leash will begin to chafe.");
+
+createABulkFact(FIRE, "People Burn Themselves on Ria's Altar","Ria, especially when she is fallingi to a spiral of addiction and obsession, burns with a fever intensity. People sacrifice their health, their sanity, their lives to try to help her. Save her. But she is an endlessly hungering flame that takes and takes and never gives back. She does not meant to be. She never asked for people to try to save her. But the Song inside her compels them to feed themselves to her. LeeHunter gave her song a healtheir outlet, as their Conductor.");
+
+
+createABulkFact(LONELY, "The Closer Wears the Quinque Cloak","The Closer can not connect to anyone. Not really. Her wife, noted Wasted Gamer Gurl, Flower Chick, is the lone exception. The Cloak prevents anyone from getting close.  She prefers it that way, she'd be quick to tell you. Unprofessional, really, to be liked. .... It's just. It's only. She thought... She thought Witherby was a friend. The way he talked to her. So warmly. So to see the ice in his eyes... was a slap in the face. She has spent dozens of loops making sure Wanda fucks with the Mall where Witherby lives as much as possible, eventually folding it nearly entirely into the Maze. The ....collateral damage that occured as a result she attempted to atone for via Doc Slaughters services (for everyone but Witherby).",globalRand.pickFrom(all_secrets));
+createABulkFact(LONELY, "witherby Has A High Attachment Score","Back in the Corporation, Witherby's job was to befriend the monsters without actually feeling pity for them. To get them to open up, to bond with him, but still be okay putting a bullet in their head if the situaution called for it.  He was, very, very good at his job.");
 /*
 blorbos hit so far: 
 witherby
@@ -1888,14 +1894,13 @@ sam
 john
 Khana
 camellia
-
+twig
 
 blorbos todo:
 hostage/boss
 himbo/right hand
 intern
 rava
-twig
 camille
 Yongki
 Captain
@@ -1905,7 +1910,7 @@ Peewee
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//[ , , FIRE, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
+//[, LONELY, OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
