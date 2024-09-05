@@ -418,7 +418,7 @@ const CLOSERISGREATATROOMS = new Fact("The Closer Provides You With Best Value R
 const CLOSEREATSBABIES = new Fact("The Closer Eats Babies", "Baby Lamia grow on trees as 'fruit babs'. While they are moderately ambulatory at this stage ('wiggling') they are not generally considered sapient until they cocoon and their fruit innards become actual organs, veins and nervous systems", [KILLING, BUGS], 2, 1, 1);
 const CLOSERADDICTEDTOFRUIT = new Fact("The Closer Is Addicted To Fruit", "In the Closer's Home Universe, her race was known for being obsessively addicted to eating fruit. It is a sign of great will power to resist for even a moment.", [ADDICTION, PLANTS], 1, 1, 2);
 
-
+const TWINSHELPRIA= new Fact("The Twins Help Ria Connect The Dots","Devona gathers the data in the first place. Neville removes everything irrelevant. And Ria figures out how it all relates. Camille and Witherby are then deployed to either Kill (Camille) or Calm (Witherby) the identified threat, depending on what is needed. The training team is a well oiled Immune System for the Echidna.", [OBFUSCATION, DARKNESS, LIGHT, SPYING, ADDICTION, MATH, HUNTING, DEATH, LONELY, FAMILY],1,1,1);
 const PARKERSBESTIEISVIC = new Fact("Parker's Bestie is [REDACTED]", "When Parker is with [REDACTED] its like they can't hear the call of Gun-Tan anymore. They will weaken slowly, because Gun-Tan is how they live now. But it is nice, for just a little while, to be a danger to no one.", [OBFUSCATION, CENSORSHIP, BURIED, SPACE], 0, 0, 0);
 const PARKERSlOVESGUNTAN = new Fact("Parkers Loves Gun-Tan", "Parker loves Gun-Tan so much he never lets her go. Even if he thinks he has she is right back in his hands when its time to pull the trigger again. She loves him THAT much.", [KILLING, BURIED, SPACE], 10, 1, 10);
 const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and Khana", "When Parker burrowed out of his home universe he made sure to steal away all his favorite blorbos he loved watching through his cameras. Witherby and K are especially fun to watch, because of how often they interact with the others. Parker loves watching.", [SPYING, BURIED, LIGHT, LONELY], 1, 1, 1);
@@ -1961,6 +1961,6 @@ createABulkFact(BAKERY, "","");
 */
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, riaFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, riaFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact,TWINSHELPRIA, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
 
 
