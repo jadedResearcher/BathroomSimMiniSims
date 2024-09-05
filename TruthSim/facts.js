@@ -1873,7 +1873,15 @@ createABulkFact(FIRE, "People Burn Themselves on Ria's Altar","Ria, especially w
 
 createABulkFact(LONELY, "The Closer Wears the Quinque Cloak","The Closer can not connect to anyone. Not really. Her wife, noted Wasted Gamer Gurl, Flower Chick, is the lone exception. The Cloak prevents anyone from getting close.  She prefers it that way, she'd be quick to tell you. Unprofessional, really, to be liked. .... It's just. It's only. She thought... She thought Witherby was a friend. The way he talked to her. So warmly. So to see the ice in his eyes... was a slap in the face. She has spent dozens of loops making sure Wanda fucks with the Mall where Witherby lives as much as possible, eventually folding it nearly entirely into the Maze. The ....collateral damage that occured as a result she attempted to atone for via Doc Slaughters services (for everyone but Witherby).",globalRand.pickFrom(all_secrets));
 createABulkFact(LONELY, "witherby Has A High Attachment Score","Back in the Corporation, Witherby's job was to befriend the monsters without actually feeling pity for them. To get them to open up, to bond with him, but still be okay putting a bullet in their head if the situaution called for it.  He was, very, very good at his job.");
+
+createABulkFact(OCEAN, "Wanda Saw The Ocean Once","Wodin grew up in Ohio. Real Ohio, not TurbOhio. There wasn't really a lot of opportunities to see the ocean. Seas of corn, sure. Corn mazes galore. But not really water... When Wanda came back to 1972, in Italy, she was ...unsettled by the Mediterranean Sea. When she finally returned to Ohio in the 80s, she saw the Ocean briefly. Would not recommend. Didn't bother looking out the window any of the other loops. ");
+createABulkFact(OCEAN, "Peewee Was A Sea Dweller Once","Peewee loops and loops and loops. Time, at first, in his doomed session. The past erased, only he remembering. Then space, inside the hated Echidna.  He is so tired of not being himself. Why is he a snake?  http://farragofiction.com/Arm2/ ", new Secrets(null,"https://farragnarok.com/PodCasts/1313858.mp3","http://farragnarok.com/PodCasts/858.png","<a target='_blank' href='http://www.farragofiction.com/AudioLogs/?passPhrase=peewee'>this is meaningless</a>"));
+
+
+
 /*
+
+
 blorbos hit so far: 
 witherby
 wanda
@@ -1910,6 +1918,7 @@ Peewee
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
+//prioritize these, slots generate first: choices, defense, royalty,, service, addiction, fire,, clowns,, freedom, love, dolls,death, guiding
 //[OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
