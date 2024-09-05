@@ -194,7 +194,7 @@ const updateHiveOverTime = (hive, timeInMillis) => {
 
   //a hive can't make more honey than 10% of its population no matter how long you wait
   //there is no room
-  let baseAmount = Math.min(hive.amountOfBees/10,(hive.amountOfBees * minutes * speed) / defense);
+  let baseAmount = Math.min(hive.amountOfBees/2,((hive.amountOfBees * minutes * speed) / defense)+1);
  
 
   addLootHoneyOfQualityAndQuantity(hive, baseAmount, 1);

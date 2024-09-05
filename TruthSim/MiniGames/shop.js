@@ -74,14 +74,14 @@ class SlotsMiniGame extends MiniGame {
                 globalDataObject.numberKeys += keyWinnings;
                 winnings = `<br><br><b>${keyWinnings} Keys!</b><br><br> ... It just doesn't make sense. Why would the Maze encourage you skipping content? Is it a conspiracy? Who benefits from this? Because someone has to. You have to follow the money but of course not the LITERAL money this isn't that fake maze money that Not!Spiral Abnormality likes tricking people into taking no this is REAL value here the ability to skip the infinite to try to focus on just what you want wait isn't that like what Neville is, is there something at work with a similar principal and furthermore...  `;
             } else {
-                const facts = getAllFactsWithThemeAndTier(pickFrom([loot.theme1Key, loot.theme2Key].filter(Boolean)), loot.quality); //get rid of undefined, pick one of the themes randomly
+                const themeKey = pickFrom([loot.theme1Key, loot.theme2Key].filter(Boolean));
+                const facts = getAllFactsWithThemeAndTier(themeKey, loot.quality); //get rid of undefined, pick one of the themes randomly
                 let chosenFacts = [];
-                const numberWinnings = Math.min(13, Math.round(Math.max(1, (bet) / 1313)));
-
-                if (facts.length > 0) {
-                    for (let i = 0; i < numberWinnings; i++) {
-                        chosenFacts.push(pickFrom(facts));
-                    }
+                if (bet > 3) {
+                    truthLog("You Have My Guarantee",`Because you bet it all, and that was more than 3 paltry Honey, I will guarantee to you that this is every Fact of theme ${themeKey}.`)
+                    chosenFacts = facts;
+                }else{
+                    chosenFacts = [pickFrom(facts)]
                 }
 
                 chosenFacts = uniq(chosenFacts).filter(Boolean);
@@ -127,9 +127,7 @@ class SlotsMiniGame extends MiniGame {
             button.disabled = true;
         })
         //JR NOTE TODO: deduct bet from loot
-        console.log("JR NOTE: loot quantity before bet", loot.quantity)
         loot.quantity += -1 * bet;
-        console.log("JR NOTE: loot quantity after bet", loot.quantity)
 
         //start slots noise/music
         //i_think_its_finished_priska_turbo_time
@@ -161,7 +159,6 @@ class SlotsMiniGame extends MiniGame {
         //JR NOTE TODO: on animation end, play ting!
         //JR NOTE TODO: when all animation end, stop music,
         const animationEnded = async (ele, choice) => {
-            console.log("JR NOTE: animation ended", choice)
             const fx = new Audio("audio/fx/chip.mp3")
             fx.loop = false;
             fx.play();

@@ -1834,7 +1834,7 @@ createABulkFact(ART, "Rod Draws And Paints","Rod is far too embarrased to show a
 createABulkFact(ART, "River Collects Art","River is fascinated with objects of history. Time is so immeasurably vast, spreading out in all directions and yet somehow she, and all those in the Loop are contained in such a tiny slice of it. Just 50 years! How can anyone even breathe with so little room?");
 
 
-createABulkFact(SPACE, `The Lord Of Known Space Controls The Setting","Wanda is the Lord of Known Space. 
+createABulkFact(SPACE, "The Lord Of Known Space Controls The Setting",`Wanda is the Lord of Known Space. 
 
 When she was Wodin, he was obsessed with this creepy pasta he found online about a game that didn't exist, called Zampanio. When a glitched version of SBURB tried to make a Dead Session just for you, you unraveled.
 
