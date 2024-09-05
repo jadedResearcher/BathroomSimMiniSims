@@ -674,6 +674,8 @@ class ParkerMiniGame extends MiniGame {
                 wail.play();
 
                 setTimeout(async () => {
+                    document.querySelector(".blorbo").src="images/Parker_pixel_by_the_guide.png";//he unbreaches in horror
+                    //Parker_pixel_by_the_guide.png
                     await truthPopup("No....", `You killed Hatsune Miku, how could you :(<br><br>(Sound provided by: <a href="https://freesound.org/people/acclivity/sounds/27451/">Why.wav</a> by <a href="https://freesound.org/people/acclivity/">acclivity</a> | License: <a href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution NonCommercial 4.0</a>)`, "In Truth, I do not know why Parker is so obsessed with Hatsune Miku. In Dehydration Sim, if you Hydrate and return, he discussses how her plastic smile could forgive anything. Fair. But over the 50 year loop Zampanio has captured of the Echidna, she only appears 35 years in. Surely, going by sheer statistics, he should have gotten attached to something sooner?")
                     renderMazeTab();
                 }, 2000)
