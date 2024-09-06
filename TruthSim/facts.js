@@ -487,7 +487,7 @@ const static_secret = new Secrets(null, null, null, `<a target='_blank' href='ht
 
 const attic_secret = new Secrets(null, null, null, `<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/bathroom.html'>The Attic</a>`)
 
-const interloper_secret = new Secrets(null, null, null, `<a target='_blank' href='https://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/bathroom'>The Interloper (try 1313 and 4665)</a>`)
+const interloper_secret = new Secrets(null, null, null, `<a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/EAST/NORTH/bathroom'>The Interloper (try 1313 and 4665)</a>`)
 
 const camellia_secret = new Secrets(null, null, null, `
 The chanting reached a crescendo. 
@@ -1875,7 +1875,7 @@ createABulkFact(LONELY, "The Closer Wears the Quinque Cloak","The Closer can not
 createABulkFact(LONELY, "witherby Has A High Attachment Score","Back in the Corporation, Witherby's job was to befriend the monsters without actually feeling pity for them. To get them to open up, to bond with him, but still be okay putting a bullet in their head if the situaution called for it.  He was, very, very good at his job.");
 
 createABulkFact(OCEAN, "Wanda Saw The Ocean Once","Wodin grew up in Ohio. Real Ohio, not TurbOhio. There wasn't really a lot of opportunities to see the ocean. Seas of corn, sure. Corn mazes galore. But not really water... When Wanda came back to 1972, in Italy, she was ...unsettled by the Mediterranean Sea. When she finally returned to Ohio in the 80s, she saw the Ocean briefly. Would not recommend. Didn't bother looking out the window any of the other loops. ");
-createABulkFact(OCEAN, "Peewee Was A Sea Dweller Once","Peewee loops and loops and loops. Time, at first, in his doomed session. The past erased, only he remembering. Then space, inside the hated Echidna.  He is so tired of not being himself. Why is he a snake?  http://farragofiction.com/Arm2/ ", new Secrets(null,"https://farragnarok.com/PodCasts/1313858.mp3","http://farragnarok.com/PodCasts/858.png","<a target='_blank' href='http://www.farragofiction.com/AudioLogs/?passPhrase=peewee'>this is meaningless</a>"));
+createABulkFact(OCEAN, "Peewee Was A Sea Dweller Once","Peewee loops and loops and loops. Time, at first, in his doomed session. The past erased, only he remembering. Then space, inside the hated Echidna.  He is so tired of not being himself. Why is he a snake?  http://farragofiction.com/Arm2/ ", new Secrets(null,"http://farragnarok.com/PodCasts/1313858.mp3","http://farragnarok.com/PodCasts/858.png","<a target='_blank' href='http://www.farragofiction.com/AudioLogs/?passPhrase=peewee'>this is meaningless</a>"));
 
 
 
