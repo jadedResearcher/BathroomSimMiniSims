@@ -213,16 +213,49 @@ class SlotsMiniGame extends MiniGame {
 
     respondsToFact = (fact) => {
         //Ria Burns Everything In Despair
-        return fact.title.toUpperCase().includes("RIA BURNS") || fact.title.toUpperCase().includes("DESPAIR")
+        return fact.title.toUpperCase().includes("RIA BURNS") || fact.title.toUpperCase().includes("DESPAIR") || fact.title.includes("The Twins Help Ria Connect The Dots")
     }
 
-    startGame =  (ele, room, callback) => {
+    startGame =  (ele, room, callback, themeFilter) => {
+        console.log("JR NOTE: slots start game",{ele, room, callback, themeFilter});
+        ele.innerHTML = "";
+        let hives = Object.values(globalDataObject.hiveMap);
+        if(themeFilter){
+            console.log("JR NOTE: there is a theme filter of ", themeFilter)
+            hives = hives.filter((h)=>([h.theme1Key, h.theme2Key].includes(themeFilter)))
+        }
+
+        
+        if(this.fact && this.fact.title.includes("The Twins Help Ria Connect The Dots")){
+            const filter = createElementWithClassAndParent("div", ele);
+            filter.innerText= "Show Only Hives with Theme:"
+            const themeSelector = createElementWithClassAndParent("select", ele,);
+            themeSelector.style.display="block"
+            themeSelector.style.marginBottom="13px"
+            const option = createElementWithClassAndParent("option", themeSelector)
+            option.innerText = "All";
+            for(let [key,value] of Object.entries(all_themes) ){
+                const option = createElementWithClassAndParent("option", themeSelector)
+                option.innerText = key;
+                option.value = key;
+                if(themeFilter){
+                    option.selected = key === themeFilter;
+                }
+            }
+            themeSelector.onchange = ()=>{
+                console.log("JR NOTE: on change")
+                this.startGame(ele, room, callback, themeSelector.value);
+                return;
+            }
+        }
+
         this.valuableCustomer(ele, callback);
 
 
-        let hives = Object.values(globalDataObject.hiveMap);
         const container = createElementWithClassAndParent("div", ele, "hives-container");
-        if (this.fact && this.respondsToFact(this.fact)) {
+
+
+        if (this.fact && (this.fact.title.toUpperCase().includes("RIA BURNS") || this.fact.title.toUpperCase().includes("DESPAIR")) ) {
             const burnItAll = createElementWithClassAndParent("button", container);
             burnItAll.innerHTML = `It's too much. I'll never understand it all. Let's just burn it all at once and be done with it.`;
             burnItAll.onclick = async () => {
