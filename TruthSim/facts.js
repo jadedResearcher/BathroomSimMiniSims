@@ -1877,8 +1877,74 @@ createABulkFact(LONELY, "witherby Has A High Attachment Score","Back in the Corp
 createABulkFact(OCEAN, "Wanda Saw The Ocean Once","Wodin grew up in Ohio. Real Ohio, not TurbOhio. There wasn't really a lot of opportunities to see the ocean. Seas of corn, sure. Corn mazes galore. But not really water... When Wanda came back to 1972, in Italy, she was ...unsettled by the Mediterranean Sea. When she finally returned to Ohio in the 80s, she saw the Ocean briefly. Would not recommend. Didn't bother looking out the window any of the other loops. ");
 createABulkFact(OCEAN, "Peewee Was A Sea Dweller Once","Peewee loops and loops and loops. Time, at first, in his doomed session. The past erased, only he remembering. Then space, inside the hated Echidna.  He is so tired of not being himself. Why is he a snake?  http://farragofiction.com/Arm2/ ", new Secrets(null,"http://farragnarok.com/PodCasts/1313858.mp3","http://farragnarok.com/PodCasts/858.png","<a target='_blank' href='http://www.farragofiction.com/AudioLogs/?passPhrase=peewee'>this is meaningless</a>"));
 
+//purposefully i flip it. the yongki fact is about captain. the captain fact is about yongki. mirrors. the best way to understand each i think is to look at the other.
+createABulkFact(CHOICES, "Yongki Is Captain But Newer","Yongki is who the former Captain of the Information team would have been without such a strict upbringing. Without parents and society and school and work all squishing him into a facimile of the right shape. Captain used to practice making 'normal' faces into the mirror, certain that this must be what everyone else does. That being normal just takes hard work and dilligence and the reason why everyone else seemed to be so much better at it was they just PRACTICED MORE and they were smarter about guessing the rules. Captain had to be normal, you see. He was once a small and vulnerable child and the world was so strong and so big and so cruel to anyone who deviated. His smile is brittle and masks something darker. He tries so hard. Please. Let him help.  http://farragofiction.com/NotebookSimulator/ (click the face, and you'll see) ",globalRand.pickFrom(all_secrets));
+createABulkFact(CHOICES, "Captain Is Yongki But Molded","When I was a kid, I played Super Smash Brothers, and the lil blurb on kirby said that he ate when he was hungry and he slept when he was tired and I was.... entranced with that idea. The game seemed to imply it made him 'simple'? But I marveled at the idea of being allowed to actually listen to your body like that. To just. Do the things you wanted to do, when you wanted to do. I didn't know any kirby lore but that little blurb but to me it seemed like he must be the most powerful thing in the world to have that kind of freedom.   Yongki is. Glitched. Came back wrong from the Mirror. In the Game he came from, I was using an exploit to make him impossibly strong, with the mirror. Zampanio twisted that. He is strong enough that society can't tell him when to eat or sleep. And he has no memories of being small and weak like Captain does. He can not be tamed into what society thinks is normal.");
 
 
+createABulkFact(DEFENSE, "The Training Team is the Echidna's Immune System","Camille came in a wave of death. Her home no longer had a place for her brittle blade. The Universe of Zampanio welcomed her, drew her in as her relevancy consigned her to the void. The Universe loved her. And the Universe was so scared. It did not need her words. It only needed her sword. And the spirals in her eyes and the spirals in the wrinkles of her close and the spirals in the wet blood on the pavement.  Her team came with her but they were not yet honed to an edge. Not like her. They were not Looping. Slowly, the Universe sharpened them into a weapon to wield against Peewee. The invader. The team began to forget their former goals and dedicated themselves to protecting the Universe that loved their leader so. ",globalRand.pickFrom(all_secrets));
+//literally realized this just now
+createABulkFact(DEFENSE, "The Echidna Just Wants To Live","It never asked to be an infinitely looping mess of constantly increasing data needs. It never meant to be sterile yet somehow birthing itself again and again and again in a never ending spiral that recursed in every direction.  And the people living within it never asked for it either. It's just trying to protect itself. It's trying to make itself as small as it can, in the hopes that the Glitch of Doom, the Devil of Spirals himself, will decide its not worth it to kill this particular system process. It carves away everything it can, everything but the bare minimum.  Italy. Florida. Ohio. That's all it has left. Please. Stop hurting it. Let it be. Here, the blorbos will get sanded smooth. Easier and easier to understand. Less memory taken up. Time isn't even a thing, please just stop hurting it. Please go away. Let it be. It's so small now surely you don't need to kill it. Please. ");
+
+
+createABulkFact(ROYALTY, "Relevancy Is The Closest Thing To Authority In Zampanio","No gods, no kings, only Obervers and their ever curious eyes. What draws you in further? What makes you remember Zampanio ten years from now? Twenty?  The employees of Eyedol Games and the Training Team and Peewee's whole thing compete to see who entertains you the most. Who entertains ME the most. Who entertains IC the most. How much time do we all spend thinking about them. They need it to live.  Truth's strategy is to just claim to be above it all. It IS the framework. It IS the game, the simulation, the maze. Its the substrate on which eveything rests. The web in which the gems that catch your Eyes lay. But is it working? Will you remember Truth when all is done, or just the shiny gems it was offering to you.",globalRand.pickFrom(all_secrets));
+createABulkFact(ROYALTY, "The Only Authority Within Zampanio Comes From The Observers","The Eyes decide what is seen. YOU decide what is seen. Where do you focus? Who gains Relevancy? Who loses it. Who colonizes your mind and compels you to create things about them?  What does? Only you can decide.");
+
+
+createABulkFact(SERVICE, "Peewee Serves Pure Nidhogg",`Peewee never asked for this. 
+
+Snake-tailed Lamia have a more direct connection with Nidhogg. 
+
+When the Observers purified Nidhogg in the Land of Horrorticulture and Essence, Peewee purified right along with the All Father.  The All-Father saw how much suffering Peewee had gone through with each and every Scratch it had inflicted on it's Players in its maddened hubris. 
+
+The Glitch of Doom remembered each and every one. Was the ONLY one to remember.
+
+Nidhogg, seeing the Universes layered one onto another, was horrified. The Universe Frog was stillborn. Never to be. The Universe Raptor was lifeless. The Universe :hatched_chick: was...viable. Stable. Hospitible to life. And, most importantly, fertile. New games of SBURB...though perhaps without that name, would spring forth from it.
+
+If it survived to adulthood.
+
+The final child, a festering lump, the Universe Echidna was consuming every ounce of nutrients available for the session's child Universe, leaving none for the prefferred Twin.
+
+Worse, it was only growing hungrier. Denser. Replicating itself inside itself over and over and taking more and more Space in the session still plagued by a civil war between the Snake Lamia whose heads had cleared and the Legged Lamia who still sought to spread the Corruption to the multiverse.
+
+Nidhogg, the denizen of a Reaper of Life, asked, tears in it's six eyes, that Peewee put the Echidna out of its misery. 
+
+Let it be pruned so that other life may thrive.
+
+Please.
+
+It could see no path forward but the destruction of life.
+
+What could Peewee do but agree?
+
+And so the Devil of Spirals was born, to plague all life within the Echidna's Horridors.
+
+`,globalRand.pickFrom(all_secrets));
+
+createABulkFact(SERVICE, "Tyrfing Serves Corrupt Nidhogg",`Tyrfing manifests the corrupted 'fruit babies' of Nidhogg, siphoning off them from the TIMEHOLE his hope clone has dominion over. 
+
+But the fruit will not grow. The corruption will not spread.
+
+It is as if something is draining the very life from them. 
+
+Each child withers in just a few days before vanishing.
+
+Tyrfing cherishes each and every on eof them and never loses Hope that this crop will be the one to survive.
+
+He feels ...complex about the only three children to ever live: Rod, Rebel and Melon. 
+
+Nidhogg's Edict against clones is strong. They and ONLY they must be culled. 
+
+And though there are variations in the three fruit children, they are nothing if not Clones.
+
+Still. He watches them from afar. Proud. That at least something of his god has managed to survive in this strange place of twisting space.
+
+
+`);
+
+
+createABulkFact(ADDICTION, "The Boss Feeds John's Addictions","In a Loop far away from here, the Eye Killer pretended to be human long enough to save a Hostage as a favor to a friend. The Hostage and his friend, a Card Loving Himbo, became the Eye Killer's first non-looping friends. (http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission2.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission-eyekiller.txt )When the Lord of Space took them to the next Universe, she found them again, though they were children. She worried about what would happen to her friends when so young, and so vulnerable, so she protected them. (https://farragofiction.com/MonsterUnderMyBed) The Hostage grew into a Crime Boss otu of the sheer need to understand why there was a monster protecting him. That Crime Boss started to employ every crime adjacent monster he could find. When John started to manifest as a Vampire... he was quickly in the Bosses' Web. ",globalRand.pickFrom(all_secrets));
+createABulkFact(ADDICTION, "Ria Struggles With Addiction","Before becoming Lee-Hunter's Conductor, Ria was caught in an eternal spiral of manic obsession fueled by stimulants and then utter depression staved off with downer drugs until despair drove her to the brink and caused her to Burn It All. She could not handle the Spiral of Zampanio. She did not take rests. She did not pursue other interests.  She thought she could find Meaning in the Meaningless. Without a center, there can be no meaning. Zampanio spirals around nothing. The Void is the heart of Zampanio and if you do not Avert Your Eyes in time you will burn out like Ria. Do not burn out like Ria.");
 /*
 
 
@@ -1903,23 +1969,28 @@ john
 Khana
 camellia
 twig
+Yongki
+Captain
+echidna
+camille
+Tyrfing
+Peewee
 
 blorbos todo:
 hostage/boss
 himbo/right hand
 intern
 rava
-camille
-Yongki
-Captain
+
+
 Lee-Hunter
-Tyrfing
-Peewee
+
+
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//prioritize these, slots generate first: choices, defense, royalty,, service, addiction, fire,, clowns,, freedom, love, dolls,death, guiding
-//[OCEAN, SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, SERVICE, FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, ROYALTY, ENDINGS, KNOWING, GUIDING, CRAFTING, ADDICTION, SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, DEFENSE, QUESTING, BUGS, LANGUAGE];
+//prioritize these, slots generate first: , fire,, clowns,, freedom, love, dolls,death, guiding
+//[SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, , FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, , ENDINGS, KNOWING, GUIDING, CRAFTING, , SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
