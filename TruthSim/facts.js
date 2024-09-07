@@ -1919,6 +1919,8 @@ What could Peewee do but agree?
 
 And so the Devil of Spirals was born, to plague all life within the Echidna's Horridors.
 
+https://zampaniosim.miraheze.org/wiki/Main_Page
+
 `,globalRand.pickFrom(all_secrets));
 
 createABulkFact(SERVICE, "Tyrfing Serves Corrupt Nidhogg",`Tyrfing manifests the corrupted 'fruit babies' of Nidhogg, siphoning off them from the TIMEHOLE his hope clone has dominion over. 
@@ -1939,12 +1941,17 @@ And though there are variations in the three fruit children, they are nothing if
 
 Still. He watches them from afar. Proud. That at least something of his god has managed to survive in this strange place of twisting space.
 
+https://zampaniosim.fandom.com/wiki/Zampanio
 
 `);
 
 
 createABulkFact(ADDICTION, "The Boss Feeds John's Addictions","In a Loop far away from here, the Eye Killer pretended to be human long enough to save a Hostage as a favor to a friend. The Hostage and his friend, a Card Loving Himbo, became the Eye Killer's first non-looping friends. (http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission2.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission-eyekiller.txt )When the Lord of Space took them to the next Universe, she found them again, though they were children. She worried about what would happen to her friends when so young, and so vulnerable, so she protected them. (https://farragofiction.com/MonsterUnderMyBed) The Hostage grew into a Crime Boss otu of the sheer need to understand why there was a monster protecting him. That Crime Boss started to employ every crime adjacent monster he could find. When John started to manifest as a Vampire... he was quickly in the Bosses' Web. ",globalRand.pickFrom(all_secrets));
 createABulkFact(ADDICTION, "Ria Struggles With Addiction","Before becoming Lee-Hunter's Conductor, Ria was caught in an eternal spiral of manic obsession fueled by stimulants and then utter depression staved off with downer drugs until despair drove her to the brink and caused her to Burn It All. She could not handle the Spiral of Zampanio. She did not take rests. She did not pursue other interests.  She thought she could find Meaning in the Meaningless. Without a center, there can be no meaning. Zampanio spirals around nothing. The Void is the heart of Zampanio and if you do not Avert Your Eyes in time you will burn out like Ria. Do not burn out like Ria.");
+
+createABulkFact(MUSIC, "Lee Plays Piano","LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Lee has patience where Hunter has little. <a taret='_blank' href='http://farragofiction.com/ParkerLotLost/'>http://farragofiction.com/ParkerLotLost/</a> ",globalRand.pickFrom(all_secrets));
+createABulkFact(MUSIC, "Hunter Plays Trumpet","LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Hunter isn't a pushover where Lee goes with the flow. <a target='_blank' href='http://farragofiction.com/ExperimentalMusic/'>http://farragofiction.com/ExperimentalMusic/</a>  http://farragofiction.com/ExperimentalMusic/images/");
+
 /*
 
 
@@ -1989,7 +1996,7 @@ Lee-Hunter
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//prioritize these, slots generate first: , fire,, clowns,, freedom, love, dolls,death, guiding
+//prioritize these, slots generate first:,, clowns,, freedom, love, dolls,death, guiding
 //[SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, , FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, , ENDINGS, KNOWING, GUIDING, CRAFTING, , SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will

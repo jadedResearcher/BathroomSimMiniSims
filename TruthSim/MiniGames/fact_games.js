@@ -135,8 +135,17 @@ class TwinsMiniGame extends MiniGame {
         if (this.fact) {
             this.singleFactInfoDump(this.fact, container, room, callback);
         } else {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const date = new Date();
+            let facts = globalDataObject.factsUnlocked;
+            //thanks devona
+            if (urlParams.get("fragments") === "universe") {
+              truthLog("Be Cautious.","It seems you believe that Mortal Minds are capable of storing all the Fragments of the Universe Within. Devona would warn you, if she could.")
+              facts = all_facts;
+            }
 
-            for (let fact of globalDataObject.factsUnlocked) {
+            for (let fact of facts) {
                 this.singleFactInfoDump(fact, container, room, callback);
             }
         }
