@@ -2034,7 +2034,47 @@ She doesn't know why Ria seems so sad at the good news.
 `));
 createABulkFact(DEATH, "Camille is The End","THE End. The only. Our only End aligned Looping character. She serves as Executioner for the Echidna. Anything it wants dead, it marks as Doomed and she serves as the blade that cuts that thread. The Crumbling Armor that encases her Soul will not brook any cowardice nor pity. If her sword is stayed, if her heart is moved, her head is lost. The Funeral her Coffin triggers fills her armor with... Something. Something devoid of weakness or pity. The End is Never the End and Camille will continue to kill for as long as the Universe exists. Even if she no longer exists with it.");
 
-createABulkFact(APOCALYPSE, "The Lord of Known Space Leaves Each Universe No Later Than April 1st, 2022","",globalRand.pickFrom(all_secrets));
+
+//in what became the First Loop, Wodin dies at the hands of the Eye Killer, rather than live long enough to lose Todd
+//but of course
+//the end is never the end
+createABulkFact(APOCALYPSE, "The Lord of Known Space Leaves Each Universe No Later Than April 1st, 2022",`In a Time when Time was still a real thing, a middle manager at a moderately successful video game company died on April 1st, 2022. He had lived a relatively decent life, and his only real regret was his childhood best friend he'd lost contact with in college. 
+
+It happens. 
+
+Mental health is hard enough to navigate during normal times and college is just. A Thing. 
+
+Years later, the childhood friend thinks to check up on him. 
+
+She is crushed. He died. She had forgotten about him and he died. 
+
+Something in her cracks and the Setting shifts. She wanders a maze of Information, trying to piece together what had happened. 
+
+Why had her friend died? What had his life been like since college? 
+
+She imagines that if they had just stayed together she would have figured herself out sooner. 
+
+He always was good at keeping her on track. Why did she ever leave his orbit?  
+
+Slowly but surely, she carves bits of herself off as Sacrifice. 
+
+Please, she begs the Universe. Please, send me back. Let me find him. Let me cherish him this time. 
+
+The Echidna did not know what to do. 
+
+It is the Muse of Trapped Light. It can not control Time. 
+
+It takes the story that it has and it reflects it again and again and again against itself. 
+
+It cannot bring its Lord back to the past. It can not tell a new story. 
+
+All it can do is give everyone the tools they need to tell the story again and again and again in new ways.
+
+The Lord pieces herself back together. This will have to do.
+
+She can never bring herself to face the End of this story again, though.
+`,globalRand.pickFrom(all_secrets));
+
 createABulkFact(APOCALYPSE, "A Trickster Form of the CFO Rules The Apocalypse","");
 
 /*
