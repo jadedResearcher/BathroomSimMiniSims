@@ -1952,6 +1952,91 @@ createABulkFact(ADDICTION, "Ria Struggles With Addiction","Before becoming Lee-H
 createABulkFact(MUSIC, "Lee Plays Piano","LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Lee has patience where Hunter has little. <a taret='_blank' href='http://farragofiction.com/ParkerLotLost/'>http://farragofiction.com/ParkerLotLost/</a> ",globalRand.pickFrom(all_secrets));
 createABulkFact(MUSIC, "Hunter Plays Trumpet","LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Hunter isn't a pushover where Lee goes with the flow. <a target='_blank' href='http://farragofiction.com/ExperimentalMusic/'>http://farragofiction.com/ExperimentalMusic/</a>  http://farragofiction.com/ExperimentalMusic/images/");
 
+
+
+createABulkFact(DOLLS, "Yongki Can Be So Still You Think He Is A Mannequin","Yongki's peak physical performance means his muscles can be kept taunt in the same position for an extended period of time. Sometimes he likes pretending to be one of the Mannequins that roams the Mall he and his friends live in. It is always startling when he finally moves.",globalRand.pickFrom(all_secrets));
+createABulkFact(DOLLS, "The Mall Is Haunted By Mannequins","If you are not in the loop, Zampanio instinctively tries to add you to it. Regular people who venture too far into the endless abandoned hallways of the Westerville Ohio Mall start feeling their limbs become numb and unresponsive. Slowly, surely, they become plastic or wood or ceramic. They can always move, but eventually can only do so when there are no Eyes on them. It helps the Echidna save on memory cost (please, Peewee stop hurting it). Witherby tries to prevent people from being added to the menagerie, both for ethical reasons and because he just doesn't want a lot of neighbors. ");
+
+
+
+createABulkFact(LOVE, "Himbo Has A Crush On The Eye Killer and Camille","The Card Himbo has a thing for women who could utterly destroy him.  He does his best to be loyal to his best friend, the Crime Boss. Also known as the Hostage. He doesn't mind being his best friend's puppet, and the puppets he can create from his Zampanio Cards don't mind being his.<a target='_blank' href='http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt'>http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt</a>",globalRand.pickFrom(all_secrets));
+createABulkFact(LOVE, "Captain and Doc Slaughter are Dating ","Doc Slaughter isn't as serious about things as he is, though. Captain respects her strength and the clever ways she's been able to help his literal inner child, Yongki. Doc Slaughter appreciates that he enjoys conformity. She wishes he were a bit more self aware, though. But, alas, he is a Stranger even to himself. ");
+
+createABulkFact(SOUL, "Yongki is Mind Aligned","Yongki is what remains when every single influence society and setting has had on Captain is peeled away. He IS identity and so cannot have it. His path towards growth and change is in what Society can offer him, in Mind. He slowly figures out what facets of himself he should emphasize or downplay in order to interact with others, even as his strong identity leaves him Strange to all. ",globalRand.pickFrom(all_secrets));
+createABulkFact(SOUL, "Captain is Heart Aligned","Captain has repressed his own Identity until all that remains is a hard shell Society formed him into.  All that remains is the specific influence this particular setting has had on him. He IS nothing but Mind, and so all he can engage with and grow with is Identity, with Heart.  He slowly figures out who he is and what works for him, even as he remains a Stranger to all.");
+
+createABulkFact(DEATH, "Camille is Dead","The more she kills, the less Dead she is. If the Universe does not feed her Doomed souls, it starts at her extremities. They become cold. Grey. The only thing that is fully spared is her head. ",new Secrets(null,null,null,`
+She looms in the waiting room, a thin green ribbon around her neck. 
+
+It doesn't actually keep her head on, of course. She would not delude herself to think that a single ribbon could hold in any amount of weight, let alone one a skull. The reason is much simpler: she read a story like that once and thought it was a funny bit to do. 
+
+Can you IMAGINE the look on someone's face if they made the connection to that old story after her head fell off?
+
+A classic.
+
+Her eyes do a quick scan of the room she’s in, all too accustomed to looking for threats. She is unlikely to find any in a place plagued by illness, however; the few people next to her cough the signs of early spring flu, awaiting their turn with this Doctor. She wonders how they train the medical students of this universe. 
+
+The receptionist calls her up to ask a few questions and Camille just stares at her. Eventually, the woman licks her lips, and asks for ID, which Camille happily provides. 
+
+There is always safety in documents and bureaucracy. It's part of the battle, after all.  She is glad Witherby got them all official identities, way back when. 
+
+The card looks weathered with age, flaking and cracking in parts. It proudly declares it was issued two months ago. The receptionist seems hesitant to touch it, but does her duty. 
+
+Camille makes a note to get it updated in the next loop. It wouldn't do for it to literally fall apart on her. Unless.... well it WOULD be pretty funny if she could manage to get it to happen in a police officer's hand.
+
+Really drive home how ill prepared they are to deal with ACTUAL threats. How even their documents and procedures are dust in the wind compared to what it takes to keep up with the beasts. 
+
+The receptionist returns with her card and a little clipboard with a form attached. 
+
+Camille fills it out in front of her, as the woman shifts in place. 
+
+She hesitates at the section asking what she'd like to see the doctor about today. 
+
+Really, she is here for Ria. Her heart swells with love just thinking of her name. Ria has been worried about her cold hands and feet. Worried it could be a sign of something sinister. Nothing SUPERNATURAL, of course, just regular ordinary human health concerns. It could be a sign of bad circulation!
+
+Things have been going so well with Ria lately. They are dating again and it actually lasted more than a couple of years. Ria has stabilized.  Camille will not be the one to ruin this. 
+
+She quiets the fluttering in her chest. It is not cowardice to get medical care between battles. This is simple practicality. It would hardly do to die of something as preventable as a blood clot outside of battle, now would it. 
+
+Dutifully, she writes in "poor circulation" in the section. 
+
+She hands the form back to the receptionist and resumes looming in a corner of the room. The seats look uncomfortably small and why not stand if there's room?
+
+
+When she's called to the back, she allows her height and weight to be checked. The nurse seems to be a nervous sort. Perhaps that's why she chose a non combat role? 
+
+She has to get a special extender out to fully measure Camille's height. Inwardly, Camille winces. She knows how abnormal her height is, and always hates being reminded of it.  Not that it’s capital A Abnormal, of course. She'd been tall for her age as long as she could remember. 
+
+She's led to the examination room and  left to ruminate on her height and how it makes it hard for her to fit in.
+
+Eventually, the doctor arrives. He's a thin man. Thin body, thin skin, thin gray hair thinning in places. He looks... soft. Delicate.  She supposes the medical profession rarely sees combat. 
+
+He barely glances at her, immediately checking his computer for the notes on her chart. 
+
+"I see you're here for...poor circulation?"
+
+She doesn't even attempt to nod, but he doesn't appear to notice. He's flipping through the chart. 
+
+
+He doesn't notice the raw muscles on her frame. 
+
+He doesn't notice the gray and shrunken appearance of her hands. The only part of her body visible besides her head.
+
+He doesn't notice the contrast between those dead and cold hands and the warm glow of her head. 
+
+"Yes, just as I thought", he says, declaring victory without even looking at her, "You could stand to lose a few pounds, young lady!  Your BMI is atrocious! Just do a bit of exercise, even fifteen minutes a day, and skip those desserts and your circulation should clear right up!". 
+
+
+Later, when she's alone with Ria, she explains through wide and energetic signs that really she just needs to train EVEN HARDER and eat less food, and everything will be back to normal. It was a good thing she had it checked out!
+
+She doesn't know why Ria seems so sad at the good news. 
+
+`));
+createABulkFact(DEATH, "Camille is The End","THE End. The only. Our only End aligned Looping character. She serves as Executioner for the Echidna. Anything it wants dead, it marks as Doomed and she serves as the blade that cuts that thread. The Crumbling Armor that encases her Soul will not brook any cowardice nor pity. If her sword is stayed, if her heart is moved, her head is lost. The Funeral her Coffin triggers fills her armor with... Something. Something devoid of weakness or pity. The End is Never the End and Camille will continue to kill for as long as the Universe exists. Even if she no longer exists with it.");
+
+createABulkFact(APOCALYPSE, "The Lord of Known Space Leaves Each Universe No Later Than April 1st, 2022","",globalRand.pickFrom(all_secrets));
+createABulkFact(APOCALYPSE, "A Trickster Form of the CFO Rules The Apocalypse","");
+
 /*
 
 
@@ -1982,22 +2067,19 @@ echidna
 camille
 Tyrfing
 Peewee
+hostage/boss
+Lee-Hunter
 
 blorbos todo:
-hostage/boss
+
 himbo/right hand
 intern
 rava
-
-
-Lee-Hunter
-
-
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//prioritize these, slots generate first:,, clowns,, freedom, love, dolls,death, guiding
-//[SCIENCE, MATH, TWISTING, DEATH, APOCALYPSE, , FAMILY, MAGIC, ANGELS, LIGHT, HUNTING, CLOWNS, PLANTS, DECAY, CHOICES, ZAP, LOVE, SOUL, ANGER, WEB, , ENDINGS, KNOWING, GUIDING, CRAFTING, , SPYING, HEALING, DOLLS, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, QUESTING, BUGS, LANGUAGE];
+//prioritize these, slots generate first:,, ,death, guiding
+//[SCIENCE, MATH, , , , FAMILY, MAGIC, ANGELS, LIGHT, PLANTS, DECAY, CHOICES, ZAP, ANGER, WEB, , ENDINGS, KNOWING, GUIDING, CRAFTING, , SPYING, HEALING, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));

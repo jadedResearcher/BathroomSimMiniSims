@@ -47,6 +47,19 @@ body {
   animation-fill-mode: forwards;
 }
 
+a {
+  color: red;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: red;
+}
+
+a:hover {
+  color: #a10000;
+}
+
 .credits-friday {
   position: sticky;
   z-index: 1000;
