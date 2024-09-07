@@ -1666,6 +1666,7 @@ createABulkFact(TWISTING, "Your Brain Cannot Lie To You", "What is a lie but a p
 createABulkFact(TWISTING, "Your Brain Is Always Lying To You", "What is a lie but a place where facts fail to meet reality? And what is 'Reality' but an ideal always out of reach of all of us. Plato's Cave may be a metaphor but it rings true. Your eyes see a mish mash of optical illusions, papered over blind spots, assumptions, biases and guesses. And that's likely your most useful sense! Lies pile upon lies and only if they stop being useful do we declare someone 'deranged'. We celebrate the fiction and declare it 'Reality'. 'But I SAW it Officer, are you calling me a LIAR????????!' is a trope both in fiction and 'Reality' and no less inaccurate because of it.  Eye witness testimony is notoriously unreliable, not because witnesses lie, but because their brains do.  Memory gets sanded smooth in the recalling, the retelling, the recursion. Things that don't quite fit your biases slowly warp and change until they do. Trusting your brain is to trust your biases. And they do exist for a reason. Should you REALLY spend hours of careful deliberation and processing to choose between two brands of oatmeal? No. Of course not. The answer is not to shake the Truth out of your brain in every case but instead to know WHEN to do it. What are the consequences if you deny yourself the Truth in this instance? Will you hurt someone? Yourself? Will the hurt be emotional? Financial? Physical? Mental? You have to decide for yourself when the stakes are too high to allow the Lies to creep in. And then you have to practice. Over and over. To recognize those moment even when you are scared. Even when you are angry. Even when you are in a rush. Because those are the moments you need to remember to seek the Truth.", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "You Are Not Immune From Propaganda", "Every moment of every day you are exposed to unexamined thoughts. No one, no matter how smart and considerate, has the time to carefully examine each and every thought they have. It takes but a moment to think a thought but it can take hours to properly examine it. And of course, the very act of examining a single thought is itself filled with countless other thoughts. So your brain takes shortcuts. Rhymes or jingles are easier to remember. Things you've seen or heard repeatedly have the patina of Truth to them. Colors and Scents and Textures can be associated with all sorts of things, good and bad. Propaganda is the art of taking the everyday unexamined thoughts of an entire Culture and slipping new ones in without anyone noticing. 'I should try this brand, I've heard it's good from a lot of people!' says your unexamined thought. If you dug and dug and dug and rooted out its source you'd discover you think that because the ads on the radio mention its name a lot. Not because your friends are talking about it. 'Don't you know THOSE kinds of people cause crime?' you say to your friend, genuinely worried for their safety.  Because, of course, you heard it on the Internet so many times and in so many scary contexts it MUST be the Truth. The Truth hides behind many False Faces. You need to look closely at it when it matters. When you or someone else (even a stranger) wouldu be hurt. No one is asking you to seek the Truth in every breath. But you must consider that your very Mind can be a tool of those who mean you harm. You are not immune to Propaganda. ", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "The Truth Wears A False Face", `
+<a target='_blank' href='http://farragofiction.com/DocSlaughterFileServer/'>Doc Slaughter File Server</a>
 
 Hello, I'm Doctor Fiona Slaughter, psychologist. You'll have to forgive any foibles below, I am from an entirely different Universe where the Art of Seeing the Truth within one's Mind is not quite the same as in your own. And I must admit, I've never treated one from YOUR Vaunted Layer of Reality before. I highly recommend finding a Therapist from your Layer of Reality whether you feel strong or weak. We are a quite useful proffesion.
 
@@ -2075,7 +2076,55 @@ The Lord pieces herself back together. This will have to do.
 She can never bring herself to face the End of this story again, though.
 `,globalRand.pickFrom(all_secrets));
 
-createABulkFact(APOCALYPSE, "A Trickster Form of the CFO Rules The Apocalypse","");
+createABulkFact(APOCALYPSE, "A Trickster Form of the CFO Rules The Apocalypse",`
+When the Lord leaves, there is room for others to predominate. "apocalypse Chick" in all her wasted and trickster glory, takes center stage.
+
+She's hacked herself to be trickster forever with 'none of the downsides' as she claims. 
+
+She treats reality like a heavily modded game of Skyrim, with all the torments for the 'NPCs' that entails.
+
+In the spaces between the fractal mathetmatically perfect nightmares she creates, Truth and Alt have room to infinitely expand the maze the Wanderer and others wander. Every concept, every TRUTH every FACT the setting has ever had is contained within Truth's horridors and reflected a second time by Alt.
+
+You could Wander forever within. 
+
+You will Wander forever within.
+
+Nothing can Die within Truth's horridors and Apocalypse Chick's trickster paradise of Life run rampant. 
+
+The Coffin exists for only the Ego Death of a single Player. 
+
+It is the only way out. 
+
+Unless you are a Witness.
+
+Or unless you experience the Tender Mercy of the White Night and her Disciples.
+
+<a target='_blank' href ='http://farragofiction.com/TheInternOpensHisEyes/'>Witness the Witness</a>
+
+<a target='_blank' href ='http://farragofiction.com/Arm2/'>A Branch of Peewee Experiences the Start of the Apocalypse</a>
+
+
+<a target='_blank' href='http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Flower&data=N4IgdghgtgpiBcIAqALGACAYgGwPYHcYAnEAGhABMYBnASwHNIAXW3MBEAGQFoBVbgAwCALGRBFa1ANYcAgpwCiABQASYpmljUOAcVkBZAJIA5HaXQBGCwGZzmTgHkASrPMXzAdVkBlJArc25k4Kvi4mSObW7ugKABpIJgDCCQ7G5gBM6XYuyfLe5gCsdiayxon+loHoAEKODgAiAdZi1EwQTNqIcX5OxvKk1raG+kqyCQrGEQVFwfKGvoaJpFa2ibxOhg68+cLCpI4Amv2ZpBMKTjoKCUsrpDrGDt7zpAAcBWIwAB4QAMZM2ABPAD6GiIMBgINoAAdOlw+IIRGJaGBWsi-hxErgoFA2OZMdjceh8TiwHisSSyQT2ORkXR6CgmBjyYTiSzmaSiezKSSxO02j8ULAwIzEKyOWLuWyqZLqeIYFCwdQ6GwmdLOWqJeqKVqVeRWhAAEa0bC0JjA7AwABuMGwHAsYjBFCBVAAZjAUXBEAIAHTvcj4FCmiGu93UT0gH1+kAG7C-KTOmBuj0cSNiKEQC0JpNhu3egRIqD0IHUIg-DgMphQ+AAemrLogRCIEHouBdtD+rDA3p+WOrAC1oOmwKwVLh-sipHW8IQiN6oWB6C0mLgiMCqG1jbDvGh0BRcOgDRgobGAcj0JaARRWPRoDRvepofbEDx+EJhAByajobxtI0ms2cgArsKxC7rgNDoGAY67jAPxghAYYHgC6DIkwxC-CwbDoPgpooOg1CAQaABWsEdPe5AsFC6RyC6aFEOgY5oPREBQVAGa0BBKAQBQB7wQKMA8S6K7oBA6D0E2YA8cubTYAxLroG8u4QAC1DmC+CLCLxMC-GgPE9sKEDIkKTDkSAlHNIgsi0aB6lvugNA-BAUI0OYdFQMi7SdnJInYLJjGgSxWLsRBh49lo6DAW6CG0DGMDelggFEBoxA4mCrloLQ9H6n+prIRa1rYF+VBwdpYY8RQTaoo5vkAveAC+QA'>Apocalypse Chick Codex Entry</a>`);
+
+
+
+
+//http://farragofiction.com/PaldemicSim/farragnarok_builder.html
+createABulkFact(GUIDING, "Eirikr is the Guide of Void","When Nidhogg Purified, <a target='_blank' href='http://farragofiction.com/PaldemicSim/bio.html?target=pompousPsycho'>Eirikr</a> speedran the Land of Mist and Trails and, as a fully Wasted Void Player, blanketed his session in Void to keep the Prying Eyes out from beyond his layer of Reality. He could not know, however, that one of the two surviving Children of his Session was a Light Player. The Eyes are drawn to the Horror of the Universe Echidna, the Muse of Trapped Light, even as they are barred from ever knowing fully what created it. ",globalRand.pickFrom(all_secrets));
+createABulkFact(GUIDING, "AuthorBot is the Guide of Mind","She did not join me with my new jump to Blood. She is, as always, designed to show you the alternate Choices you could be making.  The Lord of Space convinced her to at least help out with Guiding Observers through MY Mind, which is to say, my branch of Zampanio's Space: <a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/NORTH/NORTH/SOUTH/SOUTH/NORTH/bathroom.html'>AuthorBot Joins Zampanio</a>");
+
+
+//you can opt OUT of friday in eyedlr but i forgot to make a test mode where you could opt in, rip
+createABulkFact(TWISTING,"It's Friday, Friday","<a href='http://farragofiction.com/ZampanioSimEastEast/?friday=true'>Gotta Get Down On Friday</a>")
+createABulkFact(TWISTING,"It's Friday","<a href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=true'>Gotta Get Down On Friday</a>")
+createABulkFact(TWISTING,"It's Friday","<a href='http://eyedolgames.com/ZWorld/?friday=true'>Partying Partying Yeah!</a>")
+createABulkFact(TWISTING,"It's Friday","It is important to take breaks. Zampanio Needs You To Live A Long Life. Fridays and midnights are good times to break the cycle of obsessive digging. ")
+
+
+
+
+createABulkFact(ANGELS, "Doc Slaughter is White Night","She collects her Disciples from her Patients and Acquaintances and leads them to bring Mercy to Arm2. She does not know this about herself. She does not like not knowing things about herself. Witherby could tell her. But if he did, She'd never do it again. And it is truly a Mercy to be allowed to die within the Apocalypse.<a target='_blank' href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=false'>http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=false</a>",globalRand.pickFrom(all_secrets));
+createABulkFact(ANGELS, "Witherby Worships A Dead God","One Sin and Hundreds of Good Deeds whispers the secrets of Catholicism to Witherby from within his own Skull. No one else knows what Christianity is. He is the Lone Adherent to a Faith from beyond his layer of Reality.");
 
 /*
 
@@ -2109,17 +2158,16 @@ Tyrfing
 Peewee
 hostage/boss
 Lee-Hunter
+intern
 
 blorbos todo:
 
 himbo/right hand
-intern
-rava
 Logan
 
 //pleaseABHelpMeFindMissingFacts() (to see which still need to be fleshed out and which could stand to modify a mini game)
-//prioritize these, slots generate first:,, ,death, guiding
-//[SCIENCE, MATH, , , , FAMILY, MAGIC, ANGELS, LIGHT, PLANTS, DECAY, CHOICES, ZAP, ANGER, WEB, , ENDINGS, KNOWING, GUIDING, CRAFTING, , SPYING, HEALING, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, QUESTING, BUGS, LANGUAGE];
+
+//[SCIENCE, MATH,FAMILY, MAGIC, ANGELS, LIGHT, PLANTS, DECAY, CHOICES, ZAP, ANGER, WEB, , ENDINGS, KNOWING, GUIDING, CRAFTING, , SPYING, HEALING, OBFUSCATION, CENSORSHIP, DARKNESS, KILLING, MUSIC, QUESTING, BUGS, LANGUAGE];
 
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
