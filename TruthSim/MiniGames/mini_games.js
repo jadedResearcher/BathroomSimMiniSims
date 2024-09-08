@@ -269,7 +269,6 @@ class MiniGame {
             }
             skip_button.onclick = async () => {
                 if (this.id === LAUNDRYMINIGAME) {
-                    console.log("JR NOTE: this.id is", {id: this.id, laundryminiGame: LAUNDRYMINIGAME})
                     globalSkippedK = true;
                     globalDataObject.numberKeys += -1;
                     globalDataObject.currentMaze = null;//reset maze

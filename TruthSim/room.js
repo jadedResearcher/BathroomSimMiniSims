@@ -32,18 +32,20 @@ const getNewBabyMaze = () => {
 const makeRandomEasyRoom = (maze, row, col) => {
   const theme = maze.rand.nextDouble() > 0.3 ? undefined : pickFrom(Object.keys(all_themes));
   let possibleGames = [...globalDataObject.unlockedMiniGames];
-  if(globalSkippedK){
+  if (globalSkippedK) {
     possibleGames = [LAUNDRYMINIGAME]
   }
 
-  for(let game of maze.miniGamesWithin){
+  if (!globalSkippedK) { //k doesn't fucking care about the odds, he's LUCKY and he's MAD and you are GOING TO LOOK AT HIM
+    for (let game of maze.miniGamesWithin) {
 
-    if(uniqueMiniGames.includes(game) && possibleGames.includes(game)){
-      possibleGames = removeItemOnce(possibleGames,game);
-    }
+      if (uniqueMiniGames.includes(game) && possibleGames.includes(game)) {
+        possibleGames = removeItemOnce(possibleGames, game);
+      }
 
-    if(rareMiniGames.includes(game) && possibleGames.includes(game) && maze.rand.nextDouble()>0.5){
-      possibleGames = removeItemOnce(possibleGames,game);
+      if (rareMiniGames.includes(game) && possibleGames.includes(game) && maze.rand.nextDouble() > 0.5) {
+        possibleGames = removeItemOnce(possibleGames, game);
+      }
     }
   }
   const chosen_mini_game_key = maze.rand.pickFrom(possibleGames);
@@ -62,7 +64,7 @@ const makeRoomFromJSon = (json) => {
 
 //mostly basic procedural rooms but occasionally special ones
 const makeRandomRoom = (maze, row, col) => {
-  const room =  makeRandomEasyRoom(maze, row, col);
+  const room = makeRandomEasyRoom(maze, row, col);
   maze.miniGamesWithin.push(room.miniGameKey);
   return room;
 }
@@ -81,32 +83,36 @@ class Maze {
   maxSize = 23; // no infinite mazes rip, makes saving dumb
   title = "Firsty";
   miniGamesWithin = [];//useful for handling rare or unique mini games in a maze
-  internal_seed=13;
+  internal_seed = 13;
   roomPlaying; //what room are you currently in?
   //each row is a row in the map
   //each cell is either undefined or a room in the maze
   map = [];
   constructor(rand, number, difficulty) {
     //bigger with more truthPerSecond
-    this.maxSize = Math.min(23,Math.max(3, globalDataObject.truthPerSecond*3));
-    this.minSize = Math.min(13,Math.max(3, globalDataObject.truthPerSecond));
+    this.maxSize = Math.min(23, Math.max(3, globalDataObject.truthPerSecond * 3));
+    this.minSize = Math.min(13, Math.max(3, globalDataObject.truthPerSecond));
     //console.log("JR NOTE: maze max size is", this.maxSize, this.minSize)
 
     this.rand = rand;
     this.difficulty = difficulty;
-    this.title = "MAZE #"+number;
+    this.title = "MAZE #" + number;
     //starts out with a size of one x one.
-    this.map.push([makeRandomEasyRoom(this,0,0)]);
+    this.map.push([makeRandomEasyRoom(this, 0, 0)]);
     const entrance = this.map[0][0];
     this.miniGamesWithin.push(entrance.miniGameKey);
     entrance.title += " (ENTRANCE)";
     //it'll be negative if its intended to be a placeholder before loading
-    if(number >=0){
+    if (number >= 0) {
       //will recursively fill out the whole maze without getting bigger than maxSize;
       entrance.makeNeighbors(this);
     }
     entrance.unlock(this);
     this.miniGamesWithin = uniq(this.miniGamesWithin)
+
+    if (globalSkippedK) {
+      globalSkippedK = false; //only a single time
+    }
 
   }
 
@@ -138,7 +144,7 @@ class Maze {
     return this.getRoomCount() > this.minSize;
   }
 
-  hitMaxSize = ()=>{
+  hitMaxSize = () => {
     return this.getRoomCount() > this.maxSize;
 
   }
@@ -263,7 +269,7 @@ class Room {
   }
 
   unlock = (maze) => {
-    if(globalMeatMode){
+    if (globalMeatMode) {
       return;
     }
     //console.log("JR NOTE: unlocking", this.title)
@@ -276,7 +282,7 @@ class Room {
   makeNeighbors = (maze) => {
     this.difficulty = maze.difficulty; //recursively sets it for all rooms
     console.log("JR NOTE: making neighbors for", this.title)
-    if(maze.hitMaxSize()){//no infinite mazes
+    if (maze.hitMaxSize()) {//no infinite mazes
       return;
     }
     const hitMinSize = maze.hitMinSize();
@@ -529,11 +535,11 @@ class Room {
       ele.onclick = () => {
         //no. you forgot this. i don't care if you found some other way to access it, the part of your soul that recognizes this has rotten away
         //did you really think there would be no consequences to using [CENSORED] so blithely?
-        if(globalDataObject.rottenMiniGames.includes(this.miniGameKey)){
+        if (globalDataObject.rottenMiniGames.includes(this.miniGameKey)) {
           fuckShitUpVikStyle();
           return;
         }
-        globalMiniGames[this.miniGameKey].render(globalTabContent,this, this.incrementTimesBeaten);
+        globalMiniGames[this.miniGameKey].render(globalTabContent, this, this.incrementTimesBeaten);
         if (globalMeatMode && globalMeatGrowing) {
           growMeat();
         }
@@ -563,7 +569,7 @@ class Room {
 
   }
 
-} 
+}
 
 /*
 suddenly im thinking of an au where like
