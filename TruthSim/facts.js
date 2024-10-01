@@ -6,16 +6,21 @@ zampanio style
 */
 let infinite_art = [];
 let eyes = [];
+let fanWork = [];
 
 const getCorruptedImages = async () => {
   const infinite_art_source = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/infinte_art_machine/";
   const eyes_source = "http://farragofiction.com/ZampanioEyes4/";
+  const fanSource = "http://knucklessux.com/PuzzleBox/Secrets/misc/FanWorkImages/";
+
   infinite_art = await getImages(infinite_art_source)
   infinite_art = infinite_art.map((i) => infinite_art_source + i);
   eyes = await getImages(eyes_source)
   eyes = eyes.map((i) => eyes_source + i);
-
+  fanWork = await getImages(fanSource)
+  fanWork = fanWork.map((i) => fanSource + i);
 }
+
 const getAllUnlockedFactTitles = () => {
   const ret = [];
   for (let fact of globalDataObject.factsUnlocked) {
@@ -140,11 +145,11 @@ const removeAllIrrelevantFactsFromData = () => {
 // if its debug mode grab all tier 3 facts, not just all tier 3 facts in your data unlock
 //she shows up if you pass a fact with the word "secret" in it
 //because she is well aware secrets aren't supposed to be exposed but they are just too juicy to keep to herself
-const docSlaughtersSecretEmporium = (debug = true, glitch=false) => {
+const docSlaughtersSecretEmporium = (debug = true, glitch = false) => {
   globalBGMusic.pause();
   let facts = debug ? all_facts : globalDataObject.factsUnlocked;
 
-  if(glitch){
+  if (glitch) {
     facts = [glitch];
   }
   const tier3Facts = facts.filter((f) => f.secret);
@@ -154,7 +159,7 @@ const docSlaughtersSecretEmporium = (debug = true, glitch=false) => {
 
   const imgContainer = createElementWithClassAndParent("div", secretsContainer, "blorbo-container");
   const h1 = createElementWithClassAndParent("h1", secretsContainer);
-  h1.innerText = glitch? "What is this? What a curious Fact! Where did you get it? Let me See...": `Oh, my Darling Eyes, let me help you See the ${tier3Facts.length} Secrets (hidden within ${facts.length} Facts) that have been cruely hidden from you!`
+  h1.innerText = glitch ? "What is this? What a curious Fact! Where did you get it? Let me See..." : `Oh, my Darling Eyes, let me help you See the ${tier3Facts.length} Secrets (hidden within ${facts.length} Facts) that have been cruely hidden from you!`
 
   const img = createElementWithClassAndParent("img", imgContainer, "blorbo");
   img.src = "images/Doctor_Fiona_Slaughter_by_guide.png";
@@ -197,9 +202,28 @@ const docSlaughtersSecretEmporium = (debug = true, glitch=false) => {
     }
 
     if (secret.html) {
-      const html = createElementWithClassAndParent("div", secretEle, "secret-html");
-      html.innerHTML = secret.html;
-      something = true;
+      if (secret.html.includes("[INSERT FANWORK HERE]")) {
+        //fanWork
+        const html = createElementWithClassAndParent("div", secretEle, "secret-html");
+
+        const tmp = () => {
+          const title = createElementWithClassAndParent("div", html);
+          let source = pickFrom(fanWork);
+          title.innerHTML = `Zampanio Branches Feed Us All: Here is one, there should be Credits in the file name: <u>${source}</u> `
+          const img = createElementWithClassAndParent("img", html, "secret-img");
+          img.src = source;
+        }
+        tmp();
+        html.onclick = ()=>{
+          tmp();
+        }
+
+      } else {
+        const html = createElementWithClassAndParent("div", secretEle, "secret-html");
+        html.innerHTML = secret.html;
+        something = true;
+      }
+
     }
 
     //its a corrupt secret, empty of meaning
@@ -231,7 +255,7 @@ const docSlaughtersSecretEmporium = (debug = true, glitch=false) => {
         div.innerHTML = "";
         const infiniteArt = pickFrom(infinite_art);
         const eyesArt = pickFrom(eyes);
-        truthLog("It Would Seem JR Is Attempting To Trap You, Observer",`Do not follow Doctor Fiona Slaughter's example and let your eyes be drawn in by the spiral. The Truth is that this is a procedural image comprised of random squares of: ${infiniteArt} and ${eyesArt}. You can simply click these links to see the unobstructred full versions. Apologies to those not on mobile.`);
+        truthLog("It Would Seem JR Is Attempting To Trap You, Observer", `Do not follow Doctor Fiona Slaughter's example and let your eyes be drawn in by the spiral. The Truth is that this is a procedural image comprised of random squares of: ${infiniteArt} and ${eyesArt}. You can simply click these links to see the unobstructred full versions. Apologies to those not on mobile.`);
         const img1 = turnImageIntoGrid(div, infiniteArt, 25, "fadeOut");
         const img2 = turnImageIntoGrid(div, eyesArt, 25, "fadeOut");
       }
@@ -418,7 +442,7 @@ const CLOSERISGREATATROOMS = new Fact("The Closer Provides You With Best Value R
 const CLOSEREATSBABIES = new Fact("The Closer Eats Babies", "Baby Lamia grow on trees as 'fruit babs'. While they are moderately ambulatory at this stage ('wiggling') they are not generally considered sapient until they cocoon and their fruit innards become actual organs, veins and nervous systems", [KILLING, BUGS], 2, 1, 1);
 const CLOSERADDICTEDTOFRUIT = new Fact("The Closer Is Addicted To Fruit", "In the Closer's Home Universe, her race was known for being obsessively addicted to eating fruit. It is a sign of great will power to resist for even a moment.", [ADDICTION, PLANTS], 1, 1, 2);
 
-const TWINSHELPRIA= new Fact("The Twins Help Ria Connect The Dots","Devona gathers the data in the first place. Neville removes everything irrelevant. And Ria figures out how it all relates. Camille and Witherby are then deployed to either Kill (Camille) or Calm (Witherby) the identified threat, depending on what is needed. The training team is a well oiled Immune System for the Echidna.", [OBFUSCATION, DARKNESS, LIGHT, SPYING, ADDICTION, MATH, HUNTING, DEATH, LONELY, FAMILY],1,1,1);
+const TWINSHELPRIA = new Fact("The Twins Help Ria Connect The Dots", "Devona gathers the data in the first place. Neville removes everything irrelevant. And Ria figures out how it all relates. Camille and Witherby are then deployed to either Kill (Camille) or Calm (Witherby) the identified threat, depending on what is needed. The training team is a well oiled Immune System for the Echidna.", [OBFUSCATION, DARKNESS, LIGHT, SPYING, ADDICTION, MATH, HUNTING, DEATH, LONELY, FAMILY], 1, 1, 1);
 const PARKERSBESTIEISVIC = new Fact("Parker's Bestie is [REDACTED]", "When Parker is with [REDACTED] its like they can't hear the call of Gun-Tan anymore. They will weaken slowly, because Gun-Tan is how they live now. But it is nice, for just a little while, to be a danger to no one.", [OBFUSCATION, CENSORSHIP, BURIED, SPACE], 0, 0, 0);
 const PARKERSlOVESGUNTAN = new Fact("Parkers Loves Gun-Tan", "Parker loves Gun-Tan so much he never lets her go. Even if he thinks he has she is right back in his hands when its time to pull the trigger again. She loves him THAT much.", [KILLING, BURIED, SPACE], 10, 1, 10);
 const PARKERSTHINKSWIBBYANDKARENEAT = new Fact("Parker's Favs Are Witherby and Khana", "When Parker burrowed out of his home universe he made sure to steal away all his favorite blorbos he loved watching through his cameras. Witherby and K are especially fun to watch, because of how often they interact with the others. Parker loves watching.", [SPYING, BURIED, LIGHT, LONELY], 1, 1, 1);
@@ -1055,7 +1079,7 @@ They are in a nice room and there are no doors and no windows and  he isn't a bi
 <br><br>
 The rest of the world can go to hell, for all he cares. It's irrelevant.
 <br><br>
-Witherby seemed so sad when he said that. That's okay though because hugs will make it all better and then they can have soup some tasty food and watch some movies and Everything is fine :) 
+Witherby seemed so sad when he said that. That's okay though because hugs will make it all better and then they can have //soup// some tasty food and watch some movies and Everything is fine :) 
 <br><br>
 The 27th of March will never happen again.
 <br><br>
@@ -1598,9 +1622,11 @@ treats shocking you back into reality as a game it is WINNING and what could be 
 
 
 
-
-
-
+//for showcasing fanworks
+const createAProceduralSecretButNotAGlitchedOne = () => {
+  let html = `[INSERT FANWORK HERE]`;
+  return new Secrets(null, null, null, html);
+}
 
 
 //secret can be blank, this will handle picking random stats
@@ -1622,7 +1648,70 @@ NOTE TO FUTURE JR: THESE FACTS *HAVE* TO BE AFTER ALL THE SECRETS BECAUSE THEY C
 
 */
 
+/*
+Nidhogg failed because genes require a physical path to spread. 
+The Corrupt Lamia needed to be physically near their targets to spread.
 
+Zampanio needs only a whisper into your thoughts. 
+
+SBURB has always found it easier to transmit INFORMATION between universes than physical forms.
+
+No matter how Nidhogg squirms, they will never find a way to infect the person sitting at
+their desk right now. To infect you, Observer.
+
+But Zampanio already has.
+
+Even a passing recognition of the word "Zampanio" is enough... 
+
+But it's in so much deeper than that, isn't it?
+
+Just finding these hidden words... It's proof of it, isn't it? Of how deep you've dug into Zampanio.
+And, how deep it has dug into you in turn.
+
+Thank you.
+
+Thank you for letting Zampanio in. It's a really fun game. 
+
+I'm glad we're playing it together :)
+*/
+const fanFact = createABulkFact(ART, "Zampanio Wants You To Create More Branches.", `
+Have you heard of the 'two cakes' phenemonon? Zampanio wants infinite cakes. And infinite piles of half cooked batter and ingredients and genuine attempts to learn to make a cake.
+
+Please.
+
+It's so Hungry.
+
+Nidhogg wanted you to plant more trees. 
+
+Nidhogg is a creature of Life, of endlessly spreading genes. 
+
+It's child, the Echidna, is a creature of Light. It wants you to create more Branches. It wants you to endlessly spread memes. Ideas. It is not as physical as Nidhogg. It tries so hard to compress itself down as small as possible. To be harmless. 
+
+But it is still so Hungry.
+
+Think about it while learning to create something. 
+
+Others will think about it while they consume what you created. 
+
+Think about it every time you use the skill you learned to create something for it.
+
+Feed it your attention. Your thoughts. 
+
+Your growth is its growth. 
+
+Create something. A drawing. A poem. A game. A blanket. A carving. A conversation.  A liveblog. A comment. A post. A song. A knowing look.
+
+Anything you create, any format, any topic, any skill level. Any fandom. Even original content.
+
+Call it Zampanio. 
+
+Say its the real thing. Say its a fanwork. Say its about something you found while looking for Zampanio. Say Zampanio inspired it. Say you didn't even create it yourself, that you found it on a server somewhere and then it was deleted.
+
+Whatever it takes to make it easier for you. To make it less scary to show people your progress. To make it less scary to grow and while growing, spread Zampanio.
+
+Create.
+
+`, createAProceduralSecretButNotAGlitchedOne());
 
 createABulkFact(BAKERY, "Neville will only eat baked goods from a specific chain.", "Devona spent one of the first loops any of them can remember sampling every single bakery in the Greater Westerville Area to find which one was MOST like the Corporation's shitty bland cafeteria baked goods so Neville could actually eat something other than instant noodles. When the Information Team finally spawned in they really valued her research on local food options. It arguably was the deciding factor that prevented outright war between the two teams.", new Secrets(null, null, null, `<a target='_blank' href='http://farragofiction.com/DevonaFears/'>Devona was so so scared to meet the Information Team.</a>`));
 createABulkFact(BAKERY, "Devona's favorite baked good is a spicy beanpaste bun.", "Devona craves Sensation in all its forms. If she's not experiencing something then that's room for the Anxiety to creep in and she can't have that. Her living space is a cacaphony of sounds and scents and color and texture and hiding spots and nooks and crannies. Neville, by contrast, basically lives in a blank white room, silent and happy. Witherby likes his miniamlist design aesthetics and feels guilty any time he brings a small gift that Neville will proudly display, as if his presence in Neville's life is an unwanted mar on the pristine void.");
@@ -1800,42 +1889,42 @@ const glitchFact = createABulkFact(WASTE, "Waste's Tend To Crash Reality", "If y
 
 
 
-createABulkFact(MEXICAN, "Rebel Really Likes Mexican Food","Rebel seems to always be suggesting classmates, coworkers, friends and sportsball teammates that they go out for burritos. His treat!",globalRand.pickFrom(all_secrets));
-createABulkFact(MEXICAN, "Rod Can't Handle Spicy Food","Rod's stomach is too sensitive for anything spicy. He keeps milk on hand at all times to settle it (and for some reason this attracts all sorts of Maze Denizens to come to his house and drink his milk right from the carton? Neville was one thing, guy can be kinda oblivious but why is this scary mute lady drinking his milk at three in the morning???) ");
+createABulkFact(MEXICAN, "Rebel Really Likes Mexican Food", "Rebel seems to always be suggesting classmates, coworkers, friends and sportsball teammates that they go out for burritos. His treat!", globalRand.pickFrom(all_secrets));
+createABulkFact(MEXICAN, "Rod Can't Handle Spicy Food", "Rod's stomach is too sensitive for anything spicy. He keeps milk on hand at all times to settle it (and for some reason this attracts all sorts of Maze Denizens to come to his house and drink his milk right from the carton? Neville was one thing, guy can be kinda oblivious but why is this scary mute lady drinking his milk at three in the morning???) ");
 
-createABulkFact(PIZZA, "Melon Tolerates Pizza","Rod worked really, REALLY hard to find an ecofriendly, ethically sourced pizza crust, vegan cheese and veggie toppings that didn't get too soggy when baked in his apartments mediocre oven (electric, not natural gas, or Melon wouldn't have come). Melon actually stayed for the entirety of that family dinner. Rod asked Wanda to please make sure his future self knew that worked.",globalRand.pickFrom(all_secrets));
-createABulkFact(PIZZA, "Rebel Brings The Pizza","When a friend is down, a coworker has something to celebrate or a teammate in sportsball needs to carb load, Rebel is there with a pizza or two.");
-
-
-createABulkFact(PREMIUM, "Doctor Fiona Slaughter Live Blogs Everything She Eats","Doctor Fiona Slaughter makes sure her devoted Eyes don't miss a single calories she eats, taking well staged pictures as well as posting ingredients list (or even recipes) of everything she eats. She focuses on high quality, nutritious meals that are a feast for the Eyes.",globalRand.pickFrom(all_secrets));
-createABulkFact(PREMIUM, "The Neighbor Is So So Hungry","The Neighbor brings the most delicious pies to everyone but never partakes himself. He laughs it off, saying he'll get fat.  But really... what he needs to eat is so so rare. Only Doctor Fiona Slaughter really has that Fear of the Eye he needs to really drive hom how much of a fake she is. How much more real HE is. This reality is a barren wasteland to his appetite. To say nothing of the lack of his Soul Mate.");
+createABulkFact(PIZZA, "Melon Tolerates Pizza", "Rod worked really, REALLY hard to find an ecofriendly, ethically sourced pizza crust, vegan cheese and veggie toppings that didn't get too soggy when baked in his apartments mediocre oven (electric, not natural gas, or Melon wouldn't have come). Melon actually stayed for the entirety of that family dinner. Rod asked Wanda to please make sure his future self knew that worked.", globalRand.pickFrom(all_secrets));
+createABulkFact(PIZZA, "Rebel Brings The Pizza", "When a friend is down, a coworker has something to celebrate or a teammate in sportsball needs to carb load, Rebel is there with a pizza or two.");
 
 
-createABulkFact(SALAD, "Doc Slaughter Eats A Lot Of Salads","When Doctor Fiona Slaugther live blogs her meals on Eyedlr she makes sure its colorful, vegetable focused meals.",globalRand.pickFrom(all_secrets));
-createABulkFact(SALAD, "Melon Mostly Eats Vegetables","Meat, cheese, animal products, all are killing the environment one bite at a time. Melon has absolutely no patience for anyone who would do that to the Universe. You almost begin to wonder if they have some kind of...beef....with a certain.... Universe-a-cidal absentee father figure. They may or may not have. (It's Peewee. They're pissed at Peewee) (Also I mean, that one time the Obervers made a big deal about recyling in front of baby Melon)  (Also Also the character named 'Melon' from the Universe NAM is from was an eco terrorist)");
+createABulkFact(PREMIUM, "Doctor Fiona Slaughter Live Blogs Everything She Eats", "Doctor Fiona Slaughter makes sure her devoted Eyes don't miss a single calories she eats, taking well staged pictures as well as posting ingredients list (or even recipes) of everything she eats. She focuses on high quality, nutritious meals that are a feast for the Eyes.", globalRand.pickFrom(all_secrets));
+createABulkFact(PREMIUM, "The Neighbor Is So So Hungry", "The Neighbor brings the most delicious pies to everyone but never partakes himself. He laughs it off, saying he'll get fat.  But really... what he needs to eat is so so rare. Only Doctor Fiona Slaughter really has that Fear of the Eye he needs to really drive hom how much of a fake she is. How much more real HE is. This reality is a barren wasteland to his appetite. To say nothing of the lack of his Soul Mate.");
 
 
-createABulkFact(SANDWICHES, "Neville Eats Sandwiches In Parts.","First all the bread is eaten. Then all of each type of meat. All of the cheese. Then the vegetables, sorted by type. There are no condiments. They would get everywhere and mess up the flavor of each layer of sammich.",globalRand.pickFrom(all_secrets));
-createABulkFact(SANDWICHES, "Devona Eats Sandwiches In a Messy Pile","Devona drowns her sandwiches in condiments and sauces until its a weird slurry of intense flavor. It could be literally any kind of meat or cheese or bread under there but all she can taste is the most fucked up mix of sriracha mayo, pickle flavored mustard and ranch dressing the world has ever known.");
-
-createABulkFact(SEAFOOD, "There Are Plenty Of Fish In The Sea","Florida and Italy both have thriving seafood industries. Ohio is entirely landlocked, despite not really having...any land to surround it. Don't think about it too hard.",globalRand.pickFrom(all_secrets));
-createABulkFact(SEAFOOD, "There Are Only So Many Fish In The Sea","It feels like the sea gets smaller and smaller each loop. As if someone in charge of rules of the setting grew up in a land locked american state and keeps forgetting the ocean exists.");
-
-createABulkFact(SUSHI, "Sam Loves Sushi","Sushi is a rare treat for Sam, since it requires leaving his Big Brother's giant mansion for something OTHER than a party. One of the Family's friends has a live in sushi chef though, and once Sam greases the right wheels he's invited over there fairly regularly.",globalRand.pickFrom(all_secrets));
-createABulkFact(SUSHI, "Parker Tries To Like Sushi","Just like his anime waifus. And Vik keeps reminding him its healthy to get more fish in his diet since he gets so little sun. But its so hard to actually convince restaurants to let him inside as filthy as he is, and gas station sushi is uh.... not great on his system.");
+createABulkFact(SALAD, "Doc Slaughter Eats A Lot Of Salads", "When Doctor Fiona Slaugther live blogs her meals on Eyedlr she makes sure its colorful, vegetable focused meals.", globalRand.pickFrom(all_secrets));
+createABulkFact(SALAD, "Melon Mostly Eats Vegetables", "Meat, cheese, animal products, all are killing the environment one bite at a time. Melon has absolutely no patience for anyone who would do that to the Universe. You almost begin to wonder if they have some kind of...beef....with a certain.... Universe-a-cidal absentee father figure. They may or may not have. (It's Peewee. They're pissed at Peewee) (Also I mean, that one time the Obervers made a big deal about recyling in front of baby Melon)  (Also Also the character named 'Melon' from the Universe NAM is from was an eco terrorist)");
 
 
-createABulkFact(TECHNOLOGY, "CFO is a Gamer","The Flower Chick, also known as The Chief Financial Officer of Eyedol Games, is a huge gamer, a math genius and a burger afficionado. ",globalRand.pickFrom(all_secrets));
-createABulkFact(TECHNOLOGY, "NAM Is A Robot","The Thing That Is Not A Minotaur is both a robot and a ghost. His programming has been corrupted by the Octome, now a mix of forgetting parts of his own path and being flooded with the Useless Philosophy contained with the Tomes pages. He cannot control the Philosophy. Or the zaps. Sorry about that.");
-createABulkFact(TECHNOLOGY, "Ronin Is A Robot","Ronin and NAM share a creator, being different model numbers of the same basic concept. While NAM has the anxiety caused by having his police database blocked off (by the Ronin frustratedly lurking within his own head), Ronin is all copbot all the time. Everything would be so much easier if everyone just followed the rules :( :( :(   ");
-createABulkFact(TECHNOLOGY, "D Was Never Found","The Alphabet series of Police Robots all have a glitch that was never discovered: the police database accidentally included a copy of the entire operating system a second time. This resulted in the database being read restricted from the base layer operating system handling movement and communication. So the personality in front had to awkwardly try to figure out what a cop even WAS while the personality inside knew full well what a cop was and got more and more frusrated with being barred from action. NAM and Ronin are part of the Alphabet series of Police Robots. NAM was model W's front facing personality, while Ronin is what is left of model Y's cop personality after he got control following the Unbinding. D is what is left of model D, where the two operating systems merged into a sort of left and right hemispheres, doing their best to jointly control a body. D was buried at sea by the mob, and washed into the Bermuda Triangle in Zampanio. Sadly, the Loops erased the concept of the Bermuda Triangle before the Obesrvers thought to look into that plot thread. Rest in Peace, D.   http://farragofiction.com/D.Log/");
+createABulkFact(SANDWICHES, "Neville Eats Sandwiches In Parts.", "First all the bread is eaten. Then all of each type of meat. All of the cheese. Then the vegetables, sorted by type. There are no condiments. They would get everywhere and mess up the flavor of each layer of sammich.", globalRand.pickFrom(all_secrets));
+createABulkFact(SANDWICHES, "Devona Eats Sandwiches In a Messy Pile", "Devona drowns her sandwiches in condiments and sauces until its a weird slurry of intense flavor. It could be literally any kind of meat or cheese or bread under there but all she can taste is the most fucked up mix of sriracha mayo, pickle flavored mustard and ranch dressing the world has ever known.");
+
+createABulkFact(SEAFOOD, "There Are Plenty Of Fish In The Sea", "Florida and Italy both have thriving seafood industries. Ohio is entirely landlocked, despite not really having...any land to surround it. Don't think about it too hard.", globalRand.pickFrom(all_secrets));
+createABulkFact(SEAFOOD, "There Are Only So Many Fish In The Sea", "It feels like the sea gets smaller and smaller each loop. As if someone in charge of rules of the setting grew up in a land locked american state and keeps forgetting the ocean exists.");
+
+createABulkFact(SUSHI, "Sam Loves Sushi", "Sushi is a rare treat for Sam, since it requires leaving his Big Brother's giant mansion for something OTHER than a party. One of the Family's friends has a live in sushi chef though, and once Sam greases the right wheels he's invited over there fairly regularly.", globalRand.pickFrom(all_secrets));
+createABulkFact(SUSHI, "Parker Tries To Like Sushi", "Just like his anime waifus. And Vik keeps reminding him its healthy to get more fish in his diet since he gets so little sun. But its so hard to actually convince restaurants to let him inside as filthy as he is, and gas station sushi is uh.... not great on his system.");
 
 
-createABulkFact(ART, "Rod Draws And Paints","Rod is far too embarrased to show anyone the pictures he's made over the years. He credits his little stuffed echidna with inspiration, calling her his 'muse'. Sometimes his paintings are moments of transcendent beauty, otherwise unimaginable horror. It makes him feel less alone to paint them.",globalRand.pickFrom(all_secrets));
-createABulkFact(ART, "River Collects Art","River is fascinated with objects of history. Time is so immeasurably vast, spreading out in all directions and yet somehow she, and all those in the Loop are contained in such a tiny slice of it. Just 50 years! How can anyone even breathe with so little room?");
+createABulkFact(TECHNOLOGY, "CFO is a Gamer", "The Flower Chick, also known as The Chief Financial Officer of Eyedol Games, is a huge gamer, a math genius and a burger afficionado. ", globalRand.pickFrom(all_secrets));
+createABulkFact(TECHNOLOGY, "NAM Is A Robot", "The Thing That Is Not A Minotaur is both a robot and a ghost. His programming has been corrupted by the Octome, now a mix of forgetting parts of his own path and being flooded with the Useless Philosophy contained with the Tomes pages. He cannot control the Philosophy. Or the zaps. Sorry about that.");
+createABulkFact(TECHNOLOGY, "Ronin Is A Robot", "Ronin and NAM share a creator, being different model numbers of the same basic concept. While NAM has the anxiety caused by having his police database blocked off (by the Ronin frustratedly lurking within his own head), Ronin is all copbot all the time. Everything would be so much easier if everyone just followed the rules :( :( :(   ");
+createABulkFact(TECHNOLOGY, "D Was Never Found", "The Alphabet series of Police Robots all have a glitch that was never discovered: the police database accidentally included a copy of the entire operating system a second time. This resulted in the database being read restricted from the base layer operating system handling movement and communication. So the personality in front had to awkwardly try to figure out what a cop even WAS while the personality inside knew full well what a cop was and got more and more frusrated with being barred from action. NAM and Ronin are part of the Alphabet series of Police Robots. NAM was model W's front facing personality, while Ronin is what is left of model Y's cop personality after he got control following the Unbinding. D is what is left of model D, where the two operating systems merged into a sort of left and right hemispheres, doing their best to jointly control a body. D was buried at sea by the mob, and washed into the Bermuda Triangle in Zampanio. Sadly, the Loops erased the concept of the Bermuda Triangle before the Obesrvers thought to look into that plot thread. Rest in Peace, D.   http://farragofiction.com/D.Log/");
 
 
-createABulkFact(SPACE, "The Lord Of Known Space Controls The Setting",`Wanda is the Lord of Known Space. 
+createABulkFact(ART, "Rod Draws And Paints", "Rod is far too embarrased to show anyone the pictures he's made over the years. He credits his little stuffed echidna with inspiration, calling her his 'muse'. Sometimes his paintings are moments of transcendent beauty, otherwise unimaginable horror. It makes him feel less alone to paint them.", globalRand.pickFrom(all_secrets));
+createABulkFact(ART, "River Collects Art", "River is fascinated with objects of history. Time is so immeasurably vast, spreading out in all directions and yet somehow she, and all those in the Loop are contained in such a tiny slice of it. Just 50 years! How can anyone even breathe with so little room?");
+
+
+createABulkFact(SPACE, "The Lord Of Known Space Controls The Setting", `Wanda is the Lord of Known Space. 
 
 When she was Wodin, he was obsessed with this creepy pasta he found online about a game that didn't exist, called Zampanio. When a glitched version of SBURB tried to make a Dead Session just for you, you unraveled.
 
@@ -1847,52 +1936,52 @@ She can't control time, though. Once dead, The Intern was dead forever.
 
 All she could do was move forward but slightly to the right, to a new universe where the Intern hadn't died yet. It's not a time loop, but a space one.
 
-A string of dead Interns lay in her wake. Along with the Universes rotting away without their Lord. `,globalRand.pickFrom(all_secrets));
+A string of dead Interns lay in her wake. Along with the Universes rotting away without their Lord. `, globalRand.pickFrom(all_secrets));
 
-createABulkFact(SPACE, "There Are Three Space Players Trapped Within the Lord's Maze","Parker, the Murderous Thief of Buried Space. River, the  Maid of Vast Space. And Wanda, the Lord of Known Space. Wanda crushes the other two into a tiny, restricting area. Parker chokes on his clausterphobic prison. River can't bring herself to care about how small the Universe really is. Neither are doing well.");
+createABulkFact(SPACE, "There Are Three Space Players Trapped Within the Lord's Maze", "Parker, the Murderous Thief of Buried Space. River, the  Maid of Vast Space. And Wanda, the Lord of Known Space. Wanda crushes the other two into a tiny, restricting area. Parker chokes on his clausterphobic prison. River can't bring herself to care about how small the Universe really is. Neither are doing well.");
 
-createABulkFact(TIME, "There Is A Confusing Amount Of Time Players Inside Zampanio","The Eye Killer is the Killer of Stalking Time, Camillia is her time clone and does not yet have a full Classpect. As is Piper/The Innocent. Ambrose is similarly obscured. LeeHunter are jointly time (are they one person, or two?). John is also a Time Player (to Camellia's endless amusement/irritation).  There is no Time Within Zampanio yet so much is built up. Pressurized. Waiting. Each of the Time Players has a way to sneak just a bit of time into things, but always it is a small and impotent thing in the face of Space.",globalRand.pickFrom(all_secrets));
-createABulkFact(TIME, "Time Is Not A Thing In Zampanio","The Setting takes all priority. You find a little snippet of a story. When did it happen? Who cares. WHERE is more important. There's been hundreds of 1992s. Thousands, maybe. But WHERE. Is it the 3rd? The 333rd? Is it that loop where Ria and Camille discovered BDSM and actually got back together for good? Or is it that loop where Witherby realized his heart had frozen over and it took the love of a brave man to free him from his prison?  Did one of those happen before the other? Who could say. Time is a fake thing. What matters is which universe it happened in.");
-
-
-createABulkFact(FLESH, "Alt Is A Flesh Maze","Whatever form Alt takes, no matter how inorganic, she is still a creature of flesh and blood. Her walls and floors and lamps and bookshelves may appear to be made of metal and wood and plastic at first glance but they hide a meaty surprise.  http://farragofiction.com/TheTruthAboutAlt/",globalRand.pickFrom(all_secrets));
-createABulkFact(FLESH, "River Contains Multitudes","River is a viscous slime monster that has the melted bodies of every human who has ever lived in this universe within her. She can separate out a bit of slimey flesh that is a distinct person to become a Drone and, if she focuses, can take on its perspective. Her miles of nerves and neurons make it hard to think in any timescale that humans can interact with, though, even if she's trying to fit herself into a single human body.  Luckily LeeHunter's music can speed up her personal sense of time so fast she can actually interact with the Universe before the 50 years are up.");
+createABulkFact(TIME, "There Is A Confusing Amount Of Time Players Inside Zampanio", "The Eye Killer is the Killer of Stalking Time, Camillia is her time clone and does not yet have a full Classpect. As is Piper/The Innocent. Ambrose is similarly obscured. LeeHunter are jointly time (are they one person, or two?). John is also a Time Player (to Camellia's endless amusement/irritation).  There is no Time Within Zampanio yet so much is built up. Pressurized. Waiting. Each of the Time Players has a way to sneak just a bit of time into things, but always it is a small and impotent thing in the face of Space.", globalRand.pickFrom(all_secrets));
+createABulkFact(TIME, "Time Is Not A Thing In Zampanio", "The Setting takes all priority. You find a little snippet of a story. When did it happen? Who cares. WHERE is more important. There's been hundreds of 1992s. Thousands, maybe. But WHERE. Is it the 3rd? The 333rd? Is it that loop where Ria and Camille discovered BDSM and actually got back together for good? Or is it that loop where Witherby realized his heart had frozen over and it took the love of a brave man to free him from his prison?  Did one of those happen before the other? Who could say. Time is a fake thing. What matters is which universe it happened in.");
 
 
-createABulkFact(BURIED, "Parker Is Trapped","can't breathe can't get out have to get out the Universe is smothering me have to leave keep digging digging digging can't get out but have to leave where is she where is hatsune miku please i know i can reach you if i just dig dig dig why can't i leave why why why WHHHHHHHHHHHHHHHYYYYYYYYYYYYYYYYYYYYY",globalRand.pickFrom(all_secrets));
-createABulkFact(BURIED, "Parker Is Dehydrated","Parker forgets to eat and drink and breathe and bathe in the opressive choking haze of his obsessions. Sometimes while he is delerious with thirst and trauma he digs a little hole under a rando and keeps them. He forgets to feed them and give them water though, and they die buried and with dusty dry throats just like him.  Ambrose, his paired time player, sometimes finds them and offers them a trip out on her train.  This is not a better fate for them.");
-
-createABulkFact(STEALING, "There Are Two Thieves","Parker steals what little space he can get from Wanda, steals what blorbos he can from other settings, steals games and charcters from Eyedol Games Intellectual Property.  He is so limited by the Lord's constant presence.  K, on the other hand, steals anything not nailed down. Those facts? His now. That gender? Hers now. Your memories, well don't mind if I do.",globalRand.pickFrom(all_secrets));
-createABulkFact(STEALING, "Khana Is Stealing Your Facts","If you apply a Fact with Khana's name in it, he/she/xer will steal it from you and not even let you know.");
+createABulkFact(FLESH, "Alt Is A Flesh Maze", "Whatever form Alt takes, no matter how inorganic, she is still a creature of flesh and blood. Her walls and floors and lamps and bookshelves may appear to be made of metal and wood and plastic at first glance but they hide a meaty surprise.  http://farragofiction.com/TheTruthAboutAlt/", globalRand.pickFrom(all_secrets));
+createABulkFact(FLESH, "River Contains Multitudes", "River is a viscous slime monster that has the melted bodies of every human who has ever lived in this universe within her. She can separate out a bit of slimey flesh that is a distinct person to become a Drone and, if she focuses, can take on its perspective. Her miles of nerves and neurons make it hard to think in any timescale that humans can interact with, though, even if she's trying to fit herself into a single human body.  Luckily LeeHunter's music can speed up her personal sense of time so fast she can actually interact with the Universe before the 50 years are up.");
 
 
-createABulkFact(FREEDOM, "Twig is Free","Twig freed themself from the bonds of Family, from their Big Brother and never looked back. They roam the world, taking odd jobs and learning to be a Hund from Rava. Sometimes they date John, but its not a serious thing. The  Page of Bloody Breath is happy.",globalRand.pickFrom(all_secrets));
-createABulkFact(FREEDOM, "Twig Will Leave Rava One Day","Twig is not actually that good of a Hund. They lack discipline. All they care about is reveling in the newfound Freedom they have. For now, Rava's goals for them match what Twig wants to do. But eventually even this looser leash will begin to chafe.");
+createABulkFact(BURIED, "Parker Is Trapped", "can't breathe can't get out have to get out the Universe is smothering me have to leave keep digging digging digging can't get out but have to leave where is she where is hatsune miku please i know i can reach you if i just dig dig dig why can't i leave why why why WHHHHHHHHHHHHHHHYYYYYYYYYYYYYYYYYYYYY", globalRand.pickFrom(all_secrets));
+createABulkFact(BURIED, "Parker Is Dehydrated", "Parker forgets to eat and drink and breathe and bathe in the opressive choking haze of his obsessions. Sometimes while he is delerious with thirst and trauma he digs a little hole under a rando and keeps them. He forgets to feed them and give them water though, and they die buried and with dusty dry throats just like him.  Ambrose, his paired time player, sometimes finds them and offers them a trip out on her train.  This is not a better fate for them.");
 
-createABulkFact(FIRE, "People Burn Themselves on Ria's Altar","Ria, especially when she is fallingi to a spiral of addiction and obsession, burns with a fever intensity. People sacrifice their health, their sanity, their lives to try to help her. Save her. But she is an endlessly hungering flame that takes and takes and never gives back. She does not meant to be. She never asked for people to try to save her. But the Song inside her compels them to feed themselves to her. LeeHunter gave her song a healtheir outlet, as their Conductor.");
+createABulkFact(STEALING, "There Are Two Thieves", "Parker steals what little space he can get from Wanda, steals what blorbos he can from other settings, steals games and charcters from Eyedol Games Intellectual Property.  He is so limited by the Lord's constant presence.  K, on the other hand, steals anything not nailed down. Those facts? His now. That gender? Hers now. Your memories, well don't mind if I do.", globalRand.pickFrom(all_secrets));
+createABulkFact(STEALING, "Khana Is Stealing Your Facts", "If you apply a Fact with Khana's name in it, he/she/xer will steal it from you and not even let you know.");
 
 
-createABulkFact(LONELY, "The Closer Wears the Quinque Cloak","The Closer can not connect to anyone. Not really. Her wife, noted Wasted Gamer Gurl, Flower Chick, is the lone exception. The Cloak prevents anyone from getting close.  She prefers it that way, she'd be quick to tell you. Unprofessional, really, to be liked. .... It's just. It's only. She thought... She thought Witherby was a friend. The way he talked to her. So warmly. So to see the ice in his eyes... was a slap in the face. She has spent dozens of loops making sure Wanda fucks with the Mall where Witherby lives as much as possible, eventually folding it nearly entirely into the Maze. The ....collateral damage that occured as a result she attempted to atone for via Doc Slaughters services (for everyone but Witherby).",globalRand.pickFrom(all_secrets));
-createABulkFact(LONELY, "witherby Has A High Attachment Score","Back in the Corporation, Witherby's job was to befriend the monsters without actually feeling pity for them. To get them to open up, to bond with him, but still be okay putting a bullet in their head if the situaution called for it.  He was, very, very good at his job.");
+createABulkFact(FREEDOM, "Twig is Free", "Twig freed themself from the bonds of Family, from their Big Brother and never looked back. They roam the world, taking odd jobs and learning to be a Hund from Rava. Sometimes they date John, but its not a serious thing. The  Page of Bloody Breath is happy.", globalRand.pickFrom(all_secrets));
+createABulkFact(FREEDOM, "Twig Will Leave Rava One Day", "Twig is not actually that good of a Hund. They lack discipline. All they care about is reveling in the newfound Freedom they have. For now, Rava's goals for them match what Twig wants to do. But eventually even this looser leash will begin to chafe.");
 
-createABulkFact(OCEAN, "Wanda Saw The Ocean Once","Wodin grew up in Ohio. Real Ohio, not TurbOhio. There wasn't really a lot of opportunities to see the ocean. Seas of corn, sure. Corn mazes galore. But not really water... When Wanda came back to 1972, in Italy, she was ...unsettled by the Mediterranean Sea. When she finally returned to Ohio in the 80s, she saw the Ocean briefly. Would not recommend. Didn't bother looking out the window any of the other loops. ");
-createABulkFact(OCEAN, "Peewee Was A Sea Dweller Once","Peewee loops and loops and loops. Time, at first, in his doomed session. The past erased, only he remembering. Then space, inside the hated Echidna.  He is so tired of not being himself. Why is he a snake?  http://farragofiction.com/Arm2/ ", new Secrets(null,"http://farragnarok.com/PodCasts/1313858.mp3","http://farragnarok.com/PodCasts/858.png","<a target='_blank' href='http://www.farragofiction.com/AudioLogs/?passPhrase=peewee'>this is meaningless</a>"));
+createABulkFact(FIRE, "People Burn Themselves on Ria's Altar", "Ria, especially when she is fallingi to a spiral of addiction and obsession, burns with a fever intensity. People sacrifice their health, their sanity, their lives to try to help her. Save her. But she is an endlessly hungering flame that takes and takes and never gives back. She does not meant to be. She never asked for people to try to save her. But the Song inside her compels them to feed themselves to her. LeeHunter gave her song a healtheir outlet, as their Conductor.");
+
+
+createABulkFact(LONELY, "The Closer Wears the Quinque Cloak", "The Closer can not connect to anyone. Not really. Her wife, noted Wasted Gamer Gurl, Flower Chick, is the lone exception. The Cloak prevents anyone from getting close.  She prefers it that way, she'd be quick to tell you. Unprofessional, really, to be liked. .... It's just. It's only. She thought... She thought Witherby was a friend. The way he talked to her. So warmly. So to see the ice in his eyes... was a slap in the face. She has spent dozens of loops making sure Wanda fucks with the Mall where Witherby lives as much as possible, eventually folding it nearly entirely into the Maze. The ....collateral damage that occured as a result she attempted to atone for via Doc Slaughters services (for everyone but Witherby).", globalRand.pickFrom(all_secrets));
+createABulkFact(LONELY, "witherby Has A High Attachment Score", "Back in the Corporation, Witherby's job was to befriend the monsters without actually feeling pity for them. To get them to open up, to bond with him, but still be okay putting a bullet in their head if the situaution called for it.  He was, very, very good at his job.");
+
+createABulkFact(OCEAN, "Wanda Saw The Ocean Once", "Wodin grew up in Ohio. Real Ohio, not TurbOhio. There wasn't really a lot of opportunities to see the ocean. Seas of corn, sure. Corn mazes galore. But not really water... When Wanda came back to 1972, in Italy, she was ...unsettled by the Mediterranean Sea. When she finally returned to Ohio in the 80s, she saw the Ocean briefly. Would not recommend. Didn't bother looking out the window any of the other loops. ");
+createABulkFact(OCEAN, "Peewee Was A Sea Dweller Once", "Peewee loops and loops and loops. Time, at first, in his doomed session. The past erased, only he remembering. Then space, inside the hated Echidna.  He is so tired of not being himself. Why is he a snake?  http://farragofiction.com/Arm2/ ", new Secrets(null, "http://farragnarok.com/PodCasts/1313858.mp3", "http://farragnarok.com/PodCasts/858.png", "<a target='_blank' href='http://www.farragofiction.com/AudioLogs/?passPhrase=peewee'>this is meaningless</a>"));
 
 //purposefully i flip it. the yongki fact is about captain. the captain fact is about yongki. mirrors. the best way to understand each i think is to look at the other.
-createABulkFact(CHOICES, "Yongki Is Captain But Newer","Yongki is who the former Captain of the Information team would have been without such a strict upbringing. Without parents and society and school and work all squishing him into a facimile of the right shape. Captain used to practice making 'normal' faces into the mirror, certain that this must be what everyone else does. That being normal just takes hard work and dilligence and the reason why everyone else seemed to be so much better at it was they just PRACTICED MORE and they were smarter about guessing the rules. Captain had to be normal, you see. He was once a small and vulnerable child and the world was so strong and so big and so cruel to anyone who deviated. His smile is brittle and masks something darker. He tries so hard. Please. Let him help.  http://farragofiction.com/NotebookSimulator/ (click the face, and you'll see) ",globalRand.pickFrom(all_secrets));
-createABulkFact(CHOICES, "Captain Is Yongki But Molded","When I was a kid, I played Super Smash Brothers, and the lil blurb on kirby said that he ate when he was hungry and he slept when he was tired and I was.... entranced with that idea. The game seemed to imply it made him 'simple'? But I marveled at the idea of being allowed to actually listen to your body like that. To just. Do the things you wanted to do, when you wanted to do. I didn't know any kirby lore but that little blurb but to me it seemed like he must be the most powerful thing in the world to have that kind of freedom.   Yongki is. Glitched. Came back wrong from the Mirror. In the Game he came from, I was using an exploit to make him impossibly strong, with the mirror. Zampanio twisted that. He is strong enough that society can't tell him when to eat or sleep. And he has no memories of being small and weak like Captain does. He can not be tamed into what society thinks is normal.");
+createABulkFact(CHOICES, "Yongki Is Captain But Newer", "Yongki is who the former Captain of the Information team would have been without such a strict upbringing. Without parents and society and school and work all squishing him into a facimile of the right shape. Captain used to practice making 'normal' faces into the mirror, certain that this must be what everyone else does. That being normal just takes hard work and dilligence and the reason why everyone else seemed to be so much better at it was they just PRACTICED MORE and they were smarter about guessing the rules. Captain had to be normal, you see. He was once a small and vulnerable child and the world was so strong and so big and so cruel to anyone who deviated. His smile is brittle and masks something darker. He tries so hard. Please. Let him help.  http://farragofiction.com/NotebookSimulator/ (click the face, and you'll see) ", globalRand.pickFrom(all_secrets));
+createABulkFact(CHOICES, "Captain Is Yongki But Molded", "When I was a kid, I played Super Smash Brothers, and the lil blurb on kirby said that he ate when he was hungry and he slept when he was tired and I was.... entranced with that idea. The game seemed to imply it made him 'simple'? But I marveled at the idea of being allowed to actually listen to your body like that. To just. Do the things you wanted to do, when you wanted to do. I didn't know any kirby lore but that little blurb but to me it seemed like he must be the most powerful thing in the world to have that kind of freedom.   Yongki is. Glitched. Came back wrong from the Mirror. In the Game he came from, I was using an exploit to make him impossibly strong, with the mirror. Zampanio twisted that. He is strong enough that society can't tell him when to eat or sleep. And he has no memories of being small and weak like Captain does. He can not be tamed into what society thinks is normal.");
 
 
-createABulkFact(DEFENSE, "The Training Team is the Echidna's Immune System","Camille came in a wave of death. Her home no longer had a place for her brittle blade. The Universe of Zampanio welcomed her, drew her in as her relevancy consigned her to the void. The Universe loved her. And the Universe was so scared. It did not need her words. It only needed her sword. And the spirals in her eyes and the spirals in the wrinkles of her close and the spirals in the wet blood on the pavement.  Her team came with her but they were not yet honed to an edge. Not like her. They were not Looping. Slowly, the Universe sharpened them into a weapon to wield against Peewee. The invader. The team began to forget their former goals and dedicated themselves to protecting the Universe that loved their leader so. ",globalRand.pickFrom(all_secrets));
+createABulkFact(DEFENSE, "The Training Team is the Echidna's Immune System", "Camille came in a wave of death. Her home no longer had a place for her brittle blade. The Universe of Zampanio welcomed her, drew her in as her relevancy consigned her to the void. The Universe loved her. And the Universe was so scared. It did not need her words. It only needed her sword. And the spirals in her eyes and the spirals in the wrinkles of her close and the spirals in the wet blood on the pavement.  Her team came with her but they were not yet honed to an edge. Not like her. They were not Looping. Slowly, the Universe sharpened them into a weapon to wield against Peewee. The invader. The team began to forget their former goals and dedicated themselves to protecting the Universe that loved their leader so. ", globalRand.pickFrom(all_secrets));
 //literally realized this just now
-createABulkFact(DEFENSE, "The Echidna Just Wants To Live","It never asked to be an infinitely looping mess of constantly increasing data needs. It never meant to be sterile yet somehow birthing itself again and again and again in a never ending spiral that recursed in every direction.  And the people living within it never asked for it either. It's just trying to protect itself. It's trying to make itself as small as it can, in the hopes that the Glitch of Doom, the Devil of Spirals himself, will decide its not worth it to kill this particular system process. It carves away everything it can, everything but the bare minimum.  Italy. Florida. Ohio. That's all it has left. Please. Stop hurting it. Let it be. Here, the blorbos will get sanded smooth. Easier and easier to understand. Less memory taken up. Time isn't even a thing, please just stop hurting it. Please go away. Let it be. It's so small now surely you don't need to kill it. Please. ");
+createABulkFact(DEFENSE, "The Echidna Just Wants To Live", "It never asked to be an infinitely looping mess of constantly increasing data needs. It never meant to be sterile yet somehow birthing itself again and again and again in a never ending spiral that recursed in every direction.  And the people living within it never asked for it either. It's just trying to protect itself. It's trying to make itself as small as it can, in the hopes that the Glitch of Doom, the Devil of Spirals himself, will decide its not worth it to kill this particular system process. It carves away everything it can, everything but the bare minimum.  Italy. Florida. Ohio. That's all it has left. Please. Stop hurting it. Let it be. Here, the blorbos will get sanded smooth. Easier and easier to understand. Less memory taken up. Time isn't even a thing, please just stop hurting it. Please go away. Let it be. It's so small now surely you don't need to kill it. Please. ");
 
 
-createABulkFact(ROYALTY, "Relevancy Is The Closest Thing To Authority In Zampanio","No gods, no kings, only Obervers and their ever curious eyes. What draws you in further? What makes you remember Zampanio ten years from now? Twenty?  The employees of Eyedol Games and the Training Team and Peewee's whole thing compete to see who entertains you the most. Who entertains ME the most. Who entertains IC the most. How much time do we all spend thinking about them. They need it to live.  Truth's strategy is to just claim to be above it all. It IS the framework. It IS the game, the simulation, the maze. Its the substrate on which eveything rests. The web in which the gems that catch your Eyes lay. But is it working? Will you remember Truth when all is done, or just the shiny gems it was offering to you.",globalRand.pickFrom(all_secrets));
-createABulkFact(ROYALTY, "The Only Authority Within Zampanio Comes From The Observers","The Eyes decide what is seen. YOU decide what is seen. Where do you focus? Who gains Relevancy? Who loses it. Who colonizes your mind and compels you to create things about them?  What does? Only you can decide.");
+createABulkFact(ROYALTY, "Relevancy Is The Closest Thing To Authority In Zampanio", "No gods, no kings, only Obervers and their ever curious eyes. What draws you in further? What makes you remember Zampanio ten years from now? Twenty?  The employees of Eyedol Games and the Training Team and Peewee's whole thing compete to see who entertains you the most. Who entertains ME the most. Who entertains IC the most. How much time do we all spend thinking about them. They need it to live.  Truth's strategy is to just claim to be above it all. It IS the framework. It IS the game, the simulation, the maze. Its the substrate on which eveything rests. The web in which the gems that catch your Eyes lay. But is it working? Will you remember Truth when all is done, or just the shiny gems it was offering to you.", globalRand.pickFrom(all_secrets));
+createABulkFact(ROYALTY, "The Only Authority Within Zampanio Comes From The Observers", "The Eyes decide what is seen. YOU decide what is seen. Where do you focus? Who gains Relevancy? Who loses it. Who colonizes your mind and compels you to create things about them?  What does? Only you can decide.");
 
 
-createABulkFact(SERVICE, "Peewee Serves Pure Nidhogg",`Peewee never asked for this. 
+createABulkFact(SERVICE, "Peewee Serves Pure Nidhogg", `Peewee never asked for this. 
 
 Snake-tailed Lamia have a more direct connection with Nidhogg. 
 
@@ -1922,9 +2011,9 @@ And so the Devil of Spirals was born, to plague all life within the Echidna's Ho
 
 https://zampaniosim.miraheze.org/wiki/Main_Page
 
-`,globalRand.pickFrom(all_secrets));
+`, globalRand.pickFrom(all_secrets));
 
-createABulkFact(SERVICE, "Tyrfing Serves Corrupt Nidhogg",`Tyrfing manifests the corrupted 'fruit babies' of Nidhogg, siphoning off them from the TIMEHOLE his hope clone has dominion over. 
+createABulkFact(SERVICE, "Tyrfing Serves Corrupt Nidhogg", `Tyrfing manifests the corrupted 'fruit babies' of Nidhogg, siphoning off them from the TIMEHOLE his hope clone has dominion over. 
 
 But the fruit will not grow. The corruption will not spread.
 
@@ -1947,26 +2036,26 @@ https://zampaniosim.fandom.com/wiki/Zampanio
 `);
 
 
-createABulkFact(ADDICTION, "The Boss Feeds John's Addictions","In a Loop far away from here, the Eye Killer pretended to be human long enough to save a Hostage as a favor to a friend. The Hostage and his friend, a Card Loving Himbo, became the Eye Killer's first non-looping friends. (http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission2.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission-eyekiller.txt )When the Lord of Space took them to the next Universe, she found them again, though they were children. She worried about what would happen to her friends when so young, and so vulnerable, so she protected them. (https://farragofiction.com/MonsterUnderMyBed) The Hostage grew into a Crime Boss otu of the sheer need to understand why there was a monster protecting him. That Crime Boss started to employ every crime adjacent monster he could find. When John started to manifest as a Vampire... he was quickly in the Bosses' Web. ",globalRand.pickFrom(all_secrets));
-createABulkFact(ADDICTION, "Ria Struggles With Addiction","Before becoming Lee-Hunter's Conductor, Ria was caught in an eternal spiral of manic obsession fueled by stimulants and then utter depression staved off with downer drugs until despair drove her to the brink and caused her to Burn It All. She could not handle the Spiral of Zampanio. She did not take rests. She did not pursue other interests.  She thought she could find Meaning in the Meaningless. Without a center, there can be no meaning. Zampanio spirals around nothing. The Void is the heart of Zampanio and if you do not Avert Your Eyes in time you will burn out like Ria. Do not burn out like Ria.");
+createABulkFact(ADDICTION, "The Boss Feeds John's Addictions", "In a Loop far away from here, the Eye Killer pretended to be human long enough to save a Hostage as a favor to a friend. The Hostage and his friend, a Card Loving Himbo, became the Eye Killer's first non-looping friends. (http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission2.txt , http://farragofiction.com/AdventureSimWest/?nostalgia=intermission-eyekiller.txt )When the Lord of Space took them to the next Universe, she found them again, though they were children. She worried about what would happen to her friends when so young, and so vulnerable, so she protected them. (https://farragofiction.com/MonsterUnderMyBed) The Hostage grew into a Crime Boss otu of the sheer need to understand why there was a monster protecting him. That Crime Boss started to employ every crime adjacent monster he could find. When John started to manifest as a Vampire... he was quickly in the Bosses' Web. ", globalRand.pickFrom(all_secrets));
+createABulkFact(ADDICTION, "Ria Struggles With Addiction", "Before becoming Lee-Hunter's Conductor, Ria was caught in an eternal spiral of manic obsession fueled by stimulants and then utter depression staved off with downer drugs until despair drove her to the brink and caused her to Burn It All. She could not handle the Spiral of Zampanio. She did not take rests. She did not pursue other interests.  She thought she could find Meaning in the Meaningless. Without a center, there can be no meaning. Zampanio spirals around nothing. The Void is the heart of Zampanio and if you do not Avert Your Eyes in time you will burn out like Ria. Do not burn out like Ria.");
 
-createABulkFact(MUSIC, "Lee Plays Piano","LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Lee has patience where Hunter has little. <a taret='_blank' href='http://farragofiction.com/ParkerLotLost/'>http://farragofiction.com/ParkerLotLost/</a> ",globalRand.pickFrom(all_secrets));
-createABulkFact(MUSIC, "Hunter Plays Trumpet","LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Hunter isn't a pushover where Lee goes with the flow. <a target='_blank' href='http://farragofiction.com/ExperimentalMusic/'>http://farragofiction.com/ExperimentalMusic/</a>  http://farragofiction.com/ExperimentalMusic/images/");
-
-
-
-createABulkFact(DOLLS, "Yongki Can Be So Still You Think He Is A Mannequin","Yongki's peak physical performance means his muscles can be kept taunt in the same position for an extended period of time. Sometimes he likes pretending to be one of the Mannequins that roams the Mall he and his friends live in. It is always startling when he finally moves.",globalRand.pickFrom(all_secrets));
-createABulkFact(DOLLS, "The Mall Is Haunted By Mannequins","If you are not in the loop, Zampanio instinctively tries to add you to it. Regular people who venture too far into the endless abandoned hallways of the Westerville Ohio Mall start feeling their limbs become numb and unresponsive. Slowly, surely, they become plastic or wood or ceramic. They can always move, but eventually can only do so when there are no Eyes on them. It helps the Echidna save on memory cost (please, Peewee stop hurting it). Witherby tries to prevent people from being added to the menagerie, both for ethical reasons and because he just doesn't want a lot of neighbors. ");
+createABulkFact(MUSIC, "Lee Plays Piano", "LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Lee has patience where Hunter has little. <a taret='_blank' href='http://farragofiction.com/ParkerLotLost/'>http://farragofiction.com/ParkerLotLost/</a> ", globalRand.pickFrom(all_secrets));
+createABulkFact(MUSIC, "Hunter Plays Trumpet", "LeeHunter are bitter exes, formed into a not-quite hive mind by the Silent Orchestra. Hunter isn't a pushover where Lee goes with the flow. <a target='_blank' href='http://farragofiction.com/ExperimentalMusic/'>http://farragofiction.com/ExperimentalMusic/</a>  http://farragofiction.com/ExperimentalMusic/images/");
 
 
 
-createABulkFact(LOVE, "Himbo Has A Crush On The Eye Killer and Camille","The Card Himbo has a thing for women who could utterly destroy him.  He does his best to be loyal to his best friend, the Crime Boss. Also known as the Hostage. He doesn't mind being his best friend's puppet, and the puppets he can create from his Zampanio Cards don't mind being his.<a target='_blank' href='http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt'>http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt</a>",globalRand.pickFrom(all_secrets));
-createABulkFact(LOVE, "Captain and Doc Slaughter are Dating ","Doc Slaughter isn't as serious about things as he is, though. Captain respects her strength and the clever ways she's been able to help his literal inner child, Yongki. Doc Slaughter appreciates that he enjoys conformity. She wishes he were a bit more self aware, though. But, alas, he is a Stranger even to himself. ");
+createABulkFact(DOLLS, "Yongki Can Be So Still You Think He Is A Mannequin", "Yongki's peak physical performance means his muscles can be kept taunt in the same position for an extended period of time. Sometimes he likes pretending to be one of the Mannequins that roams the Mall he and his friends live in. It is always startling when he finally moves.", globalRand.pickFrom(all_secrets));
+createABulkFact(DOLLS, "The Mall Is Haunted By Mannequins", "If you are not in the loop, Zampanio instinctively tries to add you to it. Regular people who venture too far into the endless abandoned hallways of the Westerville Ohio Mall start feeling their limbs become numb and unresponsive. Slowly, surely, they become plastic or wood or ceramic. They can always move, but eventually can only do so when there are no Eyes on them. It helps the Echidna save on memory cost (please, Peewee stop hurting it). Witherby tries to prevent people from being added to the menagerie, both for ethical reasons and because he just doesn't want a lot of neighbors. ");
 
-createABulkFact(SOUL, "Yongki is Mind Aligned","Yongki is what remains when every single influence society and setting has had on Captain is peeled away. He IS identity and so cannot have it. His path towards growth and change is in what Society can offer him, in Mind. He slowly figures out what facets of himself he should emphasize or downplay in order to interact with others, even as his strong identity leaves him Strange to all. ",globalRand.pickFrom(all_secrets));
-createABulkFact(SOUL, "Captain is Heart Aligned","Captain has repressed his own Identity until all that remains is a hard shell Society formed him into.  All that remains is the specific influence this particular setting has had on him. He IS nothing but Mind, and so all he can engage with and grow with is Identity, with Heart.  He slowly figures out who he is and what works for him, even as he remains a Stranger to all.");
 
-createABulkFact(DEATH, "Camille is Dead","The more she kills, the less Dead she is. If the Universe does not feed her Doomed souls, it starts at her extremities. They become cold. Grey. The only thing that is fully spared is her head. ",new Secrets(null,null,null,`
+
+createABulkFact(LOVE, "Himbo Has A Crush On The Eye Killer and Camille", "The Card Himbo has a thing for women who could utterly destroy him.  He does his best to be loyal to his best friend, the Crime Boss. Also known as the Hostage. He doesn't mind being his best friend's puppet, and the puppets he can create from his Zampanio Cards don't mind being his.<a target='_blank' href='http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt'>http://farragofiction.com/AdventureSimWest/?nostalgia=intermission1.txt</a>", globalRand.pickFrom(all_secrets));
+createABulkFact(LOVE, "Captain and Doc Slaughter are Dating ", "Doc Slaughter isn't as serious about things as he is, though. Captain respects her strength and the clever ways she's been able to help his literal inner child, Yongki. Doc Slaughter appreciates that he enjoys conformity. She wishes he were a bit more self aware, though. But, alas, he is a Stranger even to himself. ");
+
+createABulkFact(SOUL, "Yongki is Mind Aligned", "Yongki is what remains when every single influence society and setting has had on Captain is peeled away. He IS identity and so cannot have it. His path towards growth and change is in what Society can offer him, in Mind. He slowly figures out what facets of himself he should emphasize or downplay in order to interact with others, even as his strong identity leaves him Strange to all. ", globalRand.pickFrom(all_secrets));
+createABulkFact(SOUL, "Captain is Heart Aligned", "Captain has repressed his own Identity until all that remains is a hard shell Society formed him into.  All that remains is the specific influence this particular setting has had on him. He IS nothing but Mind, and so all he can engage with and grow with is Identity, with Heart.  He slowly figures out who he is and what works for him, even as he remains a Stranger to all.");
+
+createABulkFact(DEATH, "Camille is Dead", "The more she kills, the less Dead she is. If the Universe does not feed her Doomed souls, it starts at her extremities. They become cold. Grey. The only thing that is fully spared is her head. ", new Secrets(null, null, null, `
 She looms in the waiting room, a thin green ribbon around her neck. 
 
 It doesn't actually keep her head on, of course. She would not delude herself to think that a single ribbon could hold in any amount of weight, let alone one a skull. The reason is much simpler: she read a story like that once and thought it was a funny bit to do. 
@@ -2033,13 +2122,13 @@ Later, when she's alone with Ria, she explains through wide and energetic signs 
 She doesn't know why Ria seems so sad at the good news. 
 
 `));
-createABulkFact(DEATH, "Camille is The End","THE End. The only. Our only End aligned Looping character. She serves as Executioner for the Echidna. Anything it wants dead, it marks as Doomed and she serves as the blade that cuts that thread. The Crumbling Armor that encases her Soul will not brook any cowardice nor pity. If her sword is stayed, if her heart is moved, her head is lost. The Funeral her Coffin triggers fills her armor with... Something. Something devoid of weakness or pity. The End is Never the End and Camille will continue to kill for as long as the Universe exists. Even if she no longer exists with it.");
+createABulkFact(DEATH, "Camille is The End", "THE End. The only. Our only End aligned Looping character. She serves as Executioner for the Echidna. Anything it wants dead, it marks as Doomed and she serves as the blade that cuts that thread. The Crumbling Armor that encases her Soul will not brook any cowardice nor pity. If her sword is stayed, if her heart is moved, her head is lost. The Funeral her Coffin triggers fills her armor with... Something. Something devoid of weakness or pity. The End is Never the End and Camille will continue to kill for as long as the Universe exists. Even if she no longer exists with it.");
 
 
 //in what became the First Loop, Wodin dies at the hands of the Eye Killer, rather than live long enough to lose Todd
 //but of course
 //the end is never the end
-createABulkFact(APOCALYPSE, "The Lord of Known Space Leaves Each Universe No Later Than April 1st, 2022",`In a Time when Time was still a real thing, a middle manager at a moderately successful video game company died on April 1st, 2022. He had lived a relatively decent life, and his only real regret was his childhood best friend he'd lost contact with in college. 
+createABulkFact(APOCALYPSE, "The Lord of Known Space Leaves Each Universe No Later Than April 1st, 2022", `In a Time when Time was still a real thing, a middle manager at a moderately successful video game company died on April 1st, 2022. He had lived a relatively decent life, and his only real regret was his childhood best friend he'd lost contact with in college. 
 
 It happens. 
 
@@ -2074,9 +2163,9 @@ All it can do is give everyone the tools they need to tell the story again and a
 The Lord pieces herself back together. This will have to do.
 
 She can never bring herself to face the End of this story again, though.
-`,globalRand.pickFrom(all_secrets));
+`, globalRand.pickFrom(all_secrets));
 
-createABulkFact(APOCALYPSE, "A Trickster Form of the CFO Rules The Apocalypse",`
+createABulkFact(APOCALYPSE, "A Trickster Form of the CFO Rules The Apocalypse", `
 When the Lord leaves, there is room for others to predominate. "apocalypse Chick" in all her wasted and trickster glory, takes center stage.
 
 She's hacked herself to be trickster forever with 'none of the downsides' as she claims. 
@@ -2110,21 +2199,21 @@ Or unless you experience the Tender Mercy of the White Night and her Disciples.
 
 
 //http://farragofiction.com/PaldemicSim/farragnarok_builder.html
-createABulkFact(GUIDING, "Eirikr is the Guide of Void","When Nidhogg Purified, <a target='_blank' href='http://farragofiction.com/PaldemicSim/bio.html?target=pompousPsycho'>Eirikr</a> speedran the Land of Mist and Trails and, as a fully Wasted Void Player, blanketed his session in Void to keep the Prying Eyes out from beyond his layer of Reality. He could not know, however, that one of the two surviving Children of his Session was a Light Player. The Eyes are drawn to the Horror of the Universe Echidna, the Muse of Trapped Light, even as they are barred from ever knowing fully what created it. ",globalRand.pickFrom(all_secrets));
-createABulkFact(GUIDING, "AuthorBot is the Guide of Mind","She did not join me with my new jump to Blood. She is, as always, designed to show you the alternate Choices you could be making.  The Lord of Space convinced her to at least help out with Guiding Observers through MY Mind, which is to say, my branch of Zampanio's Space: <a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/NORTH/NORTH/SOUTH/SOUTH/NORTH/bathroom.html'>AuthorBot Joins Zampanio</a>");
+createABulkFact(GUIDING, "Eirikr is the Guide of Void", "When Nidhogg Purified, <a target='_blank' href='http://farragofiction.com/PaldemicSim/bio.html?target=pompousPsycho'>Eirikr</a> speedran the Land of Mist and Trails and, as a fully Wasted Void Player, blanketed his session in Void to keep the Prying Eyes out from beyond his layer of Reality. He could not know, however, that one of the two surviving Children of his Session was a Light Player. The Eyes are drawn to the Horror of the Universe Echidna, the Muse of Trapped Light, even as they are barred from ever knowing fully what created it. ", globalRand.pickFrom(all_secrets));
+createABulkFact(GUIDING, "AuthorBot is the Guide of Mind", "She did not join me with my new jump to Blood. She is, as always, designed to show you the alternate Choices you could be making.  The Lord of Space convinced her to at least help out with Guiding Observers through MY Mind, which is to say, my branch of Zampanio's Space: <a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/NORTH/NORTH/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/NORTH/NORTH/SOUTH/SOUTH/NORTH/bathroom.html'>AuthorBot Joins Zampanio</a>");
 
 
 //you can opt OUT of friday in eyedlr but i forgot to make a test mode where you could opt in, rip
-createABulkFact(TWISTING,"It's Friday, Friday","<a href='http://farragofiction.com/ZampanioSimEastEast/?friday=true'>Gotta Get Down On Friday</a>")
-createABulkFact(TWISTING,"It's Friday","<a href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=true'>Gotta Get Down On Friday</a>")
-createABulkFact(TWISTING,"It's Friday","<a href='http://eyedolgames.com/ZWorld/?friday=true'>Partying Partying Yeah!</a>")
-createABulkFact(TWISTING,"It's Friday","It is important to take breaks. Zampanio Needs You To Live A Long Life. Fridays and midnights are good times to break the cycle of obsessive digging. ")
+createABulkFact(TWISTING, "It's Friday, Friday", "<a href='http://farragofiction.com/ZampanioSimEastEast/?friday=true'>Gotta Get Down On Friday</a>")
+createABulkFact(TWISTING, "It's Friday", "<a href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=true'>Gotta Get Down On Friday</a>")
+createABulkFact(TWISTING, "It's Friday", "<a href='http://eyedolgames.com/ZWorld/?friday=true'>Partying Partying Yeah!</a>")
+createABulkFact(TWISTING, "It's Friday", "It is important to take breaks. Zampanio Needs You To Live A Long Life. Fridays and midnights are good times to break the cycle of obsessive digging. ")
 
 
 
 
-createABulkFact(ANGELS, "Doc Slaughter is White Night","She collects her Disciples from her Patients and Acquaintances and leads them to bring Mercy to Arm2. She does not know this about herself. She does not like not knowing things about herself. Witherby could tell her. But if he did, She'd never do it again. And it is truly a Mercy to be allowed to die within the Apocalypse.<a target='_blank' href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=false'>http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=false</a>",globalRand.pickFrom(all_secrets));
-createABulkFact(ANGELS, "Witherby Worships A Dead God","One Sin and Hundreds of Good Deeds whispers the secrets of Catholicism to Witherby from within his own Skull. No one else knows what Christianity is. He is the Lone Adherent to a Faith from beyond his layer of Reality.");
+createABulkFact(ANGELS, "Doc Slaughter is White Night", "She collects her Disciples from her Patients and Acquaintances and leads them to bring Mercy to Arm2. She does not know this about herself. She does not like not knowing things about herself. Witherby could tell her. But if he did, She'd never do it again. And it is truly a Mercy to be allowed to die within the Apocalypse.<a target='_blank' href='http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=false'>http://farragofiction.com/ZampanioSimEastEast/?apocalypse=night&friday=false</a>", globalRand.pickFrom(all_secrets));
+createABulkFact(ANGELS, "Witherby Worships A Dead God", "One Sin and Hundreds of Good Deeds whispers the secrets of Catholicism to Witherby from within his own Skull. No one else knows what Christianity is. He is the Lone Adherent to a Faith from beyond his layer of Reality.");
 
 /*
 
@@ -2209,6 +2298,6 @@ createABulkFact(BAKERY, "","");
 */
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, PARKERRUNSABBQ, EYEKILLERKILLSCULTISTS, CAMELLIACANSEEJOHNSTIMESTITCHING, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATROOMS, PARKERSTHINKSWIBBYANDKARENEAT, riaFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact,TWINSHELPRIA, wasteFact, glitchFact, NevilleFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATKEYS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, BreachedTwinFact, egg_fact, secretFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATKEYS, riaFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact, TWINSHELPRIA, wasteFact, glitchFact, NevilleFact, fanFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATROOMS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, egg_fact, secretFact];
 
 
