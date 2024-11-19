@@ -18,6 +18,7 @@ let truthEle;
 
 let globalDataObject = {
   truthPerSecond: 1,
+  timesCheatedTheHarvest: 0, //Camellia will make sure there are Consequences.
   startedPlayingTimeCode: Date.now(),
   numberKeys: 1, //thanks illusionist
   keysBoughtFromCloser: 0,

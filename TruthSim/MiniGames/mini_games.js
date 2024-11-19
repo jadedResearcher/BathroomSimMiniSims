@@ -475,32 +475,64 @@ class EyeKillerMiniGame extends MiniGame {
             // ria post https://www.tumblr.com/jadedresearcher/766772258183233536/i-cant-remember-if-this-has-been-asked-before-but?source=share
             let factsSelector1;
             let factsSelector2;
-            const factContainer = createElementWithClassAndParent("div", ele,"harvest-container");
+            const factContainer = createElementWithClassAndParent("div", ele, "harvest-container");
             factContainer.style.cssText = `justify-content: center;margin-top:31px; gap:13px;display: flex; margin-left: auto; margin-right: auto; width: 90%;`;
 
             if (options1.length > 0) {
-                factsSelector1 = createElementWithClassAndParent("select", factContainer,"harvest-select");
+                factsSelector1 = createElementWithClassAndParent("select", factContainer, "harvest-select");
                 factsSelector1.style.cssText = `max-width: 250px;`;
 
                 for (let o of options1) {
                     factsSelector1.append(o.option);
                 }
 
-                factsSelector2 = createElementWithClassAndParent("select", factContainer,"harvest-select");
+                factsSelector2 = createElementWithClassAndParent("select", factContainer, "harvest-select");
                 factsSelector2.style.cssText = `max-width: 250px;`;
                 for (let o of options2) {
-                    console.log("JR NOTE: option 2",o)
+                    console.log("JR NOTE: option 2", o)
                     factsSelector2.append(o.option);
                 }
 
                 const button = createElementWithClassAndParent("button", ele);
                 button.innerText = "Sacrifice These Facts To The Sleeping Harvest";
                 button.style.cssText = `display: block; margin-left:auto; margin-right:auto; margin-top:31px;`;
-                button.onclick = ()=>{
+                button.onclick = () => {
                     alert("TODO")
+                    const fact1Title = factsSelector1.value;
+                    const fact2Title = factsSelector2.value;
+                    let fact1;
+                    let fact2;
+
+                    for (let fact of globalDataObject.factsUnlocked) {
+                        if (fact.title === fact1Title) {
+                            fact1 = fact;
+                        }
+
+                        if(fact.title === fact2Title){
+                            fact2 = fact;
+                        }
+                        if(fact1 && fact2){
+                            break;
+                        }
+                    }
+
+                    if(fact1 == fact2){
+                        globalDataObject.timesCheatedTheHarvest = globalDataObject.timesCheatedTheHarvest? globalDataObject.timesCheatedTheHarvest:0;
+                        globalDataObject.timesCheatedTheHarvest++;
+                        if(globalDataObject.timesCheatedTheHarvest ===1){
+                            ele.innerHTML = "You have been warned. Do not try to cheat the Harvest again. Two of the same facts are not two facts.";
+                        }else{
+                            //will wastes inevitably exploit this to clear out facts?
+                            //maybe? maybe neville is more convinient
+                            ele.innerHTML = "Blasphemer. Cheater. Heretic. You do not heed the warnings. Two of the same facts are not two facts. Are not a True Sacrifice. <br><br>The Harvest is the god of, among more things than your feable brain could comprehend, two things Sacrificed to become Changed. <br><br> All your facts are forfeit.<br><br>May this feast Serve our god in her time of slumber.<br><br>And may you be Inspired to not repeat your little trick.";
+                            globalDataObject.factsUnlocked = [];
+                            ele.style.padding="31px"
+                        }
+                        save(); //you will be remembered. 
+                    }
                 }
 
-            }else{
+            } else {
                 //truth + scarecrow + libraries = the Harvest is a ravenous infovore.
                 factContainer.innerText = "No Facts For The Harvest To Eat :( :( :("
             }
