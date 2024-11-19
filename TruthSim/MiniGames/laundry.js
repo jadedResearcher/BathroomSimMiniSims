@@ -131,6 +131,7 @@ class LaundryMiniGame extends MiniGame {
         const header = createElementWithClassAndParent("div", container);
         if (this.fact && this.respondsToFact(this.fact)) {
             donateFactToK(this.fact);
+            console.log("JR NOTE: https://archiveofourown.org/works/60649303/chapters/154864102")
             truthLog("It seems the little gremlin has stolen your fact because it had his/xer/her/their/its name on it.", "No matter. I am certain you can obtain it again elsewhere.");
             this.fact = null;//yoinked
         }

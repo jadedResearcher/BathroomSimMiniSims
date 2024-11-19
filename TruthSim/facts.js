@@ -428,9 +428,10 @@ const KISALUCKYBASTARD = new Fact("K Is A Lucky Bastard", "K should have died a 
 //https://archive.org/details/zammy-dreams
 //the eye killer considers herself the Final Girl of a horror movie. she is desparate and scared and willing to kill to survive. and so full of adrenaline and fear that the slightest surprise is treated as a jump scare you should stab. 
 const KILLEROWNSBLADE = new Fact("The Eye Killer Wields the Quatro Blade", "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. Any cut made with it can not be perceived, even as blood loss slowly builds up. Anyone who dies while bleeding from this blade will not be percieved by any means. It is said the Eye Killer does not even know she wields it. All she knows is that the kills she makes to warn off Hunters never seem to get found. Never seem to scare off predators. So her kills get more and more gruesome, more and more artistic,  to try to acomplish her goals. Do not look for her. Do not Hunt her. Do not make Wodin's mistake.", [KILLING, OBFUSCATION], 2, 0.5, 0.5)
-const EYEKILLERISHUNTED = new Fact("The Eye Killer Is Hunted", "The Eye Killer is hunted by the Cult of the Nameless One, for reasons she does not understand. She was one of the, once.", [HUNTING], 1, 1, 2);
-const EYEKILLERKILLSCULTISTS = new Fact("The Eye Killer Kills Cultists", "The Eye Killer kills only in self defense, but makes increasingly gruesome 'art pieces' to try to scare off future hunters. She does not know why it never seems to work.", [KILLING], 2, 1, 1);
+const EYEKILLERISHUNTED = new Fact("The Eye Killer Is Hunted", "The Eye Killer is hunted by the Cult of the Nameless One, for reasons she does not understand. She was one of them, once.", [HUNTING, ANGELS, KILLING], 1, 1, 2);
+const EYEKILLERKILLSCULTISTS = new Fact("The Eye Killer Kills Cultists", "The Eye Killer kills only in self defense, but makes increasingly gruesome 'art pieces' to try to scare off future hunters. She does not know why it never seems to work. The Quatro Blade obscures her kills.", [KILLING, ANGELS, OBFUSCATION], 2, 1, 1);
 const EYEKILLERFOUNDFAMILY = new Fact("The Eye Killer Has Found A Family", "The Eye Killer misses the cult that raises her, even as they hunt her now. She's finally found a new one she trusts in the Mafia. The Hostage she rescued and the Himbo who helped her are her friends, through every Loop.", [DEFENSE, FAMILY], 1, 10, 1);
+const EYEKILLERWASCULTIST = new Fact("The Eye Killer Was a Cultist", "If the EyeKiller had not fled the cult, afraid for her life, she might have gone on to lead it. Camellia is from a timeline where that happened. Camellia is very happy with her role in the cult. ", [KILLING, ANGELS, TIME], 2, 1, 1, new Secrets(null,null,null,`<a target="_blank" href='http://lavinraca.eyedolgames.com/'>The Harvest Sleeps Until October</a>`));
 
 
 //closer will NOT stock any facts about herself, thank you very much, besides marketing spiels
@@ -2261,7 +2262,7 @@ Logan
 //first will have a secret, none of the others will
 createABulkFact(BAKERY, "","",globalRand.pickFrom(all_secrets));
 createABulkFact(BAKERY, "","");
-
+//https://archiveofourown.org/works/60649303/chapters/154864102 totally true tales of k
 //wiggler eater: https://archiveofourown.org/works/36742426/chapters/91657357
 //wiggler eater 2: https://archiveofourown.org/works/39322080
 //jr ships: https://archiveofourown.org/works/35265706/chapters/87885928
@@ -2298,6 +2299,6 @@ createABulkFact(BAKERY, "","");
 */
 
 //every fact the closer can give you
-const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATKEYS, riaFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact, TWINSHELPRIA, wasteFact, glitchFact, NevilleFact, fanFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATROOMS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, egg_fact, secretFact];
+const factsForSale = [CLOSERISGREATATFACTS, KISALUCKYBASTARD, EYEKILLERISHUNTED, EYEKILLERKILLSCULTISTS, KILLEROWNSBLADE, EYEKILLERFOUNDFAMILY, PARKERSBESTIEISVIC, EYEKILLERWASCULTIST, DevonaFact, PARKERSlOVESGUNTAN, CLOSERISGREATATKEYS, riaFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP2, altFact, TWINSHELPRIA, wasteFact, glitchFact, NevilleFact, fanFact, VIKANDKHAVEACOMPLICATEDRELATIONSHIP1, CLOSERISGREATATROOMS, VIKANDKHAVEACOMPLICATEDRELATIONSHIP3, egg_fact, secretFact];
 
 

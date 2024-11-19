@@ -53,10 +53,10 @@ const rooms_to_unlock = {
 
 
 //half as common as other rooms
-const rareMiniGames = [EYEKILLERMINIGAME, LAUNDRYMINIGAME,HOONMINIGAME];
+const rareMiniGames = [EYEKILLERMINIGAME, LAUNDRYMINIGAME, HOONMINIGAME];
 
 //max of once per maze
-const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, RIAMINIGAME,SHOPMINIGAME, TWINSMINIEGAME, GAMERSHOPMINIGAME];
+const uniqueMiniGames = [LOCKEDMINIGAME, CONFESSIONMINIGAME, RIAMINIGAME, SHOPMINIGAME, TWINSMINIEGAME, GAMERSHOPMINIGAME];
 
 const initAllMiniGames = () => {
     new LockMiniGame();
@@ -263,8 +263,8 @@ class MiniGame {
             const skip_button = createElementWithClassAndParent("img", header, "skip-button");
             skip_button.src = "images/KeyForFriend.png";
 
-            if(this.id == LAUNDRYMINIGAME){
-                skip_button.style.cursor="not-allowed";
+            if (this.id == LAUNDRYMINIGAME) {
+                skip_button.style.cursor = "not-allowed";
                 skip_button.title = "Don't You Fucking Dare";
             }
             skip_button.onclick = async () => {
@@ -274,11 +274,11 @@ class MiniGame {
                     globalDataObject.currentMaze = null;//reset maze
                     //not quite enough to breech but.... pretty close
                     //plus ALL of these will end up in the slot machine pool
-                    for(let i =0; i<10; i++){
+                    for (let i = 0; i < 10; i++) {
                         const kFact = new Fact("You Will Look At Khana", "So. Funny story. K has two main abnormalities associated with him/her/xer:  Burrowing Heaven, and Schadenfreude. With the former, if you ignore K too long, he breeches, and spreads in every direction to try to find your Gaze. With the latter, if you look too much at xer, xe breeches and rampages around killing people horribly. Vik can help contain the latter. The Censorship is for your protection against schadenfreude....but once Burrowing Heaven gets loose... Well. Best to let it run its course. Censorship only makes it worse, afterall.", Object.keys(all_themes), 999, 999, 999);
-                        if(globalRand.nextDouble()>0.5){
+                        if (globalRand.nextDouble() > 0.5) {
                             factsForSale.push(kFact);
-                        }else{
+                        } else {
                             globalDataObject.factsUnlocked.push(kFact);
                         }
                     }
@@ -342,14 +342,14 @@ class MiniGame {
 
                     ////any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
                     if (factsSelector.value.toLowerCase().includes("secret")) {
-                        docSlaughtersSecretEmporium(false,false);
+                        docSlaughtersSecretEmporium(false, false);
                         return;
                     }
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === factsSelector.value) {
                             //doc slaughter is so so nosy
-                            if(fact.secret && secretIsGlitched(fact.secret)){
-                                docSlaughtersSecretEmporium(false,fact);
+                            if (fact.secret && secretIsGlitched(fact.secret)) {
+                                docSlaughtersSecretEmporium(false, fact);
                                 return;
                             }
                             fact.mini_game_key = this.id;
@@ -435,13 +435,78 @@ class EyeKillerMiniGame extends MiniGame {
     }
 
     respondsToFact = (fact) => {
-        return fact.title.includes("Quatro Blade") || fact.title.includes("The Eye Killer Did Not Always Like Eggs");
+        return fact.title.includes("The Eye Killer Was a Cultist") || fact.title.includes("Quatro Blade") || fact.title.includes("The Eye Killer Did Not Always Like Eggs");
     }
 
     respondToEgg = async (ele, room, callback) => {
         await truthPopup("You did it!", "Nothing that offers an Egg can be Scary!", "I am Flattered that you have Watched us long enough to realize the Key to the EyeKiller's Heart.")
         callback(globalDataObject.currentMaze);
         renderMazeTab();
+    }
+
+    gloryToTheHarvest = async (ele, room, callback) => {
+        const cultist_container = createElementWithClassAndParent("div", ele);
+        const harvest_poster = createElementWithClassAndParent("img", ele);
+        harvest_poster.src = "images/harvest_by_guide.png";
+        harvest_poster.style.cssText = `    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #F0EAD6;
+    border-bottom-width: 8px;
+    border-top-width: 8px;
+    width: 150px;`
+
+        if (globalDataObject.factsUnlocked.length > 0) {
+            const options1 = [];
+            const options2 = [];
+
+            for (let fact of globalDataObject.factsUnlocked) {
+                if (!fact.mini_game_key) { //don't display facts that already live somewhere
+                    const option = document.createElement("option")
+                    option.innerText = fact.title;
+                    options1.push({ option, fact });
+
+                    const option2 = document.createElement("option")
+                    option2.innerText = fact.title;
+                    options2.push({ option: option2, fact });
+                }
+
+            }
+            // ria post https://www.tumblr.com/jadedresearcher/766772258183233536/i-cant-remember-if-this-has-been-asked-before-but?source=share
+            let factsSelector1;
+            let factsSelector2;
+            const factContainer = createElementWithClassAndParent("div", ele,"harvest-container");
+            factContainer.style.cssText = `justify-content: center;margin-top:31px; gap:13px;display: flex; margin-left: auto; margin-right: auto; width: 90%;`;
+
+            if (options1.length > 0) {
+                factsSelector1 = createElementWithClassAndParent("select", factContainer,"harvest-select");
+                factsSelector1.style.cssText = `max-width: 250px;`;
+
+                for (let o of options1) {
+                    factsSelector1.append(o.option);
+                }
+
+                factsSelector2 = createElementWithClassAndParent("select", factContainer,"harvest-select");
+                factsSelector2.style.cssText = `max-width: 250px;`;
+                for (let o of options2) {
+                    console.log("JR NOTE: option 2",o)
+                    factsSelector2.append(o.option);
+                }
+
+                const button = createElementWithClassAndParent("button", ele);
+                button.innerText = "Sacrifice These Facts To The Sleeping Harvest";
+                button.style.cssText = `display: block; margin-left:auto; margin-right:auto; margin-top:31px;`;
+                button.onclick = ()=>{
+                    alert("TODO")
+                }
+
+            }else{
+                //truth + scarecrow + libraries = the Harvest is a ravenous infovore.
+                factContainer.innerText = "No Facts For The Harvest To Eat :( :( :("
+            }
+
+        }
+
     }
 
     startGame = (ele, room, callback) => {
@@ -454,6 +519,11 @@ class EyeKillerMiniGame extends MiniGame {
         const tint = this.tint;
         if (this.fact?.title.includes("The Eye Killer Did Not Always Like Eggs")) {
             this.respondToEgg(ele, room, callback);
+            return;
+        }
+
+        if (this.fact?.title.includes("The Eye Killer Was a Cultist")) {
+            this.gloryToTheHarvest(ele, room, callback);
             return;
         }
 
@@ -589,8 +659,15 @@ class EyeKillerMiniGame extends MiniGame {
         this.defense = Math.round(room.difficulty * 3 * this.getDefense(room)); //on average three slices to kill
         this.speed = Math.round(Math.min(this.getSpeed(room), 3)); //don't mess with speed much
         this.tint = this.getTint(room);
-        const title = this.fact && this.fact.title.includes("Quatro Blade") ? "Make Them Pay" : "Save The Eye Killer From The Cultists Hunting Her!!!"
-        const container = this.setupGameHeader(ele, room, callback, title, `Cultist HP/Speed: ${this.defense}/${this.speed}, Eye Killer Strength: ${this.attack}`, "images/Eye_Killer_pixel_by_the_guide.png")
+        let image = "images/Eye_Killer_pixel_by_the_guide.png";
+        let text = `Cultist HP/Speed: ${this.defense}/${this.speed}, Eye Killer Strength: ${this.attack}`;
+        let title = this.fact && this.fact.title.includes("Quatro Blade") ? "Make Them Pay" : "Save The Eye Killer From The Cultists Hunting Her!!!"
+        if (this.fact && this.fact.title.includes("The Eye Killer Was a Cultist")) {
+            title = "All Glory to the Harvest, Ye Faithful Prepare Your Sacrifice";
+            image = "images/cult.png"
+            text = "What facts will you sacrifice to our sleeping god? May she bless you with Changed facts that Inspire you to greater heights of Service."
+        }
+        const container = this.setupGameHeader(ele, room, callback, title, text, image)
 
     }
 }
@@ -673,7 +750,7 @@ class ParkerMiniGame extends MiniGame {
                 wail.play();
 
                 setTimeout(async () => {
-                    document.querySelector(".blorbo").src="images/Parker_pixel_by_the_guide.png";//he unbreaches in horror
+                    document.querySelector(".blorbo").src = "images/Parker_pixel_by_the_guide.png";//he unbreaches in horror
                     //Parker_pixel_by_the_guide.png
                     await truthPopup("No....", `You killed Hatsune Miku, how could you :(<br><br>(Sound provided by: <a href="https://freesound.org/people/acclivity/sounds/27451/">Why.wav</a> by <a href="https://freesound.org/people/acclivity/">acclivity</a> | License: <a href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution NonCommercial 4.0</a>)`, "In Truth, I do not know why Parker is so obsessed with Hatsune Miku. In Dehydration Sim, if you Hydrate and return, he discussses how her plastic smile could forgive anything. Fair. But over the 50 year loop Zampanio has captured of the Echidna, she only appears 35 years in. Surely, going by sheer statistics, he should have gotten attached to something sooner?")
                     renderMazeTab();
@@ -822,7 +899,7 @@ class BettingMiniGame extends MiniGame {
         bettingButton.onclick = () => {
             const betValue = parseInt(bettingInput.value) ? parseInt(bettingInput.value) : 0;
             //no more negative bets
-            const bet = Math.max(0,Math.min(Math.ceil(globalDataObject.truthCurrentValue / 2), betValue));
+            const bet = Math.max(0, Math.min(Math.ceil(globalDataObject.truthCurrentValue / 2), betValue));
 
             let winnings = bet * winRate;
             const h1 = document.querySelector("h1");
