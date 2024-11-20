@@ -1,4 +1,12 @@
 /*
+
+k doesn't have to share his file with ANYONE
+
+specialist boi gurl thing
+
+(by which i mean he'd' probably kill anyone in here)
+
+
 k moneylaunders facts:  take any fact you want, he wipes it clean and replaces it with his own  (entirely procedural) fact
 
 give him the right fact (stroke his ego and use one he created) and he'll let you do it too (completely customizable facts)

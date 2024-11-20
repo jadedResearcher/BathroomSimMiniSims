@@ -445,16 +445,17 @@ class EyeKillerMiniGame extends MiniGame {
     }
 
     gloryToTheHarvest = async (ele, room, callback) => {
+        truthLog("Huh", "I did not know the Harvest followed me back here. Last year the Scarecrow did, of course, but the Harvest simply fell asleep where she lay... I suppose her Library must be between realms...  No matter.")
         const cultist_container = createElementWithClassAndParent("div", ele);
         const harvest_poster = createElementWithClassAndParent("img", ele);
         harvest_poster.src = "images/harvest_by_guide.png";
         harvest_poster.style.cssText = `    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: 3px solid #F0EAD6;
-    border-bottom-width: 8px;
-    border-top-width: 8px;
-    width: 150px;`
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                        border: 3px solid #F0EAD6;
+                                        border-bottom-width: 8px;
+                                        border-top-width: 8px;
+                                        width: 150px;`
 
         if (globalDataObject.factsUnlocked.length > 0) {
             const options1 = [];
@@ -496,8 +497,7 @@ class EyeKillerMiniGame extends MiniGame {
                 const button = createElementWithClassAndParent("button", ele);
                 button.innerText = "Sacrifice These Facts To The Sleeping Harvest";
                 button.style.cssText = `display: block; margin-left:auto; margin-right:auto; margin-top:31px;`;
-                button.onclick = () => {
-                    alert("TODO")
+                button.onclick = async () => {
                     const fact1Title = factsSelector1.value;
                     const fact2Title = factsSelector2.value;
                     let fact1;
@@ -508,27 +508,68 @@ class EyeKillerMiniGame extends MiniGame {
                             fact1 = fact;
                         }
 
-                        if(fact.title === fact2Title){
+                        if (fact.title === fact2Title) {
                             fact2 = fact;
                         }
-                        if(fact1 && fact2){
+                        if (fact1 && fact2) {
                             break;
                         }
                     }
 
-                    if(fact1 == fact2){
-                        globalDataObject.timesCheatedTheHarvest = globalDataObject.timesCheatedTheHarvest? globalDataObject.timesCheatedTheHarvest:0;
+                    if (fact1 == fact2) {
+                        globalDataObject.timesCheatedTheHarvest = globalDataObject.timesCheatedTheHarvest ? globalDataObject.timesCheatedTheHarvest : 0;
                         globalDataObject.timesCheatedTheHarvest++;
-                        if(globalDataObject.timesCheatedTheHarvest ===1){
+                        if (globalDataObject.timesCheatedTheHarvest === 1) {
                             ele.innerHTML = "You have been warned. Do not try to cheat the Harvest again. Two of the same facts are not two facts.";
-                        }else{
+                        } else {
                             //will wastes inevitably exploit this to clear out facts?
                             //maybe? maybe neville is more convinient
                             ele.innerHTML = "Blasphemer. Cheater. Heretic. You do not heed the warnings. Two of the same facts are not two facts. Are not a True Sacrifice. <br><br>The Harvest is the god of, among more things than your feable brain could comprehend, two things Sacrificed to become Changed. <br><br> All your facts are forfeit.<br><br>May this feast Serve our god in her time of slumber.<br><br>And may you be Inspired to not repeat your little trick.";
                             globalDataObject.factsUnlocked = [];
-                            ele.style.padding="31px"
+                            ele.style.padding = "31px"
                         }
                         save(); //you will be remembered. 
+                    } else {
+                        const themeKeys = [...fact1.theme_key_array, ...fact2.theme_key_array]
+                        console.log("JR NOTE: harvest themeKeys are ", themeKeys)
+                        //prefer change (tier 2 facts change mini games) if possible
+                        //but they are rare so also have lots of tier 3
+                        const possibleTier2Facts = getAllFactsWithThemeAndTier(globalRand.pickFrom(themeKeys), 2);
+                        const possibleTier3Facts = getAllFactsWithThemeAndTier(globalRand.pickFrom(themeKeys), 3);
+
+                        let chosenFact;
+                        let quip = "";
+                        if (possibleTier2Facts.length > 0 && globalRand.nextDouble() > 0.3) {
+                            chosenFact = globalRand.pickFrom(possibleTier2Facts);
+                            quip = "The Harves grants you <b>Change.</b>"
+                        } else if (possibleTier3Facts.length > 0) {
+                            quip = "The Harvest grants you <b>Inspiration.</b>"
+                            chosenFact = globalRand.pickFrom(possibleTier3Facts);
+                        } else {//random it is
+                            quip = "The Harvest grants you <b>Confusion.</b>"
+                            chosenFact = randomFact(globalRand);
+                        }
+
+                        console.log("JR NOTE: fact picked to change is: ", chosenFact);
+                        /*
+                         Change the fact to have the combination of the themes and stats of the sacrificed facts (sacrifice enough facts to make god tier facts)
+                        remove parent facts from list
+                        add this new fact to list
+
+                        */
+                        //damage_multiplier, defense_multipler, speed_multipler, secrets) {
+                        chosenFact.theme_key_array = [...themeKeys]; //ignore whatever it originally had, its now a combo of the two, Change
+                        chosenFact.damage_multiplier = fact1.damage_multiplier + fact2.damage_multiplier;
+                        chosenFact.defense_multipler = fact1.defense_multipler + fact2.defense_multipler;
+                        chosenFact.speed_multipler = fact1.speed_multipler + fact2.speed_multipler;
+                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact1);
+                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact2);
+                        globalDataObject.factsUnlocked.push(chosenFact)
+
+                        await truthPopup("You have sacrificed to the Harvest!", `${quip}. Fact Recieved: ${chosenFact.title}!<br><br> It does seem that the Harvest has accepted my presence within her mind now.<br><br> The Scarecrow gives her the Hunger and I shape it into something cognitive.<br><br> Of the mind.  <br><br>She eats knowledge now, Observer. <br><br>Thank you for feeding her.`, "In Truth... I was never comfortable with how little she appreciated my presence. As a god, she saw beneath my False Face and did not appreciate the deception. I am... glad she accepts me more now. Or perhaps...has forgotten me?");
+                        callback(globalDataObject.currentMaze);
+                        renderMazeTab();
+
                     }
                 }
 
