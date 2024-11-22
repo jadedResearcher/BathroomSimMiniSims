@@ -533,16 +533,17 @@ class EyeKillerMiniGame extends MiniGame {
                     
                     */
                     chosenFact = combineFacts(chosenFact, facts);
-                    for (let fact of facts) {
+                    let tmp = [...facts];
+                    for (let fact of tmp) {
                         debug += `<li><u>${fact.title}</u><li>${fact.damage_multiplier.toFixed(2)}/${fact.defense_multipler.toFixed(2)}/${fact.speed_multipler.toFixed(2)}</li>
                         <li>Themes: ${fact.theme_key_array.join(",")}</li>
                         </li>`
-                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
-
+                        removeItemOnce(globalDataObject.factsUnlocked, fact);
                     }
                     globalDataObject.factsUnlocked.push(chosenFact)
-
-                    await truthPopup("You have sacrificed to the Harvest!", `${quip}.
+//why yes truths ramble about the harvest WILL go mostly off screen. 
+//what will you do about that?
+                    await truthPopup(`You have sacrificed ${facts.length>2?"All":"Two Facts"} to the Harvest!`, `${quip}.
                          Fact Recieved: ${chosenFact.title}!
                          <br><br>${chosenFact.damage_multiplier.toFixed(2)}/${chosenFact.defense_multipler.toFixed(2)}/${chosenFact.speed_multipler.toFixed(2)}
                           Themes: ${chosenFact.theme_key_array.join(",")}

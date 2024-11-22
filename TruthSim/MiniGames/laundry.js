@@ -82,7 +82,7 @@ class LaundryMiniGame extends MiniGame {
 
     //k got too big, vik called in
     vikPopup = (callback) => {
-        removeItemOnce(globalDataObject.unlockedMiniGames, this.id);
+        globalDataObject.unlockedMiniGames = removeItemOnce(globalDataObject.unlockedMiniGames, this.id);
         globalDataObject.currentMaze = null;
         //vik doesnt ROT k, they're still friends
         //this is more an intervention
