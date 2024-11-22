@@ -586,7 +586,7 @@ const renderBeeTab = () => {
         chosenTheme = all_themes[hive.theme2Key];
       }
       //bypass error handling so i can do custom error handling
-      console.log("JR NOTE: chosen theme is", chosenTheme)
+      //console.log("JR NOTE: chosen theme is", chosenTheme)
       let chosen_icon;
       let chosenFloorObject = chosenTheme.string_possibilities[FLOORFOREGROUND] ? hiveRand.pickFrom(chosenTheme.string_possibilities[FLOORFOREGROUND]) : null;
       if (!chosenFloorObject) {

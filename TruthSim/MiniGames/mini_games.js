@@ -483,20 +483,88 @@ class EyeKillerMiniGame extends MiniGame {
                 factsSelector1 = createElementWithClassAndParent("select", factContainer, "harvest-select");
                 factsSelector1.style.cssText = `max-width: 250px;`;
 
-                for (let o of options1) {
+                for (let o of options1.reverse()) {
                     factsSelector1.append(o.option);
                 }
 
                 factsSelector2 = createElementWithClassAndParent("select", factContainer, "harvest-select");
                 factsSelector2.style.cssText = `max-width: 250px;`;
                 for (let o of options2) {
-                    console.log("JR NOTE: option 2", o)
                     factsSelector2.append(o.option);
                 }
 
+
+                const sacrifice = async (facts) => {
+                    const themeKeys = facts.map((f) => f.theme_key_array);
+                    //takes in a new fact to store the sourceFacts combo ito, return the new fact
+                    const combineFacts = (newFact, sourceFacts) => {
+                        //this is an incredibly bad idea, all themes sum together to 0/0/0
+                        newFact.theme_key_array = [LANGUAGE, ENDINGS, CLOWNS, SERVICE, ART] //libraries, change, the fuck ton of clown dolls, being served, inspiration
+                        //newFact.theme_key_array = [...themeKeys]; //ignore whatever it originally had, its now a combo of the two, Change
+                        newFact.damage_multiplier = sourceFacts.reduce((total, fact) => total + fact.damage_multiplier, 0);
+                        newFact.defense_multipler = sourceFacts.reduce((total, fact) => total + fact.defense_multipler, 0);
+                        newFact.speed_multipler = sourceFacts.reduce((total, fact) => total + fact.speed_multipler, 0);
+                        return newFact
+                    }
+                    //prefer change (tier 2 facts change mini games) if possible
+                    //but they are rare so also have lots of tier 3
+                    const possibleTier2Facts = getAllFactsWithThemeAndTier(globalRand.pickFrom(themeKeys), 2);
+                    const possibleTier3Facts = getAllFactsWithThemeAndTier(globalRand.pickFrom(themeKeys), 3);
+
+                    let chosenFact;
+                    let quip = "";
+                    if (possibleTier2Facts.length > 0 && globalRand.nextDouble() > 0.3) {
+                        chosenFact = globalRand.pickFrom(possibleTier2Facts);
+                        quip = "The Harves grants you <b>Change.</b>"
+                    } else if (possibleTier3Facts.length > 0) {
+                        quip = "The Harvest grants you <b>Inspiration.</b>"
+                        chosenFact = globalRand.pickFrom(possibleTier3Facts);
+                    } else {//random it is
+                        quip = "The Harvest grants you <b>Confusion.</b>"
+                        chosenFact = randomFact(globalRand);
+                    }
+
+                    let debug = ``;
+
+                    /*
+                     Change the fact to have the combination of the themes and stats of the sacrificed facts (sacrifice enough facts to make god tier facts)
+                    remove parent facts from list
+                    add this new fact to list
+                    
+                    */
+                    chosenFact = combineFacts(chosenFact, facts);
+                    for (let fact of facts) {
+                        debug += `<li><u>${fact.title}</u><li>${fact.damage_multiplier.toFixed(2)}/${fact.defense_multipler.toFixed(2)}/${fact.speed_multipler.toFixed(2)}</li>
+                        <li>Themes: ${fact.theme_key_array.join(",")}</li>
+                        </li>`
+                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact);
+
+                    }
+                    globalDataObject.factsUnlocked.push(chosenFact)
+
+                    await truthPopup("You have sacrificed to the Harvest!", `${quip}.
+                         Fact Recieved: ${chosenFact.title}!
+                         <br><br>${chosenFact.damage_multiplier.toFixed(2)}/${chosenFact.defense_multipler.toFixed(2)}/${chosenFact.speed_multipler.toFixed(2)}
+                          Themes: ${chosenFact.theme_key_array.join(",")}
+                          From sources: 
+                          ${debug}
+                           <br><br> It does seem that the Harvest has accepted my presence within her mind now.<br><br> The Scarecrow gives her the Hunger and I shape it into something cognitive.<br><br> Of the mind.  <br><br>She eats knowledge now, Observer. <br><br>Thank you for feeding her.`, "In Truth... I was never comfortable with how little she appreciated my presence. As a god, she saw beneath my False Face and did not appreciate the deception. I am... glad she accepts me more now. Or perhaps...has forgotten me?");
+                    callback(globalDataObject.currentMaze);
+                    renderMazeTab();
+
+                }
                 const button = createElementWithClassAndParent("button", ele);
-                button.innerText = "Sacrifice These Facts To The Sleeping Harvest";
+                button.innerText = "Sacrifice Selected Facts To The Sleeping Harvest";
                 button.style.cssText = `display: block; margin-left:auto; margin-right:auto; margin-top:31px;`;
+
+                const button2 = createElementWithClassAndParent("button", ele);
+                button2.innerText = "Sacrifice ALL Facts To The Sleeping Harvest";
+                button2.style.cssText = `display: block; margin-left:auto; margin-right:auto; margin-top:31px;`;
+
+                button2.onclick = () => {
+                    sacrifice(globalDataObject.factsUnlocked);
+                }
+
                 button.onclick = async () => {
                     const fact1Title = factsSelector1.value;
                     const fact2Title = factsSelector2.value;
@@ -530,46 +598,7 @@ class EyeKillerMiniGame extends MiniGame {
                         }
                         save(); //you will be remembered. 
                     } else {
-                        const themeKeys = [...fact1.theme_key_array, ...fact2.theme_key_array]
-                        console.log("JR NOTE: harvest themeKeys are ", themeKeys)
-                        //prefer change (tier 2 facts change mini games) if possible
-                        //but they are rare so also have lots of tier 3
-                        const possibleTier2Facts = getAllFactsWithThemeAndTier(globalRand.pickFrom(themeKeys), 2);
-                        const possibleTier3Facts = getAllFactsWithThemeAndTier(globalRand.pickFrom(themeKeys), 3);
-
-                        let chosenFact;
-                        let quip = "";
-                        if (possibleTier2Facts.length > 0 && globalRand.nextDouble() > 0.3) {
-                            chosenFact = globalRand.pickFrom(possibleTier2Facts);
-                            quip = "The Harves grants you <b>Change.</b>"
-                        } else if (possibleTier3Facts.length > 0) {
-                            quip = "The Harvest grants you <b>Inspiration.</b>"
-                            chosenFact = globalRand.pickFrom(possibleTier3Facts);
-                        } else {//random it is
-                            quip = "The Harvest grants you <b>Confusion.</b>"
-                            chosenFact = randomFact(globalRand);
-                        }
-
-                        console.log("JR NOTE: fact picked to change is: ", chosenFact);
-                        /*
-                         Change the fact to have the combination of the themes and stats of the sacrificed facts (sacrifice enough facts to make god tier facts)
-                        remove parent facts from list
-                        add this new fact to list
-
-                        */
-                        //damage_multiplier, defense_multipler, speed_multipler, secrets) {
-                        chosenFact.theme_key_array = [...themeKeys]; //ignore whatever it originally had, its now a combo of the two, Change
-                        chosenFact.damage_multiplier = fact1.damage_multiplier + fact2.damage_multiplier;
-                        chosenFact.defense_multipler = fact1.defense_multipler + fact2.defense_multipler;
-                        chosenFact.speed_multipler = fact1.speed_multipler + fact2.speed_multipler;
-                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact1);
-                        globalDataObject.factsUnlocked = removeItemOnce(globalDataObject.factsUnlocked, fact2);
-                        globalDataObject.factsUnlocked.push(chosenFact)
-
-                        await truthPopup("You have sacrificed to the Harvest!", `${quip}. Fact Recieved: ${chosenFact.title}!<br><br> It does seem that the Harvest has accepted my presence within her mind now.<br><br> The Scarecrow gives her the Hunger and I shape it into something cognitive.<br><br> Of the mind.  <br><br>She eats knowledge now, Observer. <br><br>Thank you for feeding her.`, "In Truth... I was never comfortable with how little she appreciated my presence. As a god, she saw beneath my False Face and did not appreciate the deception. I am... glad she accepts me more now. Or perhaps...has forgotten me?");
-                        callback(globalDataObject.currentMaze);
-                        renderMazeTab();
-
+                        sacrifice([fact1, fact2])
                     }
                 }
 
@@ -1251,7 +1280,6 @@ class ButtonMiniGame extends MiniGame {
         if (room.themeKeys) {
             for (let themeKey of room.themeKeys) {
                 const theme = all_themes[themeKey]
-                console.log("JR NOTE: theme is", theme)
                 quips.push("You're so " + theme.pickPossibilityFor(COMPLIMENT, globalRand));
                 quips.push("You could be a real " + theme.pickPossibilityFor(PERSON, globalRand));
                 quips.push("Wow! Why would anyone ever call you " + theme.pickPossibilityFor(INSULT, globalRand));

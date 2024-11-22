@@ -17,6 +17,8 @@ class TwinsMiniGame extends MiniGame {
         const doesItHaveSecrets = fact.secret ? `It Has A Secret (Sorry I Can't Say :())` : "";//the Fragmnts of the Univere that spill from her mouth would drive you mad
         devonalabel.innerHTML = `<hr><u style='font-family: Courier New'><img height="31" src='images/devona_twin_by_guide.png'>Devona says: 'Here's Everything I Know About <i><b>'${fact.title}'</b></i> I Hope It's Okay! ${isItUseful} ${doesItHaveSecrets}'</u><br><br>` //because she is too much information all at once not using css for her, she is all in the html, a mess of content and design that is practically unreadable
 
+        const stats = createElementWithClassAndParent("div", ele);
+        stats.innerHTML = `Attack: ${fact.damage_multiplier.toFixed(2)} Defense: ${fact.defense_multipler.toFixed(2)} Speed: ${fact.speed_multipler.toFixed(2)} <br>Themes: ${fact.theme_key_array.join(",")}`;
         const infodump = createElementWithClassAndParent("div", ele);
         infodump.style.padding = '31px';
         infodump.style.border = "1px dashed yellow";
