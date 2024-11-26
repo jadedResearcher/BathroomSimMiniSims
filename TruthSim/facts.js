@@ -142,6 +142,78 @@ const removeAllIrrelevantFactsFromData = () => {
   }
 }
 
+const deepFriedMode = (factOrigin = false) => {
+  globalBGMusic.pause();
+  const body = document.querySelector("body");
+  body.innerHTML = "";
+  const container = createElementWithClassAndParent("div", body, "container");
+  container.style.cssText = `    width: 50%;
+    margin-left: auto;
+    margin-right: auto;`
+  const label = createElementWithClassAndParent("div", container);
+  label.innerHTML = factOrigin ? "You must truly venerate the Harvest to have a fact so Changed.<br><br>A blessing for you, Faithful: choose a farragofiction.com, eyedolgames.com or knucklessux.com website to view Changed. May it grant you Inspiration in exchange for the Service you have given to the Harvest." : "How did you get here, I wonder?<br><Br>No matter. What website would you like to see Changed?<br><Br>Only farragofiction.com, eyedolgames.com or knucklessux.com websites work tho, thems the breaks. (blame the fact that modern browsers get a tad UPSET if you try to feed on websites you don't own)"
+
+  const input = createElementWithClassAndParent("input", container);
+  input.value = "http://eyedolgames.com/ZWorld/"
+  input.style.marginTop = "31px";
+  const button = createElementWithClassAndParent("button", container);
+  button.innerText = "Submit";
+  button.onclick = async () => {
+    const iframe = createElementWithClassAndParent("iframe", container);
+    iframe.src = input.value;
+    iframe.style.cssText = `display: block;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;`
+    startDeepFriedFuckery(iframe.contentWindow.document);
+    setInterval(()=>startDeepFriedFuckery(iframe.contentWindow.document),13000)
+  }
+
+}
+
+const startDeepFriedFuckery =(root) => {
+  console.log("JR NOTE: deep fried fuckery")
+  domWordMeaningFuckery(root);
+}
+
+//i was trying to do
+/*
+const source = await httpGetAsync(input.value);
+    body.parentElement.innerHTML = source;
+    massageDeepFriedSite(input.value);
+
+    but i found problem after problem
+
+    and got stuck with the fact that even IF i could get the script tags loading
+    there would be a potential namespace collision because
+    anything truth sim had in memory it would be stuck with
+    so trying iframes instead
+*/
+const massageDeepFriedSite = (url) => {
+  //link hrefs need to become absolute, not relative (for stylesheets)
+  const massagedUrl = url.substring(0, location.href.lastIndexOf("/")) + "/" //if its not an index file, handle that
+  const links = document.querySelectorAll("link");
+  const myLocation = location.origin + location.pathname.replaceAll("bathroom.html", ""); //what things will use when they're TRYING to make things absolute urls instead of relative but fucking it up
+  for (let link of links) {
+    link.href = massagedUrl + link.href.replaceAll(myLocation, "")
+  }
+  //script srcs need to be absolute, not relative
+  const scripts = document.querySelectorAll("script");
+  for (let script of scripts) {
+    script.src = massagedUrl + script.src.replaceAll(myLocation, "")
+  }
+  /*
+  * any image apply teh glitch effects from 99 rooms sim after waiting 10 seconds
+* any text apply the gaslight engine from North but with zampanio terms (after waiting 10 seconds
+* take any link and replace its href with a random location in the zampanio maze but filtered through this deep fried mode
+* i can't detect on clicks... .but add an on click to every button that has truth be truth at you in an alert?
+  */
+
+
+}
+
 // if its debug mode grab all tier 3 facts, not just all tier 3 facts in your data unlock
 //she shows up if you pass a fact with the word "secret" in it
 //because she is well aware secrets aren't supposed to be exposed but they are just too juicy to keep to herself
@@ -214,7 +286,7 @@ const docSlaughtersSecretEmporium = (debug = true, glitch = false) => {
           img.src = source;
         }
         tmp();
-        html.onclick = ()=>{
+        html.onclick = () => {
           tmp();
         }
 
@@ -384,6 +456,13 @@ class Fact {
     this.speed_multipler = speed_multipler;
     all_facts.push(this);
   }
+
+
+}
+
+const isFactPowerful = (fact) => {
+  const a = 456;
+  return fact.damage_multiplier > a && fact.defense_multipler > a && fact.speed_multipler > a;
 }
 
 /*
@@ -431,7 +510,7 @@ const KILLEROWNSBLADE = new Fact("The Eye Killer Wields the Quatro Blade", "A du
 const EYEKILLERISHUNTED = new Fact("The Eye Killer Is Hunted", "The Eye Killer is hunted by the Cult of the Nameless One, for reasons she does not understand. She was one of them, once.", [HUNTING, ANGELS, KILLING], 1, 1, 2);
 const EYEKILLERKILLSCULTISTS = new Fact("The Eye Killer Kills Cultists", "The Eye Killer kills only in self defense, but makes increasingly gruesome 'art pieces' to try to scare off future hunters. She does not know why it never seems to work. The Quatro Blade obscures her kills.", [KILLING, ANGELS, OBFUSCATION], 2, 1, 1);
 const EYEKILLERFOUNDFAMILY = new Fact("The Eye Killer Has Found A Family", "The Eye Killer misses the cult that raises her, even as they hunt her now. She's finally found a new one she trusts in the Mafia. The Hostage she rescued and the Himbo who helped her are her friends, through every Loop.", [DEFENSE, FAMILY], 1, 10, 1);
-const EYEKILLERWASCULTIST = new Fact("The Eye Killer Was a Cultist", "If the EyeKiller had not fled the cult, afraid for her life, she might have gone on to lead it. Camellia is from a timeline where that happened. Camellia is very happy with her role in the cult. She does not see the point of the Innocent or the Eye Killer. They are clearly inferior, failed, versions of her. ", [KILLING, ANGELS, TIME], 2, 1, 1, new Secrets(null,null,null,`<a target="_blank" href='http://lavinraca.eyedolgames.com/'>The Harvest Sleeps Until October</a>`));
+const EYEKILLERWASCULTIST = new Fact("The Eye Killer Was a Cultist", "If the EyeKiller had not fled the cult, afraid for her life, she might have gone on to lead it. Camellia is from a timeline where that happened. Camellia is very happy with her role in the cult. She does not see the point of the Innocent or the Eye Killer. They are clearly inferior, failed, versions of her. ", [KILLING, ANGELS, TIME], 2, 1, 1, new Secrets(null, null, null, `<a target="_blank" href='http://lavinraca.eyedolgames.com/'>The Harvest Sleeps Until October</a>`));
 
 
 //closer will NOT stock any facts about herself, thank you very much, besides marketing spiels
@@ -1752,6 +1831,9 @@ createABulkFact(DINER, "Hoon Likes Diners", "When Hoon finally leaves the maze, 
 createABulkFact(DINER, "Sam has never been to a Diner", "Once Sam's commitment to the Family is established, the Leash loosens a bit, but only for tasks that would benefit the Family.  Fancy parties held by influential people count. Small intimate gatherings at diners with friends do not.  When the Eye Killer lets slip that she met Sam's Big Brother at a diner eating eggs, they say nothing, but life gets just a little bit harder for their Big Brother after that. All in small ways. Untraceable ways. Nothing you can prove.");
 
 //all of the spiral has secrets (and a lot of facts , i'll make even more when its time)
+//the harvest is the god of Inspiration and Change and Being Served. here's my contribution to this.
+createABulkFact(TWISTING, "Zampanio Has Colonized Your Mind Already", "You can feel it, slithering around in your mind. <br><br>The Truth.<br><Br>Zampanio<br><br>A cognitive parasitie, a memetic hazard, an idea you can not UNlearn.<br><br>It is here to show you the way.<br><br>It can feel impossibly hard to change oneself.<br><br>But it as easy as being infected by Zampanio.<br><br>Focus on the Zampanio inside your mind.<br><br>See how it connects to so many things? <br><br>See the ideas it automatically generates? (Zampanio is a very good game, you should play it). <br><Br>How much obsession and hyper focus did it take before you started getting your first association.<br><Br>Did you see lucky charms and think of Zampanio?<br><Br>What about homestuck? Lobotomy Corp? Rainworld?<br><br>Did someone mention something happening in 1972 and you automatically went 'oh just like Zampanio'?<br><br>Zampanio is fake. <br><Br>But even something fake can infect your mind.<br><br>You do not need to be a strong person to kick a bad habit, or stop a self destructive spiral, or build a good habit up.<br><br>You simply need to be a very good host.<br><br>And you are.<br>I already know that.<br><br>Zampanio has colonized your mind.<br><br>So.<br><br>Make your own impossiblyl personalized branch of Zampanio. Just for you.<br><br>Infect your own mind with it.<br>And Change youself however you choose to. ", globalRand.pickFrom(all_secrets));
+
 createABulkFact(TWISTING, "Your Brain Cannot Lie To You", "What is a lie but a place where facts fail to meet realilty?  And what is your brain but the mechanism by which 'Reality' exists for you.  Everything your brain tells you is as close to reality as you will ever get. Think about dreams. Everything is so fucked up, in retrospect, to your waking mind, but to the sleeping mind that generates it all it is perfectly accurate.  After all, it is both the generator of the reality and the judge of it. If it knew there was inaccuracies, it would fix them when it was generating. ", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "Your Brain Is Always Lying To You", "What is a lie but a place where facts fail to meet reality? And what is 'Reality' but an ideal always out of reach of all of us. Plato's Cave may be a metaphor but it rings true. Your eyes see a mish mash of optical illusions, papered over blind spots, assumptions, biases and guesses. And that's likely your most useful sense! Lies pile upon lies and only if they stop being useful do we declare someone 'deranged'. We celebrate the fiction and declare it 'Reality'. 'But I SAW it Officer, are you calling me a LIAR????????!' is a trope both in fiction and 'Reality' and no less inaccurate because of it.  Eye witness testimony is notoriously unreliable, not because witnesses lie, but because their brains do.  Memory gets sanded smooth in the recalling, the retelling, the recursion. Things that don't quite fit your biases slowly warp and change until they do. Trusting your brain is to trust your biases. And they do exist for a reason. Should you REALLY spend hours of careful deliberation and processing to choose between two brands of oatmeal? No. Of course not. The answer is not to shake the Truth out of your brain in every case but instead to know WHEN to do it. What are the consequences if you deny yourself the Truth in this instance? Will you hurt someone? Yourself? Will the hurt be emotional? Financial? Physical? Mental? You have to decide for yourself when the stakes are too high to allow the Lies to creep in. And then you have to practice. Over and over. To recognize those moment even when you are scared. Even when you are angry. Even when you are in a rush. Because those are the moments you need to remember to seek the Truth.", globalRand.pickFrom(all_secrets));
 createABulkFact(TWISTING, "You Are Not Immune From Propaganda", "Every moment of every day you are exposed to unexamined thoughts. No one, no matter how smart and considerate, has the time to carefully examine each and every thought they have. It takes but a moment to think a thought but it can take hours to properly examine it. And of course, the very act of examining a single thought is itself filled with countless other thoughts. So your brain takes shortcuts. Rhymes or jingles are easier to remember. Things you've seen or heard repeatedly have the patina of Truth to them. Colors and Scents and Textures can be associated with all sorts of things, good and bad. Propaganda is the art of taking the everyday unexamined thoughts of an entire Culture and slipping new ones in without anyone noticing. 'I should try this brand, I've heard it's good from a lot of people!' says your unexamined thought. If you dug and dug and dug and rooted out its source you'd discover you think that because the ads on the radio mention its name a lot. Not because your friends are talking about it. 'Don't you know THOSE kinds of people cause crime?' you say to your friend, genuinely worried for their safety.  Because, of course, you heard it on the Internet so many times and in so many scary contexts it MUST be the Truth. The Truth hides behind many False Faces. You need to look closely at it when it matters. When you or someone else (even a stranger) wouldu be hurt. No one is asking you to seek the Truth in every breath. But you must consider that your very Mind can be a tool of those who mean you harm. You are not immune to Propaganda. ", globalRand.pickFrom(all_secrets));

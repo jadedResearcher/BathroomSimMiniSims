@@ -182,6 +182,9 @@ window.onload = async () => {
   load();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
+  if(urlParams.get("deepfryersim")){
+    deepFriedMode(false);
+  }
   debugMiniGame = urlParams.get('debugMiniGame');
   if (debugMiniGame) {
     debugMode(debugMiniGame);

@@ -366,6 +366,56 @@ const getVideo = async (url) => {
   return promise;
 }
 
+//https://media.discordapp.net/attachments/468574691087613952/863079687276986388/tumblr_qaosxmi6ET1xf64vf.mp4
+//https://en.m.wikipedia.org/wiki/Wordplay_(The_Twilight_Zone)
+//takes in a sentence, for each word in it decides if its going to fuck it up today.
+//seed_multiplier handles making it so that EVERY instance of the word "dog" is treated the same but each time i ask i might decide dog is changeable vs not
+const domWordMeaningFuckery =(root)=>{
+  const seed_multiplier = getRandomNumberBetween(0,300);
+  if(root){
+      const children = root.querySelectorAll("*");
+      for(let child of children){
+          const subchildren = child.querySelectorAll("*");
+          if(subchildren.length === 0){
+              child.textContent = gaslightWordMeanings(child.textContent, seed_multiplier);
+          }
+      }
+  }
+
+}
+
+function gaslightWordMeanings(sentence, seed_multiplier){
+  console.log("JR NOTE: gaslightWordMeanings",sentence)
+  const words = sentence.split(" ");
+  for(let i = 0; i<words.length; i++){
+      words[i] = getWordReplacement(words[i],seed_multiplier)
+  }
+  return words.join(" ");
+}
+
+//takes in a word, turns it into a random seed and if rngesus says so, turns it into another word
+function getWordReplacement(word,seed_multiplier){
+   if(word === "you"){
+       return "ya'll";
+   }
+  const gaslightOptions = ["zampanio","[REDACTED]","zampanio","parasite","very fun game","you should play it","minotaur","what have you done","zampanio","changed","distortion","observer","no","minotaur","zampanio","zampanio is a really fun game you should play it","gaslight","truth","evil fox","lazy dog","quick fox","dead fox","terrible fox","bad fox","fox","untrustworthy fox","taste","the truth is layered","zampanio needs you to live a long life","failure","fear","horror","what will you create","two cakes","stay","good dog","canine","good boy","good boi","bark","zampanio","curious dog","squirming dog", "make dog", "dog CODE","zampanio","zampanio","zampanio","console","hacker","secret","gaslight","zampanio","dog","zampanio","horridor","hallway","backroom","labyrinth","minotaur","maze","zampanio","distortion","spiral","zampanio","zampanio","zampanio","zampanio","zampanio","zampanio","zampanio","zampanio","zampanio","observer","zampanio","watcher","zampanio","zampanio","spiral","friday","sunflower","zampanio"];
+  const multiplied_seed = stringtoseed(word.toUpperCase())*seed_multiplier;
+  let chance = .95;
+
+  let rand = new SeededRandom(multiplied_seed);
+  if(rand.nextDouble()>chance){
+      const seed = stringtoseed(word.toUpperCase());
+      let rand2 = new SeededRandom(seed);
+      let ret= rand2.pickFrom(gaslightOptions);
+      if(word[0]===word[0].toUpperCase()){
+          ret = titleCase(ret);
+      }
+      return ret;
+  }
+  return word;
+}
+
+
 const getAudio = async (url) => {
   if (cachedAudio[url]) {
     return cachedAudio[url];

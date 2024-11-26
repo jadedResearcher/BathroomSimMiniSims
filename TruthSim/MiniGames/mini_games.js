@@ -347,6 +347,11 @@ class MiniGame {
                     }
                     for (let fact of globalDataObject.factsUnlocked) {
                         if (fact.title === factsSelector.value) {
+
+                            if(isFactPowerful(fact)){
+                                deepFriedMode(true)
+                                return
+                            }
                             //doc slaughter is so so nosy
                             if (fact.secret && secretIsGlitched(fact.secret)) {
                                 docSlaughtersSecretEmporium(false, fact);
