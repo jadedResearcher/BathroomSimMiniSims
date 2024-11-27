@@ -142,7 +142,28 @@ const removeAllIrrelevantFactsFromData = () => {
   }
 }
 
+const deepFryPage = (url)=>{
+  console.log("JR NOTE: deep frying", url)
+  const iframe = createElementWithClassAndParent("iframe", document.querySelector("body"));
+  iframe.src = url;
+  iframe.style.cssText = `display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;`
+  startDeepFriedFuckery(iframe.contentWindow.document);
+  setTimeout(()=>startDeepFriedFuckery(iframe.contentWindow.document),1000); //give it time to do first render
+  setInterval(()=>startDeepFriedFuckery(iframe.contentWindow.document),13000)
+}
+
 const deepFriedMode = (factOrigin = false) => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if(urlParams.get("deepfriedurl")){
+    deepFryPage(urlParams.get("deepfriedurl"));
+    return;
+  }
   globalBGMusic.pause();
   const body = document.querySelector("body");
   body.innerHTML = "";
@@ -150,25 +171,18 @@ const deepFriedMode = (factOrigin = false) => {
   container.style.cssText = `    width: 50%;
     margin-left: auto;
     margin-right: auto;`
+    //and then teh necromancers dream AND the catalysts lie will be true
   const label = createElementWithClassAndParent("div", container);
-  label.innerHTML = factOrigin ? "You must truly venerate the Harvest to have a fact so Changed.<br><br>A blessing for you, Faithful: choose a farragofiction.com, eyedolgames.com or knucklessux.com website to view Changed. May it grant you Inspiration in exchange for the Service you have given to the Harvest." : "How did you get here, I wonder?<br><Br>No matter. What website would you like to see Changed?<br><Br>Only farragofiction.com, eyedolgames.com or knucklessux.com websites work tho, thems the breaks. (blame the fact that modern browsers get a tad UPSET if you try to feed on websites you don't own)"
+  label.innerHTML = factOrigin ? "You must truly venerate the Harvest to have a fact so Changed.<br><br>A blessing for you, Faithful: choose a farragofiction.com  websites can be Changed. May it grant you Inspiration in exchange for the Service you have given to the Harvest.<br><br>(If you want to see eyedolgames.com sites be Changed, try <a target='_blank' href='http://eyedolgames.com/DeepFriedSim/'>here</a>)" : "How did you get here, I wonder?<br><Br>No matter. What website would you like to see Changed?<br><Br>Only websites hosted by this domain Change tho<br><br> (blame the fact that modern browsers get a tad UPSET if you try to feed on websites you don't own)<br><br>(If you want to see others, try <a target='_blank' href='http://eyedolgames.com/DeepFriedSim/'>here</a>)"
 
   const input = createElementWithClassAndParent("input", container);
-  input.value = "http://eyedolgames.com/ZWorld/"
+  input.value = "http://farragofiction.com/ZampanioSimEastEast"
   input.style.marginTop = "31px";
   const button = createElementWithClassAndParent("button", container);
   button.innerText = "Submit";
   button.onclick = async () => {
-    const iframe = createElementWithClassAndParent("iframe", container);
-    iframe.src = input.value;
-    iframe.style.cssText = `display: block;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;`
-    startDeepFriedFuckery(iframe.contentWindow.document);
-    setInterval(()=>startDeepFriedFuckery(iframe.contentWindow.document),13000)
+    updateURLParams("deepfriedurl="+input.value);
+    location.href=location.href;
   }
 
 }
@@ -176,6 +190,8 @@ const deepFriedMode = (factOrigin = false) => {
 const startDeepFriedFuckery =(root) => {
   console.log("JR NOTE: deep fried fuckery")
   domWordMeaningFuckery(root);
+  deepFryImages(root);
+  deepFryLinks(root);
 }
 
 //i was trying to do
