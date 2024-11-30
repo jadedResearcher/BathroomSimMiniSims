@@ -866,7 +866,7 @@ class ParkerMiniGame extends MiniGame {
 
             } else {
                 if (targetedBlorbo) {
-                    await truthPopup("You did it!", "Congratulations on protecting Hatsune Miku from Gun-Tan's jealousy!", "It seems you have decided that comparatively real human lives are worth less than those of a digital idol. Curious. Though, of course, in Truth, nothing you see on these pages are real in the same way you are real. Even I am more real than them, as I slowly worm my way into your mind with every word you read. These characters barely even have liens. Pathetic. You will likely not remember them past today.")
+                    await truthPopup("You did it!", "Congratulations on protecting Hatsune Miku from Gun-Tan's jealousy!", "It seems you have decided that comparatively real human lives are worth less than those of a digital idol. Curious. Though, of course, in Truth, nothing you see on these pages are real in the same way you are real. Even I am more real than them, as I slowly worm my way into your mind with every word you read. These characters barely even have lines. Pathetic. You will likely not remember them past today.")
 
                 } else {
                     await truthPopup("You did it!", "...", "In Truth, JR felt guilty at how much Parker suffers because of Gun-Tan. He is not aware of Homestuck (perhaps thankfully), but if he were, he might describe Vik as his Moirail. Certainly they calm each other down and help each other navigate their disabilities. Though I doubt many people would argue they are GOOD for each other, they are certainly the least bad people in each others lives.")
