@@ -72,31 +72,66 @@ const initAB = async () => {
 //or hides files
 //and keep list on page without rerenders
 const renderList = (list) => {
+  console.log("JR NOTE: rendering list")
   const countEle = document.querySelector("#filter-count");
   countEle.innerText = "Filtered Eyes Count: " + list.length;
   //caching this will speed things up too but im lazy so unless i need to i won't
   const listEleParent = document.querySelector("#omni-list");
   listEleParent.innerHTML = "";
   const unorderedList = createElementWithClassAndParent("ul", listEleParent);
-
-  for (let item of list) {
+  const buttons = [];//lets us go left and right
+  for (let i=0; i<list.length; i++) {
+    let item = list[i];
     const list_item = createElementWithClassAndParent("li", unorderedList);
+    console.log("JR NOTE: making button for ", item)
     const button = createElementWithClassAndParent("button", list_item);
-    button.style.cssText = `    background: none;
-    color: white;
-    border: none;`
+    buttons.push(button);
+    button.style.cssText = `text-decoration: underline;margin: none; background: none; color: white;border: none;`
     button.innerHTML = `${item.title}`;
     const body = document.querySelector("body");
     button.onclick = (e) => {
+      console.log("JR NOTE: button was clicked for",i)
       e.stopPropagation();
       const popup = createElementWithClassAndParent("button", body, "gallery-popup");
-      const button = createElementWithClassAndParent("button", popup, "close-button");
-      button.innerText = "Close";
+      popup.focus();
+      const closeButton = createElementWithClassAndParent("button", popup, "close-button");
+      closeButton.innerText = "Close";
 
+      const navigationHolder = createElementWithClassAndParent("div", popup);
+      navigationHolder.style.cssText=`    position: absolute;
+    top: 34px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    width: 100%;`
+
+      const left = createElementWithClassAndParent("button", navigationHolder);
+      left.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>';
+      left.onclick =(e)=>{
+        e.stopPropagation();
+        console.log("JR NOTE: left",i)
+        if(i>0){
+          console.log("JR NOTE: going to click left", i-1)
+          popup.remove();
+          buttons[i-1].click();
+        }
+      }
+      const right = createElementWithClassAndParent("button", navigationHolder);
+      right.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
+      right.onclick=(e)=>{
+        e.stopPropagation();
+        console.log("JR NOTE: right",i)
+        if(i<list.length){
+          console.log("JR NOTE: going to click right", i+1)
+          popup.remove();
+          buttons[i+1].click();
+        }
+      }
 
       const title = createElementWithClassAndParent("div", popup, "gallery-title");
       title.innerText = item.text;
-      popup.onclick = () => {
+      closeButton.onclick = (e) => {
+        e.stopPropagation();
         popup.remove();
       }
       openPopup = popup;
