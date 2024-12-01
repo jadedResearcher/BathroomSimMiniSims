@@ -54,22 +54,19 @@ const initAB = async () => {
   console.log("JR NOTE: results is", results);
   console.log("JR NOTE: i need to iterate on the results and write them to screen as text previews");
   renderList(foundFiles);
-  renderImages(foundFiles);
 
   const filterInput = document.querySelector("#filter");
   filterInput.oninput = () => {
     if (filterInput.value.length != 1) { //if its empty, no filter, if its a single letter thats....less useful than no filter
-      const filteredList = foundFiles.filter((item) =>item.title.includes(filterInput.value));
+      const filteredList = foundFiles.filter((item) => item.title.includes(filterInput.value));
       renderList(filteredList);
-      renderImages(filteredList);
     }
   }
 
 }
-
-const renderImages = (list) => {
-  console.warn("JR NOTE: todo render images")
-}
+//http://farragofiction.com/ColonistsEyes5/LyreBird/SuperSecretInformationKeepFromDocSlaughter/
+//https://archiveofourown.org/works/60983944  
+//http://www.farragofiction.com/PaldemicSim/?id=258  the Unmarked have a plan afoot
 
 //replaces list with new thing, if this ends up too slow, instead have one that concats
 //or hides files
@@ -84,7 +81,29 @@ const renderList = (list) => {
 
   for (let item of list) {
     const list_item = createElementWithClassAndParent("li", unorderedList);
-    list_item.innerHTML = `${item.title}`;
+    const button = createElementWithClassAndParent("button", list_item);
+    button.style.cssText = `    background: none;
+    color: white;
+    border: none;`
+    button.innerHTML = `${item.title}`;
+    const body = document.querySelector("body");
+    button.onclick = (e) => {
+      e.stopPropagation();
+      const popup = createElementWithClassAndParent("button", body, "gallery-popup");
+      const button = createElementWithClassAndParent("button", popup, "close-button");
+      button.innerText = "Close";
+
+
+      const title = createElementWithClassAndParent("div", popup, "gallery-title");
+      title.innerText = item.text;
+      popup.onclick = () => {
+        popup.remove();
+      }
+      openPopup = popup;
+
+      const ele = createElementWithClassAndParent("img", popup, "gallery-image-fullsize");
+      ele.src = item.text;
+    }
 
   }
 }
