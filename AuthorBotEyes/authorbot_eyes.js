@@ -15,10 +15,10 @@ const eyesToFetchReal = [
   "http://lavinraca.eyedolgames.com/images/HarvestEyes/",
   "http://lavinraca.eyedolgames.com/images/secrets/Eyes/"
 */
-const eyesToFetch = [...eyesToFetchReal];
+let eyesToFetch = [...eyesToFetchReal];
 
 //clear this out when you add it to eyesToFetch
-const newEyesToFetch = [];
+let newEyesToFetch = [];
 
 let foundFiles = [];
 
@@ -38,14 +38,36 @@ const initAB = async () => {
   const form = document.querySelector("#interloper-form");
   form.onsubmit = (e) => {
     e.preventDefault();
-    alert("TODO: move the next eyes to the current and loop")
+    eyesToFetch = [...newEyesToFetch];
+    newEyesToFetch = [];
+    input.value = "loading..."
+    fetchLayerOfTruth();
   }
+  fetchLayerOfTruth();
+  const filterInput = document.querySelector("#filter");
+  filterInput.oninput = () => {
+    if (filterInput.value.length != 1) { //if its empty, no filter, if its a single letter thats....less useful than no filter
+      const filteredList = foundFiles.filter((item) => item.title.includes(filterInput.value));
+      renderList(filteredList);
+    }
+  }
+
+}
+
+const fetchLayerOfTruth = async () => {
+  const input = document.querySelector("#interloper-id");
+  const form = document.querySelector("#interloper-form");
 
   let results = [];
   for (let eye of eyesToFetch) {
-    const tmp = await processEye(eye);
+    try{
+      const tmp = await processEye(eye);
     results = results.concat(tmp);
+    }catch(e){
+      console.error(`JR NOTE: something weird happened fetching ${eye} so im skipping it...`,e)
+    }
   }
+  //add to ones found previously
   foundFiles = foundFiles.concat(results);
   input.value = newEyesToFetch.join("\n");
   const countEle = document.querySelector("#count");
@@ -55,13 +77,6 @@ const initAB = async () => {
   form.querySelector("button").innerText = `Fetch Eyes from ${newEyesToFetch.length} urls?`;
   renderList(foundFiles);
 
-  const filterInput = document.querySelector("#filter");
-  filterInput.oninput = () => {
-    if (filterInput.value.length != 1) { //if its empty, no filter, if its a single letter thats....less useful than no filter
-      const filteredList = foundFiles.filter((item) => item.title.includes(filterInput.value));
-      renderList(filteredList);
-    }
-  }
 
 }
 //http://farragofiction.com/ColonistsEyes5/LyreBird/SuperSecretInformationKeepFromDocSlaughter/
@@ -86,7 +101,7 @@ const renderList = (list) => {
     const button = createElementWithClassAndParent("button", list_item);
     buttons.push(button);
     button.style.cssText = `text-decoration: underline;margin: none; background: none; color: white;border: none;`
-    button.innerHTML = `(${item.originalURL==="http://farragofiction.com/ZampanioEyes/"?"*":""}${item.date}) ${item.title}`;
+    button.innerHTML = `(${item.originalURL === "http://farragofiction.com/ZampanioEyes/" ? "*" : ""}${item.date}) ${item.title}`;
     const body = document.querySelector("body");
     button.onclick = (e) => {
       e.stopPropagation();
