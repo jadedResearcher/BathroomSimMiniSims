@@ -24,7 +24,7 @@ let foundFiles = [];
 
 const initAB = async () => {
   alert("JR NOTE: work in progress :) :) ;)")
-  console.log("JR NOTE: did you know you could search through GopherSim and other file system mazes like this too? Just make it the html version the top level URL to search.")
+  console.log("JR NOTE: did you know you could search through other Eyes like this (like, say, the Harvests?)")
 
 
 
@@ -61,6 +61,7 @@ const fetchLayerOfTruth = async () => {
   let results = [];
   for (let eye of eyesToFetch) {
     try{
+      console.log("JR NOTE: trying",eye)
       const tmp = await processEye(eye);
     results = results.concat(tmp);
     }catch(e){
@@ -185,7 +186,7 @@ const processEye = async (url) => {
       }
       text = url + title;
       if (isSubDirectory && !title.includes("*")) {
-        newEyesToFetch.push(text);
+        newEyesToFetch.push(text+"/");
       }
       return { title, text, isSubDirectory, originalURL: url, date: d.date }
     });
