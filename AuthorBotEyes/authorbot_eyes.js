@@ -2,6 +2,7 @@
 //loops are not just possible but likely, i know how past jr is
 //so don't send dear sweet precious AB into a possible spiral with no way out
 const order = "?C=M;O=D"; //descending by date
+let openPopup; //so i can close it
 //clear this out when you're done fetching, replace with newEyesToFetch
 const eyesToFetchReal = [
   "http://farragofiction.com/ZampanioEyes/",
@@ -16,6 +17,12 @@ const eyesToFetchReal = [
   "http://lavinraca.eyedolgames.com/images/secrets/Eyes/"
 */
 let eyesToFetch = [...eyesToFetchReal];
+
+window.onclick =()=>{
+  if(openPopup){
+    openPopup.remove();
+  }
+}
 
 //clear this out when you add it to eyesToFetch
 let newEyesToFetch = [];
@@ -70,7 +77,7 @@ const fetchLayerOfTruth = async () => {
   }
   //add to ones found previously
   foundFiles = foundFiles.concat(results);
-  input.value = newEyesToFetch.join("\n");
+  input.value = newEyesToFetch.length >0 ? newEyesToFetch.join("\n") :"NO FURTHER LAYERS TO FETCH";
   const countEle = document.querySelector("#count");
   countEle.innerText = "# Eyes Already Loaded: " + foundFiles.length;
 
