@@ -9,10 +9,12 @@ const eyesToFetchReal = [
   "http://farragofiction.com/ZampanioEyes3/",
   "http://farragofiction.com/ZampanioEyes4/",
   "http://farragofiction.com/ColonistsEyes5/",
+
+];//"http://farragofiction.com/ColonistsEyes5/LyreBird/SuperSecretInformationKeepFromDocSlaughter/"
+/*
   "http://lavinraca.eyedolgames.com/images/HarvestEyes/",
   "http://lavinraca.eyedolgames.com/images/secrets/Eyes/"
-];
-
+*/
 const eyesToFetch = [...eyesToFetchReal];
 
 //clear this out when you add it to eyesToFetch
@@ -51,8 +53,6 @@ const initAB = async () => {
 
 
   form.querySelector("button").innerText = `Fetch Eyes from ${newEyesToFetch.length} urls?`;
-  console.log("JR NOTE: results is", results);
-  console.log("JR NOTE: i need to iterate on the results and write them to screen as text previews");
   renderList(foundFiles);
 
   const filterInput = document.querySelector("#filter");
@@ -72,33 +72,36 @@ const initAB = async () => {
 //or hides files
 //and keep list on page without rerenders
 const renderList = (list) => {
-  console.log("JR NOTE: rendering list")
   const countEle = document.querySelector("#filter-count");
   countEle.innerText = "Filtered Eyes Count: " + list.length;
+
   //caching this will speed things up too but im lazy so unless i need to i won't
   const listEleParent = document.querySelector("#omni-list");
   listEleParent.innerHTML = "";
   const unorderedList = createElementWithClassAndParent("ul", listEleParent);
   const buttons = [];//lets us go left and right
-  for (let i=0; i<list.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     let item = list[i];
     const list_item = createElementWithClassAndParent("li", unorderedList);
-    console.log("JR NOTE: making button for ", item)
     const button = createElementWithClassAndParent("button", list_item);
     buttons.push(button);
     button.style.cssText = `text-decoration: underline;margin: none; background: none; color: white;border: none;`
-    button.innerHTML = `${item.title}`;
+    button.innerHTML = `(${item.originalURL==="http://farragofiction.com/ZampanioEyes/"?"*":""}${item.date}) ${item.title}`;
     const body = document.querySelector("body");
     button.onclick = (e) => {
-      console.log("JR NOTE: button was clicked for",i)
       e.stopPropagation();
       const popup = createElementWithClassAndParent("button", body, "gallery-popup");
       popup.focus();
       const closeButton = createElementWithClassAndParent("button", popup, "close-button");
       closeButton.innerText = "Close";
+      closeButton.style.cssText = `    margin: 0px;
+    padding: 0px;
+    height: 50px;
+    width: 50px;
+`;
 
       const navigationHolder = createElementWithClassAndParent("div", popup);
-      navigationHolder.style.cssText=`    position: absolute;
+      navigationHolder.style.cssText = `    position: absolute;
     top: 34px;
     left: 0px;
     display: flex;
@@ -107,35 +110,31 @@ const renderList = (list) => {
 
       const left = createElementWithClassAndParent("button", navigationHolder);
       left.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>';
-      left.onclick =(e)=>{
+      left.onclick = (e) => {
         e.stopPropagation();
-        console.log("JR NOTE: left",i)
-        if(i>0){
-          console.log("JR NOTE: going to click left", i-1)
+        if (i > 0) {
           popup.remove();
-          buttons[i-1].click();
+          buttons[i - 1].click();
         }
       }
       const right = createElementWithClassAndParent("button", navigationHolder);
       right.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
-      right.onclick=(e)=>{
+      right.onclick = (e) => {
         e.stopPropagation();
-        console.log("JR NOTE: right",i)
-        if(i<list.length){
-          console.log("JR NOTE: going to click right", i+1)
+        if (i < list.length) {
           popup.remove();
-          buttons[i+1].click();
+          buttons[i + 1].click();
         }
       }
 
       const title = createElementWithClassAndParent("div", popup, "gallery-title");
-      title.innerText = item.text;
+      title.innerText = `(${item.date})  ${item.text}`;
       closeButton.onclick = (e) => {
         e.stopPropagation();
         popup.remove();
       }
       openPopup = popup;
-
+      //https://archiveofourown.org/works/41083818
       const ele = createElementWithClassAndParent("img", popup, "gallery-image-fullsize");
       ele.src = item.text;
     }
@@ -173,7 +172,7 @@ const processEye = async (url) => {
       if (isSubDirectory && !title.includes("*")) {
         newEyesToFetch.push(text);
       }
-      return { title, text, isSubDirectory, originalURL: url }
+      return { title, text, isSubDirectory, originalURL: url, date: d.date }
     });
 
     return massagedData;

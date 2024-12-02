@@ -35,7 +35,8 @@ const getGopherData = async (url) => {
       const href = url + cells[1].querySelector("a").href;
       if (href) {
         const size = cells[3].innerText;
-        ret[index] = { href, size };
+        const date = cells[2].innerText;
+        ret[index] = { href, size, date };
         index++;
       }
     }
