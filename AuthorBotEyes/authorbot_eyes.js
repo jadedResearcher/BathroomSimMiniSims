@@ -16,7 +16,7 @@ const eyesToFetchReal = [
   "http://lavinraca.eyedolgames.com/images/HarvestEyes/",
   "http://lavinraca.eyedolgames.com/images/secrets/Eyes/"
 */
-let eyesToFetch = [...eyesToFetchReal];
+let eyesToFetch = [];
 
 window.onclick =()=>{
   if(openPopup){
@@ -25,7 +25,7 @@ window.onclick =()=>{
 }
 
 //clear this out when you add it to eyesToFetch
-let newEyesToFetch = [];
+let newEyesToFetch = [...eyesToFetchReal];
 
 let foundFiles = [];
 
@@ -41,7 +41,7 @@ const initAB = async () => {
   container.append(closerSprite);
 
   const input = document.querySelector("#interloper-id");
-  input.value = "loading..."
+  input.value = newEyesToFetch.length >0 ? newEyesToFetch.join("\n") :"NO FURTHER LAYERS TO FETCH";
   const form = document.querySelector("#interloper-form");
   form.onsubmit = (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const initAB = async () => {
     input.value = "loading..."
     fetchLayerOfTruth();
   }
-  fetchLayerOfTruth();
+  //fetchLayerOfTruth();
   const filterInput = document.querySelector("#filter");
   filterInput.oninput = () => {
     if (filterInput.value.length != 1) { //if its empty, no filter, if its a single letter thats....less useful than no filter
@@ -122,7 +122,7 @@ const renderList = (list) => {
     height: 50px;
     width: 50px;
 `;
-
+//http://farragofiction.com/PaldemicSim/bio.html?target=yggdrasilsYeoman
       const navigationHolder = createElementWithClassAndParent("div", popup);
       navigationHolder.style.cssText = `    position: absolute;
     top: 34px;
