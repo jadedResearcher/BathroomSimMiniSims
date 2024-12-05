@@ -506,7 +506,7 @@ const altFact2 = new Fact("Alt Is Very Lonely", "In the Universe Alt came from, 
 
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
 //any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
-const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.");
+const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.",1,1,1);
 
 /*
 if having trouble thinking of a fact, link to another part of zampaniosim, including my puzzlebox
