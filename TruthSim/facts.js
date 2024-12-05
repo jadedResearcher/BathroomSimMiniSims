@@ -415,8 +415,8 @@ const getAllFactsWithTheme = (theme_key) => {
 }
 
 const getAllFactsWithThemeAndTier = (theme_key, tier) => {
-  console.log("JR NOTE: getAllFactsWithThemeAndTier ", { theme_key, tier })
-  console.log("JR NOTE: don't forget to call pleaseABHelpMeFindMissingFacts to make sure theres no themes with no facts")
+  //console.log("JR NOTE: getAllFactsWithThemeAndTier ", { theme_key, tier })
+  //console.log("JR NOTE: don't forget to call pleaseABHelpMeFindMissingFacts to make sure theres no themes with no facts")
 
   const oddsSpiral = () => {
     return Math.random() > 0.95; //5% chance that a spiral fact will slip into some other theme unnoticed, its probably fine
@@ -424,7 +424,7 @@ const getAllFactsWithThemeAndTier = (theme_key, tier) => {
   //sure could call getAllFactsWithTheme but why loop to get the facts then loop again to get the tiers
   const ret = [];
   for (let fact of all_facts) {
-    //console.log("JR NOTE: fact is", fact)
+    //console.log("JR NOTE: getAllFactsWithThemeAndTier debugging for rested, fact is", fact)
     if (fact.theme_key_array.includes(theme_key) || (oddsSpiral() && fact.theme_key_array.includes(TWISTING))) {
       if (tier === 1) {
         //level 1 is all facts of theme (theme_key_array on fact)
@@ -506,7 +506,7 @@ const altFact2 = new Fact("Alt Is Very Lonely", "In the Universe Alt came from, 
 
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
 //any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
-const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.",1,1,1);
+const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.",[WASTE],1,1,1);
 
 /*
 if having trouble thinking of a fact, link to another part of zampaniosim, including my puzzlebox
