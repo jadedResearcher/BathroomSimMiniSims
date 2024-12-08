@@ -66,7 +66,7 @@ const initAB = async () => {
   if (urlParams.get("filter")) {
     container.remove();
     form.remove();
-    document.querySelector("#warning").innerText = "How did you get here?"
+    document.querySelector("#warning").innerHTML = `<br><br><img style="height: 75px; float: left" src='Doctor_Fiona_Slaughter_by_guide.png'>My name is Doctor Fiona Slaughter, and I do not know why your Eyes were sent to me. But I am grateful you are here.<br><br>The files you were sent to See are below:`
     filterInput.value = urlParams.get("filter")
     //too lazy to dry up my code lol
     eyesToFetch = [...newEyesToFetch];
@@ -146,7 +146,18 @@ const renderList = (list) => {
     buttons.push(button);
     button.style.cssText = `text-decoration: underline;margin: none; background: none; color: white;border: none;`
     button.innerHTML = `(${item.originalURL === "http://farragofiction.com/ZampanioEyes/" ? "*" : ""}${item.date}) ${item.title}`;
+    
+    if(item.originalURL.includes("SuperSecretInformationKeepFromDocSlaughter")){
+      const panicButton = createElementWithClassAndParent("button", list_item);
+      panicButton.innerText ="What's This? Do The Eyes Have Something To Show Me?"
+      panicButton.onclick = ()=>{
+        alert("WIP: JR TODO fiona needs to fucking panic")
+      }
+
+    }
     const body = document.querySelector("body");
+
+
     button.onclick = (e) => {
       e.stopPropagation();
       const popup = createElementWithClassAndParent("button", body, "gallery-popup");
