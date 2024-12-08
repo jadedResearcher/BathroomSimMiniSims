@@ -20,8 +20,8 @@ let eyesToFetch = [];
 
 const allEyesFetched = [];
 
-window.onclick =()=>{
-  if(openPopup){
+window.onclick = () => {
+  if (openPopup) {
     openPopup.remove();
   }
 }
@@ -35,7 +35,12 @@ const initAB = async () => {
   alert("JR NOTE: work in progress :) :) ;)")
   console.log("JR NOTE: did you know you could search through other Eyes like this (like, say, the Harvests?)")
 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
 
+  if (urlParams.get("list")) {
+    newEyesToFetch = decodeURIComponent(urlParams.get("list")).split(",")
+  }
 
   const container = document.querySelector("#room-container");
   const closerSprite = createElementWithClassAndParent("img", container, 'sprite ab');
@@ -43,11 +48,11 @@ const initAB = async () => {
   container.append(closerSprite);
 
   const input = document.querySelector("#interloper-id");
-  input.oninput = ()=>{
+  input.oninput = () => {
     newEyesToFetch = input.value.split("\n");
     console.log("JR NOTE: newEyesToFetch is", newEyesToFetch);
   }
-  input.value = newEyesToFetch.length >0 ? newEyesToFetch.join("\n") :"NO FURTHER LAYERS TO FETCH";
+  input.value = newEyesToFetch.length > 0 ? newEyesToFetch.join("\n") : "NO FURTHER LAYERS TO FETCH";
   const form = document.querySelector("#interloper-form");
   form.onsubmit = (e) => {
     e.preventDefault();
@@ -58,6 +63,19 @@ const initAB = async () => {
   }
   //fetchLayerOfTruth();
   const filterInput = document.querySelector("#filter");
+  if (urlParams.get("filter")) {
+    container.remove();
+    form.remove();
+    document.querySelector("#warning").innerText = "How did you get here?"
+    filterInput.value = urlParams.get("filter")
+    //too lazy to dry up my code lol
+    eyesToFetch = [...newEyesToFetch];
+    newEyesToFetch = [];
+    await fetchLayerOfTruth();
+    const filteredList = foundFiles.filter((item) => item.title.includes(filterInput.value));
+    renderList(filteredList);
+    return;
+  }
   filterInput.oninput = () => {
     if (filterInput.value.length != 1) { //if its empty, no filter, if its a single letter thats....less useful than no filter
       updateURLParams(`?filter=${filterInput.value}`)
@@ -75,23 +93,30 @@ const fetchLayerOfTruth = async () => {
 
   let results = [];
   for (let eye of eyesToFetch) {
-    try{
-      console.log("JR NOTE: trying",eye)
+    try {
+      console.log("JR NOTE: trying", eye)
       const tmp = await processEye(eye);
-    results = results.concat(tmp);
-    allEyesFetched.push(eye);
-    }catch(e){
-      console.error(`JR NOTE: something weird happened fetching ${eye} so im skipping it...`,e)
+      results = results.concat(tmp);
+      allEyesFetched.push(eye);
+    } catch (e) {
+      console.error(`JR NOTE: something weird happened fetching ${eye} so im skipping it...`, e)
     }
   }
   //add to ones found previously
   foundFiles = foundFiles.concat(results);
-  input.value = newEyesToFetch.length >0 ? newEyesToFetch.join("\n") :"NO FURTHER LAYERS TO FETCH";
+  if (input) {
+    input.value = newEyesToFetch.length > 0 ? newEyesToFetch.join("\n") : "NO FURTHER LAYERS TO FETCH";
+  }
   const countEle = document.querySelector("#count");
-  countEle.innerText = "# Eyes Already Loaded: " + foundFiles.length;
+  if (countEle) {
+    countEle.innerText = "# Eyes Already Loaded: " + foundFiles.length;
+  }
 
 
-  form.querySelector("button").innerText = `Fetch Eyes from ${newEyesToFetch.length} urls?`;
+  if (form && form.querySelector("button")) {
+    form.querySelector("button").innerText = `Fetch Eyes from ${newEyesToFetch.length} urls?`;
+  }
+
   renderList(foundFiles);
   updateURLParams(`?list=${allEyesFetched.join(",")}`)
 
@@ -133,7 +158,7 @@ const renderList = (list) => {
     height: 50px;
     width: 50px;
 `;
-//http://farragofiction.com/PaldemicSim/bio.html?target=yggdrasilsYeoman
+      //http://farragofiction.com/PaldemicSim/bio.html?target=yggdrasilsYeoman
       const navigationHolder = createElementWithClassAndParent("div", popup);
       navigationHolder.style.cssText = `    position: absolute;
     top: 34px;
@@ -204,14 +229,14 @@ const processEye = async (url) => {
       }
       text = url + title;
       if (isSubDirectory && !title.includes("*")) {
-        newEyesToFetch.push(text+"/");
+        newEyesToFetch.push(text + "/");
       }
       return { title, text, isSubDirectory, originalURL: url, date: d.date }
     });
 
     return massagedData;
   }
-//https://zampaniosim.miraheze.org/wiki/ZampanioSimSouthSouth
+  //https://zampaniosim.miraheze.org/wiki/ZampanioSimSouthSouth
   const initialData = await fetchDataAndMassage(url);
   return initialData;
 
