@@ -18,6 +18,8 @@ const eyesToFetchReal = [
 */
 let eyesToFetch = [];
 
+const allEyesFetched = [];
+
 window.onclick =()=>{
   if(openPopup){
     openPopup.remove();
@@ -41,6 +43,10 @@ const initAB = async () => {
   container.append(closerSprite);
 
   const input = document.querySelector("#interloper-id");
+  input.oninput = ()=>{
+    newEyesToFetch = input.value.split("\n");
+    console.log("JR NOTE: newEyesToFetch is", newEyesToFetch);
+  }
   input.value = newEyesToFetch.length >0 ? newEyesToFetch.join("\n") :"NO FURTHER LAYERS TO FETCH";
   const form = document.querySelector("#interloper-form");
   form.onsubmit = (e) => {
@@ -54,6 +60,8 @@ const initAB = async () => {
   const filterInput = document.querySelector("#filter");
   filterInput.oninput = () => {
     if (filterInput.value.length != 1) { //if its empty, no filter, if its a single letter thats....less useful than no filter
+      updateURLParams(`?filter=${filterInput.value}`)
+
       const filteredList = foundFiles.filter((item) => item.title.includes(filterInput.value));
       renderList(filteredList);
     }
@@ -71,6 +79,7 @@ const fetchLayerOfTruth = async () => {
       console.log("JR NOTE: trying",eye)
       const tmp = await processEye(eye);
     results = results.concat(tmp);
+    allEyesFetched.push(eye);
     }catch(e){
       console.error(`JR NOTE: something weird happened fetching ${eye} so im skipping it...`,e)
     }
@@ -84,6 +93,8 @@ const fetchLayerOfTruth = async () => {
 
   form.querySelector("button").innerText = `Fetch Eyes from ${newEyesToFetch.length} urls?`;
   renderList(foundFiles);
+  updateURLParams(`?list=${allEyesFetched.join(",")}`)
+
 
 
 }
