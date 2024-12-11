@@ -24,7 +24,7 @@ window.onclick = () => {
   if (openPopup) {
     openPopup.remove();
   }
-}
+}//http://farragofiction.com/ColonistsEyes5/imthewebthatconnects_alltheshininglights_thatwouldotherwise_belosttothevoid___hopefully_theconnectionsyoumaketoeachother_helpssecureagainstthefuture.png
 
 //clear this out when you add it to eyesToFetch
 let newEyesToFetch = [...eyesToFetchReal];
@@ -32,7 +32,6 @@ let newEyesToFetch = [...eyesToFetchReal];
 let foundFiles = [];
 
 const initAB = async () => {
-  alert("JR NOTE: work in progress :) :) ;)")
   console.log("JR NOTE: did you know you could search through other Eyes like this (like, say, the Harvests?)")
 
   const queryString = window.location.search;
@@ -149,15 +148,24 @@ const renderList = (list) => {
     
     if(item.originalURL.includes("SuperSecretInformationKeepFromDocSlaughter")){
       const panicButton = createElementWithClassAndParent("button", list_item);
-      panicButton.innerText ="What's This? Do The Eyes Have Something To Show Me?"
+      panicButton.style.display="block";
+      panicButton.innerText ="What's This? Do The Eyes Have Something To Show Me? A Secret?"
       panicButton.onclick = ()=>{
-        alert("WIP: JR TODO fiona needs to fucking panic")
+        const body = document.querySelector("body")
+        body.innerHTML = "";
+        body.style.backgroundColor="black";
+        const fullVideo = createElementWithClassAndParent("video", body);
+        fullVideo.src = "whitenightengale.mp4";
+        fullVideo.loop=true;
+        fullVideo.autoplay =true;
+        fullVideo.play();
+        fullVideo.style.cssText = `height: 100%; margin-left: auto; margin-right:auto; position: relative; display: block;`;
       }
 
     }
     const body = document.querySelector("body");
 
-
+//zampanio is the fandom we made along the way
     button.onclick = (e) => {
       e.stopPropagation();
       const popup = createElementWithClassAndParent("button", body, "gallery-popup");
