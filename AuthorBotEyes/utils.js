@@ -159,6 +159,25 @@ const createElementWithClass = (eleName, className) => {
 
 }
 
+const createElementWithId = (eleName, id, className) => {
+  const ele = document.createElement(eleName);
+  if (id) {
+      ele.id = id;
+  }
+  if (className) {
+      ele.className = className;
+  }
+  return ele;
+
+}
+
+
+const createElementWithIdAndParent = (eleName, parent, id, className) => {
+  const ele = createElementWithId(eleName, id, className);
+  parent.append(ele);
+  return ele;
+}
+
 const titleCase = (input) => {
   const pieces = input.split(" ");
   const ret = [];
@@ -291,6 +310,32 @@ function getTimeString(date) {
   s = checkTime(s);
   return h + ":" + m + ":" + s;
 }
+
+function getTimeStringBuff(date) {
+  let m = `${date.getMinutes()}`;
+  let s = `${date.getSeconds()}`;
+  let ms = `${date.getMilliseconds()}`;
+
+  // add a zero in front of numbers<10
+  m = checkTime(date.getMinutes());
+  s = checkTime(date.getSeconds());
+  ms = checkTimeMS(date.getMilliseconds());
+
+  return + m + ":" + s + ":" + ms;
+}
+
+
+
+function checkTimeMS(i) {
+  let ret = `${i}`;
+  if (i < 10) {
+      ret = "00" + i;
+  } else if (i < 100) {
+      ret = "0" + i;
+  }
+  return ret;
+}
+
 
 //https://stackoverflow.com/questions/18229022/how-to-show-current-time-in-javascript-in-the-format-hhmmss
 function checkTime(i) {

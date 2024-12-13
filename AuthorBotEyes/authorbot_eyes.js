@@ -3,6 +3,9 @@
 //so don't send dear sweet precious AB into a possible spiral with no way out
 const order = "?C=M;O=D"; //descending by date
 let openPopup; //so i can close it
+
+
+
 //clear this out when you're done fetching, replace with newEyesToFetch
 const eyesToFetchReal = [
   "http://farragofiction.com/ZampanioEyes/",
@@ -145,27 +148,49 @@ const renderList = (list) => {
     buttons.push(button);
     button.style.cssText = `text-decoration: underline;margin: none; background: none; color: white;border: none;`
     button.innerHTML = `(${item.originalURL === "http://farragofiction.com/ZampanioEyes/" ? "*" : ""}${item.date}) ${item.title}`;
-    
-    if(item.originalURL.includes("SuperSecretInformationKeepFromDocSlaughter")){
+
+    if (item.originalURL.includes("SuperSecretInformationKeepFromDocSlaughter")) {
       const panicButton = createElementWithClassAndParent("button", list_item);
-      panicButton.style.display="block";
-      panicButton.innerText ="What's This? Do The Eyes Have Something To Show Me? A Secret?"
-      panicButton.onclick = ()=>{
+      panicButton.style.display = "block";
+      panicButton.innerText = "What's This? Do The Eyes Have Something To Show Me? A Secret?"
+      panicButton.onclick = () => {
         const body = document.querySelector("body")
         body.innerHTML = "";
-        body.style.backgroundColor="black";
+        body.style.backgroundColor = "black";
         const fullVideo = createElementWithClassAndParent("video", body);
         fullVideo.src = "whitenightengale.mp4";
-        fullVideo.loop=true;
-        fullVideo.autoplay =true;
+        fullVideo.loop = true;
+        fullVideo.autoplay = true;
         fullVideo.play();
         fullVideo.style.cssText = `height: 100%; margin-left: auto; margin-right:auto; position: relative; display: block;`;
+
+        const youWon = () => {
+          alert("TODO")
+        }
+
+
+        const loadDoctorFionaSlaughtersLogs = () => {
+          fullVideo.remove();
+          body.innerHTML = `<div id="crt">
+    <div class="scanline"></div>
+    <div class="lines"></div>
+
+    <div id="terminal">
+      <input id="hidden-input" style="display:none"></input>
+    </div>
+  </div>`
+          body.className = "typing";//should pull in all the typing css now
+          playTyping();
+
+        }
+
+        setTimeout(loadDoctorFionaSlaughtersLogs, 3000)
       }
 
     }
     const body = document.querySelector("body");
-
-//zampanio is the fandom we made along the way
+    //https://spiralsrest.neocities.org/misc/LettersAtTheEndOfTheWorld/STPBYSTP.ANS
+    //zampanio is the fandom we made along the way
     button.onclick = (e) => {
       e.stopPropagation();
       const popup = createElementWithClassAndParent("button", body, "gallery-popup");
@@ -219,6 +244,8 @@ const renderList = (list) => {
 
   }
 }
+
+
 
 //if you find a subdirectory don't make it a clickable book
 //instead add it to eyesToFetch
