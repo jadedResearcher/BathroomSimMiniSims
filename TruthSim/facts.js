@@ -1418,7 +1418,7 @@ But the Mother of Monsters would not go down without a fight.
 
 http://farragofiction.com/Arm2/
 
-`);
+`);//the medium disabled White Nightengale. The puppet is free, what sins will he commit?
 
 //he's basically retired from caring about zampanio
 //good for him

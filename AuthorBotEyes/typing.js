@@ -154,7 +154,7 @@
     nextWord = () => {
         const current_word = this.sorted_word_list[this.current_index];
         this.unique_word_map[current_word].typed = true;
-        this.wordsLeft.innerHTML = `${this.wordsRemaining()} words remaining in this Practice Level.<p>CONTENT WARNING: mild mind control premise, cognitive parasite, masturbation guide, praise</p>`;
+        this.wordsLeft.innerHTML = `${this.wordsRemaining()} words remaining in this Practice Level.</p>`;
 
         this.current_index++;
 
