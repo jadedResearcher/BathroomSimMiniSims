@@ -1416,6 +1416,8 @@ The Echidna did not ask to devour Relevancy and Space and Memory.
 
 But the Mother of Monsters would not go down without a fight.
 
+http://farragofiction.com/Arm2/
+
 `);
 
 //he's basically retired from caring about zampanio
