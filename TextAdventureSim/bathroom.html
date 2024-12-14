@@ -1,0 +1,62 @@
+<html language="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description"
+    content="It's a game! It works! There are definitely no secrets! Inspired by the hit 1972 classic: Zampanio">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>ZampanioSimulator: Just A Normal Text Adventure Game</title>
+  <script src="utils.js"></script>
+  <script src="data.js"></script>
+  <script src="index.js"></script>
+
+</head>
+
+
+<body>
+  <div id="container">
+  </div>
+
+  <div id="todo-pile">
+    <h2>Bones</h2>
+    <li> style like atticsimish</li>
+
+    <li> placeholder room that just says "you are in a room" and lets you type text in an input that just results in "i
+      don't know what that means" no matter what you type</li>
+    <li> trigger/effect system for adding things to the room (including exits) (should be a trigger of "has no exits" to
+      add at least one exit)</li>
+    <li> wire up default "look" behavior to list items, people and exits in the room and discuss the procedural
+      description it has</li>
+    <li> wire up default "move/go" behavior to pick a new room (decide how neighboring rooms work. i want a LITLE bit of
+      stability, but delete the neighbors of any room more than three away from current)</li>
+
+      <h2>Meat</h2>
+
+
+      <li> make a placeholder game in the bathroom (i am so normal about the bathroom maze), for a text adventure game</li>
+<li> update PersonalityQuiz to generate a link to the bathroom (basically same as other link, seed, themes)</li>
+<li> themes and seed are used to generate the bathroom (means certain blorbos/items are locked to certain games)</li>
+<li> rival is around and is a HUGE ASSHOLE, if they are in a room they've already taken all the objects AND convinced everyone inside not to talk to you</li>
+<li> same ACTION words as EastEast, more or less (move/take/use/talk/look/taste/etc) </li>
+<li> game will not let you "get ye flask" to ANYTHING, its broken, there's an error message when you try saying 
+"FINISH THE TUTORIAL TO GET YOUR INVENTORY!" except the way to finish it is broken</li>
+<li> you can hack the game to set the tutorial to complete.  truth gets PISSY about this (flashes random spooky videos to 'punish' you) and rants about how much WORK was put in and you can't even be bothered to play the game normally, you probably don't even CARE about the plot, etc, etc</li>
+<li> you can hack the game to use a debug inventory (this activates east mode, it simply starts working)</li>
+<li> each room is created via a series of triggers/effects (what people or items are inside it) </li>
+<li> each entity (animate or otherwise) has a series of trigers/effects on what should happen if the various ACTIONs are deployed onto them, including default ones (i.e. you can only open a locked box if you have a key, you can only KILL a blorbo if you have a weapon, etc)</li>
+<li> its increasingly clear you're in Arm2</li>
+<li> doc slaughter is weeping and refuses to do anything (you can help her, and if you do the next iteration of Arm 1 has Wanda start therapy)</li>
+<li>work in a novel use for the Fact engine i made for TruthSim (maybe if you help out white nightengale she'll give you facts every time you talk to her?)</li>
+<li> Peewee is trapped in a room that can not be exited, along with the Detective (Guide of Trapped Breath) (you can hack to get out, but if you do, Peewee escapes as well and gets into the Mundane Arm, where he wins)</li>
+<li> The Witness is also wandering</li>
+<li> Apocalypse Chick has the sweet lore to drop and thinks that even if you manage to free peewee (what she assumes your goal is) it'll just let her take this party on the road</li>
+<li> the game keeps track of Slaughter vs Peewee and sends it over to ButlerBot</li>
+<li> eventually I conclude which one people like more and make a Decision</li>
+<li>update personality quiz results to generate the link to the bathroom when it is done/ready</li>
+
+  </div>
+</body>
+
+</html>

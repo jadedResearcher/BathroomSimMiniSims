@@ -68,7 +68,7 @@ const initAB = async () => {
   if (urlParams.get("filter")) {
     container.remove();
     form.remove();
-    document.querySelector("#warning").innerHTML = `<br><br><img style="height: 75px; float: left" src='Doctor_Fiona_Slaughter_by_guide.png'>My name is Doctor Fiona Slaughter, and I do not know why your Eyes were sent to me. But I am grateful you are here.<br><br>The files you were sent to See are below:`
+    document.querySelector("#warning").innerHTML = `<br><br><img style="height: 75px; float: left" id="doc" src='Doctor_Fiona_Slaughter_by_guide.png'>My name is Doctor Fiona Slaughter, and I do not know why your Eyes were sent to me. But I am grateful you are here.<br><br>The files you were sent to See are below:`
     filterInput.value = urlParams.get("filter")
     //too lazy to dry up my code lol
     eyesToFetch = [...newEyesToFetch];
@@ -153,7 +153,10 @@ const renderList = (list) => {
       const panicButton = createElementWithClassAndParent("button", list_item);
       panicButton.style.display = "block";
       panicButton.innerText = "What's This? Do The Eyes Have Something To Show Me? A Secret?"
-      panicButton.onclick = () => {
+      panicButton.onclick = async () => {
+        const doc = document.querySelector("#doc");
+        doc.src = "images/whitenightengale_by_guide.png";
+        await sleep(1000);
         const body = document.querySelector("body")
         body.innerHTML = "";
         body.style.backgroundColor = "black";
