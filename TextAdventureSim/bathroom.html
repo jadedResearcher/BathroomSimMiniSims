@@ -11,19 +11,37 @@
   <script src="utils.js"></script>
   <script src="data.js"></script>
   <script src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
 
 </head>
 
 
 <body>
   <div id="container">
+    <div class="player-container" id="story-container">
+      <div class="story-so-far">
+        <p>Loading...</p>
+      </div>
+
+      <div class="command">
+
+        <form id="puppet-command" action="" method="post" style="display: inline-block;">
+
+          <input id="puppet-input" autofocus  placeholder="Enter Command">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+
+
   </div>
 
   <div id="todo-pile">
     <h2>Bones</h2>
     <li> style like atticsimish</li>
 
-    <li> placeholder room that just says "you are in a room" and lets you type text in an input that just results in "i
+    <li> placeholder room dom only that just says "you are in a room" and lets you type text in an input that just results in "i
       don't know what that means" no matter what you type</li>
     <li> trigger/effect system for adding things to the room (including exits) (should be a trigger of "has no exits" to
       add at least one exit)</li>

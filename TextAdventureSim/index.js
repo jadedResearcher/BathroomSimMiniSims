@@ -8,7 +8,7 @@ let rand = new SeededRandom(13);
 
 
 window.onload = () => {
-  mainElement = document.querySelector("#container");
+  mainElement = document.querySelector(".story-so-far");
 
   if (isItFriday()) {
     mainElement.innerHTML = `<p>...</p>
