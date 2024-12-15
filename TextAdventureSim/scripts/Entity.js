@@ -56,6 +56,11 @@ class Entity {
     this.name = name;
     this.theme_keys = theme_keys;
     this.rand = rand;
+    this.syncDefaultFunctions();
+  }
+
+  //if an instance has a new look function, for example, you need to recall this or it'll have a ghost reference (it'll keep being the original version)
+  syncDefaultFunctions = ()=>{
     //doing it this way means if i want an especially customized entity i can do so
     //but otherwise all entities will call their functions for the base stuff (which i can also customize)
     this.functionMap[COMMAND_LOOK] = this.look;
@@ -94,17 +99,15 @@ class Entity {
     //this also means your contents may respond to a command that you don't and thats fine
     for (let c of this.contents) {
       if (command.includes(c.name)) {//the name of the entity in its entirity
-        c.handleCommand(command);
-        return;
+        return c.handleCommand(command);
       }
     }
     //if we haven't returned yet, its for me to handle
     const first_word = command.split(" ")[0].toUpperCase();
-    for (const [key, value] of Object.entries(actionMap)) {
+    for (const [key, value] of Object.entries(this.actionMap)) {
       if (value.includes(first_word)) {
         //we found it
-        this.functionMap[key]();
-        return;
+        return this.functionMap[key]();
       }
     }
 
