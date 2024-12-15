@@ -4,7 +4,7 @@ let seed;
 let your_themes;
 let your_rivals_themes;
 let rand = new SeededRandom(13);
-
+let current_room; //an instance of Truth or Alt (unless you manage to do something weirder)
 
 
 window.onload = () => {
@@ -42,8 +42,20 @@ return;
   mainElement.innerHTML = "Pending"
   initThemes();
   grabPersonlization();
-  mainElement.innerHTML = `Seed: ${seed}, Your Themes: ${your_themes.join(",")}, Your Rival's Themes: ${your_rivals_themes.join(",")}`
-
+  mainElement.innerHTML = `Seed: ${seed}, Your Themes: ${your_themes.join(",")}, Your Rival's Themes: ${your_rivals_themes.join(",")}<br><br>type "HELP" for a list of commands.`
+  
+  
+  current_room = new Entity("Entry Room", [KNOWING], rand);
+  const testObject = new Entity("TEST OBJECT", [KNOWING], rand);
+  current_room.contents.push(testObject);
+  
+  const form =document.querySelector("#puppet-command");
+  const input = document.querySelector("#puppet-input")
+  form.onsubmit=(e)=>{
+    e.preventDefault();
+    mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand(input.value)}</p>`;
+    input.value ="";
+  }
 
 }
 

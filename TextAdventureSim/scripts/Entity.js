@@ -93,13 +93,16 @@ class Entity {
   will need to have some kind of counter so i can't go deeper than say, three levels at a time, have a fun apocalypse chick warning if you do
   so lets stub this function out
   */
-  handleCommand = (command) => {
+  handleCommand = (command, count=0) => {
+    if(count > 13){
+      return "Haha, wow! How did you manage to recurse thaaaaaaaaaaaaat many times. Surely even YOU can't justify that one, lol. imma just...stop that. Only I get to cause fractal game crashing bugs like that, lulz. It's been real!"
+    }
     //first word is what command it is
     //but do not rush and try to do something with it, it might be for one of your contents
     //this also means your contents may respond to a command that you don't and thats fine
     for (let c of this.contents) {
-      if (command.includes(c.name)) {//the name of the entity in its entirity
-        return c.handleCommand(command);
+      if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
+        return c.handleCommand(command, count +1);
       }
     }
     //if we haven't returned yet, its for me to handle
@@ -158,6 +161,6 @@ class Entity {
 
   //JR NOTE: this should be tutorial shit or maybe hints if i can manage it
   help = () => {
-    return `You help at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    return `List of Commands For ${this.name}: ${Object.keys(this.actionMap).join(", ")}`;
   }
 }
