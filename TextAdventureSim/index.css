@@ -423,6 +423,7 @@ textarea{
   margin-bottom: 50px;
   overflow-y: auto;
   overflow-x: hidden;
+  padding: 13px;
   height: 490px;
 }
 
