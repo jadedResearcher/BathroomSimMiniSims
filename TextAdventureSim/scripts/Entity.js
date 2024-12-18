@@ -2,6 +2,7 @@ const COMMAND_LOOK = "LOOK";
 const COMMAND_LISTEN = "LISTEN";
 const COMMAND_SMELL = "SMELL";
 const COMMAND_TASTE = "TASTE";
+const COMMAND_TOUCH = "TOUCH";
 const COMMAND_GO = "GO";
 const COMMAND_TALK = "TALK";
 const COMMAND_TAKE = "TAKE";
@@ -14,6 +15,8 @@ const COMMAND_HELP = "HELP";
 const defaultActionMap = {}
 defaultActionMap[COMMAND_LOOK] = ["LOOK", "SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
 defaultActionMap[COMMAND_LISTEN] = ["LISTEN", "HEAR"];
+defaultActionMap[COMMAND_TOUCH] = ["FEEL", "CARESS", "TOUCH","FONDLE","PET"];
+
 defaultActionMap[COMMAND_SMELL] = ["SNIFF", "SMELL", "SNORT", "INHALE", "WHIFF"];
 defaultActionMap[COMMAND_TASTE] = ["TASTE", "LICK", "EAT", 'FLAVOR', "MUNCH", "BITE", "TONGUE", "SLURP", "NOM"];
 defaultActionMap[COMMAND_GO] = ["GO", "DOOR", "EXIT", "LEAVE", "NORTH", "SOUTH", "EAST"];
@@ -74,6 +77,8 @@ class Entity {
     this.functionMap[COMMAND_TAKE] = this.take;
     this.functionMap[COMMAND_GIVE] = this.give;
     this.functionMap[COMMAND_USE] = this.use;
+    this.functionMap[COMMAND_TOUCH] = this.touch;
+
   }
   /*
   i want a function that handles parsing a command
@@ -114,6 +119,8 @@ class Entity {
       }
     }
 
+    return "You don't know how to " + command + ".";
+
   }
 
   //some objects might have their own custom functions for these, like specific triggers/effects
@@ -133,6 +140,10 @@ class Entity {
 
   taste = () => {
     return `You TASTE at the ${this.name} and think about how JR still needs to wire up default theme things.`
+  }
+
+  touch = () => {
+    return `You touch at the ${this.name} and think about how JR still needs to wire up default theme things.`
   }
 
   go = () => {

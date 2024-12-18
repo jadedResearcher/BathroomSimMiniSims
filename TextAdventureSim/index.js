@@ -7,7 +7,8 @@ let rand = new SeededRandom(13);
 let current_room; //an instance of Truth or Alt (unless you manage to do something weirder)
 
 
-window.onload = () => {
+window.onload = async () => {
+  await showDevLog();
   mainElement = document.querySelector(".story-so-far");
 
   if (isItFriday()) {
@@ -55,6 +56,7 @@ return;
     e.preventDefault();
     mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand(input.value)}</p>`;
     input.value ="";
+    mainElement.scrollBy(0,1000);//go to the bottom
   }
 
 }

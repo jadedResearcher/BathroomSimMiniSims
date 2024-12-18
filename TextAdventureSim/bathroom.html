@@ -11,6 +11,7 @@
   <script src="utils.js"></script>
   <script src="data.js"></script>
   <script src="scripts/Entity.js"></script>
+  <script src="dev-log.js"></script>
   <script src="index.js"></script>
   <link rel="stylesheet" href="index.css">
 
@@ -19,6 +20,7 @@
 
 <body>
   <div id="container">
+    <svg title="report bug?" id="bug-report" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z"/></svg>
     <div class="player-container" id="story-container">
       <div class="story-so-far">
         <p>Loading...</p>
@@ -71,7 +73,28 @@
 <li> the game keeps track of Slaughter vs Peewee and sends it over to ButlerBot</li>
 <li> eventually I conclude which one people like more and make a Decision</li>
 <li>update personality quiz results to generate the link to the bathroom when it is done/ready</li>
+idea:
 
+can i make the video game equivalent of foot notes?
+
+leave purposeful bugs in, but when they trigger theres a fake "bug report form"
+
+if you fill it out it sets a local storage variable and the next time you refresh the page the change log updates with the "bug" fixed and increasingly unhinged developer notes
+report bug button fixed in upper right hand corner, have first bug be if you try to GET  anything theres a bug with an error code 
+put error code into form to fix specific problems
+change log and dev notes on page load  reverse chronological (can have real ones and then the new ones from local storage)
+jadedResearcher — Yesterday at 1:54 PM
+since its north tho somehow it never fully fixes itself
+
+inventory keeps being locked but for new reasons each time (till it shifts to procedural ones)
+
+other bugs do fix tho (like "family" themed rooms wont let you leave), one bug per theme 
+
+eventually if you hack the inventory to work you get to chat with true attic jr, and from then on you unlock "up" and "down" commands 
+
+if you go up from a room you can see truth, if you go up from truth you can talk to attic jr again, if you go up from attic jr you get sent to my tumblr
+
+and down lets you enter any object or person as if they were a room
   </div>
 </body>
 
