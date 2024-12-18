@@ -26,7 +26,7 @@ const jrPopup = async (title, contentEle, secret) => {
   jrLog(secret);
 
   const myPromise = new Promise((resolve, reject) => {
-    popup.onclick = () => {
+    closeButton.onclick = () => {
       popup.remove();
       //just in case somehow theres multiple
       document.querySelectorAll(".jr-popup").forEach((x) => x.remove());
@@ -37,18 +37,52 @@ const jrPopup = async (title, contentEle, secret) => {
   return myPromise;
 }
 
+const showBugForm = () => {
+  const contentEle = document.createElement("div");
+
+  const form = createElementWithClassAndParent("form", contentEle);
+
+  const label = createElementWithClassAndParent("label", form);
+  label.innerText = "Error Code:"
+
+  const input = createElementWithClassAndParent("input", form);
+  input.placeholder = "(find in error reports)"
+
+  const line = createElementWithClassAndParent("div", form);
+  line.style.marginBottom="13px"
+
+  const label2 = createElementWithClassAndParent("label", form);
+  label2.innerText = "Comments"
+
+  const area = createElementWithClassAndParent("textarea", form);
+  area.placeholder = "What were you doing when it hit?"
+
+  const button = createElementWithClassAndParent("button", form);
+  button.innerText = "Submit"
+
+  form.onsubmit=(e)=>{
+    e.preventDefault();
+    alert("JR NOTE: TODO wire this up plz")
+    contentEle.parentElement.parentElement.remove();
+  }
+
+
+  jrPopup("Submit Bug Report", contentEle)
+
+}
+
 const showDevLog = () => {
   const contentEle = document.createElement("div");
-  for(let log of all_dev_logs){
+  for (let log of all_dev_logs) {
     const container = createElementWithClassAndParent("li", contentEle, "dev-log");
-    container.innerHTML=`<b><u>${log.date}</u></b>: ${log.text}`;
-    container.onmouseover=()=>{
+    container.innerHTML = `<b><u>${log.date}</u></b>: ${log.text}`;
+    container.onmouseover = () => {
       log.secret && jrLog(log.secret);
     }
 
   }
 
-  jrPopup("JR Dev Log",contentEle)
+  jrPopup("JR Dev Log", contentEle)
 }
 
 class DevLog {
