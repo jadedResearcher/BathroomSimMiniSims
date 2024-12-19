@@ -42,19 +42,29 @@ const showBugForm = () => {
 
   const form = createElementWithClassAndParent("form", contentEle);
 
-  const label = createElementWithClassAndParent("label", form);
-  label.innerText = "Error Code:"
+  const line1 = createElementWithClassAndParent("div", form);
+  line1.style.marginLeft="13px"
 
-  const input = createElementWithClassAndParent("input", form);
+  const label = createElementWithClassAndParent("label", line1);
+  label.innerText = "Error Code: "
+  label.style.width="100px"
+  label.style.display="inline-block"
+
+
+  const input = createElementWithClassAndParent("input", line1);
   input.placeholder = "(find in error reports)"
 
-  const line = createElementWithClassAndParent("div", form);
-  line.style.marginBottom="13px"
+  const line2 = createElementWithClassAndParent("div", form);
+  line2.style.marginLeft="13px"
 
-  const label2 = createElementWithClassAndParent("label", form);
-  label2.innerText = "Comments"
 
-  const area = createElementWithClassAndParent("textarea", form);
+  const label2 = createElementWithClassAndParent("label", line2);
+  label2.innerText = "Comments: "
+  label2.style.width="100px"
+  label2.style.display="inline-block"
+
+
+  const area = createElementWithClassAndParent("textarea", line2);
   area.placeholder = "What were you doing when it hit?"
 
   const button = createElementWithClassAndParent("button", form);
