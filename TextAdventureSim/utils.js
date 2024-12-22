@@ -108,7 +108,7 @@ const fuckShitUPAnimation = (ele) => {
   const animation = `${animation_name} ${getRandomNumberBetween(1, 10) * Math.random()}s ${pickFrom(timing_functions)} ${Math.random() * getRandomNumberBetween(1, 10)}s infinite`;
   ele.style.animation = animation;
 }
-
+//https://longesttextever.neocities.org/
 //from info token reader!
 const getBullshitCSS = (allowFilters) => {
   let css = "";
@@ -148,7 +148,7 @@ const getBullshitCSS = (allowFilters) => {
   }
   return css;
 }
-
+//you cannot go forward in an absence of space (talos principle)
 const createElementWithClass = (eleName, className) => {
   const ele = document.createElement(eleName);
 

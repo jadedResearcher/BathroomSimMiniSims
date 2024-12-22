@@ -135,7 +135,7 @@ class Entity {
   }
 
   smell = () => {
-    return `You SMELL at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    return `You SMELL at the ${this.name} think about ${this.theme_keys.join(",")}`
   }
 
   taste = () => {

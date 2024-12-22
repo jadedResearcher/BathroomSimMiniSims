@@ -9,7 +9,7 @@ const jrLog = (text) => {
 }
 
 //blocks until you click, so long as you await 
-const jrPopup = async (title, contentEle, secret) => {
+const jrPopup =  (title, contentEle, secret) => {
   const popup = createElementWithClassAndParent("div", document.querySelector("body"), "jr-popup");
 
   popup.focus();
@@ -25,16 +25,13 @@ const jrPopup = async (title, contentEle, secret) => {
   popupbody.append(contentEle);
   jrLog(secret);
 
-  const myPromise = new Promise((resolve, reject) => {
-    closeButton.onclick = () => {
-      popup.remove();
-      //just in case somehow theres multiple
-      document.querySelectorAll(".jr-popup").forEach((x) => x.remove());
-      resolve(true);
-    }
-  });
+  closeButton.onclick = () => {
+    popup.remove();
+    //just in case somehow theres multiple
+    document.querySelectorAll(".jr-popup").forEach((x) => x.remove());
+  }
 
-  return myPromise;
+  return popup;
 }
 
 const showBugForm = () => {
@@ -43,25 +40,25 @@ const showBugForm = () => {
   const form = createElementWithClassAndParent("form", contentEle);
 
   const line1 = createElementWithClassAndParent("div", form);
-  line1.style.marginLeft="13px"
+  line1.style.marginLeft = "13px"
 
   const label = createElementWithClassAndParent("label", line1);
   label.innerText = "Error Code: "
-  label.style.width="100px"
-  label.style.display="inline-block"
+  label.style.width = "100px"
+  label.style.display = "inline-block"
 
 
   const input = createElementWithClassAndParent("input", line1);
   input.placeholder = "(find in error reports)"
 
   const line2 = createElementWithClassAndParent("div", form);
-  line2.style.marginLeft="13px"
+  line2.style.marginLeft = "13px"
 
 
   const label2 = createElementWithClassAndParent("label", line2);
   label2.innerText = "Comments: "
-  label2.style.width="100px"
-  label2.style.display="inline-block"
+  label2.style.width = "100px"
+  label2.style.display = "inline-block"
 
 
   const area = createElementWithClassAndParent("textarea", line2);
@@ -70,7 +67,7 @@ const showBugForm = () => {
   const button = createElementWithClassAndParent("button", form);
   button.innerText = "Submit"
 
-  form.onsubmit=(e)=>{
+  form.onsubmit = (e) => {
     e.preventDefault();
     alert("JR NOTE: TODO wire this up plz")
     contentEle.parentElement.parentElement.remove();
@@ -92,7 +89,17 @@ const showDevLog = () => {
 
   }
 
-  jrPopup("JR Dev Log", contentEle)
+  const popup = jrPopup("JR Dev Log", contentEle);
+  //just for me cuz i have to refresh the page a lot to develop
+  const body = document.querySelector("body");
+  const closePopup = () => {
+    popup.remove();
+    body.removeEventListener("click", closePopup)
+    body.removeEventListener("keydown", closePopup)
+  }
+  body.addEventListener("click", closePopup)
+  body.addEventListener("keydown", closePopup)
+
 }
 
 class DevLog {
@@ -108,6 +115,8 @@ class DevLog {
 }
 //new DevLog("12/17/2024","")
 //newest on top
+
+new DevLog("12/22/2024", "Guess who's got a whole week off to obsess over making a shitty zampanio fangame?", "its me")
 new DevLog("12/17/2024", "lol realized i should probably have some kinda bug report form<br><br>plus this devlog<br><br>gotta get my RAMBLE on<br><br>you know?", "gonna have FUN with this<br><br>Its not enough to have a game that's broken, we need to rub it in your face, after all.\n\nHopefully my fake 'responses' to bug reports won't be TOO cruel if someone believes them?\n\nI promise, I'm a weirdly fast and responsive dev but Obsession is a Dangerous Thing and i'm not THAT responsive")
 new DevLog("12/15/2024", "Got the bones in place, you can submit commands and they print text on the screen. it's all default text tho")
 new DevLog("12/14/2024", "got the page more or less created<br><br>super excited about getting to actually play around with North again. Don't get me wrong, Eyedlr was a great time, 10/10, but it wasn't really ZAMPANIOSIM you know? it was just me spiralling around my own branch in a highly selfindulgent way.<br><br>This is me trying to get back to basics. I tried my hand at making a simulation of what Zampanio would look like if it were an RPGMaker game, so how about a Text Adventure?", "PLUS the Medium and the Anon and a few otheres are trying to end the story :) :) :)\n\nTHAT'll be fun to bounce off of")
