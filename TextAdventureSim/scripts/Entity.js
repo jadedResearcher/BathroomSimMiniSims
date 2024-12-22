@@ -171,7 +171,7 @@ class Entity {
     let pockets;
 
     pockets = this.contents.length > 0 ? `You see ${humanJoining(this.contents.map((c => c.name)))}! ` : "You see nothing :(";
-    directions = this.neighbors.length > 0 ? `Obvious exits are ${humanJoining(this.neighbors.map((n, i) => getDirectionLabel(i)))}!` : "There's no where to go from here :(";
+    directions = this.neighbors.length > 0 ? `Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name}(${getDirectionLabel(i)})`))}!` : "There's no where to go from here :(";
     return `You look carefully at the ${this.name}. It's hard to see! ${pockets} ${directions}`;
   }
 
