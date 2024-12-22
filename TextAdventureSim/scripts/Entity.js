@@ -39,6 +39,85 @@ getDirectionLabel = (index) => {
   }
 }
 
+const getRandomThemeConcept = (rand, theme_keys, concept) => {
+  console.log("JR NOTE: getRandomThemeConcept", rand,concept, theme_keys, all_themes)
+  const theme = all_themes[rand.pickFrom(theme_keys)];
+  return theme.pickPossibilityFor(concept,rand);
+}
+
+/*
+will mutate one or more of the theme keys
+(mutation can be removing it unless its the last one)
+*/
+const makeChildEntity = (rand, theme_keys, nameOverride) => {
+  console.log("JR NOTE:makeChildEntity ", theme_keys)
+  let my_keys = [];
+  for (let key of theme_keys) {
+    //add a new theme from scratch
+    if (rand.nextDouble() > 0.95) {
+      console.log("JR NOTE: adding mutation", all_themes)
+      my_keys.push(rand.pickFrom(Object.keys(all_themes)));
+    }
+    //small chance to not add this theme at all
+    if (rand.nextDouble() > 0.15) {
+      console.log("JR NOTE: adding", key)
+      my_keys.push(key)
+    }
+  }
+  console.log("JR NOTE: after mutation pass", my_keys)
+
+  if (my_keys.length == 0) {
+    my_keys = [rand.pickFrom(theme_keys)];
+  } else if (my_keys.length > 8) {
+    my_keys = my_keys.slice(2, 5); //grab a middle-ish chunk
+  }
+  my_keys = uniq(my_keys);
+  console.log("JR NOTE: my keys are", my_keys)
+  const name = `${titleCase(getRandomThemeConcept(rand, my_keys, ADJ))} ${titleCase(getRandomThemeConcept(rand,my_keys, LOCATION))}`;
+  const ret = new Entity(nameOverride ? nameOverride : name, "It's a room...",my_keys, rand);
+  ret.contents = spawnItemsForThemes(ret.rand, ret.theme_keys);
+  return ret;
+}
+
+const spawnItemsForThemes = (rand, theme_keys) => {
+  const itemsButNotEntities = [];
+  const amount = rand.getRandomNumberBetween(0, 5);
+  const artifacts = [
+    { name: "Unos Artifact Book", layer: 1, src: `Artifacts/Zampanio_Artifact_01_Book.png`, themes: [all_themes[SOUL], all_themes[OBFUSCATION]], desc: "A tattered cardboard book filled with signatures with an ornate serif '1' embossed onto it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Duo Mask", layer: 1, src: `Artifacts/Zampanio_Artifact_02_Mask.png`, themes: [all_themes[CLOWNS], all_themes[OBFUSCATION]], desc: "A faceless theater mask with a 2 on the inside of the forehead. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Tres Bottle", layer: 1, src: `Artifacts/Zampanio_Artifact_03_Bottle.png`, themes: [all_themes[OBFUSCATION]], desc: "A simple glass milk bottle with a 3 emblazoned on it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Quatro Blade", layer: 1, src: `Artifacts/Zampanio_Artifact_04_Razor.png`, themes: [all_themes[KILLING], all_themes[OBFUSCATION]], desc: "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Quinque Cloak", layer: 1, src: `Artifacts/Zampanio_Artifact_05_Cloak.png`, themes: [all_themes[OBFUSCATION]], desc: " A simple matte blue cloak with a 5 embroidered on the back in shiny red thread. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Sextant", layer: 1, src: `Artifacts/Zampanio_Artifact_06_Sextant.png`, themes: [all_themes[OBFUSCATION]], desc: "A highly polished brass sextant. There is a 6 carved onto the main knob. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Septum Coin", layer: 1, src: `Artifacts/Zampanio_Artifact_07_Coin_Bronze.png`, themes: [all_themes[OBFUSCATION]], desc: "An old bronze coin. There is a theater mask on one side, and a 7 on the other. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Octome", layer: 1, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [all_themes[KNOWING], all_themes[OBFUSCATION]], desc: "A crumbling leather book with seemingly latin script, with messily torn pages.  There is an 8 embossed onto the back. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Novum Mirror", layer: 1, src: `Artifacts/Zampanio_Artifact_09_Mirror.png`, themes: [all_themes[OBFUSCATION]], desc: "An ornate but tarnished silver mirror, with a 9 carved onto the back. It is said to reflect everything but faces. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+  ];
+  //apocalypse chick is having a great time
+  for (let a of artifacts) {
+    a.desc = "lol did you reaaaaaaaaaaaaaaaally think these still have power here? The apocalypse is upon us alreaaaaaaady !!!!!!!!!!!!!!";
+  }
+
+  for (let i = 0; i < amount; i++) {
+    //true random chance of useless artifacts
+    if(Math.random()>0.9){
+      itemsButNotEntities.push(pickFrom(artifacts));
+    }
+    const chosen_theme = all_themes[rand.pickFrom(theme_keys)];
+    const item = chosen_theme.pickPossibilityFor(FLOORFOREGROUND,rand);
+    item.themes = [chosen_theme];
+    itemsButNotEntities.push(item);
+  }
+
+  const ret = [];
+  for(let item of itemsButNotEntities){
+    console.log("JR  NOTE: item is", item)
+    const e = new Entity(item.name, item.desc,item.themes.map((t)=>t.key), rand);
+    ret.push(e)
+  }
+  return ret;
+}
+
 /*
 Arm2 is a spiralling fractal of madness because of Apocalypse Chick. 
 
@@ -61,6 +140,7 @@ const seedCache = {};
 
 class Entity {
   alive = false;
+  description = "It's so perfectly generic."
   name = "Perfectly Generic Entity";
   durability = 113;//(nothing can die in arm2 but if you take enough damage you're not exactly coherent anymore)
   theme_keys = [];
@@ -73,8 +153,10 @@ class Entity {
 
 
 
-  constructor(name, theme_keys, rand) {
+  constructor(name, desc, theme_keys, rand) {
+    console.log("JR NOTE: ", {name, desc, theme_keys, rand})
     this.name = name.toUpperCase();
+    this.description = desc;
     this.theme_keys = theme_keys;
     this.rand = rand;
     if (!seedCache[this.name]) {
@@ -170,9 +252,9 @@ class Entity {
     let directions;
     let pockets;
 
-    pockets = this.contents.length > 0 ? `You see ${humanJoining(this.contents.map((c => c.name)))}! ` : "You see nothing :(";
-    directions = this.neighbors.length > 0 ? `Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name} (${getDirectionLabel(i)})`))}!` : "There's no where to go from here :(";
-    return `You look carefully at the ${this.name}. It's hard to see! ${pockets} ${directions}`;
+    pockets = this.contents.length > 0 ? `<br><br>You see ${humanJoining(this.contents.map((c => c.name)))} inside it! ` : "<br><br>You see nothing inside it :(";
+    directions = this.neighbors.length > 0 ? `<br><br>Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name} (${getDirectionLabel(i)})`))}!` : "<br><br>There's no where to go from it :(";
+    return `You look carefully at the ${this.name}. It's hard to see! ${this.description}. ${pockets} ${directions}`;
   }
 
   listen = (recursionJustified = true) => {
@@ -236,6 +318,15 @@ class Entity {
   }
 
   go = () => {
+    /*
+      figure out where you're trying to go (NORTH/SOUTH/EAST  map to indices, otherwise name)
+      before you go there make sure you spawn its neighbors via makeChildEntity (if it does not have any)
+      (this way you never have to worry about infinitely recursing)
+      //ONE of its neighbors (it does not matter which one) should be THIS
+      //so when its done making neighbors pick one at random to replace with yourself
+      //(if it had only one neighbor then its a dead end now, rip)
+      //just like in east east each time you go to a location that already has neighbors theres a small chance of it spawning new ones, so its never fininite
+    */
     return `You GO at the ${this.name} and think about how JR still needs to wire up default theme things.`
   }
 
@@ -272,10 +363,10 @@ class Entity {
 
 class FleshCreature extends Entity {
   alive = true;
-  constructor(name, theme_keys, rand) {
-    super(name, theme_keys, rand);
-    this.contents.push(new Entity("Blood", [FLESH], rand)); //you can take the blood out, twig :) :) :)
-    this.contents.push(new Entity("Meat", [FLESH], rand)); //you can take the meat out, twig :) :) :)
+  constructor(name, desc, theme_keys, rand) {
+    super(name, desc + "<br><br>It's made of meat :) " , theme_keys, rand);
+    this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.",[FLESH], rand)); //you can take the blood out, twig :) :) :)
+    this.contents.push(new Entity("Meat","it's pink and moist. Your mouth waters thinking about it.", [FLESH], rand)); //you can take the meat out, twig :) :) :)
     this.theme_keys.push(FLESH);
   }
 }

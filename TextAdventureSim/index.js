@@ -48,21 +48,18 @@ return;
   <br><br>
   Your INTERESTS include DOING WHATEVER YOU WANT and LISTENING TO YOUR HUNDMASTER RAVA.
   <br><br>
+  She told you to listen to the Observers for a while!
+  <br><br>
   You are VERY EXCITED now that the Apocalypse has started! Even less rules to follow than normal!</i>
   <br><br>type "HELP" for a list of commands.`
   
   
-  current_room = new Entity("Entry Room", your_themes, rand);
-  const testObject = new FleshCreature("Sheep", [TIME], rand);
-  const testNeighbor = new Entity("TEST1", your_rivals_themes, rand);
-  const testNeighbor2 = new Entity("TEST2", your_rivals_themes, rand);
-  const testNeighbor3 = new Entity("TEST3", your_rivals_themes, rand);
-
-
+  current_room = makeChildEntity(rand, your_themes, "Entry Room");
+  const testObject = new FleshCreature("Sheep", "It's a hideous TIMEBEAST!  They taste great! <br><br>Before the Apocalypse, if you killed one, it would take you to a random time and location. <br><br>Lame...<br><br>Now, though, they have no power!<br><br>You are not even a little bit curious as to why! ", [TIME], rand);
   current_room.contents.push(testObject);
-  current_room.neighbors.push(testNeighbor);
-  current_room.neighbors.push(testNeighbor2);
-  current_room.neighbors.push(testNeighbor3);
+  current_room.neighbors.push(makeChildEntity(rand, your_themes));
+  current_room.neighbors.push(makeChildEntity(rand, your_themes));
+  current_room.neighbors.push(makeChildEntity(rand, your_themes));
 
   const form =document.querySelector("#puppet-command");
   const input = document.querySelector("#puppet-input")
