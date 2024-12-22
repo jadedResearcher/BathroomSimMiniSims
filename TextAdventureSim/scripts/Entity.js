@@ -155,11 +155,28 @@ class Entity {
   //like, ria being on fire (having fire in her inventory) isn't going to behave the same as anyone else 
 
   look = () => {
-    return `You LOOK at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    const rand = this.getCachedRand();
+    let directions;
+    let pockets;
+
+    pockets = this.contents.length > 0 ? `You see ${humanJoining(this.contents.map((c => c.name)))}! `:"You see nothing :(";
+    directions = this.neighbors.length >0 ?`Obvious exits are ${humanJoining(this.neighbors.map((n, i) => getDirectionLabel(i)))}!`:"There's no where to go from here :(";
+    return `You look carefully at the ${this.name}. It's hard to see! ${pockets} ${directions}`;
   }
 
-  listen = () => {
-    return `You LISTEN at the ${this.name} and think about how JR still needs to wire up default theme things.`
+  listen = (recursionJustified = true) => {
+    const rand = this.getCachedRand();
+    let sounds = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(SOUND, rand));
+    let directions;
+
+    //if we're close by its clear, and we can smell a bit of our neighbors
+    if (recursionJustified) {
+      directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly hear ${n.listen(false)}.`)
+      return `You prick your ears towards the ${this.name}, taking in the sounds of ${humanJoining(uniq(sounds))}.  ${directions}`
+
+    } else { //if we're not we can only smell a bit
+      return sounds[0]; //just return the smell word.
+    }
   }
 
   /*
@@ -198,11 +215,13 @@ class Entity {
   taste = () => {
     const rand = this.getCachedRand();
     let tastes = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(TASTE, rand));
-    return `You happily lick at the ${this.name}, taking in the flavors of ${humanJoining(uniq(tastes))}. ${this.alive? `The ${this.name} seems really upset about this.`:"No one can stop you."}`
+    return `You happily lick at the ${this.name}, taking in the flavors of ${humanJoining(uniq(tastes))}. ${this.alive ? `The ${this.name} seems really upset about this.` : "No one can stop you."}`
   }
 
   touch = () => {
-    return `You touch at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    const rand = this.getCachedRand();
+    let touch = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(FEELING, rand));
+    return `You happily paw at the ${this.name}, taking in the textures of ${humanJoining(uniq(touch))}. ${this.alive ? `The ${this.name} seems really upset about this.` : "No one can stop you."}`
   }
 
   go = () => {
@@ -210,8 +229,10 @@ class Entity {
   }
 
   talk = () => {
-    return `You talk at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    const rand = this.getCachedRand();
+    return `The ${this.name} doesn't seem to want to talk to you :(`;
   }
+
 
   take = () => {
     return `You take at the ${this.name} and think about how JR still needs to wire up default theme things.`
@@ -226,7 +247,9 @@ class Entity {
   }
 
   think = () => {
-    return `You think at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    //this one isn't cached, your thoughts can change
+    const theme = all_themes[this.rand.pickFrom(this.theme_keys)]
+    return `You think about the ${this.name}... Haha, wow, that's hard actually!  In the distance, you can hear a mournful voice droning on and on about something? "${theme.pickPossibilityFor(PHILOSOPHY, this.rand)}"<br><br>Boring!`
   }
 
   //JR NOTE: this should be tutorial shit or maybe hints if i can manage it
