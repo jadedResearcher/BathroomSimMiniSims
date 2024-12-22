@@ -154,13 +154,22 @@ class Entity {
   //some objects might have their own custom functions for these, like specific triggers/effects
   //like, ria being on fire (having fire in her inventory) isn't going to behave the same as anyone else 
 
+
+  /*
+  i think its funny
+  there ARE no procedural "sight" words
+  mostly because if a room contains things then those things can tell you their names
+  but as a Hund, twig WOULD be mostly not sight based
+  but also twig/sam have themes of being blindfolded
+  twig shook free of the cobwebs sure, but the ironiy that they replaced it with basically losing a lot of their eyesight to be a weird dog person
+  */
   look = () => {
     const rand = this.getCachedRand();
     let directions;
     let pockets;
 
-    pockets = this.contents.length > 0 ? `You see ${humanJoining(this.contents.map((c => c.name)))}! `:"You see nothing :(";
-    directions = this.neighbors.length >0 ?`Obvious exits are ${humanJoining(this.neighbors.map((n, i) => getDirectionLabel(i)))}!`:"There's no where to go from here :(";
+    pockets = this.contents.length > 0 ? `You see ${humanJoining(this.contents.map((c => c.name)))}! ` : "You see nothing :(";
+    directions = this.neighbors.length > 0 ? `Obvious exits are ${humanJoining(this.neighbors.map((n, i) => getDirectionLabel(i)))}!` : "There's no where to go from here :(";
     return `You look carefully at the ${this.name}. It's hard to see! ${pockets} ${directions}`;
   }
 
