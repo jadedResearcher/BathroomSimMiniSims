@@ -232,6 +232,14 @@ function removeItemOnce(arr, value) {
   return arr;
 }
 
+ function humanJoining(arr){
+  if(arr.length === 1){
+    return arr[0]
+  }
+  return arr.slice(0, -1).join(', ') + " and, " + arr[arr.length-1];
+}
+
+
 //https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;

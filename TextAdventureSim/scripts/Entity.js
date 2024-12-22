@@ -15,7 +15,7 @@ const COMMAND_HELP = "HELP";
 const defaultActionMap = {}
 defaultActionMap[COMMAND_LOOK] = ["LOOK", "SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
 defaultActionMap[COMMAND_LISTEN] = ["LISTEN", "HEAR"];
-defaultActionMap[COMMAND_TOUCH] = ["FEEL", "CARESS", "TOUCH","FONDLE","PET"];
+defaultActionMap[COMMAND_TOUCH] = ["FEEL", "CARESS", "TOUCH", "FONDLE", "PET"];
 
 defaultActionMap[COMMAND_SMELL] = ["SNIFF", "SMELL", "SNORT", "INHALE", "WHIFF"];
 defaultActionMap[COMMAND_TASTE] = ["TASTE", "LICK", "EAT", 'FLAVOR', "MUNCH", "BITE", "TONGUE", "SLURP", "NOM"];
@@ -26,6 +26,18 @@ defaultActionMap[COMMAND_TALK] = ["TALK", "TELL", "ASK", "QUESTION", "INTERROGAT
 defaultActionMap[COMMAND_TAKE] = ["TAKE", "PILFER", "LOOT", "GET", "STEAL", "POCKET", "OBTAIN", "GRAB", "CLUTCH", "WITHDRAW", "EXTRACT", "REMOVE", "PURLOIN", "YOINK", "PICK"];
 defaultActionMap[COMMAND_GIVE] = ["GIVE", "GIFT", "OFFER", "BESTOW"];
 defaultActionMap[COMMAND_USE] = ["USE", "DEPLOY", "UTILIZE", "OPERATE", "INVOKE"];
+
+getDirectionLabel = (index) => {
+  if (index === 0) {
+    return "NORTH";
+  } else if (index === 1) {
+    return "SOUTH";
+  } else if (index === 2) {
+    return "EAST";
+  } else {
+    return "???";
+  }
+}
 
 /*
 Arm2 is a spiralling fractal of madness because of Apocalypse Chick. 
@@ -43,8 +55,12 @@ Truth and Alt don't really care so long as they get to be immortal, infinite maz
 
 And I mean, from THEIR point of view of COURSE a person is the same thing as a box is the same thing as a room.
 */
+//every entity can access a stable seed for its randomness
+const seedCache = {};
+
 
 class Entity {
+  alive = false;
   name = "Perfectly Generic Entity";
   durability = 113;//(nothing can die in arm2 but if you take enough damage you're not exactly coherent anymore)
   theme_keys = [];
@@ -55,15 +71,26 @@ class Entity {
   functionMap = {}//what do we DO for each possible action?
   neighbors = []; //similar to contents, but these are the things you can move into from this entity
 
+
+
   constructor(name, theme_keys, rand) {
     this.name = name;
     this.theme_keys = theme_keys;
     this.rand = rand;
+    if (!seedCache[this.name]) {
+      seedCache[this.name] = rand.internal_seed;
+    }
     this.syncDefaultFunctions();
+  }
+  //this will be the same every time i call this function (unless i refresh the page)
+  //as opposed to the non cached rand that changes over time
+  //useful for, say, making sure the room always smells the same
+  getCachedRand = () => {
+    return new SeededRandom(seedCache[this.name]);
   }
 
   //if an instance has a new look function, for example, you need to recall this or it'll have a ghost reference (it'll keep being the original version)
-  syncDefaultFunctions = ()=>{
+  syncDefaultFunctions = () => {
     //doing it this way means if i want an especially customized entity i can do so
     //but otherwise all entities will call their functions for the base stuff (which i can also customize)
     this.functionMap[COMMAND_LOOK] = this.look;
@@ -98,8 +125,8 @@ class Entity {
   will need to have some kind of counter so i can't go deeper than say, three levels at a time, have a fun apocalypse chick warning if you do
   so lets stub this function out
   */
-  handleCommand = (command, count=0) => {
-    if(count > 13){
+  handleCommand = (command, count = 0) => {
+    if (count > 13) {
       return "Haha, wow! How did you manage to recurse thaaaaaaaaaaaaat many times. Surely even YOU can't justify that one, lol. imma just...stop that. Only I get to cause fractal game crashing bugs like that, lulz. It's been real!"
     }
     //first word is what command it is
@@ -107,7 +134,7 @@ class Entity {
     //this also means your contents may respond to a command that you don't and thats fine
     for (let c of this.contents) {
       if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
-        return c.handleCommand(command, count +1);
+        return c.handleCommand(command, count + 1);
       }
     }
     //if we haven't returned yet, its for me to handle
@@ -123,6 +150,7 @@ class Entity {
 
   }
 
+
   //some objects might have their own custom functions for these, like specific triggers/effects
   //like, ria being on fire (having fire in her inventory) isn't going to behave the same as anyone else 
 
@@ -134,12 +162,43 @@ class Entity {
     return `You LISTEN at the ${this.name} and think about how JR still needs to wire up default theme things.`
   }
 
-  smell = () => {
-    return `You SMELL at the ${this.name} think about ${this.theme_keys.join(",")}`
+  /*
+  so in theory when we smell where we are standing or focusing on we get as much info as possible, but from things further away we only learn a bit
+  i don't think i want to smell things in someones pockets???
+  ............................................
+  but wouldn't that be funny
+  actually
+  if we were playing as Twig all along
+  just
+  weirdly good sense of smell
+  its decided
+  see this is why i don't flesh things all the way out before starting, 
+  sometimes you want room to take advangate of lucky lil coincidences
+  :chrm_horseshoes:
+  */
+  smell = (recursionJustified = true) => {
+    const rand = this.getCachedRand();
+    let scents = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(SMELL, rand));
+    let directions;
+    let pockets;
+
+    //if we're close by its clear, and we can smell a bit of our neighbors
+    if (recursionJustified) {
+      pockets = this.contents.map((c) => c.smell(false));
+      directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly smell ${n.smell(false)}.`)
+      return `You breath deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
+
+    } else { //if we're not we can only smell a bit
+      scents = [scents[0]];
+      return scents[0]; //just return the smell word.
+    }
   }
 
+  //taste isn't recursive. if you lick a person you can't taste whats in their pockets
   taste = () => {
-    return `You TASTE at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    const rand = this.getCachedRand();
+    let tastes = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(TASTE, rand));
+    return `You happily lick at the ${this.name}, taking in the flavors of ${humanJoining(uniq(tastes))}. ${this.alive? `The ${this.name} seems really upset about this.`:"No one can stop you."}`
   }
 
   touch = () => {
@@ -173,5 +232,16 @@ class Entity {
   //JR NOTE: this should be tutorial shit or maybe hints if i can manage it
   help = () => {
     return `List of Commands For ${this.name}: ${Object.keys(this.actionMap).join(", ")}`;
+  }
+}
+
+
+class FleshCreature extends Entity {
+  alive = true;
+  constructor(name, theme_keys, rand) {
+    super(name, theme_keys, rand);
+    this.contents.push(new Entity("Blood", [FLESH], rand)); //you can take the blood out, twig :) :) :)
+    this.contents.push(new Entity("Meat", [FLESH], rand)); //you can take the meat out, twig :) :) :)
+    this.theme_keys.push(FLESH);
   }
 }

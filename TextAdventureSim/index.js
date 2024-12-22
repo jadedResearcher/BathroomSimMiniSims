@@ -43,12 +43,22 @@ return;
   mainElement.innerHTML = "Pending"
   initThemes();
   grabPersonlization();
-  mainElement.innerHTML = `Seed: ${seed}, Your Themes: ${your_themes.join(",")}, Your Rival's Themes: ${your_rivals_themes.join(",")}<br><br>type "HELP" for a list of commands.`
+  mainElement.innerHTML = `Seed: ${seed}, Your Themes: ${your_themes.join(",")}, Your Rival's Themes: ${your_rivals_themes.join(",")}
+  <br><br><br><i>Your name is TWIG and you are a VERY GOOD DOG.
+  <br><br>
+  Your INTERESTS include DOING WHATEVER YOU WANT and LISTENING TO YOUR HUNDMASTER RAVA.
+  <br><br>
+  You are VERY EXCITED now that the Apocalypse has started! Even less rules to follow than normal!</i>
+  <br><br>type "HELP" for a list of commands.`
   
   
-  current_room = new Entity("Entry Room", [KNOWING], rand);
-  const testObject = new Entity("TEST OBJECT", [KNOWING], rand);
+  current_room = new Entity("Entry Room", your_themes, rand);
+  const testObject = new FleshCreature("Sheep", [TIME], rand);
+  const testNeighbor = new Entity("TEST Neighbor (MAKE THIS PROCEDURAL)", your_rivals_themes, rand);
+
+
   current_room.contents.push(testObject);
+  current_room.neighbors.push(testNeighbor);
   
   const form =document.querySelector("#puppet-command");
   const input = document.querySelector("#puppet-input")
