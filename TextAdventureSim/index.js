@@ -54,12 +54,16 @@ return;
   
   current_room = new Entity("Entry Room", your_themes, rand);
   const testObject = new FleshCreature("Sheep", [TIME], rand);
-  const testNeighbor = new Entity("TEST Neighbor (MAKE THIS PROCEDURAL)", your_rivals_themes, rand);
+  const testNeighbor = new Entity("TEST1", your_rivals_themes, rand);
+  const testNeighbor2 = new Entity("TEST2", your_rivals_themes, rand);
+  const testNeighbor3 = new Entity("TEST3", your_rivals_themes, rand);
 
 
   current_room.contents.push(testObject);
   current_room.neighbors.push(testNeighbor);
-  
+  current_room.neighbors.push(testNeighbor2);
+  current_room.neighbors.push(testNeighbor3);
+
   const form =document.querySelector("#puppet-command");
   const input = document.querySelector("#puppet-input")
   form.onsubmit=(e)=>{
