@@ -161,7 +161,9 @@ class Entity {
   mostly because if a room contains things then those things can tell you their names
   but as a Hund, twig WOULD be mostly not sight based
   but also twig/sam have themes of being blindfolded
-  twig shook free of the cobwebs sure, but the ironiy that they replaced it with basically losing a lot of their eyesight to be a weird dog person
+  twig shook free of the cobwebs sure, but the ironiy that they replaced it with
+   basically losing a lot of their eyesight to be a weird dog person
+   is choice
   */
   look = () => {
     const rand = this.getCachedRand();
