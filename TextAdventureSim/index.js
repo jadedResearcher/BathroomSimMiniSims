@@ -7,6 +7,7 @@ let rand = new SeededRandom(13);
 let current_room; //an instance of Truth or Alt (unless you manage to do something weirder)
 
 
+
 window.onload = async () => {
   await showDevLog();
   mainElement = document.querySelector(".story-so-far");
@@ -69,8 +70,12 @@ return;
     input.value ="";
     mainElement.scrollBy(0,1000);//go to the bottom
   }
+  //start out with a LOOK because you can't do anything without knowing what you're working with
+  mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand("LOOK")}</p>`;
 
 }
+
+
 
 //urls should be coming from the Personality Quiz
 //its actually wild to me that the Personality unmarked was named for that quiz

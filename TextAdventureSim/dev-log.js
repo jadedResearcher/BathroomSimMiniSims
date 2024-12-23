@@ -115,7 +115,8 @@ class DevLog {
 }
 //new DevLog("12/17/2024","")
 //newest on top
-
+//fake devlogs will get added to the top as well
+new DevLog("12/13/2024","Now you can actually move around in this maze!")
 new DevLog("12/22/2024", "Guess who's got a whole week off to obsess over making a shitty zampanio fangame?<br><br>having a lot of fun realizing that our protag should be twig cuz of how freaking weird it is to go around smelling things", "its me<br><br>i'm the one on vacation")
 new DevLog("12/17/2024", "lol realized i should probably have some kinda bug report form<br><br>plus this devlog<br><br>gotta get my RAMBLE on<br><br>you know?", "gonna have FUN with this<br><br>Its not enough to have a game that's broken, we need to rub it in your face, after all.\n\nHopefully my fake 'responses' to bug reports won't be TOO cruel if someone believes them?\n\nI promise, I'm a weirdly fast and responsive dev but Obsession is a Dangerous Thing and i'm not THAT responsive")
 new DevLog("12/15/2024", "Got the bones in place, you can submit commands and they print text on the screen. it's all default text tho")

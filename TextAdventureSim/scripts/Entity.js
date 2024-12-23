@@ -27,22 +27,18 @@ defaultActionMap[COMMAND_TAKE] = ["TAKE", "PILFER", "LOOT", "GET", "STEAL", "POC
 defaultActionMap[COMMAND_GIVE] = ["GIVE", "GIFT", "OFFER", "BESTOW"];
 defaultActionMap[COMMAND_USE] = ["USE", "DEPLOY", "UTILIZE", "OPERATE", "INVOKE"];
 
+const directionIndices = ["NORTH","SOUTH","EAST"]
 getDirectionLabel = (index) => {
-  if (index === 0) {
-    return "NORTH";
-  } else if (index === 1) {
-    return "SOUTH";
-  } else if (index === 2) {
-    return "EAST";
-  } else {
-    return "???";
+  if(index < directionIndices.length){
+    return directionIndices[index]
   }
+  return "???";
 }
 
 const getRandomThemeConcept = (rand, theme_keys, concept) => {
-  console.log("JR NOTE: getRandomThemeConcept", rand,concept, theme_keys, all_themes)
+  console.log("JR NOTE: getRandomThemeConcept", rand, concept, theme_keys, all_themes)
   const theme = all_themes[rand.pickFrom(theme_keys)];
-  return theme.pickPossibilityFor(concept,rand);
+  return theme.pickPossibilityFor(concept, rand);
 }
 
 /*
@@ -64,7 +60,6 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
       my_keys.push(key)
     }
   }
-  console.log("JR NOTE: after mutation pass", my_keys)
 
   if (my_keys.length == 0) {
     my_keys = [rand.pickFrom(theme_keys)];
@@ -72,9 +67,8 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
     my_keys = my_keys.slice(2, 5); //grab a middle-ish chunk
   }
   my_keys = uniq(my_keys);
-  console.log("JR NOTE: my keys are", my_keys)
-  const name = `${titleCase(getRandomThemeConcept(rand, my_keys, ADJ))} ${titleCase(getRandomThemeConcept(rand,my_keys, LOCATION))}`;
-  const ret = new Entity(nameOverride ? nameOverride : name, "It's a room...",my_keys, rand);
+  const name = `${titleCase(getRandomThemeConcept(rand, my_keys, ADJ))} ${titleCase(getRandomThemeConcept(rand, my_keys, LOCATION))}`;
+  const ret = new Entity(nameOverride ? nameOverride : name, "It's a room...", my_keys);
   ret.contents = spawnItemsForThemes(ret.rand, ret.theme_keys);
   return ret;
 }
@@ -100,19 +94,19 @@ const spawnItemsForThemes = (rand, theme_keys) => {
 
   for (let i = 0; i < amount; i++) {
     //true random chance of useless artifacts
-    if(Math.random()>0.9){
+    if (Math.random() > 0.9) {
       itemsButNotEntities.push(pickFrom(artifacts));
     }
     const chosen_theme = all_themes[rand.pickFrom(theme_keys)];
-    const item = chosen_theme.pickPossibilityFor(FLOORFOREGROUND,rand);
+    const item = chosen_theme.pickPossibilityFor(FLOORFOREGROUND, rand);
     item.themes = [chosen_theme];
     itemsButNotEntities.push(item);
   }
 
   const ret = [];
-  for(let item of itemsButNotEntities){
+  for (let item of itemsButNotEntities) {
     console.log("JR  NOTE: item is", item)
-    const e = new Entity(item.name, item.desc,item.themes.map((t)=>t.key), rand);
+    const e = new Entity(item.name, item.desc, item.themes.map((t) => t.key));
     ret.push(e)
   }
   return ret;
@@ -134,8 +128,7 @@ Truth and Alt don't really care so long as they get to be immortal, infinite maz
 
 And I mean, from THEIR point of view of COURSE a person is the same thing as a box is the same thing as a room.
 */
-//every entity can access a stable seed for its randomness
-const seedCache = {};
+
 
 
 class Entity {
@@ -153,22 +146,20 @@ class Entity {
 
 
 
-  constructor(name, desc, theme_keys, rand) {
-    console.log("JR NOTE: ", {name, desc, theme_keys, rand})
+  constructor(name, desc, theme_keys) {
+    console.log("JR NOTE: ", { name, desc, theme_keys })
     this.name = name.toUpperCase();
+    this.rand = new SeededRandom(stringtoseed(name));
     this.description = desc;
     this.theme_keys = theme_keys;
     this.rand = rand;
-    if (!seedCache[this.name]) {
-      seedCache[this.name] = rand.internal_seed;
-    }
     this.syncDefaultFunctions();
   }
   //this will be the same every time i call this function (unless i refresh the page)
   //as opposed to the non cached rand that changes over time
   //useful for, say, making sure the room always smells the same
   getCachedRand = () => {
-    return new SeededRandom(seedCache[this.name]);
+    return new SeededRandom(stringtoseed(this.name)); //the initial rand is keyed off your name
   }
 
   //if an instance has a new look function, for example, you need to recall this or it'll have a ghost reference (it'll keep being the original version)
@@ -219,12 +210,33 @@ class Entity {
         return c.handleCommand(command, count + 1);
       }
     }
-    //if we haven't returned yet, its for me to handle
+
+      let index = -1;
+      for(let i = 0; i<directionIndices.length; i++){
+        if(command.toUpperCase().includes(directionIndices[i])){
+          index = i;
+          break;
+        }
+      } 
+      //now that we have the direction index, use it to call go on that neighbor
+      if(index>-1 && this.neighbors[index]){
+        console.log("JR NOTE: think i found a direction word")
+        return this.neighbors[index].handleCommand(command, count + 1);
+      }
+
+      //okay well did we try a neighbor by name?
+      for (let c of this.neighbors) {
+        if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
+          return c.handleCommand(command, count + 1);
+        }
+      }
+
+    //if we haven't returned yet, its for me to handle (not something INSIDE me or NEAR me)
     const first_word = command.split(" ")[0].toUpperCase();
     for (const [key, value] of Object.entries(this.actionMap)) {
       if (value.includes(first_word)) {
         //we found it
-        return this.functionMap[key]();
+        return `>${command}<br><br>` + this.functionMap[key]();
       }
     }
 
@@ -289,6 +301,7 @@ class Entity {
   smell = (recursionJustified = true) => {
     const rand = this.getCachedRand();
     let scents = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(SMELL, rand));
+    console.log("JR NOTE: scents", {rand,scents, keys: this.theme_keys, all_themes})
     let directions;
     let pockets;
 
@@ -296,7 +309,7 @@ class Entity {
     if (recursionJustified) {
       pockets = this.contents.map((c) => c.smell(false));
       directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly smell ${n.smell(false)}.`)
-      return `You breath deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
+      return `You breathe deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets && pockets.length>0 ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
 
     } else { //if we're not we can only smell a bit
       scents = [scents[0]];
@@ -317,17 +330,42 @@ class Entity {
     return `You happily paw at the ${this.name}, taking in the textures of ${humanJoining(uniq(touch))}. ${this.alive ? `The ${this.name} seems really upset about this.` : "No one can stop you."}`
   }
 
+  /*
+  yeah okay if i call "go" on an object we're going to move to it
+  this MEANS we can "go ria" by default but honestly, im fine with this
+  the recursion is justified
+  */
   go = () => {
+    if(this === current_room){
+      return `You don't know how to do that! (You're PRETTY sure you're already at ${this.name}!)`
+    }
     /*
-      figure out where you're trying to go (NORTH/SOUTH/EAST  map to indices, otherwise name)
-      before you go there make sure you spawn its neighbors via makeChildEntity (if it does not have any)
+    before you go there make sure you spawn its neighbors via makeChildEntity (if it does not have any)
       (this way you never have to worry about infinitely recursing)
       //ONE of its neighbors (it does not matter which one) should be THIS
       //so when its done making neighbors pick one at random to replace with yourself
       //(if it had only one neighbor then its a dead end now, rip)
       //just like in east east each time you go to a location that already has neighbors theres a small chance of it spawning new ones, so its never fininite
     */
-    return `You GO at the ${this.name} and think about how JR still needs to wire up default theme things.`
+   if(this.neighbors.length === 0){
+    //guaranteed neighbor to the north (the current room you got here from)
+    //yes this means that "NORTH" is now defined as the illusion you carefully don't poke at
+    //didn't you think you got here from the EAST? Dont' worry about that. that's not real :) :) :)
+    this.neighbors.push(current_room); 
+
+    //possible branch point is fairly common
+    if(this.rand.nextDouble()>0.25){
+      this.neighbors.push(makeChildEntity(rand, this.theme_keys));
+    }
+
+    //less likely to have a third path
+    if(this.rand.nextDouble()>0.5){
+      this.neighbors.push(makeChildEntity(rand, this.theme_keys));
+    }
+   }
+
+    current_room = this;
+    return `<hr>You GO to the ${this.name}.<hr>` + this.look()
   }
 
   talk = () => {
@@ -363,10 +401,10 @@ class Entity {
 
 class FleshCreature extends Entity {
   alive = true;
-  constructor(name, desc, theme_keys, rand) {
-    super(name, desc + "<br><br>It's made of meat :) " , theme_keys, rand);
-    this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.",[FLESH], rand)); //you can take the blood out, twig :) :) :)
-    this.contents.push(new Entity("Meat","it's pink and moist. Your mouth waters thinking about it.", [FLESH], rand)); //you can take the meat out, twig :) :) :)
+  constructor(name, desc, theme_keys) {
+    super(name, desc + "<br><br>It's made of meat :) ", theme_keys);
+    this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.", [FLESH])); //you can take the blood out, twig :) :) :)
+    this.contents.push(new Entity("Meat", "it's pink and moist. Your mouth waters thinking about it.", [FLESH])); //you can take the meat out, twig :) :) :)
     this.theme_keys.push(FLESH);
   }
 }
