@@ -85,7 +85,7 @@
 
       let current_points_to_spend = localStorage[LOCAL_STORAGE_KEY_RUNNING_TOTAL];
       incrementLocalStorageByAmount(LOCAL_STORAGE_KEY_RUNNING_TOTAL, 11300); //MUCH more useful than free gopher gold/candy
-
+      window.location.href = "bathrom.html"
     }
 
     const jrSays = async (html) => {
@@ -102,6 +102,19 @@
       });
 
     }
+
+    const incrementLocalStorageByAmount = (KEY, AMOUNT) => {
+
+      let current = localStorage.getItem(KEY);
+      if (!current) {
+        current = AMOUNT;
+      }
+      console.log("JR NOTE:", KEY, " was " + current)
+
+      localStorage.setItem(KEY, parseInt(current) + AMOUNT)
+
+    }
+
   </script>
 
 
