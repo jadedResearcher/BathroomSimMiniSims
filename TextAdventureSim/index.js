@@ -72,6 +72,8 @@ return;
   }
   //start out with a LOOK because you can't do anything without knowing what you're working with
   mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand("LOOK")}</p>`;
+  //throw a SMELL in too, you're a dog
+  mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand("SMELL")}</p>`;
 
 }
 

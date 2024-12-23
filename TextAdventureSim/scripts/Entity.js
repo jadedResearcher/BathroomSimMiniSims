@@ -27,9 +27,9 @@ defaultActionMap[COMMAND_TAKE] = ["TAKE", "PILFER", "LOOT", "GET", "STEAL", "POC
 defaultActionMap[COMMAND_GIVE] = ["GIVE", "GIFT", "OFFER", "BESTOW"];
 defaultActionMap[COMMAND_USE] = ["USE", "DEPLOY", "UTILIZE", "OPERATE", "INVOKE"];
 
-const directionIndices = ["NORTH","SOUTH","EAST"]
+const directionIndices = ["NORTH", "SOUTH", "EAST"]
 getDirectionLabel = (index) => {
-  if(index < directionIndices.length){
+  if (index < directionIndices.length) {
     return directionIndices[index]
   }
   return "???";
@@ -198,38 +198,22 @@ class Entity {
   will need to have some kind of counter so i can't go deeper than say, three levels at a time, have a fun apocalypse chick warning if you do
   so lets stub this function out
   */
-  handleCommand = (command, count = 0) => {
+  handleCommand = (command, count = 0, justifiedRecursion = true) => {
     if (count > 13) {
       return "Haha, wow! How did you manage to recurse thaaaaaaaaaaaaat many times. Surely even YOU can't justify that one, lol. imma just...stop that. Only I get to cause fractal game crashing bugs like that, lulz. It's been real!"
     }
     //first word is what command it is
     //but do not rush and try to do something with it, it might be for one of your contents
     //this also means your contents may respond to a command that you don't and thats fine
-    for (let c of this.contents) {
-      if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
-        return c.handleCommand(command, count + 1);
-      }
+    const contentRet = this.checkContentsForCommand(command, count, justifiedRecursion);
+    if (contentRet) {
+      return contentRet;
     }
 
-      let index = -1;
-      for(let i = 0; i<directionIndices.length; i++){
-        if(command.toUpperCase().includes(directionIndices[i])){
-          index = i;
-          break;
-        }
-      } 
-      //now that we have the direction index, use it to call go on that neighbor
-      if(index>-1 && this.neighbors[index]){
-        console.log("JR NOTE: think i found a direction word")
-        return this.neighbors[index].handleCommand(command, count + 1);
-      }
-
-      //okay well did we try a neighbor by name?
-      for (let c of this.neighbors) {
-        if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
-          return c.handleCommand(command, count + 1);
-        }
-      }
+    const neighborRet = this.checkNeighborForCommand(command, count, justifiedRecursion);
+    if (neighborRet) {
+      return neighborRet;
+    }
 
     //if we haven't returned yet, its for me to handle (not something INSIDE me or NEAR me)
     const first_word = command.split(" ")[0].toUpperCase();
@@ -242,6 +226,46 @@ class Entity {
 
     return "You don't know how to " + command + ".";
 
+  }
+
+  checkContentsForCommand = (command, count, justifiedRecursion) => {
+    if (!justifiedRecursion) { //its not justified, don't check
+      return;
+    }
+
+    for (let c of this.contents) {
+      if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
+        return c.handleCommand(command, count + 1, justifiedRecursion);
+      }
+    }
+  }
+
+  //do NOT recurse on neighbors because they will always have loops
+  checkNeighborForCommand = (command, count, justifiedRecursion) => {
+    if (!justifiedRecursion) { //its not justified, don't check
+      return;
+    }
+    let index = -1;
+    for (let i = 0; i < directionIndices.length; i++) {
+      if (command.toUpperCase().includes(directionIndices[i])) {
+        index = i;
+        break;
+      }
+    }
+    //now that we have the direction index, use it to call go on that neighbor
+    if (index > -1 && this.neighbors[index]) {
+      console.log("JR NOTE: think i found a direction word")
+      //neighbors we NEVER recurse on (because your neighbors have you as neighbors)
+      return this.neighbors[index].handleCommand(command, count + 1, false);
+    }
+
+    //okay well did we try a neighbor by name?
+    for (let c of this.neighbors) {
+      if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
+        //neighbors we NEVER recurse on (because your neighbors have you as neighbors)
+        return c.handleCommand(command, count + 1, false);
+      }
+    }
   }
 
 
@@ -301,7 +325,7 @@ class Entity {
   smell = (recursionJustified = true) => {
     const rand = this.getCachedRand();
     let scents = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(SMELL, rand));
-    console.log("JR NOTE: scents", {rand,scents, keys: this.theme_keys, all_themes})
+    console.log("JR NOTE: scents", { rand, scents, keys: this.theme_keys, all_themes })
     let directions;
     let pockets;
 
@@ -309,7 +333,7 @@ class Entity {
     if (recursionJustified) {
       pockets = this.contents.map((c) => c.smell(false));
       directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly smell ${n.smell(false)}.`)
-      return `You breathe deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets && pockets.length>0 ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
+      return `You breathe deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets && pockets.length > 0 ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
 
     } else { //if we're not we can only smell a bit
       scents = [scents[0]];
@@ -336,7 +360,7 @@ class Entity {
   the recursion is justified
   */
   go = () => {
-    if(this === current_room){
+    if (this === current_room) {
       return `You don't know how to do that! (You're PRETTY sure you're already at ${this.name}!)`
     }
     /*
@@ -347,25 +371,25 @@ class Entity {
       //(if it had only one neighbor then its a dead end now, rip)
       //just like in east east each time you go to a location that already has neighbors theres a small chance of it spawning new ones, so its never fininite
     */
-   if(this.neighbors.length === 0){
-    //guaranteed neighbor to the north (the current room you got here from)
-    //yes this means that "NORTH" is now defined as the illusion you carefully don't poke at
-    //didn't you think you got here from the EAST? Dont' worry about that. that's not real :) :) :)
-    this.neighbors.push(current_room); 
+    if (this.neighbors.length === 0) {
+      //guaranteed neighbor to the north (the current room you got here from)
+      //yes this means that "NORTH" is now defined as the illusion you carefully don't poke at
+      //didn't you think you got here from the EAST? Dont' worry about that. that's not real :) :) :)
+      this.neighbors.push(current_room);
 
-    //possible branch point is fairly common
-    if(this.rand.nextDouble()>0.25){
-      this.neighbors.push(makeChildEntity(rand, this.theme_keys));
-    }
+      //possible branch point is fairly common
+      if (this.rand.nextDouble() > 0.25) {
+        this.neighbors.push(makeChildEntity(rand, this.theme_keys));
+      }
 
-    //less likely to have a third path
-    if(this.rand.nextDouble()>0.5){
-      this.neighbors.push(makeChildEntity(rand, this.theme_keys));
+      //less likely to have a third path
+      if (this.rand.nextDouble() > 0.5) {
+        this.neighbors.push(makeChildEntity(rand, this.theme_keys));
+      }
     }
-   }
 
     current_room = this;
-    return `<hr>You GO to the ${this.name}.<hr>` + this.look()
+    return `<hr>You GO to the ${this.name}.<hr>` + this.look() +"<br><br>"+ this.smell()
   }
 
   talk = () => {
