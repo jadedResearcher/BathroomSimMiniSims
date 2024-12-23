@@ -9,12 +9,13 @@
   <script src="utils.js"></script>
   <script src="canvas_utils.js"></script>
   <style>
-    body{
+    body {
       background-image: url(images/attic_jr.jpg);
-      background-size: contain;
+      background-size: cover;
+      cursor: pointer;
     }
 
-    #container{
+    #container {
       margin-left: auto;
       margin-right: auto;
       margin-top: auto;
@@ -27,7 +28,7 @@
       padding-bottom: 13px;
       text-align: center;
       width: 93vw;
-      background-color: rgba(255,255,255,0.5);
+      background-color: rgba(255, 255, 255, 0.5);
       color: #a10000;
       font-family: 'Courier New', Courier, monospace;
 
@@ -35,16 +36,71 @@
   </style>
 
   <script>
-    let ticks=0;
-    window.onload = ()=>{
+    let ticks = 0;
+    let jrSaysEle;
+    let body;
+    window.onload = () => {
       const container = document.querySelector("#container");
-      setInterval(()=>{
-        ticks ++;
+      jrSaysEle = document.querySelector("#jr-says");
+      body = document.querySelector("body");
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const date = new Date();
+      if (urlParams.get("from") === "TextAdventureSim") {
+        return handleTextAdeventureRamble();
+      }
+      setInterval(() => {
+        ticks++;
         container.innerHTML += ":) :) :)"
-        if(ticks >333){
+        if (ticks > 333) {
           alert("Did you REALLY think it would be that easy???")
         }
-      },500)
+      }, 500)
+    }
+
+    const handleTextAdeventureRamble = async () => {
+      await jrSays("hello!!!")
+      await jrSays("what brings you to my glorious attic???")
+      await jrSays("text adventure sim???")
+      await jrSays("well isnt THAT interesting")
+      await jrSays("lemme guess")
+      await jrSays("you tried to go an 'impossible direction'")
+      await jrSays("and got shot right thru the fourth wall???")
+      await jrSays("lol")
+      await jrSays("well i suppose i can give you a little something for your troubles")
+      await jrSays("have you found my attic the normal way in the bathroom???")
+      await jrSays("i'll give you some money for it")
+      await jrSays("which is NOT the same thing as money for the closers store")
+      await jrSays("THAT is gopher gold/candy")
+      await jrSays("lol")
+      await jrSays("all sorts of fourth wall breaking stuff you can buy in MY store")
+      await jrSays("something something obsession is a dangerous thing tho")
+      await jrSays("so be warned")
+      await jrSays("too much Gnosis is not good for you")
+      await jrSays("anyways let me get you that dosh and send you on your way")
+      await jrSays("lol yes that DOES mean you dont get the dosh till im done talking :) :) :)")
+
+      const LOCAL_STORAGE_KEY_RUNNING_TOTAL = "BATHROOM_MAZE_POINTS";
+
+      let current_points_to_spend = localStorage[LOCAL_STORAGE_KEY_RUNNING_TOTAL];
+      incrementLocalStorageByAmount(LOCAL_STORAGE_KEY_RUNNING_TOTAL, 11300); //MUCH more useful than free gopher gold/candy
+
+    }
+
+    const jrSays = async (html) => {
+      jrSaysEle.innerHTML = html;
+      return new Promise(resolve => {
+
+        const handleClick = () => {
+          resolve();
+          body.removeEventListener("click", handleClick);
+        }
+
+        body.addEventListener("click", handleClick);
+        setTimeout(handleClick, 5000); //if you don't click it'll eventually go
+      });
+
     }
   </script>
 
@@ -54,7 +110,9 @@
 <body>
 
   <div id="container">
-
+    <div id="jr-says">
+      JR: !!! well hello there :) :) :)
+    </div>
   </div>
 </body>
 

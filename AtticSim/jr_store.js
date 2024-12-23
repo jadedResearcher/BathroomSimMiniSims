@@ -52,8 +52,8 @@ window.onload = async () => {
   await jrSays(`JR: you've spent ${current_points_to_spend} in the closers bathroom shops so far`);
   await jrSays("JR: so thats what you have to spend with me")
   await jrSays("JR: don't like it? go spend more Gopher Gold with the Closer lol")
-  await jrSays("JR: here, i'll give you 13000 walking around gold as a favor :) :) :)") //once you find JR the previous mechanic of trying to earn gopher gold becomes irrelevant. jr likes destroying the premise of their own experiences
-  await jrSays(`JR: hope your ${current_points_to_spend} points is enough :) :) ;)`)
+  await jrSays("JR: here, i'll give you 13000 walking around Gopher Gold as a favor :) :) :)") //once you find JR the previous mechanic of trying to earn gopher gold becomes irrelevant. jr likes destroying the premise of their own experiences
+  await jrSays(`JR: hope your ${current_points_to_spend} Gnosis Points is enough :) :) ;)`)
 
   //href, size
   const data = await getGopherData(store_url);
