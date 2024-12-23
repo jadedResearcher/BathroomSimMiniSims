@@ -122,3 +122,9 @@ const isItFriday = () => {
   }
   return false;
 }
+
+const handleAttic = ()=>{
+  //CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH
+  const url = 'http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/?from=TextAdventureSim'
+  window.open(url,'_blank');
+}

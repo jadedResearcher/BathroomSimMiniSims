@@ -27,7 +27,7 @@ defaultActionMap[COMMAND_TAKE] = ["TAKE", "PILFER", "LOOT", "GET", "STEAL", "POC
 defaultActionMap[COMMAND_GIVE] = ["GIVE", "GIFT", "OFFER", "BESTOW"];
 defaultActionMap[COMMAND_USE] = ["USE", "DEPLOY", "UTILIZE", "OPERATE", "INVOKE"];
 
-const directionIndices = ["NORTH", "SOUTH", "EAST"]
+const directionIndices = ["NORTH", "SOUTH", "EAST","???"]
 getDirectionLabel = (index) => {
   if (index < directionIndices.length) {
     return directionIndices[index]
@@ -255,13 +255,23 @@ class Entity {
     //now that we have the direction index, use it to call go on that neighbor
     if (index > -1 && this.neighbors[index]) {
       console.log("JR NOTE: think i found a direction word")
+      if(index >=3){
+        handleAttic();
+        return `>${command}<br><br>` + "Oh??? What's this??? You want to wander into my attic??? :) :) ;) "
+      }
       //neighbors we NEVER recurse on (because your neighbors have you as neighbors)
       return this.neighbors[index].handleCommand(command, count + 1, false);
     }
 
     //okay well did we try a neighbor by name?
+    index = 0;
     for (let c of this.neighbors) {
+      index ++;
       if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
+        if(index >=3){
+          handleAttic();
+          return `>${command}<br><br>` + "Oh??? What's this??? You want to wander into my attic??? :) :) ;) "
+        }
         //neighbors we NEVER recurse on (because your neighbors have you as neighbors)
         return c.handleCommand(command, count + 1, false);
       }
@@ -363,6 +373,7 @@ class Entity {
     if (this === current_room) {
       return `You don't know how to do that! (You're PRETTY sure you're already at ${this.name}!)`
     }
+
     /*
     before you go there make sure you spawn its neighbors via makeChildEntity (if it does not have any)
       (this way you never have to worry about infinitely recursing)
@@ -378,7 +389,7 @@ class Entity {
       this.neighbors.push(current_room);
 
       //possible branch point is fairly common
-      if (this.rand.nextDouble() > 0.25) {
+      if (this.rand.nextDouble() > 0.05) {
         this.neighbors.push(makeChildEntity(rand, this.theme_keys));
       }
 
@@ -386,7 +397,18 @@ class Entity {
       if (this.rand.nextDouble() > 0.5) {
         this.neighbors.push(makeChildEntity(rand, this.theme_keys));
       }
+    }else if (this.neighbors.length <4){
+      //we aren't maxed out yet? lets add some gaslight engine goodness
+      //are you SURE there was always a door here?
+      //and just for extra funseies lets have a small chance of there being an impossible direction door
+      //by which i mean
+      //'west'
+      //any door there should lead to attic JR
+      if (this.rand.nextDouble() > 0.5) {
+        this.neighbors.push(makeChildEntity(rand, this.theme_keys));
+      }
     }
+
 
     current_room = this;
     return `<hr>You GO to the ${this.name}.<hr>` + this.look() +"<br><br>"+ this.smell()
