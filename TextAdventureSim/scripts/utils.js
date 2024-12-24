@@ -267,6 +267,50 @@ const incrementLocalStorageByOne = (KEY) => {
 
 }
 
+const addStringToArrayWithKey = (key, target) => {
+  console.log("JR NOTE: addStringToArrayWithKey", { key, target })
+
+  const tmp = valueAsArray(key);
+  tmp.push(target);
+  localStorage[key] = JSON.stringify(tmp);
+}
+
+//intentionally not hex :) :) :) gosh i wonder why
+//https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+function makeid(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
+
+
+const removeStringFromArrayWithKey = (key, target) => {
+  let tmp = valueAsArray(key);
+  tmp = removeItemOnce(tmp, target);
+  localStorage[key] = JSON.stringify(tmp);
+}
+
+const initEmptyArrayAtKey = (key) => {
+  const tmp = [];
+  localStorage[key] = JSON.stringify(tmp);
+  return tmp;
+}
+
+
+const valueAsArray = (key) => {
+  if (localStorage[key]) {
+    return JSON.parse(localStorage[key]);
+  } else {
+    return initEmptyArrayAtKey(key);
+  }
+}
+
 
 //if you give it new values for existing params it layers them on
 const updateURLParams = (params) => {

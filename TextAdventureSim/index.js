@@ -5,7 +5,7 @@ let your_themes;
 let your_rivals_themes;
 let rand = new SeededRandom(13);
 let current_room; //an instance of Truth or Alt (unless you manage to do something weirder)
-
+let player = new Player();
 
 
 window.onload = async () => {
@@ -38,9 +38,9 @@ window.onload = async () => {
 <p>Zampanio needs you to live a long life.</p>
 <p>Do not forget me.</p>
 <p>And do not forget yourself.</p>`;
-return;
+    return;
   }
-
+  player.loadFromLocalStorage();
   mainElement.innerHTML = "Pending"
   initThemes();
   grabPersonlization();
@@ -53,8 +53,8 @@ return;
   <br><br>
   You are VERY EXCITED now that the Apocalypse has started! Even less rules to follow than normal!</i>
   <br><br>type "HELP" for a list of commands.`
-  
-  
+
+
   current_room = makeChildEntity(rand, your_themes, "Entry Room");
   const testObject = new FleshCreature("Sheep", "It's a hideous TIMEBEAST!  They taste great! <br><br>Before the Apocalypse, if you killed one, it would take you to a random time and location. <br><br>Lame...<br><br>Now, though, they have no power!<br><br>You are not even a little bit curious as to why! ", [TIME], rand);
   current_room.contents.push(testObject);
@@ -62,13 +62,13 @@ return;
   current_room.neighbors.push(makeChildEntity(rand, your_themes));
   current_room.neighbors.push(makeChildEntity(rand, your_themes));
 
-  const form =document.querySelector("#puppet-command");
+  const form = document.querySelector("#puppet-command");
   const input = document.querySelector("#puppet-input")
-  form.onsubmit=(e)=>{
+  form.onsubmit = (e) => {
     e.preventDefault();
     mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand(input.value)}</p>`;
-    input.value ="";
-    mainElement.scrollBy(0,1000);//go to the bottom
+    input.value = "";
+    mainElement.scrollBy(0, 1000);//go to the bottom
   }
   //start out with a LOOK because you can't do anything without knowing what you're working with
   mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand("LOOK")}</p>`;
@@ -84,29 +84,29 @@ return;
 //cuz now i keep thinking i'm talking about them
 //hi personality :)
 //example url seed=400164&your_themes=killing%2Cflesh%2Cspace&your_rivals_themes=lonely
-const grabPersonlization = ()=>{
+const grabPersonlization = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   seed = parseInt(urlParams.get("seed"));
-  your_themes = urlParams.get("your_themes")?urlParams.get("your_themes").split(","):null;
-  your_rivals_themes = urlParams.get("your_rivals_themes")?urlParams.get("your_rivals_themes").split(","):null;
+  your_themes = urlParams.get("your_themes") ? urlParams.get("your_themes").split(",") : null;
+  your_rivals_themes = urlParams.get("your_rivals_themes") ? urlParams.get("your_rivals_themes").split(",") : null;
 
-  if(!seed){
+  if (!seed) {
     seed = 13;
   }
   rand = new SeededRandom(seed);
 
-  if(!your_themes){
-    your_themes = [rand.pickFrom(Object.keys(all_themes)),rand.pickFrom(Object.keys(all_themes)),rand.pickFrom(Object.keys(all_themes))];
+  if (!your_themes) {
+    your_themes = [rand.pickFrom(Object.keys(all_themes)), rand.pickFrom(Object.keys(all_themes)), rand.pickFrom(Object.keys(all_themes))];
   }
 
-  if(!your_rivals_themes){
+  if (!your_rivals_themes) {
     your_rivals_themes = [rand.pickFrom(Object.keys(all_themes))]
   }
 
   updateURLParams(`seed=${seed}&your_themes=${your_themes.join(",")}&your_rivals_themes=${your_rivals_themes.join(",")}`)
 
-} 
+}
 
 
 const isItFriday = () => {
@@ -123,8 +123,8 @@ const isItFriday = () => {
   return false;
 }
 
-const handleAttic = ()=>{
+const handleAttic = () => {
   //CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH
   const url = 'http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/?from=TextAdventureSim'
-  window.open(url,'_blank');
+  window.open(url, '_blank');
 }

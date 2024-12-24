@@ -421,15 +421,45 @@ class Entity {
 
 
   take = () => {
-    return `You take at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    if(player.debugCodes.includes(UNLOCK_INVENTORY3)){
+      console.warn("JR NOTE: hey actually how do we remove this from our parent :( :( :(")
+      player.inventory.addItem(this);
+      return `You TAKE the ${this.name}! (BUT NOT REALLY JR NOTE MAKE THIS ACTUALLY WORK)`
+    }else if(player.debugCodes.includes(UNLOCK_INVENTORY2)){
+      handleError(`[[ERROR CODE: ${UNLOCK_INVENTORY3}]] AT ${new Error().stack}`);
+      throw `[[ERROR CODE: ${UNLOCK_INVENTORY3}]] AT ${new Error().stack}`
+
+    }else if(player.debugCodes.includes(UNLOCK_INVENTORY1)){
+      handleError(`[[ERROR CODE: ${UNLOCK_INVENTORY2}]] AT ${new Error().stack}`);
+      throw `[[ERROR CODE: ${UNLOCK_INVENTORY2}]] AT ${new Error().stack}`
+
+    }else{
+      handleError(`[[ERROR CODE: ${UNLOCK_INVENTORY1}]] AT ${new Error().stack}`);
+      throw `[[ERROR CODE: ${UNLOCK_INVENTORY1}]] AT ${new Error().stack}`
+
+    }
+
   }
 
   give = () => {
-    return `You give at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    if(player.inventory && player.inventory.length >0){
+      //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
+      const code = player.debugCodes.includes(UNLOCK_GIVE)? makeid(12):UNLOCK_GIVE;
+      handleError(`[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`);
+      throw `[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`
+    }
+    return `You can't GIVE anything! You have nothing in your inventory!`
   }
 
+
   use = () => {
-    return `You use at the ${this.name} and think about how JR still needs to wire up default theme things.`
+    if(player.inventory && player.inventory.length >0){
+      //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
+      const code = player.debugCodes.includes(UNLOCK_USE)? makeid(12):UNLOCK_USE;
+      handleError(`[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`);
+      throw `[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`
+    }
+    return `You can't GIVE anything! You have nothing in your inventory!`
   }
 
   think = () => {
