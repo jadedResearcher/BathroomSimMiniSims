@@ -12,6 +12,8 @@
 
   <script>
     const handleError = (message) => {
+      const bugIcon = document.querySelector("#bug-report");
+      bugIcon.classList.add("bug-pulse")
       const storySoFar = document.querySelector(".story-so-far");
       const err = createElementWithClassAndParent("p", storySoFar, "error");
       err.innerHTML = "ERROR CAUGHT: " + message;

@@ -27,7 +27,7 @@ defaultActionMap[COMMAND_TAKE] = ["TAKE", "PILFER", "LOOT", "GET", "STEAL", "POC
 defaultActionMap[COMMAND_GIVE] = ["GIVE", "GIFT", "OFFER", "BESTOW"];
 defaultActionMap[COMMAND_USE] = ["USE", "DEPLOY", "UTILIZE", "OPERATE", "INVOKE"];
 
-const directionIndices = ["NORTH", "SOUTH", "EAST","???"]
+const directionIndices = ["NORTH", "SOUTH", "EAST", "???"]
 getDirectionLabel = (index) => {
   if (index < directionIndices.length) {
     return directionIndices[index]
@@ -77,15 +77,15 @@ const spawnItemsForThemes = (rand, theme_keys) => {
   const itemsButNotEntities = [];
   const amount = rand.getRandomNumberBetween(0, 5);
   const artifacts = [
-    { name: "Unos Artifact Book", layer: 1, src: `Artifacts/Zampanio_Artifact_01_Book.png`, themes: [all_themes[SOUL], all_themes[OBFUSCATION]], desc: "A tattered cardboard book filled with signatures with an ornate serif '1' embossed onto it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Duo Mask", layer: 1, src: `Artifacts/Zampanio_Artifact_02_Mask.png`, themes: [all_themes[CLOWNS], all_themes[OBFUSCATION]], desc: "A faceless theater mask with a 2 on the inside of the forehead. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Tres Bottle", layer: 1, src: `Artifacts/Zampanio_Artifact_03_Bottle.png`, themes: [all_themes[OBFUSCATION]], desc: "A simple glass milk bottle with a 3 emblazoned on it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Quatro Blade", layer: 1, src: `Artifacts/Zampanio_Artifact_04_Razor.png`, themes: [all_themes[KILLING], all_themes[OBFUSCATION]], desc: "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Quinque Cloak", layer: 1, src: `Artifacts/Zampanio_Artifact_05_Cloak.png`, themes: [all_themes[OBFUSCATION]], desc: " A simple matte blue cloak with a 5 embroidered on the back in shiny red thread. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Sextant", layer: 1, src: `Artifacts/Zampanio_Artifact_06_Sextant.png`, themes: [all_themes[OBFUSCATION]], desc: "A highly polished brass sextant. There is a 6 carved onto the main knob. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Septum Coin", layer: 1, src: `Artifacts/Zampanio_Artifact_07_Coin_Bronze.png`, themes: [all_themes[OBFUSCATION]], desc: "An old bronze coin. There is a theater mask on one side, and a 7 on the other. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Octome", layer: 1, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [all_themes[KNOWING], all_themes[OBFUSCATION]], desc: "A crumbling leather book with seemingly latin script, with messily torn pages.  There is an 8 embossed onto the back. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Novum Mirror", layer: 1, src: `Artifacts/Zampanio_Artifact_09_Mirror.png`, themes: [all_themes[OBFUSCATION]], desc: "An ornate but tarnished silver mirror, with a 9 carved onto the back. It is said to reflect everything but faces. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    { name: "Unos Artifact Book", layer: 1, src: `Artifacts/Zampanio_Artifact_01_Book.png`, themes: [all_themes[SOUL], all_themes[OBFUSCATION ]], desc: "A tattered cardboard book filled with signatures with an ornate serif '1' embossed onto it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Duo Mask", layer: 1, src: `Artifacts/Zampanio_Artifact_02_Mask.png`, themes: [all_themes[CLOWNS], all_themes[OBFUSCATION ]], desc: "A faceless theater mask with a 2 on the inside of the forehead. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Tres Bottle", layer: 1, src: `Artifacts/Zampanio_Artifact_03_Bottle.png`, themes: [all_themes[OBFUSCATION ]], desc: "A simple glass milk bottle with a 3 emblazoned on it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Quatro Blade", layer: 1, src: `Artifacts/Zampanio_Artifact_04_Razor.png`, themes: [all_themes[KILLING], all_themes[OBFUSCATION ]], desc: "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Quinque Cloak", layer: 1, src: `Artifacts/Zampanio_Artifact_05_Cloak.png`, themes: [all_themes[OBFUSCATION ]], desc: " A simple matte blue cloak with a 5 embroidered on the back in shiny red thread. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Sextant", layer: 1, src: `Artifacts/Zampanio_Artifact_06_Sextant.png`, themes: [all_themes[OBFUSCATION ]], desc: "A highly polished brass sextant. There is a 6 carved onto the main knob. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Septum Coin", layer: 1, src: `Artifacts/Zampanio_Artifact_07_Coin_Bronze.png`, themes: [all_themes[OBFUSCATION ]], desc: "An old bronze coin. There is a theater mask on one side, and a 7 on the other. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Octome", layer: 1, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [all_themes[KNOWING], all_themes[OBFUSCATION ]], desc: "A crumbling leather book with seemingly latin script, with messily torn pages.  There is an 8 embossed onto the back. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Novum Mirror", layer: 1, src: `Artifacts/Zampanio_Artifact_09_Mirror.png`, themes: [all_themes[OBFUSCATION ]], desc: "An ornate but tarnished silver mirror, with a 9 carved onto the back. It is said to reflect everything but faces. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
   ];
   //apocalypse chick is having a great time
   for (let a of artifacts) {
@@ -255,7 +255,7 @@ class Entity {
     //now that we have the direction index, use it to call go on that neighbor
     if (index > -1 && this.neighbors[index]) {
       console.log("JR NOTE: think i found a direction word")
-      if(index >=3){
+      if (index >= 3) {
         handleAttic();
         return `>${command}<br><br>` + "Oh??? What's this??? You want to wander into my attic??? :) :) ;) "
       }
@@ -266,9 +266,9 @@ class Entity {
     //okay well did we try a neighbor by name?
     index = 0;
     for (let c of this.neighbors) {
-      index ++;
+      index++;
       if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
-        if(index >=3){
+        if (index >= 3) {
           handleAttic();
           return `>${command}<br><br>` + "Oh??? What's this??? You want to wander into my attic??? :) :) ;) "
         }
@@ -346,7 +346,7 @@ class Entity {
       return `You breathe deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets && pockets.length > 0 ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
 
     } else { //if we're not we can only smell a bit
-      scents = [scents[0]];
+      scents = [scents[0 ]];
       return scents[0]; //just return the smell word.
     }
   }
@@ -397,7 +397,7 @@ class Entity {
       if (this.rand.nextDouble() > 0.5) {
         this.neighbors.push(makeChildEntity(rand, this.theme_keys));
       }
-    }else if (this.neighbors.length <4){
+    } else if (this.neighbors.length < 4) {
       //we aren't maxed out yet? lets add some gaslight engine goodness
       //are you SURE there was always a door here?
       //and just for extra funseies lets have a small chance of there being an impossible direction door
@@ -411,7 +411,7 @@ class Entity {
 
 
     current_room = this;
-    return `<hr>You GO to the ${this.name}.<hr>` + this.look() +"<br><br>"+ this.smell()
+    return `<hr>You GO to the ${this.name}.<hr>` + this.look() + "<br><br>" + this.smell()
   }
 
   talk = () => {
@@ -421,45 +421,40 @@ class Entity {
 
 
   take = () => {
-    if(player.debugCodes.includes(UNLOCK_INVENTORY3)){
+    if (player.debugCodes.includes(UNLOCK_INVENTORY2)) {
       console.warn("JR NOTE: hey actually how do we remove this from our parent :( :( :(")
-      player.inventory.addItem(this);
+      player.inventory.push(this);
       return `You TAKE the ${this.name}! (BUT NOT REALLY JR NOTE MAKE THIS ACTUALLY WORK)`
-    }else if(player.debugCodes.includes(UNLOCK_INVENTORY2)){
-      handleError(`[[ERROR CODE: ${UNLOCK_INVENTORY3}]] AT ${new Error().stack}`);
-      throw `[[ERROR CODE: ${UNLOCK_INVENTORY3}]] AT ${new Error().stack}`
-
-    }else if(player.debugCodes.includes(UNLOCK_INVENTORY1)){
-      handleError(`[[ERROR CODE: ${UNLOCK_INVENTORY2}]] AT ${new Error().stack}`);
-      throw `[[ERROR CODE: ${UNLOCK_INVENTORY2}]] AT ${new Error().stack}`
-
-    }else{
-      handleError(`[[ERROR CODE: ${UNLOCK_INVENTORY1}]] AT ${new Error().stack}`);
-      throw `[[ERROR CODE: ${UNLOCK_INVENTORY1}]] AT ${new Error().stack}`
+    } else if (player.debugCodes.includes(UNLOCK_INVENTORY1)) {
+      handleError(`[[ ERROR CODE: ${UNLOCK_INVENTORY2} ]] AT ${new Error().stack}`);
+      throw `[[ ERROR CODE: ${UNLOCK_INVENTORY2} ]] AT ${new Error().stack}`
+    } else {
+      handleError(`[[ ERROR CODE: ${UNLOCK_INVENTORY1} ]] AT ${new Error().stack}`);
+      throw `[[ ERROR CODE: ${UNLOCK_INVENTORY1} ]] AT ${new Error().stack}`
 
     }
 
   }
 
   give = () => {
-    if(player.inventory && player.inventory.length >0){
+    if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
-      const code = player.debugCodes.includes(UNLOCK_GIVE)? makeid(12):UNLOCK_GIVE;
-      handleError(`[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`);
-      throw `[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`
+      const code = player.debugCodes.includes(UNLOCK_GIVE) ? makeid(12) : UNLOCK_GIVE;
+      handleError(`[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`);
+      throw `[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`
     }
     return `You can't GIVE anything! You have nothing in your inventory!`
   }
 
 
   use = () => {
-    if(player.inventory && player.inventory.length >0){
+    if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
-      const code = player.debugCodes.includes(UNLOCK_USE)? makeid(12):UNLOCK_USE;
-      handleError(`[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`);
-      throw `[[ERROR CODE: ${CODE}]] AT ${new Error().stack}`
+      const code = player.debugCodes.includes(UNLOCK_USE) ? makeid(12) : UNLOCK_USE;
+      handleError(`[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`);
+      throw `[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`
     }
-    return `You can't GIVE anything! You have nothing in your inventory!`
+    return `You can't USE anything! You have nothing in your inventory!`
   }
 
   think = () => {

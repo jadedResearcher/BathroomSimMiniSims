@@ -486,7 +486,7 @@ textarea {
 
 #bug-report {
   fill: #b4b474;
-  position: absolute;
+  position: fixed;
   right: 13px;
   transform: scale(1.5);
   -moz-transform: scale(1.5);
@@ -496,6 +496,11 @@ textarea {
 }
 
 .bug-pulse {
+  animation: bug-pulse 2.0s steps(10) infinite;
+}
+
+#bug-report:hover {
+  cursor: pointer;
   animation: bug-pulse 2.0s steps(10) infinite;
 }
 
@@ -605,10 +610,7 @@ textarea {
   background-repeat: no-repeat;
 }
 
-#bug-report:hover {
-  cursor: pointer;
-  animation: bug-pulse 2.0s steps(10) infinite;
-}
+
 
 .story-so-far {
   margin-bottom: 50px;
@@ -765,10 +767,6 @@ a:active {
 
 .invisible-until-hover:hover {
   opacity: 100;
-}
-
-.bug-pulse {
-  animation: pulse 2.0s steps(10) infinite;
 }
 
 .fast-pulse {
