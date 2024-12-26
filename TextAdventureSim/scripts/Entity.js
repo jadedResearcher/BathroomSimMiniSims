@@ -435,7 +435,8 @@ class Entity {
   */
   go = () => {
     if (this === current_room) {
-      return `You don't know how to do that! (You're PRETTY sure you're already at ${this.name}!)`
+      const directions = this.neighbors.length > 0 ? `<br><br>Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name} (${getDirectionLabel(i)})`))}!` : "<br><br>There's no where to go from it :(";
+      return `You don't know how to do that! (You're PRETTY sure you're already at ${this.name}!) ${directions}`
     }
 
     /*
