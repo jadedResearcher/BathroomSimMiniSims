@@ -769,6 +769,18 @@ a:active {
   opacity: 100;
 }
 
+.secret-img {
+  width: -webkit-fill-available;
+}
+
+.corrupted-img {
+  height: 475px;
+  width: 475px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
 .fast-pulse {
   animation: pulse 2.0s steps(10) infinite;
 }

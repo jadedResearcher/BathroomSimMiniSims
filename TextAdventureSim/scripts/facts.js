@@ -7,6 +7,7 @@ zampanio style
 let infinite_art = [];
 let eyes = [];
 let fanWork = [];
+const truthSimURL = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/"
 
 const getCorruptedImages = async () => {
   const infinite_art_source = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/infinte_art_machine/";
@@ -142,7 +143,7 @@ const removeAllIrrelevantFactsFromData = () => {
   }
 }
 
-const deepFryPage = (url)=>{
+const deepFryPage = (url) => {
   console.log("JR NOTE: deep frying", url)
   const iframe = createElementWithClassAndParent("iframe", document.querySelector("body"));
   iframe.src = url;
@@ -153,14 +154,14 @@ const deepFryPage = (url)=>{
   width: 100%;
   height: 100%;`
   startDeepFriedFuckery(iframe.contentWindow.document);
-  setTimeout(()=>startDeepFriedFuckery(iframe.contentWindow.document),1000); //give it time to do first render
-  setInterval(()=>startDeepFriedFuckery(iframe.contentWindow.document),13000)
+  setTimeout(() => startDeepFriedFuckery(iframe.contentWindow.document), 1000); //give it time to do first render
+  setInterval(() => startDeepFriedFuckery(iframe.contentWindow.document), 13000)
 }
 
 const deepFriedMode = (factOrigin = false) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  if(urlParams.get("deepfriedurl")){
+  if (urlParams.get("deepfriedurl")) {
     deepFryPage(urlParams.get("deepfriedurl"));
     return;
   }
@@ -171,7 +172,7 @@ const deepFriedMode = (factOrigin = false) => {
   container.style.cssText = `    width: 50%;
     margin-left: auto;
     margin-right: auto;`
-    //and then teh necromancers dream AND the catalysts lie will be true
+  //and then teh necromancers dream AND the catalysts lie will be true
   const label = createElementWithClassAndParent("div", container);
   label.innerHTML = factOrigin ? "You must truly venerate the Harvest to have a fact so Changed.<br><br>A blessing for you, Faithful: choose a farragofiction.com  websites can be Changed. May it grant you Inspiration in exchange for the Service you have given to the Harvest.<br><br>(If you want to see eyedolgames.com sites be Changed, try <a target='_blank' href='http://eyedolgames.com/DeepFriedSim/'>here</a>)" : "How did you get here, I wonder?<br><Br>No matter. What website would you like to see Changed?<br><Br>Only websites hosted by this domain Change tho<br><br> (blame the fact that modern browsers get a tad UPSET if you try to feed on websites you don't own)<br><br>(If you want to see others, try <a target='_blank' href='http://eyedolgames.com/DeepFriedSim/'>here</a>)"
 
@@ -181,13 +182,13 @@ const deepFriedMode = (factOrigin = false) => {
   const button = createElementWithClassAndParent("button", container);
   button.innerText = "Submit";
   button.onclick = async () => {
-    updateURLParams("deepfriedurl="+input.value);
-    location.href=location.href;
+    updateURLParams("deepfriedurl=" + input.value);
+    location.href = location.href;
   }
 
 }
 
-const startDeepFriedFuckery =(root) => {
+const startDeepFriedFuckery = (root) => {
   console.log("JR NOTE: deep fried fuckery")
   domWordMeaningFuckery(root);
   deepFryImages(root);
@@ -230,6 +231,97 @@ const massageDeepFriedSite = (url) => {
 
 }
 
+const renderSecret = (secret, secretEle) => {
+  let something = false;
+  if (secret.image) {
+    const img = createElementWithClassAndParent("img", secretEle, "secret-img");
+    img.src = secret.image;
+    something = true;
+  }
+
+
+  if (secret.video) {
+    const v = createElementWithClassAndParent("video", secretEle, "secret-vid");
+    v.src = secret.video;
+    something = true;
+  }
+
+  if (secret.audio) {
+    const a = createElementWithClassAndParent("audio", secretEle, "secret-audio");
+    a.src = secret.audio;
+    a.controls = true;
+    something = true;
+  }
+
+  if (secret.html) {
+    if (secret.html.includes("[INSERT FANWORK HERE]")) {
+      //fanWork
+      const html = createElementWithClassAndParent("div", secretEle, "secret-html");
+
+      const tmp = () => {
+        const title = createElementWithClassAndParent("div", html);
+        let source = pickFrom(fanWork);
+        title.innerHTML = `Zampanio Branches Feed Us All: Here is one, there should be Credits in the file name: <u>${source}</u> `
+        const img = createElementWithClassAndParent("img", html, "secret-img");
+        img.src = source;
+      }
+      tmp();
+      html.onclick = () => {
+        tmp();
+      }
+
+    } else {
+      const html = createElementWithClassAndParent("div", secretEle, "secret-html");
+      html.innerHTML = secret.html;
+      something = true;
+    }
+
+  }
+
+  //its a corrupt secret, empty of meaning
+  //don't worry, we have a way of injecting meaning to the void :) :) ;)
+  if (!something) {
+    const button = createElementWithClassAndParent("button", secretEle,"corrupt-button");
+    button.innerHTML = "Surely This Can't Be All There Is."
+
+
+
+    button.onclick = () => {
+      processCorruptedImage();
+    }
+
+  }
+
+
+}
+
+const processCorruptedImage = (e) => {
+  const div = createElementWithClassAndParent("div", e.target.parentElement, "corrupted-img");
+  div.style.setProperty("--animps", `paused`);
+
+  div.onmouseenter = () => {
+    div.style.setProperty("--animps", `running`);
+  }
+
+  div.onmouseleave = () => {
+    div.style.setProperty("--animps", `paused`);
+  }
+
+  div.onmousedown = () => {
+    div.style.setProperty("--animps", `running`);
+  }
+
+  div.onmouseup = () => {
+    div.style.setProperty("--animps", `paused`);
+  }
+  console.log("JR NOTE: button click")
+  div.innerHTML = "";
+  const infiniteArt = pickFrom(infinite_art);
+  const eyesArt = pickFrom(eyes);
+  const img1 = turnImageIntoGrid(div, infiniteArt, 25, "fadeOut");
+  const img2 = turnImageIntoGrid(div, eyesArt, 25, "fadeOut");
+}
+
 // if its debug mode grab all tier 3 facts, not just all tier 3 facts in your data unlock
 //she shows up if you pass a fact with the word "secret" in it
 //because she is well aware secrets aren't supposed to be exposed but they are just too juicy to keep to herself
@@ -250,7 +342,7 @@ const docSlaughtersSecretEmporium = (debug = true, glitch = false) => {
   h1.innerText = glitch ? "What is this? What a curious Fact! Where did you get it? Let me See..." : `Oh, my Darling Eyes, let me help you See the ${tier3Facts.length} Secrets (hidden within ${facts.length} Facts) that have been cruely hidden from you!`
 
   const img = createElementWithClassAndParent("img", imgContainer, "blorbo");
-  img.src = "images/Doctor_Fiona_Slaughter_by_guide.png";
+  img.src = truthSimURL + "images/Doctor_Fiona_Slaughter_by_guide.png";
   const difficulty = createElementWithClassAndParent("div", secretsContainer, "difficulty-guide");
   difficulty.innerHTML = "Where are my manners? I am Doctor Fiona Slaughter, licensed Pyschotherapist. Obviously none of these secrets are ones I am Legally Liable to keep. What an absurd law this Unvierse has! Imagine, information not being free!<br><br>"
   const secretsContentContainer = createElementWithClassAndParent("div", secretsContainer);
@@ -268,89 +360,7 @@ const docSlaughtersSecretEmporium = (debug = true, glitch = false) => {
     title.innerHTML = '<b><u><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>' + fact.title + '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></b></u>';
     const secret = fact.secret;
 
-    let something = false;
-    if (secret.image) {
-      const img = createElementWithClassAndParent("img", secretEle, "secret-img");
-      img.src = secret.image;
-      something = true;
-    }
-
-
-    if (secret.video) {
-      const v = createElementWithClassAndParent("video", secretEle, "secret-vid");
-      v.src = secret.video;
-      something = true;
-    }
-
-    if (secret.audio) {
-      const a = createElementWithClassAndParent("audio", secretEle, "secret-audio");
-      a.src = secret.audio;
-      a.controls = true;
-      something = true;
-    }
-
-    if (secret.html) {
-      if (secret.html.includes("[INSERT FANWORK HERE]")) {
-        //fanWork
-        const html = createElementWithClassAndParent("div", secretEle, "secret-html");
-
-        const tmp = () => {
-          const title = createElementWithClassAndParent("div", html);
-          let source = pickFrom(fanWork);
-          title.innerHTML = `Zampanio Branches Feed Us All: Here is one, there should be Credits in the file name: <u>${source}</u> `
-          const img = createElementWithClassAndParent("img", html, "secret-img");
-          img.src = source;
-        }
-        tmp();
-        html.onclick = () => {
-          tmp();
-        }
-
-      } else {
-        const html = createElementWithClassAndParent("div", secretEle, "secret-html");
-        html.innerHTML = secret.html;
-        something = true;
-      }
-
-    }
-
-    //its a corrupt secret, empty of meaning
-    //don't worry, we have a way of injecting meaning to the void :) :) ;)
-    if (!something) {
-      const button = createElementWithClassAndParent("button", secretEle);
-      button.innerHTML = "Surely This Can't Be All There Is."
-
-      const div = createElementWithClassAndParent("div", secretEle, "corrupted-img");
-      div.style.setProperty("--animps", `paused`);
-
-      div.onmouseenter = () => {
-        div.style.setProperty("--animps", `running`);
-      }
-
-      div.onmouseleave = () => {
-        div.style.setProperty("--animps", `paused`);
-      }
-
-      div.onmousedown = () => {
-        div.style.setProperty("--animps", `running`);
-      }
-
-      div.onmouseup = () => {
-        div.style.setProperty("--animps", `paused`);
-      }
-
-      button.onclick = () => {
-        div.innerHTML = "";
-        const infiniteArt = pickFrom(infinite_art);
-        const eyesArt = pickFrom(eyes);
-        truthLog("It Would Seem JR Is Attempting To Trap You, Observer", `Do not follow Doctor Fiona Slaughter's example and let your eyes be drawn in by the spiral. The Truth is that this is a procedural image comprised of random squares of: ${infiniteArt} and ${eyesArt}. You can simply click these links to see the unobstructred full versions. Apologies to those not on mobile.`);
-        const img1 = turnImageIntoGrid(div, infiniteArt, 25, "fadeOut");
-        const img2 = turnImageIntoGrid(div, eyesArt, 25, "fadeOut");
-      }
-
-    }
-
-
+    renderSecret(secret, secretEle);
 
   }
 
@@ -404,7 +414,6 @@ const pleaseABHelpMeFindMissingFacts = () => {
 
 //if this is slow, store the facts on the theme object after the first time
 const getAllFactsWithTheme = (theme_key) => {
-  console.log("JR NOTE: don't forget to call pleaseABHelpMeFindMissingFacts to make sure theres no themes with no facts")
   const ret = [];
   for (let fact of all_facts) {
     if (fact.theme_key_array.includes(theme_key)) {
@@ -506,7 +515,7 @@ const altFact2 = new Fact("Alt Is Very Lonely", "In the Universe Alt came from, 
 
 const TESTFACT = new Fact("Test Fact", "test", [GUIDING], 1, 10, 1);
 //any fact with the word "secret" in it isn't readable by neville and devona, ironically doc slaughters eagerness to show things to you hides others
-const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.",[WASTE],1,1,1);
+const secretFact = new Fact("Some Facts Have Secrets S̸̭̖̳̤̽̿̄͌͋̈́̅̊̆̐͛͗͝e̸̡̧̻̘̲̞̲̱͕͙̓͂͐̍͋̋̅̽̽̔̀͆̂̈́͗͝͠c̶͓̖͙̩̯̣͉̩̣̙͚̭͋́̑̆͆̀̌̿̐ŗ̷̲̮̤̬̪̖̳̀̈́͘ȩ̸͍̗̱̲̼̮͙̂̍̎̏͗̋̊̈̐̍̕t̶̝͆s", "Your face is not your face is not your face is not your face.", [WASTE], 1, 1, 1);
 
 /*
 if having trouble thinking of a fact, link to another part of zampaniosim, including my puzzlebox
@@ -916,6 +925,8 @@ And you think I'm HAPPY? Sitting here giddily smiling in the middle of my inheri
 FUCK no.
 
 I never asked for this shitty deal.
+
+http://farragofiction.com/AdventureSimWest/?nostalgia=lavinraca.txt
 `)
 
 const neville_secret = new Secrets(null, null, null, `<p><strong><u><span style="font-size:11pt;">Neville&apos;s Secret:</span></u></strong></p>
@@ -1379,10 +1390,10 @@ then we got those actively creating zampanio through eyedol games
 and then we have the mafia just, basically being a containment zone for the eye killer as they slowly twist
 and this upstart cult faction doing something*/
 //ic made this. my take is: red is rava, blue is camellia and black is john
-const cult_secret2 = new Secrets(null, null, "images/wattbyIC___bywhichimeanNAM.png", `NAM honestly just tries to live his life in the echidna. He tries to help out the Eye Killer to be less, you know, stabby, and is relieved when she ends up finding her Mafia Family to further calm her down. He can't control the philosophy so he mostly stays quiet. Ronin took it upon himself to take NAM under his wing and he's an intern at the Closer's consulting firm, sometimes.  The fact that NAM loops but Ronin does not makes it really awkward for NAM though and he never knows what to say if Ronin says something he already knows but shouldn't.`)
+const cult_secret2 = new Secrets(null, null, truthSimURL + "images/wattbyIC___bywhichimeanNAM.png", `NAM honestly just tries to live his life in the echidna. He tries to help out the Eye Killer to be less, you know, stabby, and is relieved when she ends up finding her Mafia Family to further calm her down. He can't control the philosophy so he mostly stays quiet. Ronin took it upon himself to take NAM under his wing and he's an intern at the Closer's consulting firm, sometimes.  The fact that NAM loops but Ronin does not makes it really awkward for NAM though and he never knows what to say if Ronin says something he already knows but shouldn't.`)
 
 //i am so excited that i realized the cult faction has *literally* all our movie monsters.  werewolves and vampires and evil cults.  the fact that camellia is a piper time clone is so perfect, because pipe (and by extension the Eye Killer) are SO into horror movies. 
-const cult_secret = new Secrets(null, null, "images/cult_faction_conspiracywall_by_IC.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
+const cult_secret = new Secrets(null, null, truthSimURL + "images/cult_faction_conspiracywall_by_IC.png", `think about pen colors, think about who is saying what and what knowledge or perspective they may be missing , its not all Truth but then, nothing ever is, is it?`)
 
 
 //https://www.tumblr.com/roach-works/758817422452064256?source=share <-- literally rod core
@@ -1422,7 +1433,7 @@ http://farragofiction.com/Arm2/
 
 //he's basically retired from caring about zampanio
 //good for him
-const nam_secret = new Secrets(null, null, "images/john_andcamellia_andrava___gueststarringtwig_byic.png", `Camellia leads a cult that worships [???] and Rava just sort of showed up one day and never left.  And the absolute second Camellia saw how badly John uses what time powers he manages to cobble together in this timeless universe she was so entertained at his fail boi energy she kept him on as a sort of jester.  Rava, of course, is Twig's master. And John is exes with Sam and is currently dating Twig and this is Really Normal of him and he just thinks they're like, twins, but Twig ran away, maybe?  (they are not)`)
+const nam_secret = new Secrets(null, null, truthSimURL + "images/john_andcamellia_andrava___gueststarringtwig_byic.png", `Camellia leads a cult that worships The Harvest (god of Being Served, Inspiration, Change and Libraries) and Rava just sort of showed up one day and never left.  And the absolute second Camellia saw how badly John uses what time powers he manages to cobble together in this timeless universe she was so entertained at his fail boi energy she kept him on as a sort of jester.  Rava, of course, is Twig's master. And John is exes with Sam and is currently dating Twig and this is Really Normal of him and he just thinks they're like, twins, but Twig ran away, maybe?  (they are not)`)
 
 const arg_secret_by_ic2 = new Secrets(null, null, null, `IC says: 
 During one of the many business management books I had to digest in college, I came across a concept that it called 'the First Follower'. If you've done any kind of business-related degree, you may know it as the Leadership Lessons from a Dancing Guy video. You can't miss it.
@@ -1520,7 +1531,7 @@ const rava_secret_by_ic = new Secrets(null, null, null, `
 const lost_secret = new Secrets(null, null, null, `lost media, at its core is "look what you missed, now obsess over its scraps knowing you will never truly have the full picture"<br><br>
 zampanio is not an arg or a game or a story but a creepy pasta about lost media and the vibe if lost media, the vibe that no matter how hard you look youll ALWAYS be missing something and that you wont have the same experience as someone else in the fandom `)
 
-const space_secret = new Secrets(null, null, "images/wodin_and_todd.jpg", `
+const space_secret = new Secrets(null, null, truthSimURL + "images/wodin_and_todd.jpg", `
 a space loop is much more dangerous than a time loop
 <br>
 a time loop circles in on itself, neatly tying off its past and future into one oroboros where ending and begining are one and the same
@@ -1554,7 +1565,7 @@ don't let anyone tell you that the echidna universe
 is caught in a time loop
 `);
 
-const todd_secret = new Secrets(null, null, "images/wodin_and_todd.jpg", `
+const todd_secret = new Secrets(null, null, truthSimURL + "images/wodin_and_todd.jpg", `
 <p>wodin clearly was getting too used to todd doing all the labor in their friendship</p>
 <p>crush or not</p>
 <p>i think Todd&apos;s voidy ass would have eventually faded away</p>
@@ -1730,9 +1741,9 @@ const createAProceduralSecretButNotAGlitchedOne = () => {
 //secret can be blank, this will handle picking random stats
 const createABulkFact = (theme_key, title, text, secret) => {
   //console.log("JR NOTE: creating a bulk fact for", theme_key)
-
+  const rand = new SeededRandom(13); //doens't matter, not using stats rn in TextAdventureSim
   const randomStat = () => {
-    return globalRand.getRandomNumberBetween(1, 3) * globalRand.nextDouble(); //allows values less than 1
+    return rand.getRandomNumberBetween(1, 3) * rand.nextDouble(); //allows values less than 1
   }
 
   return new Fact(title, text, [theme_key], randomStat(), randomStat(), randomStat(), secret)

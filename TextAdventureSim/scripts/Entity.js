@@ -13,7 +13,7 @@ const COMMAND_HELP = "HELP";
 
 //what are euphamisms for each action (NOT what functions do they call)
 const defaultActionMap = {}
-defaultActionMap[COMMAND_LOOK] = ["LOOK", "SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
+defaultActionMap[COMMAND_LOOK] = ["LOOK", "READ","SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
 defaultActionMap[COMMAND_LISTEN] = ["LISTEN", "HEAR"];
 defaultActionMap[COMMAND_TOUCH] = ["FEEL", "CARESS", "TOUCH", "FONDLE", "PET"];
 
@@ -73,19 +73,77 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
   return ret;
 }
 
+//books have a random Fact inside them, mostly so that you can, in theory, read about Sam and Twig's backstories 
+//the Harvest's influence is spreading, even as she sleeps
+const spawnBooksAsAppropriate = (rand, theme_keys) => {
+  let odds = 0.05;
+
+  //for each theme you have that is compatible with knowledge, increase odds of book
+
+  //don't you want to know all the blorbo secrets, the sweet ARG lore you crave? 
+  if (theme_keys.includes(KNOWING)) {
+    odds += 0.25;
+  }
+
+  //so much of what is in here, the blorbos wouldn't want you to know
+  if (theme_keys.includes(SPYING)) {
+    odds += 0.15;
+  }
+
+  //they are books after all
+  if (theme_keys.includes(LANGUAGE)) {
+    odds += 0.25;
+  }
+  //you are going to be inspired to hunt these down, find the nuggets
+  if (theme_keys.includes(HUNTING)) {
+    odds += 0.15;
+  }
+
+  //lets be honest, questing is just hunting but more civilized
+  if (theme_keys.includes(QUESTING)) {
+    odds += 0.05;
+  }
+
+  //odds add up to around 90
+
+  const ret = [];
+  //three chances to spawn a book
+  for (let i = 0; i < 3; i++) {
+    if (rand.nextDouble() < odds) {
+      const theme = rand.pickFrom(theme_keys);
+      let fact = rand.pickFrom(getAllFactsWithTheme(theme)); //at least somewhat themed book
+      if (!fact || rand.nextDouble()>0.75) {
+        rand.pickFrom(all_facts);//just grab something
+      }
+      //no doubles
+      if(!ret.map((r)=>r.name).includes(fact.title)){
+        ret.push({ name: fact.title, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: fact.theme_key_array, desc: "<br><hr><br>" + fact.lore_snippet });
+      }
+    }
+  }
+  //only one chance for a secret
+  if (rand.nextDouble() < odds) {
+    const secret = rand.pickFrom(all_secrets);
+    const secretEle = document.createElement("div");//unattached
+    renderSecret(secret,secretEle);
+    ret.push({ name: "Secret Tome", src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [OBFUSCATION], desc: "<br><hr><br>" + secretEle.innerHTML+"<br><hr><br>" });
+  }
+  return ret;
+}
+
 const spawnItemsForThemes = (rand, theme_keys) => {
   const itemsButNotEntities = [];
   const amount = rand.getRandomNumberBetween(0, 5);
   const artifacts = [
-    { name: "Unos Artifact Book", layer: 1, src: `Artifacts/Zampanio_Artifact_01_Book.png`, themes: [all_themes[SOUL], all_themes[OBFUSCATION ]], desc: "A tattered cardboard book filled with signatures with an ornate serif '1' embossed onto it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Duo Mask", layer: 1, src: `Artifacts/Zampanio_Artifact_02_Mask.png`, themes: [all_themes[CLOWNS], all_themes[OBFUSCATION ]], desc: "A faceless theater mask with a 2 on the inside of the forehead. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Tres Bottle", layer: 1, src: `Artifacts/Zampanio_Artifact_03_Bottle.png`, themes: [all_themes[OBFUSCATION ]], desc: "A simple glass milk bottle with a 3 emblazoned on it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Quatro Blade", layer: 1, src: `Artifacts/Zampanio_Artifact_04_Razor.png`, themes: [all_themes[KILLING], all_themes[OBFUSCATION ]], desc: "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Quinque Cloak", layer: 1, src: `Artifacts/Zampanio_Artifact_05_Cloak.png`, themes: [all_themes[OBFUSCATION ]], desc: " A simple matte blue cloak with a 5 embroidered on the back in shiny red thread. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Sextant", layer: 1, src: `Artifacts/Zampanio_Artifact_06_Sextant.png`, themes: [all_themes[OBFUSCATION ]], desc: "A highly polished brass sextant. There is a 6 carved onto the main knob. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Septum Coin", layer: 1, src: `Artifacts/Zampanio_Artifact_07_Coin_Bronze.png`, themes: [all_themes[OBFUSCATION ]], desc: "An old bronze coin. There is a theater mask on one side, and a 7 on the other. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Octome", layer: 1, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [all_themes[KNOWING], all_themes[OBFUSCATION ]], desc: "A crumbling leather book with seemingly latin script, with messily torn pages.  There is an 8 embossed onto the back. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
-    , { name: "Novum Mirror", layer: 1, src: `Artifacts/Zampanio_Artifact_09_Mirror.png`, themes: [all_themes[OBFUSCATION ]], desc: "An ornate but tarnished silver mirror, with a 9 carved onto the back. It is said to reflect everything but faces. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    { name: "Unos Artifact Book", layer: 1, src: `Artifacts/Zampanio_Artifact_01_Book.png`, themes: [all_themes[SOUL], all_themes[OBFUSCATION]], desc: "A tattered cardboard book filled with signatures with an ornate serif '1' embossed onto it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Duo Mask", layer: 1, src: `Artifacts/Zampanio_Artifact_02_Mask.png`, themes: [all_themes[CLOWNS], all_themes[OBFUSCATION]], desc: "A faceless theater mask with a 2 on the inside of the forehead. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Tres Bottle", layer: 1, src: `Artifacts/Zampanio_Artifact_03_Bottle.png`, themes: [all_themes[OBFUSCATION]], desc: "A simple glass milk bottle with a 3 emblazoned on it. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Quatro Blade", layer: 1, src: `Artifacts/Zampanio_Artifact_04_Razor.png`, themes: [all_themes[KILLING], all_themes[OBFUSCATION]], desc: "A dull straight razor stained with blood, a number 4 is etched onto the side of the blade. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Quinque Cloak", layer: 1, src: `Artifacts/Zampanio_Artifact_05_Cloak.png`, themes: [all_themes[OBFUSCATION]], desc: " A simple matte blue cloak with a 5 embroidered on the back in shiny red thread. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Sextant", layer: 1, src: `Artifacts/Zampanio_Artifact_06_Sextant.png`, themes: [all_themes[OBFUSCATION]], desc: "A highly polished brass sextant. There is a 6 carved onto the main knob. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Septum Coin", layer: 1, src: `Artifacts/Zampanio_Artifact_07_Coin_Bronze.png`, themes: [all_themes[OBFUSCATION]], desc: "An old bronze coin. There is a theater mask on one side, and a 7 on the other. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Octome", layer: 1, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [all_themes[KNOWING], all_themes[OBFUSCATION]], desc: "A crumbling leather book with seemingly latin script, with messily torn pages.  There is an 8 embossed onto the back. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
+    , { name: "Novum Mirror", layer: 1, src: `Artifacts/Zampanio_Artifact_09_Mirror.png`, themes: [all_themes[OBFUSCATION]], desc: "An ornate but tarnished silver mirror, with a 9 carved onto the back. It is said to reflect everything but faces. It is said that if all 9 Artifacts are united, the Apocalypse will begin." }
   ];
   //apocalypse chick is having a great time
   for (let a of artifacts) {
@@ -105,8 +163,13 @@ const spawnItemsForThemes = (rand, theme_keys) => {
 
   const ret = [];
   for (let item of itemsButNotEntities) {
-    console.log("JR  NOTE: item is", item)
     const e = new Entity(item.name, item.desc, item.themes.map((t) => t.key));
+    ret.push(e)
+  }
+  const books = spawnBooksAsAppropriate(rand, theme_keys)
+
+  for (let item of books) {
+    const e = new Book(item.name, item.desc, item.themes);
     ret.push(e)
   }
   return ret;
@@ -133,6 +196,7 @@ And I mean, from THEIR point of view of COURSE a person is the same thing as a b
 
 class Entity {
   alive = false;
+  book = false;
   description = "It's so perfectly generic."
   name = "Perfectly Generic Entity";
   durability = 113;//(nothing can die in arm2 but if you take enough damage you're not exactly coherent anymore)
@@ -298,9 +362,9 @@ class Entity {
     let directions;
     let pockets;
 
-    pockets = this.contents.length > 0 ? `<br><br>You see ${humanJoining(this.contents.map((c => c.name)))} inside it! ` : "<br><br>You see nothing inside it :(";
+    pockets = this.contents.length > 0 ? `<br><br>You see ${humanJoining(this.contents.map((c => c.book? `<u>${c.name}</u>`:c.name)))} inside it! ` : "<br><br>You see nothing inside it :(";
     directions = this.neighbors.length > 0 ? `<br><br>Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name} (${getDirectionLabel(i)})`))}!` : "<br><br>There's no where to go from it :(";
-    return `You look carefully at the ${this.name}. It's hard to see! ${this.description}. ${pockets} ${directions}`;
+    return `You look carefully at the ${this.book? `<u>${this.name}</u>`:this.name}. ${this.book? "You only have enough attention span to read a little bit:":"It's hard to see!"} ${this.description}. ${pockets} ${directions}`;
   }
 
   listen = (recursionJustified = true) => {
@@ -334,8 +398,8 @@ class Entity {
   */
   smell = (recursionJustified = true) => {
     const rand = this.getCachedRand();
+    console.log("JR NOTE: trying to smell", this)
     let scents = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(SMELL, rand));
-    console.log("JR NOTE: scents", { rand, scents, keys: this.theme_keys, all_themes })
     let directions;
     let pockets;
 
@@ -346,7 +410,7 @@ class Entity {
       return `You breathe deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets && pockets.length > 0 ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
 
     } else { //if we're not we can only smell a bit
-      scents = [scents[0 ]];
+      scents = [scents[0]];
       return scents[0]; //just return the smell word.
     }
   }
@@ -470,6 +534,17 @@ class Entity {
 }
 
 
+class Book extends Entity {
+  alive = false;
+  book = true;
+  constructor(name, desc, theme_keys) {
+    super(name, desc,theme_keys);
+    this.theme_keys.push(LANGUAGE);
+    this.theme_keys.push(KNOWING);
+  }
+}
+
+
 class FleshCreature extends Entity {
   alive = true;
   constructor(name, desc, theme_keys) {
@@ -479,3 +554,9 @@ class FleshCreature extends Entity {
     this.theme_keys.push(FLESH);
   }
 }
+
+/*
+yeah this is really starting to come together
+the webbed heir of blood connects wanda and the intern tightly, forces their pasts to bind them while using doc slaughter as a puppet
+meanwhile the page of bloody breath gives freedom to something they maybe should not have, something murderous
+*/

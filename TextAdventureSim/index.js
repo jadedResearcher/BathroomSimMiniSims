@@ -44,6 +44,7 @@ window.onload = async () => {
   mainElement.innerHTML = "Pending"
   initThemes();
   grabPersonlization();
+  await getCorruptedImages();
   mainElement.innerHTML = `Seed: ${seed}, Your Themes: ${your_themes.join(",")}, Your Rival's Themes: ${your_rivals_themes.join(",")}
   <br><br><br><i>Your name is TWIG and you are a VERY GOOD DOG.
   <br><br>
@@ -67,6 +68,12 @@ window.onload = async () => {
   form.onsubmit = (e) => {
     e.preventDefault();
     mainElement.innerHTML = `${mainElement.innerHTML}<p>${current_room.handleCommand(input.value)}</p>`;
+    const corruptButtons = mainElement.querySelectorAll(".corrupt-button");
+    //fingers twisted this works, forgot tha you don't get to keep click events when you set inner html
+    if (corruptButtons && corruptButtons.length > 0) {
+      corruptButtons[corruptButtons.length - 1].onclick = processCorruptedImage;
+    }
+
     input.value = "";
     mainElement.scrollBy(0, 1000);//go to the bottom
   }
