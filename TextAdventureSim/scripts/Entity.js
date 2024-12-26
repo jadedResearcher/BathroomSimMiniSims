@@ -117,7 +117,7 @@ const spawnBooksAsAppropriate = (rand, theme_keys) => {
       }
       //no doubles
       if(!ret.map((r)=>r.name).includes(fact.title)){
-        ret.push({ name: fact.title, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: fact.theme_key_array, desc: "<br><hr><br>" + fact.lore_snippet });
+        ret.push({ name: fact.title, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: fact.theme_key_array, desc: "<br><hr><br><p style='padding:31px;'>" + fact.lore_snippet +"</p><br><hr><br>" });
       }
     }
   }
