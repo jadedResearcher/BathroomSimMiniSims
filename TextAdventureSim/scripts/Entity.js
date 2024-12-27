@@ -493,7 +493,7 @@ class Entity {
         player.addToInventory(this);
         removeItemOnce(parentEntity.contents, this);
       }else{
-        "You try to TAKE...something. But fail! Are you sure its really there?";
+        return "You try to TAKE...something. But fail! Are you sure its really there?";
       }
       return `You TAKE the ${this.name}!`
     } else if (player.debugCodes.includes(UNLOCK_INVENTORY1)) {
@@ -511,6 +511,7 @@ class Entity {
     if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
       const code = player.debugCodes.includes(UNLOCK_GIVE) ? makeid(12) : UNLOCK_GIVE;
+      fakeDevLogs[code]="pending"; //so the bug report system validates it
       handleError(`[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`);
       throw `[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`
     }
