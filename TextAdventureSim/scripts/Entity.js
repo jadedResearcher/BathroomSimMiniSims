@@ -13,7 +13,7 @@ const COMMAND_HELP = "HELP";
 
 //what are euphamisms for each action (NOT what functions do they call)
 const defaultActionMap = {}
-defaultActionMap[COMMAND_LOOK] = ["LOOK", "READ","SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
+defaultActionMap[COMMAND_LOOK] = ["LOOK", "READ", "SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
 defaultActionMap[COMMAND_LISTEN] = ["LISTEN", "HEAR"];
 defaultActionMap[COMMAND_TOUCH] = ["FEEL", "CARESS", "TOUCH", "FONDLE", "PET"];
 
@@ -76,48 +76,49 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
 //books have a random Fact inside them, mostly so that you can, in theory, read about Sam and Twig's backstories 
 //the Harvest's influence is spreading, even as she sleeps
 const spawnBooksAsAppropriate = (rand, theme_keys) => {
-  let odds = 0.05;
+  let odds = 0.01;
+  const singleOdd = 0.15;
 
   //for each theme you have that is compatible with knowledge, increase odds of book
 
   //don't you want to know all the blorbo secrets, the sweet ARG lore you crave? 
   if (theme_keys.includes(KNOWING)) {
-    odds += 0.25;
+    odds += singleOdd;
   }
 
   //so much of what is in here, the blorbos wouldn't want you to know
   if (theme_keys.includes(SPYING)) {
-    odds += 0.15;
+    odds += singleOdd;
   }
 
   //they are books after all
   if (theme_keys.includes(LANGUAGE)) {
-    odds += 0.25;
+    odds += singleOdd;
   }
   //you are going to be inspired to hunt these down, find the nuggets
   if (theme_keys.includes(HUNTING)) {
-    odds += 0.15;
+    odds += singleOdd;
   }
 
   //lets be honest, questing is just hunting but more civilized
   if (theme_keys.includes(QUESTING)) {
-    odds += 0.05;
+    odds += singleOdd;
   }
 
-  //odds add up to around 90
 
   const ret = [];
   //three chances to spawn a book
   for (let i = 0; i < 3; i++) {
-    if (rand.nextDouble() < odds) {
+    const roll = rand.nextDouble();
+    if (roll < odds) {
       const theme = rand.pickFrom(theme_keys);
       let fact = rand.pickFrom(getAllFactsWithTheme(theme)); //at least somewhat themed book
-      if (!fact || rand.nextDouble()>0.75) {
-        rand.pickFrom(all_facts);//just grab something
+      if (!fact || rand.nextDouble() > 0.75) {
+        fact = rand.pickFrom(all_facts);//just grab something
       }
       //no doubles
-      if(!ret.map((r)=>r.name).includes(fact.title)){
-        ret.push({ name: fact.title, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: fact.theme_key_array, desc: "<br><hr><br><p style='padding:31px;'>" + fact.lore_snippet +"</p><br><hr><br>" });
+      if (!ret.map((r) => r.name).includes(fact.title)) {
+        ret.push({ name: fact.title, src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: fact.theme_key_array, desc: "<br><hr><br><p style='padding:31px;'>" + fact.lore_snippet + "</p><br><hr><br>" });
       }
     }
   }
@@ -125,8 +126,8 @@ const spawnBooksAsAppropriate = (rand, theme_keys) => {
   if (rand.nextDouble() < odds) {
     const secret = rand.pickFrom(all_secrets);
     const secretEle = document.createElement("div");//unattached
-    renderSecret(secret,secretEle);
-    ret.push({ name: "Secret Tome", src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [OBFUSCATION], desc: "<br><hr><br>" + secretEle.innerHTML+"<br><hr><br>" });
+    renderSecret(secret, secretEle);
+    ret.push({ name: "Secret Tome", src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [OBFUSCATION], desc: "<br><hr><br>" + secretEle.innerHTML + "<br><hr><br>" });
   }
   return ret;
 }
@@ -262,7 +263,8 @@ class Entity {
   will need to have some kind of counter so i can't go deeper than say, three levels at a time, have a fun apocalypse chick warning if you do
   so lets stub this function out
   */
-  handleCommand = (command, count = 0, justifiedRecursion = true) => {
+  //parentEntity will be usually be null, only set if we are contents or neighbors of wherever player is (or deeper)
+  handleCommand = (command, parentEntity, count = 0, justifiedRecursion = true) => {
     if (count > 13) {
       return "Haha, wow! How did you manage to recurse thaaaaaaaaaaaaat many times. Surely even YOU can't justify that one, lol. imma just...stop that. Only I get to cause fractal game crashing bugs like that, lulz. It's been real!"
     }
@@ -284,14 +286,14 @@ class Entity {
     for (const [key, value] of Object.entries(this.actionMap)) {
       if (value.includes(first_word)) {
         //we found it
-        return `>${command}<br><br>` + this.functionMap[key]();
+        return `>${command}<br><br>` + this.functionMap[key](parentEntity);
       }
     }
 
     return "You don't know how to " + command + ".";
 
   }
-
+  //if these recurse, THEY are the parent, not their parent
   checkContentsForCommand = (command, count, justifiedRecursion) => {
     if (!justifiedRecursion) { //its not justified, don't check
       return;
@@ -299,11 +301,11 @@ class Entity {
 
     for (let c of this.contents) {
       if (command.toUpperCase().includes(c.name.toUpperCase())) {//the name of the entity in its entirity
-        return c.handleCommand(command, count + 1, justifiedRecursion);
+        return c.handleCommand(command, this, count + 1, justifiedRecursion);
       }
     }
   }
-
+  //if these recurse, THEY are the parent, not their parent
   //do NOT recurse on neighbors because they will always have loops
   checkNeighborForCommand = (command, count, justifiedRecursion) => {
     if (!justifiedRecursion) { //its not justified, don't check
@@ -324,7 +326,7 @@ class Entity {
         return `>${command}<br><br>` + "Oh??? What's this??? You want to wander into my attic??? :) :) ;) "
       }
       //neighbors we NEVER recurse on (because your neighbors have you as neighbors)
-      return this.neighbors[index].handleCommand(command, count + 1, false);
+      return this.neighbors[index].handleCommand(command, this, count + 1, false);
     }
 
     //okay well did we try a neighbor by name?
@@ -337,7 +339,7 @@ class Entity {
           return `>${command}<br><br>` + "Oh??? What's this??? You want to wander into my attic??? :) :) ;) "
         }
         //neighbors we NEVER recurse on (because your neighbors have you as neighbors)
-        return c.handleCommand(command, count + 1, false);
+        return c.handleCommand(command, this, count + 1, false);
       }
     }
   }
@@ -357,24 +359,24 @@ class Entity {
    basically losing a lot of their eyesight to be a weird dog person
    is choice
   */
-  look = () => {
+  look = (parentEntity) => {
     const rand = this.getCachedRand();
     let directions;
     let pockets;
 
-    pockets = this.contents.length > 0 ? `<br><br>You see ${humanJoining(this.contents.map((c => c.book? `<u>${c.name}</u>`:c.name)))} inside it! ` : "<br><br>You see nothing inside it :(";
+    pockets = this.contents.length > 0 ? `<br><br>You see ${humanJoining(this.contents.map((c => c.book ? `<u>${c.name}</u>` : c.name)))} inside it! ` : "<br><br>You see nothing inside it :(";
     directions = this.neighbors.length > 0 ? `<br><br>Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name} (${getDirectionLabel(i)})`))}!` : "<br><br>There's no where to go from it :(";
-    return `You look carefully at the ${this.book? `<u>${this.name}</u>`:this.name}. ${this.book? "You only have enough attention span to read a little bit:":"It's hard to see!"} ${this.description}. ${pockets} ${directions}`;
+    return `You look carefully at the ${this.book ? `<u>${this.name}</u>` : this.name}. ${this.book ? "You only have enough attention span to read a little bit:" : "It's hard to see!"} ${this.description}. ${pockets} ${directions}`;
   }
 
-  listen = (recursionJustified = true) => {
+  listen = (parentEntity, recursionJustified = true) => {
     const rand = this.getCachedRand();
     let sounds = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(SOUND, rand));
     let directions;
 
     //if we're close by its clear, and we can smell a bit of our neighbors
     if (recursionJustified) {
-      directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly hear ${n.listen(false)}.`)
+      directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly hear ${n.listen(parentEntity, false)}.`)
       return `You prick your ears towards the ${this.name}, taking in the sounds of ${humanJoining(uniq(sounds))}.  ${directions}`
 
     } else { //if we're not we can only smell a bit
@@ -396,17 +398,16 @@ class Entity {
   sometimes you want room to take advangate of lucky lil coincidences
   :chrm_horseshoes:
   */
-  smell = (recursionJustified = true) => {
+  smell = (parentEntity, recursionJustified = true) => {
     const rand = this.getCachedRand();
-    console.log("JR NOTE: trying to smell", this)
     let scents = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(SMELL, rand));
     let directions;
     let pockets;
 
     //if we're close by its clear, and we can smell a bit of our neighbors
     if (recursionJustified) {
-      pockets = this.contents.map((c) => c.smell(false));
-      directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly smell ${n.smell(false)}.`)
+      pockets = this.contents.map((c) => c.smell(parentEntity, false));
+      directions = this.neighbors.map((n, i) => `To the ${getDirectionLabel(i)} you faintly smell ${n.smell(parentEntity, false)}.`)
       return `You breathe deeply at the ${this.name}, taking in the scents of ${humanJoining(uniq(scents))}. ${pockets && pockets.length > 0 ? `Is that a faint whiff of ${humanJoining(uniq(pockets))} you detect?` : ""} ${directions}`
 
     } else { //if we're not we can only smell a bit
@@ -416,13 +417,13 @@ class Entity {
   }
 
   //taste isn't recursive. if you lick a person you can't taste whats in their pockets
-  taste = () => {
+  taste = (parentEntity) => {
     const rand = this.getCachedRand();
     let tastes = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(TASTE, rand));
     return `You happily lick at the ${this.name}, taking in the flavors of ${humanJoining(uniq(tastes))}. ${this.alive ? `The ${this.name} seems really upset about this.` : "No one can stop you."}`
   }
 
-  touch = () => {
+  touch = (parentEntity) => {
     const rand = this.getCachedRand();
     let touch = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(FEELING, rand));
     return `You happily paw at the ${this.name}, taking in the textures of ${humanJoining(uniq(touch))}. ${this.alive ? `The ${this.name} seems really upset about this.` : "No one can stop you."}`
@@ -433,7 +434,7 @@ class Entity {
   this MEANS we can "go ria" by default but honestly, im fine with this
   the recursion is justified
   */
-  go = () => {
+  go = (parentEntity) => {
     if (this === current_room) {
       const directions = this.neighbors.length > 0 ? `<br><br>Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name} (${getDirectionLabel(i)})`))}!` : "<br><br>There's no where to go from it :(";
       return `You don't know how to do that! (You're PRETTY sure you're already at ${this.name}!) ${directions}`
@@ -476,20 +477,25 @@ class Entity {
 
 
     current_room = this;
-    return `<hr>You GO to the ${this.name}.<hr>` + this.look() + "<br><br>" + this.smell()
+    return `<hr>You GO to the ${this.name}.<hr>` + this.look() + "<br><br>" + this.smell(parentEntity)
   }
 
-  talk = () => {
+  talk = (parentEntity) => {
     const rand = this.getCachedRand();
-    return `The ${this.name} doesn't seem to want to talk to you :(`;
+    //classic breath player
+    return `The ${this.name} doesn't seem to want to talk to you :(<br><br>That's okay though!<br><br>You don't need anyone.`;
   }
 
 
-  take = () => {
+  take = (parentEntity) => {
     if (player.debugCodes.includes(UNLOCK_INVENTORY2)) {
-      console.warn("JR NOTE: hey actually how do we remove this from our parent :( :( :(")
-      player.inventory.push(this);
-      return `You TAKE the ${this.name}! (BUT NOT REALLY JR NOTE MAKE THIS ACTUALLY WORK)`
+      if (parentEntity) {
+        player.addToInventory(this);
+        removeItemOnce(parentEntity.contents, this);
+      }else{
+        "You try to TAKE...something. But fail! Are you sure its really there?";
+      }
+      return `You TAKE the ${this.name}!`
     } else if (player.debugCodes.includes(UNLOCK_INVENTORY1)) {
       handleError(`[[ ERROR CODE: ${UNLOCK_INVENTORY2} ]] AT ${new Error().stack}`);
       throw `[[ ERROR CODE: ${UNLOCK_INVENTORY2} ]] AT ${new Error().stack}`
@@ -501,35 +507,35 @@ class Entity {
 
   }
 
-  give = () => {
+  give = (parentEntity) => {
     if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
       const code = player.debugCodes.includes(UNLOCK_GIVE) ? makeid(12) : UNLOCK_GIVE;
-      handleError(`[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`);
-      throw `[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`
+      handleError(`[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`);
+      throw `[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`
     }
     return `You can't GIVE anything! You have nothing in your inventory!`
   }
 
 
-  use = () => {
+  use = (parentEntity) => {
     if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
       const code = player.debugCodes.includes(UNLOCK_USE) ? makeid(12) : UNLOCK_USE;
-      handleError(`[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`);
-      throw `[[ ERROR CODE: ${CODE} ]] AT ${new Error().stack}`
+      handleError(`[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`);
+      throw `[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`
     }
     return `You can't USE anything! You have nothing in your inventory!`
   }
 
-  think = () => {
+  think = (parentEntity) => {
     //this one isn't cached, your thoughts can change
     const theme = all_themes[this.rand.pickFrom(this.theme_keys)]
     return `You think about the ${this.name}... Haha, wow, that's hard actually!  In the distance, you can hear a mournful voice droning on and on about something? "${theme.pickPossibilityFor(PHILOSOPHY, this.rand)}"<br><br>Boring!`
   }
 
   //JR NOTE: this should be tutorial shit or maybe hints if i can manage it
-  help = () => {
+  help = (parentEntity) => {
     return `List of Commands For ${this.name}: ${Object.keys(this.actionMap).join(", ")}`;
   }
 }
@@ -539,7 +545,7 @@ class Book extends Entity {
   alive = false;
   book = true;
   constructor(name, desc, theme_keys) {
-    super(name, desc,theme_keys);
+    super(name, desc, theme_keys);
     this.theme_keys.push(LANGUAGE);
     this.theme_keys.push(KNOWING);
   }

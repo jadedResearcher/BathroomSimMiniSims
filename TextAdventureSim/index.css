@@ -690,6 +690,7 @@ textarea {
 
 .command {
   position: absolute;
+  background-color: black;
   bottom: 0px;
   border-radius: 8px;
   border: 1px solid;

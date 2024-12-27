@@ -8,6 +8,7 @@ let infinite_art = [];
 let eyes = [];
 let fanWork = [];
 const truthSimURL = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/"
+let globalRand = new SeededRandom(13);
 
 const getCorruptedImages = async () => {
   const infinite_art_source = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/images/infinte_art_machine/";

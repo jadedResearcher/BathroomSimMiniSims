@@ -32,7 +32,7 @@ fakeDevLogs[UNLOCK_USE] = "okay what the hell, the inventory is DEFINITELY there
 //okay what the hell, the inventory is DEFINITELY there now, why can't you give anything?
 //after this, GIVE has procedural error codes
 const UNLOCK_GIVE = "2f9777c49a74";
-fakeDevLogs[UNLOCK_GIVE] = "okay what the hell, the inventory is DEFINITELY there now, why can't you use anything?<br><br>think i got a fix in, fingers twisted"
+fakeDevLogs[UNLOCK_GIVE] = "okay what the hell, the inventory is DEFINITELY there now, why can't you give anything?<br><br>think i got a fix in, fingers twisted"
 
 const THEENDISNEVERTHEEND = "THE END IS NEVER THE END";
 fakeDevLogs[THEENDISNEVERTHEEND] = "THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END THE END IS NEVER THE END"
@@ -68,20 +68,20 @@ class Player {
   //what debug codes have you found and submitted, get these from localStorage
   debugCodes = [];
 
-  constructor(){
+  constructor() {
     this.loadFromLocalStorage();
   }
 
   //only your debug codes remain, because you're intended to start new runs every refresh
   loadFromLocalStorage = () => {
     console.log("JR NOTE: loading player progress")//gosh isn't it mysterious, what could it be loading (of course, if you're reading this you're literally seeing whats being loaded but i imagine if you're in the javascript console only its like... but if i refresh my progress is lost so is this glitched out too?)
-    this.debugCodes =valueAsArray(SAVE_KEY);
-    for(let d of this.debugCodes){
-      if(!fakeDevLogs[d]){
+    this.debugCodes = valueAsArray(SAVE_KEY);
+    for (let d of this.debugCodes) {
+      if (!fakeDevLogs[d]) {
         fakeDevLogs[d] = "JR NOTE: make this spooky and procedural and maybe glitch effect occasionally"
       }
     }
-    if(this.debugCodes.includes(UNLOCK_INVENTORY1)){
+    if (this.debugCodes.includes(UNLOCK_INVENTORY1)) {
       this.inventory = [];
     }
   }
@@ -90,6 +90,51 @@ class Player {
   saveToLocalStorage = () => {
     console.log("JR NOTE: saving player progress")
     localStorage[SAVE_KEY] = JSON.stringify(uniq(this.debugCodes));
+  }
+
+  //sam does not care if its a person, place or thing he's stuffing into his greedy maw
+  //its the apocalypse, everything is hacked to be everything else
+  //fractals ftw
+  //nothing can die in nidhoggs apocalypse tho
+  //so what happens instead?
+  addToInventory = (entity) => {
+    //no doubles
+    let unique = true;
+    for (let item in this.inventory) {
+      if (item.name === entity.name) {
+        unique = false;
+      }
+    }
+    if (unique) {
+      this.inventory.push(entity);
+    }
+    //if its the first item we're adding, add the inventory button
+    if (this.inventory.length === 1) {
+      const parent = document.querySelector(".command")
+      const inventoryButton = document.createElement("button");
+      parent.prepend(inventoryButton)
+      inventoryButton.innerText = "Go To Inventory"//slightly weird wording isn't it :) :) ;)
+      inventoryButton.onclick = () => {
+        if (!player.debugCodes.includes(UNLOCK_INVENTORY3)) {
+          handleError(`[[ ERROR CODE: ${UNLOCK_INVENTORY3} ]] AT ${new Error().stack}`);
+          throw `[[ ERROR CODE: ${UNLOCK_INVENTORY3} ]] AT ${new Error().stack}`
+          return;
+        }
+        const inventoryGame = createElementWithClassAndParent("div", parent);
+        inventoryGame.style.padding = "31px"
+        inventoryGame.style.background = "black"
+        inventoryGame.innerHTML = `<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Your name is SAM, and you are DOING YOUR VERY BEST to keep this Family together.&nbsp;</span></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Even though you didn&apos;t exactly ask for this.</span></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Your Big Bro has been.... Let&apos;s say, &apos;taking a nap&apos; for a few months now and so far no one is wise to your ruse.&nbsp;</span></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Those freakin&apos; monsters that live in the mall have started sniffing around your business lately, some kind of feud with one of your, you mean your Big Bro&apos;s pet monsters. The one who is the backbone of your &quot;Addiction&quot; thread. ...</span><s><span style="font-size:11pt;font-family:Arial,sans-serif;">&nbsp;You try not to think about how you had to find out the bastard was your ex when you fully took over Family operations. &nbsp;John...</span></s></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">So. Fine. You can make this work.&nbsp;</span></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">You offer the monsters an olive branch. Their leader apparently is one of the spooks that eliminates &apos;problems&apos; for the Family, and you&apos;ve always treated her right. Camille, you think it was? Or was it Camillia? Too many similar names these days and you are run too ragged to keep track of them.&nbsp;</span></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">So yeah, olive branch. You&apos;re gonna get everybody attending the same party, at a high class club your Family owns, The Inventory, &nbsp;pull your strings, and get them actually TALKING to each other.&nbsp;</span></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Ain&apos;t nobody kept a feud up once they&apos;re tried together, you always say.&nbsp;</span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;">Now let&apos;s see, who do you have here tonight at the Inventory.</span></p>`;
+        jrPopup("Inventory", inventoryGame);
+      }
+
+    }
   }
 
 }
