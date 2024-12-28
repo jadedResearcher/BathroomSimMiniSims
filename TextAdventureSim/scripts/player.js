@@ -159,8 +159,19 @@ class Player {
 
 const renderInventory = (parent)=>{
   const container = createElementWithClassAndParent("div", parent);
-  container.style.display="flex";
-  container.style.gap="31px;"
+  container.style.cssText=`display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    height: 80%;
+    overflow: auto;`;
+
+  const sceneText = createElementWithClassAndParent("div", parent);
+  sceneText.innerHTML = `<b>JR:</b>whoa whats this???`;
+  sceneText.style.cssText = `position: absolute;
+    bottom: 0px;
+    height: 50px;
+    background: black;
+    width: 100%;`;
 
   for(let item of player.inventory){
     const itemEle = createElementWithClassAndParent("img", container);

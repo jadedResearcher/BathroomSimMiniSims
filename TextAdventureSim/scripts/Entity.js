@@ -160,10 +160,8 @@ const spawnItemsForThemes = (rand, theme_keys) => {
     let item = chosen_theme.pickPossibilityFor(FLOORFOREGROUND, rand);
     if(item && item.name){ //could be a glitched item like for Burger
       item.themes = [chosen_theme];
-    }else{
-      item = pickFrom(artifacts);
+      itemsButNotEntities.push(item);
     }
-    itemsButNotEntities.push(item);
   }
 
   const ret = [];
@@ -500,7 +498,15 @@ class Entity {
         player.addToInventory(this);
         removeItemOnce(parentEntity.contents, this);
       }else{
-        return "You try to TAKE...something. But fail! Are you sure its really there?";
+        if(this.contents.length >0){
+          for(let c of this.contents){
+            player.addToInventory(c);
+          }
+          this.contents = [];//empty now
+          return "You take absolutely everything in this room, including some things you hadn't realized weren't nailed down.";
+        }else{
+          return "There's nothing left to TAKE!";
+        }
       }
       return `You TAKE the ${this.name}!`
     } else if (player.debugCodes.includes(UNLOCK_INVENTORY1)) {
