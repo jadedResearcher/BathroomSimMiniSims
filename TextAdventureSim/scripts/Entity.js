@@ -127,7 +127,7 @@ const spawnBooksAsAppropriate = (rand, theme_keys) => {
     const secret = rand.pickFrom(all_secrets);
     const secretEle = document.createElement("div");//unattached
     renderSecret(secret, secretEle);
-    ret.push({ name: "Secret Tome", src: `Artifacts/Zampanio_Artifact_08_Tome.png`, themes: [OBFUSCATION], desc: "<br><hr><br>" + secretEle.innerHTML + "<br><hr><br>" });
+    ret.push({ name: "Secret Tome", src: `Artifacts/secret_book.gif`, themes: [OBFUSCATION], desc: "<br><hr><br>" + secretEle.innerHTML + "<br><hr><br>" });
   }
   return ret;
 }
@@ -175,7 +175,7 @@ const spawnItemsForThemes = (rand, theme_keys) => {
   const books = spawnBooksAsAppropriate(rand, theme_keys)
 
   for (let item of books) {
-    const e = new Book(item.name, item.desc, item.themes);
+    const e = new Book(item.name, item.desc, item.themes, item.src);
     ret.push(e)
   }
   return ret;
@@ -553,8 +553,8 @@ class Entity {
 class Book extends Entity {
   alive = false;
   book = true;
-  constructor(name, desc, theme_keys) {
-    super(name, desc, theme_keys);
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc, theme_keys, sprite);
     this.theme_keys.push(LANGUAGE);
     this.theme_keys.push(KNOWING);
   }
@@ -563,9 +563,9 @@ class Book extends Entity {
 
 class FleshCreature extends Entity {
   alive = true;
-  constructor(name, desc, theme_keys) {
-    super(name, desc + "<br><br>It's made of meat :) ", theme_keys);
-    this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.", [FLESH], "blood_puddle.png")); //you can take the blood out, twig :) :) :)
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's made of meat :) ", theme_keys, sprite);
+    this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.", [FLESH], "bloodpuddle.png")); //you can take the blood out, twig :) :) :)
     this.contents.push(new Entity("Meat", "it's pink and moist. Your mouth waters thinking about it.", [FLESH],"meatslabs.png")); //you can take the meat out, twig :) :) :)
     this.theme_keys.push(FLESH);
   }

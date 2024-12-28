@@ -165,7 +165,7 @@ const renderInventory = (parent)=>{
   for(let item of player.inventory){
     const itemEle = createElementWithClassAndParent("img", container);
     itemEle.title =item.name;
-    itemEle.src = "images/Walkabout/TopFloorObjects/" + item.sprite;
+    itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
 
   }
 

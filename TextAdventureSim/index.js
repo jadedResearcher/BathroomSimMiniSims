@@ -57,7 +57,7 @@ window.onload = async () => {
 
 
   current_room = makeChildEntity(rand, your_themes, "Entry Room");
-  const testObject = new FleshCreature("Sheep", "It's a hideous TIMEBEAST!  They taste great! <br><br>Before the Apocalypse, if you killed one, it would take you to a random time and location. <br><br>Lame...<br><br>Now, though, they have no power!<br><br>You are not even a little bit curious as to why! ", [TIME], rand);
+  const testObject = new FleshCreature("Sheep", "It's a hideous TIMEBEAST!  They taste great! <br><br>Before the Apocalypse, if you killed one, it would take you to a random time and location. <br><br>Lame...<br><br>Now, though, they have no power!<br><br>You are not even a little bit curious as to why! ", [TIME]);
   current_room.contents.push(testObject);
   current_room.neighbors.push(makeChildEntity(rand, your_themes));
   current_room.neighbors.push(makeChildEntity(rand, your_themes));
