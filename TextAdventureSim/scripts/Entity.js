@@ -523,6 +523,7 @@ class Entity {
     if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
       const code = player.debugCodes.includes(UNLOCK_USE) ? makeid(12) : UNLOCK_USE;
+      fakeDevLogs[code]="pending"; //so the bug report system validates it
       handleError(`[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`);
       throw `[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`
     }

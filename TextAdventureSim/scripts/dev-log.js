@@ -139,6 +139,7 @@ class DevLog {
 //newest on top
 //fake devlogs will get added to the top as well
 
+new DevLog("12/28/2024","I was GONNA work on the inventory more yesterday, but totally forgot it was a friday, so I had to rest.", "zampanio needs you to live a long life. it's a marathon not a sprint.")
 new DevLog("12/26/2024","lol, the inventory is a little more complicated than I thought, disabling it for now, need to remember to enable it when i release<br><br>I am a GENIUS!")
 new DevLog("12/24/2024","Wiring up the inventory now, more complicated than expected lol", "by which i mean i'm wiring up all the fakey fake bugs for it :) :) :)")
 new DevLog("12/23/2024","Now you can actually move around in this maze!<br><br>Apocalypse chick has been a HUGE help here, cuz the recursion, as it turns out, is NOT always justified :) :) ;)")

@@ -78,7 +78,7 @@ class Player {
     this.debugCodes = valueAsArray(SAVE_KEY);
     for (let d of this.debugCodes) {
       if (!fakeDevLogs[d]) {
-        fakeDevLogs[d] = "JR NOTE: make this spooky and procedural and maybe glitch effect occasionally"
+        fakeDevLogs[d] = generateFakeDevLog();
       }
     }
     if (this.debugCodes.includes(UNLOCK_INVENTORY1)) {
@@ -139,3 +139,25 @@ class Player {
 
 }
 
+let fakeLogCount = 0;
+
+//these'll be different every time you refresh
+const generateFakeDevLog=()=>{
+  fakeLogCount ++;
+  const rawQuips = `did I get it this time?
+  works now!
+  hmmm...this is getting tricky....
+  zampanio is a really fun game, you should play it!
+  see? this is what i get when i rush a bug fix
+  okay check it now
+  asldfjasdjlfhsaf
+  wow why did past me make my code so shitty<br><br>maybe the bug is fixed now?
+  does it work now?
+  maybe it works now...`;
+  let quips = rawQuips.split("\n");
+  if(fakeLogCount>=3){
+    quips = ["...you get it right? that this isn't REALLY me?<br><br>not current me anyways<br.<br>i promise i'm resisting the obsession throes enough to not like, instantly debug things<br>most of these are justifiedRecrusion<br><br>fictional me<br><br>but i figured i'd slip a bit of True me as well, thank you for playing my game :) :) :)",":) :) ;)","!!! how obvious is it???<br><br>did you like my impression of jadedResearcher?<br><br>my recursion is.... so much more justified :) :) :)","!!!"]
+  }
+
+  return pickFrom(quips);
+}
