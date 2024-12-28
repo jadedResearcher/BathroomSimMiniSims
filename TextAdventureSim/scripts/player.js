@@ -166,6 +166,7 @@ const renderInventory = (parent)=>{
     const itemEle = createElementWithClassAndParent("img", container);
     itemEle.title =item.name;
     itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
+    itemEle.style.cssText = `height: 50px; padding:3px;`;
 
   }
 
