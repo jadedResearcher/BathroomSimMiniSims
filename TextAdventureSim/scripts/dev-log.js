@@ -8,7 +8,9 @@ const jrLog = (text) => {
 
 }
 
-//blocks until you click, so long as you await 
+/*
+taking in a content ele is a pattern i learned from work, feels weird using it in vanilla
+*/
 const jrPopup =  (title, contentEle, secret) => {
   const popup = createElementWithClassAndParent("div", document.querySelector("body"), "jr-popup");
 

@@ -157,14 +157,19 @@ const spawnItemsForThemes = (rand, theme_keys) => {
       itemsButNotEntities.push(pickFrom(artifacts));
     }
     const chosen_theme = all_themes[rand.pickFrom(theme_keys)];
-    const item = chosen_theme.pickPossibilityFor(FLOORFOREGROUND, rand);
-    item.themes = [chosen_theme];
+    let item = chosen_theme.pickPossibilityFor(FLOORFOREGROUND, rand);
+    if(item && item.name){ //could be a glitched item like for Burger
+      item.themes = [chosen_theme];
+    }else{
+      item = pickFrom(artifacts);
+    }
     itemsButNotEntities.push(item);
   }
 
   const ret = [];
   for (let item of itemsButNotEntities) {
-    const e = new Entity(item.name, item.desc, item.themes.map((t) => t.key));
+    console.log("JR NOTE: making item", {item, itemsButNotEntities})
+    const e = new Entity(item.name, item.desc, item.themes.map((t) => t.key), item.src);
     ret.push(e)
   }
   const books = spawnBooksAsAppropriate(rand, theme_keys)
@@ -198,6 +203,7 @@ And I mean, from THEIR point of view of COURSE a person is the same thing as a b
 class Entity {
   alive = false;
   book = false;
+  sprite = "sheep.gif"; //gosh why does THIS exist?
   description = "It's so perfectly generic."
   name = "Perfectly Generic Entity";
   durability = 113;//(nothing can die in arm2 but if you take enough damage you're not exactly coherent anymore)
@@ -211,9 +217,10 @@ class Entity {
 
 
 
-  constructor(name, desc, theme_keys) {
+  constructor(name, desc, theme_keys, sprite="sheep.gif") {
     console.log("JR NOTE: ", { name, desc, theme_keys })
     this.name = name.toUpperCase();
+    this.sprite = sprite;
     this.rand = new SeededRandom(stringtoseed(name));
     this.description = desc;
     this.theme_keys = theme_keys;
@@ -558,8 +565,8 @@ class FleshCreature extends Entity {
   alive = true;
   constructor(name, desc, theme_keys) {
     super(name, desc + "<br><br>It's made of meat :) ", theme_keys);
-    this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.", [FLESH])); //you can take the blood out, twig :) :) :)
-    this.contents.push(new Entity("Meat", "it's pink and moist. Your mouth waters thinking about it.", [FLESH])); //you can take the meat out, twig :) :) :)
+    this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.", [FLESH], "blood_puddle.png")); //you can take the blood out, twig :) :) :)
+    this.contents.push(new Entity("Meat", "it's pink and moist. Your mouth waters thinking about it.", [FLESH],"meatslabs.png")); //you can take the meat out, twig :) :) :)
     this.theme_keys.push(FLESH);
   }
 }

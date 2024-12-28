@@ -123,7 +123,22 @@ class Player {
         const inventoryGame = createElementWithClassAndParent("div", parent);
         inventoryGame.style.padding = "31px"
         inventoryGame.style.background = "black"
-        inventoryGame.innerHTML = `<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Your name is SAM, and you are DOING YOUR VERY BEST to keep this Family together.&nbsp;</span></p>
+
+        const container = createElementWithClassAndParent("div", inventoryGame);
+        container.style.display="flex";
+        container.style.gap="31px;"
+
+        const startButton = createElementWithClassAndParent("button", container);
+        startButton.innerText = "BEGIN BONDING";//classic heir of blood baby
+        startButton.onclick = ()=>{
+          container.remove();
+          renderInventory(inventoryGame);
+        }
+
+        const intro = createElementWithClassAndParent("div", container);
+        intro.style.padding ="31px"
+
+        intro.innerHTML = `<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Your name is SAM, and you are DOING YOUR VERY BEST to keep this Family together.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Even though you didn&apos;t exactly ask for this.</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Your Big Bro has been.... Let&apos;s say, &apos;taking a nap&apos; for a few months now and so far no one is wise to your ruse.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Those freakin&apos; monsters that live in the mall have started sniffing around your business lately, some kind of feud with one of your, you mean your Big Bro&apos;s pet monsters. The one who is the backbone of your &quot;Addiction&quot; thread. ...</span><s><span style="font-size:11pt;font-family:Arial,sans-serif;">&nbsp;You try not to think about how you had to find out the bastard was your ex when you fully took over Family operations. &nbsp;John...</span></s></p>
@@ -131,6 +146,9 @@ class Player {
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">You offer the monsters an olive branch. Their leader apparently is one of the spooks that eliminates &apos;problems&apos; for the Family, and you&apos;ve always treated her right. Camille, you think it was? Or was it Camillia? Too many similar names these days and you are run too ragged to keep track of them.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">So yeah, olive branch. You&apos;re gonna get everybody attending the same party, at a high class club your Family owns, The Inventory, &nbsp;pull your strings, and get them actually TALKING to each other.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Ain&apos;t nobody kept a feud up once they&apos;re tried together, you always say.&nbsp;</span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;">Now let&apos;s see, who do you have here tonight at the Inventory.</span></p>`;
+
+
+        
         jrPopup("Inventory", inventoryGame);
       }
 
@@ -139,11 +157,25 @@ class Player {
 
 }
 
+const renderInventory = (parent)=>{
+  const container = createElementWithClassAndParent("div", parent);
+  container.style.display="flex";
+  container.style.gap="31px;"
+
+  for(let item of player.inventory){
+    const itemEle = createElementWithClassAndParent("img", container);
+    itemEle.title =item.name;
+    itemEle.src = "images/Walkabout/TopFloorObjects/" + item.sprite;
+
+  }
+
+}
+
 let fakeLogCount = 0;
 
 //these'll be different every time you refresh
-const generateFakeDevLog=()=>{
-  fakeLogCount ++;
+const generateFakeDevLog = () => {
+  fakeLogCount++;
   const rawQuips = `did I get it this time?
   works now!
   hmmm...this is getting tricky....
@@ -155,8 +187,8 @@ const generateFakeDevLog=()=>{
   does it work now?
   maybe it works now...`;
   let quips = rawQuips.split("\n");
-  if(fakeLogCount>=3){
-    quips = ["...you get it right? that this isn't REALLY me?<br><br>not current me anyways<br.<br>i promise i'm resisting the obsession throes enough to not like, instantly debug things<br>most of these are justifiedRecrusion<br><br>fictional me<br><br>but i figured i'd slip a bit of True me as well, thank you for playing my game :) :) :)",":) :) ;)","!!! how obvious is it???<br><br>did you like my impression of jadedResearcher?<br><br>my recursion is.... so much more justified :) :) :)","!!!"]
+  if (fakeLogCount >= 3) {
+    quips = ["...you get it right? that this isn't REALLY me?<br><br>not current me anyways<br.<br>i promise i'm resisting the obsession throes enough to not like, instantly debug things<br>most of these are justifiedRecrusion<br><br>fictional me<br><br>but i figured i'd slip a bit of True me as well, thank you for playing my game :) :) :)", ":) :) ;)", "!!! how obvious is it???<br><br>did you like my impression of jadedResearcher?<br><br>my recursion is.... so much more justified :) :) :)", "!!!"]
   }
 
   return pickFrom(quips);
