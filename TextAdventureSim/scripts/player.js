@@ -98,10 +98,13 @@ class Player {
   //nothing can die in nidhoggs apocalypse tho
   //so what happens instead?
   addToInventory = (entity) => {
+    console.log("JR NOTE: adding to inventory", {entity: entity.name, inventory:this.inventory})
     //no doubles
     let unique = true;
-    for (let item in this.inventory) {
+    for (let item of this.inventory) {
+      console.log("JR NOTE: is this the same as it? ", {item, inventoryItem: item.name,entity: entity.name})
       if (item.name === entity.name) {
+        console.log("JR NOTE: its in the inventory")
         unique = false;
       }
     }
@@ -176,6 +179,8 @@ const renderInventory = (parent)=>{
   for(let item of player.inventory){
     const itemEle = createElementWithClassAndParent("img", container);
     itemEle.title =item.name;
+    itemEle.classList.add(convertStringToClassFriendlyName(item.name));
+    itemEle.classList.add("inventory-item");
     itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
     itemEle.style.cssText = `height: 50px; padding:3px;`;
 
