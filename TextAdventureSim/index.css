@@ -131,6 +131,10 @@
 
 }
 
+.inventory-item-unselected{
+  opacity: 0.3;
+}
+
 .film-grain {
   animation: grain 0.5s steps(6) infinite;
 

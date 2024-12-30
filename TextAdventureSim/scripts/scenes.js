@@ -40,7 +40,6 @@ class Scene {
 //but not a scene with Sheep and Blood and Fire and Ria
 const getAllScenesWithEntities = (player) => {
   const inventoryNames = player.inventory.map((i) => i.name);
-  console.log("JR NOTE: getAllScenesWithEntities", { inventoryNames })
   const ret = [];
   for (let s of all_scenes) {
     let canAdd = true;
@@ -51,7 +50,6 @@ const getAllScenesWithEntities = (player) => {
     }
     canAdd && ret.push(s);
   }
-  console.log("JR NOTE: getAllScenesWithEntities", { ret })
 
   return ret;
 }
@@ -64,8 +62,8 @@ const convertScriptToScene = (title,script) => {
     const parts = line.split(":");
     const name = parts[0].trim();
     const text = parts.slice(1).join();//everything but the first bit becomes a string again
-    names.push(name);
-    lines.push({ name, line: text });
+    names.push(name.toUpperCase());
+    lines.push({ name: name.toUpperCase(), line: text });
   }
   names = uniq(names);
   new Scene(title,names, lines);

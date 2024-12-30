@@ -223,6 +223,15 @@ const renderInventory = (parent) => {
 const renderScenes = (ele, scenes, sceneIndex = 0) => {
   const scene = scenes[sceneIndex];
   if (scene) {
+    //downplay any entities not in this scene
+    //convertStringToClassFriendlyName
+    for(let item of player.inventory){
+      if(!scene.entityNames.includes(item.name)){
+        const ele = document.querySelector(`.${convertStringToClassFriendlyName(item.name)}`);
+        ele.classList.add("inventory-item-unselected");
+      }
+    }
+
     //display title
     ele.innerHTML = scene.title;
     //wait until click
