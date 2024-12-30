@@ -67,6 +67,7 @@ class Player {
   inventory;
   //what debug codes have you found and submitted, get these from localStorage
   debugCodes = [];
+  scenesSeen = [];//list of titles
 
   constructor() {
     this.loadFromLocalStorage();
@@ -75,7 +76,16 @@ class Player {
   //only your debug codes remain, because you're intended to start new runs every refresh
   loadFromLocalStorage = () => {
     console.log("JR NOTE: loading player progress")//gosh isn't it mysterious, what could it be loading (of course, if you're reading this you're literally seeing whats being loaded but i imagine if you're in the javascript console only its like... but if i refresh my progress is lost so is this glitched out too?)
-    this.debugCodes = valueAsArray(SAVE_KEY);
+    const loadObject = JSON.parse(localStorage.getItem(SAVE_KEY));
+
+    if (loadObject.debugCodes) {
+      this.debugCodes = loadObject.debugCodes;
+    }
+
+    if (loadObject.scenesSeen) {
+      this.scenesSeen = loadObject.scenesSeen;
+    }
+
     for (let d of this.debugCodes) {
       if (!fakeDevLogs[d]) {
         fakeDevLogs[d] = generateFakeDevLog();
@@ -89,7 +99,7 @@ class Player {
   //only your debug codes remain, because you're intended to start new runs every refresh
   saveToLocalStorage = () => {
     console.log("JR NOTE: saving player progress")
-    localStorage[SAVE_KEY] = JSON.stringify(uniq(this.debugCodes));
+    localStorage[SAVE_KEY] = JSON.stringify({ debugCodes: uniq(this.debugCodes), scenesSeen: uniq(this.scenesSeen) });
   }
 
   //sam does not care if its a person, place or thing he's stuffing into his greedy maw
@@ -98,11 +108,11 @@ class Player {
   //nothing can die in nidhoggs apocalypse tho
   //so what happens instead?
   addToInventory = (entity) => {
-    console.log("JR NOTE: adding to inventory", {entity: entity.name, inventory:this.inventory})
+    console.log("JR NOTE: adding to inventory", { entity: entity.name, inventory: this.inventory })
     //no doubles
     let unique = true;
     for (let item of this.inventory) {
-      console.log("JR NOTE: is this the same as it? ", {item, inventoryItem: item.name,entity: entity.name})
+      console.log("JR NOTE: is this the same as it? ", { item, inventoryItem: item.name, entity: entity.name })
       if (item.name === entity.name) {
         console.log("JR NOTE: its in the inventory")
         unique = false;
@@ -128,18 +138,18 @@ class Player {
         inventoryGame.style.background = "black"
 
         const container = createElementWithClassAndParent("div", inventoryGame);
-        container.style.display="flex";
-        container.style.gap="31px;"
+        container.style.display = "flex";
+        container.style.gap = "31px;"
 
         const startButton = createElementWithClassAndParent("button", container);
         startButton.innerText = "BEGIN BONDING";//classic heir of blood baby
-        startButton.onclick = ()=>{
+        startButton.onclick = () => {
           container.remove();
           renderInventory(inventoryGame);
         }
 
         const intro = createElementWithClassAndParent("div", container);
-        intro.style.padding ="31px"
+        intro.style.padding = "31px"
 
         intro.innerHTML = `<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Your name is SAM, and you are DOING YOUR VERY BEST to keep this Family together.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Even though you didn&apos;t exactly ask for this.</span></p>
@@ -151,7 +161,7 @@ class Player {
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Ain&apos;t nobody kept a feud up once they&apos;re tried together, you always say.&nbsp;</span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;">Now let&apos;s see, who do you have here tonight at the Inventory.</span></p>`;
 
 
-        
+
         jrPopup("Inventory", inventoryGame);
       }
 
@@ -160,29 +170,67 @@ class Player {
 
 }
 
-const renderInventory = (parent)=>{
+const renderInventory = (parent) => {
   const container = createElementWithClassAndParent("div", parent);
-  container.style.cssText=`display: flex;
+  container.style.cssText = `display: flex;
     flex-wrap: wrap;
     gap: 13px;
     height: 80%;
     overflow: auto;`;
 
-  const sceneText = createElementWithClassAndParent("div", parent);
-  sceneText.innerHTML = `<b>JR:</b>whoa whats this???`;
-  sceneText.style.cssText = `position: absolute;
-    bottom: 0px;
+  const sceneContainer = createElementWithClassAndParent("div", parent);
+  sceneContainer.style.cssText = `position: absolute;
+    bottom: 25px;
     height: 50px;
     background: black;
     width: 100%;`;
 
-  for(let item of player.inventory){
+  const sceneText = createElementWithClassAndParent("div", sceneContainer);
+  sceneText.innerHTML = `<b>JR:</b>whoa whats this???`;
+  sceneText.style.cssText = `background: rgb(196, 196, 196);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 13px;
+    border: 1px solid red;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bolder;
+    font-family: nunito;`
+
+
+
+  for (let item of player.inventory) {
     const itemEle = createElementWithClassAndParent("img", container);
-    itemEle.title =item.name;
+    itemEle.title = item.name;
     itemEle.classList.add(convertStringToClassFriendlyName(item.name));
     itemEle.classList.add("inventory-item");
     itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
     itemEle.style.cssText = `height: 50px; padding:3px;`;
+
+  }
+
+  const scenes = getAllScenesWithEntities(player);
+  if (scenes.length > 0) {
+    renderScenes(sceneText, scenes);
+  }
+
+}
+
+//for all scenes you have, render in order, do not loop
+//a scene handles highlighting its participants
+const renderScenes = (ele, scenes, sceneIndex = 0) => {
+  const scene = scenes[sceneIndex];
+  if (scene) {
+    //display title
+    ele.innerHTML = scene.title;
+    //wait until click
+    //display first line
+    //wait until click
+    //display next line till done
+    //wait untill click
+    //display next scene (call this with new index)
 
   }
 

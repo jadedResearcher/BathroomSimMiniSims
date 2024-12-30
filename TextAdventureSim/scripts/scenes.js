@@ -11,13 +11,15 @@ const all_scenes = [];
 
 class Scene {
   //just their names, not their objects
-  entityNames= [];
+  entityNames = [];
+  title = "???"
   //{name, text} pairs
   lines = [];
 
-  constructor(entityNames, lines){
+  constructor(title,entityNames, lines) {
     this.entityNames = entityNames;
     this.lines = lines;
+    this.title= title;
     all_scenes.push(this);
   }
 
@@ -36,23 +38,37 @@ class Scene {
 //if the inventory has Sheep and Blood and Fire
 //then a scene with Sheep and Blood would return, as well as Blood and Fire
 //but not a scene with Sheep and Blood and Fire and Ria
-const getAllScenesWithEntities = (entities)=>{
+const getAllScenesWithEntities = (player) => {
+  const inventoryNames = player.inventory.map((i) => i.name);
+  console.log("JR NOTE: getAllScenesWithEntities", { inventoryNames })
+  const ret = [];
+  for (let s of all_scenes) {
+    let canAdd = true;
+    for (let name of s.entityNames) {
+      if (!inventoryNames.includes(name.toUpperCase())) {
+        canAdd = false; //no way to set it back to true once youv'e decided its not valid
+      }
+    }
+    canAdd && ret.push(s);
+  }
+  console.log("JR NOTE: getAllScenesWithEntities", { ret })
 
+  return ret;
 }
 
-const convertScriptToScene =(script)=>{
+const convertScriptToScene = (title,script) => {
   //{name, text} pairs
-  const lines =[];
+  const lines = [];
   let names = [];
-  for(let line of script.split("/n")){
+  for (let line of script.split("\n")) {
     const parts = line.split(":");
-    const name = parts[0];
+    const name = parts[0].trim();
     const text = parts.slice(1).join();//everything but the first bit becomes a string again
     names.push(name);
-    lines.push(text);
+    lines.push({ name, line: text });
   }
   names = uniq(names);
-  new Scene(names, lines);
+  new Scene(title,names, lines);
 
 }
 
@@ -61,7 +77,7 @@ const convertStringToClassFriendlyName = (string) => {
   return string.replace(/[^a-z0-9]/g, function (s) {
     var c = s.charCodeAt(0);
     if (c == 32) return '-';
-    if (c >= 65 && c <= 90) return  s.toLowerCase();
+    if (c >= 65 && c <= 90) return s.toLowerCase();
     return '__' + ('000' + c.toString(16)).slice(-4);
   });
 }
@@ -71,13 +87,62 @@ const convertStringToClassFriendlyName = (string) => {
 /*
 ////////////////////////////SCRIPTS START HERE//////////////////////////////
 */
-
-convertScriptToScene(`Sheep: baaaa
+//http://knucklessux.com/InfoTokenReader/?search_term=pink
+//http://knucklessux.com/InfoTokenReader/?search_term=yellow
+//http://knucklessux.com/InfoTokenReader/?search_term=romance
+//http://knucklessux.com/InfoTokenReader/Bullshit/WordThoughts/
+convertScriptToScene("Test1",`Sheep: baaaa
   Blood: [exists]
   Sheep: baaaaaaaaaaaa!!!
   Blood: [leaves sheep]
   Sheep: ...
   Sheep: ...
   Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
+
+convertScriptToScene("Test2",`Sheep: baaaa
+    Sheep: baaaaaaaaaaaa!!!
+    Sheep: ...
+    Sheep: ...
+    Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
+
+convertScriptToScene("Test3",`Sheep: baaaa
+      Camille: [exists]
+      Sheep: baaaaaaaaaaaa!!!
+      Camille: :3
+      Sheep: ...
+      Sheep: ...
+      Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
+
+
+/*
+if hoon,devona neville and vik all are in inventory, Apoxalypz Byrd  is formed (its a band)
+
+meowloudly15 — Today at 8:21 PM
+Vik, ostensibly (they haven't shown up for practice in quite some time)
+^w^ — Today at 8:21 PM
+Apoxalypz Byrd 
+meowloudly15 — Today at 8:21 PM
+APOCALYPSE BYRD
+PERFECT
+Hoon and Vik still can't stand each other
+^w^ — Today at 8:21 PM
+Yeah, but like
+that's normal band stuff
+they still go for coffee after practice together
+meowloudly15 — Today at 8:21 PM
+It's not a radio thing this time it's just they frickin' hate each other
+
+~~~
+meowloudly15 — Today at 8:24 PM
+Ok hold on
+Lee: piano (canon)
+Hunter: trumpet (canon)
+Ria: vocals (inferred via Singing Machine)
+
+Hoon: DEATH METAL CLARINET
+Vik: drums
+Devona: bass guitar, saxophone
+Neville: theremin, mixing 
+Could Vik play the drums*/
 
 
