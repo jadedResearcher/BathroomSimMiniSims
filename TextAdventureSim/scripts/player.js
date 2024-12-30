@@ -185,13 +185,15 @@ const renderInventory = (parent) => {
     background: black;
     width: 100%;`;
 
+    //will have text and icon in it
   const sceneText = createElementWithClassAndParent("div", sceneContainer);
-  sceneText.innerHTML = `<b>JR:</b>whoa whats this???`;
   sceneText.style.cssText = `background: rgb(196, 196, 196);
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    display: block;
+    display: flex;
+    gap: 13px;
+    cursor: pointer;
     padding: 13px;
     border: 1px solid red;
     border-radius: 5px;
@@ -220,29 +222,22 @@ const renderInventory = (parent) => {
 
 //for all scenes you have, render in order, do not loop
 //a scene handles highlighting its participants
-const renderScenes = (ele, scenes, sceneIndex = 0) => {
+const renderScenes = async (ele, scenes, sceneIndex = 0) => {
+  ele.innerHTML = "";
   const scene = scenes[sceneIndex];
   if (scene) {
-    //downplay any entities not in this scene
-    //convertStringToClassFriendlyName
-    for(let item of player.inventory){
-      if(!scene.entityNames.includes(item.name)){
-        const ele = document.querySelector(`.${convertStringToClassFriendlyName(item.name)}`);
-        ele.classList.add("inventory-item-unselected");
-      }
+    //will return when its done showing all lines
+    await scene.renderSelf(ele,player);
+    player.scenesSeen.push(scene.title);
+    renderScenes(ele, scenes, sceneIndex+1);
+  }else{
+    const allCharacters = document.querySelectorAll(".inventory-item");
+    for(let char of allCharacters){
+      char.classList.remove("star");
+      char.classList.remove("inventory-item-unselected");
     }
-
-    //display title
-    ele.innerHTML = scene.title;
-    //wait until click
-    //display first line
-    //wait until click
-    //display next line till done
-    //wait untill click
-    //display next scene (call this with new index)
-
+    ele.innerHTML = "[THERE IS ONLY SILENCE][ALL SCENES WITNESSED]"
   }
-
 }
 
 let fakeLogCount = 0;

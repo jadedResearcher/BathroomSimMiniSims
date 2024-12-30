@@ -16,10 +16,10 @@ class Scene {
   //{name, text} pairs
   lines = [];
 
-  constructor(title,entityNames, lines) {
+  constructor(title, entityNames, lines) {
     this.entityNames = entityNames;
     this.lines = lines;
-    this.title= title;
+    this.title = title;
     all_scenes.push(this);
   }
 
@@ -28,8 +28,69 @@ class Scene {
   also find the entities (class name will be their name) in the document that map to whoever is currently speaking and give them a special class
   remove that class from everyone else
   */
-  renderSelf = (parent) => {
+  renderSelf = async (parent, player) => {
+    //downplay any entities not in this scene
     //convertStringToClassFriendlyName
+    for (let item of player.inventory) {
+      if (!this.entityNames.includes(item.name)) {
+        const ele = document.querySelector(`.${convertStringToClassFriendlyName(item.name)}`);
+        ele.classList.add("inventory-item-unselected");
+      }
+    }
+
+    const textElement = createElementWithClassAndParent("div", parent);
+    const iconElement = createElementWithClassAndParent("div", parent, "click-pulse");
+
+    //display title
+    textElement.innerHTML = `<u>${this.title}${player.scenesSeen.includes(this.title)?"":" (NEW!)"}</u>`;
+    const nextIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 0 24 24" width="12px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 1.56 4 4.92 4 9h7V1.07z"/></svg>`;
+    iconElement.innerHTML = nextIcon;
+    //wait until click
+    //display first line
+    //wait until click
+    //display next line till done
+    //wait untill click
+    //display next scene (call this with new index)
+
+    let resolveFunction;
+    let index = -1;
+
+    const showNextLine = ()=>{
+      console.log("JR NOTE: shownNextLine",index)
+      //if there is no next line, resolve the promise
+      if(index >= this.lines.length){
+        //done with this scene
+        const body = document.querySelector("body");
+        body.removeEventListener("click", showNextLine)
+        resolveFunction(true);
+        return;
+      }else{
+        if(index ===-1){
+          index++; //just show the title, for some reason the click is called AS this is rendered so its being skipped
+          return;
+        }
+        const line = this.lines[index];
+        console.log("JR NOTE: trying to show line: ", line)
+        const allCharacters = document.querySelectorAll(".inventory-item");
+        for(let char of allCharacters){
+          char.classList.remove("star");
+        }
+
+        const charEle = document.querySelector(`.${convertStringToClassFriendlyName(line.name)}`);
+        charEle && charEle.classList.add("star");
+        textElement.innerHTML = `${line.name}: ${line.text}`;
+        index ++;
+      }
+    }
+
+    const myPromise = new Promise((resolve, reject) => {
+      resolveFunction = resolve;
+      const body = document.querySelector("body");
+      body.addEventListener("click", showNextLine)
+    });
+  
+    return myPromise;
+
   }
 
 
@@ -54,7 +115,7 @@ const getAllScenesWithEntities = (player) => {
   return ret;
 }
 
-const convertScriptToScene = (title,script) => {
+const convertScriptToScene = (title, script) => {
   //{name, text} pairs
   const lines = [];
   let names = [];
@@ -63,10 +124,10 @@ const convertScriptToScene = (title,script) => {
     const name = parts[0].trim();
     const text = parts.slice(1).join();//everything but the first bit becomes a string again
     names.push(name.toUpperCase());
-    lines.push({ name: name.toUpperCase(), line: text });
+    lines.push({ name: name.toUpperCase(), text });
   }
   names = uniq(names);
-  new Scene(title,names, lines);
+  new Scene(title, names, lines);
 
 }
 
@@ -89,7 +150,7 @@ const convertStringToClassFriendlyName = (string) => {
 //http://knucklessux.com/InfoTokenReader/?search_term=yellow
 //http://knucklessux.com/InfoTokenReader/?search_term=romance
 //http://knucklessux.com/InfoTokenReader/Bullshit/WordThoughts/
-convertScriptToScene("Test1",`Sheep: baaaa
+convertScriptToScene("Test1", `Sheep: baaaa
   Blood: [exists]
   Sheep: baaaaaaaaaaaa!!!
   Blood: [leaves sheep]
@@ -97,13 +158,13 @@ convertScriptToScene("Test1",`Sheep: baaaa
   Sheep: ...
   Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
 
-convertScriptToScene("Test2",`Sheep: baaaa
+convertScriptToScene("Test2", `Sheep: baaaa
     Sheep: baaaaaaaaaaaa!!!
     Sheep: ...
     Sheep: ...
     Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
 
-convertScriptToScene("Test3",`Sheep: baaaa
+convertScriptToScene("Test3", `Sheep: baaaa
       Camille: [exists]
       Sheep: baaaaaaaaaaaa!!!
       Camille: :3
