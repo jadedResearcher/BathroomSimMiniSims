@@ -215,7 +215,7 @@ const renderInventory = (parent) => {
 
   const scenes = getAllScenesWithEntities(player);
   if (scenes.length > 0) {
-    renderScenes(sceneText, scenes);
+    renderScenes(sceneText, globalRand.shuffle(scenes));
   }
 
 }

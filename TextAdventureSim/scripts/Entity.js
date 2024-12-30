@@ -567,15 +567,26 @@ class Book extends Entity {
 }
 
 
+
 class FleshCreature extends Entity {
   alive = true;
   constructor(name, desc, theme_keys, sprite) {
     super(name, desc + "<br><br>It's made of meat :) ", theme_keys, sprite);
     this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.", [FLESH], "bloodpuddle.png")); //you can take the blood out, twig :) :) :)
-    this.contents.push(new Entity("Meat", "it's pink and moist. Your mouth waters thinking about it.", [FLESH],"meatslabs.png")); //you can take the meat out, twig :) :) :)
+    this.contents.push(new Entity("Meat", "It's pink and moist. Your mouth waters thinking about it.", [FLESH],"meatslabs.png")); //you can take the meat out, twig :) :) :)
     this.theme_keys.push(FLESH);
   }
 }
+
+class RotBeast extends FleshCreature {
+  alive = false;
+  constructor() {
+    super("[REDACTED]", "[REDACTED]", [CENSORSHIP], "redacted.gif");
+    this.contents.push(new Entity("[PULSING REDACTED]", "It's disgusting.", [FLESH, DECAY],"redacted.gif"));
+
+  }
+}
+
 
 /*
 yeah this is really starting to come together
