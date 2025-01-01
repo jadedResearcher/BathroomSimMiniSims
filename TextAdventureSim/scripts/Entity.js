@@ -78,18 +78,18 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
 }
 
 //specialThemeEntities technically not all are blorbos
-const spawnSpecialEntities = (rand, theme_keys)=>{
+const spawnSpecialEntities = (rand, theme_keys) => {
   const odds = 1.5; //not guaranteed but it shouldn't be terribly hard to find blorbos etc
   const ret = [];
   for (let i = 0; i < 3; i++) {
     const roll = rand.nextDouble();
     if (roll < odds) {
       const theme = rand.pickFrom(theme_keys);
-      if(specialThemeEntities[theme]){
+      if (specialThemeEntities[theme]) {
         const blorbo = rand.pickFrom(specialThemeEntities[theme]);//for example this could pick either devona, neville or eye killer for HUNTING
-        if(!player.inventory.map((i)=>i.name).includes(blorbo.name)){
-          console.log("JR NOTE: i think that blorbo is not already in my inventory", {inventory: player.inventory, blorbo})
-          ret.push(blorbo); 
+        if (!player.inventory.map((i) => i.name).includes(blorbo.name)) {
+          console.log("JR NOTE: i think that blorbo is not already in my inventory", { inventory: player.inventory, blorbo })
+          ret.push(blorbo);
         }
       }
     }
@@ -182,7 +182,7 @@ const spawnItemsForThemes = (rand, theme_keys) => {
     }
     const chosen_theme = all_themes[rand.pickFrom(theme_keys)];
     let item = chosen_theme.pickPossibilityFor(FLOORFOREGROUND, rand);
-    if(item && item.name){ //could be a glitched item like for Burger
+    if (item && item.name) { //could be a glitched item like for Burger
       item.themes = [chosen_theme];
       itemsButNotEntities.push(item);
     }
@@ -190,7 +190,7 @@ const spawnItemsForThemes = (rand, theme_keys) => {
 
   let ret = [];
   for (let item of itemsButNotEntities) {
-    console.log("JR NOTE: making item", {item, itemsButNotEntities})
+    console.log("JR NOTE: making item", { item, itemsButNotEntities })
     const e = new Entity(item.name, item.desc, item.themes.map((t) => t.key), item.src);
     ret.push(e)
   }
@@ -242,7 +242,7 @@ class Entity {
 
 
 
-  constructor(name, desc, theme_keys, sprite="sheep.gif") {
+  constructor(name, desc, theme_keys, sprite = "sheep.gif") {
     console.log("JR NOTE: ", { name, desc, theme_keys })
     this.name = name.toUpperCase();
     this.sprite = sprite;
@@ -509,9 +509,9 @@ class Entity {
 
     current_room = this;
     //if we have already picked this up AND its special(specialThemeEntities) (not generic), ignore it
-    for(let item of player.inventory){
-      if(item.special && this.contents.map((i)=>i).includes(item)){
-        removeItemOnce(this.contents,item)
+    for (let item of player.inventory) {
+      if (item.special && this.contents.map((i) => i).includes(item)) {
+        removeItemOnce(this.contents, item)
       }
     }
     return `<hr>You GO to the ${this.name}.<hr>` + this.look() + "<br><br>" + this.smell(parentEntity)
@@ -529,14 +529,14 @@ class Entity {
       if (parentEntity) {
         player.addToInventory(this);
         removeItemOnce(parentEntity.contents, this);
-      }else{
-        if(this.contents.length >0){
-          for(let c of this.contents){
+      } else {
+        if (this.contents.length > 0) {
+          for (let c of this.contents) {
             player.addToInventory(c);
           }
           this.contents = [];//empty now
           return "You take absolutely everything in this room, including some things you hadn't realized weren't nailed down.";
-        }else{
+        } else {
           return "There's nothing left to TAKE!";
         }
       }
@@ -556,7 +556,7 @@ class Entity {
     if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
       const code = player.debugCodes.includes(UNLOCK_GIVE) ? makeid(12) : UNLOCK_GIVE;
-      fakeDevLogs[code]="pending"; //so the bug report system validates it
+      fakeDevLogs[code] = "pending"; //so the bug report system validates it
       handleError(`[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`);
       throw `[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`
     }
@@ -568,7 +568,7 @@ class Entity {
     if (player.inventory && player.inventory.length > 0) {
       //if you already have gotten jr to try to fix it once, it starts breaking down into obvious fakeness :)
       const code = player.debugCodes.includes(UNLOCK_USE) ? makeid(12) : UNLOCK_USE;
-      fakeDevLogs[code]="pending"; //so the bug report system validates it
+      fakeDevLogs[code] = "pending"; //so the bug report system validates it
       handleError(`[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`);
       throw `[[ ERROR CODE: ${code} ]] AT ${new Error().stack}`
     }
@@ -605,17 +605,59 @@ class FleshCreature extends Entity {
   constructor(name, desc, theme_keys, sprite) {
     super(name, desc + "<br><br>It's made of meat :) ", theme_keys, sprite);
     this.contents.push(new Entity("Blood", "It's red and vibrant. Salty and Metallic. Blood.", [FLESH], "bloodpuddle.png")); //you can take the blood out, twig :) :) :)
-    this.contents.push(new Entity("Meat", "It's pink and moist. Your mouth waters thinking about it.", [FLESH],"meatslabs.png")); //you can take the meat out, twig :) :) :)
+    this.contents.push(new Entity("Meat", "It's pink and moist. Your mouth waters thinking about it.", [FLESH], "meatslabs.png")); //you can take the meat out, twig :) :) :)
+    this.contents.push(new Entity("Bone", "It's white and hard. Your mouth waters thinking about it.", [FLESH], "skeleton1.png")); //you can take the bones out, twig :) :) :)
+
     this.theme_keys.push(FLESH);
   }
 }
 
+class FireBeast extends FleshCreature {
+  alive = true;
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's made of fire :() ", theme_keys, sprite);
+    //singing , singeing whats the difference
+    this.contents.push(new Entity("Singing Flame", "It's hot.", [FIRE, MUSIC], "redacted.gif"));
+    this.theme_keys.push(FIRE);
+
+  }
+}
+
+class ShadowBeast extends Entity {
+  alive = true;
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's made of darkness... ", theme_keys, sprite);
+    //its not made of anything at all, no meat or bones or organs
+  }
+}
+
+
+class GooCreature extends Entity {
+  alive = true;
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's made of slime... ", theme_keys, sprite);
+    this.contents.push(new Entity("Goo Drone", "It is one of River's slime bodies, melted down.", [CRAFTING], "Science_Object.gif"));
+
+  }
+}
+
+
+class MechanicalBeast extends Entity {
+  alive = true;
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's made of metal... ", theme_keys, sprite);
+    this.theme_keys.push(ZAP);
+    this.theme_keys.push(TECHNOLOGY);
+    this.contents.push(new Entity("Machine Parts", "It's full of metal and electricity.", [ZAP, TECHNOLOGY], "printer.gif"));
+  }
+}
+
 class RotBeast extends FleshCreature {
-  alive = false;
+  alive = false; //:) :) :)
   constructor() {
     super("[REDACTED]", "[REDACTED]", [CENSORSHIP], "redacted.gif");
     //it is not just rotting meat, but you can't quite tell what it is
-    this.contents.push(new Entity("[PULSING REDACTED]", "It's disgusting.", [FLESH, DECAY, TWISTING],"redacted.gif"));
+    this.contents.push(new Entity("[PULSING REDACTED]", "It's disgusting.", [FLESH, DECAY, TWISTING], "redacted.gif"));
 
   }
 }
@@ -632,29 +674,124 @@ meanwhile the page of bloody breath gives freedom to something they maybe should
 
 new FleshCreature("name",
    "desc",
-   [ENDINGS, KILLING, QUESTING,LONELY],
+   [EN],
    "Blorbos/camille.png")
 */
 
 const CAMILLE = new FleshCreature("Camille",
   "She is the Lone Knight of Fated Death, the beloved Immune System of the Echidna.<br><br>If she finds Ria, they will merge together and become more powerful.<br><br>If she finds Peewee, she will kill him.<br><br>She tries to enjoy the Apocalypse, for Ria's sake, but it is hard not to lose her head.",
-  [ENDINGS, KILLING, QUESTING,LONELY],
+  [ENDINGS, KILLING, QUESTING, LONELY, DEATH],
   "Blorbos/camille.png");
 
 const VIK = new RotBeast("[Redacted]");
 
+const RIA = new FireBeast("Ria",
+  "She is the Burning Witch of Threaded Rage.<br><br>If she finds Camille, they will merge together and become even more dedicated to burning it all down."
+  , [FIRE, MUSIC, WEB, ADDICTION], "Blorbos/RiabyGuide.png")
 
+const LEE = new FleshCreature("LeeHunter1",
+  "LeeHunter play a trumpet that makes you older and a piano that makes you younger. They are always looking for new members of their Orchestra.",
+  [TIME, MUSIC, WEB, LONELY, ANGER],
+  "Blorbos/Lee_byGuide.png")
+
+const HUNTER = new FleshCreature("LeeHunter2",
+  "LeeHunter play a trumpet that makes you older and a piano that makes you younger. They are always looking for new members of their Orchestra.",
+  [TIME, MUSIC, WEB, LONELY, ANGER],
+  "Blorbos/Hunter_by_Guide.png")
+
+const NEVILLE = new FleshCreature("Neville",
+  "desc",
+  [HUNTING, OBFUSCATION, DARKNESS, SPYING, MATH],
+  "Blorbos/camille.png")
+
+const DEVONA = new FleshCreature("Devona",
+  "desc",
+  [HUNTING, KNOWING, LIGHT, SPYING, OBFUSCATION],
+  "Blorbos/camille.png")
+
+const EYEKILLER = new ShadowBeast("Eye Killer",
+  "She is the Killer of Stalking Time. Made of Shadows. You are either the hunter or the hunted.",
+  [KILLING, ART, TIME, DARKNESS],
+  "Blorbos/Eye_Killer_pixel_by_the_guide.png");
+
+  const YONGKI = new MechanicalBeast("Yongki",
+    "He is the Scholar of Strange Minds. He can not be defeated. He only wants to learn about the world and the wonders within it.",
+    [DOLL, CLOWNS, CHOICES, DEFENSE, FREEDOM],
+    "Blorbos/Yongki_byGuide.png"
+  );
+
+
+  //how obvious is it that the captain is fused with the All Around Helper (it sure is not obvious to him)
+  const CAPTAIN = new MechanicalBeast("Captain",
+    "He is the Watcher of Strange Hearts. He can not be defeated. He only wants to figure out who he is and what he must do.",
+    [TECHNOLOGY, SOUL, DEFENSE, SERVICE, GUIDING],
+    "Blorbos/Captain_by_guide.png"
+  );
+
+    const RIVER = new GooCreature("River",
+      "River is new and old and big and small. Nothing can really matter to her in the face of how insignificant it all is.<br><br>Time moves too quickly for her unless she listens to LeeHunter's music. ",
+      [SPACE, OCEAN, LONELY, MUSIC, ART, CRAFTING], //she is made of herself
+      "Blorbos/River_byGuide.png"
+    );
+
+
+/*importantly, these are NOT a 1:1 with the themes the characters have
+the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
+*/
 specialThemeEntities[ENDINGS] = [CAMILLE];
-specialThemeEntities[KILLING] = [CAMILLE];
-specialThemeEntities[QUESTING] = [CAMILLE];
-specialThemeEntities[LONELY] = [CAMILLE];
+specialThemeEntities[DEATH] = [CAMILLE];
+specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI];
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER,RIVER];
 specialThemeEntities[CENSORSHIP] = [VIK];
-specialThemeEntities[OBFUSCATION] = [VIK];
+specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA];
 specialThemeEntities[DECAY] = [VIK];
+specialThemeEntities[ART] = [EYEKILLER,RIVER];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN];
+specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
+specialThemeEntities[SPACE] = [RIVER];
+specialThemeEntities[OCEAN] = [RIVER];
+specialThemeEntities[FIRE] = [RIA];
+specialThemeEntities[FREEDOM] = [YONGKI];
+specialThemeEntities[STEALING] = [];
+specialThemeEntities[BURIED] = [RIVER];
+specialThemeEntities[FLESH] = [];
+specialThemeEntities[SCIENCE] = [];
+specialThemeEntities[MATH] = [NEVILLE];
+specialThemeEntities[TWISTING] = [];
+specialThemeEntities[DEATH] = [];
+specialThemeEntities[APOCALYPSE] = [];
+specialThemeEntities[ANGELS] = [];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN];
+specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
+specialThemeEntities[MAGIC] = [];
+specialThemeEntities[LIGHT] = [DEVONA];
+specialThemeEntities[HEALING] = [];
+specialThemeEntities[PLANTS] = [RIVER];
+specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER];
+specialThemeEntities[CHOICES] = [YONGKI];
+specialThemeEntities[ZAP] = [CAPTAIN];
+specialThemeEntities[LOVE] = [];
+specialThemeEntities[SOUL] = [CAPTAIN];
+specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN];
+specialThemeEntities[WEB] = [RIA, LEE, HUNTER];
+specialThemeEntities[ROYALTY] = [CAPTAIN]; //he is the only leader of a team that was DESIGNED for it
+specialThemeEntities[KNOWING] = [DEVONA];
+specialThemeEntities[GUIDING] = [CAPTAIN];
+specialThemeEntities[CRAFTING] = [RIVER];
+specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
+specialThemeEntities[BUGS] = [YONGKI];
+specialThemeEntities[ADDICTION] = [RIA];
+specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER];
+specialThemeEntities[CLOWNS] = [YONGKI];
+specialThemeEntities[DOLLS] = [YONGKI];
+specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
+specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER];
+specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN];
 
 //make sure they know they're special
-for(let arr of Object.values(specialThemeEntities)){
-  for(let obj of arr){
+for (let arr of Object.values(specialThemeEntities)) {
+  for (let obj of arr) {
     console.log("JR NOTE: making this as special", obj)
     obj.special = true;
   }
