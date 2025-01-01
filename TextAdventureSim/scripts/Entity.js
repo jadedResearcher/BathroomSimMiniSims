@@ -77,6 +77,20 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
   return ret;
 }
 
+/*
+one thing i find interesting is that if you have decided to pick a blorbo up you can no longer wander arund inside of them
+so you have to choose, for each blorbo in a run through, whether you want to explore them via sam or via twig
+*/
+
+/*
+and its interesting that....
+the Freedom/Breath aligned copy gives you this meaningless, dreamlike expereience free of everything but associations, bonds.  you might find neville inside devona because they are connected
+
+blood
+while the Binding/Blood aligned copy doubles down and gives you this incredibly rigid, pre-scripting sequence of the bonds a character has
+no matter how far twig runs, they still are defined by their bonds, even if its no longer strangling them
+*/
+
 //specialThemeEntities technically not all are blorbos
 const spawnSpecialEntities = (rand, theme_keys) => {
   const odds = 1.5; //not guaranteed but it shouldn't be terribly hard to find blorbos etc
