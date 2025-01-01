@@ -223,6 +223,11 @@ const renderInventory = (parent) => {
 //for all scenes you have, render in order, do not loop
 //a scene handles highlighting its participants
 const renderScenes = async (ele, scenes, sceneIndex = 0) => {
+  const allCharacters = document.querySelectorAll(".inventory-item");
+  for(let char of allCharacters){
+    char.classList.remove("star");
+    char.classList.remove("inventory-item-unselected");
+  }
   ele.innerHTML = "";
   const scene = scenes[sceneIndex];
   if (scene) {
@@ -231,11 +236,7 @@ const renderScenes = async (ele, scenes, sceneIndex = 0) => {
     player.scenesSeen.push(scene.title);
     renderScenes(ele, scenes, sceneIndex+1);
   }else{
-    const allCharacters = document.querySelectorAll(".inventory-item");
-    for(let char of allCharacters){
-      char.classList.remove("star");
-      char.classList.remove("inventory-item-unselected");
-    }
+
     ele.innerHTML = "[THERE IS ONLY SILENCE][ALL SCENES WITNESSED]"
   }
 }

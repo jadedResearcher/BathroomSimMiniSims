@@ -201,8 +201,7 @@ Camille: Does that scare you?
 [REDACTED]: Oh, it takes more than mere party tricks to unnerve me.
 [REDACTED]: Especially with, well... this.
 [REDACTED]
-Camille: That's good. I'd hate to do that to you.
-`);
+Camille: That's good. I'd hate to do that to you.`);
 
 convertScriptToScene("A Second Transcript: Part2", `[REDACTED]: You know, with how verbose your reports can be, I had expected you to blabber on a lot more than this.
 Camille: I have to write to compensate. Not too much, though. Otherwise, I tend to...
@@ -211,8 +210,7 @@ Camille: Lose my head.
 [REDACTED]: So not only can you speak, but you're not even funny.
 Camille: Ah.
 Camille: You hurt me, [REDACTED]tor.
-[REDACTED]: Fine, then. It was a decent gag, if that would please you to hear.
-`);
+[REDACTED]: Fine, then. It was a decent gag, if that would please you to hear.`);
 
 convertScriptToScene("A Second Transcript: Part3", `[REDACTED]: But enough of that. What is this place, pray tell?
 Camille: Good question.
@@ -233,8 +231,7 @@ Camille: Would you mind if I started with you, then?
 [REDACTED]: No. As uncivilized as I find your point, perhaps I see what you mean.
 [SHEATHES SWORD.]
 Camille: I knew I could trust you to understand.
-[SIGH.]
-  `);
+[SIGH.]`);
 
 
 convertScriptToScene("A Second Transcript: Part4", `[REDACTED]: So, tell me. What is it that you want? Surely it is not just to spit diatribe, threaten me, then wave your head around.
@@ -254,8 +251,7 @@ Camille: Doesn't it feel lonely? Those around us can choose to move on from all 
 Camille: It all makes us so... similar. Both cursed by monsters that no longer exist, both thrust into our role by circumstance. Both made to live by their tenets.
 Camille: That is why I'm asking you. The others may try, but they've been compromised. Presenting a united front is a complicated task when you can turn to your baser instincts at any moment. Besides, not everyone can make these decisions. They all need someone to look to for guidance.
 Camille: That is why we had a manager.
-[REDACTED]: Fuck off.
-`);
+[REDACTED]: Fuck off.`);
 
 convertScriptToScene("A Second Transcript: Part5", `Camille: [REDACTED]tor.
 Camille: The mission... I cannot accomplish it on my own. These civilians think all the research we have done is... silly. They think it's funny. They laughed at me. Laughed at me.
@@ -278,8 +274,7 @@ Camille: I thought we might have been friends.
 [REDACTED]: It doesn't, and we're not. It is not my duty or anyone else's to save everyone. I am angry, and I am tired. I did all that thankless work because I still hoped for a better life, and that was a ticket out. It is the story of everyone I have ever known. We have only ever been fodder. That is the fundamental truth of our world.
 [REDACTED]: Perhaps at one point you knew this as well. But clearly, you have forgotten.
 [REDACTED]: Play the knight, if you so wish. But know you are a brute at heart, eager to solve with steel what you cannot with words, and as much a monster as any of your friends. But unlike them, you took what imprisoned you and declared yourself warden.
-[REDACTED]: Know this was all your choice.
-`);
+[REDACTED]: Know this was all your choice.`);
 
 convertScriptToScene("A Second Transcript: Part6", `Camille: ...
 Camille: I don't get it. You can hear me.

@@ -11,6 +11,10 @@ const COMMAND_USE = "USE";
 const COMMAND_THINK = "THINK";
 const COMMAND_HELP = "HELP";
 
+//not guaranteed to have every theme, but will be keyed by theme and have an array of entities to spawn
+//look for [SETUP SPECIAL ENTITIES]
+const specialThemeEntities = {};
+
 //what are euphamisms for each action (NOT what functions do they call)
 const defaultActionMap = {}
 defaultActionMap[COMMAND_LOOK] = ["LOOK", "READ", "SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
@@ -593,3 +597,31 @@ yeah this is really starting to come together
 the webbed heir of blood connects wanda and the intern tightly, forces their pasts to bind them while using doc slaughter as a puppet
 meanwhile the page of bloody breath gives freedom to something they maybe should not have, something murderous
 */
+
+//[SETUP SPECIAL ENTITIES]
+/*
+
+new FleshCreature("name",
+   "desc",
+   [ENDINGS, KILLING, QUESTING,LONELY],
+   "Blorbos/camille.png")
+*/
+
+const CAMILLE = new FleshCreature("Camille",
+  "She is the Lone Knight of Fated Death, the beloved Immune System of the Echidna.<br><br>If she finds Ria, they will merge together and become more powerful.<br><br>If she finds Peewee, she will kill him.<br><br>She tries to enjoy the Apocalypse, for Ria's sake, but it is hard not to lose her head.",
+  [ENDINGS, KILLING, QUESTING,LONELY],
+  "Blorbos/camille.png");
+
+const VIK = new RotBeast("[Redacted]");
+
+specialThemeEntities[ENDINGS] = [CAMILLE];
+specialThemeEntities[KILLING] = [CAMILLE];
+specialThemeEntities[QUESTING] = [CAMILLE];
+specialThemeEntities[LONELY] = [CAMILLE];
+specialThemeEntities[CENSORSHIP] = [VIK];
+specialThemeEntities[OBFUSCATION] = [VIK];
+specialThemeEntities[DECAY] = [VIK];
+
+
+
+

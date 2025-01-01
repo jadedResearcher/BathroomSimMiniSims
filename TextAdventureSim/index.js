@@ -60,12 +60,6 @@ window.onload = async () => {
   const testObject = new FleshCreature("Sheep", "It's a hideous TIMEBEAST!  They taste great! <br><br>Before the Apocalypse, if you killed one, it would take you to a random time and location. <br><br>Lame...<br><br>Now, though, they have no power!<br><br>You are not even a little bit curious as to why! ", [TIME]);
   current_room.contents.push(testObject);
 
-  console.warn("JR NOTE: don't forget to spawn a system that puts blorbos in appropriately themed rooms, for now, auto spawn her")
-  const testBlorbo = new FleshCreature("Camille", "She is the Lone Knight of Fated Death, the beloved Immune System of the Echidna.<br><br>If she finds Ria, they will merge together and become more powerful.<br><br>If she finds Peewee, she will kill him.<br><br>She tries to enjoy the Apocalypse, for Ria's sake, but it is hard not to lose her head.", [ENDINGS, KILLING, QUESTING,LONELY],"Blorbos/camille.png");
-  current_room.contents.push(testBlorbo);
-
-  const testBlorbo2 = new RotBeast("[Redacted]");
-  current_room.contents.push(testBlorbo2);
 
   current_room.neighbors.push(makeChildEntity(rand, your_themes));
   current_room.neighbors.push(makeChildEntity(rand, your_themes));
