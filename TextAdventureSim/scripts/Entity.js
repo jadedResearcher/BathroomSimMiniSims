@@ -87,7 +87,8 @@ const spawnSpecialEntities = (rand, theme_keys) => {
       const theme = rand.pickFrom(theme_keys);
       if (specialThemeEntities[theme]) {
         const blorbo = rand.pickFrom(specialThemeEntities[theme]);//for example this could pick either devona, neville or eye killer for HUNTING
-        if (!player.inventory.map((i) => i.name).includes(blorbo.name)) {
+        console.log("JR NOTE: blorbo i'm checking if i already have is", blorbo)
+        if (blorbo && !player.inventory.map((i) => i.name).includes(blorbo.name)) {
           console.log("JR NOTE: i think that blorbo is not already in my inventory", { inventory: player.inventory, blorbo })
           ret.push(blorbo);
         }
@@ -690,49 +691,54 @@ const RIA = new FireBeast("Ria",
   , [FIRE, MUSIC, WEB, ADDICTION], "Blorbos/RiabyGuide.png")
 
 const LEE = new FleshCreature("LeeHunter1",
-  "LeeHunter play a trumpet that makes you older and a piano that makes you younger. They are always looking for new members of their Orchestra.",
-  [TIME, MUSIC, WEB, LONELY, ANGER],
+  "They are the Pages of Time Coruption. LeeHunter play a trumpet that makes you older and a piano that makes you younger. They are always looking for new members of their Orchestra.",
+  [TIME, MUSIC, WEB, LONELY, ANGER, DECAY],
   "Blorbos/Lee_byGuide.png")
 
 const HUNTER = new FleshCreature("LeeHunter2",
-  "LeeHunter play a trumpet that makes you older and a piano that makes you younger. They are always looking for new members of their Orchestra.",
-  [TIME, MUSIC, WEB, LONELY, ANGER],
+  "They are the Pages of Time Corruption. LeeHunter play a trumpet that makes you older and a piano that makes you younger. They are always looking for new members of their Orchestra.",
+  [TIME, MUSIC, WEB, LONELY, ANGER, DECAY],
   "Blorbos/Hunter_by_Guide.png")
 
 const NEVILLE = new FleshCreature("Neville",
-  "desc",
+  "The Bard of Hunting Night. If anything happens to Devona, he cracks.",
   [HUNTING, OBFUSCATION, DARKNESS, SPYING, MATH],
-  "Blorbos/camille.png")
+  "Blorbos/neville_twin_by_guide.png")
 
 const DEVONA = new FleshCreature("Devona",
-  "desc",
+  "The Bard of Hunting Day. If anything happens to Neville, she will stop at nothing for revenge.",
   [HUNTING, KNOWING, LIGHT, SPYING, OBFUSCATION],
-  "Blorbos/camille.png")
+  "Blorbos/devona_twin_by_guide.png")
 
 const EYEKILLER = new ShadowBeast("Eye Killer",
   "She is the Killer of Stalking Time. Made of Shadows. You are either the hunter or the hunted.",
   [KILLING, ART, TIME, DARKNESS],
   "Blorbos/Eye_Killer_pixel_by_the_guide.png");
 
-  const YONGKI = new MechanicalBeast("Yongki",
-    "He is the Scholar of Strange Minds. He can not be defeated. He only wants to learn about the world and the wonders within it.",
-    [DOLL, CLOWNS, CHOICES, DEFENSE, FREEDOM],
-    "Blorbos/Yongki_byGuide.png"
-  );
+const YONGKI = new MechanicalBeast("Yongki",
+  "He is the Scholar of Strange Minds. He can not be defeated. He only wants to learn about the world and the wonders within it.",
+  [DOLLS, CLOWNS, CHOICES, DEFENSE, FREEDOM],
+  "Blorbos/Yongki_byGuide.png"
+);
 
 
-  //how obvious is it that the captain is fused with the All Around Helper (it sure is not obvious to him)
-  const CAPTAIN = new MechanicalBeast("Captain",
-    "He is the Watcher of Strange Hearts. He can not be defeated. He only wants to figure out who he is and what he must do.",
-    [TECHNOLOGY, SOUL, DEFENSE, SERVICE, GUIDING],
-    "Blorbos/Captain_by_guide.png"
-  );
+//how obvious is it that the captain is fused with the All Around Helper (it sure is not obvious to him)
+const CAPTAIN = new MechanicalBeast("Captain",
+  "He is the Watcher of Strange Hearts. He can not be defeated. He only wants to figure out who he is and what he must do.",
+  [TECHNOLOGY, SOUL, DEFENSE, SERVICE, GUIDING],
+  "Blorbos/Captain_by_guide.png"
+);
 
-    const RIVER = new GooCreature("River",
-      "River is new and old and big and small. Nothing can really matter to her in the face of how insignificant it all is.<br><br>Time moves too quickly for her unless she listens to LeeHunter's music. ",
-      [SPACE, OCEAN, LONELY, MUSIC, ART, CRAFTING], //she is made of herself
-      "Blorbos/River_byGuide.png"
-    );
+const RIVER = new GooCreature("River",
+  "The Maid of Vast Space. River is new and old and big and small. Nothing can really matter to her in the face of how insignificant it all is.<br><br>Time moves too quickly for her unless she listens to LeeHunter's music. ",
+  [SPACE, OCEAN, LONELY, MUSIC, ART, CRAFTING], //she is made of herself
+  "Blorbos/River_byGuide.png"
+);
+
+const HOON = new FleshCreature("Hoon",
+  "The Prince of Slaughtered Breath. She has long since surrendered her freedom to make Judgements to the Radio. If it says to Kill, she simply will.",
+  [WEB, ROYALTY, KILLING, QUESTING, SERVICE],
+  "Blorbos/Hoon_by_guide.png")
 
 
 /*importantly, these are NOT a 1:1 with the themes the characters have
@@ -740,53 +746,53 @@ the eye killer is NOT a monster of family, but you can't understand her without 
 */
 specialThemeEntities[ENDINGS] = [CAMILLE];
 specialThemeEntities[DEATH] = [CAMILLE];
-specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER,RIVER];
+specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI,HOON];
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN,HOON];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER];
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA];
-specialThemeEntities[DECAY] = [VIK];
-specialThemeEntities[ART] = [EYEKILLER,RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN];
+specialThemeEntities[DECAY] = [VIK, LEE, HUNTER];
+specialThemeEntities[ART] = [EYEKILLER, RIVER];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN,HOON];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER];
 specialThemeEntities[OCEAN] = [RIVER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI];
+specialThemeEntities[FREEDOM] = [YONGKI,HOON];
 specialThemeEntities[STEALING] = [];
 specialThemeEntities[BURIED] = [RIVER];
 specialThemeEntities[FLESH] = [];
 specialThemeEntities[SCIENCE] = [];
 specialThemeEntities[MATH] = [NEVILLE];
 specialThemeEntities[TWISTING] = [];
-specialThemeEntities[DEATH] = [];
+specialThemeEntities[DEATH] = [CAMILLE];
 specialThemeEntities[APOCALYPSE] = [];
 specialThemeEntities[ANGELS] = [];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN,HOON];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
-specialThemeEntities[MAGIC] = [];
+specialThemeEntities[MAGIC] = [HOON];
 specialThemeEntities[LIGHT] = [DEVONA];
 specialThemeEntities[HEALING] = [];
 specialThemeEntities[PLANTS] = [RIVER];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER];
-specialThemeEntities[CHOICES] = [YONGKI];
+specialThemeEntities[CHOICES] = [YONGKI,HOON];
 specialThemeEntities[ZAP] = [CAPTAIN];
 specialThemeEntities[LOVE] = [];
 specialThemeEntities[SOUL] = [CAPTAIN];
 specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN];
-specialThemeEntities[WEB] = [RIA, LEE, HUNTER];
-specialThemeEntities[ROYALTY] = [CAPTAIN]; //he is the only leader of a team that was DESIGNED for it
+specialThemeEntities[WEB] = [RIA, LEE, HUNTER,HOON];
+specialThemeEntities[ROYALTY] = [CAPTAIN,HOON]; //captain is the only leader of a team that was DESIGNED for it
 specialThemeEntities[KNOWING] = [DEVONA];
-specialThemeEntities[GUIDING] = [CAPTAIN];
+specialThemeEntities[GUIDING] = [CAPTAIN,HOON];
 specialThemeEntities[CRAFTING] = [RIVER];
 specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
 specialThemeEntities[BUGS] = [YONGKI];
-specialThemeEntities[ADDICTION] = [RIA];
+specialThemeEntities[ADDICTION] = [RIA,HOON];
 specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER];
 specialThemeEntities[CLOWNS] = [YONGKI];
 specialThemeEntities[DOLLS] = [YONGKI];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
-specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER];
+specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER,HOON];
 specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN];
 
 //make sure they know they're special
