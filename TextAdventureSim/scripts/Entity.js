@@ -77,6 +77,26 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
   return ret;
 }
 
+//specialThemeEntities technically not all are blorbos
+const spawnSpecialEntities = (rand, theme_keys)=>{
+  const odds = 1.5; //not guaranteed but it shouldn't be terribly hard to find blorbos etc
+  const ret = [];
+  for (let i = 0; i < 3; i++) {
+    const roll = rand.nextDouble();
+    if (roll < odds) {
+      const theme = rand.pickFrom(theme_keys);
+      if(specialThemeEntities[theme]){
+        const blorbo = rand.pickFrom(specialThemeEntities[theme]);//for example this could pick either devona, neville or eye killer for HUNTING
+        if(!player.inventory.map((i)=>i.name).includes(blorbo.name)){
+          console.log("JR NOTE: i think that blorbo is not already in my inventory", {inventory: player.inventory, blorbo})
+          ret.push(blorbo); 
+        }
+      }
+    }
+  }
+  return uniq(ret);
+}
+
 //books have a random Fact inside them, mostly so that you can, in theory, read about Sam and Twig's backstories 
 //the Harvest's influence is spreading, even as she sleeps
 const spawnBooksAsAppropriate = (rand, theme_keys) => {
@@ -133,7 +153,7 @@ const spawnBooksAsAppropriate = (rand, theme_keys) => {
     renderSecret(secret, secretEle);
     ret.push({ name: "Secret Tome", src: `Artifacts/secret_book.gif`, themes: [OBFUSCATION], desc: "<br><hr><br>" + secretEle.innerHTML + "<br><hr><br>" });
   }
-  return ret;
+  return uniq(ret);
 }
 
 const spawnItemsForThemes = (rand, theme_keys) => {
@@ -168,7 +188,7 @@ const spawnItemsForThemes = (rand, theme_keys) => {
     }
   }
 
-  const ret = [];
+  let ret = [];
   for (let item of itemsButNotEntities) {
     console.log("JR NOTE: making item", {item, itemsButNotEntities})
     const e = new Entity(item.name, item.desc, item.themes.map((t) => t.key), item.src);
@@ -180,6 +200,9 @@ const spawnItemsForThemes = (rand, theme_keys) => {
     const e = new Book(item.name, item.desc, item.themes, item.src);
     ret.push(e)
   }
+
+  const blorbos = spawnSpecialEntities(rand, theme_keys);//already entity form
+  ret = ret.concat(blorbos);
   return ret;
 }
 
@@ -226,7 +249,6 @@ class Entity {
     this.rand = new SeededRandom(stringtoseed(name));
     this.description = desc;
     this.theme_keys = theme_keys;
-    this.rand = rand;
     this.syncDefaultFunctions();
   }
   //this will be the same every time i call this function (unless i refresh the page)
@@ -486,6 +508,12 @@ class Entity {
 
 
     current_room = this;
+    //if we have already picked this up AND its special(specialThemeEntities) (not generic), ignore it
+    for(let item of player.inventory){
+      if(item.special && this.contents.map((i)=>i).includes(item)){
+        removeItemOnce(this.contents,item)
+      }
+    }
     return `<hr>You GO to the ${this.name}.<hr>` + this.look() + "<br><br>" + this.smell(parentEntity)
   }
 
@@ -586,7 +614,8 @@ class RotBeast extends FleshCreature {
   alive = false;
   constructor() {
     super("[REDACTED]", "[REDACTED]", [CENSORSHIP], "redacted.gif");
-    this.contents.push(new Entity("[PULSING REDACTED]", "It's disgusting.", [FLESH, DECAY],"redacted.gif"));
+    //it is not just rotting meat, but you can't quite tell what it is
+    this.contents.push(new Entity("[PULSING REDACTED]", "It's disgusting.", [FLESH, DECAY, TWISTING],"redacted.gif"));
 
   }
 }
@@ -614,6 +643,7 @@ const CAMILLE = new FleshCreature("Camille",
 
 const VIK = new RotBeast("[Redacted]");
 
+
 specialThemeEntities[ENDINGS] = [CAMILLE];
 specialThemeEntities[KILLING] = [CAMILLE];
 specialThemeEntities[QUESTING] = [CAMILLE];
@@ -621,6 +651,14 @@ specialThemeEntities[LONELY] = [CAMILLE];
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK];
 specialThemeEntities[DECAY] = [VIK];
+
+//make sure they know they're special
+for(let arr of Object.values(specialThemeEntities)){
+  for(let obj of arr){
+    console.log("JR NOTE: making this as special", obj)
+    obj.special = true;
+  }
+}
 
 
 
