@@ -802,12 +802,12 @@ ic was describing her to me back in the day and i went "wow she is such an extin
 const APOCALYSE_CHICK = new FleshCreature("Apocalypse Chick",
   "<div class='rainbow-text' style='padding:31px;font-size:28px;'><a target='_blank' href ='http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Flower&data=N4IgdghgtgpiBcIAqALGACAYgGwPYHcYAnEAGhABMYBnASwHNIAXW3MBEAGQFoBVbgAwCALGRBFa1ANYcAgpwCiABQASYpmljUOAcVkBZAJIA5HaXQBGCwGZzmTgHkASrPMXzAdVkBlJArc25k4Kvi4mSObW7ugKABpIJgDCCQ7G5gBM6XYuyfLe5gCsdiayxon+loHoAEKODgAiAdZi1EwQTNqIcX5OxvKk1raG+kqyCQrGEQVFwfKGvoaJpFa2ibxOhg68+cLCpI4Amv2ZpBMKTjoKCUsrpDrGDt7zpAAcBWIwAB4QAMZM2ABPAD6GiIMBgINoAAdOlw+IIRGJaGBWsi-hxErgoFA2OZMdjceh8TiwHisSSyQT2ORkXR6CgmBjyYTiSzmaSiezKSSxO02j8ULAwIzEKyOWLuWyqZLqeIYFCwdQ6GwmdLOWqJeqKVqVeRWhAAEa0bC0JjA7AwABuMGwHAsYjBFCBVAAZjAUXBEAIAHTvcj4FCmiGu93UT0gH1+kAG7C-KTOmBuj0cSNiKEQC0JpNhu3egRIqD0IHUIg-DgMphQ+AAemrLogRCIEHouBdtD+rDA3p+WOrAC1oOmwKwVLh-sipHW8IQiN6oWB6C0mLgiMCqG1jbDvGh0BRcOgDRgobGAcj0JaARRWPRoDRvepofbEDx+EJhAByajobxtI0ms2cgArsKxC7rgNDoGAY67jAPxghAYYHgC6DIkwxC-CwbDoPgpooOg1CAQaABWsEdPe5AsFC6RyC6aFEOgY5oPREBQVAGa0BBKAQBQB7wQKMA8S6K7oBA6D0E2YA8cubTYAxLroG8u4QAC1DmC+CLCLxMC-GgPE9sKEDIkKTDkSAlHNIgsi0aB6lvugNA-BAUI0OYdFQMi7SdnJInYLJjGgSxWLsRBh49lo6DAW6CG0DGMDelggFEBoxA4mCrloLQ9H6n+prIRa1rYF+VBwdpYY8RQTaoo5vkAveAC+QA'>Oooooooh?</a> Observers? <br><br>What an honor!<br><br>Don't often see you guys in the fuuuuuun part of reality!<br><br>Decided to stop being so boooooooring, have you?<br><br>Well sit back! Take a load off!<br><br>God mode is enabled and you can no clip to your hearts content!<br><br>Welcome to my creative mode server!<br><br>I beeeeet you're here because of all those changes, huh!<br><br>Peewee getting all trapped by that Detective and all sure was surprising!<br><br>Don't wooooorrrrry!<br><br>I can just imagine the face you're making, lulz<br><br>I'm not going to stoooooop you.<br><br>You wanna stop my Apocalypse, go right ahead!<br><br>All that'll do is finally get me into the new game +!</div>",
   [APOCALYPSE, TWISTING, TECHNOLOGY, MATH, ADDICTION],
-  "Blorbos/flower_chick_by_the_guide.png")
+  "Blorbos/apocalypse_chick_by_guide.gif")
 
 
 const WIBBY = new FleshCreature("Witherby",
   "He is the Watching Sylph of Lonely Faith. He is the only adherent to a religion that didn't even really exist in his home universe. He is surprisingly good at getting people to open up to him.",
-  [ANGELS, KNOWING, LONELY,SERVICE, HEALING],
+  [ANGELS, KNOWING, LONELY, SERVICE, HEALING],
   "Blorbos/Thesolemn_by_guide.png");
 
 const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
@@ -816,15 +816,20 @@ const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
   "skull.png");
 WIBBY.contents.push(sin);
 
+const DOC_SLAUGHTER = new FleshCreature("White Nightengale",
+  "The Doctor of Hopeful <a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2FLyreBird%2FSuperSecretInformationKeepFromDocSlaughter%2F%2C&filter=doc'>Eyes</a>. Doctor Fiona Slaughter.<br><br> She loves being Watched (Hi Observers!!). She is supposed to offer a Final Mercy to any afflicted with eternal life. <br><br>She is not.<br><br>Her eye brims with tears. <br><br>She will not meet your gaze.<br><Br>She did not know she was a monster. She did not know she is meant to be the Final Boss of Zampanio.<br><br>The Choir of her chosen Disciples behind her can not console her.  ",
+  [ANGELS, KNOWING, SERVICE, HEALING, SPYING, APOCALYPSE],
+  "Blorbos/white_nightengale_by_guide_chosen.gif"); //the only one shown as breeched because she doesn't have a CHOICE. this is her life if its arm2.  actually cfo should be too, brb
+
 
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
 */
-specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK];
+specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK,DOC_SLAUGHTER];
 specialThemeEntities[DEATH] = [CAMILLE];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
 specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK,WIBBY];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT];
 specialThemeEntities[DECAY] = [VIK, LEE, HUNTER];
@@ -834,38 +839,38 @@ specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER];
 specialThemeEntities[OCEAN] = [RIVER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK,WIBBY];
+specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[STEALING] = [K, ALT];
-specialThemeEntities[BURIED] = [RIVER];
+specialThemeEntities[BURIED] = [RIVER,DOC_SLAUGHTER];
 specialThemeEntities[FLESH] = [ALT];
-specialThemeEntities[SCIENCE] = [];
-specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK,WIBBY];
+specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER];
+specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK];
-specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK];
-specialThemeEntities[ANGELS] = [WIBBY];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT,WIBBY];
+specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK,DOC_SLAUGHTER];
+specialThemeEntities[ANGELS] = [WIBBY,DOC_SLAUGHTER];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY,DOC_SLAUGHTER];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
 specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK];
-specialThemeEntities[LIGHT] = [DEVONA, K];
-specialThemeEntities[HEALING] = [WIBBY];
+specialThemeEntities[LIGHT] = [DEVONA, K,DOC_SLAUGHTER];
+specialThemeEntities[HEALING] = [WIBBY,DOC_SLAUGHTER];
 specialThemeEntities[PLANTS] = [RIVER];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER];
-specialThemeEntities[CHOICES] = [YONGKI, HOON];
+specialThemeEntities[CHOICES] = [YONGKI, HOON,DOC_SLAUGHTER];
 specialThemeEntities[ZAP] = [CAPTAIN];
-specialThemeEntities[LOVE] = [ALT,WIBBY];
-specialThemeEntities[SOUL] = [CAPTAIN, ALT];
+specialThemeEntities[LOVE] = [ALT, WIBBY,DOC_SLAUGHTER];
+specialThemeEntities[SOUL] = [CAPTAIN, ALT,DOC_SLAUGHTER];
 specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K];
 specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON];
 specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
-specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY];
-specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
+specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY,DOC_SLAUGHTER];
+specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K,DOC_SLAUGHTER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
 specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
 specialThemeEntities[BUGS] = [YONGKI];
 specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK];
-specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K];
+specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K,DOC_SLAUGHTER];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
-specialThemeEntities[DOLLS] = [YONGKI, ALT];
+specialThemeEntities[DOLLS] = [YONGKI, ALT,DOC_SLAUGHTER];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
 specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];
 specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT];

@@ -155,7 +155,9 @@ const renderList = (list) => {
       panicButton.innerText = "What's This? Do The Eyes Have Something To Show Me? A Secret?"
       panicButton.onclick = async () => {
         const doc = document.querySelector("#doc");
-        doc.src = "images/whitenightengale_by_guide.png";
+        if(doc){
+          doc.src = "images/whitenightengale_by_guide.png";
+        }
         await sleep(1000);
         const body = document.querySelector("body")
         body.innerHTML = "";
