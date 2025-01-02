@@ -754,60 +754,95 @@ const HOON = new FleshCreature("Hoon",
   [WEB, ROYALTY, KILLING, QUESTING, SERVICE],
   "Blorbos/Hoon_by_guide.png")
 
+//k KNOWS something is wrong with the world the Muse of Void provides, but in no arm (besides 13) does he quite no why
+const K = new MechanicalBeast("K",
+  "The Thief of Evershifting Light, he languishes out of the spotlight, all Eyes moving on as the Apocalypse consumes everything. Why aren't you looking at him? LOOK AT HIM.",
+  [TECHNOLOGY, LIGHT, STEALING, SPYING, KNOWING, TWISTING],
+  "Blorbos/Khana_pixel_by_the_guide.png"
+);
+//K is merged with schadenfreud, which turns into a killer robot if you look at it too much, thus why he's a mechanical beast
+
+
+const ALT = new FleshCreature("Alt",
+  "The Stranger of Fleshy Dreams. She looks like whoever she is interacting with... Inside of Truth's horridors, that means she looks like a maze. <br><br>She refuses to leave Truth, because she craves the certainty of the immortality the Apocalypse providdes.<br><br>She does not want to ever be alone again because everyone else has died.",
+  [FLESH, DOLLS, SERVICE, LONELY, APOCALYPSE],
+  "Blorbos/ALT_by_guide_of_hunters.png")
+
+//cfo is does not exist past arm1, much like wanda does not
+//but unlike wanda its because she breaches into her trickster form, the apocalpyse chick
+
+/*
+cfo breaches fully any time the apocalypse hits
+apocalypse chick is just.... trickster CFO
+she spends her whole existence terrified of apocalypse, she was literally DESIGNED to bring it about in her home universe, she works tirelessly to prevent it
+and her trickster arc is just "fixing" all her problems by deciding actually apocalypses are cooooool and why was she worrying about it so much? have fuuuuun, live a little
+ic was describing her to me back in the day and i went "wow she is such an extiniction avatar it burns" when infodumping about magnus archives to him
+*/
+
+//apocalypse chick, more than anyone else, rules arm2. 
+//a permeanently wasted, permanently trickster god of reality itself
+//is not a recipe for a stable narrative
+//she's BORED, the way you'd be bored if you already 100%ed skyrim and installed all the mods and cheats and bullshit you wanted but still for some reason couldn't stop playing
+//she is like wanda that way, the way she gets a thrill when something out of her control finally shows up
+//you.
+const APOCALYSE_CHICK = new FleshCreature("Apocalypse Chick",
+  "<a target='_blank' href ='http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Flower&data=N4IgdghgtgpiBcIAqALGACAYgGwPYHcYAnEAGhABMYBnASwHNIAXW3MBEAGQFoBVbgAwCALGRBFa1ANYcAgpwCiABQASYpmljUOAcVkBZAJIA5HaXQBGCwGZzmTgHkASrPMXzAdVkBlJArc25k4Kvi4mSObW7ugKABpIJgDCCQ7G5gBM6XYuyfLe5gCsdiayxon+loHoAEKODgAiAdZi1EwQTNqIcX5OxvKk1raG+kqyCQrGEQVFwfKGvoaJpFa2ibxOhg68+cLCpI4Amv2ZpBMKTjoKCUsrpDrGDt7zpAAcBWIwAB4QAMZM2ABPAD6GiIMBgINoAAdOlw+IIRGJaGBWsi-hxErgoFA2OZMdjceh8TiwHisSSyQT2ORkXR6CgmBjyYTiSzmaSiezKSSxO02j8ULAwIzEKyOWLuWyqZLqeIYFCwdQ6GwmdLOWqJeqKVqVeRWhAAEa0bC0JjA7AwABuMGwHAsYjBFCBVAAZjAUXBEAIAHTvcj4FCmiGu93UT0gH1+kAG7C-KTOmBuj0cSNiKEQC0JpNhu3egRIqD0IHUIg-DgMphQ+AAemrLogRCIEHouBdtD+rDA3p+WOrAC1oOmwKwVLh-sipHW8IQiN6oWB6C0mLgiMCqG1jbDvGh0BRcOgDRgobGAcj0JaARRWPRoDRvepofbEDx+EJhAByajobxtI0ms2cgArsKxC7rgNDoGAY67jAPxghAYYHgC6DIkwxC-CwbDoPgpooOg1CAQaABWsEdPe5AsFC6RyC6aFEOgY5oPREBQVAGa0BBKAQBQB7wQKMA8S6K7oBA6D0E2YA8cubTYAxLroG8u4QAC1DmC+CLCLxMC-GgPE9sKEDIkKTDkSAlHNIgsi0aB6lvugNA-BAUI0OYdFQMi7SdnJInYLJjGgSxWLsRBh49lo6DAW6CG0DGMDelggFEBoxA4mCrloLQ9H6n+prIRa1rYF+VBwdpYY8RQTaoo5vkAveAC+QA'>Oooooooh?</a> Observers? <br><br>What an honor!<br><br>Don't often see you guys in the fuuuuuun part of reality!<br><br>Decided to stop being so boooooooring, have you?<br><br>Well sit back! Take a load off!<br><br>God mode is enabled and you can no clip to your hearts content!<br><br>Welcome to my creative mode server!<br><br>I beeeeet you're here because of all those changes, huh!<br><br>Peewee getting all trapped by that Detective and all sure was surprising!<br><br>Don't wooooorrrrry!<br><br>I can just imagine the face you're making, lulz<br><br>I'm not going to stoooooop you.<br><br>You wanna stop my Apocalypse, go right ahead!<br><br>All that'll do is finally get me into the new game +!",
+  [APOCALYPSE, TWISTING,TECHNOLOGY, MATH,ADDICTION ],
+  "Blorbos/flower_chick_by_the_guide.png")
 
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
 */
-specialThemeEntities[ENDINGS] = [CAMILLE];
+specialThemeEntities[ENDINGS] = [CAMILLE,APOCALYSE_CHICK];
 specialThemeEntities[DEATH] = [CAMILLE];
-specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI,HOON];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN,HOON];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER];
+specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT,APOCALYSE_CHICK];
 specialThemeEntities[CENSORSHIP] = [VIK];
-specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA];
+specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT];
 specialThemeEntities[DECAY] = [VIK, LEE, HUNTER];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN,HOON];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K,APOCALYSE_CHICK];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER];
 specialThemeEntities[OCEAN] = [RIVER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI,HOON];
-specialThemeEntities[STEALING] = [];
+specialThemeEntities[FREEDOM] = [YONGKI, HOON,APOCALYSE_CHICK];
+specialThemeEntities[STEALING] = [K, ALT];
 specialThemeEntities[BURIED] = [RIVER];
-specialThemeEntities[FLESH] = [];
+specialThemeEntities[FLESH] = [ALT];
 specialThemeEntities[SCIENCE] = [];
-specialThemeEntities[MATH] = [NEVILLE];
-specialThemeEntities[TWISTING] = [];
+specialThemeEntities[MATH] = [NEVILLE,APOCALYSE_CHICK];
+specialThemeEntities[TWISTING] = [K,APOCALYSE_CHICK];
 specialThemeEntities[DEATH] = [CAMILLE];
-specialThemeEntities[APOCALYPSE] = [];
+specialThemeEntities[APOCALYPSE] = [ALT,APOCALYSE_CHICK];
 specialThemeEntities[ANGELS] = [];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN,HOON];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
-specialThemeEntities[MAGIC] = [HOON];
-specialThemeEntities[LIGHT] = [DEVONA];
+specialThemeEntities[MAGIC] = [HOON,APOCALYSE_CHICK];
+specialThemeEntities[LIGHT] = [DEVONA, K];
 specialThemeEntities[HEALING] = [];
 specialThemeEntities[PLANTS] = [RIVER];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER];
-specialThemeEntities[CHOICES] = [YONGKI,HOON];
+specialThemeEntities[CHOICES] = [YONGKI, HOON];
 specialThemeEntities[ZAP] = [CAPTAIN];
-specialThemeEntities[LOVE] = [];
-specialThemeEntities[SOUL] = [CAPTAIN];
-specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN];
-specialThemeEntities[WEB] = [RIA, LEE, HUNTER,HOON];
-specialThemeEntities[ROYALTY] = [CAPTAIN,HOON]; //captain is the only leader of a team that was DESIGNED for it
-specialThemeEntities[KNOWING] = [DEVONA];
-specialThemeEntities[GUIDING] = [CAPTAIN,HOON];
-specialThemeEntities[CRAFTING] = [RIVER];
+specialThemeEntities[LOVE] = [ALT];
+specialThemeEntities[SOUL] = [CAPTAIN, ALT];
+specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K];
+specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON];
+specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
+specialThemeEntities[KNOWING] = [DEVONA, K];
+specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
+specialThemeEntities[CRAFTING] = [RIVER, ALT,APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
 specialThemeEntities[BUGS] = [YONGKI];
-specialThemeEntities[ADDICTION] = [RIA,HOON];
-specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER];
-specialThemeEntities[CLOWNS] = [YONGKI];
-specialThemeEntities[DOLLS] = [YONGKI];
+specialThemeEntities[ADDICTION] = [RIA, HOON,APOCALYSE_CHICK];
+specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K];
+specialThemeEntities[CLOWNS] = [YONGKI,APOCALYSE_CHICK];
+specialThemeEntities[DOLLS] = [YONGKI, ALT];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
-specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER,HOON];
-specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN];
+specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];
+specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT];
 
 //make sure they know they're special
 for (let arr of Object.values(specialThemeEntities)) {
