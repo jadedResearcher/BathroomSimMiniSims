@@ -663,7 +663,6 @@ class MechanicalBeast extends Entity {
     super(name, desc + "<br><br>It's made of metal... ", theme_keys, sprite);
     this.theme_keys.push(ZAP);
     this.theme_keys.push(TECHNOLOGY);
-    this.contents.push(new Entity("Machine Parts", "It's full of metal and electricity.", [ZAP, TECHNOLOGY], "printer.gif"));
   }
 }
 
@@ -729,7 +728,7 @@ const EYEKILLER = new ShadowBeast("Eye Killer",
   [KILLING, ART, TIME, DARKNESS],
   "Blorbos/Eye_Killer_pixel_by_the_guide.png");
 
-const YONGKI = new MechanicalBeast("Yongki",
+const YONGKI = new FleshCreature("Yongki",
   "He is the Scholar of Strange Minds. He can not be defeated. He only wants to learn about the world and the wonders within it.",
   [DOLLS, CLOWNS, CHOICES, DEFENSE, FREEDOM],
   "Blorbos/Yongki_byGuide.png"
@@ -737,11 +736,18 @@ const YONGKI = new MechanicalBeast("Yongki",
 
 
 //how obvious is it that the captain is fused with the All Around Helper (it sure is not obvious to him)
-const CAPTAIN = new MechanicalBeast("Captain",
+const CAPTAIN = new FleshCreature("Captain",
   "He is the Watcher of Strange Hearts. He can not be defeated. He only wants to figure out who he is and what he must do.",
   [TECHNOLOGY, SOUL, DEFENSE, SERVICE, GUIDING],
   "Blorbos/Captain_by_guide.png"
 );
+const helper = new MechanicalBeast("All-Around Helper",
+  "Lurking inside Captain is the machine society has compressed him into. No feelings. No weakness. Only the desire to do as he's told. To HELP. He does not know this lurks within him. ",
+  [TECHNOLOGY, SERVICE],
+  "laundry.png"
+);
+CAPTAIN.contents.push(helper);
+
 
 const RIVER = new GooCreature("River",
   "The Maid of Vast Space. River is new and old and big and small. Nothing can really matter to her in the face of how insignificant it all is.<br><br>Time moves too quickly for her unless she listens to LeeHunter's music. ",
@@ -756,12 +762,19 @@ const HOON = new FleshCreature("Hoon",
 
 //k KNOWS something is wrong with the world the Muse of Void provides, but in no arm (besides 13) does he quite no why
 //also if i call him "K" he thinks any word with a K in it (including LOOK) is about him
-const K = new MechanicalBeast("Khana",
+const K = new FleshCreature("Khana",
   "The Thief of Evershifting Light, he languishes out of the spotlight, all Eyes moving on as the Apocalypse consumes everything. Why aren't you looking at him? LOOK AT HIM.",
   [TECHNOLOGY, LIGHT, STEALING, SPYING, KNOWING, TWISTING],
   "Blorbos/Khana_pixel_by_the_guide.png"
 );
-//K is merged with schadenfreud, which turns into a killer robot if you look at it too much, thus why he's a mechanical beast
+
+const schadenfreud = new MechanicalBeast("Schadenfreud",
+  "LookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMeLookAtMe",
+  [TECHNOLOGY, SPYING],
+  "eye6.png"
+);
+K.contents.push(schadenfreud);
+
 
 
 const ALT = new FleshCreature("Alt",
@@ -788,58 +801,70 @@ ic was describing her to me back in the day and i went "wow she is such an extin
 //you.
 const APOCALYSE_CHICK = new FleshCreature("Apocalypse Chick",
   "<div class='rainbow-text' style='padding:31px;font-size:28px;'><a target='_blank' href ='http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Flower&data=N4IgdghgtgpiBcIAqALGACAYgGwPYHcYAnEAGhABMYBnASwHNIAXW3MBEAGQFoBVbgAwCALGRBFa1ANYcAgpwCiABQASYpmljUOAcVkBZAJIA5HaXQBGCwGZzmTgHkASrPMXzAdVkBlJArc25k4Kvi4mSObW7ugKABpIJgDCCQ7G5gBM6XYuyfLe5gCsdiayxon+loHoAEKODgAiAdZi1EwQTNqIcX5OxvKk1raG+kqyCQrGEQVFwfKGvoaJpFa2ibxOhg68+cLCpI4Amv2ZpBMKTjoKCUsrpDrGDt7zpAAcBWIwAB4QAMZM2ABPAD6GiIMBgINoAAdOlw+IIRGJaGBWsi-hxErgoFA2OZMdjceh8TiwHisSSyQT2ORkXR6CgmBjyYTiSzmaSiezKSSxO02j8ULAwIzEKyOWLuWyqZLqeIYFCwdQ6GwmdLOWqJeqKVqVeRWhAAEa0bC0JjA7AwABuMGwHAsYjBFCBVAAZjAUXBEAIAHTvcj4FCmiGu93UT0gH1+kAG7C-KTOmBuj0cSNiKEQC0JpNhu3egRIqD0IHUIg-DgMphQ+AAemrLogRCIEHouBdtD+rDA3p+WOrAC1oOmwKwVLh-sipHW8IQiN6oWB6C0mLgiMCqG1jbDvGh0BRcOgDRgobGAcj0JaARRWPRoDRvepofbEDx+EJhAByajobxtI0ms2cgArsKxC7rgNDoGAY67jAPxghAYYHgC6DIkwxC-CwbDoPgpooOg1CAQaABWsEdPe5AsFC6RyC6aFEOgY5oPREBQVAGa0BBKAQBQB7wQKMA8S6K7oBA6D0E2YA8cubTYAxLroG8u4QAC1DmC+CLCLxMC-GgPE9sKEDIkKTDkSAlHNIgsi0aB6lvugNA-BAUI0OYdFQMi7SdnJInYLJjGgSxWLsRBh49lo6DAW6CG0DGMDelggFEBoxA4mCrloLQ9H6n+prIRa1rYF+VBwdpYY8RQTaoo5vkAveAC+QA'>Oooooooh?</a> Observers? <br><br>What an honor!<br><br>Don't often see you guys in the fuuuuuun part of reality!<br><br>Decided to stop being so boooooooring, have you?<br><br>Well sit back! Take a load off!<br><br>God mode is enabled and you can no clip to your hearts content!<br><br>Welcome to my creative mode server!<br><br>I beeeeet you're here because of all those changes, huh!<br><br>Peewee getting all trapped by that Detective and all sure was surprising!<br><br>Don't wooooorrrrry!<br><br>I can just imagine the face you're making, lulz<br><br>I'm not going to stoooooop you.<br><br>You wanna stop my Apocalypse, go right ahead!<br><br>All that'll do is finally get me into the new game +!</div>",
-  [APOCALYPSE, TWISTING,TECHNOLOGY, MATH,ADDICTION ],
+  [APOCALYPSE, TWISTING, TECHNOLOGY, MATH, ADDICTION],
   "Blorbos/flower_chick_by_the_guide.png")
+
+
+const WIBBY = new FleshCreature("Witherby",
+  "He is the Watching Sylph of Lonely Faith. He is the only adherent to a religion that didn't even really exist in his home universe. He is surprisingly good at getting people to open up to him.",
+  [ANGELS, KNOWING, LONELY,SERVICE, HEALING],
+  "Blorbos/Thesolemn_by_guide.png");
+
+const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
+  "Witherby's skull is literally an Abnormality that feasts on the sins of others without judgement. It whispers to him to secrets of a long dead religion called 'Catholicsm'. ",
+  [ANGELS, KNOWING, FLESH],
+  "skull.png");
+WIBBY.contents.push(sin);
+
 
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
 */
-specialThemeEntities[ENDINGS] = [CAMILLE,APOCALYSE_CHICK];
+specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK];
 specialThemeEntities[DEATH] = [CAMILLE];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
 specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT,APOCALYSE_CHICK];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK,WIBBY];
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT];
 specialThemeEntities[DECAY] = [VIK, LEE, HUNTER];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K,APOCALYSE_CHICK];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER];
 specialThemeEntities[OCEAN] = [RIVER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI, HOON,APOCALYSE_CHICK];
+specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK,WIBBY];
 specialThemeEntities[STEALING] = [K, ALT];
 specialThemeEntities[BURIED] = [RIVER];
 specialThemeEntities[FLESH] = [ALT];
 specialThemeEntities[SCIENCE] = [];
-specialThemeEntities[MATH] = [NEVILLE,APOCALYSE_CHICK];
-specialThemeEntities[TWISTING] = [K,APOCALYSE_CHICK];
-specialThemeEntities[DEATH] = [CAMILLE];
-specialThemeEntities[APOCALYPSE] = [ALT,APOCALYSE_CHICK];
-specialThemeEntities[ANGELS] = [];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT];
+specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK,WIBBY];
+specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK];
+specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK];
+specialThemeEntities[ANGELS] = [WIBBY];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT,WIBBY];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
-specialThemeEntities[MAGIC] = [HOON,APOCALYSE_CHICK];
+specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK];
 specialThemeEntities[LIGHT] = [DEVONA, K];
-specialThemeEntities[HEALING] = [];
+specialThemeEntities[HEALING] = [WIBBY];
 specialThemeEntities[PLANTS] = [RIVER];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER];
 specialThemeEntities[CHOICES] = [YONGKI, HOON];
 specialThemeEntities[ZAP] = [CAPTAIN];
-specialThemeEntities[LOVE] = [ALT];
+specialThemeEntities[LOVE] = [ALT,WIBBY];
 specialThemeEntities[SOUL] = [CAPTAIN, ALT];
 specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K];
 specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON];
 specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
-specialThemeEntities[KNOWING] = [DEVONA, K];
+specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY];
 specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
-specialThemeEntities[CRAFTING] = [RIVER, ALT,APOCALYSE_CHICK];
+specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
 specialThemeEntities[BUGS] = [YONGKI];
-specialThemeEntities[ADDICTION] = [RIA, HOON,APOCALYSE_CHICK];
+specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK];
 specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K];
-specialThemeEntities[CLOWNS] = [YONGKI,APOCALYSE_CHICK];
+specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
 specialThemeEntities[DOLLS] = [YONGKI, ALT];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
 specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];

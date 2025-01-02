@@ -289,6 +289,14 @@ Camille: I have to leave.
 [SIGH]
 [REDACTED]: Well. Time to wander.`);
 
+/*
+have scenes have optional [MEMORY] label if from arm1
+
+this lets me have wanda scenes, tho obviously they wont ever be playable, just easter eggs in code
+
+want eyedol games scenes about making eyedlr or other ganes
+*/
+
 
 
 /*
