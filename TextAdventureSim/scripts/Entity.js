@@ -816,6 +816,18 @@ const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
   "skull.png");
 WIBBY.contents.push(sin);
 
+/*
+she's not even trying to be cruel (by dating captain and seeing the Neighbor on the side)
+she just
+it doesn't even occur to her theres rules she's breaking
+and to be fair captain should have tried to lay out his expectations
+but the problem here
+the fundamental problem
+that the Neighbor is absolutely feasting on
+is that the both fiona and captain are strangers in a strange land, used to blindly conforming to things, but completely lost now that their "obvious normalness" is wrong for this world
+the "common sense" each is following is both completely wild to the other and to the universe they find themselves in
+the neighbor loves that they are the strange ones and not him
+*/
 const DOC_SLAUGHTER = new FleshCreature("White Nightengale",
   "The Doctor of Hopeful <a target='_blank' href='http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2FLyreBird%2FSuperSecretInformationKeepFromDocSlaughter%2F%2C&filter=doc'>Eyes</a>. Doctor Fiona Slaughter.<br><br> She loves being Watched (Hi Observers!!). She is supposed to offer a Final Mercy to any afflicted with eternal life. <br><br>She is not.<br><br>Her eye brims with tears. <br><br>She will not meet your gaze.<br><Br>She did not know she was a monster. She did not know she is meant to be the Final Boss of Zampanio.<br><br>The Choir of her chosen Disciples behind her can not console her.  ",
   [ANGELS, KNOWING, SERVICE, HEALING, SPYING, APOCALYPSE],

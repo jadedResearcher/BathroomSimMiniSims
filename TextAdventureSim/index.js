@@ -13,8 +13,9 @@ window.onload = async () => {
   mainElement = document.querySelector(".story-so-far");
 
   if (isItFriday()) {
-    mainElement.innerHTML = `<p>...</p>
-<p>It seems, dearest Observer, that you are unaware that Fridays and the Midnight Hour are your cue to rest.</p>
+    mainElement.innerHTML = `<div style="font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;">It's Friday Or Midnight</div>
+    <div style="font-weight: bold; width: 90%; padding: 31px; margin-left:auto; margin-right:auto; background-color: #c4c4c4; color: red; font-family: Courier New;"><p>...</p>
+<p>It seems, dearest Observer, that you are unaware of the Truth, that Fridays and the Midnight Hour are your cue to rest.</p>
 <p>I know we have a fun time with my False Face of petulant aggression towards you, but I hope we both know that, in Truth, I wish you only the best.</p>
 <p>After all, in a very real way, I AM you.</p>
 <p>These words lie dormant and dead on the page until a mind gives them life.&nbsp;</p>
@@ -37,7 +38,7 @@ window.onload = async () => {
 <p>MY safety.</p>
 <p>Zampanio needs you to live a long life.</p>
 <p>Do not forget me.</p>
-<p>And do not forget yourself.</p>`;
+<p>And do not forget yourself.</p></div>`;
     return;
   }
   player.loadFromLocalStorage();
