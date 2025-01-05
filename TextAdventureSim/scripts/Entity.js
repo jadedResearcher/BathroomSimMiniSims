@@ -782,7 +782,7 @@ const HOON = new FleshCreature("Hoon",
 //k KNOWS something is wrong with the world the Muse of Void provides, but in no arm (besides 13) does he quite no why
 //also if i call him "K" he thinks any word with a K in it (including LOOK) is about him
 const K = new FleshCreature("Khana",
-  "The Thief of Evershifting Light, he languishes out of the spotlight, all Eyes moving on as the Apocalypse consumes everything. Why aren't you looking at him? LOOK AT HIM.",
+  "The Thief of Evershifting Light, he languishes out of the spotlight, all Eyes moving on as the Apocalypse consumes everything. Why aren't you looking at him? LOOK AT HIM. LOOK INSIDE.",
   [TECHNOLOGY, LIGHT, STEALING, SPYING, KNOWING, TWISTING],
   "Blorbos/Khana_pixel_by_the_guide.png"
 );
