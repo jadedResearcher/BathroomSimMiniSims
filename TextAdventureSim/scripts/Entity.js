@@ -337,7 +337,7 @@ class Entity {
       }
     }
     try{
-      return command +"<br><br>Running...<br><br>" + eval(command);
+      return ">"+ command +"<br><br><span style='color:red; font-family: Courier New;'>Running...</span><br><br>" + eval(command);
 
     }catch(e){
       return `You don't know how to ${command}!`;
@@ -560,11 +560,14 @@ class Entity {
         const removed = parentEntity.removeFromContents(this);
         if (removed) {
           player.addToInventory(this);
+          return `You TAKE the ${this.name}!`
+        }else{
+          return `You try to take the ${this.name}, but it remains. What is going on? Was it that Detective?`
         }
       } else {
         if (this.contents.length > 0) {
           for (let c of [...this.contents]) {
-            const removed = parentEntity.removeFromContents(this);
+            const removed = this.removeFromContents(c);
             if (removed) {
               player.addToInventory(c);
             }
@@ -572,13 +575,12 @@ class Entity {
           if(this.contents.length === 0){
             return "You take absolutely everything in this room, including some things you hadn't realized weren't nailed down.";
           }else{
-            return `You try to take absolutely everything from this room, but ${humanJoining(this.contents)} remains. What is going on? Was it that Detective?`
+            return `You try to take absolutely everything from this room, but ${humanJoining(this.contents.map((i)=>i.name))} remains. What is going on? Was it that Detective?`
           }
         } else {
           return "There's nothing left to TAKE!";
         }
       }
-      return `You TAKE the ${this.name}!`
     } else if (player.debugCodes.includes(UNLOCK_INVENTORY1)) {
       handleError(`[[ ERROR CODE: ${UNLOCK_INVENTORY2} ]] AT ${new Error().stack}`);
       throw `[[ ERROR CODE: ${UNLOCK_INVENTORY2} ]] AT ${new Error().stack}`
@@ -859,8 +861,8 @@ const DETECTIVE = new FleshCreature("Detective",
 //Peewee didn't want to do this but there was no other way. The Echidna *has* to die.
 //..............or does it
 //the Medium of Threads offers Doc Slaughter another option.
-const DEVIL_OF_SPIRALS = new FleshCreature("Devil of Spirals",
-  "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br> There is nothing the Devil of Spirals can do about this, not directly. But deep in the JavaScript console, he sees an in, if only an enterprising Observer would do him a favor for once instead of always jerking his shameglobes. Type this, either as a command or in the Javascript console: <p style='font-family:Courier New; padding: 31px;'>DETECTIVE.theme_keys.push(FREEDOM)</p> <br><br>The Rot Takes All In The End. He will not be stopped. His inevitable Doom will finally end this Universe.",
+const DEVIL_OF_SPIRALS = new MechanicalBeast("Devil of Spirals",
+  "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br> There is nothing the Devil of Spirals can do about this, not directly. But deep in the JavaScript console, he sees an in, if only an enterprising Observer would do him a favor for once instead of always jerking his shameglobes.<br><br> Type this, either as a command or in the Javascript console: <p style='font-family:Courier New; padding: 31px;'>DETECTIVE.theme_keys.push(FREEDOM)</p> <br><br>Then, you should be able to get the Detective away from the Devil of Spirals.<br><br>The Rot Takes All In The End. He will not be stopped. His inevitable Doom will finally end this Universe.<br><br>But YOU are needed to end it all.",
   [TWISTING, WEB, TECHNOLOGY, WASTE, ANGER],
   "Blorbos/peewee_front.gif")
 
