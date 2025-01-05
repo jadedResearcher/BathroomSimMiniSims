@@ -865,6 +865,9 @@ const DEVIL_OF_SPIRALS = new MechanicalBeast("Devil of Spirals",
   "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br> There is nothing the Devil of Spirals can do about this, not directly. But deep in the JavaScript console, he sees an in, if only an enterprising Observer would do him a favor for once instead of always jerking his shameglobes.<br><br> Type this, either as a command or in the Javascript console: <p style='font-family:Courier New; padding: 31px;'>DETECTIVE.theme_keys.push(FREEDOM)</p> <br><br>Then, you should be able to get the Detective away from the Devil of Spirals.<br><br>The Rot Takes All In The End. He will not be stopped. His inevitable Doom will finally end this Universe.<br><br>But YOU are needed to end it all.",
   [TWISTING, WEB, TECHNOLOGY, WASTE, ANGER],
   "Blorbos/peewee_front.gif")
+  //theres no meat left inside arm2 peewee. ria and then Camiria burnt it all away
+  //only the metal remains
+  //http://farragofiction.com/Arm2/
 
 
 
