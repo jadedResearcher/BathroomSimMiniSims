@@ -107,7 +107,7 @@ const spawnSpecialEntities = (rand, theme_keys) => {
       }
     }
   }
-  if(ret.includes(DEVIL_OF_SPIRALS)){
+  if (ret.includes(DEVIL_OF_SPIRALS)) {
     ret.push(DETECTIVE)
   }
   return uniq(ret);
@@ -336,8 +336,13 @@ class Entity {
         return `>${command}<br><br>` + this.functionMap[key](parentEntity);
       }
     }
+    try{
+      return command +"<br><br>Running...<br><br>" + eval(command);
 
-    return "You don't know how to " + command + ".";
+    }catch(e){
+      return `You don't know how to ${command}!`;
+    }
+
 
   }
   //if these recurse, THEY are the parent, not their parent
@@ -539,19 +544,36 @@ class Entity {
     return `The ${this.name} doesn't seem to want to talk to you :(<br><br>That's okay though!<br><br>You don't need anyone.`;
   }
 
+  removeFromContents = (item) => {
+    //anywhere the detective is is a trap for anyone besides breath players
+    if(this.contents.includes(DETECTIVE) && !(item.theme_keys.includes(FREEDOM))){ 
+      return false;
+    }
+    removeItemOnce(this.contents, item);
+    return true;
+  }
+
 
   take = (parentEntity) => {
     if (player.debugCodes.includes(UNLOCK_INVENTORY2)) {
       if (parentEntity) {
-        player.addToInventory(this);
-        removeItemOnce(parentEntity.contents, this);
+        const removed = parentEntity.removeFromContents(this);
+        if (removed) {
+          player.addToInventory(this);
+        }
       } else {
         if (this.contents.length > 0) {
-          for (let c of this.contents) {
-            player.addToInventory(c);
+          for (let c of [...this.contents]) {
+            const removed = parentEntity.removeFromContents(this);
+            if (removed) {
+              player.addToInventory(c);
+            }
           }
-          this.contents = [];//empty now
-          return "You take absolutely everything in this room, including some things you hadn't realized weren't nailed down.";
+          if(this.contents.length === 0){
+            return "You take absolutely everything in this room, including some things you hadn't realized weren't nailed down.";
+          }else{
+            return `You try to take absolutely everything from this room, but ${humanJoining(this.contents)} remains. What is going on? Was it that Detective?`
+          }
         } else {
           return "There's nothing left to TAKE!";
         }
@@ -821,26 +843,26 @@ new FleshCreature("name",
 //http://farragofiction.com/MurderOnTheScorpiusExpressSim/
 //sorry detectivee
 //you're still needed
-//you can't escape the narrative quite yet
+//you can't escape the narrative quite yet, no pink frog for you
 //choke out every escape of the Witnesses' enemy
 //counter his glitches with your own
 const DETECTIVE = new FleshCreature("Detective",
-  "The Guiding Detective of Trapped Breath. His character portrait was never created before his game of origin was abandoned.<br><br> He escaped one claustrophobic bathroom only to find an infinitely spiralling one.<br><br>As long as he is in a room, no one can leave it.<br><br>Peewee is NOT happy about this.",
-  [FREEDOM, GUIDING, BURIED, HUNTING, DECAY, WASTE],
+  "The Guiding Detective of Trapped Breath. His character portrait was never created before his game of origin was abandoned.<br><br> He escaped one claustrophobic bathroom only to find an infinitely spiralling one.<br><br>As long as he is in a room, no one can leave it.<br><br>The Devil of Spirals is NOT happy about this.",
+  [GUIDING, BURIED, HUNTING, DECAY, WASTE], //he is breath, but there is no freedom within him. 
   "Blorbos/404.png")
 
-  //the Echidna universe is a fractal spiral of infinite universes layered on top of each other
-  //the Universe was not meant to be this way
-  //a thousand thousand copies of arm1, each with their own arm2 and arm 3 and arms spiralling out into infinity, each other with their own setting and premise.  Arm 1 is Zampanio. Arm2 is the Apocalypse. Arm3 is the Mundane Universe.  Arm4 is the one filled with Gods.  There's a Daemon Arm. A Fae one. A space one. A homestuck one. A space one a pirate one an enemies to lovers one a smutty one a puppet one a warriors cat one it goes forever and ever not just one but infinity. There's a warriors cat au where parker dies a warriors cats au where parker lives a warriors cats one where parker never botheres showing up do you see how far the spiral goes?
-  //the Witness watches them all.
-  //the twin universe of the Echidna, the :hatched_chick: can not grow up so long as all its memory is being eaten by its sibling
-  //Peewee didn't want to do this but there was no other way. The Echidna *has* to die.
-  //..............or does it
-  //the Medium of Threads offers Doc Slaughter another option.
-  const DEVIL_OF_SPIRALS = new FleshCreature("The Devil of Spirals",
-    "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br>The Rot Takes All In The End.",
-    [TWISTING, WEB, TECHNOLOGY, WASTE, ANGER],
-    "Blorbos/peewee_front.gif")
+//the Echidna universe is a fractal spiral of infinite universes layered on top of each other
+//the Universe was not meant to be this way
+//a thousand thousand copies of arm1, each with their own arm2 and arm 3 and arms spiralling out into infinity, each other with their own setting and premise.  Arm 1 is Zampanio. Arm2 is the Apocalypse. Arm3 is the Mundane Universe.  Arm4 is the one filled with Gods.  There's a Daemon Arm. A Fae one. A space one. A homestuck one. A space one a pirate one an enemies to lovers one a smutty one a puppet one a warriors cat one it goes forever and ever not just one but infinity. There's a warriors cat au where parker dies a warriors cats au where parker lives a warriors cats one where parker never botheres showing up do you see how far the spiral goes?
+//the Witness watches them all.
+//the twin universe of the Echidna, the :hatched_chick: can not grow up so long as all its memory is being eaten by its sibling
+//Peewee didn't want to do this but there was no other way. The Echidna *has* to die.
+//..............or does it
+//the Medium of Threads offers Doc Slaughter another option.
+const DEVIL_OF_SPIRALS = new FleshCreature("Devil of Spirals",
+  "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br> There is nothing the Devil of Spirals can do about this, not directly. But deep in the JavaScript console, he sees an in, if only an enterprising Observer would do him a favor for once instead of always jerking his shameglobes. Type this, either as a command or in the Javascript console: <p style='font-family:Courier New; padding: 31px;'>DETECTIVE.theme_keys.push(FREEDOM)</p> <br><br>The Rot Takes All In The End. He will not be stopped. His inevitable Doom will finally end this Universe.",
+  [TWISTING, WEB, TECHNOLOGY, WASTE, ANGER],
+  "Blorbos/peewee_front.gif")
 
 
 
@@ -874,56 +896,56 @@ the neighbor loves that they are the strange ones and not him
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
 */
-specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK,DOC_SLAUGHTER,DEVIL_OF_SPIRALS];
+specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS];
 specialThemeEntities[DEATH] = [CAMILLE];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON,DETECTIVE,DEVIL_OF_SPIRALS];
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT];
-specialThemeEntities[DECAY] = [VIK, LEE, HUNTER,DETECTIVE,DEVIL_OF_SPIRALS];
+specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK,DETECTIVE,DEVIL_OF_SPIRALS];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
-specialThemeEntities[SPACE] = [RIVER,DETECTIVE];//the detective is from a space setting
+specialThemeEntities[SPACE] = [RIVER, DETECTIVE];//the detective is from a space setting
 specialThemeEntities[OCEAN] = [RIVER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY,DETECTIVE,DEVIL_OF_SPIRALS];
+specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[STEALING] = [K, ALT];
-specialThemeEntities[BURIED] = [RIVER,DOC_SLAUGHTER,DETECTIVE];
+specialThemeEntities[BURIED] = [RIVER, DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[FLESH] = [ALT];
-specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER,DETECTIVE];
+specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
-specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK,DEVIL_OF_SPIRALS];
-specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK,DOC_SLAUGHTER,DEVIL_OF_SPIRALS];
-specialThemeEntities[ANGELS] = [WIBBY,DOC_SLAUGHTER,DEVIL_OF_SPIRALS];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY,DOC_SLAUGHTER,DETECTIVE,DEVIL_OF_SPIRALS];
+specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
+specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS];
+specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
-specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK,DEVIL_OF_SPIRALS];
-specialThemeEntities[LIGHT] = [DEVONA, K,DOC_SLAUGHTER];
-specialThemeEntities[HEALING] = [WIBBY,DOC_SLAUGHTER];
+specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
+specialThemeEntities[LIGHT] = [DEVONA, K, DOC_SLAUGHTER];
+specialThemeEntities[HEALING] = [WIBBY, DOC_SLAUGHTER];
 specialThemeEntities[PLANTS] = [RIVER];
-specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER,DETECTIVE];
-specialThemeEntities[CHOICES] = [YONGKI, HOON,DOC_SLAUGHTER,DETECTIVE];
-specialThemeEntities[ZAP] = [CAPTAIN,DEVIL_OF_SPIRALS];
-specialThemeEntities[LOVE] = [ALT, WIBBY,DOC_SLAUGHTER];
-specialThemeEntities[SOUL] = [CAPTAIN, ALT,DOC_SLAUGHTER];
-specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K,DETECTIVE,DEVIL_OF_SPIRALS];
-specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON,DEVIL_OF_SPIRALS];
+specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER, DETECTIVE];
+specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE];
+specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS];
+specialThemeEntities[LOVE] = [ALT, WIBBY, DOC_SLAUGHTER];
+specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER];
+specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K, DETECTIVE, DEVIL_OF_SPIRALS];
+specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS];
 specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
-specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY,DOC_SLAUGHTER,DETECTIVE];
-specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K,DOC_SLAUGHTER,DETECTIVE]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
+specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE];
+specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K, DOC_SLAUGHTER, DETECTIVE]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
 specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
-specialThemeEntities[BUGS] = [YONGKI,DEVIL_OF_SPIRALS]; //the worm squirming towardss the echidnas heart, prepared to kill it
+specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS]; //the worm squirming towardss the echidnas heart, prepared to kill it
 specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK];
-specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K,DOC_SLAUGHTER,DETECTIVE];
+specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K, DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
-specialThemeEntities[DOLLS] = [YONGKI, ALT,DOC_SLAUGHTER];
+specialThemeEntities[DOLLS] = [YONGKI, ALT, DOC_SLAUGHTER];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
 specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];
-specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS,DETECTIVE];
-specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT,DETECTIVE];
+specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE];
+specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT, DETECTIVE];
 
 //make sure they know they're special
 for (let arr of Object.values(specialThemeEntities)) {
