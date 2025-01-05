@@ -684,13 +684,7 @@ meanwhile the page of bloody breath gives freedom to something they maybe should
 */
 
 //[SETUP SPECIAL ENTITIES]
-/*
 
-new FleshCreature("name",
-   "desc",
-   [EN],
-   "Blorbos/camille.png")
-*/
 
 const CAMILLE = new FleshCreature("Camille",
   "She is the Lone Knight of Fated Death, the beloved Immune System of the Echidna.<br><br>If she finds Ria, they will merge together and become more powerful.<br><br>If she finds Peewee, she will kill him.<br><br>She tries to enjoy the Apocalypse, for Ria's sake, but it is hard not to lose her head.",
@@ -817,6 +811,22 @@ const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
 WIBBY.contents.push(sin);
 
 /*
+new FleshCreature("name",
+   "desc",
+   [EN],
+   "Blorbos/camille.png")
+*/
+
+//http://farragofiction.com/MurderOnTheScorpiusExpressSim/
+//sorry detectivee
+//you're still needed
+//you can't escape the narrative quite yet
+const DETECTIVE = new FleshCreature("Detective",
+  "The Guiding Detective of Trapped Breath. His character portrait was never created before his game of origin was abandoned.<br><br> He escaped one claustrophobic bathroom only to find an infinitely spiralling one.<br><br>As long as he is in a room, no one can leave it.<br><br>Peewee is NOT happy about this.",
+  [FREEDOM, GUIDING, BURIED, HUNTING, DECAY],
+  "Blorbos/404.png")
+
+/*
 she's not even trying to be cruel (by dating captain and seeing the Neighbor on the side)
 she just
 it doesn't even occur to her theres rules she's breaking
@@ -840,52 +850,52 @@ the eye killer is NOT a monster of family, but you can't understand her without 
 specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK,DOC_SLAUGHTER];
 specialThemeEntities[DEATH] = [CAMILLE];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON];
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON,DETECTIVE];
 specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT];
-specialThemeEntities[DECAY] = [VIK, LEE, HUNTER];
+specialThemeEntities[DECAY] = [VIK, LEE, HUNTER,DETECTIVE];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK,DETECTIVE];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
-specialThemeEntities[SPACE] = [RIVER];
+specialThemeEntities[SPACE] = [RIVER,DETECTIVE];//the detective is from a space setting
 specialThemeEntities[OCEAN] = [RIVER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY];
+specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY,DETECTIVE];
 specialThemeEntities[STEALING] = [K, ALT];
-specialThemeEntities[BURIED] = [RIVER,DOC_SLAUGHTER];
+specialThemeEntities[BURIED] = [RIVER,DOC_SLAUGHTER,DETECTIVE];
 specialThemeEntities[FLESH] = [ALT];
-specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER];
+specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER,DETECTIVE];
 specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK];
 specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK,DOC_SLAUGHTER];
 specialThemeEntities[ANGELS] = [WIBBY,DOC_SLAUGHTER];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY,DOC_SLAUGHTER];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY,DOC_SLAUGHTER,DETECTIVE];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
 specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK];
 specialThemeEntities[LIGHT] = [DEVONA, K,DOC_SLAUGHTER];
 specialThemeEntities[HEALING] = [WIBBY,DOC_SLAUGHTER];
 specialThemeEntities[PLANTS] = [RIVER];
-specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER];
-specialThemeEntities[CHOICES] = [YONGKI, HOON,DOC_SLAUGHTER];
+specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER,DETECTIVE];
+specialThemeEntities[CHOICES] = [YONGKI, HOON,DOC_SLAUGHTER,DETECTIVE];
 specialThemeEntities[ZAP] = [CAPTAIN];
 specialThemeEntities[LOVE] = [ALT, WIBBY,DOC_SLAUGHTER];
 specialThemeEntities[SOUL] = [CAPTAIN, ALT,DOC_SLAUGHTER];
-specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K];
+specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K,DETECTIVE];
 specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON];
 specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
-specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY,DOC_SLAUGHTER];
-specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K,DOC_SLAUGHTER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
+specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY,DOC_SLAUGHTER,DETECTIVE];
+specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K,DOC_SLAUGHTER,DETECTIVE]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
 specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
 specialThemeEntities[BUGS] = [YONGKI];
 specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK];
-specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K,DOC_SLAUGHTER];
+specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K,DOC_SLAUGHTER,DETECTIVE];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
 specialThemeEntities[DOLLS] = [YONGKI, ALT,DOC_SLAUGHTER];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
 specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];
-specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT];
+specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT,DETECTIVE];
 
 //make sure they know they're special
 for (let arr of Object.values(specialThemeEntities)) {
