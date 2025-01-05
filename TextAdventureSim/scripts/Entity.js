@@ -101,13 +101,14 @@ const spawnSpecialEntities = (rand, theme_keys) => {
       const theme = rand.pickFrom(theme_keys);
       if (specialThemeEntities[theme]) {
         const blorbo = rand.pickFrom(specialThemeEntities[theme]);//for example this could pick either devona, neville or eye killer for HUNTING
-        console.log("JR NOTE: blorbo i'm checking if i already have is", blorbo)
         if (blorbo && !player.inventory.map((i) => i.name).includes(blorbo.name)) {
-          console.log("JR NOTE: i think that blorbo is not already in my inventory", { inventory: player.inventory, blorbo })
           ret.push(blorbo);
         }
       }
     }
+  }
+  if(ret.includes(DEVIL_OF_SPIRALS)){
+    ret.push(DETECTIVE)
   }
   return uniq(ret);
 }
@@ -821,9 +822,11 @@ new FleshCreature("name",
 //sorry detectivee
 //you're still needed
 //you can't escape the narrative quite yet
+//choke out every escape of the Witnesses' enemy
+//counter his glitches with your own
 const DETECTIVE = new FleshCreature("Detective",
   "The Guiding Detective of Trapped Breath. His character portrait was never created before his game of origin was abandoned.<br><br> He escaped one claustrophobic bathroom only to find an infinitely spiralling one.<br><br>As long as he is in a room, no one can leave it.<br><br>Peewee is NOT happy about this.",
-  [FREEDOM, GUIDING, BURIED, HUNTING, DECAY],
+  [FREEDOM, GUIDING, BURIED, HUNTING, DECAY, WASTE],
   "Blorbos/404.png")
 
   //the Echidna universe is a fractal spiral of infinite universes layered on top of each other
@@ -919,7 +922,7 @@ specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
 specialThemeEntities[DOLLS] = [YONGKI, ALT,DOC_SLAUGHTER];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
 specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];
-specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
+specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS,DETECTIVE];
 specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT,DETECTIVE];
 
 //make sure they know they're special
