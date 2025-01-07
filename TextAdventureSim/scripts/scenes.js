@@ -289,6 +289,81 @@ Camille: I have to leave.
 [SIGH]
 [REDACTED]: Well. Time to wander.`);
 
+convertScriptToScene(`[ARM1]
+Devona: Neville, pull over.
+[Neville continues staring at the horizon]
+Devona: Neville, we gotta switch out.
+Neville: Huh?
+Devona: We gotta take the next exit to get charged.
+Neville: Oh, sure :)
+Devona: Camille, did you still want to practice driving in cities?
+Camille: :3 
+Ria: I can take a turn if you need me to. 
+Devona: ...
+Devona: ... 
+Devona: ...
+Devona: "General Motors streetcar conspiracy"
+[Temperature in the Car goes up by ten degrees]
+Ria: ...
+Ria: [small voice] yeah okay`)
+
+convertScriptToScene(`[ARM1]
+Ria: Devona, do you have a minute?
+Ria: I'd like to talk about the route you and Neville have planned out...
+Devona: Yeah?
+Ria:...
+Ria: well...
+Ria: It's just...
+Ria: Can't we get to the Anomalous Highway in half the time if we don't...
+Ria: Stop at every charging station?
+Neville: If we run out of electricity we'll be stranded though...
+Camille: :(
+Witherby: I hear what you're saying Ria, and I agree, but I think it's important to focus on the fact that we have literally no rush here.
+Ria: Okay, then...
+Ria: Why don't we come back in a decade when the charging stations are more common?
+Devona: Well! Well! You see! i thought, and I mean maybe this is just me but I thought maybe it would be nice to get out of the Mall, see the sights, you know, maybe bond a little bit because I mean, again , maybe this i just me but.... 
+Neville: We don't hang out much anymore :(
+Neville: Ever since you guys got back together...
+Neville: And did what you did in front of Wibby's Salad.
+Ria:...
+[Temperature in the Car goes up by ten degrees]
+Ria: ...
+Ria: [small voice] yeah okay`)
+
+convertScriptToScene(`[ARM1]
+Devona: Wow.
+Neville: ...
+Ria: ...
+Witherby: ...
+Camille: :3
+Devona: Did anyone else not expect the Anomalous Highway to be part of ZWorld?
+Neville: ...
+Ria: ...
+Camille: :3
+Witherby: I'll make some phone calls.
+`)
+
+convertScriptToScene(`[ARM1]
+Devona: Ummmmm....
+Devona: Ria?
+Ria: Yes?
+Devona: Could you maybe...
+Devona: Um could you maybe if its not too much trouble, i mean i don't want to put you out but I was wondering if-
+Neville: Is anyone else really hot in here?
+[Temperature in the Car goes up by ten degrees]
+Ria:... oh no I'm so sorry I didn't mean to I was just thinking about how the Corporate Overlords literally destroyed the public transit system, this isn't even a conspiracy they were found guilty in a court of law and-
+Neville: Wibby?
+[Egregious Display of Public Affection Directed At Witherby That Barely Qualifies as Better Kept Private]
+[Temperature in the Car goes down by thirty degrees]
+Witherby : [blushing] This is hardly appropriate, Neville.
+Witherby: I am hardly the team air conditioner. 
+Witherby: And Ria is equally more than just the heat she provides. 
+Ria: [small voice] thank you witherby
+Neville: :)
+Camille: :3
+`)
+
+
 /*
 have scenes have optional [MEMORY] label if from arm1
 
