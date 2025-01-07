@@ -363,6 +363,93 @@ Neville: :)
 Camille: :3
 `)
 
+//i will never stop being amused that theres both a looping and a non looping closer, cinque cloak really is cruel
+//all the friends she WOULD have instead treat her like a weird stranger because the know her looping form beter
+//not that wibby is friends with either
+//god the closer hates him
+convertScriptToScene(`[ARM1]
+Witherby: Hello, this is Witherby, with the Training Team, calling for Ms. Closer.
+Closer: [static noises]
+Closer: Oh.
+Closer: It's you.
+Witherby: It's great hearing from you again, Ms Closer.
+Witherby: I hope things have been going well with your boss. The CFO, was it?
+Closer:[static noises]
+Witherby: I am calling in a professional capacity.
+Witherby: One of your employees, Ms. Devona, designs ZWorld rides?
+Witherby: You "CEBro" has recognized her efforts personally.
+Witherby: Ms Devona has contracted my services to enquire as to why one of her designs has been replaced with what appears to be...
+[papers shuffling theatrically]
+Witherby: Some type of "Anomalous Highway"?
+Witherby: Signage indicates it goes on forever.
+Witherby: Would you happen to know anything of this, Ms. Closer?
+Closer: [sigh]
+Closer: While I am quite skilled in my professional capacity, wrangling my superiors is not among my job responsibilities.
+Closer: I will, of course, look into your query and respond appropriately.
+Closer: Would this be the best number to follow up on?
+Witherby: Indeed it would, thank you very much Ms. Closer, you have a wonderful day, now.
+[phone hangs up]
+Closer: The NERVE of him!
+Closer: Implying I would EVERY have an inappropriate relationship with a coworker!
+Closer: Much less a superior!
+Closer: ...
+Closer: [sigh]
+Closer: Well. I suppose it cannot hurt to find out why The CEBro of Eyedol games is micromanaging her themepark rides.`)
+
+convertScriptToScene(`[ARM1]
+CFO: Wanda
+CFO: Baby
+CFO: Cinnamon Bun
+CFO: We've taaaaalked about this!
+CFO: You can't just go turning random parts of reality into mazes!
+CFO: No matter how 'coooool' it would be!
+Wanda: [not looking up from her phone]
+CFO: siiiiiiiiigh
+CFO: [typing]
+Wanda: !
+Wanda: HEY DID WE JUST LOSE WIFI?
+CFO: Wanda. Baby. Cinnamon bun.
+CFO: "Anomalous Highway". Maze. Why?
+Wanda: Huh?
+Wanda: Oh!
+Wanda: Isn't it really cool?
+Wanda: The Intern says he likes it!
+CFO: Wanda, what about your favorite....
+CFO: What are you calling them now?
+CFO: Scream-gineers?
+CFO: That Devona girl? The one who turns into that cool bird?
+CFO: You hurt her feelings, apparently.
+CFO: That was HER ride you converted...
+Wanda: Oh.
+Wanda: Huh.
+Wanda: Offer her stock tips?
+CFO: siiiiiigh
+CFO: She's in the Loop, Wanda. Remember?
+CFO: Shitty stock tips only work for those out of it.
+Wanda: ....
+CFO: Tell you what..
+CFO: Why don't you make the Intern more Corn Mazes.
+CFO: You guys looooove Corn Mazes.
+CFO: That way your little hobbies stay in Ohio, and we keep Florida relatively sane.
+CFO: Or at least insane with a consistent theme.
+Wanda: Are you sure the Intern isn't getting bored of Corn Mazes?
+CFO: ...
+CFO: You really need to sit down and talk to him yourself.
+CFO: You know that, right?
+CFO: You proooooomised me.
+CFO: LOOPS ago.
+CFO: [sotto voice] you both did
+Wanda: What was that?
+CFO: Nooooothing!
+CFO: So!
+CFO: Mazes are for Ohio, not Florida!
+CFO: If you agree, clean up your anomalous highway, yeah?
+Wanda: ...
+Wanda: Yeah, okay... BUT
+Wanda: Do we still have that chocolate guy on retainer?
+Wanda: I wanna make a surprise for the Intern if we're just gonna go with a Corn Maze again...
+
+`)
 
 /*
 have scenes have optional [MEMORY] label if from arm1
