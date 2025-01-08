@@ -390,7 +390,7 @@ Closer: Would this be the best number to follow up on?
 Witherby: Indeed it would, thank you very much Ms. Closer, you have a wonderful day, now.
 [phone hangs up]
 Closer: The NERVE of him!
-Closer: Implying I would EVERY have an inappropriate relationship with a coworker!
+Closer: Implying I would EVER have an inappropriate relationship with a coworker!
 Closer: Much less a superior!
 Closer: ...
 Closer: [sigh]
@@ -443,7 +443,7 @@ Wanda: What was that?
 CFO: Nooooothing!
 CFO: So!
 CFO: Mazes are for Ohio, not Florida!
-CFO: If you agree, clean up your anomalous highway, yeah?
+CFO: If you agree, clean up your Anomalous Highway, yeah?
 Wanda: ...
 Wanda: Yeah, okay... BUT
 Wanda: Do we still have that chocolate guy on retainer?

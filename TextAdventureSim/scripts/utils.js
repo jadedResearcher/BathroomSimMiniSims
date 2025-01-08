@@ -606,6 +606,44 @@ class SeededRandom {
     return chunks.flat();
   }
 
+  /*
+The actions of the Observers did two critical things:
+
+* they let Doc Slaughter know she is White Nightengale (aka the last boss of Zampanio aka the Final Mercy of Arm2)
+
+* they asked Doc Slaughter to give wanda therapy
+
+
+unfortunately the first made her a little too depressed to try too hard so she half heartedly pursued wanda and instead found the intern....
+
+and got a huge crush on him cuz he's a literal god of Witnessing
+
+but in arm 2 she's still..... too depressed to move, and definitely too depressed to keep killing arm2 peewee
+so
+poker night at the inventory is a game about blorbos from different universes (like the Heavy from team fortress 2 and strongbad) chat with each other while playing cards
+TextAdventureSim is a North game, so it APPEARS to be a game but major functionality is "broken"
+in this case, the Inventory 
+if you try to pick an item up you get an error code, and theres a bug report from you can put it in
+if you do, a new devlog appears with me "fixing it", and you can pick things up
+if you do, you get a button to open up your inventory
+if you do THAT
+then you play a game within a game where Sam, the Heir of Webbed Blood, tries to get the blorbos talking at their club, the Inventory
+any blorbos in your inventory will have little scenes together
+talk shit out
+And if you have both the Witness AND doc slaughter, then they'll have a scene where The Witness does a better job convincing fiona that she has a job to do than the Intern did
+meanwhile, Peewee is trapped in place in arm2 by a last ditch effort by the Witness, who WANTS The loops to stop, but not through destroying everything wanda cares about
+the Witness grabs the Detective from bathroo sim (where he's been wandering ever since escaping Dracula's bathroom) and uses him to look peewee into place, since the Detective is glitched out and makes all doors locked
+if you try to pick anything up in the glitched out space the Detective controls, you can not
+BUT, if you look at peewee, he will tell you a secret
+ThisIsNotAGame
+its a full on javascript console, the whoel text adventure is
+and he has you hack the Detective into not being suceptible to his own effect
+so you can pick HIM up
+and when you do
+peeewee is free
+
+  */
+
   shuffle = (array) => {
     var currentIndex = array.length, temporaryValue, randomIndex;
 

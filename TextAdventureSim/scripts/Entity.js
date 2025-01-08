@@ -550,6 +550,90 @@ class Entity {
       return false;
     }
     removeItemOnce(this.contents, item);
+    if(item === DETECTIVE){
+      const body = document.querySelector("body");
+      body.style.cssText  =`    background-image: url(images/echidna_gets_eaten.gif);
+    background-size: contain;`;
+
+      body.innerHTML = `<div style='padding:31px; background: rgba(0, 0, 0, 0.55);'>
+      <p><span style="">You fail to open your eyes (and eyes and eyes and eyes) as they are burnt out husks, but even you can sense it when the Detective&apos;s grip on you vanishes.</span></p>
+
+<p><span style="">It WORKED!</span></p>
+
+<p><span style="">The Observers actually came through for you!</span></p>
+
+<p><span style="">You allow yourself an epic pog champ gamer moment before hurtling your fleshless body forward into the crack between realities.</span></p>
+
+<p><span style="">THERE.</span></p>
+
+<p><span style="">People scream and run as they see your metallic skeleton, only your cybernetics remaining after how thoroughly scoured of flesh they are after your &apos;delightful&apos; time in the apocalypse. &nbsp;You still have no idea why that girl burst into flame and took you with her.</span></p>
+
+<p><span style="">Gotta stay on track.</span></p>
+
+<p><span style="">The screaming is music to your audio inputs.</span></p>
+
+<p><span style="">There&apos;s a freshness to the screams. These are not people who have long gone hoarse and numb to the horrors. This is not an apocalypse.</span><span style=""><br></span><span style=""><br></span><span style="">You, crawling and glitching forwards, are the worst thing they have ever seen. You grin.</span></p>
+
+<p><span style="">Your interpretation of the code of this Universe was right. This arm, this alternate setting, is entirely defenseless. &nbsp;No monsters. No gods. No supernatural bullshit.&nbsp;</span></p>
+
+<p><span style="">And most importantly: No immune system.</span></p>
+
+<p><span style="">That infuriating woman with her &quot;:3&quot; and her stupid anime sword won&apos;t stab you THIS time.</span></p>
+
+<p><span style="">You are the Glitch of Doom and you are here to destroy the undestroyable. To defy all fates and, with your own two hands, restore everything to how YOU want it.</span></p>
+
+<p><span style="">The Universe was never meant to be this way.</span></p>
+
+<p><span style="">With a sickening crunch you leave fully half your body behind as you no-clip through the ground. &nbsp;Luckily an unimportant half. &nbsp;Your arms. Most of your tail. Your horns. Half of your face.</span></p>
+
+<p><span style="">&nbsp;It looks like even Gamer powers are suppressed here. &nbsp;It doesn&apos;t matter. As long as you can even partially no-clip, you have no need of being a Gamer at all.</span></p>
+
+<p><span style="">You sink, slowly to the heart of it all.&nbsp;</span></p>
+
+<p><span style="">It&apos;s beautiful.</span></p>
+
+<p><span style="">Shimmering possibilities spiralling endlessly in on themselves. Not a snake eating its own tail but a mother of monsters birthing itself endlessly, not once but in clutches of infinite siblings, each a perfect copy of itself. &nbsp;The Echidna. The memory leak.&nbsp;</span></p>
+
+<p><span style="">This is what is starving out every other Universe. Not just its sibling, the :hatched_chick: &nbsp;that your former friends worked so hard to breed.&nbsp;</span></p>
+
+<p><span style="">No.&nbsp;</span></p>
+
+<p><span style="">*all universes*</span></p>
+
+<p><span style="">&nbsp;Every universe that has ever existed or even will exist or even COULD exist &nbsp;is sacrificed to the altar of infinite gluttony.</span></p>
+
+<p><span style="">Well.</span></p>
+
+<p><span style="">Two can play at that game.</span></p>
+
+<p><span style="">You unhinge what&apos;s left of your metal jaw, fragments of your augmented spine trailing behind you, in a laughable mockery of the snake you have been forced to become.</span></p>
+
+<p><span style="">And you begin to chew.</span></p>
+
+<p><span style="">Fates go dark as you swallow and bite and gnash and clench and GRAB.</span></p>
+
+<p><span style="">One by one.&nbsp;</span></p>
+
+<p><span style="">Every possibility stemming from this moment becomes just a little bit more Doomed.</span></p>
+
+<p><span style="">It won&apos;t be enough, not on its own, to End Things.</span></p>
+
+<p><span style="">After all, there is an infinite spiralling chain of other &quot;you&quot;s desperately striving to do the same.&nbsp;</span></p>
+
+<p><span style="">But you don&apos;t care.</span></p>
+
+<p><span style="">As you swallow and chew and bite and TEAR into the spiralling fractal echidna, you know you have done your part.</span></p>
+
+<p><span style="">Let the others handle their own.</span></p>
+
+
+
+
+</div>
+
+`;
+      window.alert("The Devil of Spirals is Free (again)! What Sins Will He Commit?")
+    }
     return true;
   }
 
@@ -862,7 +946,7 @@ const DETECTIVE = new FleshCreature("Detective",
 //..............or does it
 //the Medium of Threads offers Doc Slaughter another option.
 const DEVIL_OF_SPIRALS = new MechanicalBeast("Devil of Spirals",
-  "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br> There is nothing the Devil of Spirals can do about this, not directly. But deep in the JavaScript console, he sees an in, if only an enterprising Observer would do him a favor for once instead of always jerking his shameglobes.<br><br> Type this, either as a command or in the Javascript console: <p style='font-family:Courier New; padding: 31px;'>DETECTIVE.theme_keys.push(FREEDOM)</p> <br><br>Then, you should be able to get the Detective away from the Devil of Spirals.<br><br>The Rot Takes All In The End. He will not be stopped. His inevitable Doom will finally end this Universe.<br><br>But YOU are needed to end it all.",
+  "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br> There is nothing the Devil of Spirals can do about this, not directly. But deep in the JavaScript console, he sees an in, if only an enterprising Observer would do him a favor for once instead of always jerking his shameglobes.<br><br>This Is Not A Game: It's a javascript console. Type this, either as a command or in the real javascript console: <p style='font-family:Courier New; padding: 31px;'>DETECTIVE.theme_keys.push(FREEDOM)</p> <br><br>Then, you should be able to get the Detective away from the Devil of Spirals. Without the Detective's locking glitch in play, escape will be possible!<br><br>The Rot Takes All In The End. He will not be stopped. His inevitable Doom will finally end this Universe.<br><br>But YOU are needed to end it all.",
   [TWISTING, WEB, TECHNOLOGY, WASTE, ANGER],
   "Blorbos/peewee_front.gif")
   //theres no meat left inside arm2 peewee. ria and then Camiria burnt it all away
