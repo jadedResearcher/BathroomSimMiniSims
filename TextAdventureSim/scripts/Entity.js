@@ -768,6 +768,15 @@ class GooCreature extends Entity {
 }
 
 
+class GodBeast extends Entity {
+  alive = true;
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's divine ", theme_keys, sprite);
+    this.theme_keys.push(ANGELS);
+  }
+}
+
+
 class MechanicalBeast extends Entity {
   alive = true;
   constructor(name, desc, theme_keys, sprite) {
@@ -921,12 +930,7 @@ const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
   "skull.png");
 WIBBY.contents.push(sin);
 
-/*
-new FleshCreature("name",
-   "desc",
-   [EN],
-   "Blorbos/camille.png")
-*/
+
 
 //http://farragofiction.com/MurderOnTheScorpiusExpressSim/
 //sorry detectivee
@@ -955,8 +959,18 @@ const DEVIL_OF_SPIRALS = new MechanicalBeast("Devil of Spirals",
 //only the metal remains
 //http://farragofiction.com/Arm2/
 
+/*
+const name = new FleshCreature("name",
+   "desc",
+   [EN],
+   "Blorbos/camille.png")
+*/
 
 
+const WITNESS  = new GodBeast("Witness",
+  "The Witness to the End and everything that comes after. <br><br>The Audience for Wanda's antics, even as he inspires them.<br><br>The Muse of Fractured Void.<br><br>He was an Intern once. A friend.<br><br>Now he is forever locked out of all relevance. Out of even being mourned as dead by those who loved him. <br><br><li>Arm1 is Wanda's Arm. Zampanio. Wanda controls its setting and space utterly. When the Intern dies, she abandons it for the next Universe's Arm 1, with a fresh Intern.<li>Arm2 is the Apocalypse. What is left of a setting when its Lord has forsaken it. The 'Apocalypse Chick' rules here, using her Doubly Wasted (mind altered with trickster drugs even as she hacks reality) powers, she mods reality like an irresponsible skyrim player. <li>Arm3 is the Mundane Arm. Coffeeshop AU. The wistful might have been if he could have just lived a life with Wanda, who has long since moved on. There are no powers there.<li>Arm4 is the God Arm. All characters are both more and less than human, sleeping between bouts of miracles and worship. <br><br>Past that is a blur. Sometimes 5 is the Fae AU (he hates watching Alt take Wanda's face and rule the Summer Court), Arm13 is something called 'homestuck' he doens't understand. There's Parker's favorite 'daemon au' Arm... Warrior Cats, Animorphs, Baccano, Vampires....That one infinite Bathroom... <br><br>He's so tired.<br><br>The Witness just wants to be seen by Wanda. That is all.<br><br>Mourn him.",
+  [SPYING, KNOWING, OBFUSCATION, ENDINGS, ,LONELY],
+  "Blorbos/Todd_by_guide.png")
 
 //she is supposed to trim arm 2 to allow the actual alternate settings to thrive
 //to provide a Final Mercy to all those trapped within
@@ -987,14 +1001,14 @@ the neighbor loves that they are the strange ones and not him
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
 */
-specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS];
-specialThemeEntities[DEATH] = [CAMILLE];
+specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS,WITNESS];
+specialThemeEntities[DEATH] = [CAMILLE,WITNESS];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
 specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, DEVIL_OF_SPIRALS];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY,WITNESS]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
 specialThemeEntities[CENSORSHIP] = [VIK];
-specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT];
-specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS];
+specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT,WITNESS];
+specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS,WITNESS];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
 specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
@@ -1008,8 +1022,8 @@ specialThemeEntities[FLESH] = [ALT];
 specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
-specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS];
-specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS];
+specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS,WITNESS];
+specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS,WITNESS];
 specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
 specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
@@ -1017,25 +1031,25 @@ specialThemeEntities[LIGHT] = [DEVONA, K, DOC_SLAUGHTER];
 specialThemeEntities[HEALING] = [WIBBY, DOC_SLAUGHTER];
 specialThemeEntities[PLANTS] = [RIVER];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER, DETECTIVE];
-specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE];
+specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE,WITNESS];
 specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS];
-specialThemeEntities[LOVE] = [ALT, WIBBY, DOC_SLAUGHTER];
-specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER];
+specialThemeEntities[LOVE] = [ALT, WIBBY, DOC_SLAUGHTER,WITNESS];
+specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER,WITNESS];
 specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS];
 specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
-specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE];
+specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE,WITNESS];
 specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K, DOC_SLAUGHTER, DETECTIVE]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
 specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
-specialThemeEntities[LANGUAGE] = [YONGKI]; //viscous
+specialThemeEntities[LANGUAGE] = [YONGKI,WITNESS]; //viscous
 specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS]; //the worm squirming towardss the echidnas heart, prepared to kill it
 specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK];
-specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K, DOC_SLAUGHTER, DETECTIVE];
+specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K, DOC_SLAUGHTER, DETECTIVE,WITNESS];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
 specialThemeEntities[DOLLS] = [YONGKI, ALT, DOC_SLAUGHTER];
-specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER];
+specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER,WITNESS];
 specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];
-specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE];
+specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE,WITNESS];
 specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT, DETECTIVE];
 
 //make sure they know they're special

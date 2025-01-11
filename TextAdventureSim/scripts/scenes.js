@@ -451,6 +451,11 @@ Wanda: I wanna make a surprise for the Intern if we're just gonna go with a Corn
 
 `)
 
+// :) :) ;)
+convertScriptToScene(`[ARM2]
+  Witness: [THERAPY ENDING]
+  White Nightengale: [THERAPY ENDING]`)
+
 /*
 have scenes have optional [MEMORY] label if from arm1
 
