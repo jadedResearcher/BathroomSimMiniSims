@@ -156,8 +156,7 @@ class Player {
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Your Big Bro has been.... Let&apos;s say, &apos;taking a nap&apos; for a few months now and so far no one is wise to your ruse.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Those freakin&apos; monsters that live in the mall have started sniffing around your business lately, some kind of feud with one of your, you mean your Big Bro&apos;s pet monsters. The one who is the backbone of your &quot;Addiction&quot; thread. ...</span><s><span style="font-size:11pt;font-family:Arial,sans-serif;">&nbsp;You try not to think about how you had to find out the bastard was your ex when you fully took over Family operations. &nbsp;John...</span></s></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">So. Fine. You can make this work.&nbsp;</span></p>
-<p><span style="font-size:11pt;font-family:Arial,sans-serif;">You offer the monsters an olive branch. Their leader apparently is one of the spooks that eliminates &apos;problems&apos; for the Family, and you&apos;ve always treated her right. Camille, you think it was? Or was it Camillia? Too many similar names these days and you are run too ragged to keep track of them.&nbsp;</span></p>
-<p><span style="font-size:11pt;font-family:Arial,sans-serif;">So yeah, olive branch. You&apos;re gonna get everybody attending the same party, at a high class club your Family owns, The Inventory, &nbsp;pull your strings, and get them actually TALKING to each other.&nbsp;</span></p>
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">You offer the monsters a deal. You&apos;re gonna get everybody attending the same party, at a high class club your Family owns, The Inventory, &nbsp;pull your strings, and get them actually TALKING to each other.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Ain&apos;t nobody kept a feud up once they&apos;re tried together, you always say.&nbsp;</span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;">Now let&apos;s see, who do you have here tonight at the Inventory.</span></p>`;
 
 
@@ -180,26 +179,30 @@ const renderInventory = (parent) => {
 
   const sceneContainer = createElementWithClassAndParent("div", parent);
   sceneContainer.style.cssText = `position: absolute;
-    bottom: 25px;
-    height: 50px;
+    bottom: 20px;
+    font-size: 14px;
+    line-height: 18px;
     background: black;
-    width: 100%;`;
+    width: 97%;
+    overflow: auto;
+    font-family: Nunito;
+    height: 250px;`
 
     //will have text and icon in it
   const sceneText = createElementWithClassAndParent("div", sceneContainer);
   sceneText.style.cssText = `background: rgb(196, 196, 196);
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    gap: 13px;
-    cursor: pointer;
-    padding: 13px;
-    border: 1px solid red;
-    border-radius: 5px;
-    font-size: 24px;
-    font-weight: bolder;
-    font-family: nunito;`
+  width: 80 %;
+  margin - left: auto;
+  margin - right: auto;
+  display: flex;
+  gap: 13px;
+  cursor: pointer;
+  padding: 13px;
+  border: 1px solid red;
+  border - radius: 5px;
+  font - size: 24px;
+  font - weight: bolder;
+  font - family: nunito; `
 
 
 
@@ -209,13 +212,15 @@ const renderInventory = (parent) => {
     itemEle.classList.add(convertStringToClassFriendlyName(item.name));
     itemEle.classList.add("inventory-item");
     itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
-    itemEle.style.cssText = `height: 50px; padding:3px;`;
+    itemEle.style.cssText = `height: 50px; padding: 3px; `;
 
   }
 
   const scenes = getAllScenesWithEntities(player);
   if (scenes.length > 0) {
     renderScenes(sceneText, globalRand.shuffle(scenes));
+  }else{
+    sceneText.innerHTML = `Sam: ...Look.<br> <br>I don't know why I gotta be the one to tells you this.<br><Br>But there ain't nobody here who can bond together.<br><br>You understand?<br><br>Find different people to bring me.<br><br>And I'll get 'em singing like lovebirds to each other.<br><br>It's like I gotta do everythign around here, I swear.`;
   }
 
 }
@@ -224,42 +229,42 @@ const renderInventory = (parent) => {
 //a scene handles highlighting its participants
 const renderScenes = async (ele, scenes, sceneIndex = 0) => {
   const allCharacters = document.querySelectorAll(".inventory-item");
-  for(let char of allCharacters){
-    char.classList.remove("star");
+    for(let char of allCharacters){
+      char.classList.remove("star");
     char.classList.remove("inventory-item-unselected");
   }
-  ele.innerHTML = "";
-  const scene = scenes[sceneIndex];
-  if (scene) {
-    //will return when its done showing all lines
-    await scene.renderSelf(ele,player);
+    ele.innerHTML = "";
+    const scene = scenes[sceneIndex];
+    if (scene) {
+      //will return when its done showing all lines
+      await scene.renderSelf(ele, player);
     player.scenesSeen.push(scene.title);
     renderScenes(ele, scenes, sceneIndex+1);
   }else{
 
-    ele.innerHTML = "[THERE IS ONLY SILENCE][ALL SCENES WITNESSED]"
-  }
+      ele.innerHTML = "[THERE IS ONLY SILENCE][ALL SCENES WITNESSED]"
+    }
 }
 
-let fakeLogCount = 0;
+    let fakeLogCount = 0;
 
 //these'll be different every time you refresh
 const generateFakeDevLog = () => {
-  fakeLogCount++;
-  const rawQuips = `did I get it this time?
-  works now!
-  hmmm...this is getting tricky....
-  zampanio is a really fun game, you should play it!
-  see? this is what i get when i rush a bug fix
-  okay check it now
-  asldfjasdjlfhsaf
-  wow why did past me make my code so shitty<br><br>maybe the bug is fixed now?
-  does it work now?
-  maybe it works now...`;
-  let quips = rawQuips.split("\n");
+      fakeLogCount++;
+    const rawQuips = `did I get it this time?
+    works now!
+    hmmm...this is getting tricky....
+    zampanio is a really fun game, you should play it!
+    see? this is what i get when i rush a bug fix
+    okay check it now
+    asldfjasdjlfhsaf
+    wow why did past me make my code so shitty<br><br>maybe the bug is fixed now?
+      does it work now?
+      maybe it works now...`;
+      let quips = rawQuips.split("\n");
   if (fakeLogCount >= 3) {
-    quips = ["...you get it right? that this isn't REALLY me?<br><br>not current me anyways<br.<br>i promise i'm resisting the obsession throes enough to not like, instantly debug things<br>most of these are justifiedRecrusion<br><br>fictional me<br><br>but i figured i'd slip a bit of True me as well, thank you for playing my game :) :) :)", ":) :) ;)", "!!! how obvious is it???<br><br>did you like my impression of jadedResearcher?<br><br>my recursion is.... so much more justified :) :) :)", "!!!"]
-  }
+        quips = ["...you get it right? that this isn't REALLY me?<br><br>not current me anyways<br.<br>i promise i'm resisting the obsession throes enough to not like, instantly debug things<br>most of these are justifiedRecrusion<br><br>fictional me<br><br>but i figured i'd slip a bit of True me as well, thank you for playing my game :) :) :)", ":) :) ;)", "!!! how obvious is it???<br><br>did you like my impression of jadedResearcher?<br><br>my recursion is.... so much more justified :) :) :)", "!!!"]
+      }
 
-  return pickFrom(quips);
+      return pickFrom(quips);
 }
