@@ -111,6 +111,7 @@ const getAllScenesWithEntities = (player) => {
     let canAdd = true;
     for (let name of s.entityNames) {
       if (!inventoryNames.includes(name.toUpperCase())) {
+        console.log("JR NOTE: scene is invalid because does not include name: ", {s, name})
         canAdd = false; //no way to set it back to true once youv'e decided its not valid
       }
     }
@@ -289,7 +290,7 @@ Camille: I have to leave.
 [SIGH]
 [REDACTED]: Well. Time to wander.`);
 
-convertScriptToScene(`[ARM1]
+convertScriptToScene("A Road Trip: Part 1",`[ARM1]
 Devona: Neville, pull over.
 [Neville continues staring at the horizon]
 Devona: Neville, we gotta switch out.
@@ -307,7 +308,7 @@ Devona: "General Motors streetcar conspiracy"
 Ria: ...
 Ria: [small voice] yeah okay`)
 
-convertScriptToScene(`[ARM1]
+convertScriptToScene("A Road Trip: Part 2",`[ARM1]
 Ria: Devona, do you have a minute?
 Ria: I'd like to talk about the route you and Neville have planned out...
 Devona: Yeah?
@@ -330,7 +331,7 @@ Ria:...
 Ria: ...
 Ria: [small voice] yeah okay`)
 
-convertScriptToScene(`[ARM1]
+convertScriptToScene("A Road Trip: Part 3",`[ARM1]
 Devona: Wow.
 Neville: ...
 Ria: ...
@@ -343,7 +344,7 @@ Camille: :3
 Witherby: I'll make some phone calls.
 `)
 
-convertScriptToScene(`[ARM1]
+convertScriptToScene("A Road Trip: Part 4",`[ARM1]
 Devona: Ummmmm....
 Devona: Ria?
 Ria: Yes?
@@ -367,7 +368,7 @@ Camille: :3
 //all the friends she WOULD have instead treat her like a weird stranger because the know her looping form beter
 //not that wibby is friends with either
 //god the closer hates him
-convertScriptToScene(`[ARM1]
+convertScriptToScene("A Road Trip: Part 5",`[ARM1]
 Witherby: Hello, this is Witherby, with the Training Team, calling for Ms. Closer.
 Closer: [static noises]
 Closer: Oh.
@@ -396,7 +397,7 @@ Closer: ...
 Closer: [sigh]
 Closer: Well. I suppose it cannot hurt to find out why The CEBro of Eyedol games is micromanaging her themepark rides.`)
 
-convertScriptToScene(`[ARM1]
+convertScriptToScene("A Road Trip: Part 6",`[ARM1]
 CFO: Wanda
 CFO: Baby
 CFO: Cinnamon Bun
@@ -452,7 +453,7 @@ Wanda: I wanna make a surprise for the Intern if we're just gonna go with a Corn
 `)
 
 // :) :) ;)
-convertScriptToScene(`[ARM2]
+convertScriptToScene("Therapy Ending",`[ARM2]
   Witness: [THERAPY ENDING]
   White Nightengale: [THERAPY ENDING]`)
 

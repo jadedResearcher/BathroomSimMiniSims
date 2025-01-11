@@ -186,23 +186,24 @@ const renderInventory = (parent) => {
     width: 97%;
     overflow: auto;
     font-family: Nunito;
-    height: 250px;`
+    height: 150px;`
 
     //will have text and icon in it
   const sceneText = createElementWithClassAndParent("div", sceneContainer);
   sceneText.style.cssText = `background: rgb(196, 196, 196);
   width: 80 %;
-  margin - left: auto;
-  margin - right: auto;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   gap: 13px;
   cursor: pointer;
   padding: 13px;
   border: 1px solid red;
-  border - radius: 5px;
-  font - size: 24px;
-  font - weight: bolder;
-  font - family: nunito; `
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bolder;
+  font-family: nunito; `
 
 
 

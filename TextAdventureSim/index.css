@@ -504,9 +504,9 @@ textarea {
 }
 
 .click-pulse {
-  margin-top: auto;
-  margin-bottom: auto;
-  animation: bug-pulse 2.0s steps(10) infinite;
+  margin-top: 4px;
+  height: fit-content;
+  animation: click-pulse 2.0s steps(10) infinite;
 
   svg {
     fill: red;
@@ -538,6 +538,30 @@ textarea {
     -o-transform: scale(1.6);
     -webkit-transform: scale(1.6);
     transform: scale(1.6);
+    fill: #e8e806;
+  }
+
+  100% {
+    -moz-transform: scaleX(1.5);
+    -o-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+  }
+}
+
+@keyframes click-pulse {
+  0% {
+    -moz-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+  }
+
+  50% {
+    -moz-transform: scale(1.8);
+    -o-transform: scale(1.8);
+    -webkit-transform: scale(1.8);
+    transform: scale(1.8);
     fill: #e8e806;
   }
 

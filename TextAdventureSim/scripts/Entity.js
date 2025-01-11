@@ -40,7 +40,6 @@ getDirectionLabel = (index) => {
 }
 
 const getRandomThemeConcept = (rand, theme_keys, concept) => {
-  console.log("JR NOTE: getRandomThemeConcept", rand, concept, theme_keys, all_themes)
   const theme = all_themes[rand.pickFrom(theme_keys)];
   return theme.pickPossibilityFor(concept, rand);
 }
@@ -50,17 +49,14 @@ will mutate one or more of the theme keys
 (mutation can be removing it unless its the last one)
 */
 const makeChildEntity = (rand, theme_keys, nameOverride) => {
-  console.log("JR NOTE:makeChildEntity ", theme_keys)
   let my_keys = [];
   for (let key of theme_keys) {
     //add a new theme from scratch
     if (rand.nextDouble() > 0.95) {
-      console.log("JR NOTE: adding mutation", all_themes)
       my_keys.push(rand.pickFrom(Object.keys(all_themes)));
     }
     //small chance to not add this theme at all
     if (rand.nextDouble() > 0.15) {
-      console.log("JR NOTE: adding", key)
       my_keys.push(key)
     }
   }
@@ -259,7 +255,6 @@ class Entity {
 
 
   constructor(name, desc, theme_keys, sprite = "sheep.gif") {
-    console.log("JR NOTE: ", { name, desc, theme_keys })
     this.name = name.toUpperCase();
     this.sprite = sprite;
     this.rand = new SeededRandom(stringtoseed(name));
@@ -1055,7 +1050,6 @@ specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, AL
 //make sure they know they're special
 for (let arr of Object.values(specialThemeEntities)) {
   for (let obj of arr) {
-    console.log("JR NOTE: making this as special", obj)
     obj.special = true;
   }
 }
