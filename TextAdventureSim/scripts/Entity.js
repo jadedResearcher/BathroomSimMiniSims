@@ -336,10 +336,10 @@ class Entity {
         return `>${command}<br><br>` + this.functionMap[key](parentEntity);
       }
     }
-    try{
-      return ">"+ command +"<br><br><span style='color:red; font-family: Courier New;'>Running...</span><br><br>" + eval(command);
+    try {
+      return ">" + command + "<br><br><span style='color:red; font-family: Courier New;'>Running...</span><br><br>" + eval(command);
 
-    }catch(e){
+    } catch (e) {
       return `You don't know how to ${command}!`;
     }
 
@@ -544,15 +544,17 @@ class Entity {
     return `The ${this.name} doesn't seem to want to talk to you :(<br><br>That's okay though!<br><br>You don't need anyone.`;
   }
 
-  removeFromContents = (item) => {
+  removeFromContents = async (item) => {
     //anywhere the detective is is a trap for anyone besides breath players
-    if(this.contents.includes(DETECTIVE) && !(item.theme_keys.includes(FREEDOM))){ 
+    if (this.contents.includes(DETECTIVE) && !(item.theme_keys.includes(FREEDOM))) {
       return false;
     }
     removeItemOnce(this.contents, item);
-    if(item === DETECTIVE){
+    if (item === DETECTIVE) {
+      const response = await httpGetAsync(`http://farragofiction.com:8500/TalkButlerBot?chatHandle=samAndTwigsWildRide&input=${encodeURI("The Worm is Free: What Sins Will He Commit")}?`);
+
       const body = document.querySelector("body");
-      body.style.cssText  =`    background-image: url(images/echidna_gets_eaten.gif);
+      body.style.cssText = `    background-image: url(images/echidna_gets_eaten.gif);
     background-size: contain;`;
 
       body.innerHTML = `<div style='padding:31px; background: rgba(0, 0, 0, 0.55);'>
@@ -645,7 +647,7 @@ class Entity {
         if (removed) {
           player.addToInventory(this);
           return `You TAKE the ${this.name}!`
-        }else{
+        } else {
           return `You try to take the ${this.name}, but it remains. What is going on? Was it that Detective?`
         }
       } else {
@@ -656,10 +658,10 @@ class Entity {
               player.addToInventory(c);
             }
           }
-          if(this.contents.length === 0){
+          if (this.contents.length === 0) {
             return "You take absolutely everything in this room, including some things you hadn't realized weren't nailed down.";
-          }else{
-            return `You try to take absolutely everything from this room, but ${humanJoining(this.contents.map((i)=>i.name))} remains. What is going on? Was it that Detective?`
+          } else {
+            return `You try to take absolutely everything from this room, but ${humanJoining(this.contents.map((i) => i.name))} remains. What is going on? Was it that Detective?`
           }
         } else {
           return "There's nothing left to TAKE!";
@@ -949,9 +951,9 @@ const DEVIL_OF_SPIRALS = new MechanicalBeast("Devil of Spirals",
   "He has been split in two. Half of him, Peewee, was left to rot in Arm1, trying to raise a family and move on. <br><Br>This is the other half. There is nothing left but the drive to, at any cost, end the Universe. To stop the endlessly recursive memory usage of the Echidna universe, before it crashes all of reality.<br><br>He relentlessly moves forward, waiting for the tiniest hint of vulnerability.<br><br>He can smell it. <br><br>If he can just break past the Apocalypse, to the tender healing flesh beyond the scabs and scars of Arm2... <br><Br>There will be nothing to stop him.<br><br>Arm3 has no immune system.<br><br>The Detective is the only thing <a target='_blank' href='http://eyedolgames.com/ZWorld/?friday=jrwantsin&rideType=Train&name=Coffee%20Shop%20AU:%20The%20Steam&image=/Trains/00090-20230604190728-img.png&themes=twisting,choices,Bakery&obsession=Coffee%20Shop%20AU'>preventing</a> him from slithering into the crack between AUs.<br><br> There is nothing the Devil of Spirals can do about this, not directly. But deep in the JavaScript console, he sees an in, if only an enterprising Observer would do him a favor for once instead of always jerking his shameglobes.<br><br>This Is Not A Game: It's a javascript console. Type this, either as a command or in the real javascript console: <p style='font-family:Courier New; padding: 31px;'>DETECTIVE.theme_keys.push(FREEDOM)</p> <br><br>Then, you should be able to get the Detective away from the Devil of Spirals. Without the Detective's locking glitch in play, escape will be possible!<br><br>The Rot Takes All In The End. He will not be stopped. His inevitable Doom will finally end this Universe.<br><br>But YOU are needed to end it all.",
   [TWISTING, WEB, TECHNOLOGY, WASTE, ANGER],
   "Blorbos/peewee_front.gif")
-  //theres no meat left inside arm2 peewee. ria and then Camiria burnt it all away
-  //only the metal remains
-  //http://farragofiction.com/Arm2/
+//theres no meat left inside arm2 peewee. ria and then Camiria burnt it all away
+//only the metal remains
+//http://farragofiction.com/Arm2/
 
 
 
