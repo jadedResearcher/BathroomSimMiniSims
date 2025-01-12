@@ -6,6 +6,7 @@ it figures out what names are involved in it
 and given a list of entities will return true or false if all of the chars in it are in the list
 it knows how to render itself (all at once with little audio sounds)
 */
+let startedTherapy = false;
 
 const all_scenes = [];
 
@@ -70,7 +71,6 @@ class Scene {
           return;
         }
         const line = this.lines[index];
-        console.log("JR NOTE: trying to show line: ", line)
         const allCharacters = document.querySelectorAll(".inventory-item");
         for (let char of allCharacters) {
           char.classList.remove("star");
@@ -78,11 +78,14 @@ class Scene {
 
         const charEle = document.querySelector(`.${convertStringToClassFriendlyName(line.name)}`);
         charEle && charEle.classList.add("star");
+        if(line.text.includes("[THERAPY ENDING]")){
+          therapyEnding();
+          return;
+        }
         if(line.name){
           textElement.innerHTML = `${line.name}: ${line.text}`;
         }else{//sound effects and shit
           textElement.innerHTML = `${line.text}`;
-
         }
         index++;
       }
@@ -98,6 +101,372 @@ class Scene {
 
   }
 
+
+}
+
+const therapyEnding = async ()=>{
+  if(startedTherapy){
+    return; //this might try to trigger a few times, its fine
+  }
+  startedTherapy = true;
+
+  const body = document.querySelector("body");
+  body.innerHTML = ``;
+  const fullVideo = createElementWithClassAndParent("video", body);
+  fullVideo.src = "images/the_whitenightengale_andthewitness.mp4";
+  fullVideo.loop = true;
+  fullVideo.autoplay = true;
+  fullVideo.play();
+  fullVideo.style.cssText = `height: 100%; margin-left: auto; margin-right:auto; position: relative; display: block;`;
+  console.log("JR NOTE: going to show story")
+  await sleep(9000); //nine artifacts
+  const text = createElementWithClassAndParent("div", body);
+  text.style.cssText = `    width: 100%;
+    position: absolute;
+    color: pink;
+    top: 0px;
+    height: 100%;`;
+  text.innerHTML = `<div style="margin-left: auto; margin-right: auto; width: 85%;">
+  <p>You are a <span style='color: red;'>Monster</span>.</p>
+
+<p>The Choir of Twelve Disciples behind you wail their lament.</p>
+
+<p>Your patients.&nbsp;</p>
+
+<p>They <span style='color: white;'>Trusted</span> you.</p>
+
+<p>You can not face what you have turned them into.</p>
+
+<p>You are a <span style='color: red;'>Monster</span>.</p>
+
+<p>They <span style='color: white;'>Trusted</span> you.</p>
+
+<p>Your thoughts Spiral for a time beyond time and then you slowly become aware of it.</p>
+
+<p>The Gaze.</p>
+
+<p>There are Eyes upon you.</p>
+
+<p>You do not Look up, head buried in your glitching, <span style='color;red'>Monstrous</span> hands.</p>
+
+<p>You can not bear the thought of the Eyes seeing you at your lowest.</p>
+
+<p>Surely they are Judging you so very harshly.</p>
+
+<p>You are a <span style='color: red;'>Monster</span>.</p>
+
+<p>You betrayed the <span style='color: white;'>Trust</span> of Vulnerable People Who Gifted You Their Secrets.</p>
+
+<p>&quot;Doctor?&quot;</p>
+
+<p>...</p>
+
+<p>You do not Look up. You do not want to Recognize the Voice.</p>
+
+<p>You Hear footsteps, hesitant and slow, approach you.</p>
+
+<p>There is silence.&nbsp;</p>
+
+<p>&quot;I...&quot;</p>
+
+<p>&quot;I hope you remember who I am, Doctor.&quot;</p>
+
+<p>&quot;I thought...&quot;</p>
+
+<p>&quot;It doesn&apos;t matter.&quot;</p>
+
+<p>&quot;You&apos;ve never done this before.&quot;</span><br></span><br></span>&quot;And...&quot;</p>
+
+<p>There&apos;s shuffling, clothes rustling, a sigh of breath.</p>
+
+<p>&quot;What is it Wibby always says in the next Arm? &apos;Jegus&apos;? &nbsp;Something like that....&quot;</p>
+
+<p>&quot;Jegus&quot;</p>
+
+<p>&quot;Doctor, I&apos;m... so sorry.... if giving me therapy did this to you.&quot;</p>
+
+<p>You do not Look up but you move so fast it surprises you, juttering hands made of letters and symbols clinging to dirty and torn jeans.&nbsp;</p>
+
+<p>Clinging to him.</p>
+
+<p>You do not Look up but you can&apos;t help but see the pool of Eyes and shadow lapping gently around his cross legged form. Each Eye looking at your tear streaked face with such....</p>
+
+<p>Compassion.</p>
+
+<p>Curiosity.</p>
+
+<p>Worry.</p>
+
+<p>&quot;you didn&apos;t do this to me.&quot; you say, your voice quiet and dead and hollow and not at all Bright and Bubbly like it is Supposed to be.</p>
+
+<p>You shudder with the sudden spike of Anxiety, what would the Neighbor think, to see you brought so low. This isn&apos;t you.</p>
+
+<p>You are a <span style='color: red;'>Monster</span>.</p>
+
+<p>You fold into yourself again, curling into yourself, no longer able to see the worried Eyes, but <span style='color;red'>Monstrous</span> fingers still curling around the rough fabric of the well used denim.&nbsp;</p>
+
+<p>You cling to that texture, almost involuntarily. &nbsp;</span><br></span><br></span>You&apos;ve helped your Patients (you are a <span style='color: red;'>Monster</span>, you betrayed their <span style='color: white;'>Trust</span>) too many times to use sensory information to ground them through Spirals to not do it yourself.</p>
+
+<p>The denim is the cuffs of his pants. You can not feel any flesh underneath, they&apos;re a bit too a bit too long, a bit too large.&nbsp;</p>
+
+<p>The denim is ragged and there are places where it is so thin you can feel empty air on the other side and &nbsp;you can feel bits of mud (or is it blood) in large flaky patches where it dried too thick.&nbsp;</p>
+
+<p>You breathe. Slowly. You feel your chest rise and fall. Your throat hurts, where you have been wailing.&nbsp;</p>
+
+<p>Behind you, your Choir (you betrayed their <span style='color: white;'>Trust</span> you are a <span style='color: red;'>Monster</span>) is humming softly, no longer wailing.&nbsp;</p>
+
+<p>Beneath you is pavement. It&apos;s cold and smooth and hard. You aren&apos;t sure if you have bones anymore but something *hurts* sitting on the cold and hard ground. (its what you deserve you&apos;re a <span style='color: red;'>Monster</span> you betrayed their <span style='color: white;'>Trust</span>).&nbsp;</p>
+
+<p>Slowly.</p>
+
+<p>You look up.</p>
+
+<p>It&apos;s him.</p>
+
+<p>The Intern.... or... You suppose... given his Confessions during Therapy...</p>
+
+<p>The Witness.</p>
+
+<p>You see the bags under his Eyes, the lines of clean skin streaked from long dried&nbsp;</p>
+<p>Tears against a filthy face.&nbsp;</p>
+
+<p>He is Watching you. &nbsp;You see without seeing the halo of eyes swarming his head, a mirror to those pooling at his feet.</p>
+
+<p>Something in you trembles at the Gaze. The steady pulse of Curiosity and Patience.&nbsp;</p>
+
+<p>This is not like the Eyes back home. There is no Gleeful Anticipation of your inevitable Fall.&nbsp;</p>
+
+<p>These Eyes See you at your worst, at your most <span style='color;red'>Monstrous</span> and they simply wish to See what you will do next.</p>
+
+<p>You sag, for the first time pressing yourself into his body, feeling his warmth (you don&apos;t deserve it, you are a <span style='color: red;'>Monster</span>, you betrayed their <span style='color: white;'>Trust</span>).&nbsp;</p>
+
+<p>There is a Fear in you. An old one. One you can&apos;t muster the Energy to feel anything but an Echo of.</p>
+
+<p>If you are not Judged, you will Fall. If you are not Kept To Task you will become Inferior.&nbsp;</p>
+
+<p>Does it even matter anymore?</span><br></span><br></span>Can you really Fall any farther?</p>
+
+<p>He&apos;s Waiting.</p>
+
+<p>&quot;I...&quot;... you swallow. Suddenly aware that you have no idea how long you have been sitting here, crying. Your throat is dry. &nbsp;Raw. Speaking is hard.</p>
+
+<p>&quot;i was already on this path...&quot; you croak, dully. &quot;i wouldn&apos;t have met you at all if i wasn&apos;t afraid of becoming this...&quot;</p>
+
+<p>He shifts his weight.&nbsp;</p>
+
+<p>Dimly, you&apos;re aware that if you were acting as his Therapist (you are a <span style='color: red;'>Monster</span>, you betrayed them) you should stop touching him. You should stop putting your problems on him. You should ...</p>
+
+<p>&quot;Doctor?&quot; his voice breaks you from your impending Spiral.</p>
+
+<p>&quot;I can&apos;t remember the other Witnesses&apos; &nbsp;lives very clearly. They&apos;re not mine, for one. Just... echoes that those who came before give me so they can be remembered. So that maybe one day....&quot; he shifts again.&nbsp;</p>
+
+<p>&quot;But...&quot;</p>
+
+<p>&quot;Doctor. You&apos;ve never approached me before. We never even meet until the next Arm, usually.&quot;</p>
+
+<p>&quot;But...&quot;</p>
+
+<p>&quot;When we do? We become close. As close as two people who can not forget even as the Universe Fractures CAN be. &quot;</p>
+
+<p>&quot;So.&quot;</p>
+
+<p>&quot;Let me be selfish. &nbsp;Let me try to help you now, so that I can get that chance at happiness that the other Witnesses have had...&quot;</p>
+
+<p>You...become close?</p>
+
+<p>You feel your cheeks become warm, the jittering pulsing glitching of your body seems to speed up in response.&nbsp;</p>
+
+<p>Those Eyes... There&apos;s not a trace of Deception or Judgement.</p>
+
+<p>You swallow.</p>
+
+<p>&quot;I&apos;m supposed to kill everyone.&quot; you say &quot;Put them out of their misery. The.... the &quot;Final Mercy&quot;.&quot; &nbsp;it beats in your skull to the time of your pulse. To Kill.</span><br></span><br></span>He nods, unsurprised, unjudging. &nbsp;&quot;That is what releases us all from the apocalypse. To move on to the next Arm. A peaceful one. &quot;</p>
+
+<p>You blink up at him, feeling for the first time the eyes that halo your own body joining in.&nbsp;</p>
+
+<p>Behind you the Choir lifts their voices into a psalm of hope and glory. (you betrayed their <span style='color: white;'>Trust</span>, you are a <span style='color: red;'>Monster</span>).&nbsp;</p>
+
+<p>Are.... are you a <span style='color: red;'>Monster</span>?</p>
+
+<p>&quot;Am I a <span style='color: red;'>Monster</span>?&quot;</p>
+
+<p>The Eyes upon Eyes of the Witness blink at you.</p>
+
+<p>&quot;We all are, Fiona&quot;</p>
+
+<p>He used your Name.</p>
+
+<p>You look down.&nbsp;</p>
+
+<p>You begin scouring your own Mind, looking for the thought you are Spiraling around.</p>
+
+<p>You are a <span style='color: red;'>Monster</span>? Yes. Of course you are. We are all <span style='color;red'>Monsters</span>. It is okay to be a <span style='color: red;'>Monster</span>. You are a <span style='color: red;'>Monster</span> just like Him.</p>
+
+<p>You betrayed their <span style='color: white;'>Trust</span>?.... How can you counter that.</p>
+
+<p>You lift your Gaze to the Choir.</p>
+
+<p>&quot;I betrayed their <span style='color: white;'>Trust</span>&quot;, you say out loud.</p>
+
+<p>There is silence.&nbsp;</p>
+
+<p>&quot;How?&quot; he asks, finally.</p>
+
+<p>&quot;During Therapy... I... I would get this sense of... tugging? Belonging? For certain patients. When everything started to burn I.... &quot;</p>
+
+<p>You finally let go of the hem of his pants, wringing your ascii hands together.&nbsp;</p>
+
+<p>&quot;I did SOMETHING and they became...&quot;</p>
+
+<p>You gesture helplessly.</p>
+
+<p>&quot;They became those .... things?&quot;</p>
+
+<p>The Choir sings a song of Recognition. &quot;Rise, my servants. Rise and serve me.&quot; they sing, as one.</p>
+
+<p>&quot;That is an Inappropriate Doctor Patient Relationship!&quot; you say, offended at yourself.</p>
+
+<p>The Witness breathes out a surprised chuckle, and you Look up sharply at him.</p>
+
+<p>He is not making fun of you. &nbsp;He is not Judging. His Gaze is Fond and some part of you melts.&nbsp;</p>
+
+<p>&quot;So, sounds like you&apos;ll do better next time. Or... at least, the copy of you in the next Universe will. &quot;</p>
+
+<p>He frowns.</p>
+
+<p>&quot;I guess that doesn&apos;t help you... but my point is.... &quot;</p>
+
+<p>He gestures at the Choir and they all flutter in a Highly Embarrassing Way. &nbsp; Can you really not Control Your Emotions better?</p>
+
+<p>&quot;You didn&apos;t know any better. You didn&apos;t know you were White Nightengale. You didn&apos;t know an apocalypse was coming.&quot;</p>
+
+<p>&quot;You never do.&quot;</p>
+
+<p>&quot;Because you ...&quot;</p>
+
+<p>He shifts, suddenly uncomfortable.</p>
+
+<p>&quot;This is absolutely not a Judgement of you, by the way, I want to make that clear...&quot;</p>
+
+<p>&quot;But...&quot;</p>
+
+<p>&quot;You always think that because Morgan&apos;s Hill made it so you can not be Corrupted By The Void, that that means you know everything that happens to you.&quot;</p>
+
+<p>&quot;You don&apos;t. Okay? Because sometimes the &apos;you&apos; it happens to is someone entirely different. Sometimes you die as the Apocalypse starts and then wake up in a brand new Universe completely unaware that you split in two and that half of you is continuing to live on in the original Universe and that that other you is doing things you never were aware of but that&apos;s OKAY its OKAY to not know things, even about yourself!&quot;</p>
+
+<p>He rushes through it all, as if he&apos;s afraid you will React Badly.</p>
+
+<p>&quot;You&apos;re not Keeping Secrets from yourself, I promise&quot;, he finishes. &nbsp;He says &apos;Keeping Secrets&apos; just so, like you would.</p>
+
+<p>You allow yourself a small smile.</span><br></span><br></span>&quot;You really do... Know me, don&apos;t you?&quot;, you say, flattered.</p>
+
+<p>He grins back &quot;I do. Or... well. &nbsp;I have half understood dream-memories that other me&apos;s sent to me about other YOU&apos;s and thats a pretty good first order approximation.&quot;</p>
+
+<p>He stands up, the comforting warmth suddenly gone.&nbsp;</p>
+
+<p>He offers you a hand, and you take it without thinking.&nbsp;</p>
+
+<p>You&apos;re standing.</p>
+
+<p>&quot;Apparently in some of the early Loops you&apos;d grab me as one of your Choir&quot; he says, as if this is not a Revelation.&nbsp;</span><br></span><br></span>&quot;So, if it&apos;s alright with you, I&apos;ll tag along and help out. &quot; his Gaze turns to the Choir &quot;Because &nbsp;the best way to make up for mind controlling your patients without their consent is to get everyone to the next Setting as fast as possible.&quot;</p>
+
+<p>He frowns.</p>
+
+<p>&quot;I don&apos;t think Nidhogg and the Harleclypse will let any death I bestow stick.... so it&apos;ll have to be you and yours who deals the final blow, alright?&quot;</p>
+
+<p>You nod.&nbsp;</p>
+
+<p>It will be okay.</p>
+
+<p>Except...&nbsp;</p>
+
+<p>&quot;Ummm...&quot;</p>
+
+<p>No, that isn&apos;t Like You. No filler words.</p>
+
+<p>&quot;Witness? Is that the Appropriate Form of Address?&quot;</p>
+
+<p>He nods and you continue. &quot;I have been Given a Task, one I am Realizing was of More Import than I had Initially Considered&quot;.</p>
+
+<p>He freezes.</p>
+
+<p>&quot;Wanda&quot;, he breathes, suddenly sitting down.</p>
+
+<p>&quot;To Summarize my Understanding: Wanda is someone Immensely Important, not only to You, but to Reality as a Whole. She is Dealing With Grief very Poorly and, as a Result, the Universe Fractures in All Directions, Causing Problems&quot;.</p>
+
+<p>You pause. &nbsp;It&apos;s awkward to be standing if He is not. &nbsp;Would it be undignified to sit on the ground again? Surely you would not be so Gauche as to squat.&nbsp;</p>
+
+<p>You decide that backing up a bit is a Workable Compromise.</p>
+
+<p>You really are Feeling Like Yourself Again.</p>
+
+<p>&quot;I have been asked by an Observer to provide Wanda with Therapy. I was unable to reach her, and instead found You.&quot;</p>
+
+<p>&quot;To my Shame, I was not as Dedicated to the Task as was Appropriate, Distracted as I was by the Revelation of my...&quot;</p>
+
+<p>It&apos;s okay to be a <span style='color: red;'>Monster</span>. Everyone is a <span style='color: red;'>Monster</span>. HE is a <span style='color: red;'>Monster</span>.</span><br></span><br></span>You like being the same kind of thing He is.</p>
+
+<p>&quot;<span style='color;red'>Monstrous</span> Nature.&quot; you finish, well aware of the awkward pause in there. You will have to practice saying out loud that you are a <span style='color: red;'>Monster</span> without flinching.</p>
+
+<p>&quot;What do I need to do to continue seeking to provide Wanda with Therapy?&quot;</p>
+
+<p>There is silence.&nbsp;</p>
+
+<p>The eyes pooling around the hunched over Witness are all shut.&nbsp;</p>
+
+<p>You swallow.. Have you...</p>
+
+<p>But before a new Spiral can begin he speaks up.&nbsp;</p>
+
+<p>&quot;You can&apos;t. Wanda is gone. Long gone. The second I died she moved on to another Universe. No matter how long we live. No matter how fast we move through the Arms, we will never reach her. We are stuck here. In this Universe that she abandoned.&quot;</p>
+
+<p>...</p>
+
+<p>You process this, giving it the Attention it Deserves.</p>
+
+<p>You know from your previous therapy sessions with the Intern, before he became...this.... Beautiful <span style='color: red;'>Monster</span> of Eyes.... No. No Distractions.</p>
+
+<p>You know that the Intern likely has a crush on Wanda. Perhaps one he is not fully aware of. You know that Wanda likewise has an Obsession with him.&nbsp;</p>
+
+<p>To... simply leave.... When...</p>
+
+<p>&quot;You died?&quot;</p>
+
+<p>He nods.</p>
+
+<p>&quot;...&quot;</p>
+
+<p>&quot;She is moving on to find the next You, isn&apos;t she?&quot;</p>
+
+<p>He nods.</p>
+
+<p>You clap your hands and do your best not to jump when the Choir all claps at the same time. &nbsp;</p>
+
+<p>The Witness looks up with Eyes upon Eyes, all Focused on you. You try not to blush.</p>
+
+<p>&quot;Then we know our task. &nbsp;Clearly the other you&apos;s that Came Before could control information given to the next in line? Once we clean up things here...&quot;</span><br></span><br></span>&quot;All we need to do is make sure the Next You knows every possible trick to get the Next Me to show an Appropriate Level of Dedication towards reaching Wanda!&quot;</p>
+
+<p>And if that would make this Beautiful <span style='color: red;'>Monster</span> of Eyes Know you Inside and Out, you are not complaining.&nbsp;</p>
+
+<p>He opens his mouth to speak but you Interrupt him, knowing Rudeness is a Sin but one you are Willing To Take On In This Circumstance:</p>
+
+<p>&quot;Yes. This won&apos;t help you. It will not give you the Closure I suspect you crave. But until you identify a Better Task, this is the one we can work on.&quot;</p>
+
+<p>&quot;It is &nbsp;Important, for Both of Us, to have a Task other than simply....&quot;</p>
+
+<p>You do your best not to Shudder</p>
+
+<p>&quot;Killing every person in the Universe one by one.&quot;</p>
+
+<p>He nods, those thoughtful Eyes upon Eyes gazing up at you. You try not to preen a bit (how DOES your hair look when you&apos;re made of symbols and glitches!?).&nbsp;</p>
+
+<p>&quot;Alright&quot;, he finally says and this time it is you offering him a hand to help him up.</p>
+
+<p>He takes his place among your Choir and you try not to feel self conscious as you begin your Grisly Task.</p>
+</div>
+<br><br><br><br>
+`;
+const response = await httpGetAsync(`http://farragofiction.com:8500/TalkButlerBot?chatHandle=samAndTwigsWildRide&input=${encodeURI("Thank you. Truly, Observer. I can only hope that I Witness a gentler Spiral from here. Maybe some future Witness will be finally mourned...")}?`);
 
 }
 
@@ -161,7 +530,7 @@ const convertStringToClassFriendlyName = (string) => {
 ////////////////////////////SCRIPTS START HERE//////////////////////////////
 */
 //http://knucklessux.com/InfoTokenReader/?search_term=pink
-//http://knucklessux.com/InfoTokenReader/?search_term=yellow
+//http://knucklessux.com/InfoTokenReader/?search_term=white
 //http://knucklessux.com/InfoTokenReader/?search_term=romance
 //http://knucklessux.com/InfoTokenReader/Bullshit/WordThoughts/
 convertScriptToScene("Test1", `Sheep: baaaa
@@ -217,7 +586,7 @@ convertScriptToScene("A Second Transcript: Part3", `[REDACTED]: But enough of th
 Camille: Good question.
 Camille: This is the maze. It is an anomaly which exists outside of time, powered by an artificial intelligence-- much like home, in a way. It contains hundreds-- no, thousands of rooms, each dedicated to each and every horror mankind can fathom.
 Camille: Sometimes, when people are caught by obsession, they end up here. I would have seen to its containment if it weren't for the fact that nearly every anomaly gravitates to this maze before 2022.
-[REDACTED]: Fascinating. Of course your self-inflicted cabal of monsters rests here. I would ask about that date, but something tells me that I'd rather not know what happens.
+[REDACTED]: Fascinating. Of course your self-inflicted cabal of <span style='color;red'>Monsters</span> rests here. I would ask about that date, but something tells me that I'd rather not know what happens.
 Camille: Nothing good happens in that year, no.
 [REDACTED]: Figured as much.
 [REDACTED]: You know, if these anomalies are as dangerous as you have described them in the past, then disturbing their nest would have most likely saved you a lot of trouble.
@@ -225,13 +594,13 @@ Camille: Would it, now?
 [REDACTED]: Surely it would have proven more efficient.
 [REDACTED]: You are not harnessing anything from them, as far as you've shown your hand. If your goal is to stop them from interfering with this reality, then keeping them around is a moot point. They're just taking up space.
 [REDACTED]: We didn't bother with any anomalies we had already contained. This free-range method seems... inane.
-Camille: Ah, of course, [REDACTED]tor. I had not thought about it that way. Perhaps simply getting rid of all the monsters is the best solution after all.
+Camille: Ah, of course, [REDACTED]tor. I had not thought about it that way. Perhaps simply getting rid of all the <span style='color;red'>Monsters</span> is the best solution after all.
 [UNSHEATHES SWORD.]
 Camille: Would you mind if I started with you, then?
 [REDACTED]: ...
 [REDACTED]: No. As uncivilized as I find your point, perhaps I see what you mean.
 [SHEATHES SWORD.]
-Camille: I knew I could trust you to understand.
+Camille: I knew I could <span style='color: white;'>Trust</span> you to understand.
 [SIGH.]`);
 
 
@@ -249,7 +618,7 @@ Camille: Not forever! And it would not be for nothing. I would remain at your se
 Camille: I'm sure we could arrange something. There has to be something you lack. It is clear we both do. No one can hear me, and no one can see you.
 Camille: Doesn't it feel lonely? Those around us can choose to move on from all of this, to live on, but we can only watch. Bound by the rules placed on us.
 [REDACTED]: Fuck off.
-Camille: It all makes us so... similar. Both cursed by monsters that no longer exist, both thrust into our role by circumstance. Both made to live by their tenets.
+Camille: It all makes us so... similar. Both cursed by <span style='color;red'>Monsters</span> that no longer exist, both thrust into our role by circumstance. Both made to live by their tenets.
 Camille: That is why I'm asking you. The others may try, but they've been compromised. Presenting a united front is a complicated task when you can turn to your baser instincts at any moment. Besides, not everyone can make these decisions. They all need someone to look to for guidance.
 Camille: That is why we had a manager.
 [REDACTED]: Fuck off.`);
@@ -274,7 +643,7 @@ Camille: I thought we might have been friends.
 [REDACTED]: I gave up a lot to keep that damn wheel turning. My body, my soul, my very self. And yet, even after it's over, you have the audacity to show up with some story about how the world needs us, about how we're friends, about how we're all in this together.
 [REDACTED]: It doesn't, and we're not. It is not my duty or anyone else's to save everyone. I am angry, and I am tired. I did all that thankless work because I still hoped for a better life, and that was a ticket out. It is the story of everyone I have ever known. We have only ever been fodder. That is the fundamental truth of our world.
 [REDACTED]: Perhaps at one point you knew this as well. But clearly, you have forgotten.
-[REDACTED]: Play the knight, if you so wish. But know you are a brute at heart, eager to solve with steel what you cannot with words, and as much a monster as any of your friends. But unlike them, you took what imprisoned you and declared yourself warden.
+[REDACTED]: Play the knight, if you so wish. But know you are a brute at heart, eager to solve with steel what you cannot with words, and as much a <span style='color: red;'>Monster</span> as any of your friends. But unlike them, you took what imprisoned you and declared yourself warden.
 [REDACTED]: Know this was all your choice.`);
 
 convertScriptToScene("A Second Transcript: Part6", `Camille: ...
@@ -451,6 +820,15 @@ Wanda: Do we still have that chocolate guy on retainer?
 Wanda: I wanna make a surprise for the Intern if we're just gonna go with a Corn Maze again...
 
 `)
+
+/*
+what ccan i say im a sucker for juttering <span style='color;red'>Monsters</span>
+i feel like, if you're gonna kill someone past nighoggs eternal life effect, you can't just use violence
+you gotta glitch that shit
+interestingly peewee as a skellington is glitchy too
+i feel like you gotta
+glitch to cause even an approximation of an ending in zapanio
+*/
 
 // :) :) ;)
 convertScriptToScene("Therapy Ending",`[ARM2]

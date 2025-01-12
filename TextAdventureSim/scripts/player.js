@@ -240,6 +240,7 @@ const renderScenes = async (ele, scenes, sceneIndex = 0) => {
       //will return when its done showing all lines
       await scene.renderSelf(ele, player);
     player.scenesSeen.push(scene.title);
+    player.saveToLocalStorage();
     renderScenes(ele, scenes, sceneIndex+1);
   }else{
 
