@@ -97,7 +97,7 @@ const spawnSpecialEntities = (rand, theme_keys) => {
       const theme = rand.pickFrom(theme_keys);
       if (specialThemeEntities[theme]) {
         const blorbo = rand.pickFrom(specialThemeEntities[theme]);//for example this could pick either devona, neville or eye killer for HUNTING
-        if (blorbo && !player.inventory.map((i) => i.name).includes(blorbo.name)) {
+        if (blorbo &&  player.inventory && !player.inventory.map((i) => i.name).includes(blorbo.name)) {
           ret.push(blorbo);
         }
       }
