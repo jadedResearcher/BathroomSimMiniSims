@@ -954,10 +954,58 @@ const APOCALYSE_CHICK = new FleshCreature("Harleclypse ", //we gave her yet anot
   "Blorbos/apocalypse_chick_by_guide.gif")
 
   APOCALYSE_CHICK.talk = ()=>{
-    return "JR NOTE: did this work?"
+    return `Oooooooooooh!!!!!!!!!!!
+    <br>
+    You want to talk to me????????????
+    <br>
+    Shame JR didn't aaaaaaaaaaactually implement this feature, huh!
+    <br>
+    I mean...
+    <br>
+    Obviously *I* can talk to you!
+    <br>
+    Unlike those stick in the mud NPCs amirite?
+    <br>
+    But I can't hear what you say!
+    <br>
+    That's okay though!
+    <br>
+    I'm used to talking to a silent protagonist!
+    <br>
+    Probably for the best, really!
+    <br>
+    Even I have a problem with horrorterror speech!
+    <br>
+    Ha!
+    <br>
+    I can just imagine you going 'but I'm not a horrorterror!'
+    <br>
+    As if!
+    <br>
+    You dooooooooooo realize that you exist on an entire plane of reality higher than I do?
+    <br>
+    With a whole ass extra dimension???????????
+    <br>
+    You're too funny!
+    <br>
+    Aaaaaaaaaaanyways!
+    <br>
+    It's been real!
+    <br>
+    But I think you need to get back to your duties, don't you?
+    <br>
+    Buuuuuuuuuuuut!
+    <br>
+    If you think of something fun for me to do once either Peewee gets loose or Wanda gets all boring!
+    <br>
+    Let me know!
+    <br>
+    You guys like sending letters right?
+    <br>
+    I'll be watching! `;
   }
 
-  APOCALYSE_CHICK.syncDefaultFunctions
+  APOCALYSE_CHICK.syncDefaultFunctions();
 
 
 const WIBBY = new FleshCreature("Witherby",
