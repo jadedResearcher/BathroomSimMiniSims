@@ -1013,6 +1013,9 @@ const WIBBY = new FleshCreature("Witherby",
   [ANGELS, KNOWING, LONELY, SERVICE, HEALING],
   "Blorbos/Thesolemn_by_guide.png");
 
+  WIBBY.actionMap["CONFESS"] = ["CONFESS"]
+  WIBBY.functionMap["CONFESS"] = ()=>{return "You are forgiven."}
+
 const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
   "Witherby's skull is literally an Abnormality that feasts on the sins of others without judgement. It whispers to him to secrets of a long dead religion called 'Catholicsm'. ",
   [ANGELS, KNOWING, FLESH],
