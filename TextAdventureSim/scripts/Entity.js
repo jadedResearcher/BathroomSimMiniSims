@@ -786,6 +786,15 @@ class MechanicalBeast extends Entity {
   }
 }
 
+class StaticCreature extends Entity {
+  alive = true;
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's made of buzzing static... ", theme_keys, sprite);
+    this.theme_keys.push(MUSIC);
+    this.theme_keys.push(ZAP);
+  }
+}
+
 class RotBeast extends FleshCreature {
   alive = false; //:) :) :)
   constructor() {
@@ -959,12 +968,7 @@ const DEVIL_OF_SPIRALS = new MechanicalBeast("Devil of Spirals",
 //only the metal remains
 //http://farragofiction.com/Arm2/
 
-/*
-const name = new FleshCreature("name",
-   "desc",
-   [EN],
-   "Blorbos/camille.png")
-*/
+
 
 
 const WITNESS = new GodBeast("Witness",
@@ -997,6 +1001,18 @@ the neighbor loves that they are the strange ones and not him
 
 
 
+/*
+const name = new FleshCreature("name",
+   "desc",
+   [EN],
+   "Blorbos/camille.png")
+*/
+
+
+const CLOSER = new StaticCreature("Closer",
+  "The Closer is a strange creature...<br><br>Unlike all but Parker, she brought HERSELF to the Echidna, rather than being pulled here against her will.<br><br>Since she came in the front door, so to speak (while Parker burrowed in from the back), the Closer counts as a Resident, with each new Universe Wanda instantiates having a copy of her, static and all.<br><br>At the same time, she is in the Loop, spawning anew with copies of memories from the last universe.<br><br>Looping Closer politely ignores her 'inferior' Resident copy, and attempts to not die from embarassment at said copies obvious crush on her boss, the CFO of Eyedol games (who just so happens to be Looping Closer's Wife. It's a whole thing). <br><br>Resident Closer works dilliegently to sell copies of Eyedol Games's Hit Title; ZampanioQuest.<br><Br>Looping Closer tries to put all that behind her. Most of her generation isn't really as into Zampanio anymore.",
+  [LONELY, FREEDOM, GUIDING, SERVICE, PLANTS, ADDICTION],
+  "Blorbos/closer_by_the_guide.png")
 
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
@@ -1004,18 +1020,18 @@ the eye killer is NOT a monster of family, but you can't understand her without 
 specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[DEATH] = [CAMILLE, WITNESS];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, DEVIL_OF_SPIRALS];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY, WITNESS]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY, WITNESS,CLOSER]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT, WITNESS];
 specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER, DETECTIVE];//the detective is from a space setting
-specialThemeEntities[OCEAN] = [RIVER];
+specialThemeEntities[OCEAN] = [RIVER,CLOSER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS];
+specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
 specialThemeEntities[STEALING] = [K, ALT];
 specialThemeEntities[BURIED] = [RIVER, DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[FLESH] = [ALT];
@@ -1024,31 +1040,31 @@ specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
 specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
 specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
 specialThemeEntities[LIGHT] = [DEVONA, K, DOC_SLAUGHTER];
 specialThemeEntities[HEALING] = [WIBBY, DOC_SLAUGHTER];
-specialThemeEntities[PLANTS] = [RIVER];
+specialThemeEntities[PLANTS] = [RIVER,CLOSER];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER, DETECTIVE];
-specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS];
-specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS];
+specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS,CLOSER];
+specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS,CLOSER];
 specialThemeEntities[LOVE] = [ALT, WIBBY, DOC_SLAUGHTER, WITNESS];
 specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER, WITNESS];
 specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS];
 specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
 specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE, WITNESS];
-specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K, DOC_SLAUGHTER, DETECTIVE]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
+specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K, DOC_SLAUGHTER, DETECTIVE,CLOSER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
 specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI, WITNESS]; //viscous
 specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS]; //the worm squirming towardss the echidnas heart, prepared to kill it
-specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK];
+specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK,CLOSER];
 specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K, DOC_SLAUGHTER, DETECTIVE, WITNESS];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
 specialThemeEntities[DOLLS] = [YONGKI, ALT, DOC_SLAUGHTER];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER, WITNESS];
-specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON];
+specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON,CLOSER];
 specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE, WITNESS];
 specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT, DETECTIVE];
 

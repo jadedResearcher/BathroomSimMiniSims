@@ -16,7 +16,7 @@
       bugIcon.classList.add("bug-pulse")
       const storySoFar = document.querySelector(".story-so-far");
       const err = createElementWithClassAndParent("p", storySoFar, "error");
-      err.innerHTML = "ERROR CAUGHT: " + message;
+      err.innerHTML = "PLEASE REPORT ERROR CODE IN BUG MENU: " + message ;
       const input = document.querySelector("#puppet-input")
       if (input) {
         input.value = "";
