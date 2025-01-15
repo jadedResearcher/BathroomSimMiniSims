@@ -710,7 +710,16 @@ class Entity {
 
   //JR NOTE: this should be tutorial shit or maybe hints if i can manage it
   help = (parentEntity) => {
-    return `List of Commands For ${this.name}: ${Object.keys(this.actionMap).join(", ")}`;
+    let commands = [];
+    let defaultCommands = Object.keys(defaultActionMap);
+    for(let c of Object.keys(this.actionMap)){
+      if(defaultCommands.includes(c)){
+        commands.push(`<span style="color: green; text-decoration:underlined;">${c}</span>`)
+      }else{
+        commands.push(`<span style="color: yellow; text-decoration:underlined;">${c}</span>`)
+      }
+    }
+    return `List of Commands For ${this.name}: ${commands.join(", ")}`;
   }
 }
 
