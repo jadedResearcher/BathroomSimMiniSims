@@ -798,55 +798,36 @@ class StaticCreature extends Entity {
 
 class RotBeast extends FleshCreature {
   alive = false; //:) :) :)
-  uncensored = false;
-
   constructor() {
     super("[REDACTED]", "[REDACTED]", [CENSORSHIP], "redacted.gif");
     this.actionMap[COMMAND_UNCENSOR] = ["UNCENSOR", "UNREDACT", "REVEAL"]
     this.functionMap[COMMAND_UNCENSOR] = this.uncensor;
-    this.syncDefaultFunctions();
     //it is not just rotting meat, but you can't quite tell what it is
     this.contents.push(new Entity("[PULSING REDACTED]", "It's disgusting.", [FLESH, DECAY, TWISTING], "redacted.gif"));
+    this.functionMap[COMMAND_LOOK] = this.censor;
+    this.functionMap[COMMAND_LISTEN] = this.censor;
+    this.functionMap[COMMAND_SMELL] = this.censor;
+    this.functionMap[COMMAND_TASTE] = this.censor;
+    this.functionMap[COMMAND_GO] = this.censor;
+    this.functionMap[COMMAND_THINK] = this.censor;
+    //this.functionMap[COMMAND_HELP] = this.censor; //purposefull let people see the uncensor command that is custom for vik, though i doube people are typing help constantly directed at blorbos
+    this.functionMap[COMMAND_TALK] = this.censor;
+    this.functionMap[COMMAND_TAKE] = this.censor;
+    this.functionMap[COMMAND_GIVE] = this.censor;
+    this.functionMap[COMMAND_USE] = this.censor;
+    this.functionMap[COMMAND_TOUCH] = this.censor;
   }
 
   uncensor = () => {
     window.open("http://farragofiction.com/ACensoredTranscript/?seerOfVoid=true" , '_blank');
+    this.syncDefaultFunctions(); //restores the uncensored versions
+    return ".... Well. Alright then. I am sure you know what you are doing."
   }
 
-  look = () => {
+  censor = () => {
     return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
   }
 
-  smell = () => {
-    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
-  }
-
-  listen = () => {
-    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
-  }
-
-
-  taste = () => {
-    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
-  }
-
-
-  go = () => {
-    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
-  }
-
-  take = () => {
-    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
-  }
-
-
-  give = () => {
-    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
-  }
-
-  use = () => {
-    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
-  }
 
 }
 
@@ -971,6 +952,12 @@ const APOCALYSE_CHICK = new FleshCreature("Harleclypse ", //we gave her yet anot
   "<div class='rainbow-text' style='padding:31px;font-size:28px;'><a target='_blank' href ='http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Flower&data=N4IgdghgtgpiBcIAqALGACAYgGwPYHcYAnEAGhABMYBnASwHNIAXW3MBEAGQFoBVbgAwCALGRBFa1ANYcAgpwCiABQASYpmljUOAcVkBZAJIA5HaXQBGCwGZzmTgHkASrPMXzAdVkBlJArc25k4Kvi4mSObW7ugKABpIJgDCCQ7G5gBM6XYuyfLe5gCsdiayxon+loHoAEKODgAiAdZi1EwQTNqIcX5OxvKk1raG+kqyCQrGEQVFwfKGvoaJpFa2ibxOhg68+cLCpI4Amv2ZpBMKTjoKCUsrpDrGDt7zpAAcBWIwAB4QAMZM2ABPAD6GiIMBgINoAAdOlw+IIRGJaGBWsi-hxErgoFA2OZMdjceh8TiwHisSSyQT2ORkXR6CgmBjyYTiSzmaSiezKSSxO02j8ULAwIzEKyOWLuWyqZLqeIYFCwdQ6GwmdLOWqJeqKVqVeRWhAAEa0bC0JjA7AwABuMGwHAsYjBFCBVAAZjAUXBEAIAHTvcj4FCmiGu93UT0gH1+kAG7C-KTOmBuj0cSNiKEQC0JpNhu3egRIqD0IHUIg-DgMphQ+AAemrLogRCIEHouBdtD+rDA3p+WOrAC1oOmwKwVLh-sipHW8IQiN6oWB6C0mLgiMCqG1jbDvGh0BRcOgDRgobGAcj0JaARRWPRoDRvepofbEDx+EJhAByajobxtI0ms2cgArsKxC7rgNDoGAY67jAPxghAYYHgC6DIkwxC-CwbDoPgpooOg1CAQaABWsEdPe5AsFC6RyC6aFEOgY5oPREBQVAGa0BBKAQBQB7wQKMA8S6K7oBA6D0E2YA8cubTYAxLroG8u4QAC1DmC+CLCLxMC-GgPE9sKEDIkKTDkSAlHNIgsi0aB6lvugNA-BAUI0OYdFQMi7SdnJInYLJjGgSxWLsRBh49lo6DAW6CG0DGMDelggFEBoxA4mCrloLQ9H6n+prIRa1rYF+VBwdpYY8RQTaoo5vkAveAC+QA'>Oooooooh?</a> Observers? <br><br>What an honor!<br><br>Don't often see you guys in the fuuuuuun part of reality!<br><br>Decided to stop being so boooooooring, have you?<br><br>Well sit back! Take a load off!<br><br>God mode is enabled and you can no clip to your hearts content!<br><br>Welcome to my creative mode server!<br><br>I beeeeet you're here because of all those changes, huh!<br><br>Peewee getting all trapped by that Detective and all sure was surprising!<br><br>Don't wooooorrrrry!<br><br>I can just imagine the face you're making, lulz<br><br>I'm not going to stoooooop you.<br><br>You wanna stop my Apocalypse, go right ahead!<br><br>All that'll do is finally get me into the new game +!</div>",
   [APOCALYPSE, TWISTING, TECHNOLOGY, MATH, ADDICTION, WASTE],
   "Blorbos/apocalypse_chick_by_guide.gif")
+
+  APOCALYSE_CHICK.talk = ()=>{
+    return "JR NOTE: did this work?"
+  }
+
+  APOCALYSE_CHICK.syncDefaultFunctions
 
 
 const WIBBY = new FleshCreature("Witherby",
