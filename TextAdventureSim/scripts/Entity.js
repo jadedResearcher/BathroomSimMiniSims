@@ -10,6 +10,7 @@ const COMMAND_GIVE = "GIVE";
 const COMMAND_USE = "USE";
 const COMMAND_THINK = "THINK";
 const COMMAND_HELP = "HELP";
+const COMMAND_UNCENSOR = "UNCENSOR"
 
 //not guaranteed to have every theme, but will be keyed by theme and have an array of entities to spawn
 //look for [SETUP SPECIAL ENTITIES]
@@ -99,7 +100,7 @@ const spawnSpecialEntities = (rand, theme_keys) => {
         const blorbo = rand.pickFrom(specialThemeEntities[theme]);//for example this could pick either devona, neville or eye killer for HUNTING
         //only spawn a blorbo if you aren't already carring them
         if (blorbo && (!player.inventory || !player.inventory.map((i) => i.name).includes(blorbo.name))) {
-          
+
           ret.push(blorbo);
         }
       }
@@ -797,12 +798,56 @@ class StaticCreature extends Entity {
 
 class RotBeast extends FleshCreature {
   alive = false; //:) :) :)
+  uncensored = false;
+
   constructor() {
     super("[REDACTED]", "[REDACTED]", [CENSORSHIP], "redacted.gif");
+    this.actionMap[COMMAND_UNCENSOR] = ["UNCENSOR", "UNREDACT", "REVEAL"]
+    this.functionMap[COMMAND_UNCENSOR] = this.uncensor;
+    this.syncDefaultFunctions();
     //it is not just rotting meat, but you can't quite tell what it is
     this.contents.push(new Entity("[PULSING REDACTED]", "It's disgusting.", [FLESH, DECAY, TWISTING], "redacted.gif"));
-
   }
+
+  uncensor = () => {
+    window.open("http://farragofiction.com/ACensoredTranscript/?seerOfVoid=true" , '_blank');
+  }
+
+  look = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
+  smell = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
+  listen = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
+
+  taste = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
+
+  go = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
+  take = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
+
+  give = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
+  use = () => {
+    return "<span class='vik' title='WARNING: DO NOT UNCENSOR'>THE CENSORSHIP IS FOR YOUR PROTECTION</span>"
+  }
+
 }
 
 
@@ -1020,18 +1065,18 @@ the eye killer is NOT a monster of family, but you can't understand her without 
 specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[DEATH] = [CAMILLE, WITNESS];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY, WITNESS,CLOSER]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY, WITNESS, CLOSER]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT, WITNESS];
 specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER, DETECTIVE];//the detective is from a space setting
-specialThemeEntities[OCEAN] = [RIVER,CLOSER];
+specialThemeEntities[OCEAN] = [RIVER, CLOSER];
 specialThemeEntities[FIRE] = [RIA];
-specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
+specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[STEALING] = [K, ALT];
 specialThemeEntities[BURIED] = [RIVER, DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[FLESH] = [ALT];
@@ -1040,31 +1085,31 @@ specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
 specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS,CLOSER];
+specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
 specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
 specialThemeEntities[LIGHT] = [DEVONA, K, DOC_SLAUGHTER];
 specialThemeEntities[HEALING] = [WIBBY, DOC_SLAUGHTER];
-specialThemeEntities[PLANTS] = [RIVER,CLOSER];
+specialThemeEntities[PLANTS] = [RIVER, CLOSER];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER, DETECTIVE];
-specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS,CLOSER];
-specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS,CLOSER];
+specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS, CLOSER];
+specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[LOVE] = [ALT, WIBBY, DOC_SLAUGHTER, WITNESS];
 specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER, WITNESS];
 specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS];
 specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
 specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE, WITNESS];
-specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K, DOC_SLAUGHTER, DETECTIVE,CLOSER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
+specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K, DOC_SLAUGHTER, DETECTIVE, CLOSER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
 specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI, WITNESS]; //viscous
 specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS]; //the worm squirming towardss the echidnas heart, prepared to kill it
-specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK,CLOSER];
+specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK, CLOSER];
 specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K, DOC_SLAUGHTER, DETECTIVE, WITNESS];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
 specialThemeEntities[DOLLS] = [YONGKI, ALT, DOC_SLAUGHTER];
 specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER, WITNESS];
-specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON,CLOSER];
+specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON, CLOSER];
 specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE, WITNESS];
 specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT, DETECTIVE];
 

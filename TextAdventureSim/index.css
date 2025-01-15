@@ -1153,6 +1153,13 @@ a:active {
   }
 }
 
+.vik{
+  animation: glitch 1s linear infinite;
+  color: red;
+  display: inline-block;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
 .glitch {
   animation: glitch 1s linear infinite;
   display: inline-block;
