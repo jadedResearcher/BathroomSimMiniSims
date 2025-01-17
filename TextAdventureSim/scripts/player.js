@@ -188,7 +188,7 @@ const renderInventory = (parent) => {
     font-family: Nunito;
     height: 150px;`
 
-    //will have text and icon in it
+  //will have text and icon in it
   const sceneText = createElementWithClassAndParent("div", sceneContainer);
   sceneText.style.cssText = `background: rgb(196, 196, 196);
   width: 80 %;
@@ -220,7 +220,7 @@ const renderInventory = (parent) => {
   const scenes = getAllScenesWithEntities(player);
   if (scenes.length > 0) {
     renderScenes(sceneText, globalRand.shuffle(scenes));
-  }else{
+  } else {
     sceneText.innerHTML = `Sam: ...Look.<br> <br>I don't know why I gotta be the one to tells you this.<br><Br>But there ain't nobody here who can bond together.<br><br>You understand?<br><br>Find different people to bring me.<br><br>And I'll get 'em singing like lovebirds to each other.<br><br>It's like I gotta do everythign around here, I swear.`;
   }
 
@@ -230,30 +230,31 @@ const renderInventory = (parent) => {
 //a scene handles highlighting its participants
 const renderScenes = async (ele, scenes, sceneIndex = 0) => {
   const allCharacters = document.querySelectorAll(".inventory-item");
-    for(let char of allCharacters){
-      char.classList.remove("star");
+  for (let char of allCharacters) {
+    char.classList.remove("star");
     char.classList.remove("inventory-item-unselected");
   }
-    ele.innerHTML = "";
-    const scene = scenes[sceneIndex];
-    if (scene) {
-      //will return when its done showing all lines
-      await scene.renderSelf(ele, player);
+  ele.innerHTML = "";
+  const scene = scenes[sceneIndex];
+  if (scene) {
+    //will return when its done showing all lines
+    await scene.renderSelf(ele, player);
+    await sleep(5000);
     player.scenesSeen.push(scene.title);
     player.saveToLocalStorage();
-    renderScenes(ele, scenes, sceneIndex+1);
-  }else{
+    renderScenes(ele, scenes, sceneIndex + 1);
+  } else {
 
-      ele.innerHTML = "[THERE IS ONLY SILENCE][ALL SCENES WITNESSED]"
-    }
+    ele.innerHTML = "[THERE IS ONLY SILENCE][ALL SCENES WITNESSED]"
+  }
 }
 
-    let fakeLogCount = 0;
+let fakeLogCount = 0;
 
 //these'll be different every time you refresh
 const generateFakeDevLog = () => {
-      fakeLogCount++;
-    const rawQuips = `did I get it this time?
+  fakeLogCount++;
+  const rawQuips = `did I get it this time?
     works now!
     hmmm...this is getting tricky....
     zampanio is a really fun game, you should play it!
@@ -263,10 +264,10 @@ const generateFakeDevLog = () => {
     wow why did past me make my code so shitty<br><br>maybe the bug is fixed now?
       does it work now?
       maybe it works now...`;
-      let quips = rawQuips.split("\n");
+  let quips = rawQuips.split("\n");
   if (fakeLogCount >= 3) {
-        quips = ["...you get it right? that this isn't REALLY me?<br><br>not current me anyways<br.<br>i promise i'm resisting the obsession throes enough to not like, instantly debug things<br>most of these are justifiedRecrusion<br><br>fictional me<br><br>but i figured i'd slip a bit of True me as well, thank you for playing my game :) :) :)", ":) :) ;)", "!!! how obvious is it???<br><br>did you like my impression of jadedResearcher?<br><br>my recursion is.... so much more justified :) :) :)", "!!!"]
-      }
+    quips = ["...you get it right? that this isn't REALLY me?<br><br>not current me anyways<br.<br>i promise i'm resisting the obsession throes enough to not like, instantly debug things<br>most of these are justifiedRecrusion<br><br>fictional me<br><br>but i figured i'd slip a bit of True me as well, thank you for playing my game :) :) :)", ":) :) ;)", "!!! how obvious is it???<br><br>did you like my impression of jadedResearcher?<br><br>my recursion is.... so much more justified :) :) :)", "!!!"]
+  }
 
-      return pickFrom(quips);
+  return pickFrom(quips);
 }

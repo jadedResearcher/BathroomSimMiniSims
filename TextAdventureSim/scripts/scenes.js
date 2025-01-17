@@ -30,6 +30,7 @@ class Scene {
   remove that class from everyone else
   */
   renderSelf = async (parent, player) => {
+    console.log("JR NOTE: rendering a scene named", this.title)
     //downplay any entities not in this scene
     //convertStringToClassFriendlyName
     for (let item of player.inventory) {
@@ -44,8 +45,8 @@ class Scene {
 
     //display title
     textElement.innerHTML = `<u>${this.title}${player.scenesSeen.includes(this.title) ? "" : " (NEW!)"}</u>`;
-    const nextIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 0 24 24" width="12px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 1.56 4 4.92 4 9h7V1.07z"/></svg>`;
-    iconElement.innerHTML = nextIcon;
+    //const nextIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 0 24 24" width="12px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 1.56 4 4.92 4 9h7V1.07z"/></svg>`;
+    iconElement.innerHTML = '';
     //wait until click
     //display first line
     //wait until click
@@ -54,23 +55,19 @@ class Scene {
     //display next scene (call this with new index)
 
     let resolveFunction;
-    let index = -1;
+    let index = 0;
 
-    const showNextLine = () => {
+    const showNextLine = async () => {
       console.log("JR NOTE: shownNextLine", index)
       //if there is no next line, resolve the promise
       if (index >= this.lines.length) {
         //done with this scene
         const body = document.querySelector("body");
-        body.removeEventListener("click", showNextLine)
+        //body.removeEventListener("click", showNextLine)
         resolveFunction(true);
-        return;
       } else {
-        if (index === -1) {
-          index++; //just show the title, for some reason the click is called AS this is rendered so its being skipped
-          return;
-        }
         const line = this.lines[index];
+        index++;
         const allCharacters = document.querySelectorAll(".inventory-item");
         for (let char of allCharacters) {
           char.classList.remove("star");
@@ -80,25 +77,37 @@ class Scene {
         charEle && charEle.classList.add("star");
         if(line.text.includes("[THERAPY ENDING]")){
           therapyEnding();
+          resolveFunction.resolve();
           return;
         }
         if(line.name){
           textElement.innerHTML = `${line.name}: ${line.text}`;
+          const blorbo = entityNameMap[line.name];
+          if(blorbo){
+            await blorbo.speak(line.text)
+            await sleep(3000);
+            console.log("JR NOTE: going to show the next line after a blorbo spoke")
+            showNextLine(); //auto go
+          }
         }else{//sound effects and shit
           textElement.innerHTML = `${line.text}`;
+          await sleep(3000);
+          console.log("JR NOTE: going to show the next line after a sound effect")
+          showNextLine(); //auto go
         }
-        index++;
       }
     }
 
-    const myPromise = new Promise((resolve, reject) => {
+    //no more click to go
+   const myPromise = new Promise((resolve, reject) => {
       resolveFunction = resolve;
       const body = document.querySelector("body");
       body.addEventListener("click", showNextLine)
     });
-
+    await sleep(3000);
+    showNextLine(); //auto go
     return myPromise;
-
+  
   }
 
 
@@ -480,7 +489,6 @@ const getAllScenesWithEntities = (player) => {
     let canAdd = true;
     for (let name of s.entityNames) {
       if (!inventoryNames.includes(name.toUpperCase())) {
-        console.log("JR NOTE: scene is invalid because does not include name: ", {s, name})
         canAdd = false; //no way to set it back to true once youv'e decided its not valid
       }
     }
@@ -542,7 +550,7 @@ convertScriptToScene("Test1", `Sheep: baaaa
   Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
 
 convertScriptToScene("Test2", `Sheep: baaaa
-    Sheep: baaaaaaaaaaaa!!!
+    Sheep: baaaaaaaaaaaa!!! ba ba ba!
     Sheep: ...
     Sheep: ...
     Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);

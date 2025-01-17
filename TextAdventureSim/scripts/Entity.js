@@ -17,6 +17,9 @@ const COMMAND_HYDRATE = "HYDRATE"
 //look for [SETUP SPECIAL ENTITIES]
 const specialThemeEntities = {};
 
+//key is name, value is entity
+const entityNameMap = {}
+
 //what are euphamisms for each action (NOT what functions do they call)
 const defaultActionMap = {}
 defaultActionMap[COMMAND_LOOK] = ["LOOK", "READ", "SEE", "OBSERVE", "GLANCE", "GAZE", "GAPE", "STARE", "WATCH", "INSPECT", "EXAMINE", "STUDY", "SCAN", "VIEW", "JUDGE", "EYE", "OGLE"];
@@ -207,7 +210,6 @@ const spawnItemsForThemes = (rand, theme_keys) => {
 
   let ret = [];
   for (let item of itemsButNotEntities) {
-    console.log("JR NOTE: making item", { item, itemsButNotEntities })
     const e = new Entity(item.name, item.desc, item.themes.map((t) => t.key), item.src);
     ret.push(e)
   }
@@ -264,6 +266,7 @@ class Entity {
 
   constructor(name, desc, theme_keys, sprite = "sheep.gif") {
     this.name = name.toUpperCase();
+    entityNameMap[this.name] = this;
     this.sprite = sprite;
     this.rand = new SeededRandom(stringtoseed(name));
     this.freq_multiplier = this.rand.nextDouble();
@@ -273,12 +276,12 @@ class Entity {
     this.syncDefaultFunctions();
   }
 
-  speak =(words)=>{
+  speak =async (words)=>{
     if(!this.voice){
       this.voice = new BlorboVoice(this.freq_multiplier, this.speed_multiplier);
     }
     console.log("JR NOTE: going to speak: ", this.voice);
-    this.voice.speak(words, this.rand);
+    await this.voice.speak(words, this.rand);
   }
   //this will be the same every time i call this function (unless i refresh the page)
   //as opposed to the non cached rand that changes over time
