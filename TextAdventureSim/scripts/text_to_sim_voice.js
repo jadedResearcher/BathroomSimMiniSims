@@ -5,9 +5,79 @@ function syllabify(words) {
     return words.match(syllableRegex);
 }
 
+//the bare minimu you need to make a blorbo talk
+class BlorboVoice {
+    audioCtx = new AudioContext();
+    freq_multiplier;
+    speed_multiplier;
+
+    constructor(freq_multiplier, speed_multiplier) {
+        this.freq_multiplier = freq_multiplier;
+        this.speed_multiplier = speed_multiplier;
+    }
+
+    //unlike truth im not being facy here, this does not take an array in, but a string
+    speak = async (words, rand) => {
+        if (words.length === 0) {
+            return;
+        }
+        if (!rand) {
+            rand = new SeededRandom(13);
+        }
+        let word_parts = syllabify(words); //can return null for things like JR
+        word_parts = word_parts ? word_parts : words;
+
+        //forEach allows async within
+        for (let syllable of word_parts) {
+            const duration = rand.getRandomNumberBetween(50, 100) * this.speed_multiplier;
+            const frequency = syllable.charCodeAt(0) * this.freq_multiplier;
+            let real = [];
+            let imag = [];
+            for (let i = 0; i < syllable.length; i++) {
+                real.push(syllable.charCodeAt(i))
+                imag.push(syllable.charCodeAt(i))
+                real.push(217 * 1000)
+                imag.push(217 * 1000)
+            }
+
+
+            await this.note(duration, frequency, real, imag);
+            await sleep(rand.getRandomNumberBetween(10, 50)) //small pause between syllables
+
+        }
+        await sleep(rand.getRandomNumberBetween(20, 150)); //pause bewteen words
+    }
+
+    note = async (duration, frequency, real, imag) => {
+        if (this.mute) {
+            return;
+        }
+        const osc = this.audioCtx.createOscillator();
+        const gainNode = this.audioCtx.createGain();
+        osc.connect(gainNode);
+        gainNode.connect(this.audioCtx.destination)
+        gainNode.gain.value = 0.5;
+
+        gainNode.gain.setValueAtTime(gainNode.gain.value, this.audioCtx.currentTime);
+
+        const wave = this.audioCtx.createPeriodicWave(real, imag);
+
+        osc.setPeriodicWave(wave);
+        osc.frequency.value = frequency;
+        //osc.connect(this.audioCtx.destination);
+        osc.start();
+        await sleep(duration)
+        gainNode.gain.setValueAtTime(gainNode.gain.value, this.audioCtx.currentTime);
+
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + 0.03);
+        await sleep(3)
+        osc.stop(); //stopping abruptly causes a clicking sound
+    }
+}
+
 //sounds that are consistent given the same input
 //a sort of language
-class TextToSimulatedVoice {
+class TruthToSimulatedVoice {
     audioCtx = new AudioContext();
     truth
     lastTruth = "";
@@ -39,7 +109,7 @@ class TextToSimulatedVoice {
         const word = words[0];
         if (!rand) {
             rand = new SeededRandom(13);
-            this.truth.renderText(words.join(" "), truthQuotient||this.rageMode);
+            this.truth.renderText(words.join(" "), truthQuotient || this.rageMode);
             if (truthQuotient) {
                 this.lastTruth = words;
             }
@@ -69,12 +139,12 @@ class TextToSimulatedVoice {
 
         }
         await sleep(rand.getRandomNumberBetween(20, 150)); //pause bewteen words
-       !this.clear && await this.speak(words.slice(1), rand, truthQuotient);
+        !this.clear && await this.speak(words.slice(1), rand, truthQuotient);
 
     }
 
     note = async (duration, frequency, real, imag) => {
-        if(this.mute){
+        if (this.mute) {
             return;
         }
         const osc = this.audioCtx.createOscillator();

@@ -244,6 +244,9 @@ And I mean, from THEIR point of view of COURSE a person is the same thing as a b
 
 class Entity {
   alive = false;
+  voice;
+  freq_multiplier = 0.5;
+  speed_multiplier  = 0.5;
   book = false;
   sprite = "sheep.gif"; //gosh why does THIS exist?
   description = "It's so perfectly generic."
@@ -263,9 +266,19 @@ class Entity {
     this.name = name.toUpperCase();
     this.sprite = sprite;
     this.rand = new SeededRandom(stringtoseed(name));
+    this.freq_multiplier = this.rand.nextDouble();
+    this.speed_multiplier = Math.max(this.rand.nextDouble(),0.5);
     this.description = desc;
     this.theme_keys = theme_keys;
     this.syncDefaultFunctions();
+  }
+
+  speak =(words)=>{
+    if(!this.voice){
+      this.voice = new BlorboVoice(this.freq_multiplier, this.speed_multiplier);
+    }
+    console.log("JR NOTE: going to speak: ", this.voice);
+    this.voice.speak(words, this.rand);
   }
   //this will be the same every time i call this function (unless i refresh the page)
   //as opposed to the non cached rand that changes over time
@@ -983,6 +996,8 @@ const ALT = new FleshCreature("Alt",
   const TRUTH = new CognitiveCreature("TRUTH",
     "The Truth is, you will never see this, Observer. Except, of course, here. Truth is not INSIDE the Maze. TRUTH IS THE MAZE. And also not the maze. Truth is the shape your mind takes as you wander the maze. The thoughts you have. The memories you form. The maze is a mold you press your mind around and the impression it leaves on you. Truth is no more a blorbo than you are, Observer.",
   [TWISTING]);
+  TRUTH.freq_multiplier = 0.81;
+  TRUTH.speed_multiplier = 1.0;
 
 //cfo is does not exist past arm1, much like wanda does not
 //but unlike wanda its because she breaches into her trickster form, the apocalpyse chick

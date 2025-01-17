@@ -154,7 +154,7 @@ const truthGetsPissyDotEXE = async () => {
   let truthWordContainer = document.querySelector('#truths-words');
   let truth = new TruthToLipSinc(truthWellContainer, truthWordContainer);
   truth.renderFrame("Well.");
-  textVoiceSim = new TextToSimulatedVoice(truth, 0.81, 1.0);
+  textVoiceSim = new TruthToSimulatedVoice(truth, 0.81, 1.0);
   await sleep(1000);
   await textVoiceSim.speak("Well...".split(","), null, true);
   await sleep(1000);
