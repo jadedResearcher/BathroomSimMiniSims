@@ -399,6 +399,11 @@ class Entity {
   //like, ria being on fire (having fire in her inventory) isn't going to behave the same as anyone else 
 
 
+  //only reason this is a function is so alt can override it
+  displayName = ()=>{
+    return this.name;
+  }
+
   /*
   i think its funny
   there ARE no procedural "sight" words
@@ -414,7 +419,7 @@ class Entity {
     let directions;
     let pockets;
 
-    pockets = this.contents.length > 0 ? `<br><br>You see ${humanJoining(this.contents.map((c => c.book ? `<u>${c.name}</u>` : c.name)))} inside it! ` : "<br><br>You see nothing inside it :(";
+    pockets = this.contents.length > 0 ? `<br><br>You see ${humanJoining(this.contents.map((c => c.book ? `<u>${c.displayName()}</u>` : c.displayName())))} inside it! ` : "<br><br>You see nothing inside it :(";
     directions = this.neighbors.length > 0 ? `<br><br>Obvious exits are ${humanJoining(this.neighbors.map((n, i) => `${n.name} (${getDirectionLabel(i)})`))}!` : "<br><br>There's no where to go from it :(";
     return `You look carefully at the ${this.book ? `<u>${this.name}</u>` : this.name}. ${this.book ? "You only have enough attention span to read a little bit:" : "It's hard to see!"} ${this.description}. ${pockets} ${directions}`;
   }
@@ -712,10 +717,10 @@ class Entity {
   help = (parentEntity) => {
     let commands = [];
     let defaultCommands = Object.keys(defaultActionMap);
-    for(let c of Object.keys(this.actionMap)){
-      if(defaultCommands.includes(c)){
+    for (let c of Object.keys(this.actionMap)) {
+      if (defaultCommands.includes(c)) {
         commands.push(`<span style="color: green; text-decoration:underlined;">${c}</span>`)
-      }else{
+      } else {
         commands.push(`<span style="color: yellow; text-decoration:underlined;">${c}</span>`)
       }
     }
@@ -828,7 +833,7 @@ class RotBeast extends FleshCreature {
   }
 
   uncensor = () => {
-    window.open("http://farragofiction.com/ACensoredTranscript/?seerOfVoid=true" , '_blank');
+    window.open("http://farragofiction.com/ACensoredTranscript/?seerOfVoid=true", '_blank');
     this.syncDefaultFunctions(); //restores the uncensored versions
     return ".... Well. Alright then. I am sure you know what you are doing."
   }
@@ -932,13 +937,18 @@ const schadenfreud = new MechanicalBeast("Schadenfreud",
   "eye6.png"
 );
 K.contents.push(schadenfreud);
+const K_quips = ["Hell yeah you SHOULD be looking at me.","Keep those eyes coming!","If you keep looking I might do a trick ;)","That's right, look at me!","Why would you look at anything else?","You sure do have great taste!"]
+K.functionMap[COMMAND_LOOK] = ()=>{return K.look() + `<br><br><span style='font-size: 120%; color: yellow'>${pickFrom(K_quips)}</span>`}
 
 
 
 const ALT = new FleshCreature("Alt",
-  "The Stranger of Fleshy Dreams. She looks like whoever she is interacting with... Inside of Truth's horridors, that means she looks like a maze. <br><br>She refuses to leave Truth, because she craves the certainty of the immortality the Apocalypse providdes.<br><br>She does not want to ever be alone again because everyone else has died.",
+  "The Stranger of Fleshy Dreams. She looks like whoever she is interacting with... Inside of Truth's horridors, that means she can even look like a maze. <br><br>She refuses to leave Truth, because she craves the certainty of the immortality the Apocalypse provides.<br><br>She does not want to ever be alone again because everyone else has died.<br><br>Her Porn Bot Network has been great at getting more and more people to fall to Zampanio and thus join her inside of Truth.",
   [FLESH, DOLLS, SERVICE, LONELY, APOCALYPSE],
   "Blorbos/ALT_by_guide_of_hunters.png")
+  ALT.displayName= ()=>{
+    return pickFrom(current_room.contents).name;
+  }
 
 //cfo is does not exist past arm1, much like wanda does not
 //but unlike wanda its because she breaches into her trickster form, the apocalpyse chick
@@ -962,8 +972,8 @@ const APOCALYSE_CHICK = new FleshCreature("Harleclypse ", //we gave her yet anot
   [APOCALYPSE, TWISTING, TECHNOLOGY, MATH, ADDICTION, WASTE],
   "Blorbos/apocalypse_chick_by_guide.gif")
 
-  APOCALYSE_CHICK.talk = ()=>{
-    return `Oooooooooooh!!!!!!!!!!!
+APOCALYSE_CHICK.talk = () => {
+  return `Oooooooooooh!!!!!!!!!!!
     <br>
     You want to talk to me????????????
     <br>
@@ -1012,9 +1022,9 @@ const APOCALYSE_CHICK = new FleshCreature("Harleclypse ", //we gave her yet anot
     You guys like sending letters right?
     <br>
     I'll be watching! `;
-  }
+}
 
-  APOCALYSE_CHICK.syncDefaultFunctions();
+APOCALYSE_CHICK.syncDefaultFunctions();
 
 
 const WIBBY = new FleshCreature("Witherby",
@@ -1022,13 +1032,16 @@ const WIBBY = new FleshCreature("Witherby",
   [ANGELS, KNOWING, LONELY, SERVICE, HEALING],
   "Blorbos/Thesolemn_by_guide.png");
 
-  WIBBY.actionMap["CONFESS"] = ["CONFESS"]
-  WIBBY.functionMap["CONFESS"] = ()=>{return "You are forgiven."}
+WIBBY.actionMap["CONFESS"] = ["CONFESS"]
+WIBBY.functionMap["CONFESS"] = () => { return "You are forgiven." }
 
 const sin = new FleshCreature("One Sin, Hundreds of Good Deeds",
   "Witherby's skull is literally an Abnormality that feasts on the sins of others without judgement. It whispers to him to secrets of a long dead religion called 'Catholicsm'. ",
   [ANGELS, KNOWING, FLESH],
   "skull.png");
+
+sin.actionMap["CONFESS"] = ["CONFESS"]
+sin.functionMap["CONFESS"] = () => { return "You are forgiven." }
 WIBBY.contents.push(sin);
 
 
