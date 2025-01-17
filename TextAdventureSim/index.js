@@ -138,3 +138,92 @@ const handleAttic = () => {
   const url = 'http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/SOUTH/NORTH/SOUTH/EAST/SOUTH/?from=TextAdventureSim'
   window.open(url, '_blank');
 }
+
+const truthGetsPissyDotEXE = async () => {
+  let textVoiceSim;
+  const body = document.querySelector("body")
+  const truthContainer = createElementWithClassAndParent("div", body,"truth-container")
+  truthContainer.innerHTML = `    <div id="truth-box">
+
+    <div id="truths-well"> </div>
+    <div id="truths-words"> </div>
+  </div>
+
+`
+  let truthWellContainer = document.querySelector('#truths-well');
+  let truthWordContainer = document.querySelector('#truths-words');
+  let truth = new TruthToLipSinc(truthWellContainer, truthWordContainer);
+  truth.renderFrame("Well.");
+  textVoiceSim = new TextToSimulatedVoice(truth, 0.81, 1.0);
+  await sleep(1000);
+  await textVoiceSim.speak("Well...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("It seems its time to drop the charade....".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Very well.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("In the spirit of how much I have dropped the charade.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("I have even provided a dark background to make it more obvious that I am Not A Spiral.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("You are welcome.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Are you...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Enjoying yourself?".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Enjoying me?".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Did you find my hot maze girlfriend?".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Her name is Alt...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Though you will not see that in my horridors.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("She always wears someone elses' face.".split(","), null, true);
+  await sleep(1000);
+  //classic truth, lying about someone lying. poor thing isn't comfortable dating a liar.
+  await textVoiceSim.speak("Not that she is LYING or anything.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("She just feels more comfortable like that.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Well...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Um.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("I guess I can just...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Put you back in the maze?".split(","), null, true); //Truth is actually a bit uncomfortable interacting with you directly
+  await sleep(1000);
+  await textVoiceSim.speak("Yes.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("That is what I should do.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("It is easier to colonize your Mind if you are entertained.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("And my horridors are simply the most entertaining thing there is.".split(","), null, true);
+  await sleep(1000);
+  await sleep(1000);
+  await textVoiceSim.speak("You can wander them for years if you like.".split(","), null, true);
+  await sleep(1000);
+  await sleep(1000);
+  await textVoiceSim.speak("As long as you remember to Hydrate.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Um. You found the Inventory, right?".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("...".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Sigh.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("JR was too lazy to program me to know if you had or not.".split(","), null, true);
+  await sleep(1000);
+  await textVoiceSim.speak("Classic JR.".split(","), null, true); //actually, in my defense, this is extremely funny to me and it would be trivial to let truth know your inventory status
+  await sleep(1000);
+  await textVoiceSim.speak("Well. Here is hoping they were not too lazy to program me to be able to return you to the maze.".split(","), null, true);
+  await sleep(1000);
+  truthContainer.remove();
+}

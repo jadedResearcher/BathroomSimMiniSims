@@ -567,7 +567,9 @@ const httpGetAsync = async (theUrl) => {
   });
 }
 
-
+const truthLog = (text) => {
+  console.log(`Truth: %c${text}`, "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;");
+}
 
 
 //https://en.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use

@@ -1165,6 +1165,37 @@ a:active {
   display: inline-block;
 }
 
+.truth-container{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 9999;
+  background-color: #101010; /*42 in binary, the answer to life the universe and everything*/
+}
+
+#truths-box{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#truths-well{
+  z-index: 1;
+  position: absolute;
+}
+
+#truths-words{
+  z-index: 1000;
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
+  color: red;
+  padding: 31px;
+  position: fixed;
+  top:25%;
+  left: 25%;
+}
+
 @keyframes glitch {
 
   2%,

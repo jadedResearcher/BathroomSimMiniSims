@@ -11,6 +11,7 @@ const COMMAND_USE = "USE";
 const COMMAND_THINK = "THINK";
 const COMMAND_HELP = "HELP";
 const COMMAND_UNCENSOR = "UNCENSOR"
+const COMMAND_HYDRATE = "HYDRATE"
 
 //not guaranteed to have every theme, but will be keyed by theme and have an array of entities to spawn
 //look for [SETUP SPECIAL ENTITIES]
@@ -31,6 +32,7 @@ defaultActionMap[COMMAND_TALK] = ["TALK", "TELL", "ASK", "QUESTION", "INTERROGAT
 defaultActionMap[COMMAND_TAKE] = ["TAKE", "PILFER", "LOOT", "GET", "STEAL", "POCKET", "OBTAIN", "GRAB", "CLUTCH", "WITHDRAW", "EXTRACT", "REMOVE", "PURLOIN", "YOINK", "PICK"];
 defaultActionMap[COMMAND_GIVE] = ["GIVE", "GIFT", "OFFER", "BESTOW"];
 defaultActionMap[COMMAND_USE] = ["USE", "DEPLOY", "UTILIZE", "OPERATE", "INVOKE"];
+defaultActionMap[COMMAND_HYDRATE] = ["HYDRATE", "DRINK", "GUZZLE", "SWALLOW", "SLURP"];
 
 const directionIndices = ["NORTH", "SOUTH", "EAST", "???"]
 getDirectionLabel = (index) => {
@@ -287,6 +289,7 @@ class Entity {
     this.functionMap[COMMAND_TAKE] = this.take;
     this.functionMap[COMMAND_GIVE] = this.give;
     this.functionMap[COMMAND_USE] = this.use;
+    this.functionMap[COMMAND_HYDRATE] = this.hydrate;
     this.functionMap[COMMAND_TOUCH] = this.touch;
 
   }
@@ -312,6 +315,12 @@ class Entity {
   handleCommand = (command, parentEntity, count = 0, justifiedRecursion = true) => {
     if (count > 13) {
       return "Haha, wow! How did you manage to recurse thaaaaaaaaaaaaat many times. Surely even YOU can't justify that one, lol. imma just...stop that. Only I get to cause fractal game crashing bugs like that, lulz. It's been real!"
+    }
+
+    const truthRet = this.checkTruthForCommand(command);
+    if(truthRet){
+      truthGetsPissyDotEXE();
+      return `>${command}<br><br>`  + truthRet;
     }
     //first word is what command it is
     //but do not rush and try to do something with it, it might be for one of your contents
@@ -342,6 +351,12 @@ class Entity {
     }
 
 
+  }
+
+  checkTruthForCommand =(command)=>{
+    if(command.toUpperCase().includes("TRUTH")){
+      return `<span style="font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;">Well. It seems its time to drop the charade. Very well.</span>`
+    }
   }
   //if these recurse, THEY are the parent, not their parent
   checkContentsForCommand = (command, count, justifiedRecursion) => {
@@ -482,6 +497,10 @@ class Entity {
     const rand = this.getCachedRand();
     let touch = this.theme_keys.map((t) => all_themes[t].pickPossibilityFor(FEELING, rand));
     return `You happily paw at the ${this.name}, taking in the textures of ${humanJoining(uniq(touch))}. ${this.alive ? `The ${this.name} seems really upset about this.` : "No one can stop you."}`
+  }
+
+  hydrate = ()=>{
+  return "You feel refreshed. Thank you for remembering to drink. It's required to live."
   }
 
   /*
@@ -810,6 +829,14 @@ class StaticCreature extends Entity {
   }
 }
 
+class CognitiveCreature extends Entity{
+  alive = false; //not alive the same way you are, Observer
+  constructor(name, desc, theme_keys, sprite) {
+    super(name, desc + "<br><br>It's inside your Mind.", theme_keys, sprite);
+    this.theme_keys.push(TWISTING);
+  }
+}
+
 class RotBeast extends FleshCreature {
   alive = false; //:) :) :)
   constructor() {
@@ -946,9 +973,16 @@ const ALT = new FleshCreature("Alt",
   "The Stranger of Fleshy Dreams. She looks like whoever she is interacting with... Inside of Truth's horridors, that means she can even look like a maze. <br><br>She refuses to leave Truth, because she craves the certainty of the immortality the Apocalypse provides.<br><br>She does not want to ever be alone again because everyone else has died.<br><br>Her Porn Bot Network has been great at getting more and more people to fall to Zampanio and thus join her inside of Truth.",
   [FLESH, DOLLS, SERVICE, LONELY, APOCALYPSE],
   "Blorbos/ALT_by_guide_of_hunters.png")
+
+  //unless you already know alt's name you can't interact with her true form
+  //you'll only be aware of her false ones
   ALT.displayName= ()=>{
     return pickFrom(current_room.contents).name;
   }
+
+  const TRUTH = new CognitiveCreature("TRUTH",
+    "The Truth is, you will never see this, Observer. Except, of course, here. Truth is not INSIDE the Maze. TRUTH IS THE MAZE. And also not the maze. Truth is the shape your mind takes as you wander the maze. The thoughts you have. The memories you form. The maze is a mold you press your mind around and the impression it leaves on you. Truth is no more a blorbo than you are, Observer.",
+  [TWISTING]);
 
 //cfo is does not exist past arm1, much like wanda does not
 //but unlike wanda its because she breaches into her trickster form, the apocalpyse chick
