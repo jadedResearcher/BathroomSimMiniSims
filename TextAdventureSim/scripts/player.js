@@ -102,13 +102,17 @@ class Player {
     localStorage[SAVE_KEY] = JSON.stringify({ debugCodes: uniq(this.debugCodes), scenesSeen: uniq(this.scenesSeen) });
   }
 
+  dropFromInventory(entity){
+    this.inventory = removeItemOnce(this.inventory, entity);
+    current_room.contents.push(entity);
+  }
+
   //sam does not care if its a person, place or thing he's stuffing into his greedy maw
   //its the apocalypse, everything is hacked to be everything else
   //fractals ftw
   //nothing can die in nidhoggs apocalypse tho
   //so what happens instead?
   addToInventory = (entity) => {
-    console.log("JR NOTE: adding to inventory", { entity: entity.name, inventory: this.inventory })
     //no doubles
     let unique = true;
     for (let item of this.inventory) {
@@ -259,7 +263,11 @@ const renderSceneList = (parent)=>{
 }
 
 const renderDropList = (parent) => {
+  const explanation = createElementWithClassAndParent("div", parent);
+  explanation.innerText = "Click To Drop In Current Room"
   const container = createElementWithClassAndParent("div", parent);
+  
+
   container.style.cssText = `display: flex;
     flex-wrap: wrap;
     gap: 13px;
@@ -278,12 +286,16 @@ const renderDropList = (parent) => {
     height: 150px;`
 
   for (let item of player.inventory) {
-    const itemEle = createElementWithClassAndParent("img", container);
+    const itemEle = createElementWithClassAndParent("img", container, "hoverable");
     itemEle.title = item.name;
     itemEle.classList.add(convertStringToClassFriendlyName(item.name));
     itemEle.classList.add("inventory-item");
     itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
-    itemEle.style.cssText = `height: 50px; padding: 3px; `;
+    itemEle.style.cssText = `height: 50px; padding: 3px; cursor: pointer;`;
+    itemEle.onclick = ()=>{
+      player.dropFromInventory(item);
+      itemEle.remove();
+    }
 
   }
 }

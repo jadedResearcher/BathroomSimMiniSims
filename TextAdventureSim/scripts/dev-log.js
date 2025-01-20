@@ -140,6 +140,8 @@ class DevLog {
 //new DevLog("12/17/2024","")
 //newest on top
 //fake devlogs will get added to the top as well
+new DevLog("01/19/2025","Assuming I didn't accidentally break the inventory again, you can drop things from it.<br><br>You're welcome :)","Plus I made it so you can re-visit any Inventory scene in easier to read format, so long as you've seen it once.")
+
 new DevLog("01/16/2025","Why is it so hard to make the blorbos talk???","see you think its the broken 'TALK' command but actually its the inventory voice system") 
 new DevLog("01/12/2025","Haha whoops.<br><br>Guess who has completely forgot to update the Dev Log?<br><br>It's me.<br><br>I've been, believe it or not, STILL been playing wac-a-mole with the Inventory.<br><br>Turns out if you have nothing in it the whole game crashes since my big update with the ending.<br><br>This is why we regression test, smdh.")
 new DevLog("12/30/2024","Last day of real vacation left, hoping to get the last little bit of the bones (the scripting system) finished.","for the inventory :)")
