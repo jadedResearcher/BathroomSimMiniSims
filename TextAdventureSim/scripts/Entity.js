@@ -275,12 +275,12 @@ class Entity {
     this.theme_keys = theme_keys;
     this.syncDefaultFunctions();
   }
-
+  //http://farragofiction.com/ColonistsEyes5/godiloveit.png
+//this person is presumed living this person is presumed living this person is presumed living
   speak =async (words)=>{
     if(!this.voice){
       this.voice = new BlorboVoice(this.freq_multiplier, this.speed_multiplier);
     }
-    console.log("JR NOTE: going to speak: ", this.voice);
     await this.voice.speak(words, this.rand);
   }
   //this will be the same every time i call this function (unless i refresh the page)

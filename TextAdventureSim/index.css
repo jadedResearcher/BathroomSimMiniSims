@@ -790,6 +790,7 @@ button {
   font-size: 22px;
   line-height: 28.6px;
   display: block;
+  cursor: pointer;
 }
 
 .command input:focus {

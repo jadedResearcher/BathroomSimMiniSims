@@ -479,6 +479,14 @@ const response = await httpGetAsync(`http://farragofiction.com:8500/TalkButlerBo
 
 }
 
+const getSceneWithTitle = (title)=>{
+  for (let s of all_scenes) {
+    if(s.title === title){
+      return s;
+    }
+  }
+}
+
 //if the inventory has Sheep and Blood and Fire
 //then a scene with Sheep and Blood would return, as well as Blood and Fire
 //but not a scene with Sheep and Blood and Fire and Ria

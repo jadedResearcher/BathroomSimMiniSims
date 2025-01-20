@@ -141,12 +141,41 @@ class Player {
         container.style.display = "flex";
         container.style.gap = "31px;"
 
-        const startButton = createElementWithClassAndParent("button", container);
+
+        const buttonContainer = createElementWithClassAndParent("div", container);
+        buttonContainer.style.cssText =`display: flex;flex-direction: column;gap: 31px;`
+        const startButton = createElementWithClassAndParent("button", buttonContainer);
         startButton.innerText = "BEGIN BONDING";//classic heir of blood baby
         startButton.onclick = () => {
           container.remove();
           renderInventory(inventoryGame);
         }
+
+        const rereadButton = createElementWithClassAndParent("button", buttonContainer);
+        rereadButton.innerText = "REVIEW BONDS";
+        rereadButton.onclick = () => {
+          container.remove();
+          renderSceneList(inventoryGame);
+        }
+        //the thing is theres ROOM here to have things drop but... sam... is not about dropping things, now are they?
+
+        //how do i spin this?
+
+        //its not about rejecting or releasing or DROPPING the bonds...
+
+        //its about using them as a LURE for new bonds.
+
+        //is it in game?
+
+        //it can be.... but do i want it to be?
+
+        const dropButton = createElementWithClassAndParent("button", buttonContainer);
+        dropButton.innerText = "BAIT BONDS";
+        dropButton.onclick = () => {
+          container.remove();
+          renderDropList(inventoryGame);
+        }
+
 
         const intro = createElementWithClassAndParent("div", container);
         intro.style.padding = "31px"
@@ -157,7 +186,7 @@ class Player {
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">Those freakin&apos; monsters that live in the mall have started sniffing around your business lately, some kind of feud with one of your, you mean your Big Bro&apos;s pet monsters. The one who is the backbone of your &quot;Addiction&quot; thread. ...</span><s><span style="font-size:11pt;font-family:Arial,sans-serif;">&nbsp;You try not to think about how you had to find out the bastard was your ex when you fully took over Family operations. &nbsp;John...</span></s></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">So. Fine. You can make this work.&nbsp;</span></p>
 <p><span style="font-size:11pt;font-family:Arial,sans-serif;">You offer the monsters a deal. You&apos;re gonna get everybody attending the same party, at a high class club your Family owns, The Inventory, &nbsp;pull your strings, and get them actually TALKING to each other.&nbsp;</span></p>
-<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Ain&apos;t nobody kept a feud up once they&apos;re tried together, you always say.&nbsp;</span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;">Now let&apos;s see, who do you have here tonight at the Inventory.</span></p>`;
+<p><span style="font-size:11pt;font-family:Arial,sans-serif;">Ain&apos;t nobody kept a feud up once they&apos;re tied together, you always say.&nbsp;</span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="font-size:11pt;font-family:Arial,sans-serif;">Now let&apos;s see, who do you have here tonight at the Inventory.</span></p>`;
 
 
 
@@ -167,6 +196,96 @@ class Player {
     }
   }
 
+}
+
+const renderSceneReview = (parent, sceneTitle)=>{
+  const scene = getSceneWithTitle(sceneTitle);
+  const backButton = createElementWithClassAndParent("button", parent);
+  backButton.innerText = "Back To Bond List";
+  backButton.onclick = ()=>renderSceneList(parent);
+
+  const explanation = createElementWithClassAndParent("div", parent);
+  if(scene){
+    explanation.innerText = scene.title;
+    explanation.style.cssText=`    text-decoration: underline;
+    font-size: 24px;
+    margin-bottom: 31px;
+    argin-top: 13px`;
+    const story = createElementWithClassAndParent("div", parent);
+    for(let line of scene.lines){
+      const container = createElementWithClassAndParent("div", story);
+      container.style.display="flex";
+
+      if(line.name){
+        const item = entityNameMap[line.name];
+        if(item){
+          const itemEle = createElementWithClassAndParent("img", container);
+          itemEle.title = item.name;
+          itemEle.classList.add(convertStringToClassFriendlyName(item.name));
+          itemEle.classList.add("inventory-item");
+          itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
+          itemEle.style.cssText = `height: 25px; padding: 3px; `;
+        }
+      }
+      if(line.text){
+        const textElement = createElementWithClassAndParent("div", container);
+        textElement.innerHTML = `${line.text}`;
+      }
+    }
+
+  }else{
+    parent.innerHTML = `Huh. Uh. How did that happen? <br><br>Did  you REALLY view a scene that did not exist?<br><br>Or are you being a Waste and hacking things better left alone?<br><br>No matter.<br><br>Suffice to say: There is nothing here.`;
+    parent.style.cssText= "margin-left: 31px; font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;";
+  }
+}
+
+const renderSceneList = (parent)=>{
+  parent.innerHTML = "";
+  const explanation = createElementWithClassAndParent("div", parent);
+  explanation.innerHTML = "Bonding Scenes Viewed: ";
+  const ul = createElementWithClassAndParent("ul", parent);
+  for(let scene of player.scenesSeen){
+    const li = createElementWithClassAndParent("li", ul);
+    const button = createElementWithClassAndParent("button", li); //for keyboard controls/aaccessibility
+    button.innerText = scene;
+    button.style.cursor = "pointer";
+    button.style.background="none";
+    button.onclick = ()=>{
+      parent.innerHTML = ``;
+      renderSceneReview(parent,scene);
+
+    }
+  }
+}
+
+const renderDropList = (parent) => {
+  const container = createElementWithClassAndParent("div", parent);
+  container.style.cssText = `display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    height: 80%;
+    overflow: auto;`;
+
+  const sceneContainer = createElementWithClassAndParent("div", parent);
+  sceneContainer.style.cssText = `position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    line-height: 18px;
+    background: black;
+    width: 97%;
+    overflow: auto;
+    font-family: Nunito;
+    height: 150px;`
+
+  for (let item of player.inventory) {
+    const itemEle = createElementWithClassAndParent("img", container);
+    itemEle.title = item.name;
+    itemEle.classList.add(convertStringToClassFriendlyName(item.name));
+    itemEle.classList.add("inventory-item");
+    itemEle.src = "images/Walkabout/Objects/TopFloorObjects/" + item.sprite;
+    itemEle.style.cssText = `height: 50px; padding: 3px; `;
+
+  }
 }
 
 const renderInventory = (parent) => {
