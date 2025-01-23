@@ -55,7 +55,7 @@ const getAllSpecialEntities = () => {
 
 const testVoices = async () => {
   const blorbos = getAllSpecialEntities();
-  for(let blorbo of blorbos){
+  for (let blorbo of blorbos) {
     console.log(`${blorbo.name}: Speed: ${blorbo.speed_multiplier}, Frequency: ${blorbo.freq_multiplier}`)
     await blorbo.speak("THIS IS JUST A TEST OF MY VOICE")
   }
@@ -284,8 +284,8 @@ class Entity {
     entityNameMap[this.name] = this;
     this.sprite = sprite;
     this.rand = new SeededRandom(stringtoseed(name));
-    this.freq_multiplier = this.rand.nextDouble()*10;
-    this.speed_multiplier = Math.max(this.rand.nextDouble())*5;
+    this.freq_multiplier = this.rand.nextDouble() * 10;
+    this.speed_multiplier = Math.max(this.rand.nextDouble()) * 5;
     this.description = desc;
     this.theme_keys = theme_keys;
     this.syncDefaultFunctions();
@@ -1186,59 +1186,91 @@ const CLOSER = new StaticCreature("Closer",
   [LONELY, FREEDOM, GUIDING, SERVICE, PLANTS, ADDICTION],
   "Blorbos/closer_by_the_guide.png")
 
+//nidhogg can not praise a hope ghost, there is no Life there.
+const TYRFING = new FleshCreature("Tyrfing",
+  "He is a giant cockroach.<br><br>Nothing you say will convince him otherwise.<br><br>He has a hard outer carapace.<br><br>Nidhogg hates him.<br><Br>He is a hated insect, the bane of all plants.<br><br>He knows its right and proper for Nidhogg to hate him but he wishes he could be praised, just once, for doing something to make up for the repugnance of his own existence.<br><br>Through the sheer power of Hope, he forges his lifeless and deathless body to be covered in Eyes, to be the colors of the All-Father.<br><br>It does not help.",
+  [BUGS, ANGELS, SERVICE, FAMILY, ANGER],
+  "Blorbos/Tyrfing_by_guide.png")
+
+  const NAM = new MechanicalBeast("NotAMinotaur",
+    "He is Not a Minotaur. <br><br>A robotic ghost that haunts Truth's horridors until suddenly he does not.<br><br>He only wants to be left alone...<br><br>He loops, but he pretends he does not.<br><br>He can not control the Philosophy.<br><br>The Octome changed him too much. ",
+    [TECHNOLOGY, SERVICE,ZAP, KNOWING, OBFUSCATION,DEATH],
+    "Blorbos/NAM_by_guide.png"
+  );
+
+  const RONIN = new MechanicalBeast("Ronin",
+    "He used to be trapped inside of something very similar to NotAMinotaur.<br><br>He isn't anymore.<br><br>He tries not to think about what happened to the other guy, the guy he was trapped inside of.<br><br>He is not in the Loop but most of his friends are (and don't tell him). <br><br>It would break him, to learn of the Loop, and they know it.<br><Br>He wants a world where things make sense and the Rules are followed.<br><br>He refuses to wear the stupid helmet.",
+    [TECHNOLOGY, ANGER,ZAP,SERVICE,DEFENSE],
+    "Blorbos/Ronin_by_guide.png"
+  );
+
+
+  //i don't wanna write a story about him slowly peeling a guy alive while making him live through
+  //the feeling of everyone he cares about slowly liking some imposter more than him
+  //so
+  //his 'soul mate' is fictional, to the Echidna Universe
+  //he was a real dude in Morgan's Hill but...we're not there anymore, now are we.
+  //if the Neighbor found out, he would do everything in his power to return to his home Universe
+  //but, well, who would tell him?
+  const NEIGHBOR = new FleshCreature("The Neighbor.",
+    "The Neighbor. <br><br>The Host.<br><br>The Shambling Horror.<br><br>The Tourist.<br><br>Whatever you call him, he is better than you.<br><br>He fits in better.<br><br>Everyone likes him better than you.<br><br>They forget you even exist when he's around.<br><br>But don't worry.<br><br>He won't hurt you.<br><br>He's saving himself for that special someone.<br><br>The one that shares his face.<br><br>His soul mate.<br><br>They're destined to be together...forever.<br><br>...<br><br>He won't deny that there are a few Temptations, while he waits, though.<br><br>Why does Yongki get to replace Captain so easily? Why is it so hard for The Neighbor to find his own double? Does Yongki think he's better than him? Impossible. Its so tempting to just...show how much better he would be at replacing the Captain... But no. He's no strumpet. He's waiting for the One. No matter how scared he imagines the Captain would be to watch his life fall to pieces...<br><br>And Doctor Fiona Slaughter is the only one truly from his homeland... such a fun person to mess with! It's a meaningless fling of course but a guy has needs, he supposes.",
+    [DOLLS, KILLING, FAMILY,SERVICE,OBFUSCATION,SPYING],
+    "Blorbos/Neighbor_by_guide.png")
+
+
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
 */
 specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
-specialThemeEntities[DEATH] = [CAMILLE, WITNESS];
-specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, ALT, APOCALYSE_CHICK, WIBBY, WITNESS, CLOSER]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
+specialThemeEntities[DEATH] = [CAMILLE, WITNESS,NAM];
+specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K,NEIGHBOR];
+specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE,RONIN, DEVIL_OF_SPIRALS, CLOSER, TYRFING,NEIGHBOR];
+specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER,NAM, ALT, APOCALYSE_CHICK, WIBBY, WITNESS, CLOSER,NEIGHBOR]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
 specialThemeEntities[CENSORSHIP] = [VIK];
-specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT, WITNESS];
-specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, WITNESS];
+specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE, DEVONA, ALT, WITNESS,NAM,NEIGHBOR];
+specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS,NAM, WITNESS];
 specialThemeEntities[ART] = [EYEKILLER, RIVER];
-specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON, K, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
+specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HOON,RONIN, K, NAM,APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER, DETECTIVE];//the detective is from a space setting
 specialThemeEntities[OCEAN] = [RIVER, CLOSER];
 specialThemeEntities[FIRE] = [RIA];
 specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
-specialThemeEntities[STEALING] = [K, ALT];
-specialThemeEntities[BURIED] = [RIVER, DOC_SLAUGHTER, DETECTIVE];
-specialThemeEntities[FLESH] = [ALT];
+specialThemeEntities[STEALING] = [K, ALT,NEIGHBOR];
+specialThemeEntities[BURIED] = [RIVER, DOC_SLAUGHTER, RONIN,DETECTIVE];
+specialThemeEntities[FLESH] = [ALT, TYRFING,NEIGHBOR];
 specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
-specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
+specialThemeEntities[TWISTING] = [K, APOCALYSE_CHICK, DEVIL_OF_SPIRALS, TYRFING,NEIGHBOR];
 specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
-specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
-specialThemeEntities[SERVICE] = [EYEKILLER, CAPTAIN, HOON, ALT, WIBBY, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
-specialThemeEntities[FAMILY] = [NEVILLE, DEVONA, EYEKILLER, CAPTAIN, YONGKI];
-specialThemeEntities[MAGIC] = [HOON, APOCALYSE_CHICK, DEVIL_OF_SPIRALS];
+specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS, TYRFING];
+specialThemeEntities[SERVICE] = [EYEKILLER, NEIGHBOR,RONIN,CAPTAIN, HOON,NAM, ALT, WIBBY, TYRFING, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
+specialThemeEntities[FAMILY] = [NEVILLE, NEIGHBOR,DEVONA, EYEKILLER,NAM,RONIN, CAPTAIN, TYRFING, YONGKI];
+specialThemeEntities[MAGIC] = [HOON, NEIGHBOR,APOCALYSE_CHICK, DEVIL_OF_SPIRALS,NAM,CLOSER]; //anyone with an Artifact of the Nameless One is technically magic
 specialThemeEntities[LIGHT] = [DEVONA, K, DOC_SLAUGHTER];
 specialThemeEntities[HEALING] = [WIBBY, DOC_SLAUGHTER];
-specialThemeEntities[PLANTS] = [RIVER, CLOSER];
-specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER, DETECTIVE];
-specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS, CLOSER];
-specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS, CLOSER];
-specialThemeEntities[LOVE] = [ALT, WIBBY, DOC_SLAUGHTER, WITNESS];
-specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER, WITNESS];
-specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, K, DETECTIVE, DEVIL_OF_SPIRALS];
-specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS];
-specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K];
-specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE, WITNESS];
+specialThemeEntities[PLANTS] = [RIVER, CLOSER, TYRFING];
+specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER,RONIN, DETECTIVE,NEIGHBOR];
+specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS, CLOSER,NEIGHBOR];
+specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS, RONIN,CLOSER,NAM];
+specialThemeEntities[LOVE] = [ALT, WIBBY, DOC_SLAUGHTER, WITNESS,NEIGHBOR];
+specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER, WITNESS,NAM,RONIN,NEIGHBOR];
+specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, TYRFING, K, DETECTIVE, DEVIL_OF_SPIRALS];
+specialThemeEntities[WEB] = [RIA, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS,RONIN];
+specialThemeEntities[ROYALTY] = [CAPTAIN, HOON, K,NAM,RONIN];
+specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE, WITNESS,NAM];
 specialThemeEntities[GUIDING] = [CAPTAIN, HOON, K, DOC_SLAUGHTER, DETECTIVE, CLOSER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
 specialThemeEntities[CRAFTING] = [RIVER, ALT, APOCALYSE_CHICK];
-specialThemeEntities[LANGUAGE] = [YONGKI, WITNESS]; //viscous
-specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS]; //the worm squirming towardss the echidnas heart, prepared to kill it
+specialThemeEntities[LANGUAGE] = [YONGKI, WITNESS,NAM]; //viscous
+specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS, TYRFING,RONIN]; //the worm squirming towardss the echidnas heart, prepared to kill it
 specialThemeEntities[ADDICTION] = [RIA, HOON, APOCALYSE_CHICK, CLOSER];
-specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K, DOC_SLAUGHTER, DETECTIVE, WITNESS];
+specialThemeEntities[SPYING] = [NEVILLE, DEVONA, EYEKILLER, K, NEIGHBOR,DOC_SLAUGHTER, DETECTIVE, WITNESS];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
-specialThemeEntities[DOLLS] = [YONGKI, ALT, DOC_SLAUGHTER];
-specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER, WITNESS];
+specialThemeEntities[DOLLS] = [YONGKI, ALT, DOC_SLAUGHTER,NAM,RONIN,NEIGHBOR];
+specialThemeEntities[DARKNESS] = [NEVILLE, EYEKILLER, WITNESS,NEIGHBOR];
 specialThemeEntities[MUSIC] = [RIA, LEE, HUNTER, HOON, CLOSER];
 specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE, WITNESS];
-specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, YONGKI, CAPTAIN, ALT, DETECTIVE];
+specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, EYEKILLER, RONIN,YONGKI, TYRFING, CAPTAIN, ALT, DETECTIVE];
 
 //make sure they know they're special
 for (let arr of Object.values(specialThemeEntities)) {
