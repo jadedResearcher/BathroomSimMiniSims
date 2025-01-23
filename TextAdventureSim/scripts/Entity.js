@@ -949,6 +949,8 @@ const EYEKILLER = new ShadowBeast("Eye Killer",
   [KILLING, ART, TIME, DARKNESS],
   "Blorbos/Eye_Killer_pixel_by_the_guide.png");
 
+
+  //the fact tha ti keep typoing the name of our main stranger aligned character is v funny to me
 const YONGKI = new FleshCreature("Yongki",
   "He is the Scholar of Strange Minds. He can not be defeated. He only wants to learn about the world and the wonders within it.",
   [DOLLS, CLOWNS, CHOICES, DEFENSE, FREEDOM],
@@ -1204,6 +1206,19 @@ const RONIN = new MechanicalBeast("Ronin",
   "Blorbos/Ronin_by_guide.png"
 );
 
+const PARKER = new FleshCreature("Parker.",
+  "He loves anime, Vik and Hatsune Miku.<br><br>Wait, shit, forgot you saw that.<br><br>Anime, [REDACTED] and Hatsune Miku.",
+  [EN],
+  "Blorbos/Parker_pixel_by_the_guide.png")
+
+  const GUNTAN = new MechanicalBeast("Gun-Tan",
+    "Pull the trigger, Parker-san!<br><br>You know you want to~!!!<br><br>Paaaaarker?<br><br>I'm so SAAAAAAD when you don't shoot anyone!<br><br>Meanie Parker!<br><br>Baka!",
+    [KILLING],
+    "Blorbos/MikuForFriend.png")
+
+    PARKER.contents.push(GUNTAN);
+
+
 
 //i don't wanna write a story about him slowly peeling a guy alive while making him live through
 //the feeling of everyone he cares about slowly liking some imposter more than him
@@ -1233,26 +1248,26 @@ the eye killer is NOT a monster of family, but you can't understand her without 
 */
 specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[DEATH] = [CAMILLE, WITNESS, NAM];
-specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER, YONGKI, HOON, K, NEIGHBOR,HOSTAGE];
+specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER,PARKER, YONGKI, HOON, K, NEIGHBOR,HOSTAGE];
 specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, RONIN, DEVIL_OF_SPIRALS, CLOSER, TYRFING, NEIGHBOR];
 specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, NAM, ALT, APOCALYSE_CHICK, WIBBY, WITNESS, CLOSER, NEIGHBOR]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE,HOSTAGE, DEVONA, ALT, WITNESS, NAM, NEIGHBOR];
-specialThemeEntities[DECAY] = [VIK, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, NAM, WITNESS];
+specialThemeEntities[DECAY] = [VIK, PARKER,LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, NAM, WITNESS];
 specialThemeEntities[ART] = [EYEKILLER, RIVER,HOSTAGE];
 specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HIMBO,HOON, RONIN, K, NAM, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
-specialThemeEntities[SPACE] = [RIVER, DETECTIVE];//the detective is from a space setting
+specialThemeEntities[SPACE] = [RIVER, PARKER,DETECTIVE];//the detective is from an outer space setting
 specialThemeEntities[OCEAN] = [RIVER, CLOSER];
 specialThemeEntities[FIRE] = [RIA,HOSTAGE];
 specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
-specialThemeEntities[STEALING] = [K, ALT, NEIGHBOR,HIMBO,HOSTAGE];
-specialThemeEntities[BURIED] = [RIVER, DOC_SLAUGHTER, RONIN, DETECTIVE,HOSTAGE];
+specialThemeEntities[STEALING] = [K, ALT, PARKER,NEIGHBOR,HIMBO,HOSTAGE];
+specialThemeEntities[BURIED] = [PARKER,RIVER, DOC_SLAUGHTER, RONIN, DETECTIVE,HOSTAGE];
 specialThemeEntities[FLESH] = [ALT, TYRFING, NEIGHBOR,HOSTAGE];
 specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [K, HIMBO,APOCALYSE_CHICK, DEVIL_OF_SPIRALS, TYRFING, NEIGHBOR];
-specialThemeEntities[APOCALYPSE] = [ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
+specialThemeEntities[APOCALYPSE] = [PARKER,ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS, TYRFING];
 specialThemeEntities[SERVICE] = [EYEKILLER,HIMBO, NEIGHBOR, RONIN, CAPTAIN, HOON, NAM, ALT, WIBBY, TYRFING, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[FAMILY] = [NEVILLE, HOSTAGE,HIMBO,NEIGHBOR, DEVONA, EYEKILLER, NAM, RONIN, CAPTAIN, TYRFING, YONGKI];
@@ -1263,23 +1278,23 @@ specialThemeEntities[PLANTS] = [RIVER, CLOSER, TYRFING];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER, RONIN, DETECTIVE, NEIGHBOR];
 specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS, CLOSER, NEIGHBOR];
 specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS, RONIN, CLOSER, NAM];
-specialThemeEntities[LOVE] = [ALT, HIMBO,HOSTAGE,WIBBY, DOC_SLAUGHTER, WITNESS, NEIGHBOR];
+specialThemeEntities[LOVE] = [PARKER,ALT, HIMBO,HOSTAGE,WIBBY, DOC_SLAUGHTER, WITNESS, NEIGHBOR];
 specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER, WITNESS, NAM, RONIN, NEIGHBOR];
 specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, TYRFING, K, DETECTIVE, DEVIL_OF_SPIRALS];
-specialThemeEntities[WEB] = [RIA,HOSTAGE, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS, RONIN];
+specialThemeEntities[WEB] = [PARKER,RIA,HOSTAGE, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS, RONIN];
 specialThemeEntities[ROYALTY] = [CAPTAIN,HOSTAGE,HIMBO, HOON, K, NAM, RONIN];
 specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE, WITNESS, NAM];
 specialThemeEntities[GUIDING] = [CAPTAIN, HOSTAGE,HOON, K, DOC_SLAUGHTER, DETECTIVE, CLOSER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
-specialThemeEntities[CRAFTING] = [RIVER, HOSTAGE,ALT, APOCALYSE_CHICK];
+specialThemeEntities[CRAFTING] = [PARKER,RIVER, HOSTAGE,ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI, HOSTAGE,WITNESS, NAM]; //viscous
 specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS, TYRFING, RONIN]; //the worm squirming towardss the echidnas heart, prepared to kill it
-specialThemeEntities[ADDICTION] = [RIA, HOSTAGE,HOON, APOCALYSE_CHICK, CLOSER];
-specialThemeEntities[SPYING] = [NEVILLE, HIMBO,DEVONA, EYEKILLER, K, NEIGHBOR, DOC_SLAUGHTER, DETECTIVE, WITNESS];
+specialThemeEntities[ADDICTION] = [PARKER,RIA, HOSTAGE,HOON, APOCALYSE_CHICK, CLOSER];
+specialThemeEntities[SPYING] = [PARKER,NEVILLE, HIMBO,DEVONA, EYEKILLER, K, NEIGHBOR, DOC_SLAUGHTER, DETECTIVE, WITNESS];
 specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
 specialThemeEntities[DOLLS] = [YONGKI, HOSTAGE,HIMBO,ALT, DOC_SLAUGHTER, NAM, RONIN, NEIGHBOR];
-specialThemeEntities[DARKNESS] = [NEVILLE, HOSTAGE,EYEKILLER, WITNESS, NEIGHBOR];
+specialThemeEntities[DARKNESS] = [PARKER,NEVILLE, HOSTAGE,EYEKILLER, WITNESS, NEIGHBOR];
 specialThemeEntities[MUSIC] = [RIA, LEE, HOSTAGE,HUNTER, HOON, CLOSER];
-specialThemeEntities[WASTE] = [APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE, WITNESS];
+specialThemeEntities[WASTE] = [PARKER,APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE, WITNESS];
 specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, HOSTAGE,EYEKILLER, RONIN, YONGKI, TYRFING, CAPTAIN, ALT, DETECTIVE];
 
 //make sure they know they're special
