@@ -154,3 +154,5 @@ new DevLog("12/17/2024", "lol, realized i should probably have some kinda bug re
 new DevLog("12/15/2024", "Got the bones in place, you can submit commands and they print text on the screen. it's all default text tho")
 new DevLog("12/14/2024", "Got the page more or less created<br><br>Super excited about getting to actually play around with North again. Don't get me wrong, Eyedlr was a great time, 10/10, but it wasn't really ZAMPANIOSIM you know? it was just me spiralling around my own branch in a highly selfindulgent way.<br><br>This is me trying to get back to basics. I tried my hand at making a simulation of what Zampanio would look like if it were an RPGMaker game, so how about a Text Adventure?", "PLUS the Medium and the Anon and a few otheres are trying to end the story :) :) :)\n\nTHAT'll be fun to bounce off of")
 
+//https://www.youtube.com/watch?v=mMo-Nn9_YW4
+//today has been a bad day... maybe looking at my old work will help

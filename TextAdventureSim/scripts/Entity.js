@@ -45,6 +45,22 @@ getDirectionLabel = (index) => {
   return "???";
 }
 
+const getAllSpecialEntities = () => {
+  let ret = [];
+  for (let s of Object.values(specialThemeEntities)) {
+    ret = ret.concat(s);
+  }
+  return uniq(ret);
+}
+
+const testVoices = async () => {
+  const blorbos = getAllSpecialEntities();
+  for(let blorbo of blorbos){
+    console.log(`${blorbo.name}: Speed: ${blorbo.speed_multiplier}, Frequency: ${blorbo.freq_multiplier}`)
+    await blorbo.speak("THIS IS JUST A TEST OF MY VOICE")
+  }
+}
+
 const getRandomThemeConcept = (rand, theme_keys, concept) => {
   const theme = all_themes[rand.pickFrom(theme_keys)];
   return theme.pickPossibilityFor(concept, rand);
@@ -243,12 +259,11 @@ And I mean, from THEIR point of view of COURSE a person is the same thing as a b
 */
 
 
-
 class Entity {
   alive = false;
   voice;
   freq_multiplier = 0.5;
-  speed_multiplier  = 0.5;
+  speed_multiplier = 0.5;
   book = false;
   sprite = "sheep.gif"; //gosh why does THIS exist?
   description = "It's so perfectly generic."
@@ -269,16 +284,16 @@ class Entity {
     entityNameMap[this.name] = this;
     this.sprite = sprite;
     this.rand = new SeededRandom(stringtoseed(name));
-    this.freq_multiplier = this.rand.nextDouble();
-    this.speed_multiplier = Math.max(this.rand.nextDouble(),0.5);
+    this.freq_multiplier = this.rand.nextDouble()*10;
+    this.speed_multiplier = Math.max(this.rand.nextDouble())*5;
     this.description = desc;
     this.theme_keys = theme_keys;
     this.syncDefaultFunctions();
   }
   //http://farragofiction.com/ColonistsEyes5/godiloveit.png
-//this person is presumed living this person is presumed living this person is presumed living
-  speak =async (words)=>{
-    if(!this.voice){
+  //this person is presumed living this person is presumed living this person is presumed living
+  speak = async (words) => {
+    if (!this.voice) {
       this.voice = new BlorboVoice(this.freq_multiplier, this.speed_multiplier);
     }
     await this.voice.speak(words, this.rand);
@@ -334,9 +349,9 @@ class Entity {
     }
 
     const truthRet = this.checkTruthForCommand(command);
-    if(truthRet){
+    if (truthRet) {
       truthGetsPissyDotEXE();
-      return `>${command}<br><br>`  + truthRet;
+      return `>${command}<br><br>` + truthRet;
     }
     //first word is what command it is
     //but do not rush and try to do something with it, it might be for one of your contents
@@ -369,8 +384,8 @@ class Entity {
 
   }
 
-  checkTruthForCommand =(command)=>{
-    if(command.toUpperCase().includes("TRUTH")){
+  checkTruthForCommand = (command) => {
+    if (command.toUpperCase().includes("TRUTH")) {
       return `<span style="font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;">Well. It seems its time to drop the charade. Very well.</span>`
     }
   }
@@ -431,7 +446,7 @@ class Entity {
 
 
   //only reason this is a function is so alt can override it
-  displayName = ()=>{
+  displayName = () => {
     return this.name;
   }
 
@@ -515,8 +530,8 @@ class Entity {
     return `You happily paw at the ${this.name}, taking in the textures of ${humanJoining(uniq(touch))}. ${this.alive ? `The ${this.name} seems really upset about this.` : "No one can stop you."}`
   }
 
-  hydrate = ()=>{
-  return "You feel refreshed. Thank you for remembering to drink. It's required to live."
+  hydrate = () => {
+    return "You feel refreshed. Thank you for remembering to drink. It's required to live."
   }
 
   /*
@@ -845,7 +860,7 @@ class StaticCreature extends Entity {
   }
 }
 
-class CognitiveCreature extends Entity{
+class CognitiveCreature extends Entity {
   alive = false; //not alive the same way you are, Observer
   constructor(name, desc, theme_keys, sprite) {
     super(name, desc + "<br><br>It's inside your Mind.", theme_keys, sprite);
@@ -980,8 +995,8 @@ const schadenfreud = new MechanicalBeast("Schadenfreud",
   "eye6.png"
 );
 K.contents.push(schadenfreud);
-const K_quips = ["Hell yeah you SHOULD be looking at me.","Keep those eyes coming!","If you keep looking I might do a trick ;)","That's right, look at me!","Why would you look at anything else?","You sure do have great taste!"]
-K.functionMap[COMMAND_LOOK] = ()=>{return K.look() + `<br><br><span style='font-size: 120%; color: yellow'>${pickFrom(K_quips)}</span>`}
+const K_quips = ["Hell yeah you SHOULD be looking at me.", "Keep those eyes coming!", "If you keep looking I might do a trick ;)", "That's right, look at me!", "Why would you look at anything else?", "You sure do have great taste!"]
+K.functionMap[COMMAND_LOOK] = () => { return K.look() + `<br><br><span style='font-size: 120%; color: yellow'>${pickFrom(K_quips)}</span>` }
 
 
 
@@ -990,17 +1005,17 @@ const ALT = new FleshCreature("Alt",
   [FLESH, DOLLS, SERVICE, LONELY, APOCALYPSE],
   "Blorbos/ALT_by_guide_of_hunters.png")
 
-  //unless you already know alt's name you can't interact with her true form
-  //you'll only be aware of her false ones
-  ALT.displayName= ()=>{
-    return pickFrom(current_room.contents).name;
-  }
+//unless you already know alt's name you can't interact with her true form
+//you'll only be aware of her false ones
+ALT.displayName = () => {
+  return pickFrom(current_room.contents).name;
+}
 
-  const TRUTH = new CognitiveCreature("TRUTH",
-    "The Truth is, you will never see this, Observer. Except, of course, here. Truth is not INSIDE the Maze. TRUTH IS THE MAZE. And also not the maze. Truth is the shape your mind takes as you wander the maze. The thoughts you have. The memories you form. The maze is a mold you press your mind around and the impression it leaves on you. Truth is no more a blorbo than you are, Observer.",
+const TRUTH = new CognitiveCreature("TRUTH",
+  "The Truth is, you will never see this, Observer. Except, of course, here. Truth is not INSIDE the Maze. TRUTH IS THE MAZE. And also not the maze. Truth is the shape your mind takes as you wander the maze. The thoughts you have. The memories you form. The maze is a mold you press your mind around and the impression it leaves on you. Truth is no more a blorbo than you are, Observer.",
   [TWISTING]);
-  TRUTH.freq_multiplier = 0.81;
-  TRUTH.speed_multiplier = 1.0;
+TRUTH.freq_multiplier = 0.81;
+TRUTH.speed_multiplier = 1.0;
 
 //cfo is does not exist past arm1, much like wanda does not
 //but unlike wanda its because she breaches into her trickster form, the apocalpyse chick
