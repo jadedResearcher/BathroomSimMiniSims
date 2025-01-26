@@ -1218,7 +1218,41 @@ const PARKER = new FleshCreature("Parker.",
 
     PARKER.contents.push(GUNTAN);
 
+/*
+oh no i almost forgot the watt clones
 
+sorry rod, rebel and melon
+
+also, how can biological lamia be clones of a robot ghost that does not exist?
+
+because they're yellow
+
+don't worry...
+
+it makes sense
+*/
+
+/*
+const name = new FleshCreature("name",
+   "desc",
+   [EN],
+   "Blorbos/camille.png")
+*/
+
+const ROD = new FleshCreature("Rod",
+  "He holds the whole Universe in his hands.<br><br>He guides us all to a better way.<br><br>He is...so so sad that his family is so scattered.<br><br>Why does Peewee keep abandoning them all?<br><br>The entire Training team keep showing up at his place unannounced and drinking his Milk.",
+  [GUIDING, FAMILY, SERVICE, LONELY],
+  "Blorbos/rod_by_guide.png")
+
+  const REBEL = new FleshCreature("Rebel",
+    "He doesn't need his Dad. What did Peewee even do for them anyways?<br><br>He's friends with Neville.",
+    [ANGER, FAMILY, DEFENSE,STEALING],
+    "Blorbos/rebel_by_guide.png")
+
+    const MELON = new FleshCreature("Melon",
+      "This clown does ecoterrorism because when he was a wiggler one time a father figure recycled in front of him and somehow that connected to an ecoterrorist named Melon from Wattman.exe's past.<br><br>Don't worry about it.<br><br>Melon does not care if Peewee is around or not.",
+      [ANGER, PLANTS, DEFENSE, FIRE, FAMILY],
+      "Blorbos/melon_by_guide.png")
 
 //i don't wanna write a story about him slowly peeling a guy alive while making him live through
 //the feeling of everyone he cares about slowly liking some imposter more than him
@@ -1249,53 +1283,53 @@ the eye killer is NOT a monster of family, but you can't understand her without 
 specialThemeEntities[ENDINGS] = [CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[DEATH] = [CAMILLE, WITNESS, NAM];
 specialThemeEntities[KILLING] = [CAMILLE, EYEKILLER,PARKER, YONGKI, HOON, K, NEIGHBOR,HOSTAGE];
-specialThemeEntities[QUESTING] = [CAMILLE, CAPTAIN, HOON, DETECTIVE, RONIN, DEVIL_OF_SPIRALS, CLOSER, TYRFING, NEIGHBOR];
-specialThemeEntities[LONELY] = [CAMILLE, LEE, HUNTER, RIVER, NAM, ALT, APOCALYSE_CHICK, WIBBY, WITNESS, CLOSER, NEIGHBOR]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
+specialThemeEntities[QUESTING] = [MELON,CAMILLE, CAPTAIN, HOON, DETECTIVE, RONIN, DEVIL_OF_SPIRALS, CLOSER, TYRFING, NEIGHBOR];
+specialThemeEntities[LONELY] = [ROD,CAMILLE, LEE, HUNTER, RIVER, NAM, ALT, APOCALYSE_CHICK, WIBBY, WITNESS, CLOSER, NEIGHBOR]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
 specialThemeEntities[CENSORSHIP] = [VIK];
-specialThemeEntities[OBFUSCATION] = [VIK, NEVILLE,HOSTAGE, DEVONA, ALT, WITNESS, NAM, NEIGHBOR];
-specialThemeEntities[DECAY] = [VIK, PARKER,LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, NAM, WITNESS];
-specialThemeEntities[ART] = [EYEKILLER, RIVER,HOSTAGE];
+specialThemeEntities[OBFUSCATION] = [REBEL,VIK, NEVILLE,HOSTAGE, DEVONA, ALT, WITNESS, NAM, NEIGHBOR];
+specialThemeEntities[DECAY] = [MELON,VIK, PARKER,LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, NAM, WITNESS];
+specialThemeEntities[ART] = [ROD,EYEKILLER, RIVER,HOSTAGE];
 specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HIMBO,HOON, RONIN, K, NAM, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[TIME] = [LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER, PARKER,DETECTIVE];//the detective is from an outer space setting
-specialThemeEntities[OCEAN] = [RIVER, CLOSER];
-specialThemeEntities[FIRE] = [RIA,HOSTAGE];
-specialThemeEntities[FREEDOM] = [YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
-specialThemeEntities[STEALING] = [K, ALT, PARKER,NEIGHBOR,HIMBO,HOSTAGE];
+specialThemeEntities[OCEAN] = [ROD,RIVER, CLOSER];
+specialThemeEntities[FIRE] = [MELON,RIA,HOSTAGE];
+specialThemeEntities[FREEDOM] = [REBEL,YONGKI, HOON, APOCALYSE_CHICK, WIBBY, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
+specialThemeEntities[STEALING] = [REBEL,K, ALT, PARKER,NEIGHBOR,HIMBO,HOSTAGE];
 specialThemeEntities[BURIED] = [PARKER,RIVER, DOC_SLAUGHTER, RONIN, DETECTIVE,HOSTAGE];
 specialThemeEntities[FLESH] = [ALT, TYRFING, NEIGHBOR,HOSTAGE];
 specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER, DETECTIVE];
-specialThemeEntities[MATH] = [NEVILLE, APOCALYSE_CHICK, WIBBY];
+specialThemeEntities[MATH] = [REBEL,NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [K, HIMBO,APOCALYSE_CHICK, DEVIL_OF_SPIRALS, TYRFING, NEIGHBOR];
 specialThemeEntities[APOCALYPSE] = [PARKER,ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[ANGELS] = [WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS, TYRFING];
-specialThemeEntities[SERVICE] = [EYEKILLER,HIMBO, NEIGHBOR, RONIN, CAPTAIN, HOON, NAM, ALT, WIBBY, TYRFING, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
-specialThemeEntities[FAMILY] = [NEVILLE, HOSTAGE,HIMBO,NEIGHBOR, DEVONA, EYEKILLER, NAM, RONIN, CAPTAIN, TYRFING, YONGKI];
-specialThemeEntities[MAGIC] = [HOON, HIMBO,NEIGHBOR, APOCALYSE_CHICK, DEVIL_OF_SPIRALS, NAM, CLOSER]; //anyone with an Artifact of the Nameless One is technically magic
+specialThemeEntities[SERVICE] = [ROD,EYEKILLER,HIMBO, NEIGHBOR, RONIN, CAPTAIN, HOON, NAM, ALT, WIBBY, TYRFING, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
+specialThemeEntities[FAMILY] = [ROD, REBEL, MELON,NEVILLE, HOSTAGE,HIMBO,NEIGHBOR, DEVONA, EYEKILLER, NAM, RONIN, CAPTAIN, TYRFING, YONGKI];
+specialThemeEntities[MAGIC] = [MELON,HOON, HIMBO,NEIGHBOR, APOCALYSE_CHICK, DEVIL_OF_SPIRALS, NAM, CLOSER]; //anyone with an Artifact of the Nameless One is technically magic
 specialThemeEntities[LIGHT] = [DEVONA, K, DOC_SLAUGHTER];
-specialThemeEntities[HEALING] = [WIBBY, DOC_SLAUGHTER];
-specialThemeEntities[PLANTS] = [RIVER, CLOSER, TYRFING];
+specialThemeEntities[HEALING] = [MELON,ROD,WIBBY, DOC_SLAUGHTER];
+specialThemeEntities[PLANTS] = [MELON,RIVER, CLOSER, TYRFING];
 specialThemeEntities[HUNTING] = [NEVILLE, DEVONA, EYEKILLER, RONIN, DETECTIVE, NEIGHBOR];
-specialThemeEntities[CHOICES] = [YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS, CLOSER, NEIGHBOR];
+specialThemeEntities[CHOICES] = [REBEL,YONGKI, HOON, DOC_SLAUGHTER, DETECTIVE, WITNESS, CLOSER, NEIGHBOR];
 specialThemeEntities[ZAP] = [CAPTAIN, DEVIL_OF_SPIRALS, RONIN, CLOSER, NAM];
-specialThemeEntities[LOVE] = [PARKER,ALT, HIMBO,HOSTAGE,WIBBY, DOC_SLAUGHTER, WITNESS, NEIGHBOR];
+specialThemeEntities[LOVE] = [ROD,PARKER,ALT, HIMBO,HOSTAGE,WIBBY, DOC_SLAUGHTER, WITNESS, NEIGHBOR];
 specialThemeEntities[SOUL] = [CAPTAIN, ALT, DOC_SLAUGHTER, WITNESS, NAM, RONIN, NEIGHBOR];
-specialThemeEntities[ANGER] = [LEE, HUNTER, CAPTAIN, TYRFING, K, DETECTIVE, DEVIL_OF_SPIRALS];
+specialThemeEntities[ANGER] = [MELON,REBEL,LEE, HUNTER, CAPTAIN, TYRFING, K, DETECTIVE, DEVIL_OF_SPIRALS];
 specialThemeEntities[WEB] = [PARKER,RIA,HOSTAGE, LEE, HUNTER, HOON, DEVIL_OF_SPIRALS, RONIN];
 specialThemeEntities[ROYALTY] = [CAPTAIN,HOSTAGE,HIMBO, HOON, K, NAM, RONIN];
 specialThemeEntities[KNOWING] = [DEVONA, K, WIBBY, DOC_SLAUGHTER, DETECTIVE, WITNESS, NAM];
-specialThemeEntities[GUIDING] = [CAPTAIN, HOSTAGE,HOON, K, DOC_SLAUGHTER, DETECTIVE, CLOSER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
-specialThemeEntities[CRAFTING] = [PARKER,RIVER, HOSTAGE,ALT, APOCALYSE_CHICK];
+specialThemeEntities[GUIDING] = [ROD,CAPTAIN, HOSTAGE,HOON, K, DOC_SLAUGHTER, DETECTIVE, CLOSER]; //K is a surprising addition here, but he/she/they/xe/ze LOVE knowing things you don't and lording them over you
+specialThemeEntities[CRAFTING] = [ROD,PARKER,RIVER, HOSTAGE,ALT, APOCALYSE_CHICK];
 specialThemeEntities[LANGUAGE] = [YONGKI, HOSTAGE,WITNESS, NAM]; //viscous
-specialThemeEntities[BUGS] = [YONGKI, DEVIL_OF_SPIRALS, TYRFING, RONIN]; //the worm squirming towardss the echidnas heart, prepared to kill it
+specialThemeEntities[BUGS] = [MELON,YONGKI, DEVIL_OF_SPIRALS, TYRFING, RONIN]; //the worm squirming towardss the echidnas heart, prepared to kill it
 specialThemeEntities[ADDICTION] = [PARKER,RIA, HOSTAGE,HOON, APOCALYSE_CHICK, CLOSER];
 specialThemeEntities[SPYING] = [PARKER,NEVILLE, HIMBO,DEVONA, EYEKILLER, K, NEIGHBOR, DOC_SLAUGHTER, DETECTIVE, WITNESS];
-specialThemeEntities[CLOWNS] = [YONGKI, APOCALYSE_CHICK];
-specialThemeEntities[DOLLS] = [YONGKI, HOSTAGE,HIMBO,ALT, DOC_SLAUGHTER, NAM, RONIN, NEIGHBOR];
-specialThemeEntities[DARKNESS] = [PARKER,NEVILLE, HOSTAGE,EYEKILLER, WITNESS, NEIGHBOR];
-specialThemeEntities[MUSIC] = [RIA, LEE, HOSTAGE,HUNTER, HOON, CLOSER];
+specialThemeEntities[CLOWNS] = [MELON,YONGKI, APOCALYSE_CHICK];
+specialThemeEntities[DOLLS] = [ROD,YONGKI, HOSTAGE,HIMBO,ALT, DOC_SLAUGHTER, NAM, RONIN, NEIGHBOR];
+specialThemeEntities[DARKNESS] = [REBEL,PARKER,NEVILLE, HOSTAGE,EYEKILLER, WITNESS, NEIGHBOR];
+specialThemeEntities[MUSIC] = [MELON,REBEL,RIA, LEE, HOSTAGE,HUNTER, HOON, CLOSER];
 specialThemeEntities[WASTE] = [PARKER,APOCALYSE_CHICK, DEVIL_OF_SPIRALS, DETECTIVE, WITNESS];
-specialThemeEntities[DEFENSE] = [NEVILLE, DEVONA, HOSTAGE,EYEKILLER, RONIN, YONGKI, TYRFING, CAPTAIN, ALT, DETECTIVE];
+specialThemeEntities[DEFENSE] = [MELON,REBEL,NEVILLE, DEVONA, HOSTAGE,EYEKILLER, RONIN, YONGKI, TYRFING, CAPTAIN, ALT, DETECTIVE];
 
 //make sure they know they're special
 for (let arr of Object.values(specialThemeEntities)) {

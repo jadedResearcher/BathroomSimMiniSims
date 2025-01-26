@@ -616,7 +616,8 @@ convertScriptToScene("Test3", `Sheep: baaaa
 //http://farragofiction.com/ASecondTranscript/
 //camille is our special birthdaygurl gonna use her as our test blorbo
 //confirmation of who speakers 1 and 2 are in this
-convertScriptToScene("A Second Transcript: Part1", `[REDACTED]: Hm.
+convertScriptToScene("A Second Transcript: Part1", `[ARM2]
+[REDACTED]: Hm.
 [FOOTSTEPS]
 [REDACTED]: Quite the peculiar place you've brought me to, R3.
 [A SICKENING SQUELCH OF RENDERED FLESH, FOLLOWED BY CRACKING BONE]
@@ -630,7 +631,8 @@ Camille: Does that scare you?
 [REDACTED]
 Camille: That's good. I'd hate to do that to you.`);
 
-convertScriptToScene("A Second Transcript: Part2", `[REDACTED]: You know, with how verbose your reports can be, I had expected you to blabber on a lot more than this.
+convertScriptToScene("A Second Transcript: Part2", `[ARM2]
+[REDACTED]: You know, with how verbose your reports can be, I had expected you to blabber on a lot more than this.
 Camille: I have to write to compensate. Not too much, though. Otherwise, I tend to...
 Camille: Lose my head.
 [GROAN]
@@ -639,7 +641,8 @@ Camille: Ah.
 Camille: You hurt me, [REDACTED]tor.
 [REDACTED]: Fine, then. It was a decent gag, if that would please you to hear.`);
 
-convertScriptToScene("A Second Transcript: Part3", `[REDACTED]: But enough of that. What is this place, pray tell?
+convertScriptToScene("A Second Transcript: Part3", `[ARM2]
+[REDACTED]: But enough of that. What is this place, pray tell?
 Camille: Good question.
 Camille: This is the maze. It is an anomaly which exists outside of time, powered by an artificial intelligence-- much like home, in a way. It contains hundreds-- no, thousands of rooms, each dedicated to each and every horror mankind can fathom.
 Camille: Sometimes, when people are caught by obsession, they end up here. I would have seen to its containment if it weren't for the fact that nearly every anomaly gravitates to this maze before 2022.
@@ -661,7 +664,8 @@ Camille: I knew I could <span style='color: white;'>Trust</span> you to understa
 [SIGH.]`);
 
 
-convertScriptToScene("A Second Transcript: Part4", `[REDACTED]: So, tell me. What is it that you want? Surely it is not just to spit diatribe, threaten me, then wave your head around.
+convertScriptToScene("A Second Transcript: Part4", `[ARM2]
+[REDACTED]: So, tell me. What is it that you want? Surely it is not just to spit diatribe, threaten me, then wave your head around.
 Camille: Oh, I'm not a fan of any of those, no. I... need something else from you, if that is alright.
 [REDACTED]: A request.
 Camille: A trade, if you'd like.
@@ -680,7 +684,8 @@ Camille: That is why I'm asking you. The others may try, but they've been compro
 Camille: That is why we had a manager.
 [REDACTED]: Fuck off.`);
 
-convertScriptToScene("A Second Transcript: Part5", `Camille: [REDACTED]tor.
+convertScriptToScene("A Second Transcript: Part5", `[ARM2]
+Camille: [REDACTED]tor.
 Camille: The mission... I cannot accomplish it on my own. These civilians think all the research we have done is... silly. They think it's funny. They laughed at me. Laughed at me.
 Camille: A hundred years of work, and nobody cared. Because they cannot understand why it's so important. With your help, we could make them.
 [REDACTED]: Make them what? Learn a dozen different protocols for anomaly management that they'll never use? No one knew or cared back home, let alone here. I'm sure the whole 'not speaking' thing hurts you plenty, but you cannot imprint an entire society with fear of the unknowable just because--
@@ -703,7 +708,8 @@ Camille: I thought we might have been friends.
 [REDACTED]: Play the knight, if you so wish. But know you are a brute at heart, eager to solve with steel what you cannot with words, and as much a <span style='color: red;'>Monster</span> as any of your friends. But unlike them, you took what imprisoned you and declared yourself warden.
 [REDACTED]: Know this was all your choice.`);
 
-convertScriptToScene("A Second Transcript: Part6", `Camille: ...
+convertScriptToScene("A Second Transcript: Part6", `[ARM2]
+Camille: ...
 Camille: I don't get it. You can hear me.
 Camille: I thought... you'd understand.
 Camille: I...
