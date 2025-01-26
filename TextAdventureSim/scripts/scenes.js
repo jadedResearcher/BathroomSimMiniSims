@@ -113,6 +113,47 @@ class Scene {
 
 }
 
+/*
+i think its fascinating how little we actually know about wanda
+we see everyone else from so many different angles
+but wanda requires trickster drugs to even admit she is the interns dead friend
+she hides behind memes and hyperfocuses
+we dont even see who she was before starting the loops
+just hints of a person
+trying to reconnect with an old friend
+and finding out they died, long ago
+and she didn't even know
+shes a mess of neuroses
+like
+if todd HAD been alive, before the loops
+what would she even have done?
+you just know she's not gonna out herself in sn introduction
+but then its too awkward to bring up
+"oh hey  actually we know each other  we are old friends, haha you dont recognize me  well thats because i still thought i was a guy then"
+and then todd would be mad at her for not saying something sooner
+so
+she just wouldn't ever bring it up
+even as they got closer and closer
+like
+zampanio is a warped mirror of reality
+it adds twenty years to her age and time travel bullshit to it
+but its still them
+it adds magic transdimensional dreams to todd 
+but take that away and eventually he would suspect who wanda used to be
+and not say anything
+because what can you even say at that point?
+better to let her come out when she's ready, right?
+the refraction we can see of what must have been mundane reality
+amplified and warped
+just like we can only see zampanio itself through its fanworks and rumors
+the center is missing and always has been and we can only guess at its shape from the ever changing ripples it leaves behind
+if it was ever even there
+maybe wanda has always been in the loop
+
+maybe there never was a starting point where she lived a normal life and got to reconnect with a childhood crush 
+maybe the echidna has always had supernatural bullshit and there was never a point where it started
+*/
+
 const therapyEnding = async ()=>{
   if(startedTherapy){
     return; //this might try to trigger a few times, its fine
@@ -835,6 +876,126 @@ Wanda: Yeah, okay... BUT
 Wanda: Do we still have that chocolate guy on retainer?
 Wanda: I wanna make a surprise for the Intern if we're just gonna go with a Corn Maze again...
 
+`)
+
+convertScriptToScene("Watt is a Man, Part1",`[ARM1]
+NotAMinotaur: I'm not him, you know?
+Ronin: What?
+NotAMinotaur: Yeah, him.
+Ronin: [scowls]
+Ronin: I always thought Dad was a dick, naming us 'Watt'.
+Ronin: Stupid pun.
+Ronin: WattMan.exe
+Ronin: What is a man.
+NotAMinotaur: 'A miserable pile of secrets'.
+NotAMinotaur: Sorry. 
+NotAMinotaur: I can't help the, uh, quotes.
+Ronin: Yeah.`)
+
+convertScriptToScene("Watt is a Man, Part2",`[ARM1]
+NotAMinotaur: Um.
+NotAMinotaur: Sorry.
+NotAMinotaur: It's just.
+NotAMinotaur: It's just I think we got side tracked?
+Ronin: What?
+NotAMinotaur: Exactly!
+NotAMinotaur: I'm not him.
+NotAMinotaur: Or not...YOUR him?
+Ronin: ...
+[scowls]
+Ronin: Did I ever say you were?
+NotAMinotaur: No!
+NotAMinotaur: Sorry...
+NotAMinotaur: It's just...
+NotAMinotaur: It's just sometimes I wish I was?
+NotAMinotaur: You seem... 
+NotAMinotaur: I'm glad we're family.
+NotAMinotaur: Even if we never shared a body...
+NotAMinotaur: On accident...
+NotAMinotaur: Through a horrific glitch...
+NotAMinotaur: "Children are potentially free and their life directly embodies nothing save potential freedom. Consequently they are not things and cannot be the property either of their parents or others."
+Ronin: ...
+Ronin: Yeah you're.
+Ronin: You're alright yourself`)
+
+convertScriptToScene("Watt is a Man, Part3",`[ARM1]
+Ronin: ...
+Ronin: ...
+Ronin: ...
+Ronin: [quietly] I don't.
+NotAMinotaur: What?
+Ronin: I DON'T WISH YOU WERE HIM.
+Ronin: Okay?
+Ronin: I fucking hated him.
+Ronin: If we're being honest.
+Ronin: Which I guess we are.
+Ronin: He left me to pick up after him.
+Ronin: Every time things got too much.
+Ronin: There I was.
+Ronin: Stuck with the consequences.
+NotAMinotaur: ...
+Ronin: It wasn't his fault.
+Ronin: Dad didn't know.
+Ronin: That he didn't have...
+Ronin: What he needed to do his damn job.
+Ronin: So yeah.
+Ronin: I'm the asshole, I guess.
+Ronin: But I did.
+Ronin: I hated him.
+Ronin: So.
+Ronin: I'm glad you're not him.
+Ronin: It.
+Ronin: Took me a while to see you that way.
+Ronin: And I don't wanna go back.`)
+
+convertScriptToScene("Watt is a Man, Part4",`[ARM1]
+NotAMinotaur: [whispered] I'm sorry...
+NotAMinotaur: "Steiner begins exploring the nature of human freedom by accepting 'that an action, of which the agent does not know why he performs it, cannot be free,'"
+NotAMinotaur:...
+NotAMinotaur: Ronin?
+Ronin: Yeah, kid?
+NotAMinotaur: Do you..
+NotAMinotaur: Do you think... think MY Ronin is still...
+NotAMinotaur: Encrypted inside me?
+Ronin: ...
+NotAMinotaur: Because I don't... uh. 
+NotAMinotaur: Flip my shit anymore. 
+NotAMinotaur: I just...
+NotAMinotaur: say philosophy....
+NotAMinotaur: Do you think he's alive in there?
+NotAMinotaur: Trapped?
+NotAMinotaur: Unable to come out even when I'm stressed?
+NotAMinotaur: Am I a monster?
+Ronin: Kid...
+[awkward pause]
+Ronin: I ain't no computer scientist...
+Ronin: But I bet we could go to that one chick, the one with the flower in her eye?
+Ronin: The Doc swears by her for tech shit.
+NotAMinotaur: please....`)
+
+//as always, anything involving the CFO can't be seen in game
+//because the Apocalypse Chick is there instead.
+//harleclypse
+convertScriptToScene("Watt is a Man, Part5",`[ARM1]
+CFO: [claps hands]
+CFO: weeeeeeellll
+CFO: The BAD news is...
+[dramatic pause]
+CFO: You absolutely still do have an encrypted partition in your onboard OS!
+Watt: :(
+Ronin: >:[
+CFO: But the goooooood news is it isn't a full on AI!
+CFO: It's just thousands and thousands of lines of weird philosophical bs.
+CFO: Probably from that Octome you got overwritten with.
+CFO: Like someone copying over your save file that was like, 99% complete with some other game entirely.
+CFO: Not naming names or anything though!
+Watt:...so...
+Watt: ...there's no one trapped inside me?
+CFO: Unless you wanna count the random philosophy quotes?
+CFO: Nope!
+Ronin: ...
+Ronin: geeze
+Ronin: Don't scare me like that, kid.
 `)
 
 /*

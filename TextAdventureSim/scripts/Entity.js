@@ -1197,7 +1197,7 @@ const TYRFING = new FleshCreature("Tyrfing",
 const NAM = new MechanicalBeast("NotAMinotaur",
   "He is Not a Minotaur. <br><br>A robotic ghost that haunts Truth's horridors until suddenly he does not.<br><br>He only wants to be left alone...<br><br>He loops, but he pretends he does not.<br><br>He can not control the Philosophy.<br><br>The Octome changed him too much. ",
   [TECHNOLOGY, SERVICE, ZAP, KNOWING, OBFUSCATION, DEATH],
-  "Blorbos/NAM_by_guide.png"
+  "Blorbos/NAM_ghost_by_guide_edited.gif"
 );
 
 const RONIN = new MechanicalBeast("Ronin",
@@ -1208,7 +1208,7 @@ const RONIN = new MechanicalBeast("Ronin",
 
 const PARKER = new FleshCreature("Parker.",
   "He loves anime, Vik and Hatsune Miku.<br><br>Wait, shit, forgot you saw that.<br><br>Anime, [REDACTED] and Hatsune Miku.",
-  [EN],
+  [BURIED,KILLING,LOVE,SPACE,STEALING],
   "Blorbos/Parker_pixel_by_the_guide.png")
 
   const GUNTAN = new MechanicalBeast("Gun-Tan",

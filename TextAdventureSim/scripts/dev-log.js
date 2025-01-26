@@ -137,9 +137,12 @@ class DevLog {
     all_dev_logs.push(this);
   }
 }
-//new DevLog("12/17/2024","")
+//new DevLog("01/17/2025","")
 //newest on top
 //fake devlogs will get added to the top as well
+
+new DevLog("01/26/2025","Been doing a lot of writing lately, but got all the characters in at least...")
+
 new DevLog("01/19/2025","Assuming I didn't accidentally break the inventory again, you can drop things from it.<br><br>You're welcome :)","Plus I made it so you can re-visit any Inventory scene in easier to read format, so long as you've seen it once.")
 
 new DevLog("01/16/2025","Why is it so hard to make the blorbos talk???","see you think its the broken 'TALK' command but actually its the inventory voice system") 
