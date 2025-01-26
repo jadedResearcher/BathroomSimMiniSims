@@ -919,14 +919,7 @@ a:active {
   color: rgb(31, 63, 135);
 }
 
-.ronin {
-  background: #ffe972;
-  color: black;
-  padding: 13px;
-  border-radius: 13px;
-  margin: 13px;
-  max-width: 400px;
-}
+
 
 .observer {
   background: black;
