@@ -119,9 +119,7 @@ class Player {
     //no doubles
     let unique = true;
     for (let item of this.inventory) {
-      console.log("JR NOTE: is this the same as it? ", { item, inventoryItem: item.name, entity: entity.name })
       if (item.name === entity.name) {
-        console.log("JR NOTE: its in the inventory")
         unique = false;
       }
     }

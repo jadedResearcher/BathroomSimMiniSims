@@ -10,6 +10,34 @@ let startedTherapy = false;
 
 const all_scenes = [];
 
+//getSceneWithTitle("credit to the Theorist of Labyrinths, or your discord name, or a secret third option?")
+const  haxDebugScene =(sceneTitle)=>{
+  const scene =  getSceneWithTitle(sceneTitle);
+  //add all blorbos needed for this scene;
+  if(!scene){
+    return "ERROR: SCENE NOT FOUND";
+  }
+  for(let e of scene.entityNames){
+    const blorbo = entityNameMap[e];
+    if(blorbo){
+      player.addToInventory(blorbo);
+    }else{
+      console.log("JR NOTE: why can't I find: ", e)
+    }
+  }
+  return getAllScenesWithEntities(player);
+
+}
+
+//takes in a list of blorbos and adds them to inventory
+//haxDebugScenes([K, GUNTAN, VIK, PARKER])
+const haxDebugScenesForPlayers =(blorbos)=>{
+  for(let blorbo of blorbos){
+    player.addToInventory(blorbo)
+  }
+  return getAllScenesWithEntities(player);
+}
+
 class Scene {
   //just their names, not their objects
   entityNames = [];
@@ -627,25 +655,51 @@ Ria: I mean, technically, only twenty perc- [Witherby claps his hand over her mo
 
 convertScriptToScene("Credit To: Medium of Shade",`[ARM 48643]
 Parker: [Sits at the saloon bar, drinking pink lemonade.]
-Vik: [The bartender, polishing a glass.]
+[Redacted]: [The bartender, polishing a glass.]
 Khana: [Enters scene stage left.]
 Khana: Parksy, Parksy, Parksy, they call you the fastest shot in these parts, but I know the Truth. You're nothing but a Fraud.
-Vik: [Stares silently at K, disapprovingly.]
+[Redacted]: [Stares silently at K, disapprovingly.]
 Khana: I hear rumor you don't like to let yourself get involved, but everyone talks accolades of your prowess...smells like cowardice to me. I challenge you to a duel.
 Parker: [Opens his mouth, revealing the entire pink melon slice between his teeth, which he promptly spits back onto the rim of the glass, perfectly centered.]
 Parker: Not interested. I'm not here to get involved. You'll just get yourself hurt, kid.
 Khana: Oh, you motherf-.
 Khana: [As K attempts to draw their gun, his head is already missing from xir body and she falls to the floor, dead.]
-Vik: [Frowns]
+[Redacted]: [Frowns]
 Gun-Tan: Great job Parksy, you're the best! Next time, make sure to be extra fancy with your placements to keep your Style Meter up!
 Parker: I love you, but I don't think that's the right genre.
-Vik: Parker, you're helping me clean up faer body. You have the aim to knock the bullet out of the air, or disarm it, but you always pull this stunt. It's honestly getting kind of old.
+[Redacted]: Parker, you're helping me clean up faer body. You have the aim to knock the bullet out of the air, or disarm it, but you always pull this stunt. It's honestly getting kind of old.
 Gun-Tan: And you could be getting more style points, like disarming them and then jamming the gun into the skull!
 Parker: [Laughs]
 Gun-Tan: [Laughs]
-Vik: [Laughs]
+[Redacted]: [Laughs]
 Khana: [Laughs, despite being a headless corpse]
 [Curtains Close]`)
+
+//this will never spawn, because anything involving the CFO can't spawn
+//its okay tho
+convertScriptToScene("Credit To: Lyrebird",`[ARM 35150100015151414]
+CFO: [Sitting at a coffee shop.]
+Audiotor: [Sitting to the left of the CFO.]
+Fiona: [Sitting to the right of the CFO.] 
+NaM: [The barista]
+
+Fiona: So, Flornantial Officer Blightly, what's the story of that fellow to your left. I'm not sure I quite understand what they say.
+Audiotor: [Rewind noise, static. A bit of magnetic tape erupts from a cassette tape to grab the handle of a cup of coffee, raising it to gently place into an empty CD drive. There's a content buzzing.]
+CFO: Right, so, I made it as a joke, um. Not meant to be a person, but some observers really liked it. So, in some late Arms like this one, it gets some spotlight...
+NaM: To drink in the spotlight, is not always a choice. Light, bathing in it, drowning in it, was never a choice. Like the depths of a cup of coffee, one can never quite see the end, but all the same, it will have the same bite.
+Fiona: ...I suppose so. And would I be wrong to presume, that in some ways, it can be made sweet...though I daresay it'd tend to be...
+Audiotor: [Fastforward noise. Dialup noise. Bell ding.]
+CFO: I didn't even know it had a bell...fascinating.
+NaM: Existence is a fascinating thing. One may never get choice in the matter, or choice in the depths, but to revel or to drown, sometimes, one has power. Though othertimes, like wire on a stage, the course is set without anything.
+CFO: [Faces camera, smiles, winks.]
+Fiona: [Faces camera, smiles, winks.]
+Audiotor: [Faces camera, lacks eyes or mouth.]
+NaM: [Faces camera. Nods.]
+CFO: Life is fascinating sometimes. I think that's all the time we have for today. 
+Fiona: Remember to stay hydrated folks, and take care of the garden that is your mind.
+CFO: Tune in next week for more of Hope's Gardens! We're glad you were here.
+`)
+
 
 //http://farragofiction.com/ASecondTranscript/
 //camille is our special birthdaygurl gonna use her as our test blorbo

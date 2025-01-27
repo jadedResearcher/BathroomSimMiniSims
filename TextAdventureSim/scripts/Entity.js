@@ -1206,7 +1206,7 @@ const RONIN = new MechanicalBeast("Ronin",
   "Blorbos/Ronin_by_guide.png"
 );
 
-const PARKER = new FleshCreature("Parker.",
+const PARKER = new FleshCreature("Parker",
   "He loves anime, Vik and Hatsune Miku.<br><br>Wait, shit, forgot you saw that.<br><br>Anime, [REDACTED] and Hatsune Miku.",
   [BURIED,KILLING,LOVE,SPACE,STEALING],
   "Blorbos/Parker_pixel_by_the_guide.png")
