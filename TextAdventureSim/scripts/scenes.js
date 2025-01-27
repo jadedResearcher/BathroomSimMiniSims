@@ -613,16 +613,39 @@ convertScriptToScene("Test3", `Sheep: baaaa
       Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
 
 
-      //From Theorist of Labyrinths
 
-convertScriptToScene("credit to the Theorist of Labyrinths, or your discord name, or a secret third option?",`[ARM 9989]
-K: Hey, [SLUR OMITTED] Team- I mean, Training Team. What's up?
+//unmarked are colonizing the arms now
+//From Theorist of Labyrinths
+convertScriptToScene("Credit To: the Theorist of Labyrinths, or your discord name, or a secret third option?",`[ARM 9989]
+Khana: Hey, [SLUR OMITTED] Team- I mean, Training Team. What's up?
 Camille: [death glare]
 Neville: [death glare]
 Witherby: [death glare]
-Devona, hiding in the cupboard: [eye twitch]
+Devona: [hiding in the cupboard] [eye twitch]
 Ria: I mean, technically, only twenty perc- [Witherby claps his hand over her mouth] -NMF!`)     
 
+
+convertScriptToScene("Credit To: Medium of Shade",`[ARM 48643]
+Parker: [Sits at the saloon bar, drinking pink lemonade.]
+Vik: [The bartender, polishing a glass.]
+Khana: [Enters scene stage left.]
+Khana: Parksy, Parksy, Parksy, they call you the fastest shot in these parts, but I know the Truth. You're nothing but a Fraud.
+Vik: [Stares silently at K, disapprovingly.]
+Khana: I hear rumor you don't like to let yourself get involved, but everyone talks accolades of your prowess...smells like cowardice to me. I challenge you to a duel.
+Parker: [Opens his mouth, revealing the entire pink melon slice between his teeth, which he promptly spits back onto the rim of the glass, perfectly centered.]
+Parker: Not interested. I'm not here to get involved. You'll just get yourself hurt, kid.
+Khana: Oh, you motherf-.
+Khana: [As K attempts to draw their gun, his head is already missing from xir body and she falls to the floor, dead.]
+Vik: [Frowns]
+Gun-Tan: Great job Parksy, you're the best! Next time, make sure to be extra fancy with your placements to keep your Style Meter up!
+Parker: I love you, but I don't think that's the right genre.
+Vik: Parker, you're helping me clean up faer body. You have the aim to knock the bullet out of the air, or disarm it, but you always pull this stunt. It's honestly getting kind of old.
+Gun-Tan: And you could be getting more style points, like disarming them and then jamming the gun into the skull!
+Parker: [Laughs]
+Gun-Tan: [Laughs]
+Vik: [Laughs]
+Khana: [Laughs, despite being a headless corpse]
+[Curtains Close]`)
 
 //http://farragofiction.com/ASecondTranscript/
 //camille is our special birthdaygurl gonna use her as our test blorbo
@@ -786,7 +809,7 @@ Ria: ...
 Camille: :3
 Witherby: I'll make some phone calls.
 `)
-
+//player.addToInventory(blorbo)
 convertScriptToScene("A Road Trip: Part 4",`[ARM1]
 Devona: Ummmmm....
 Devona: Ria?
