@@ -603,7 +603,7 @@ convertScriptToScene("Test2", `Sheep: baaaa
     Sheep: ...
     Sheep: ...
     Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
-
+//http://eyedolgames.com/GenderForLurker/
 convertScriptToScene("Test3", `Sheep: baaaa
       Camille: [exists]
       Sheep: baaaaaaaaaaaa!!!
@@ -611,6 +611,17 @@ convertScriptToScene("Test3", `Sheep: baaaa
       Sheep: ...
       Sheep: ...
       Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
+
+
+      //From Theorist of Labyrinths
+
+convertScriptToScene("credit to the Theorist of Labyrinths, or your discord name, or a secret third option?",`[ARM 9989]
+K: Hey, [SLUR OMITTED] Team- I mean, Training Team. What's up?
+Camille: [death glare]
+Neville: [death glare]
+Witherby: [death glare]
+Devona, hiding in the cupboard: [eye twitch]
+Ria: I mean, technically, only twenty perc- [Witherby claps his hand over her mouth] -NMF!`)     
 
 
 //http://farragofiction.com/ASecondTranscript/

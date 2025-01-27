@@ -77,6 +77,9 @@ class Player {
   loadFromLocalStorage = () => {
     console.log("JR NOTE: loading player progress")//gosh isn't it mysterious, what could it be loading (of course, if you're reading this you're literally seeing whats being loaded but i imagine if you're in the javascript console only its like... but if i refresh my progress is lost so is this glitched out too?)
     const loadObject = JSON.parse(localStorage.getItem(SAVE_KEY));
+    if(!loadObject){
+      return;
+    }
 
     if (loadObject.debugCodes) {
       this.debugCodes = loadObject.debugCodes;
