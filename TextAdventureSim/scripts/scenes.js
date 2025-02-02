@@ -700,6 +700,23 @@ Fiona: Remember to stay hydrated folks, and take care of the garden that is your
 CFO: Tune in next week for more of Hope's Gardens! We're glad you were here.
 `)
 
+convertScriptToScene("Credit To: Medium of Fruitsnacks",`[Arm 234256 ]
+Harleclypse: Alright so. Here's my new pitch. You know Knife Monopoly?
+Closer: [trickster wiggler eater] Not really.
+Harleclypse: Well, we could play it, but the board's just, the world. Or well, a part of it.
+Closer: Okay, I get what you're saying, but. Have you considered: Candyland. The crunch of fruit snacks...it's been faaaaar too long.
+Harleclypse: Oh, good point. They areeeee pretty good...buuuuuut we need more players. At least one...we could pick up more along the way anyhow. But one more now...I think I know who we can find.
+Harleclypse: [Gets out her Zamphone. Dials a 'phone number' that is actually just ten fire emojis.]
+Ria: [Takes a few minutes to answer the phone.]
+Ria: Pocky? Is that you? It's three in the morning...and I've a headache the size of Westerville, Ohio.
+Harleclypse: Okay, but, we're playing Candyland but the land is actual land. And we neeeeed a third player and you're one of the most fun friends we haveeeeee you havveeeee to help us out pleaaaaase.
+Ria: [Sighs. Shortly, Ria shows up to play.] 
+Ria: Alright!  So, um, I've never played before, what are the rules. Am I going to make like, Spiral S'mores?
+Closer: Isn't it obvious?
+Harleclypse: Yeah, we make the land candy, and we have fun. It's simple as zamberry pie, or making tea from a fractal rose bush!
+Ria: You can make tea from a fractal rose bush?
+Harleclypse: And soda! That's not really important though. Anyway, let's start!`)
+
 
 //http://farragofiction.com/ASecondTranscript/
 //camille is our special birthdaygurl gonna use her as our test blorbo
