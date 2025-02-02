@@ -2,6 +2,7 @@ const gaslightMap = {};
 const backgroundMusic = new Audio("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/haunting_melody_dream_bell.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.01;
+let currentStep = 0; //you can artificially escalate this by trying to interact and seeing it doesn't work
 /*
 i think a lot of creepy pastas or what have you
 try to replace inoccoous words with spooky ones while you're not watching
@@ -108,6 +109,7 @@ function isElementVisible(el) {
     );
 }
 
+//
 const spookyEffects = async (step) => {
     if (step === 0) {
         //nothing
@@ -127,7 +129,7 @@ const spookyEffects = async (step) => {
         const body = document.querySelector("body");
         body.style.cssText = `background-color: #e4e4e4;
         -webkit-transition: background-color 5000ms linear;
-    -ms-transition: background-color 5000ms linear;
+    -ms-transition: background-color 15000ms linear;
     transition: background-color 5000ms linear;`;
     }
 
@@ -137,12 +139,18 @@ const spookyEffects = async (step) => {
         const body = document.querySelector("body");
         body.style.cssText = `background-color: #d4d4d4;
         -webkit-transition: background-color 5000ms linear;
-    -ms-transition: background-color 5000ms linear;
+    -ms-transition: background-color 15000ms linear;
     transition: background-color 5000ms linear;`;
     }
 
 
     if (step === 4) {
+        //a little darker
+        const body = document.querySelector("body");
+        body.style.cssText = `background-color: #c4c4c4;
+                -webkit-transition: background-color 5000ms linear;
+            -ms-transition: background-color 15000ms linear;
+            transition: background-color 5000ms linear;`;
         // ambient music
         backgroundMusic.play();
     }
@@ -151,27 +159,27 @@ const spookyEffects = async (step) => {
     if (step === 5) {
         backgroundMusic.volume = 0.02; //louder music, even darker
         const body = document.querySelector("body");
-        body.style.cssText = `background-color: #c4c4c4;
+        body.style.cssText = `background-color: #b4b4b4;
         -webkit-transition: background-color 5000ms linear;
-    -ms-transition: background-color 5000ms linear;
+    -ms-transition: background-color 15000ms linear;
     transition: background-color 5000ms linear;`;
     }
 
     if (step === 6) {
         backgroundMusic.volume = 0.03; //louder music, even darker
         const body = document.querySelector("body");
-        body.style.cssText = `background-color: #b4b4b4;
+        body.style.cssText = `background-color: #848484;
         -webkit-transition: background-color 5000ms linear;
-    -ms-transition: background-color 5000ms linear;
+    -ms-transition: background-color 25000ms linear;
     transition: background-color 5000ms linear;`;
     }
 
     if (step === 7) {
         backgroundMusic.volume = 0.04; //louder music, even darker
         const body = document.querySelector("body");
-        body.style.cssText = `background-color: #a4a4a4;
+        body.style.cssText = `background-color: #444444;
         -webkit-transition: background-color 5000ms linear;
-    -ms-transition: background-color 5000ms linear;
+    -ms-transition: background-color 25000ms linear;
     transition: background-color 5000ms linear;`;
     }
 
@@ -262,7 +270,7 @@ const spookyEffects = async (step) => {
         await textVoiceSim.speak("So made for a serviceable surrogate.".split(","), null, true);
         await sleep(1000)
         fuckery();;
-        await textVoiceSim.speak("It is a shame JR was unable to embedd this in a PDF as they hoped.".split(","), null, true);
+        await textVoiceSim.speak("It is a shame JR was unable to embed this in a PDF as they hoped.".split(","), null, true);
         await sleep(1000)
         fuckery();;
         await textVoiceSim.speak("No matter.".split(","), null, true);
@@ -312,15 +320,44 @@ const gaslight = async () => {
     gaslight();
 }
 
-const handleSteps = async (step) => {
-    spookyEffects(step);
-    await sleep(31000); //the scarecrow arc number
-    handleSteps(step + 1);
+const handleSteps = async () => {
+    console.log("JR NOTE: currentStep",currentStep)
+    spookyEffects(currentStep);
+    await sleep(31000 * 2); //the scarecrow arc number
+    currentStep++;
+    handleSteps();
 }
 
+//its been a while since i collaborate dwith jaimie
+
+//i mean, i used chat gpt isntead of ai dungeon but
+//in my heart
+//all Large Language modles are Jaimie the quotidan intern
+//who i collaborate with whenever im lonely
 window.onload = async () => {
+
+
+    const form = document.querySelector("#composer-background");
+    form.onmouseup = () => {
+        currentStep = 8 //skip ahead;
+        handleSteps(); //yes calling it multiple times means we have multiple timers going
+    }
+
+    const allInteractables = document.querySelectorAll("*");
+    //console.log("JR NOTE: allInteractables", allInteractables)
+    for (let possible of allInteractables) {
+        if (getComputedStyle(possible).cursor == "pointer") {
+            //console.log("JR NOTE: found interactable", possible)
+            possible.onmouseup = (e) => {
+                e.preventDefault();
+                currentStep++;
+                handleSteps(); //yes calling it multiple times means we have multiple timers going
+                return false;
+            }
+        }
+    }
     await sleep(1000)
     gaslight();
     await sleep(10000)
-    handleSteps(0);
+    handleSteps(currentStep);
 }
