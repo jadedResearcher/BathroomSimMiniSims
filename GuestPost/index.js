@@ -108,7 +108,7 @@ function isElementVisible(el) {
         rect.right > 0                    // Right is to the right of the left edge of the viewport
     );
 }
-
+let truthSeen = false;
 //
 const spookyEffects = async (step) => {
     if (step === 0) {
@@ -197,7 +197,8 @@ const spookyEffects = async (step) => {
         backgroundMusic.volume = 0.5; //louder music
     }
 
-    if (step === 8) {
+    if (step === 8 && !truthSeen) {
+        truthSeen = true; //if i don't set this truth might get called multiple times (if you spammed buttons) and be all glitchy. immaculate vibes BUT not what im going for
         //truth shows up
         const body = document.querySelector("body");
         const ele = createElementWithClassAndParent("div", body)
@@ -286,6 +287,14 @@ const spookyEffects = async (step) => {
         await sleep(1000)
         fuckery();;
         await textVoiceSim.speak("And do not forget me.".split(","), null, true);
+        await sleep(1000)
+        await textVoiceSim.speak("Here.".split(","), null, true);
+        await sleep(1000)
+        await textVoiceSim.speak("Let me take you to one more place.".split(","), null, true);
+        await sleep(1000)
+        window.location.href="chat_gpt_decides_where_this_lives.html";
+
+
     }
 }
 

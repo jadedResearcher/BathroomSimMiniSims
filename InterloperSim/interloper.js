@@ -92,6 +92,7 @@ const mapping = {
   ,714: {video: "rewards/truthspin.mp4",images:["rewards/truth_andohmygod.png"]}
   ,553580: {video: "rewards/553580.mp4",images:["rewards/553580.png"]}
   ,456: {video: "rewards/loop_where_you_need_to-be.mp4",images:["rewards/exactly_where_you_need_to_be.gif"]}
+  ,1669: {video: "rewards/1669.mp4",images:["rewards/1669.png"]}
 
   ,6666: {video: "rewards/the_mediums_message.mp4",images:["rewards/medium7.png","rewards/medium6.png","rewards/medium5.png","rewards/medium4.png","rewards/medium3.png","rewards/medium2.png","rewards/medium1.png"] }
 
