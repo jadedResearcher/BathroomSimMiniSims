@@ -380,7 +380,6 @@ const gaslight = async () => {
 }
 
 const handleSteps = async () => {
-    console.log("JR NOTE: currentStep",currentStep)
     spookyEffects(currentStep);
     await sleep(31000 * 2); //the scarecrow arc number
     currentStep++;

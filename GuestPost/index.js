@@ -310,6 +310,8 @@ const replaceText = (text) => {
 }
 
 const gaslight = async () => {
+    console.log("JR NOTE: gaslight")
+
     const me = document.querySelectorAll(".whitespace-pre-wrap");
     const you = document.querySelectorAll('[data-message-author-role="assistant"]')
 
@@ -325,7 +327,7 @@ const gaslight = async () => {
             p.innerText = replaceText(p.innerText)
         }
     }
-    await sleep(1000)
+    await sleep(10000)
     gaslight();
 }
 
@@ -365,7 +367,7 @@ window.onload = async () => {
             }
         }
     }
-    await sleep(1000)
+    await sleep(10000)
     gaslight();
     await sleep(10000)
     handleSteps(currentStep);
