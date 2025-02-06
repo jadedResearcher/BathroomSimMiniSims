@@ -159,3 +159,93 @@ new DevLog("12/14/2024", "Got the page more or less created<br><br>Super excited
 
 //https://www.youtube.com/watch?v=mMo-Nn9_YW4
 //today has been a bad day... maybe looking at my old work will help
+
+
+/*
+IC sent me these today:
+
+watt obviously became notAMinotaur
+piper becomes camellia (the Cultist) and the Eye Killer
+and Jasna becomes the Closer
+
+in zampanio at least
+
+
+~~~
+
+Watt
+
+PHYSICALITY:
+Watt follows cues from Kamen Riders and Super Heroes-- he walks and moves like someone who's watched too many reruns, so he jerks around and his body is very expressive. His body and head tend to zip, like a 'twitch', because of the electricity, so his hands are rarely still. Watt's gotta be moving fast, fast, fast. It's only when he's in shock or upset that these movements slow into something less cartoony.
+ 
+VOICE:
+Watt's efforts stay primarily at the higher register, and they push against the back of the throat-- kind of like an alarm buzz to how he speaks. His voice is just as animated as his movement, but not confident-- he erms and he hums and he adds 'sir' to his sentences when under those with authority. It's clear that Watt is more flying by the seat of his pants more often than he's speaking from confidence. Watt abstains from swearing, but this is eroded as the mask of giddy politeness starts to crack. He speaks surely what he says but very meekly and runs around topics-- like he's trying to system overflow his way into wha the wants to say.
+
+LABAN TECHNIQUES:
+Watt is quick light efforts, rarely backing into strong efforts unless he has to-- a lot of dabs, a lot of flicks. When pushed, he'll retaliate to slashes, and when REALLY pushed, we can see more maintained efforts like press or wring. It's clear these are efforts he's not used to being in but that he knows how to access.
+
+~~~
+Jasna
+
+PHYSICALITY:
+Jasna is very aware of her body, but not in a nervous way-- she's from a family of ninjas, so restraint and awareness of how she moves comes easy. Think gameshow hosts and business ad tv women in that they move with assurance and not quite swagger, but purpose-- and even then, she's very controlled! Large ostentatious motions are rare for her unless actively trying to sell something, being from a culture of relative austerity. There's a lot of thought and energy that goes into the soft, non-threatening motions of business acumen. I like to think of how boomerangs themselves move in that they glide effortlessly until they stop, so when not business-pilled she's more like that, slow and still until she has to unleash it all and move.
+
+VOICE:
+
+Jasna is middle register-- her voice rests further down the neck, so that it rings as clear as it can. It's a little salesman, a little high society lady, very feminine, very demure; she's leaning on the feminine persuasion unabashedly as a tool she can use. Her laugh is polite and outward facing, and even when she's not feeling great she's leaning on this voice a little. Either this is the voice she was born with, or it's the voice she's used to-- there's not much of a mask on it here.
+
+LABAN TECHNIQUES:
+
+Jasna primarily glides through her sentences, and flicks mostly when talking about things she finds small or inconsequential; if it's not important to her, she's staying in the more indirect stances. When she wants attention or really needs things punctuated, expect pressing but rarely ever wringing-- that sort of sustained effort isn't like her. Pressing is dedicated to when she's attempting to assert authority, so it's for when she's talking down to someone. She'll otherwise stay light when talking to those above her unless they've really slipped out of tone.
+
+~~~
+
+Piper (Act 1)
+
+PHYSICALITY:
+Piper is aware of her body in the same way a kid is aware of their hiding spot-- she knows it's best to stay still, but she still feels the urge to make herself smaller. She moves like she's hiding from a serial killer no one else can see. To this she's not constantly making herself small in a way that looks unnatural, but her arms are never too far from her body and are usually self-soothing (fidgeting, or having her arms crossed or touching). It's almost like she's clammed up and could scurry out in a moment's notice. She's got eyes like a prey animal-- focused on the threat until she's looked at, at which point she may flinch and look somewhere else.
+
+VOICE:
+Piper is upper register, on the upper back of the throat, but using a more strained, airy effort, like she's always mid sigh. Her voice leans on deadpan, though it has its peak when in a panic or when she feels like she simply must be heard. When she speaks she does so in a modulated manner, though she has a lot of fun pushing up the creepy factor by whispering or raising to add more threat to it when she's wanting to lean into the horror bit. There's an aura that she's choosing to control how she speaks than it being how she speaks naturally-- more actress finesse than deliberate subterfuge.
+
+LABAN TECHNIQUES:
+
+Piper glides and she dabs, alternating between these depending on whether she's delivering a line or truly speaking off the cuff. There's not a lot of change between these, almost like she's choosing to stay in one effort most of the time? Curious. She gravitates to the harder efforts easily, with sustained efforts such as wrings and presses being her go-tos.
+
+~~~
+
+Camellia
+
+PHYSICALITY:
+As Piper's foil, Camellia operates with the presence of a predator. I'd compare it to big cats, specifically lions, who are large and tend to have a small swagger back and forth. Camellia is someone who, when outside of her pack, is aware and constantly on the hunt, so she has the same sort of creepy stare, just more fleeting-- sizing up all threats before focusing in the ones that matter. This eases out when near others of her group, where while she's still playing herself up to be bigger than she is, she's glancing over them and somewhat relaxing her posture. If you've had a cat, you know.
+
+VOICE:
+
+Camellia sits in the same upper register as Piper, but speaks in a lower intonation. Every word is strained and delivered in an even more deadpan voice. It's a little authoritarian, meant to sound final and threatening, maybe a little... fake? When she speaks she inserts as little filler words as possible, preferring to speak in either short yes/nos or full on monologues. She likes these to go through and doesn't like it when she doesn't get her way.
+
+LABAN TECHNIQUES:
+
+Camellia primarily presses, every word pushing against the other person to make them listen no matter what. She prefers her strong efforts, but when not 'on the job' she returns to glide for a more conversational tone. Quick efforts stay out of her repertoire unless really set on edge, in which point she'll revert to them. 
+
+~~~
+
+Piper (Act 2)
+
+PHYSICALITY:
+Piper, being some sort of overworld boss for beasts, has to define her physicality into something more tough. She's directly channeling the serial killers from her horror movies; slow, threatening, overbearing. Look at how Jason stances up on his movies, or Michael Myers in halloween-- she's not literally invincible, but she's trying to project the idea that she is. When not on the spotlight, she might revert to a more relaxed posture, though she's gained enough confidence to not go into prey mode. Ultimately she's 'bridging the gap' between Camellia and her, though she stands more true.
+
+VOICE:
+Notice a difference not in the register, which doesn't change, but intonation. Her previous deadpan is reserved exclusively for behind the scenes or when performing a scare, with it being replaced by a more forceful, almost playful speaking tone. At the very least she's having tons of fun about it.
+
+LABAN TECHNIQUES:
+Here we see the introduction of a bigger variety of efforts. We see more punching/thrusting, choosing to deliver points with emphasis quickly instead of staying on them, and pushing mostly when she's getting what she wants, almost like the mask on her is slipping (deliberately). 
+
+*/
+
+/*
+i really like the jasna one, cuz i voice her when she's the Closer
+
+and IC has always said i get her spot on
+
+so the description of jasna's voice reminds me of acting her.
+*/
