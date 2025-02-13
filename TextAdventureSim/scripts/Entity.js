@@ -600,6 +600,12 @@ class Entity {
     return `The ${this.name} doesn't seem to want to talk to you :(<br><br>That's okay though!<br><br>You don't need anyone.`;
   }
 
+  /*
+The Worm is Free: What Sins Will He Commit: 2
+I can only hope that I Witness: 19
+Secret Third Option Waste Ending: 23
+  */
+
   removeFromContents = async (item) => {
     //anywhere the detective is is a trap for anyone besides breath players
     if (this.contents.includes(DETECTIVE) && !(item.theme_keys.includes(FREEDOM))) {
