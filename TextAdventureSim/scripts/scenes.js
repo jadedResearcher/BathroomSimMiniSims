@@ -58,7 +58,6 @@ class Scene {
   remove that class from everyone else
   */
   renderSelf = async (parent, player) => {
-    console.log("JR NOTE: rendering a scene named", this.title)
     //downplay any entities not in this scene
     //convertStringToClassFriendlyName
     for (let item of player.inventory) {
@@ -66,6 +65,12 @@ class Scene {
         const ele = document.querySelector(`.${convertStringToClassFriendlyName(item.name)}`);
         ele.classList.add("inventory-item-unselected");
       }
+    }
+    const skipElement = createElementWithClassAndParent("button", parent);
+    skipElement.innerText = "Skip"
+    let skip = false;
+    skipElement.onclick = ()=>{
+      skip = true;
     }
 
     const textElement = createElementWithClassAndParent("div", parent);
@@ -86,6 +91,10 @@ class Scene {
     let index = 0;
 
     const showNextLine = async () => {
+      if(skip){
+        resolveFunction(true);
+        return;
+      }
       console.log("JR NOTE: shownNextLine", index)
       //if there is no next line, resolve the promise
       if (index >= this.lines.length) {
