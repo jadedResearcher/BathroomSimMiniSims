@@ -285,7 +285,7 @@ class Entity {
     this.sprite = sprite;
     this.rand = new SeededRandom(stringtoseed(name));
     this.freq_multiplier = this.rand.nextDouble() * 10;
-    this.speed_multiplier = Math.max(this.rand.nextDouble()) * 5;
+    this.speed_multiplier = Math.max(this.rand.nextDouble()) * 2;
     this.description = desc;
     this.theme_keys = theme_keys;
     this.syncDefaultFunctions();
