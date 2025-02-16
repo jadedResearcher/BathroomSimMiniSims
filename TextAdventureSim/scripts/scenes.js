@@ -138,8 +138,6 @@ class Scene {
     //no more click to go
    const myPromise = new Promise((resolve, reject) => {
       resolveFunction = resolve;
-      const body = document.querySelector("body");
-      body.addEventListener("click", showNextLine)
     });
     await sleep(3000);
     showNextLine(); //auto go
