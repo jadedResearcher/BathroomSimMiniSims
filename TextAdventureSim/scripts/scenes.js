@@ -1170,6 +1170,22 @@ MELON: [vanished at some point while the others were distracted]
 
 `)
 
+convertScriptToScene("ALT DOES NOT WANT TO DATE KHANA",`[ARM2]
+KHANA: I get it, you can't get enough of me.
+KHANA: Last night was the best body you've ever had.
+KHANA: In more ways than one [winks and finger guns]
+ALT: [currently copying K's body]... [TRUTH, whispering in her ear: You can not be seriously considering xir proposal.]
+ALT: ... [TRUTH: His form was subpar at best to steal.]
+ALT: ... [TRUTH: And she did not even appear to see you.]
+ALT: ... [TRUTH: Overall a subpar experience.]
+ALT: It's been real [winks, finger guns, melts into a horrible flesh puddle before becoming part of the room itself]
+KHANA: [scoffs] Like anyone could REALLY choose to be anybody but me.
+KHANA: You think I don't know a con when I see one?
+KHANA: Don't think you'll get ME begging and crawling.
+KHANA: Once you see sense MAYBE I'll deign to let you borrow my face again. If YOU beg enough.
+KHANA: [stalks off, definitely not insulted]
+`)
+
 /*
 what ccan i say im a sucker for juttering <span style='color;red'>Monsters</span>
 i feel like, if you're gonna kill someone past nighoggs eternal life effect, you can't just use violence
