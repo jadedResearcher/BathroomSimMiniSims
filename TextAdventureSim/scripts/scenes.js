@@ -1186,6 +1186,30 @@ KHANA: Once you see sense MAYBE I'll deign to let you borrow my face again. If Y
 KHANA: [stalks off, definitely not insulted]
 `)
 
+convertScriptToScene("Girls, Gays and K",`[ARM1]
+KHANA: And THEN she said I was the best body she ever had!
+KHANA: The only REAL one.
+LEEHUNTER1: Rude.
+LEEHUNTER2: Rude.
+LEEHUNTER1:[SILENCE WHILE THEY GLARE AT EACH OTHER]
+LEEHUNTER2: [SILENCE WHILE THEY GLARE AT EACH OTHER]
+LEEHUNTER1: She had our bodies before.
+LEEHUNTER2: And the Conductors. Which is CLEARLY the more important one.
+LEEHUNTER1: OBVIOUSLY but we're not going to speak for the Conductor, now are we?
+LEEHUNTER1:[SILENCE WHILE THEY GLARE AT EACH OTHER]
+LEEHUNTER2: [SILENCE WHILE THEY GLARE AT EACH OTHER]
+Ria: [knows exactly what happens if she doesn't interrupt now]
+Ria: Did we want to watch a movie?
+KHANA: That REMINDS me!
+KHANA: What is UP with that coworker of yours, Ria, babe?
+KHANA: All she ever does is stare at me (I get it, there's a LOT of me to look at] and then run away!
+KHANA: Why WOULDN'T that shy little thing want to stare at me some more during movie night?
+Ria: ...
+Ria: Devona isn't comfortable around you, Khana, I mean K. There's a lot of reasons for that... but...
+Ria: [gentle humming from the air, an orchestra beginning to tune itself, LEEHUNTER1 and LEEHUNTER2 become a bit more alert]
+Ria: What matters is, right now? This is OUR movie night. Just us.
+Ria: Who needs anyone else?
+`)
 /*
 what ccan i say im a sucker for juttering <span style='color;red'>Monsters</span>
 i feel like, if you're gonna kill someone past nighoggs eternal life effect, you can't just use violence
