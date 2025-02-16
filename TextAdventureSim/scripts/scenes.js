@@ -1118,6 +1118,58 @@ Ronin: geeze
 Ronin: Don't scare me like that, kid.
 `)
 
+convertScriptToScene("Parker Finds a Waifu Immune to Bullets",`[arm1]
+PARKER: [[GUN-TAN goes off]]
+RIVER: ...
+RIVER: OH...
+RIVER: SORRY...
+RIVER: I DIDN'T MEAN TO GET IN THE WAY OF THAT...
+RIVER: I THINK ITS SOMEWHERE IN THE GOO?
+RIVER: DID YOU NEED THE BULLET BACK?
+PARKER: marry me?
+`)
+
+convertScriptToScene("WIP: TYRFING AND THE WATT CLONES",`[ARM1]
+TYRFING: SO.
+TYRFING: CLONES.
+REBEL: [scowls]
+MELON: [some sort of complicated clown trick]
+ROD: Um...?
+ROD: Yes?
+ROD: I think the term is...
+ROD: Triplets?
+TYRFING: IT'S AGAINST NIDHOGG'S WORD!
+ROD: [wince, clutches stuffed echidna plush]
+REBEL: then maybe your so called 'god' is an asshole, ever think about that?
+MELON: [nearby, a gas station explodes]
+TYRFING: AND?
+TYRFING: THE ALL FATHER AND MOTHER TO US ALL IS A GOD!
+TYRFING: GODS ARE ALLOWED TO DO!
+TYRFING: AND BE!
+TYRFING: ANYTHING THEY WANT!
+REBEL: i don't have to listen to this
+REBEL: [ollies outtie from this entire conversation]
+ROD: Um...
+ROD: Well..
+ROD: Thank you for not...
+ROD: Killing us all, Mr...?
+TYRFING: ...
+TYRFING: TYRFING.
+TYRFING: SWORD OF A GOOD MAN.
+TYRFING: OR MAYBE THAT MAN.
+TYRFING: IT'S UNCLEAR.
+ROD: Yeah... I get that. 
+ROD: There's... a lot of stuff I don't understand.
+ROD: But still..
+ROD: Thank you.
+ROD: And I hope your...[he gestures vaguely at the fruit wigglers crawling all over Tyrfing]
+ROD: Children? Grow up okay.
+TYRFING: ...
+TYRFING: [attempting to be quiet and contemplative, failing] ME TOO!
+MELON: [vanished at some point while the others were distracted]
+
+`)
+
 /*
 what ccan i say im a sucker for juttering <span style='color;red'>Monsters</span>
 i feel like, if you're gonna kill someone past nighoggs eternal life effect, you can't just use violence
