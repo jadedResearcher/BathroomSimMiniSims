@@ -1194,7 +1194,7 @@ LEEHUNTER2: Rude.
 LEEHUNTER1:[SILENCE WHILE THEY GLARE AT EACH OTHER]
 LEEHUNTER2: [SILENCE WHILE THEY GLARE AT EACH OTHER]
 LEEHUNTER1: She had our bodies before.
-LEEHUNTER2: And the Conductors. Which is CLEARLY the more important one.
+LEEHUNTER2: And the Conductor's. Which is CLEARLY the more important one.
 LEEHUNTER1: OBVIOUSLY but we're not going to speak for the Conductor, now are we?
 LEEHUNTER1:[SILENCE WHILE THEY GLARE AT EACH OTHER]
 LEEHUNTER2: [SILENCE WHILE THEY GLARE AT EACH OTHER]
@@ -1209,6 +1209,11 @@ Ria: Devona isn't comfortable around you, Khana, I mean K. There's a lot of reas
 Ria: [gentle humming from the air, an orchestra beginning to tune itself, LEEHUNTER1 and LEEHUNTER2 become a bit more alert]
 Ria: What matters is, right now? This is OUR movie night. Just us.
 Ria: Who needs anyone else?
+Ria: If they're not going to appreciate our great taste in movies, that's their loss, right?
+KHANA: [huge grin] and wait till you girls see the impeccable movies I have on display for tonight.
+KHANA: Did you know they considered me for the leading role for {Mazes and Minotaurs: Part 3}? 
+KHANA: There was some red tape though, and they had to go with the previous lead. Turns out some kind of contract meant no one could upstage him? Typical.
+Ria: [begins excitedly info dumping about a scandal involving the actor and rumors that they had an affair with an extra]
 `)
 /*
 what ccan i say im a sucker for juttering <span style='color;red'>Monsters</span>
