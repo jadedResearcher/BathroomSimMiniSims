@@ -135,6 +135,14 @@
   opacity: 0.3;
 }
 
+.inventory-item{
+  cursor: pointer;
+}
+
+.inventory-item:hover {
+  transform: scale(3);
+}
+
 .film-grain {
   animation: grain 0.5s steps(6) infinite;
 
