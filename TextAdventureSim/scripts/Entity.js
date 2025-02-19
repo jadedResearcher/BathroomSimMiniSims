@@ -277,7 +277,7 @@ class Entity {
   functionMap = {}//what do we DO for each possible action?
   neighbors = []; //similar to contents, but these are the things you can move into from this entity
 
-
+//https://www.youtube.com/watch?v=kwt3m9cRkJ8
 
   constructor(name, desc, theme_keys, sprite = "sheep.gif") {
     this.name = name.toUpperCase();
