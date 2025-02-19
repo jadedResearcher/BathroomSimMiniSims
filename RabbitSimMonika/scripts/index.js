@@ -37,6 +37,8 @@ let latestSeen = 0; //if the videos current time code is LESS than this, i need 
 let latestInteracted = -10;
 window.alert("WARNING: UNREALITY. BE WARNED. OBSESSION IS A DANGEROUS THING.")
 console.log("JR NOTE: Zampanio awaits.")
+console.log("JR NOTE: Rabbit Sim can be found here: http://farragofiction.com/RabbitSim/")
+console.log("JR NOTE: ( https://www.youtube.com/watch?v=kwt3m9cRkJ8 )The Puppeteer created this, which in turn inspired this new chapter.")
 
 const getCurrentStory = () => {
     //console.log("JR NOTE: stories is", stories.length, "and times looped is ", timesLooped, "so i think thats index ",timesLooped %stories.length, "or is it",  )
