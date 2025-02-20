@@ -350,13 +350,34 @@ let west_beat = 1;
 
 
     //north is normal, east begins to crack, south we've lost mad, unknown we've lost AA, and in west Belief is alone
-//const stories = [north, east, south, unknown, west];
-const stories = [observed];
+let stories = [north, east, south, unknown, west];
+//let stories = [observed];
+
+const triggerChapter2 = ()=>{
+    stories = [observed];
+    video = document.querySelector('#player');
+    video.pause();
+    video.src = observed.video_src;
+    const chat = document.querySelector("#chat-box")
+    chat.innerHTML = "";
+    video.currentTime =0;
+    latestSeen = 0;
+    latestInteracted =-1;
+    video.play();
+
+    const title = document.querySelector("#chat-title")
+    title.innerText = "lonelyAltruist's Room";
+
+    const status = document.querySelector("#status")
+    status.innerText = "1 Watching"
+}
 
 
 
 const postProcessStories = ()=>{
-    return; //jr says: they're past this now
+    if(stories.length === 1){
+        return;
+    }
     for(let i = 0; i<300; i+=10){
         fake.chat.push(new uMad(i, [new ChatLine(0, pickFrom(friendlyPhrases))]))
 
