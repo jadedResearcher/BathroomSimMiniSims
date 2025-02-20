@@ -327,7 +327,7 @@ let west_beat = 1;
         new asinineAssasin(observed_beat+=1, [new ChatLine(0, "No, let me say it."),new ChatLine(1, "I'm sorry."),new ChatLine(2, "I shouldn't have been so combative, when we all fell."),new ChatLine(3, "It was not your fault, or at least not solely your fault."),new ChatLine(4, "As childish as it is, I think mad had me riled up already, before we even began. Making fun of everything..."),new ChatLine(5, "I did not mean to make you feel..."),new ChatLine(6, "Excluded.")]),
         new iWantToBelieve(observed_beat+=7, [new ChatLine(0, "look"),new ChatLine(1, "i get it"),new ChatLine(2, "spooky mysteries weren't exactly your thing"),new ChatLine(3, "and i made you feel like if you didn't tag along"),new ChatLine(4, "YOU'd be the one excluded"),new ChatLine(5, "maybe we'll find our next rando"),new ChatLine(6, "watching a boring science documentary or something")]),
         new asinineAssasin(observed_beat+=7, [new ChatLine(0, "And have you actually learn something?"),new ChatLine(1, "Will wonders never cease..."),new ChatLine(2, "<span class='joined'>~~asinineAssasin  has left the room~~</span>")]),
-        new iWantToBelieve(observed_beat+=2, [new ChatLine(0, "thank you."),new ChatLine(1, "thank you, Observers"),new ChatLine(2, "for gifting me this closure"),new ChatLine(3, "<span class='joined'>>~~iWantToBelieve  has left the room~~</span>")]),
+        new iWantToBelieve(observed_beat+=2, [new ChatLine(0, "thank you."),new ChatLine(1, "thank you, Observers"),new ChatLine(2, "for gifting me this closure"),new ChatLine(3, "don't worry"),new ChatLine(2, "it didnt hurt"),new ChatLine(5, "<span class='joined'>>~~iWantToBelieve  has left the room~~</span>")]),
 
     
     ]};
@@ -358,6 +358,9 @@ const triggerChapter2 = ()=>{
     video = document.querySelector('#player');
     video.pause();
     video.src = observed.video_src;
+
+    const icon = document.querySelector("#room-icon")
+    icon.src = "icons/LA.PNG";
     const chat = document.querySelector("#chat-box")
     chat.innerHTML = "";
     video.currentTime =0;
