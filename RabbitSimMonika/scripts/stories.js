@@ -360,7 +360,7 @@ const triggerChapter2 = ()=>{
     video.src = observed.video_src;
 
     const icon = document.querySelector("#room-icon")
-    icon.src = "icons/LA.PNG";
+    icon.src = "icons/LA.png";
     const chat = document.querySelector("#chat-box")
     chat.innerHTML = "";
     video.currentTime =0;
