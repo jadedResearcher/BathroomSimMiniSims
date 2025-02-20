@@ -130,6 +130,9 @@ and tahts what they post instead of sad faces (the glithced out text)
 because of an injoke
 with the friends who ditched them
 */
+
+/*haha whoops their original name was accidentally identical to one of the unmarked
+i gave them the title of Stolen as apologies and changed this chars name */
 class languishingApparition extends ChatItem {
     isMe = true;
     constructor(targetTimecode, lines) {
