@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Rabbit Simulator: Chapter 2, Thanks to Monika, of the Aftermarket system </title>
+  <meta name="description"
+    content="A Simulation of the screen sharing (and video streaming) service that died tragically right before the pandemic. Entered into Ludum Dare 51, Theme: Every Ten Seconds">
+  <meta name="keywords" content="zampanio rabbit simulation ARG">
+  <link rel="stylesheet" href="css/index.css">
+  <script>
+    window.location.href ="http://farragofiction.com/RabbitSimMonikaOfTheAftermarketSystem/";
+  </script>
+
+</head>
+
+<body>
+
+  <div id="container">
+    <div id="video-container">
+      <video id="player" class='fuckedup' src="Films/North.mp4"
+        controls="true" autoplay="true"></video>
+    </div>
+    <div id="chat-container">
+      <div id="chat-header">
+        <div id="header-left">
+          <img class="circle" id="room-icon"
+            src="icons/ufo.PNG" />
+        </div>
+        <div id="header-right">
+          <div id="chat-title" onClick="triggerChapter2()">iWantToBelieve's Room</div>
+        </div>
+        <div id="status">5 watching</div>
+
+      </div>
+
+
+      <div id="chat-box">
+
+        <div id="hidden" style="display: none;">
+          <div class="your chat">
+            <img class="circle chat-icon"
+              src="http://farragofiction.com/TwoGayJokes/Stories/MurderGameIcons/theend.png" />
+            <div class="chat-header">
+              <div class="name">theEnd</div>
+              <div class="timestamp">12:01 am</div>
+            </div>
+            <div class="chat-content">
+              <p>Shouldn't you be asleep?</p>
+              <p>It's late.</p>
+            </div>
+          </div>
+
+          <div class="their chat">
+            <img class="circle chat-icon"
+              src="http://farragofiction.com/TwoGayJokes/Stories/MurderGameIcons/thematch.png" />
+
+            <div class="chat-header">
+              <div class="name">theMatch</div>
+
+              <div class="timestamp">12:02 am</div>
+            </div>
+            <div class="chat-content">
+              <p>its fine</p>
+              <p>i can sleep in tomorrow</p>
+            </div>
+
+          </div>
+
+          <div class="your chat">
+            <img class="circle chat-icon"
+              src="http://farragofiction.com/TwoGayJokes/Stories/MurderGameIcons/theend.png" />
+            <div class="chat-header">
+
+              <div class="name">theEnd</div>
+              <div class="timestamp">12:03 am</div>
+            </div>
+            <div class="chat-content">
+
+              <p>...</p>
+              <p>:(</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

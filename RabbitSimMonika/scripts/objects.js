@@ -133,7 +133,7 @@ with the friends who ditched them
 class lonelyAltruist extends ChatItem {
     isMe = true;
     constructor(targetTimecode, lines) {
-        super("lonelyAltruist", "icons/LA.PNG", targetTimecode, lines);
+        super("lonelyAltruist", "icons/LA.png", targetTimecode, lines);
     }
 }
 
@@ -144,7 +144,7 @@ class lonelyAltruist extends ChatItem {
 class flowersForAlgorithm extends ChatItem {
     isMe = true;
     constructor(targetTimecode, lines) {
-        super("flwrs4Algorithm", "icons/flower.PNG", targetTimecode, lines);
+        super("flwrs4Algorithm", "icons/flower.png", targetTimecode, lines);
     }
 }
 
