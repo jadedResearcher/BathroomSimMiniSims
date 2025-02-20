@@ -232,14 +232,14 @@ let west_beat = 1;
     the shambling horrors go quick and fast
    */
     observed = {video_src: "Films/Observed.mp4",chat:[
-        new lonelyAltruist(0, [new ChatLine(0, "*sigh*",1),new ChatLine(3, "probably should call it here"),new ChatLine(6, "can't believe they all ditched me "),new ChatLine(9,"🙁"), new ChatLine(13,"<span class='joined'>~~iWantToBelieve has joined the room~~</span>")]),
+        new languishingApparition(0, [new ChatLine(0, "*sigh*",1),new ChatLine(3, "probably should call it here"),new ChatLine(6, "can't believe they all ditched me "),new ChatLine(9,"🙁"), new ChatLine(13,"<span class='joined'>~~iWantToBelieve has joined the room~~</span>")]),
         new iWantToBelieve(observed_beat+=14, [new ChatLine(0, "oh"),new ChatLine(1, "whoops"),new ChatLine(2, "sorry"),new ChatLine(4, " i thought this was an empty room...")]),
-        new lonelyAltruist(observed_beat+=8, [new ChatLine(0, "oh!"),new ChatLine(3, "no you can have it"),new ChatLine(8, " i was about to leave...")]),
+        new languishingApparition(observed_beat+=8, [new ChatLine(0, "oh!"),new ChatLine(3, "no you can have it"),new ChatLine(8, " i was about to leave...")]),
         new iWantToBelieve(observed_beat+=9, [new ChatLine(0, "oh cool"),new ChatLine(1, "you wanna watch some videos with us?"),new ChatLine(2, "my friends will probably be here soon"),new ChatLine(3, "or hey"),new ChatLine(4, "any videos you wanna show us?"), new ChatLine(5,"<span class='joined'>~~asinineAssasin has joined the room~~</span>")]),
         new iWantToBelieve(observed_beat+=6, [new ChatLine(0, " i think my friends are getting tired of my creepypastas, lol")]),
-        new asinineAssasin(observed_beat+=1, [new ChatLine(0, "What's that?"),new ChatLine(1, "Finally becoming self aware?"),new ChatLine(2, "Ah, hello, lonelyAltruist, do you mind if I call you LA?"),new ChatLine(3, "It would seem to be in poor taste to try to shorten that to 'lonely'."),new ChatLine(4, "<span class='joined'>~~mikuFan1997 has joined the room~~</span>")]),
+        new asinineAssasin(observed_beat+=1, [new ChatLine(0, "What's that?"),new ChatLine(1, "Finally becoming self aware?"),new ChatLine(2, "Ah, hello, languishingApparition, do you mind if I call you LA?"),new ChatLine(3, "It would seem to be in poor taste to try to shorten that to 'lonely'."),new ChatLine(4, "<span class='joined'>~~mikuFan1997 has joined the room~~</span>")]),
         new hatsuneMikuFan1997(observed_beat+=7, [new ChatLine(0, " Hai guys! ^_^"), new ChatLine(1," *tackle glomp!*")]),
-        new lonelyAltruist(observed_beat+=2, [new ChatLine(0, "oh um"),new ChatLine(3, "yeah uh"),new ChatLine(6, "you can call me"),new ChatLine(7, "uh"),new ChatLine(9, "whatever"),new ChatLine(15, "but i don't mean to crash your party"),new ChatLine(17, "i was just leaving")]),
+        new languishingApparition(observed_beat+=2, [new ChatLine(0, "oh um"),new ChatLine(3, "yeah uh"),new ChatLine(6, "you can call me"),new ChatLine(7, "uh"),new ChatLine(9, "whatever"),new ChatLine(15, "but i don't mean to crash your party"),new ChatLine(17, "i was just leaving")]),
         new hatsuneMikuFan1997(observed_beat+=18, [new ChatLine(0, "Noooo!"),new ChatLine(1, "The more the merrier, tell them, Belief!")]),
         new iWantToBelieve(observed_beat+=2, [new ChatLine(0, "it's true, we just love showing people the things we care about")]),
         new asinineAssasin(observed_beat+=1, [new ChatLine(0, "Or, more importantly, learning what they care about, in turn.")]),
@@ -250,14 +250,14 @@ let west_beat = 1;
         new uMad(observed_beat+=2, [new ChatLine(0, "don't get all butt hurt"),new ChatLine(1, "i know, i know"),new ChatLine(2, "don't scare the normies")]),
         new hatsuneMikuFan1997(observed_beat+=3, [new ChatLine(0, "^_^;; I swear we'll ALL behave!")]),
         new iWantToBelieve(observed_beat+=3, [new ChatLine(0, "its okay if you wanna head out though, LA"),new ChatLine(1, " i get that maybe you weren't expecting your private room to get filled with"),new ChatLine(2, "..."),new ChatLine(3, " ... energetic strangers.")]),
-        new lonelyAltruist(observed_beat+=3, [new ChatLine(0, "its okay..."),new ChatLine(3, "uh"),new ChatLine(8, " what are we watching")]),
+        new languishingApparition(observed_beat+=3, [new ChatLine(0, "its okay..."),new ChatLine(3, "uh"),new ChatLine(8, " what are we watching")]),
         new uMad(observed_beat+=9, [new ChatLine(0, " zampanio is a really fun game. you should play it.")]),
         new asinineAssasin(observed_beat+=0, [new ChatLine(0, " zampanio is a really fun game. you should play it.")]),
         new hatsuneMikuFan1997(observed_beat+=0, [new ChatLine(0, " zampanio is a really fun game. you should play it.")]),
         new iWantToBelieve(observed_beat+=0, [new ChatLine(0, " zampanio is a really fun game. you should play it.")]),
-        new lonelyAltruist(observed_beat+=5, [new ChatLine(0, "...")]),
+        new languishingApparition(observed_beat+=5, [new ChatLine(0, "...")]),
         new iWantToBelieve(observed_beat+=1, [new ChatLine(0, " lol, sorry, you walked into a meme we have"),new ChatLine(1, "but seriously"),new ChatLine(2, "have you ever heard about zampanio?")]),
-        new lonelyAltruist(observed_beat+=5, [new ChatLine(0, "..."),new ChatLine(1, "no?"),new ChatLine(3, "is this... a cult thing?")]),
+        new languishingApparition(observed_beat+=5, [new ChatLine(0, "..."),new ChatLine(1, "no?"),new ChatLine(3, "is this... a cult thing?")]),
         new hatsuneMikuFan1997(observed_beat+=4, [new ChatLine(0, ">_<")]),
         new uMad(observed_beat+=1, [new ChatLine(0, "lulz")]),
         new asinineAssasin(observed_beat+=1, [new ChatLine(0, "*sigh*"),new ChatLine(1, "Belief, I keep telling you to mind how we all come off.")]),
@@ -271,7 +271,7 @@ let west_beat = 1;
         new iWantToBelieve(observed_beat+=2, [new ChatLine(0, "LA, meet flowers, flowers, meet LA (flowers talks like that to avoid getting scraped for parts by AI)")]),
         new flowersForAlgorithm(observed_beat+=1, [new ChatLine(0, "N0 1 3V3R T4K35 M3 53R10USLY WH3N 1 P01NT 0UT TH3 D4NG3R")]),
         new asinineAssasin(observed_beat+=1, [new ChatLine(0, "Yes."),new ChatLine(1, "Well."),new ChatLine(2, "One wouldn't want to become a twisted shambling horror of one's own former self, now would one.")]),
-        new lonelyAltruist(observed_beat+=5, [new ChatLine(0, "hello?"),new ChatLine(4, "im.."),new ChatLine(6, "gonna be real here"),new ChatLine(9, "i'm *very* overwhelmed right now"),new ChatLine(13, "maybe i should just..."),new ChatLine(14, "go?")]),
+        new languishingApparition(observed_beat+=5, [new ChatLine(0, "hello?"),new ChatLine(4, "im.."),new ChatLine(6, "gonna be real here"),new ChatLine(9, "i'm *very* overwhelmed right now"),new ChatLine(13, "maybe i should just..."),new ChatLine(14, "go?")]),
         new hatsuneMikuFan1997(observed_beat+=16, [new ChatLine(0, " Nooo!"),new ChatLine(1, "Our lips are zipped!"),new ChatLine(2, "Lets just start the video, Belief!")]),
         new iWantToBelieve(observed_beat+=1, [new ChatLine(0, " LA, seriously if you wanna go, feel free."),new ChatLine(1, "i know we can be a lot"),new ChatLine(2, "rest is important")]),
         new flowersForAlgorithm(observed_beat+=3, [new ChatLine(0, "test")]),
@@ -279,7 +279,7 @@ let west_beat = 1;
         new asinineAssasin(observed_beat+=0, [new ChatLine(0, "zampanio is a marathon not a sprint.")]),
         new hatsuneMikuFan1997(observed_beat+=0, [new ChatLine(0, "zampanio is a marathon not a sprint.")]),
         new iWantToBelieve(observed_beat+=0, [new ChatLine(0, "zampanio is a marathon not a sprint.")]),
-        new iWantToBelieve(observed_beat+=1, [new ChatLine(0, "fair"),new ChatLine(1, "tell you what, I'm dming my friend code to you"),new ChatLine(2, "if you ever wanna go down the rabbit hole"),new ChatLine(3, "you know where to find me ;)"),new ChatLine(4, "<span class='joined'>~~lonelyAltruist  has left the room~~</span>",0)]),
+        new iWantToBelieve(observed_beat+=1, [new ChatLine(0, "fair"),new ChatLine(1, "tell you what, I'm dming my friend code to you"),new ChatLine(2, "if you ever wanna go down the rabbit hole"),new ChatLine(3, "you know where to find me ;)"),new ChatLine(4, "<span class='joined'>~~languishingApparition  has left the room~~</span>",0)]),
         new flowersForAlgorithm(observed_beat+=5, [new ChatLine(0, "D0 Y0U TH1N|< TH3Y'LL F4LL?")]),
         new iWantToBelieve(observed_beat+=1, [new ChatLine(0, "hard to tell?"),new ChatLine(2, "i actually didn't think you would")]),
         new uMad(observed_beat+=2, [new ChatLine(0, "i can't believe u guys let the fresh meat get away so easily")]),
@@ -338,7 +338,7 @@ let west_beat = 1;
         new uMad(observed_beat+=1, [new ChatLine(0, "test")]),
         new hatsuneMikuFan1997(observed_beat+=1, [new ChatLine(0, "test")]),
         new asinineAssasin(observed_beat+=1, [new ChatLine(0, "test")]),
-        new lonelyAltruist(observed_beat+=1, [new ChatLine(0, "test")]),
+        new languishingApparition(observed_beat+=1, [new ChatLine(0, "test")]),
         new flowersForAlgorithm(observed_beat+=1, [new ChatLine(0, "test")]),
 
 ,new ChatLine(0, "test")*/
@@ -369,7 +369,7 @@ const triggerChapter2 = ()=>{
     video.play();
 
     const title = document.querySelector("#chat-title")
-    title.innerText = "lonelyAltruist's Room";
+    title.innerText = "languishingApparition's Room";
 
     const status = document.querySelector("#status")
     status.innerText = "1 Watching"

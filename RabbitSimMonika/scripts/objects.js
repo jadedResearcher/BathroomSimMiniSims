@@ -130,10 +130,10 @@ and tahts what they post instead of sad faces (the glithced out text)
 because of an injoke
 with the friends who ditched them
 */
-class lonelyAltruist extends ChatItem {
+class languishingApparition extends ChatItem {
     isMe = true;
     constructor(targetTimecode, lines) {
-        super("lonelyAltruist", "icons/LA.png", targetTimecode, lines);
+        super("languishingApparition", "icons/LA.png", targetTimecode, lines);
     }
 }
 
