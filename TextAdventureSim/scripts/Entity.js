@@ -278,7 +278,7 @@ class Entity {
   neighbors = []; //similar to contents, but these are the things you can move into from this entity
 
 //https://www.youtube.com/watch?v=kwt3m9cRkJ8
-
+//https://www.tumblr.com/altorenn/776274906039123968?source=share
   constructor(name, desc, theme_keys, sprite = "sheep.gif") {
     this.name = name.toUpperCase();
     entityNameMap[this.name] = this;
@@ -290,6 +290,12 @@ class Entity {
     this.theme_keys = theme_keys;
     this.syncDefaultFunctions();
   }
+/*
+today i realized that mita from miside is BASICALLY my character of Truth from zampanio pretending to be alt (i.e. a waifu)
+"how dare you leave me, im going to trap you and then i'm going to CONFIRM you are trapped by trying to be the scariest possible thing to you and watch you try to escape and if you STILL can't that means i no longer have to worry about being alone"
+*/
+//a friend just said that my works (including the discord), are like a haunted house attraction, really scary on the surface, but actually crafted very carefully to make sure no one gets hurt
+
   //http://farragofiction.com/ColonistsEyes5/godiloveit.png
   //this person is presumed living this person is presumed living this person is presumed living
   speak = async (words) => {

@@ -1,0 +1,503 @@
+<html>
+	<head>
+		<style>
+			body {
+				background: #505050;
+			}
+			
+			.buttonList {
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				background: #606060;
+				padding: 5px 10px 5px 10px;
+			}
+			
+			.act {
+				font-family: arial;
+				font-size: 200%;
+				font-weight: bold;
+				min-width: 300px;
+				max-width: 1024px;
+				margin: 15px 15px 15px 15px;
+				padding: 10px 15px 10px 15px;
+				border: 2px solid black;
+				border-radius: 10px;
+			}
+			
+			.actHdr {
+				display: block;
+				cursor: hand;
+				width: 100%;
+				user-select:none;
+			}
+			
+			.act1 {
+				background: #AA5050;
+			}
+			
+			.act2 {
+				background: #AAAA50;
+			}
+			
+			.act3 {
+				background: #50AA50;
+			}
+			
+			.toggle {
+				display: inline-block;
+				width: 30px;
+				text-align: center;
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 5px;
+			}
+			
+			.hide {
+				display: none !important;
+			}
+			
+			.actContent {
+				display: block;
+				background: rgba(255, 255, 255, 0.2);
+				margin: 10px 15px 5px 50px;
+				border: 1px solid black;
+				border-radius: 10px;
+			}
+			
+			.subHdr {
+				font-size: 65%;
+				font-weight: normal;
+				display: block;
+				cursor: hand;
+				width: 100%;
+				user-select: none;
+				padding: 5px 0px 5px 10px;
+			}
+			
+			.subContent {
+				display: block;
+				font-size: 55%;
+				color: #303030;
+				font-weight: 100;
+				font-style: italic;
+				margin: 0px 0px 5px 30px;
+			}
+			
+			ul {
+				margin-top: 0px;
+			}
+			
+			textarea {
+				width: 95%;
+				margin-bottom: 10px;
+				padding: 5px 5px 5px 5px;
+				background: rgba(0,0,0,0.2);
+			}
+			
+			label {
+				font-family: arial;
+				font-size: 80%;
+			}
+			
+			select {
+				min-width: 200px;
+			}
+		</style>
+		
+		<script language="JavaScript">
+			const SEP = "|";
+			const FIELDS =
+				["OpeningImage", "ThemeStated", "Setup", "Catalyst", "Debate",
+				 "BreakInto2", "BStory", "FunAndGames", "Midpoint", "BadGuysCloseIn", "AllIsLost", "DarkNightOfTheSoul",
+				 "BreakInto3", "Finale", "FinalImage"];
+		
+			function toggleSection(obj) {
+				// Update the header to toggle +/-
+				if (obj.parentNode.children[1].classList.contains("hide")) {
+					obj.children[0].innerHTML = "-";
+				} else {
+					obj.children[0].innerHTML = "+";
+				}
+			
+				// Show the children
+				for (var index = 1; index < obj.parentNode.children.length; index++) {
+					obj.parentNode.children[index].classList.toggle("hide");
+				}
+			}
+			
+			function supportsLocalStorage() {
+				if (typeof(window.localStorage) !== "undefined") {
+					return true;
+				}
+				alert("Local storage is not supported with your settings.\n"
+					+ "Please use export/import instead.");
+				return false;
+			}
+			
+			function saveToLocalStorage() {
+				if (supportsLocalStorage()) {
+					var doc = document;
+					var saveSelector = doc.getElementById("saveToStory");
+					var saveName = saveSelector.options[saveSelector.selectedIndex].text;
+					
+					// Prompt the user to specify a name for the save if (New Story) is selected
+					if (saveSelector.selectedIndex == 0) {
+						let name = prompt("Please pick a simple name for the story.\n\n"
+							+ "Only letters and numbers are allowed (no spaces).\nInvalid characters will be removed.", "");
+						if (name) {
+							saveName = name.replace(/[^a-zA-Z0-9]+/g, "");
+							var option = document.createElement("option");
+							option.text = saveName;
+							saveSelector.options.add(option);
+							saveSelector.selectedIndex = saveSelector.options.length - 1;
+						} else {
+							return;
+						}
+					}
+					
+					// Save the list of stories
+					var storyList = "";
+					for (var index = 1; index < saveSelector.options.length; index++) {
+						if (storyList.length > 0) {
+							storyList += SEP;
+						}
+						storyList += saveSelector.options[index].text;
+					}
+					localStorage.stcSavedStoryList = storyList;
+					
+					// Save the last selected story index
+					localStorage.stcLastSelectedIndex = saveSelector.selectedIndex;
+					
+					// Save the values of all the boxes
+					for (var index = 0; index < FIELDS.length; index++) {
+						localStorage.setItem("stc"+saveName+FIELDS[index], doc.getElementById("txt"+FIELDS[index]).value);
+					}
+					
+				}
+			}
+			
+			function loadFromLocalStorage() {
+				if (supportsLocalStorage()) {
+					let doc = document;
+					let saveToStory = doc.getElementById("saveToStory");
+					
+					if (saveToStory.selectedIndex > 0) {
+						let saveName = saveToStory.options[saveToStory.selectedIndex].text;
+						for (var index = 0; index < FIELDS.length; index++) {
+							doc.getElementById("txt"+FIELDS[index]).value = localStorage.getItem("stc"+saveName+FIELDS[index]);
+						}
+						
+					} else {
+						// Clear out the fields if "New Story" is loaded
+						for (var index = 0; index < FIELDS.length; index++) {
+							doc.getElementById("txt"+FIELDS[index]).value = "";
+						}
+					}
+					
+				}
+			}
+			
+			function promptToLoad() {
+				if (confirm("Are you sure you want to load?\n\nUnsaved changes will be lost!")) {
+					loadFromLocalStorage();
+					// Save the last accessed index
+					localStorage.stcLastSelectedIndex = document.getElementById("saveToStory").selectedIndex;
+				}
+			}
+			
+			function init() {
+				if (typeof(window.localStorage) !== "undefined") {
+					// Initialize story selector
+					var savedStoryList = localStorage.stcSavedStoryList;
+					var storyArr = savedStoryList ? savedStoryList.split(SEP) : null;
+					var saveToStoryObj = document.getElementById("saveToStory");
+					
+					if (storyArr != null) {
+						for (var index = 0; index < storyArr.length; index++) {
+							var option = document.createElement("option");
+							option.text = storyArr[index];
+							saveToStoryObj.options.add(option);
+						}
+						// Set the story from the last selected one
+						saveToStoryObj.selectedIndex = localStorage.stcLastSelectedIndex;
+					} else {
+						saveToStoryObj.disabled = true;
+					}
+				}
+				loadFromLocalStorage();
+			}
+		</script>
+	</head>
+	<body onload="init();">
+		<!-- Controls -->
+		<div class="buttonList">
+			<label for="saveToStory">Save to: </label>
+			<select id="saveToStory" name="saveToStory">
+				<option>(New Story)</option>
+			</select>
+			<input type="button" onclick="saveToLocalStorage();" value="Save" />
+			<input type="button" onclick="promptToLoad();" value="Load" />
+		</div>
+		
+		<!-- ======== ACT I ======== -->
+		<div class="act act1" style="margin-top: 50px;">
+			<div class="actHdr" onclick="toggleSection(this);">
+				<span class="toggle">+</span>
+				ACT I
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Opening Image
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Gives a quick &quot;before&quot; snapshot of the hero's world</li>
+						<li>Sets the tone, style, and mood</li>
+						<li>Visually represents the hero's flawed life</li>
+					</ul>
+					<textarea id="txtOpeningImage" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Theme Stated
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Briefly alludes to the journey ahead and the flaws that will be conquered</li>
+						<li>Hints at the life lesson</li>
+						<li>Shows the hero actively ignoring the thing that will truly fix their life</li>
+					</ul>
+					<textarea id="txtThemeStated" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Setup
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Sets up the status quo before it all changes</li>
+						<li>Defines the hero's personality and behaviors</li>
+						<li>Shows the hero in the pursuit of their misguided goal / want</li>
+						<li>Introduces everyone that exists in ACT I (the A story characters)</li>
+						<li>Demonstrates how the flaws affect the hero's life</li>
+						<li>Shows the stasis = death moment</li>
+					</ul>
+					<textarea id="txtSetup" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Catalyst
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Disrupts the status quo with a life-changing event</li>
+						<li>Puts the hero in a situation where they have no choice but to do something different</li>
+						<li>Often conveys the message in the form of bad news</li>
+						<li>Proves that the hero can't easily return to their normal life after this</li>
+					</ul>
+					<textarea id="txtCatalyst" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Debate
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Shows how resistant the hero is to change</li>
+						<li>Makes the hero ask themselves what to do / what happens next</li>
+						<li>Shows the hero struggling to decide (if they haven't already accepted the call)</li>
+					</ul>
+					<textarea id="txtDebate" rows="5"></textarea>
+				</div>
+			</div>
+		</div>
+		
+		<!-- ======== ACT II ======== -->
+		<div class="act act2">
+			<div class="actHdr" onclick="toggleSection(this);">
+				<span class="toggle">+</span>
+				ACT II
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Breaking into Act II
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Brings the hero into the upside-down world of ACT II</li>
+						<li>Shows the hero being proactive about propelling things forward</li>
+						<li>Shows the hero making uninformed decisions</li>
+					</ul>
+					<textarea id="txtBreakInto2" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					B Story
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Introduces (or re-introduces) the character that will ultimately bring about change in the hero</li>
+						<li>Embodies through this character what the hero <u>needs</u></li>
+						<li>Guides the hero to their life lesson through this character</li>
+					</ul>
+					<textarea id="txtBStory" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Fun & Games
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Delivers on the promise of the premise (this is candy for the reader, but not necessarily for the hero)</li>
+						<li>Lets the hero have fun&mdash;or flounder&mdash;in their new world</li>
+						<li>Provides a bouncing ball narrative; a series of ups and downs for the hero</li>
+					</ul>
+					<textarea id="txtFunAndGames" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Midpoint
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Marks the middle of the story with either a false victory or a false defeat</li>
+						<li>Raises the stakes of the story</li>
+						<li>Has the A story and B story interact in some way</li>
+						<li>Leads to the peak (or valley) of Fun & Games&mdash;depending on if it was an upward or downward trend
+							<ul>
+								<li>For a false victory, shows the hero achieving their <u>want</u></li>
+								<li>For a false failure, shows the hero missing their want, or achieving it but finding it's not right</li>
+							</ul>
+						</li>
+						<li>Turns up the pressure with a time limit, a confession, a plot twist, or a party (public expression of the hero's commitment)</li>
+						<li>Subtly shifts from the hero's <u>want</u> to their <u>need</u></li>
+						<li>Crosses the A story (flashy, external story) with the B story (internal, character growth story)</li>
+						<li>Makes it harder for the hero to turn around and go back</li>
+						<li>Shit just got real</li>
+					</ul>
+					<textarea id="txtMidpoint" rows="8"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Bad Guys Close In
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Provides a rebound point (from false defeat) or fall down (from false victory) while the bad guys (internal flaws) close in
+							<ul>
+								<li>For false victory, things continue to get worse</li>
+								<li>For false defeat, things start looking up (a small win)</li>
+							</ul>
+						</li>
+						<li>Sabotage successes, destroy happiness</li>
+					</ul>
+					<textarea id="txtBadGuysCloseIn" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					All is Lost
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Makes the hero at fault for something that becomes their lowest point, and is <u>highly</u> impactful</li>
+						<li>Carries death, or the whiff of it (doesn't have to be literal&mdash;could be the death of a relationship)</li>
+						<li>Kills the old way of thinking so that the new one can be born</li>
+						<li>Serves as a secondary catalyst</li>
+					</ul>
+					<textarea id="txtAllIsLost" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Dark Night of the Soul
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Shows how the hero reacts to All is Lost and how they break through to a resolution</li>
+						<li>Shows the hero reacting, pondering, contemplating, and/or wallowing</li>
+						<li>Includes an epiphany, where the hero's actual <u>need</u> becomes apparent</li>
+						<li>Sometimes includes a return to the familiar, where the hero retreats to a comforting place or situation, only to find it isn't what it once was for them</li>
+					</ul>
+					<textarea id="txtDarkNightOfTheSoul" rows="5"></textarea>
+				</div>
+			</div>
+		</div>
+		
+		<!-- ======== ACT III ======== -->
+		<div class="act act3">
+			<div class="actHdr" onclick="toggleSection(this);">
+				<span class="toggle">+</span>
+				ACT III
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Breaking into Act III
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Brings hero to the synthesis world of ACT III where they will fix things the right way</li>
+						<li>Lets the hero realize that it was never other people that had the solution, but the hero themselves</li>
+					</ul>
+					<textarea id="txtBreakInto3" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Finale
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Resolves all of the problems created in ACT II</li>
+						<li>Proves the hero has learned the theme and transformed</li>
+						<li>Covers the five-point finale:
+							<ul>
+								<li>Gather the team</li>
+								<li>Execute the plan with a sense of impossibility (possibly with B story character sacrifice)</li>
+								<li>High tower surprise in which things don't go as planned</li>
+								<li>Dig deep down (do the thing they've been working towards the whole story)</li>
+								<li>Execution of the new plan</li>
+							</ul>
+						</li>
+					</ul>
+					<textarea id="txtFinale" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="actContent hide">
+				<div class="subHdr" onclick="toggleSection(this);">
+					<span class="toggle">+</span>
+					Final Image
+				</div>
+				<div class="subContent hide">
+					<ul>
+						<li>Give the &quot;after&quot; snapshot of the hero, mirroring the opening image</li>
+					</ul>
+					<textarea id="txtFinalImage" rows="5"></textarea>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
