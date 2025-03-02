@@ -10,33 +10,7 @@ let startedTherapy = false;
 
 const all_scenes = [];
 
-//getSceneWithTitle("credit to the Theorist of Labyrinths, or your discord name, or a secret third option?")
-const  haxDebugScene =(sceneTitle)=>{
-  const scene =  getSceneWithTitle(sceneTitle);
-  //add all blorbos needed for this scene;
-  if(!scene){
-    return "ERROR: SCENE NOT FOUND";
-  }
-  for(let e of scene.entityNames){
-    const blorbo = entityNameMap[e];
-    if(blorbo){
-      player.addToInventory(blorbo);
-    }else{
-      console.log("JR NOTE: why can't I find: ", e)
-    }
-  }
-  return getAllScenesWithEntities(player);
 
-}
-
-//takes in a list of blorbos and adds them to inventory
-//haxDebugScenes([K, GUNTAN, VIK, PARKER])
-const haxDebugScenesForPlayers =(blorbos)=>{
-  for(let blorbo of blorbos){
-    player.addToInventory(blorbo)
-  }
-  return getAllScenesWithEntities(player);
-}
 
 class Scene {
   //just their names, not their objects

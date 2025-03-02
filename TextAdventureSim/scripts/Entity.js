@@ -12,6 +12,7 @@ const COMMAND_THINK = "THINK";
 const COMMAND_HELP = "HELP";
 const COMMAND_UNCENSOR = "UNCENSOR"
 const COMMAND_HYDRATE = "HYDRATE"
+const COMMAND_WASTE = "WASTE";
 
 //not guaranteed to have every theme, but will be keyed by theme and have an array of entities to spawn
 //look for [SETUP SPECIAL ENTITIES]
@@ -36,6 +37,7 @@ defaultActionMap[COMMAND_TAKE] = ["TAKE", "PILFER", "LOOT", "GET", "STEAL", "POC
 defaultActionMap[COMMAND_GIVE] = ["GIVE", "GIFT", "OFFER", "BESTOW"];
 defaultActionMap[COMMAND_USE] = ["USE", "DEPLOY", "UTILIZE", "OPERATE", "INVOKE"];
 defaultActionMap[COMMAND_HYDRATE] = ["HYDRATE", "DRINK", "GUZZLE", "SWALLOW", "SLURP"];
+defaultActionMap[COMMAND_WASTE] = ["WASTE", "HACK", "HAX", "CODE", "DEBUG"];
 
 const directionIndices = ["NORTH", "SOUTH", "EAST", "???"]
 getDirectionLabel = (index) => {
@@ -327,6 +329,7 @@ today i realized that mita from miside is BASICALLY my character of Truth from z
     this.functionMap[COMMAND_GIVE] = this.give;
     this.functionMap[COMMAND_USE] = this.use;
     this.functionMap[COMMAND_HYDRATE] = this.hydrate;
+    this.functionMap[COMMAND_WASTE] = this.waste;
     this.functionMap[COMMAND_TOUCH] = this.touch;
 
   }
@@ -540,6 +543,10 @@ today i realized that mita from miside is BASICALLY my character of Truth from z
     return "You feel refreshed. Thank you for remembering to drink. It's required to live."
   }
 
+  waste = ()=>{
+    return "Oh. Uh. Okay? If you're sure you know what you're doing? Explicit commands for wasting: (call them like you would any javascript, which is to say nameofCommand(), sometimes you're supposed to pass something inside the (), like nameOfCommand('Camille'), solve the puzzle of the code to know when, lol: <br><br>" + Object.keys(window).filter((i)=>i.includes("hax")).join(", ")
+  }
+
   /*
   yeah okay if i call "go" on an object we're going to move to it
   this MEANS we can "go ria" by default but honestly, im fine with this
@@ -614,6 +621,7 @@ Secret Third Option Waste Ending: 23
 
   removeFromContents = async (item) => {
     //anywhere the detective is is a trap for anyone besides breath players
+    //  in another branch, they have peace https://www.youtube.com/watch?v=bNbt3U4ZANU
     if (this.contents.includes(DETECTIVE) && !(item.theme_keys.includes(FREEDOM))) {
       return false;
     }
@@ -947,12 +955,12 @@ const HUNTER = new FleshCreature("LeeHunter2",
   "Blorbos/Hunter_by_Guide.png")
 
 const NEVILLE = new FleshCreature("Neville",
-  "The Bard of Hunting Night. If anything happens to Devona, he cracks.",
+  "The Bard of Hunting Night. If anything happens to Devona, he cracks.<br><br>He is drawn to remove irrelevancies wherever he can. The void is for him.",
   [HUNTING, OBFUSCATION, DARKNESS, SPYING, MATH],
   "Blorbos/neville_twin_by_guide.png")
 
 const DEVONA = new FleshCreature("Devona",
-  "The Bard of Hunting Day. If anything happens to Neville, she will stop at nothing for revenge.",
+  "The Bard of Hunting Day. If anything happens to Neville, she will stop at nothing for revenge.<br><br>She has the Knowledge of the Universe embedded with her, yet still she craves more. She will seek knowledge in all its forms.",
   [HUNTING, KNOWING, LIGHT, SPYING, OBFUSCATION],
   "Blorbos/devona_twin_by_guide.png")
 
@@ -1041,6 +1049,9 @@ she spends her whole existence terrified of apocalypse, she was literally DESIGN
 and her trickster arc is just "fixing" all her problems by deciding actually apocalypses are cooooool and why was she worrying about it so much? have fuuuuun, live a little
 ic was describing her to me back in the day and i went "wow she is such an extiniction avatar it burns" when infodumping about magnus archives to him
 */
+
+//https://archiveofourown.org/works/63510112?view_adult=true
+
 
 //apocalypse chick, more than anyone else, rules arm2. 
 //a permeanently wasted, permanently trickster god of reality itself
@@ -1134,7 +1145,7 @@ WIBBY.contents.push(sin);
 //choke out every escape of the Witnesses' enemy
 //counter his glitches with your own
 const DETECTIVE = new FleshCreature("Detective",
-  "The Guiding Detective of Trapped Breath. His character portrait was never created before his game of origin was abandoned.<br><br> He escaped one claustrophobic bathroom only to find an infinitely spiralling one.<br><br>As long as he is in a room, no one can leave it.<br><br>The Devil of Spirals is NOT happy about this.",
+  "The Guiding Detective of Trapped Breath. His character portrait was never created before his game of origin was abandoned.<br><br> He escaped one claustrophobic bathroom only to find an infinitely spiralling one.<br><br>As long as he is in a room, no one can leave it.<br><br>The Devil of Spirals is NOT happy about this.<br><br>A blood player freed part of him, in one Branch. This has consequences.",
   [GUIDING, BURIED, HUNTING, DECAY, WASTE], //he is breath, but there is no freedom within him. 
   "Blorbos/404.png")
 
