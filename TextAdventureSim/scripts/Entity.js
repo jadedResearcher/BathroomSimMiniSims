@@ -94,6 +94,9 @@ const makeChildEntity = (rand, theme_keys, nameOverride) => {
   const name = `${titleCase(getRandomThemeConcept(rand, my_keys, ADJ))} ${titleCase(getRandomThemeConcept(rand, my_keys, LOCATION))}`;
   const ret = new Entity(nameOverride ? nameOverride : name, "It's a room...", my_keys);
   ret.contents = spawnItemsForThemes(ret.rand, ret.theme_keys);
+  if (ret.contents.includes(DETECTIVE)) {
+    ret.name = "Bathroom"; //its a problem
+  }
   return ret;
 }
 
@@ -355,6 +358,10 @@ today i realized that mita from miside is BASICALLY my character of Truth from z
   handleCommand = (command, parentEntity, count = 0, justifiedRecursion = true) => {
     if (count > 13) {
       return "Haha, wow! How did you manage to recurse thaaaaaaaaaaaaat many times. Surely even YOU can't justify that one, lol. imma just...stop that. Only I get to cause fractal game crashing bugs like that, lulz. It's been real!"
+    }
+
+    if(this.contents.includes(DETECTIVE)){
+      this.name = "Bathroom"; //its a problem
     }
 
     const truthRet = this.checkTruthForCommand(command);

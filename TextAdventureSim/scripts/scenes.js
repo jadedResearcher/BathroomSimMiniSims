@@ -625,6 +625,132 @@ convertScriptToScene("Test3", `Sheep: baaaa
       Sheep: baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!`);
 
 
+      convertScriptToScene("Devona Interviews Neville",`Devona: For The Record, Can You State Your Name and Occupation?
+Neville: Devy, its me, you know who I am :( 
+Devona: Okay yes I know and this seems all a little bit silly, but Neville, whoever eventually listens to this might not know and I think its really important to at least ge this on record and then later maybe we can go over it and redact it if thats okay.
+Neville: Oh, okay!
+Neville: I'm Neville! I'm our Data Analyst!
+Devona: And What Does That Entail?
+Neville: I figure out what parts are important in all the data we collect :)
+Devona: And how do you feel about the Echidna?
+Neville: ...
+Neville: No comment?
+`)
+
+//devona speaks precise and formal when nervous or around strangers
+//but is more casual around friends or to herself
+convertScriptToScene("Devona Interviews The Detective",`Devona: Oh, uh, Hello!
+Detective: Wait!
+Detective: Don't close that---
+[door closes]
+Detective: ...door...
+Devona: Oh No, Did I Do Something Wrong?
+Detective: I'm afraid you'll be in this Bathroom with me for a while, Miss...
+Detective: Apologies for that.
+Detective: Eventually I'll find a way to the next Bathroom on my own...
+Detective: And you'll be able to leave through that door.
+Devona: Oh Wow!
+Devona: Is That, Like, Your Thing?
+Devona: Um...
+Devona: Oh Gosh.
+Devona: (I probably should have brought Wibby with me, I'm no good at talking)
+Devona: Uh. 
+Devona: Is It Okay If I Interview You?
+Detective: Sure thing, Miss.
+Detective: Passes the time, if nothing else.
+Devona: Okay.
+Devona: For The Record, Can You State Your Name and Occupation?
+Detective: ...
+Detective: ... I can't say I know, not for sure.
+Detective: The evidence is poor but. 
+Detective: I THINK.
+Detective: My name is Detective Shiro White.
+Detective: I am...
+Detective: PROBABLY a private investigator of some type?
+Detective: I don't have any memories of cases besides...
+Detective: The one that broke me.
+Devona: You Do Not Have To Answer, but, Could You Clarify?
+Detective: I woke up one day and...
+Detective: Look, I know how this sounds.
+Detective: Maybe I'm crazy, who knows...
+Detective: But I woke up and knew reality was a game, and that it was my job to get to the bottom of why it was glitching out.
+Detective: The murder mystery wasn't happening. The victim wasn't getting killed.
+Detective: And then I realized just how much more was broken and ...
+Detective: [voice hardening], I left.
+Detective: And here we are.
+Devona: We Sure Are!
+Devona: One Last Question!
+Devona: I Ask Everyone This: 
+Devona: What Do You Think About The Echidna?
+Detective: The what?
+Devona: Oh. Um! The Echidna! The Universe! The Thing We Are All Inside!
+Detective: ...
+Detective: Miss, I don't mean to offend but..
+Detective: Are you doing okay?
+Devona: No, See! It's, (gosh do you really not know about the Echidna) Um! 
+Devona: Are You Happy? Living Your Life?
+Detective: ...
+Detective: ...
+Detective: ...
+Detective: It beats being trapped in a forgotten game.
+Devona: [vibrates with anxiety]`)
+
+
+convertScriptToScene("Wibby Interviews The Detective",`Witherby: Is it alright if I enter?
+Detective: If you shut the door, you'll be trapped in here with me.
+Witherby: Thank you for the warning [carefully leaves the door ajar, stepping just inside.
+Witherby: I'm just checking in on you. 
+Witherby: My associate, Devona, wanted me to follow up with you.
+Detective: Well, that's very kind of her. 
+Detective: Was that the one asking all those questions?
+Witherby: The same. And forgive me, I failed to introduce myself.
+Witherby: I am Witherby, pleased to make your acquaintance. 
+Detective: You can call me the Detective.
+Witherby: nods, [assumes a more casual pose leaning against the door frame]
+Witherby: Is there anything we can do to help you?
+Witherby: Being stuck in a bathroom doesn't seem...
+Witherby: The best situation.
+Detective: It has its ups and downs, that's for sure.
+Detective: You meet a surprising amount of people this way.
+Detective: Sooner or later, everyone needs this room, you know?
+Witherby: [polite chuckle, waiting for him to continue]
+Detective: *sighs*
+Detective: I wouldn't say no to an assist...
+Detective: But I also wouldn't hold my breath waiting for rescue, either.
+Detective: Whatever mystery has me in its grips... It's not letting go any time soon.
+Witherby: [nods]
+Witherby: As a Detective, would you say you're enjoying getting to the bottom of this particular mystery?
+Detective: It beats sitting around, having nothing to do...
+Witherby: [nods]
+Detective: Look.
+Detective: I can put two and two together, right?
+Detective: Your friend, Devona, did you say her name was?
+Detective: Got all nervous like when I wasn't thrilled at my lot in life.
+Detective: And you [looks Witherby up and down] are pulling out all the stops to put me at ease.
+Detective: I don't know what's going on here, not all the way.
+Detective: But I've been around the block a time or two.
+Detective: Enough to put together some pieces.
+Detective: There's something wrong with this... 
+Detective: Well, I suppose it's not a Game.
+Detective: But whatever it is, it's WRONG.
+Detective: But that doesn't matter, not when it's your HOME and it's all you have.
+Detective: I get that.
+Detective: I'm not going to rock the boat.
+Detective: I'm not going to stop digging into this mystery, either.
+Detective: But I don't see a reason to destroy something just because it's broken.
+Witherby: What a fascinating theory you have, Detective.
+Witherby: I'm afraid I can not confirm or deny any details.
+Witherby: But I'm sure you'll be able to consider the Training Team allies to your cause.
+Witherby: It has been a pleasure meeting you.
+Witherby: [one last curt nod, and then he leaves the way he came]
+Detective: ...
+Detective: Now just what have I gotten myself into?
+`)
+//witherby very excplicitly promised exactly nothing
+/*
+i also think its funny devona (and i ) forgot to introduce herself
+while wibby waited to do so so it could be an "apology", i.e. put himself believably at "a disadvantage" early on
+*/
 
 //unmarked are colonizing the arms now
 //From Theorist of Labyrinths
