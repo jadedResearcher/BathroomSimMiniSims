@@ -540,7 +540,7 @@ const getSceneWithTitle = (title)=>{
 //if the inventory has Sheep and Blood and Fire
 //then a scene with Sheep and Blood would return, as well as Blood and Fire
 //but not a scene with Sheep and Blood and Fire and Ria
-const getAllScenesWithEntities = (player) => {
+const getAllScenesFromInventory = (player) => {
   const inventoryNames = player.inventory.map((i) => i.name);
   const ret = [];
   for (let s of all_scenes) {
@@ -555,6 +555,9 @@ const getAllScenesWithEntities = (player) => {
 
   return ret;
 }
+
+
+
 
 const convertScriptToScene = (title, script) => {
   //{name, text} pairs

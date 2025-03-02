@@ -349,7 +349,7 @@ const renderInventory = (parent) => {
 
   }
 
-  const scenes = getAllScenesWithEntities(player);
+  const scenes = getAllScenesFromInventory(player);
   if (scenes.length > 0) {
     renderScenes(sceneText, globalRand.shuffle(scenes));
   } else {

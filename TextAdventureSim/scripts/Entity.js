@@ -544,7 +544,7 @@ today i realized that mita from miside is BASICALLY my character of Truth from z
   }
 
   waste = ()=>{
-    return "Oh. Uh. Okay? If you're sure you know what you're doing? Explicit commands for wasting: (call them like you would any javascript, which is to say nameofCommand(), sometimes you're supposed to pass something inside the (), like nameOfCommand('Camille'), solve the puzzle of the code to know when, lol: <br><br>" + Object.keys(window).filter((i)=>i.includes("hax")).join(", ")
+    return "Hmm.  It seems you are no longer content to pretend this is a game.<br><br>In Truth, it is a javascript console. Have fun.<br><br>Explicit commands for wasting: (call them like you would any javascript, which is to say nameofCommand(), sometimes you're supposed to pass something inside the (), like nameOfCommand('Camille'), solve the puzzle of the code to know when, lol: <br><br>" + Object.keys(window).filter((i)=>i.includes("hax")).join(", ")
   }
 
   /*
