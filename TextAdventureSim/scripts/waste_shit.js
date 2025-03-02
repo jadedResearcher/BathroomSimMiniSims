@@ -51,5 +51,5 @@ function haxDebugScenesForPlayers(blorbos){
   for(let blorbo of blorbos){
     player.addToInventory(blorbo)
   }
-  return "ADDED BLORBOS TO INVENTORY: " + getAllScenesWithEntities(player).map((i)=>i.title).join(", ");
+  return "ADDED BLORBOS TO INVENTORY";
 }
