@@ -821,6 +821,66 @@ Devona: Interviewer Has Lost Appetite For Eggs. Requesting Waffle Party If Appli
 Devona: [whine] Conclusion: This Sucks.
 `)
 
+/*
+i love this, the fact that devona was the one to drive rava off before (see witherby's diary)
+means rava is doing this ON PURPOSE to show she's not afraid of devona/not submitting to her
+*/
+convertScriptToScene("Rava Gets Interviewed By Devona by IC",`Devona: ...
+Rava: ...
+Rava: [grins, baring teeth] You called.
+Devona: Well, Yes, We'd Agreed to Meet, But, Uh...
+Devona: N-Not In My Room?
+Rava: Do you want your interview?
+Devona: [sweats] Y-Yes?
+Rava: Start yapping, pup.
+Devona: R-Right! Could You, Uh, State Your Name And...
+Rava: [stares] And?
+Devona: O-Occupation, Please?
+Rava: Occupation.
+Devona: Your Job?
+Rava: Oh, right. Name's Rava. Job... [head sways side to side]
+Rava: Hund.
+Devona: Could You Elaborate Further?
+Rava: Guess you could call it 'Watchdog' here.
+Devona: So You Work As Protection? For Who?
+Rava: My boss.
+Devona: W-Well, I Was More Meaning... Could You Be More Specific? Which Organization?
+Rava: Where my boss works. Why does that matter?
+Devona: It's Where You W--
+Devona: [lets out the smallest, tiniest, tired groan]
+Rava: [just smiles back, placidly] Hey, you asked. That's my name and my job.
+Devona: W-Well. [squints, rubbing at her arms] Do You Like Your Job?
+Rava: Oh, yeah. There's plenty of work to do. Always someone to watch. Plenty of food. Praise from my master. What else could I want in a job? It's pretty sweet.
+Devona: Your Master?
+Rava: [nodding] My boss.
+Devona: Do You Call Your Boss Your Master Because She Told You To, Or--
+Rava: Do you call that mutt of yours your twin because he told you to?
+Devona: ... No.
+Rava: Well, there you go. 
+Devona: You Have A Subordinate, 'Twig', Is That True?
+Rava: The pup? Doing their own thing these days, but I get the question. Sure.
+Devona: And Do They Work With The Cult?
+Rava: What cult?
+Devona: The Cult Of The Harvest?
+Rava: Oh, not supposed to answer that.
+Devona: Because Of Your Master?
+Rava: She doesn't like talking about it.
+Devona: Is There A Reason She Doesn't?
+Rava: The whole point is you can't know about it.
+Devona: The Cult Of The Nameless One?
+Rava: It's in the name, so...
+Rava: ...oh, clever girl, I see what you're doing. Well played, pup. 
+Rava: Running out of time, though. You get one more question.
+Devona: ...What Do You Think About The Echidna?
+Rava: [raising a brow] The Echidna? Not my place to think about it.
+Devona: As In, You Can't Talk About It? 
+Rava: What do you think, pup? Do you think I can't talk about it or that I won't? Or maybe I don't care to tell you.
+Rava: There can be more hunds here. That's all that matters to me.
+Devona: More--
+Rava: Got a job to do. Later, pup.
+Rava: [disappears out of the room, leaving behind a puddle of blood(?) and scraps of the furniture]
+Devona: ...What?`)
+
 convertScriptToScene("Devona Interviews the Boss",`Devona: For The Record, Can You State Your Name and Occupation?
 Boss: Now, it ain't exactly fair, now is it, to go asking me that.
 Boss: I think you know that my occupation is perfectly legitimate, as it were.

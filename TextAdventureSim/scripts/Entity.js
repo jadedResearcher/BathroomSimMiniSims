@@ -1309,6 +1309,9 @@ const HOSTAGE = new FleshCreature("Boss",
 //twig would never tie themself down and say they're "dating" john, but john at least would acknowledge that they're seeing each other
 //our vampire/werewolf ships are different lol
 //horseshoes pun on time clone, its the clown of time.  a surprising amount of people can see all his resets while he tries to look 'cool'.  time players like camellia and the eye killer, obviously, but devona as well
+/*its EXTREMELY funny to me how slow his "voice" is
+i can FEEL devona vibrating with impatience as he spends 30+ tries to fry an egg
+i'd call him a waste of goddamned time if he didn't have zero gnosis */
 const JOHN = new FleshCreature("John",
   "... Your friend! <br><br>Sometimes you do super fun things together!<br><br>Rava's Boss, Camellia keeps him around and says he's entertaining!<br><br>Sometimes he calls you by a name that isn't yours and you do not know why! That's okay though!<br><br>He drinks blood! Sometimes he drinks someones blood and they turn into something new!",
   [ADDICTION, KILLING, DEATH, TIME, WEB, CLOWNS],
