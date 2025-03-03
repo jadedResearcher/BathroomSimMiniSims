@@ -1291,7 +1291,7 @@ const ROD = new FleshCreature("Rod",
 //he was a real dude in Morgan's Hill but...we're not there anymore, now are we.
 //if the Neighbor found out, he would do everything in his power to return to his home Universe
 //but, well, who would tell him?
-const NEIGHBOR = new FleshCreature("The Neighbor.",
+const NEIGHBOR = new FleshCreature("The Neighbor",
   "The Neighbor. <br><br>The Host.<br><br>The Shambling Horror.<br><br>The Tourist.<br><br>Whatever you call him, he is better than you.<br><br>He fits in better.<br><br>Everyone likes him better than you.<br><br>They forget you even exist when he's around.<br><br>But don't worry.<br><br>He won't hurt you.<br><br>He's saving himself for that special someone.<br><br>The one that shares his face.<br><br>His soul mate.<br><br>They're destined to be together...forever.<br><br>...<br><br>He won't deny that there are a few Temptations, while he waits, though.<br><br>Why does Yongki get to replace Captain so easily? Why is it so hard for The Neighbor to find his own double? Does Yongki think he's better than him? Impossible. Its so tempting to just...show how much better he would be at replacing the Captain... But no. He's no strumpet. He's waiting for the One. No matter how scared he imagines the Captain would be to watch his life fall to pieces...<br><br>And Doctor Fiona Slaughter is the only one truly from his homeland... such a fun person to mess with! It's a meaningless fling of course but a guy has needs, he supposes.",
   [DOLLS, KILLING, FAMILY, SERVICE, OBFUSCATION, SPYING],
   "Blorbos/Neighbor_by_guide.png")
