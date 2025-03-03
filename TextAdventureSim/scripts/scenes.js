@@ -752,6 +752,30 @@ i also think its funny devona (and i ) forgot to introduce herself
 while wibby waited to do so so it could be an "apology", i.e. put himself believably at "a disadvantage" early on
 */
 
+
+convertScriptToScene("Eye Killer inists on an Interview",`Devona: [visible terror]
+Eye Killer: [tape recorder noises, all words rewound and fastfowarded and cut from different parts of a tape] Ask/Me/Your/questions
+Devona: :( 
+Eye Killer:  [tape recorder noises] I/Don't/Have/All/.../Day
+Devona: Okay! Okay! I-
+Devona: [clears throat]
+Devona: For The Record, Can You State Your Name and Occupation?
+Eye Killer:  [tape recorder noises] "Please Don't Kill Me"
+Eye Killer:  [tape recorder noises] Occupation/Mafia/Family
+Devona: [squeaky voice] Right!
+Devona: Right!
+Devona: Um! I Ask Everyone This!
+Devona: What Do You Think About The Echidna?
+Eye Killer:  [tape recorder noises] "A Miserable Pile of Secrets"
+Devona: ...
+Devona: Okay! That! That's All I Had!
+Eye Killer: ...
+Eye Killer:  [tape recorder noises] "Stay Away From My Family"
+Devona: Absolutely!
+Devona: I didn't even know they were yours!
+Devona: Never again!
+`)
+
 //unmarked are colonizing the arms now
 //From Theorist of Labyrinths
 convertScriptToScene("Credit To: the Theorist of Labyrinths, or your discord name, or a secret third option?",`[ARM 9989]
