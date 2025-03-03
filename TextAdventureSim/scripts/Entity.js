@@ -1306,14 +1306,16 @@ const HOSTAGE = new FleshCreature("Boss",
   [WEB, ADDICTION, FAMILY, OBFUSCATION, DEFENSE, STEALING, ANGER], //he's trying to protect EVERYONE while being stalked by the Eye Killer who thinks she's protecting HIM.... it was not a good recipe for him to grow up knowing what appropriate boundaries are with his lil sibling.
   "Blorbos/Hostage_by_guide.png")
 
+//twig would never tie themself down and say they're "dating" john, but john at least would acknowledge that they're seeing each other
+//our vampire/werewolf ships are different lol
 const JOHN = new FleshCreature("John",
   "... Your friend! <br><br>Sometimes you do super fun things together!<br><br>Rava's Boss, Camellia keeps him around and says he's entertaining!<br><br>Sometimes he calls you by a name that isn't yours and you do not know why! That's okay though!<br><br>He drinks blood! Sometimes he drinks someones blood and they turn into something new!",
   [ADDICTION, KILLING, DEATH, TIME, WEB],
-  "notfound.png")
+  "Blorbos/john_by_ic2.png");
 
 const RAVA = new FleshCreature("Rava",
   "Oh no! Rava is here? You're going to get in trouble :(",
-  [KILLING, SERVICE, HUNT, QUESTING, GUIDING, DEFENSE],
+  [KILLING, SERVICE, HUNTING, QUESTING, GUIDING, DEFENSE],
   "Blorbos/rava.png");
 
 const CAMELLIA = new FleshCreature("CAMELLIA",
@@ -1324,15 +1326,15 @@ const CAMELLIA = new FleshCreature("CAMELLIA",
 /*importantly, these are NOT a 1:1 with the themes the characters have
 the eye killer is NOT a monster of family, but you can't understand her without that lens, not really
 */
-specialThemeEntities[ENDINGS] = [CAMELLIA,CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
+specialThemeEntities[ENDINGS] = [CAMELLIA, CAMILLE, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
 specialThemeEntities[DEATH] = [CAMILLE, WITNESS, NAM, JOHN];
 specialThemeEntities[KILLING] = [RAVA, JOHN, CAMILLE, EYEKILLER, PARKER, YONGKI, HOON, K, NEIGHBOR, HOSTAGE];
-specialThemeEntities[QUESTING] = [CAMELLIA,RAVA, MELON, CAMILLE, CAPTAIN, HOON, DETECTIVE, RONIN, DEVIL_OF_SPIRALS, CLOSER, TYRFING, NEIGHBOR];
+specialThemeEntities[QUESTING] = [CAMELLIA, RAVA, MELON, CAMILLE, CAPTAIN, HOON, DETECTIVE, RONIN, DEVIL_OF_SPIRALS, CLOSER, TYRFING, NEIGHBOR];
 specialThemeEntities[LONELY] = [ROD, CAMILLE, LEE, HUNTER, RIVER, NAM, ALT, APOCALYSE_CHICK, WIBBY, WITNESS, CLOSER, NEIGHBOR]; //look i know alright. if i wasn't so spiral i'd be Lonely and my characters reflect this
 specialThemeEntities[CENSORSHIP] = [VIK];
 specialThemeEntities[OBFUSCATION] = [REBEL, VIK, NEVILLE, HOSTAGE, DEVONA, ALT, WITNESS, NAM, NEIGHBOR];
 specialThemeEntities[DECAY] = [MELON, VIK, PARKER, LEE, HUNTER, DETECTIVE, DEVIL_OF_SPIRALS, NAM, WITNESS];
-specialThemeEntities[ART] = [CAMELLIA,JOHN, ROD, EYEKILLER, RIVER, HOSTAGE];
+specialThemeEntities[ART] = [CAMELLIA, JOHN, ROD, EYEKILLER, RIVER, HOSTAGE];
 specialThemeEntities[TECHNOLOGY] = [CAPTAIN, HIMBO, HOON, RONIN, K, NAM, APOCALYSE_CHICK, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[TIME] = [CAMELLIA, LEE, HUNTER, EYEKILLER];
 specialThemeEntities[SPACE] = [RIVER, PARKER, DETECTIVE];//the detective is from an outer space setting
@@ -1346,8 +1348,8 @@ specialThemeEntities[SCIENCE] = [DOC_SLAUGHTER, DETECTIVE];
 specialThemeEntities[MATH] = [REBEL, NEVILLE, APOCALYSE_CHICK, WIBBY];
 specialThemeEntities[TWISTING] = [RAVA, K, HIMBO, APOCALYSE_CHICK, DEVIL_OF_SPIRALS, TYRFING, NEIGHBOR];
 specialThemeEntities[APOCALYPSE] = [PARKER, ALT, APOCALYSE_CHICK, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS];
-specialThemeEntities[ANGELS] = [CAMELLIA,WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS, TYRFING];
-specialThemeEntities[SERVICE] = [CAMELLIA,RAVA, JOHN, ROD, EYEKILLER, HIMBO, NEIGHBOR, RONIN, CAPTAIN, HOON, NAM, ALT, WIBBY, TYRFING, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
+specialThemeEntities[ANGELS] = [CAMELLIA, WIBBY, DOC_SLAUGHTER, DEVIL_OF_SPIRALS, WITNESS, TYRFING];
+specialThemeEntities[SERVICE] = [CAMELLIA, RAVA, JOHN, ROD, EYEKILLER, HIMBO, NEIGHBOR, RONIN, CAPTAIN, HOON, NAM, ALT, WIBBY, TYRFING, DOC_SLAUGHTER, DETECTIVE, DEVIL_OF_SPIRALS, CLOSER];
 specialThemeEntities[FAMILY] = [CAMELLIA, RAVA, ROD, REBEL, MELON, NEVILLE, HOSTAGE, HIMBO, NEIGHBOR, DEVONA, EYEKILLER, NAM, RONIN, CAPTAIN, TYRFING, YONGKI];
 specialThemeEntities[MAGIC] = [CAMELLIA, RAVA, MELON, HOON, HIMBO, NEIGHBOR, APOCALYSE_CHICK, DEVIL_OF_SPIRALS, NAM, CLOSER]; //anyone with an Artifact of the Nameless One is technically magic
 specialThemeEntities[LIGHT] = [DEVONA, K, DOC_SLAUGHTER];
