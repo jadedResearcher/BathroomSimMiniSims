@@ -775,6 +775,51 @@ Devona: Absolutely!
 Devona: I didn't even know they were yours!
 Devona: Never again!
 `)
+//i love IC's writing so much, theres so much depth
+convertScriptToScene("Devona Interviews John (by IC)",`Devona: Uh....
+John: No, no, don't even worry. Check this out.
+John: [flawlessly balances the egg over the frying pan, sending it flying into the air into his hands before he cracks it against the pan]
+John: Hah! See, easy.
+Devona: But Didn't You Just...
+Devona: [wordlessly stares towards the floor, seeing something he doesn't]
+John: Hey! Eyes are up here, doll.
+Devona: O-Oh! Sorry, um...
+John: Apology accepted. Come on, didn't you have questions or something? You know we're not even supposed to be talking.
+Devona: R-Right! I'll Just, Haah, Get To 'Brass Tacks', Then. We Don't Have To Waste Your Time! Wouldn't Want That. [squints] We Are Just Here On Survey, And--
+John: The questions.
+Devona: R-Right!
+Devona: For The Record, Can You State Your Name And Occupation Please? If It's Not Too Much.
+John: Well, as you'll know, my name is John. I'm a pretty big deal party planner over in Naples-- birthdays, weddings, corporate work mostly. 
+John: What, you're gonna tell me you've never heard of me? I've done some gigs for your little amusement part, you know.
+Devona: [anxious laughter] Right, Of Course! You Are A Very Very Big Deal. It's Just For The Record.
+John: Hey, don't have to suck my dick either. You can think whatever you want.
+Devona: Uh... Sure! Right.
+Devona: So... There Are Rumors That You Are Affiliated With The Cult Of The Harvest. If You Could Clarify...?
+John: [stares back] 
+Devona: [gulps] You Don't Have To Answer If--
+John: Oh, come on, breathe for a bit. [chuckles] Yeah, I've done some gigs for money, autumn get-togethers, but nothing major. And before that was even public knowledge. I didn't know it was a cult.
+Devona: Yeah, Of Course--
+John: Paparazzo, you know. They always have to get that scoop, huh? [stares] You'd know about that, right?
+Devona: U-uh! 
+John: [smiles] I'm just pulling your leg. You're one of the good ones, so don't worry about that.
+Devona: T-Thank You! Last Question! 
+Devona: What Do You Think About The Echidna?
+John: Like the animal?
+Devona: ...Y-Yeah?
+John: Kinda looks like a ballsack, doesn't it.
+Devona: You Could Say That...
+John: Think they're cute. That all?
+Devona: That Would Be It, If There Are--
+John: Alright, come on, shove. Good talking to you, come again, etcetera. [starts lightly pushing her towards the door]
+Devona: Right, Thank You! [leaves, shutting the door behind her]
+Devona: ...
+Devona: [sighs]
+Devona: For The Record-- Interviewee Reset Time In The Following Ways; Thirty-Two Times To Land An Egg Correctly, Four Times When Pressed About The Cult Of The Harvest, Eighty-Four Times When Asked About Connections To Mafia, Missing Victims, Including All Possible Variations Of The Question. Refused To Answer Any Questions Relating To Their Condition In What Respects To The Boss Anomaly.
+Devona: Furthermore, Interviewee Reset Time Spontaneously For Reasons I Don't Even Understand. Current Hypothesis, 'To Look Cool'.
+Devona: ...
+Devona: Interviewer Has Lost Appetite For Eggs. Requesting Waffle Party If Applicable.
+Devona: [whine] Conclusion: This Sucks.
+`)
 
 convertScriptToScene("Devona Interviews the Boss",`Devona: For The Record, Can You State Your Name and Occupation?
 Boss: Now, it ain't exactly fair, now is it, to go asking me that.
