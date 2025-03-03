@@ -881,6 +881,46 @@ Rava: Got a job to do. Later, pup.
 Rava: [disappears out of the room, leaving behind a puddle of blood(?) and scraps of the furniture]
 Devona: ...What?`)
 
+convertScriptToScene("Devona Interviews Camellia, The Cult Leader",`Devona: ...
+Camellia: ... [stare]
+Devona: Ahem. Thank You For Accepting My Interview. 
+Camellia: ...
+Devona:... Uh.
+Devona: If You Could State Your Name And Occupation, Please?
+Camellia: Go ahead and turn that recorder off.
+Devona: B-But--
+Camellia: You and I both know it's a formality. You'll remember it anyway, whether you like it or not. Isn't that right?
+Devona: ... [turns off recorder]
+Camellia: The backup one too.
+Devona: R-Right... [another recorder shuts off]
+Camellia: Much better.
+Camellia: My name is Camellia. I currently am the spiritual priest of the Church of the Harvest.
+Devona: I-If You'll Excuse Me... What Do You Mean By 'Currently'?
+Camellia: It means... now. It was different before, but... It changes, as It does.
+Devona: 'It'? What Do You Mean By It?
+Camellia: [glances over] 'It', the cursed child. The offspring of our god's parent, the Parasite of the Parasite, That Which Eats The Rot...
+Camellia: The 'memory leak'. It's all the same.
+Devona: Uhm, I Guess That Answers My Second Question, Ahah...
+Camellia: Does it, now.
+Devona: It's... Nevermind. H-How Did You Come To Know About It? 
+Camellia: My god revealed it to me. To us. You may as well ask how we know about the stars, the moon... we know because we've seen it.
+Devona: Right... And The Purpose Of This Church?
+Camellia: Same as we have said. To show our god to the world, to share in the fruits of its labor. All as She would want it.
+Devona: Ah, Great, Uh...
+Devona: Uhm. 
+Devona: This Is... Strange To Ask, But, You've Been Rather, Uhm... Forthcoming?
+Camellia: You're asking why.
+Devona: Mhm.
+Camellia: ... 
+Camellia: In the other time, you would have been called a ████ of ██████. One who allows █████ to be █████████. This much my god has told me, in slumber.
+Devona: ...!
+Camellia: My god favors you. Favors the thrill of being known. Indeed, many things favor you, thanks to your ██████, not as much your █████. Perhaps, as well, not as much as It favors that... eugh, 'Captain' of yours, but...
+Devona: ...It Likes... Being Seen? Which Means, I Mean, I Don't Know It, But I--
+Camellia: It's cute, really. You already know all of this. But you and I face the same problem, don't we.To explain all of this to those who cannot see... that is the true test, isn't it.
+Devona: Wait, That's Not The Same! Why Would You Say That Is--
+Camellia: I believe we're done here... if you'll excuse me. 
+`)
+
 convertScriptToScene("Devona Interviews the Boss",`Devona: For The Record, Can You State Your Name and Occupation?
 Boss: Now, it ain't exactly fair, now is it, to go asking me that.
 Boss: I think you know that my occupation is perfectly legitimate, as it were.
