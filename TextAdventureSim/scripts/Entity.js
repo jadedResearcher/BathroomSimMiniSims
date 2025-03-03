@@ -1296,12 +1296,12 @@ const NEIGHBOR = new FleshCreature("The Neighbor",
   [DOLLS, KILLING, FAMILY, SERVICE, OBFUSCATION, SPYING],
   "Blorbos/Neighbor_by_guide.png")
 
-const HIMBO = new FleshCreature("The Right Hand",
+const HIMBO = new FleshCreature("Right Hand",
   "When the Eye Killer met him, he was just a simple Himbo attending a party and wishing he were playing the Zampanio cardgame instead.<br><br>He quietly supports The Boss in their joint Mafia family, summoning weird monsters from his cards, twisting reality to match his strange perceptions of it.<br><bR>Not even he is delusional enough to think either the Eye Killer or Camille return his crushes, though.<br><br>He does not See what happened to his oldest friend.",
   [TWISTING, LOVE, WEB,TECHNOLOGY,FAMILY,MAGIC],
   "Blorbos/Himbo_by_guide.png")
 
-const HOSTAGE = new FleshCreature("The Boss",
+const HOSTAGE = new FleshCreature("Boss",
   "When the Eye Killer met him he was a drugged Hostage, needing rescue. A poor lil meow meow.<br><br>Now he has an entire Criminal Empire, founded on the principle that anyone who tries to stop him with violence finds themselves mysteriously Eye-Killed.<br><br>He was a suffocating older Brother, and drove his younger sibling to splitting in two. <br><br>Twig ran away, and never looked back, tired of all the Machinations of the Family.<br><br>Sam grabbed his own leash and the puppet master became the puppet.<br><br>The Boss is a hollow shell now, for Sam to work through.<br><br>It didn't have to be this way.<br><br>It still can change.<br><br>After all... Sam is not in the Loop.<br><br>As long as Twig has slipped their leash, Sam never can be.",
   [WEB, ADDICTION, FAMILY, OBFUSCATION,DEFENSE,STEALING,ANGER], //he's trying to protect EVERYONE while being stalked by the Eye Killer who thinks she's protecting HIM.... it was not a good recipe for him to grow up knowing what appropriate boundaries are with his lil sibling.
   "Blorbos/Hostage_by_guide.png")

@@ -776,6 +776,55 @@ Devona: I didn't even know they were yours!
 Devona: Never again!
 `)
 
+convertScriptToScene("Devona Interviews the Boss",`Devona: For The Record, Can You State Your Name and Occupation?
+Boss: Now, it ain't exactly fair, now is it, to go asking me that.
+Boss: I think you know that my occupation is perfectly legitimate, as it were.
+Boss: But that my name ain't exactly common knowledge.
+Boss: And I think you and your freaky little friends might know better than me why exactly that is.
+Devona: Oh! Um.
+Boss: In fact, I think maybe you ain't gonna be leaving here 'till you spill the beans, little girl.
+Devona: I don't think.  Um.  I don't think Camille, that is, Uh. My leader... I don't think she'd like it if you. Um!
+Boss: Now now, we're all friendly like here, aren't we? I'm just saying, I expect a little compensation for this.  I answer your questions, you answer mine, it's just good manners, ain't it? It's only fair.
+Devona: ...
+Devona: Um!
+Devona: You Know About The 9 Artifacts, Right? The First One, the Unos Autograph Book!
+Devona: It Um!
+Devona: It Steals Names!
+Devona: There Is This. Um.  Abnormality! Outside Reality!
+Devona:  Anyone who catches its Eye!
+Devona: Only Has A Title!
+Devona: Um.
+Devona: Until something else gives them their Name back!
+Devona: I don't know how to make that happen! I promise!
+Boss: Sure. Fine.
+Boss: You can go.
+Devona: [squeaks]
+Boss: What.
+Devona: It's Just!
+Devona: I Have One More Question!
+Boss: Of course you do.
+Boss: You owe me then.
+Boss: I do this favor for you and you're on my hook. Quid Pro Quo.
+Devona: I don't think...
+Boss: Nothing too big. And nothing your monster in chief would get all stabby at.
+Boss: But I don't need nothing from you right now. And I'm not exactly in an answering mood.
+Boss: So if you want this, you gotta pay for it.
+Devona: What Do You Think About The Echidna?
+Boss: [sits back in his chair]
+Boss: So.
+Boss: It's like that, is it?
+Boss: You questioning my LOYALTY?
+Devona: No!
+Boss: [waves her away] Like I care.
+Boss: I'm loyal where it counts and you, you aint family.
+Boss: My FAMILY lives here, you get me?
+Boss: And I'm not gonna do anything that jeopardizes that. You don't shit where you eat.
+Boss: So what do I think about this freaky Universe we live in?
+Boss: I like it just fine.
+Boss: Not like any other one woulda been any fairer.
+Devona: Okay! [scurries away]
+`)
+
 //unmarked are colonizing the arms now
 //From Theorist of Labyrinths
 convertScriptToScene("Credit To: the Theorist of Labyrinths, or your discord name, or a secret third option?",`[ARM 9989]
