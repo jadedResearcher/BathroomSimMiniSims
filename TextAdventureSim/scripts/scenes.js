@@ -880,7 +880,95 @@ Devona: More--
 Rava: Got a job to do. Later, pup.
 Rava: [disappears out of the room, leaving behind a puddle of blood(?) and scraps of the furniture]
 Devona: ...What?`)
+//http://farragofiction.com/PerfectHeist/
+//the medium reminded me of the above, plus wibbys meeting of an airport rando in truth sim, so heres the followup
+/*
+also of note, up till now we have not seen witherby interact much with ria
+he talks about her ALL THE FUCKING TIME in his diary ( http://farragofiction.com/DearDiary/?truth=true)
+but his Lonely nature means his stories rarely actually have his loved ones in them
 
+even the story i wrote in the gay chicken timeline has witherby and a rando, not neville
+*/
+convertScriptToScene("Witherby Confesses",`
+Witherby: Ria? 
+Witherby: If you aren't too busy, could I have a moment of your time?
+Ria: Sure! What's up Wibby?
+Witherby: I confess it is a tad...heavy... 
+Witherby: So if you aren't certain you're free for something of this nature..
+Ria: Witherby... I said I was free and I'm free!
+Ria: You don't get to decide my time is so much more valuable than yours!
+Ria: I know you worry about me! I get it-I was kind of a train wreck. 
+Ria: Still am!
+Ria: But I want to be here for you too!
+Ria: LeeHunter need a good example!
+Witherby: ...
+Witherby: Yes well...
+Witherby: I merely...
+Witherby: Which is to say I...
+Witherby: How do you do it?
+Ria: ...
+Witherby: I know I perhaps... judged you too harshly, when I first became aware of your struggles.
+Witherby: And for that I... I apologize...
+Witherby: But I ain't perfect neither---apologies, I'm certainly not flawless myself....
+Ria: Wibby, it's okay, use your words! Any words!
+Witherby: How do you stop the craving?
+Witherby: I met someone at the airport. 
+Witherby: And it weren't just the Skull what craved her.
+Witherby: *I* wanted to abandon her to her fate.
+Witherby: To see her freeze over, alone and unremembered.
+Witherby: ................[visibly composes himself]
+Witherby: Ria, I confess I am ashamed of my monstrous nature.
+Witherby: I was supposed to be better than this.
+Ria: ...
+Ria: ...
+Ria: ...
+Ria: Witherby. 
+Witherby: Yes. Jesus, Yes, I know what that implies. And I am...
+Witherby: Sorry does not begin to convey it.
+Witherby: I thought I was better than you.
+Witherby: Than all of you.
+Witherby: That I could be the lone Human among the monstrous remnants of my team. 
+Witherby: That I had a RESPONSIBILITY to maintain my humanity.
+Witherby: ...
+Witherby: I am so sorry.
+Ria: Oh Wibby [hugs]
+Ria: We put that on you too, you know...
+Ria: With LeeHunter... I think I understand better now.
+Ria: How hard it is to be the "responsible one".
+Ria: It drives me to be a better person!
+Ria: But it also makes it hard for me to ... BE a person. To let myself have flaws?
+Ria: ...
+Ria: It wasn't fair of us to make you our handler. 
+Ria: I wish you could talk to Fiona...
+Witherby: ...
+Ria: She would know what to do.
+Ria: I have no clue how to help you!
+Ria: But. BUT!
+Ria: You're my friend.
+Ria: Even if sometimes you're a judgey asshole who is literally holier than thou.
+Witherby: [slight chuckle]
+Ria: At least you never stay judgey for long.
+Witherby: Small miracles, I suppose.
+`)
+
+
+
+/*
+and the fact that camllia knows
+like
+Time Is Fake
+but because of that it manifests Wrong
+camellia experiences it as knowledge
+she KNOWS all the other ways things can go
+she knows when john is a fucking clown
+she knows all the different gods she's worshiped even though its "always" been this one
+
+and she can bond with devona about that
+
+also, IC says that Camellia had her turn off the recording and then added in info hazards (homestuck and others)
+so that the only way Devona can tell others about this is with neville but theres no way to communicate it to him (since Devona has the Fragments of the Universe)
+camellia wanted to talk to HER and her alone
+*/
 convertScriptToScene("Devona Interviews Camellia, The Cult Leader, by IC",`Devona: ...
 Camellia: ... [stare]
 Devona: Ahem. Thank You For Accepting My Interview. 
