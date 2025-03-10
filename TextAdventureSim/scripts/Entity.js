@@ -1029,6 +1029,8 @@ K.functionMap[COMMAND_LOOK] = () => { return K.look() + `<br><br><span style='fo
 
 
 
+///theres arguments for her bein ga heart player too
+//the CFO is a clone of her, not the other way around
 const ALT = new FleshCreature("Alt",
   "The Stranger of Fleshy Dreams. She looks like whoever she is interacting with... Inside of Truth's horridors, that means she can even look like a maze. <br><br>She refuses to leave Truth, because she craves the certainty of the immortality the Apocalypse provides.<br><br>She does not want to ever be alone again because everyone else has died.<br><br>Her Porn Bot Network has been great at getting more and more people to fall to Zampanio and thus join her inside of Truth.",
   [FLESH, DOLLS, SERVICE, LONELY, APOCALYPSE],

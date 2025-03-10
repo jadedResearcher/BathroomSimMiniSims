@@ -1577,6 +1577,85 @@ MELON: [vanished at some point while the others were distracted]
 
 `)
 
+
+/*
+yongki does not understand the point of Poker (or really any rules ever)
+but captain is purposefully swapping out with him after finishing his turn
+so yongki can be included and not miss out on a party
+
+witherby would attend but the Closer has made it clear that fiona gets deported if she so much as blinks at him so....
+(ironically witherby and fiona's monsters DO interact with each ohter (to stop the apocalypse) (One Sin being how you stop the White Night))
+but the closer is just petty cuz witherby slighted her once and she doesn't want him to get therapy
+
+he's off doing his own thing
+*/
+convertScriptToScene("Poker Night Inside the Inventory",`
+Poker Night Inside The Inventory 
+
+Captain: ... [frowning]
+White Nightengale: So I have an Ace of Hearts~ and a Two of Diamonds!  That's not the BEST hand but that's how it goes sometimes!
+Captain:  ...[frowning]
+Vik: Doctor, you know you're supposed to keep those cards secret 'till the end, right?
+White Nightengale: But how is that going to help everyone know how to bet?!
+Captain:  ...[frowning]
+Devona: You could try counting the cards you do see and keep track of what cards are in play and oh also you need to pay attention to everyones expressions and tells and maybe what they ordered to drink and also--
+Neville: Did you know that certain hands are statistically more likely than others?
+Captain:  ...[frowning]
+Captain: I'm all in. [looks into mirror, switches out with Yongki]
+Yongki:  Can't we just take the little plastic thingies if we even want them?
+Yongki: They're not food.
+Yongki: They're not viscous.
+Devona: [sweating] Call.
+Vik: ... I fold.
+Neville: I fold!
+White Nightengale: I fold as well! Simply EVERYONE knows that if Devona is in, she's got a good hand!
+Devona: Yongki, can you let Captain back out, we need to show our cards now, unless you think he wouldn't want to?
+Yongki: Okay! [looks into mirror]
+Captain: ...
+Captain: So everyone is out but the two of us? [flips over hand, showing two aces, combined with the ace in the communal pile]
+Devona: [reveals the exact two cards needed to make a straight]
+Devona: Uh... I win!
+`)
+
+/*
+K got kicked out of poker night for BLATANTLY cheating
+
+thats okay tho, he takes xir lesbians and makes their own, BETTER poker night
+
+btw in my heart,  they're playing 5 card draw (instead of texas hold em like the other group is)
+and camille purposefully threw away an actually decent hand
+because she wanted to see K puff xirself up
+
+*/
+convertScriptToScene("Poker Night Outside the Inventory",`
+Khana: Can you believe them?
+Khana: Missing out on all this?
+Khana: All in by the way.
+LeeHunter1: [glaring at LeeHunter2]
+LeeHunter2: [glaring at LeeHunter1]
+LeeHunter1: If SOMEONE had better cards, we could have called that.
+LeeHunter2: Well if SOMEONE had bet better we'd have more chips to bet with still.
+LeeHunter1: We fold.
+LeeHunter2: We fold.
+Camille: :3  [moves all her chips into the center]
+Ria: This is nice isn't it?
+Ria: Game night just for us?
+Khana: Yeah, who needs all those LOSERS who can't recognize a good thing when they see it.
+Khana: Who needs their shitty invite-only poker game!
+Ria: I fold by the way, too rich for my blood!
+Ria: [half whispered] and I wouldn't want to risk some kind of gambling addiction...
+Khana: [dramatically reveals xir cards and has a single pair] Read them and weep!
+Camille: :3  [has the most dogshit hand you have ever seen in your life]
+LeeHunter1: No fair!
+LeeHunter2: You were supposed to wipe that smug smirk off their face!
+Khana: Tough luck Camille, them's the breaks!
+Khana: I know how much it must burn you up inside, losing to me.
+Khana: But don't worry, it puts you in good company. 
+Khana: There's no shame losing to a real WINNER!
+Camille: :3 
+
+`)
+
 convertScriptToScene("ALT DOES NOT WANT TO DATE KHANA",`[ARM2]
 KHANA: I get it, you can't get enough of me.
 KHANA: Last night was the best body you've ever had.
