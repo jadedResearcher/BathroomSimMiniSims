@@ -1445,6 +1445,35 @@ Ronin: ...
 Ronin: Yeah you're.
 Ronin: You're alright yourself`)
 
+/*
+i think i like the idea of just
+devona KEEPS TRYING TO DO ATTACHMENT WORK
+and it keeps being a bad idea
+like
+she objectively has some of the highest white damage resistence on the team
+but she also just
+will not run away from shit or like, runs away just enough that she can peak out and look back at it
+shes so freaking suceptible to white damage because she just.... is scared and does it anyways
+like luigi
+jadedResearcher — 2:44 PM
+'wow i am equally scared of spiders and lovecraftian horrors, time to go touch cthuluhu i guess"
+shes too used to ignoring her own fear
+but in the opposite direction neville ignores it 
+*/
+convertScriptToScene("",`Witherby: ...
+Ria: I just found her like that! And there was that really bright light coming out of that tiny hole and she was just shaking and shaking and I think, I mean, wouldn't anyone think that she's clearly taken too much White Damage? But then there's no way that COULD happen because we're in this Bunker and and-
+Witherby: ... Give her some space, everyone.
+[Camille, Ria, and Neville all step Back]
+Witherby: Devona? Hey, it's alright. I'm here now. 
+Witherby: You know the drill right? 
+Witherby: I'm going to ask you some questions.
+Witherby: You don't have to worry about your answers, they'll just come naturally, okay?
+Witherby: And when they are over, you'll feel better, yeah?
+Witherby: Much better.
+Witherby: Now. Devona?
+Witherby: Confess your sins.
+`)
+
 convertScriptToScene("Watt is a Man, Part3",`[ARM1]
 Ronin: ...
 Ronin: ...
@@ -1616,7 +1645,7 @@ Captain: So everyone is out but the two of us? [flips over hand, showing two ace
 Devona: [reveals the exact two cards needed to make a straight]
 Devona: Uh... I win!
 `)
-
+//https://www.youtube.com/watch?v=dICHinWw_AQ
 /*
 K got kicked out of poker night for BLATANTLY cheating
 
@@ -1625,6 +1654,14 @@ thats okay tho, he takes xir lesbians and makes their own, BETTER poker night
 btw in my heart,  they're playing 5 card draw (instead of texas hold em like the other group is)
 and camille purposefully threw away an actually decent hand
 because she wanted to see K puff xirself up
+
+meanwhile k is Unaware camille is reverse cheating
+despite how obvious she is sometimes
+
+ria is Extremely aware but is not about to risk K having a freaking temper tantrum if she thinks she's being babied
+leehunter are aware but not saying shit if their conductor isn't
+
+besides, THEY want to beat K, not have camille do it
 
 */
 convertScriptToScene("Poker Night Outside the Inventory",`
@@ -1711,6 +1748,8 @@ glitch to cause even an approximation of an ending in zapanio
 */
 
 // :) :) ;)
+////the void caller of spores pointed out that each arm ends in an apocalypse. ARM-ageddon. shit i couldn't pun that good on purpose
+
 convertScriptToScene("Therapy Ending",`[ARM2]
   Witness: [THERAPY ENDING]
   White Nightengale: [THERAPY ENDING]`)

@@ -77,6 +77,7 @@
 
       }
       let fuckeryFactor;
+      let sound; //stores it so its the same each time
       button.onclick = () => {
         console.log("JR NOTE: click")
         renderOneButton();
@@ -89,17 +90,33 @@
 
         if (fuckeryFactor <= 13) {
           console.log("JR NOTE: playing chip")
-          audio.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/chip.mp3";
-          audio.play();
+          if (!sound) {
+            sound = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/chip.mp3";;
+          }
+
         } else if (fuckeryFactor > 13) {
-          audio.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/" + rand.pickFrom(music);
-          audio.play();
+          if (!sound) {
+            sound = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/" + rand.pickFrom(music);
+          }
+
+        }
+        audio.src = sound;
+        audio.play();
+        //if we ALREADY changed position and you're clicking again, the puzzle is 'solved
+        /*
+        easy to speed run if you know what you're doing, actually kinda hard to figure out if you insist on always scrolling forward without ever going back
+        classic zampanio cautionary tale
+        if you keep digging, you won't get anywhere 
+        */
+        if (button.style.cssText.includes("absolute")) {
+          alert("haha wow, okay you got me, i'll take you to the real west lol")
+          window.open("http://farragofiction.com/AdventureSimWest/", '_blank').focus();
         }
 
         if (fuckeryFactor > 33 && fuckeryFactor % 2 === 0) {
           const css = getBullshitCSS(true);
           button.style.cssText = css;
-        }else if (fuckeryFactor % 5 === 0) {
+        } else if (fuckeryFactor % 5 === 0) {
           fuckShitUPAnimation(button);
         }
       }

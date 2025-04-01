@@ -27,6 +27,7 @@ function haxDebugAllBlorboSceneAudit() {
   console.table(ret);
   return `JR NOTE: Auditing ${Object.values(entityNameMap).length} blorbos. <br> <div class='hax-grid'>` + Object.keys(ret).map((i) => `<div class="${ret[i]===0?'empty':''}">${i},${ret[i]}</div>`).join("")+"</div>"
 }
+//one aspect of house of leaves is gut wrenchingly personal details woven in with all the rest
 
 function haxGetScenesIncludingBlorbo(blorbo) {
   if (!blorbo) {
@@ -35,7 +36,6 @@ function haxGetScenesIncludingBlorbo(blorbo) {
   const ret = getAllScenesForBlorbo(blorbo);
   return `Got ${ret.length} scenes: ` + ret.join(" ,")
 }
-
 const getAllScenesForBlorbo = (blorboName) => {
   console.log("JR NOTE: getAllScenesForBlorbo", blorboName)
   const ret = [];

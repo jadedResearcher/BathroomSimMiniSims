@@ -9,3 +9,7 @@
   justify-content: center;
   gap: 113px;
 }
+
+.fake-button:active{
+  transform: translateY(-5px);
+}
