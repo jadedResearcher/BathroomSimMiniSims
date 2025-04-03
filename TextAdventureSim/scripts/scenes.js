@@ -1459,8 +1459,20 @@ jadedResearcher — 2:44 PM
 'wow i am equally scared of spiders and lovecraftian horrors, time to go touch cthuluhu i guess"
 shes too used to ignoring her own fear
 but in the opposite direction neville ignores it 
+
+devona sees it and can't stop seeing it and then just
+acts like its irrational
+'i am so so scared of info team who threatened to kill us i guess i should go into their territory, alone, and ask them to be besties'
+
+both of them are so freaking dysfunctional when it comes to fear
+but in exactly opposite extremes
+like, immediately after devona did that neville was all
+'huh, they want someone to volunteer to hang out with them? sounds chill :) "
+not of of curiosity or interest
+but because
+he Did Not want to think about what happens if DEVONA volunteered 
 */
-convertScriptToScene("",`Witherby: ...
+convertScriptToScene("Devona Takes Too Much White Damage In Nevillle's Bunker",`Witherby: ...
 Ria: I just found her like that! And there was that really bright light coming out of that tiny hole and she was just shaking and shaking and I think, I mean, wouldn't anyone think that she's clearly taken too much White Damage? But then there's no way that COULD happen because we're in this Bunker and and-
 Witherby: ... Give her some space, everyone.
 [Camille, Ria, and Neville all step Back]
@@ -1472,6 +1484,37 @@ Witherby: And when they are over, you'll feel better, yeah?
 Witherby: Much better.
 Witherby: Now. Devona?
 Witherby: Confess your sins.
+`)
+
+
+/*
+(i like to think captain has better conflict resolution skills because of yongki. he heads off any potential misunderstanding with "i'm not saying i disagree with you"
+
+because if yongki gets upset he'll go off to pout and not switch back)
+(captain and yongki are basically severed, i just realized)
+*/
+convertScriptToScene("Vik and Captain Are In Cahoots",`VIK: ...
+VIK: They are hiding something. No doubt about that.
+VIK: Something about this date, it makes them antsy. But we do not know... why.
+Captain:...
+Captain: Alright.
+Captain: I'm not saying I disagree with you.
+Captain: But.
+Captain: Why come to me.
+VIK: I have reason to believe their whole team is in on it. Our neighbors below are... busy, for lack of a better word.
+VIK: And, well... Parker and K, subtlety... is not their strong suit. No, not even remotely.
+VIK: It makes you the default option.
+Captain: grunts I'm flattered.
+Captain: Well.
+Captain: ...
+Captain: It's clear they aren't following protocol.
+Captain: If they have Intel on why last Loop ended years ahead of schedule, from a routine Observer invasion, no less.
+Captain: They are obligated to inform the rest of us, so we can take action accordingly.
+Captain: ...
+Captain: So.
+Captain: How do you propose we wring the information out of them.
+VIK: Hm... just have to grease the squeaky wheel here. Whoever's most likely to talk.
+VIK: Come on. We have a visit to give to some twins.
 `)
 
 convertScriptToScene("Watt is a Man, Part3",`[ARM1]

@@ -1,0 +1,276 @@
+@font-face {
+    font-family: bloodscratch;
+    src: url("Fonts/BloodScratchPersonalUse.ttf");
+}
+
+@font-face {
+    font-family: paincircus;
+    src: url("Fonts/pain_circus/Pain\ Circus.ttf");
+}
+
+@font-face {
+    font-family: GT America;
+    src: url("Fonts/GT-America/GT-America-Compressed-Regular-Trial.otf");
+}
+
+@font-face {
+    font-family: ouija;
+    src: url("Fonts/ifc_los_banditos/IFC\ LOS\ BANDITOS.ttf");
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #432a63;
+    color: #ff5c39;
+    font-weight: bolder;
+    left: 0px;
+    overflow: auto;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-family: "GT America", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+label{
+    width: 333px;
+    border-bottom: 3px dotted white;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 13px;
+}
+
+.summary{
+    width: 500px;
+    padding: 31px;
+    background: rgba(250, 250, 250, 0.5);
+    margin-bottom: 31px;
+    border: 3px dotted white;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+.preview{
+    width: 113px;
+    height: 113px;
+    object-fit: contain;
+}
+
+h1 {
+    font-family: "paincircus", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+.section {
+    background: #8a859a;
+    color: #dfd3ff;
+    border-radius: 5px;
+    padding: 13px;
+    margin-top: 20px;
+    max-width: 100vw;
+
+}
+
+.sub-section {
+    background: #726695;
+    color: #dfd3ff;
+    border-radius: 5px;
+    padding: 13px;
+    border-width: 3px;
+    margin-top: 20px;
+
+}
+
+#container {
+    position: relative;
+    padding: 13px;
+    margin-left: 31px;
+    margin-right: 31px;
+    max-width: 90vw;
+}
+
+.randomize-whole-doll-button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 13px;
+}
+
+.doll {
+    position: sticky;
+    width: 50%;
+    height: fit-content;
+    cursor: pointer;
+    top: 0px;
+}
+
+.fun-canvas {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    filter: saturate(0.5) brightness(0.75);
+}
+
+.part-row{
+    display: flex;
+}
+
+.doll-container {
+    position: relative;
+    border: 3px solid black;
+    border-radius: 3px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+}
+
+.doll img {
+    max-width: 500px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+
+
+.color-picker {
+    display: block;
+}
+
+.controls {
+    width: 50%;
+    height: 90%;
+    padding-left: 13px;
+    padding-bottom: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 3px;
+}
+
+h2 {
+    font-weight: bolder;
+    color: #ff5c39;
+    margin-top: 0px;
+}
+
+a{
+    color: white;
+    opacity: .75;
+}
+
+a:visited{
+    color: white;
+}
+
+a:hover{
+    opacity: .9;
+}
+
+button {
+    background-color: #ff5c39;
+    color: black;
+    cursor: pointer;
+    border-radius: 13px;
+    padding: 7px;
+    padding-left: 13px;
+    padding-right: 13px;
+    margin-bottom: 13px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: black;
+}
+
+.randomize-all-colors-button {
+    margin-top: 13px;
+}
+
+.controls span {
+    font-size: 10px;
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 3px;
+    font-weight: lighter;
+}
+
+select {
+    margin-right: 13px;
+    width: 100%;
+    margin-bottom: 13px;
+    display: block;
+    height: 50px;
+    scrollbar-color: #13022a #432a63 ;
+    overflow: auto;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    color: black;
+    background-color: #8a859a;
+}
+
+.custom-select {
+    margin-right: 13px;
+    width: 100%;
+    margin-bottom: 13px;
+    display: block;
+    height: 150px;
+    scrollbar-color: #13022a #432a63 ;
+    overflow: auto;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    color: black;
+    background-color: #8a859a;
+}
+
+.custom-option[selected="true"]{
+    background-color: #c4c4c4;
+    border: 1px solid black;
+}   
+
+.custom-option:hover{
+    background-color: rgb(147, 129, 69);
+}
+
+.custom-option{
+    padding-left: 3px;
+}
+
+.custom-option img{
+    height: 50px;
+}
+
+.custom-select:disabled{
+    opacity: 0.5;
+}
+
+select {
+    text-align-last: right;
+}
+
+option {
+    direction: rtl;
+}
+
+.color-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+}
+
+input[type="color"] {
+    margin-top: 5px;
+}
+
+.layer-controls {
+    border: 3px solid #432a63;
+    padding: 13px;
+    margin: 3px;
+    width: 150px;
+}
