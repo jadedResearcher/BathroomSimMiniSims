@@ -216,6 +216,22 @@ const createNumberInputWithLabel = (parent,id,labelText, initialValue,max=113,mi
 
   return {container, input, label};
 }
+const createCheckboxInputWithLabel = (parent,id,labelText, initialValue)=>{
+  const container = createElementWithClassAndParent("div",parent);
+
+  const label = createElementWithClassAndParent("label", container)
+  label.for=id;
+  label.innerText = labelText;
+
+  const input = createElementWithClassAndParent("input",container)
+  input.type = "checkbox";
+  input.checked = initialValue;
+
+
+
+
+  return {container, input, label};
+}
 
 
 const createElementWithClassAndParent = (eleName, parent, className) => {

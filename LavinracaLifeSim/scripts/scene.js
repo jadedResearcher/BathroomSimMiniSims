@@ -4,6 +4,7 @@ class Scene {
   title = "An Example Scene";
   text = "A scene happens to [PLAYER]."
   triggerStatName = "Strength";
+  singleUse = false;
   triggerMax = 10;
   triggerMin = 3;
   bgAbsoluteSrc = "http://farragofiction.com/LifeSim/images/LifeSimBGs/58.png"; //can be things i don't host, go nuts, but beware the rot
@@ -50,6 +51,9 @@ class Scene {
     const textForm = createTextAreaInputWithLabel(container, 'text', "Text", this.text);
     textForm.input.onchange = () => syncThisToForm("text", textForm.input.value);
 
+    const singleUseEle = createCheckboxInputWithLabel(container, 'single-use', "Single Use:", this.singleUse);
+    singleUseEle.input.onchange = () => syncThisToForm("singleUse", !this.singleUse);
+
     const bgForm = createTextAreaInputWithLabel(container, 'background-src', "Background Image URL", this.bgAbsoluteSrc);
     bgForm.input.onchange = () => syncThisToForm("bgAbsoluteSrc", bgForm.input.value);
 
@@ -81,7 +85,7 @@ class Scene {
   }
 
   humanSummarySentence = () => {
-    return `In order for <u>${this.title}</u> to be drawn, ${this.humanTriggerSentence()}, and after it is played, ${this.humanResultSentence()}.`;
+    return `In order for <u>${this.title}</u> to be drawn, ${this.humanTriggerSentence()}, and after it is played, ${this.humanResultSentence()}. ${this.singleUse?"It will destroy itself after use.":""}`;
   }
 
   humanTriggerSentence = () => {
