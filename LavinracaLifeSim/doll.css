@@ -46,7 +46,7 @@ label{
 }
 
 .summary{
-    width: 500px;
+    width: fit-content;
     padding: 31px;
     background: rgba(250, 250, 250, 0.5);
     margin-bottom: 31px;
