@@ -65,7 +65,7 @@ class Scene {
     victoryOrDefeatOrAutoOrSingleIcon.innerText = `${this.resultStatName===VICTORY?"✔":""}${this.resultStatName===DEFEAT?"𐄂":""}${this.autoPlay?"*":""}${this.singleUse?"1":"∞"}`;
     const cardTitle = createElementWithClassAndParent("div", headerSection);
     cardTitle.innerText = this.title;
-    const costText = createElementWithClassAndParent("div", headerSection); //i.e. 5 Strength
+    const costText = createElementWithClassAndParent("div", headerSection,'cost-text'); //i.e. 5 Strength
     costText.innerText = `${this.costStatValue} ${this.costStatName}`;
 
     const boxForImage = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,"card-image-box");

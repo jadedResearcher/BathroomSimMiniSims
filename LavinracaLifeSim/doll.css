@@ -55,8 +55,9 @@ label{
     border-radius: 13px;
     padding-top: 13px;
     padding-bottom: 20px;
-    border-bottom: 5px solid rgb(0, 0, 0);;
-    border-right: 3px solid rgb(0, 0, 0);;
+    border-bottom: 5px solid rgb(0, 0, 0);
+    border-right: 3px solid rgb(0, 0, 0);
+    transform: scale(0.75);
     
 }
 
