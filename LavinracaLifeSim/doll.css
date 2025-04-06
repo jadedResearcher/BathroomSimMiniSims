@@ -47,6 +47,7 @@ label{
 
 .outer-card{
     width: 322px;
+    color: black;
     height: 450px;
     background-color: rgb(237, 210, 135);
     overflow: hidden;
@@ -54,16 +55,29 @@ label{
     border-radius: 13px;
     padding-top: 13px;
     padding-bottom: 20px;
-    border-bottom: 5px solid rgb(235, 218, 171);
-    border-right: 3px solid rgb(235, 218, 171);
+    border-bottom: 5px solid rgb(0, 0, 0);;
+    border-right: 3px solid rgb(0, 0, 0);;
     
 }
 
+.result-text{
+    background: white;
+    width: fit-content;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 7px;
+    border: 1px solid black;
+    position: absolute;
+    left: 105px;
+    top: -11px;
+    color: black;
+}
+
 .inner-card{
-    border-bottom: 5px solid rgb(218, 180, 75);
-    border-left: 3px solid rgb(218, 180, 75);
-    border-top: 1px solid rgb(218, 180, 75);
-    border-right: 1px solid rgb(218, 180, 75);
+    border: 5px outset rgb(0, 0, 0,0.25);
+    border-left: 3px solid rgb(0, 0, 0,0.25);
+    border-top: 1px solid rgb(0, 0, 0,0.25);
+    border-right: 1px solid rgb(0, 0, 0,0.25);
     background-color: rgb(238, 209, 130);
 
     padding: 13px;
@@ -72,10 +86,38 @@ label{
 
 .card-header{
     display: flex;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: bolder;
     justify-content: space-between;
     color: black;
     font-family: Times New Roman;
+}
+
+
+.summary-text{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    line-height: 10;
+}
+
+.summary-text-box{
+    border: 3px outset black;
+    height: 200px;
+    width: 290px;
+    position: relative;
+    border-top: none;
+    background: black;
+    color: white;
+    
+}
+
+.card-image-box{
+    background-image: linear-gradient(45deg, rgba(113,113,113,0.5),rgb(237, 237, 237,0.5));
+    border: 3px outset rgba(0,0,0,0.25);
+    height: 174px;
+    width: 290px;
+    border-bottom: none;
 }
 
 .card-image-box img{

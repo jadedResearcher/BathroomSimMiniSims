@@ -21,11 +21,44 @@ class Scene {
   }
 
   renderCard = (parent)=>{
-    console.log("JR NOTE: trying to render card to parent", parent)
+    console.log("JR NOTE: trying to render card to parent", parent,{cost: stringtoseed(this.resultStatName)})
+
+    const costSeed = (stringtoseed(this.costStatName)%360);
+    const resultSeed = (stringtoseed(this.resultStatName)%360);
+    console.log("JR NOTE: seeds are: ", costSeed, resultSeed)
+
+    const costColors = Please.make_scheme(
+      {
+        h: costSeed,
+        s: .5,
+        v: .85
+      },
+      {
+        scheme_type: 'analogous',
+        format: 'hex'
+      }
+    );
+
+    const resultColors = Please.make_scheme(
+      {
+        h: resultSeed,
+        s: .5,
+        v: .85
+      },
+      {
+        scheme_type: 'analogous',
+        format: 'hex'
+      }
+    );
+
+    console.log("JR NOTE: colors", {costColors, resultColors})
     const container = createElementWithClassAndParent("div", parent);
     const outerCardBoxWithRoundedEdges = createElementWithClassAndParent("div", container, 'outer-card');
+    outerCardBoxWithRoundedEdges.style.backgroundColor = costColors[0];
+
     const innerCardBoxWithSquareEdges = createElementWithClassAndParent("div", outerCardBoxWithRoundedEdges, 'inner-card');
-    
+    innerCardBoxWithSquareEdges.style.backgroundColor = costColors[1];
+
     const headerSection = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,'card-header');
     const victoryOrDefeatOrAutoOrSingleIcon = createElementWithClassAndParent("div", headerSection); //ascii check, x, * or 1 or infinity symbol 
     
@@ -39,12 +72,17 @@ class Scene {
     const bgImage = createElementWithClassAndParent("img", boxForImage);
     bgImage.src = this.bgAbsoluteSrc;
 
-    const textForResultStat = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges);
-    textForResultStat.innerText = this.resultStatName;
+ 
 
-    const boxForSummaryText = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges);
-    const resultSummaryText = createElementWithClassAndParent("div", boxForSummaryText);
-    resultSummaryText.innerText = this.humanResultSentence();
+    const boxForSummaryText = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,'summary-text-box');
+    const resultSummaryText = createElementWithClassAndParent("div", boxForSummaryText, 'summary-text');
+    resultSummaryText.style.color = resultColors[0];
+
+    resultSummaryText.innerText = this.humanResultSentence() +".";
+    const textForResultStat = createElementWithClassAndParent("div", boxForSummaryText,'result-text');
+    textForResultStat.innerText = this.resultStatName;
+    textForResultStat.style.backgroundColor = resultColors[0];
+
 
   }
 
