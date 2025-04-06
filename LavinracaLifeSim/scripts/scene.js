@@ -1,4 +1,6 @@
 
+const VICTORY = "Victory";
+const DEFEAT = "Defeat";
 
 class Scene {
   title = "An Example Scene";
@@ -21,18 +23,19 @@ class Scene {
   renderCard = (parent)=>{
     console.log("JR NOTE: trying to render card to parent", parent)
     const container = createElementWithClassAndParent("div", parent);
-    const outerCardBoxWithRoundedEdges = createElementWithClassAndParent("div", container);
-    const innerCardBoxWithSquareEdges = createElementWithClassAndParent("div", outerCardBoxWithRoundedEdges);
+    const outerCardBoxWithRoundedEdges = createElementWithClassAndParent("div", container, 'outer-card');
+    const innerCardBoxWithSquareEdges = createElementWithClassAndParent("div", outerCardBoxWithRoundedEdges, 'inner-card');
     
-    const headerSection = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges);
+    const headerSection = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,'card-header');
     const victoryOrDefeatOrAutoOrSingleIcon = createElementWithClassAndParent("div", headerSection); //ascii check, x, * or 1 or infinity symbol 
-    victoryOrDefeatOrAutoOrSingleIcon.innerText = "*TODO"
+    
+    victoryOrDefeatOrAutoOrSingleIcon.innerText = `${this.resultStatName===VICTORY?"✔":""}${this.resultStatName===DEFEAT?"𐄂":""}${this.autoPlay?"*":""}${this.singleUse?"1":"∞"}`;
     const cardTitle = createElementWithClassAndParent("div", headerSection);
     cardTitle.innerText = this.title;
     const costText = createElementWithClassAndParent("div", headerSection); //i.e. 5 Strength
-    costText.innerText = `${this.costStatName} ${this.costStatValue}`;
+    costText.innerText = `${this.costStatValue} ${this.costStatName}`;
 
-    const boxForImage = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges);
+    const boxForImage = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,"card-image-box");
     const bgImage = createElementWithClassAndParent("img", boxForImage);
     bgImage.src = this.bgAbsoluteSrc;
 

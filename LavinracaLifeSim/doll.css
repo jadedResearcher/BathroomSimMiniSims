@@ -45,6 +45,48 @@ label{
     margin-bottom: 13px;
 }
 
+.outer-card{
+    width: 322px;
+    height: 450px;
+    background-color: rgb(237, 210, 135);
+    overflow: hidden;
+    padding: 13px;
+    border-radius: 13px;
+    padding-top: 13px;
+    padding-bottom: 20px;
+    border-bottom: 5px solid rgb(235, 218, 171);
+    border-right: 3px solid rgb(235, 218, 171);
+    
+}
+
+.inner-card{
+    border-bottom: 5px solid rgb(218, 180, 75);
+    border-left: 3px solid rgb(218, 180, 75);
+    border-top: 1px solid rgb(218, 180, 75);
+    border-right: 1px solid rgb(218, 180, 75);
+    background-color: rgb(238, 209, 130);
+
+    padding: 13px;
+    height: 413px;
+}
+
+.card-header{
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    color: black;
+    font-family: Times New Roman;
+}
+
+.card-image-box img{
+    width: 230px;
+    height: 175px;
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 .summary{
     width: fit-content;
     padding: 31px;
