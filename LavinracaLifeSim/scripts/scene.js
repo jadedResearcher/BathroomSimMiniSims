@@ -52,7 +52,7 @@ class Scene {
     );
 
     console.log("JR NOTE: colors", {costColors, resultColors})
-    const container = createElementWithClassAndParent("div", parent);
+    const container = parent;
     const outerCardBoxWithRoundedEdges = createElementWithClassAndParent("div", container, 'outer-card');
     outerCardBoxWithRoundedEdges.style.backgroundColor = costColors[0];
 

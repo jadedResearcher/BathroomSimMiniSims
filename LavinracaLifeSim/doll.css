@@ -45,6 +45,11 @@ label{
     margin-bottom: 13px;
 }
 
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .outer-card{
     width: 322px;
     color: black;
@@ -56,9 +61,7 @@ label{
     padding-top: 13px;
     padding-bottom: 20px;
     border-bottom: 5px solid rgb(0, 0, 0);
-    border-right: 3px solid rgb(0, 0, 0);
-    transform: scale(0.75);
-    
+    border-right: 3px solid rgb(0, 0, 0);    
 }
 
 .result-text{
