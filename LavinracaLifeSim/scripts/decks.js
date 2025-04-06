@@ -4,9 +4,9 @@
 class CardSet {
   title = "Test Card Set"
   description = "A cardset is a playstyle, mostly oriented around clown type. This cardset is based around just, normal heroic tropes. Fighting evil and all that.";
-  cards = [victory, defeat, evilRises, trainingStrength, fightEvilWithStrength, superTrain];
+  cards = [victory, eatPotato,defeat, evilRises, trainingStrength, fightEvilWithStrength, superTrain];
 
-  startingDeck = [victory, defeat, evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises, trainingStrength, trainingStrength, fightEvilWithStrength, fightEvilWithStrength, fightEvilWithStrength, fightEvilWithStrength];
+  startingDeck = [victory,eatPotato, defeat, evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises, trainingStrength, trainingStrength, fightEvilWithStrength, fightEvilWithStrength, fightEvilWithStrength, fightEvilWithStrength];
 
   render=(parent)=>{
     const title = createElementWithClassAndParent("h2", parent);

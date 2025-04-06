@@ -68,13 +68,15 @@ class Scene {
     const costText = createElementWithClassAndParent("div", headerSection,'cost-text'); //i.e. 5 Strength
     costText.innerText = `${this.costStatValue} ${this.costStatName}`;
 
-    const boxForImage = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,"card-image-box");
+    const contentBox = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,"content-box");
+
+    const boxForImage = createElementWithClassAndParent("div", contentBox,"card-image-box");
     const bgImage = createElementWithClassAndParent("img", boxForImage);
     bgImage.src = this.bgAbsoluteSrc;
 
  
 
-    const boxForSummaryText = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,'summary-text-box');
+    const boxForSummaryText = createElementWithClassAndParent("div", contentBox,'summary-text-box');
     const resultSummaryText = createElementWithClassAndParent("div", boxForSummaryText, 'summary-text');
     resultSummaryText.style.color = resultColors[0];
 
