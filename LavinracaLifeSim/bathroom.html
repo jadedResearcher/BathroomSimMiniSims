@@ -11,6 +11,8 @@
   <script src="scripts/canvas_utils.js"></script>
   <script src="scripts/scene.js"></script>
   <script src="scripts/stored_scenes.js"></script>
+  <script src="scripts/decks.js"></script>
+
   <script src="index.js"></script>
   
 
@@ -27,14 +29,20 @@
   </div>
 <br><br><Br>
   TODO: 
+  <li>ability to render a cardset (just in a grid, so you can see them all) along with title and description of this cardset</li>
+  <li>existence of cardset vs deck. a cardset has a title and a narrative blurb (i.e. 'a story about saving a princess', 'a story about camille going to the doctor'), while a deck is the cards you currently have available to play. you unlock cards from your cardset as you go. (after ever shuffle?)</li>
+  <li>Victory and Defeat stat are special and both should end the game</li>
+  <li>ability to draw five cards from your deck</li>
+  <li>ability to play cards assuming you can pay the cost (for example, three strength)</li>
+  <li>ability to render scene of the card you just played (bg, doll, text)</li>
+  <li>after a game reaches Victory or Defeat stat of 1 or more, ability to see all the scenes you created, in order (sense they are just cards can export it as a 'deck' that is just for viewing your story, not for playing)</li>
+  <li>if cost stat is "spiral" pick a random stat you already have to actually need (apply glitch css)</li>
+  <li>if result is "spiral" pick a random stat you already have to actually alter (apply glitch css)</li>
+  <li>ability to share a cardset (so someone can play the story you created)</li>
+  <li>ability for a deck (or should it be game wide) to have associated Artifacts (not just cards) that change the rules (for example, how many cards you draw, or a multiplier for any cost you pay, or a multipler for any result you get, or a "if you would set Defeat to a value, insteaad destroy this relic")</li>
+  <li>how do artifacts unlock? every time you need to shuffle you get to pick one of three at random? or every three shuffles?</li>
+  <li>render cornmaze map? special locations give you the ability to choose a card or Artifact or candy (to use to unlock different cardsets in the main screen?)</li>
 
-  <li>flag for if a card is single use only (useful for getting rid of bad cards cluttering up your deck)</li>
-
-  <li>make a few sample cards, dirt simple</li>
-  <li>every tick you get dealt five cards from your hand that COULD trigger this tick</li>
-  <li>if you have none, you get placeholders "time pases"</li>
-  <li>You choose which to play.</li>
-  <li>cards should show what stat triggers and what stat changes</li>
 </body>
 
 </html>
