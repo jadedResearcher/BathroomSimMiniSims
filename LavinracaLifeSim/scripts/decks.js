@@ -1,6 +1,9 @@
 //a cardset should be a playstyle, along with a clown type, ask maccus what those clown types were again
 
+/*
+  <li>existence of cardset vs deck. a cardset has a title and a narrative blurb (i.e. 'a story about saving a princess', 'a story about camille going to the doctor'), while a deck is the cards you currently have available to play. you unlock cards from your cardset as you go. (after ever shuffle?)</li>
 
+*/
 class CardSet {
   title = "Test Card Set"
   description = "A cardset is a playstyle, mostly oriented around clown type. This cardset is based around just, normal heroic tropes. Fighting evil and all that.";
