@@ -74,6 +74,10 @@ label {
         font-size: 10px;
     }
 
+    .card-title{
+        font-size: 10px;
+    }
+
 }
 
 .outer-card {
@@ -81,8 +85,8 @@ label {
     color: black;
     height: 450px;
     background-color: rgb(237, 210, 135);
-    overflow: hidden;
     padding: 1%;
+    position: relative;
     border-radius: 13px;
     padding-top: 1%;
     padding-bottom: 2%;
@@ -90,11 +94,26 @@ label {
     border-right: 3px solid rgb(0, 0, 0);
 }
 
+.card-title{
+    background: white;
+    width: fit-content;
+    padding-right: 2%;
+    padding-left: 2%;
+    border-radius: 1000px;
+    border: 1px solid black;
+    position: absolute;
+    top: 7%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 15px;
+}
+
 .result-text {
     background: white;
     width: fit-content;
-    padding-right: 1%;
-    padding-left: 1%;
+    padding-right: 2%;
+    padding-left: 2%;
     border-radius: 7px;
     border: 1px solid black;
     position: absolute;
@@ -123,6 +142,7 @@ label {
     justify-content: space-between;
     color: black;
     font-family: Times New Roman;
+    
 }
 
 
@@ -146,6 +166,35 @@ label {
 
 }
 
+.stat-area{
+    position: absolute;
+    margin: 0px;
+    left: 0px;
+    color: black;
+}
+
+.stat-bar{
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: 3px solid black;
+    border: 3px solid black;
+    border-left: none;
+    border-radius: 100px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.stat-bar .stat-name{
+    margin-left: 10px;
+}
+
+.stat-bar .stat-value{
+    margin-right: 10px;
+    line-height: 32px;
+}
+
 .content-box {
     border: 3px outset rgba(0, 0, 0, 0.75);
 }
@@ -162,7 +211,7 @@ label {
 .card-image-box img {
     width: 95%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -211,7 +260,6 @@ h1 {
 }
 
 #container {
-    position: relative;
     padding: 13px;
     margin-left: 31px;
     margin-right: 31px;

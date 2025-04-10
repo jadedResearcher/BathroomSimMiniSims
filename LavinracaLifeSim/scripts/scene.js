@@ -2,6 +2,28 @@
 const VICTORY = "Victory";
 const DEFEAT = "Defeat";
 
+
+const makeColorsForStat = (stat)=>{
+  const seed =  (stringtoseed(stat)%360);
+  const hue =  seed%360;
+  const rand = new SeededRandom(seed);
+  let saturation = 0.5 + rand.nextDouble()/2;
+  let value = 0.65 + rand.nextDouble()/4;
+
+  const colors = Please.make_scheme(
+    {
+      h: hue,
+      s: saturation,
+      v: value 
+    },
+    {
+      scheme_type: 'analogous',
+      format: 'hex'
+    }
+  );
+  return colors;
+}
+
 class Scene {
   title = "An Example Scene";
   text = "A scene happens to [PLAYER]."
@@ -23,33 +45,10 @@ class Scene {
   renderCard = (parent)=>{
     console.log("JR NOTE: trying to render card to parent", parent,{cost: stringtoseed(this.resultStatName)})
 
-    const costSeed = (stringtoseed(this.costStatName)%360);
-    const resultSeed = (stringtoseed(this.resultStatName)%360);
-    console.log("JR NOTE: seeds are: ", costSeed, resultSeed)
 
-    const costColors = Please.make_scheme(
-      {
-        h: costSeed,
-        s: .5,
-        v: .85
-      },
-      {
-        scheme_type: 'analogous',
-        format: 'hex'
-      }
-    );
+    const costColors = makeColorsForStat(this.costStatName)
 
-    const resultColors = Please.make_scheme(
-      {
-        h: resultSeed,
-        s: .5,
-        v: .85
-      },
-      {
-        scheme_type: 'analogous',
-        format: 'hex'
-      }
-    );
+    const resultColors = makeColorsForStat(this.resultStatName)
 
     console.log("JR NOTE: colors", {costColors, resultColors})
     const container = parent;
@@ -62,8 +61,8 @@ class Scene {
     const headerSection = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,'card-header');
     const victoryOrDefeatOrAutoOrSingleIcon = createElementWithClassAndParent("div", headerSection); //ascii check, x, * or 1 or infinity symbol 
     
-    victoryOrDefeatOrAutoOrSingleIcon.innerText = `${this.resultStatName===VICTORY?"✔":""}${this.resultStatName===DEFEAT?"𐄂":""}${this.autoPlay?"*":""}${this.singleUse?"1":"∞"}`;
-    const cardTitle = createElementWithClassAndParent("div", headerSection);
+    victoryOrDefeatOrAutoOrSingleIcon.innerText = `${this.resultStatName===VICTORY?"✔":""}${this.resultStatName===DEFEAT?"X":""}${this.autoPlay?"*":""}${this.singleUse?"1":"∞"}`;
+    const cardTitle = createElementWithClassAndParent("div", headerSection,'card-title');
     cardTitle.innerText = this.title;
     const costText = createElementWithClassAndParent("div", headerSection,'cost-text'); //i.e. 5 Strength
     costText.innerText = `${this.costStatValue} ${this.costStatName}`;
