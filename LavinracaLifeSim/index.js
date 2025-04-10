@@ -17,7 +17,7 @@ const renderTest = ()=>{
     cardSetButton.innerText = "View Simple Cardset";
     cardSetButton.onclick = ()=>{
         contents.innerHTML = "";
-        genericCardset.render(container)
+        genericCardset.render(contents)
     }
 
     const gameTestButton = createElementWithClassAndParent("button", contents);
@@ -25,7 +25,7 @@ const renderTest = ()=>{
     gameTestButton.onclick = ()=>{
         contents.innerHTML = "";
         const game = new Game(genericCardset);
-        game.render(container)
+        game.render(contents)
     }
 
 }

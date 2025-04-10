@@ -186,6 +186,15 @@ label {
     border-top-left-radius: 0px;
 }
 
+.game-area{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50%;
+    border: 3px solid black;
+    background: #c4c4c4;
+}
+
 .stat-bar .stat-name{
     margin-left: 10px;
 }

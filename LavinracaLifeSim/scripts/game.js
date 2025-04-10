@@ -40,5 +40,7 @@ class Game {
 
   render = (parent) => {
     this.renderStats(parent);
+    const container = createElementWithClassAndParent("div", parent, 'game-area');
+
   }
 }
