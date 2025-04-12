@@ -5,16 +5,22 @@ end itself if victory or defeat is over zero
 let ohgodplzletjrdebugiaskedniceys=true;
 console.warn("JR NOTE: don't forget to disable debug mode")
 class Game {
-  cardSet;//what are we actually playing with
+  cardset;//what are we actually playing with
   stats = {};// name/value pairs
 
 
   constructor(cardset) {
-    this.cardSet = cardset;
-    const allStats = getAllStatsForCardset(this.cardSet);
+    this.cardset = cardset;
+    const allStats = getAllStatsForCardset(this.cardset);
     for (let stat of allStats) {
       this.stats[stat] = 0;
     }
+  }
+
+  renderDrawPile = (parent)=>{
+    const drawCardImage = createElementWithClassAndParent("img",parent,"draw-pile card-back");
+    drawCardImage.src = "http://www.farragofiction.com/AudioLogs/images/wallpaper.png";
+    drawCardImage.style.filter = `${this.cardset.filterValues()}`;
   }
 
   renderStats = (parent) => {
@@ -40,7 +46,8 @@ class Game {
 
   render = (parent) => {
     this.renderStats(parent);
-    const container = createElementWithClassAndParent("div", parent, 'game-area');
+    const sceneContainer = createElementWithClassAndParent("div", parent, 'game-area');
+    this.renderDrawPile(parent);
 
   }
 }

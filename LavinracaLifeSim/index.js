@@ -1,5 +1,10 @@
+const click = new Audio();
+click.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/chip.mp3"
 window.onload = ()=>{
     renderTest();
+    window.onclick =()=>{
+        click.play();
+    }
 
 }
 

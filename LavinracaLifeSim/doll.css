@@ -74,7 +74,7 @@ label {
         font-size: 10px;
     }
 
-    .card-title{
+    .card-title {
         font-size: 10px;
     }
 
@@ -94,7 +94,7 @@ label {
     border-right: 3px solid rgb(0, 0, 0);
 }
 
-.card-title{
+.card-title {
     background: white;
     width: fit-content;
     padding-right: 2%;
@@ -142,7 +142,7 @@ label {
     justify-content: space-between;
     color: black;
     font-family: Times New Roman;
-    
+
 }
 
 
@@ -166,14 +166,14 @@ label {
 
 }
 
-.stat-area{
+.stat-area {
     position: absolute;
     margin: 0px;
     left: 0px;
     color: black;
 }
 
-.stat-bar{
+.stat-bar {
     width: 100px;
     display: flex;
     justify-content: space-between;
@@ -186,7 +186,24 @@ label {
     border-top-left-radius: 0px;
 }
 
-.game-area{
+.card-back {
+    width: 113px;
+    border: 7px solid white;
+    border-radius: 13px;
+    filter: brightness(2) contrast(2) saturate(3) hue-rotate(359deg);
+}
+
+.draw-pile {
+    position: absolute;
+    right: 113px;
+    bottom: 113px;
+    cursor: pointer;
+}
+.draw-pile:hover {
+    transform: scale(1.1);
+}
+
+.game-area {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -195,11 +212,11 @@ label {
     background: #c4c4c4;
 }
 
-.stat-bar .stat-name{
+.stat-bar .stat-name {
     margin-left: 10px;
 }
 
-.stat-bar .stat-value{
+.stat-bar .stat-value {
     margin-right: 10px;
     line-height: 32px;
 }
