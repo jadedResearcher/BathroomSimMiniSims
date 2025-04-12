@@ -83,6 +83,7 @@ class Scene {
     const textForResultStat = createElementWithClassAndParent("div", boxForSummaryText,'result-text');
     textForResultStat.innerText = this.resultStatName;
     textForResultStat.style.backgroundColor = resultColors[0];
+    return outerCardBoxWithRoundedEdges;
 
 
   }
