@@ -13,6 +13,34 @@ const isItFriday = () => {
 
 }
 
+
+/*
+taking in a content ele is a pattern i learned from work, feels weird using it in vanilla
+*/
+const popup =  (title, contentEle) => {
+  const popup = createElementWithClassAndParent("div", document.querySelector("body"), "popup");
+
+  popup.focus();
+  const titleSection = createElementWithClassAndParent("div", popup, "popup-title-container");
+  const titleEle = createElementWithClassAndParent("div", titleSection, "popup-title");
+  titleEle.innerText = title;
+
+  const closeButton = createElementWithClassAndParent("button", titleSection, "popup-button");
+  closeButton.innerText = "X";
+
+  const popupbody = createElementWithClassAndParent("div", popup);
+  popupbody.append(contentEle);
+
+  closeButton.onclick = () => {
+    popup.remove();
+    //just in case somehow theres multiple
+    document.querySelectorAll(".popup").forEach((x) => x.remove());
+  }
+
+  return popup;
+}
+
+
 //from view-source:https://www.yyyyyyy.info/
   function animateTitle(i) {
     var message = [

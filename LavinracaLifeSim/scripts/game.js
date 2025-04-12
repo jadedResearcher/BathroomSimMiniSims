@@ -7,20 +7,57 @@ console.warn("JR NOTE: don't forget to disable debug mode")
 class Game {
   cardset;//what are we actually playing with
   stats = {};// name/value pairs
+  deck;
+  discards = [];
 
 
   constructor(cardset) {
     this.cardset = cardset;
+    this.deck = cardset.startingDeck;
     const allStats = getAllStatsForCardset(this.cardset);
     for (let stat of allStats) {
       this.stats[stat] = 0;
     }
   }
 
+  renderDiscardPile = (parent)=>{
+    const source = this.discards;
+    const drawCardImage = createElementWithClassAndParent("img",parent,"discard-pile card-back");
+    drawCardImage.src = "http://www.farragofiction.com/AudioLogs/images/wallpaper.png";
+    drawCardImage.style.filter = `sepia(1) contrast(0.5) saturate(0.5)`;
+    drawCardImage.style.boxShadow = `-5px ${source.length}px 18px black`;
+    drawCardImage.onclick = ()=>{
+      const contentEle = document.createElement("div");
+      contentEle.className="deck-view";
+      const container = createElementWithClassAndParent("div", contentEle,'grid tiny-cards');
+      if(source.length === 0){
+        container.innerText = "[NO CARDS FOUND]"
+      }
+      for(let card of source){
+        card.renderCard(container);
+      }
+      popup("Discard Pile", contentEle)
+    }
+  }
+
   renderDrawPile = (parent)=>{
+    const source = this.deck;
     const drawCardImage = createElementWithClassAndParent("img",parent,"draw-pile card-back");
     drawCardImage.src = "http://www.farragofiction.com/AudioLogs/images/wallpaper.png";
     drawCardImage.style.filter = `${this.cardset.filterValues()}`;
+    drawCardImage.style.boxShadow = `-5px ${source.length}px 18px black`;
+    drawCardImage.onclick = ()=>{
+      const contentEle = document.createElement("div");
+      contentEle.className="deck-view";
+      const container = createElementWithClassAndParent("div", contentEle,'grid tiny-cards');
+      if(source.length === 0){
+        container.innerText = "[NO CARDS FOUND]"
+      }
+      for(let card of source){
+        card.renderCard(container);
+      }
+      popup("Draw Pile (Random Order)", contentEle)
+    }
   }
 
   renderStats = (parent) => {
@@ -48,6 +85,8 @@ class Game {
     this.renderStats(parent);
     const sceneContainer = createElementWithClassAndParent("div", parent, 'game-area');
     this.renderDrawPile(parent);
+    this.renderDiscardPile(parent);
+
 
   }
 }

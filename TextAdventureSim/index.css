@@ -623,6 +623,7 @@ textarea {
   width: 50px;
   background: none;
   cursor: pointer;
+  border: none;
 }
 
 .popup-button:hover {

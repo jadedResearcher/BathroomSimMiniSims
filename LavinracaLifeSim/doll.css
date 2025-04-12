@@ -199,8 +199,79 @@ label {
     bottom: 113px;
     cursor: pointer;
 }
+
+.discard-pile {
+    position: absolute;
+    left: 113px;
+    bottom: 113px;
+    cursor: pointer;
+}
+
 .draw-pile:hover {
     transform: scale(1.1);
+}
+
+.popup-title-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ff5c39;
+    color: white;
+}
+
+.popup-button {
+    margin: 0px;
+    padding: 0px;
+    height: 50px;
+    width: 50px;
+    border: none;
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ff5c39;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 15px;
+    height: 5px;
+  }
+  
+
+
+  
+  .popup-button:hover {
+    text-decoration: underline;
+  }
+  
+
+.popup {
+    color: #ff5c39;
+    background: black;
+  
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: fixed;
+    top: 3%;
+    left: 1%;
+    font-size: 14px;
+    background-color: #432a63;
+    width: 98%;
+    overflow-y: auto;
+    border: 3px solid #ff5c39;
+    z-index: 4556;
+    height: 90%;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+  }
+
+.popup-title {
+    width: 90%;
+    text-align: center;
+    font-size: 32px;
+    line-height: 44px;
+    font-weight: bolder;
 }
 
 .game-area {
