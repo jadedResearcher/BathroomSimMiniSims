@@ -3,7 +3,10 @@ a game keeps track of your stats and knows to
 end itself if victory or defeat is over zero
 */
 const shuffle = new Audio();
-shuffle.src="http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/spooky_card_shuffle.mp3";
+shuffle.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/spooky_card_shuffle.mp3";
+
+const nopeFX = new Audio();
+nopeFX.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/nopedos.mp3";
 
 let ohgodplzletjrdebugiaskedniceys = true;
 console.warn("JR NOTE: don't forget to disable debug mode")
@@ -30,23 +33,26 @@ class Game {
   }
 
   discardHand = () => {
-    this.discard = this.discard.concat(this.hand);
+    if(this.hand.length){
+      this.discards = this.discards.concat(this.hand);
+    }
     this.hand = [];
   }
 
   shuffleDeck = () => {
     this.deck = this.rand.shuffle(this.deck);
-    shuffle.play();
   }
 
   shuffleDiscardIntoDeck = () => {
+    shuffle.play();
     console.warn("JR NOTE: give this a fancy animation or sound effect at least draw attention to the fact that something is happening")
-    this.deck = this.deck.concat(this.discard);
+    this.deck = this.deck.concat(this.discards);
+    this.discards = [];
     this.shuffleDeck();
   }
 
-  drawOneCard =()=>{
-    if(this.deck.length ===0){
+  drawOneCard = () => {
+    if (this.deck.length === 0) {
       return; //should never do this.
     }
 
@@ -56,9 +62,62 @@ class Game {
   }
 
   drawXCards = (x) => {
-    for(let i = 0; i<x; i++){
+    for (let i = 0; i < x; i++) {
       this.drawOneCard();
     }
+  }
+
+  canPay = (card) => {
+    //if its free, of course you can pay
+    if (card.costStatValue <= 0) {
+      console.log("JR NOTE: I can pay because its free")
+      return true;
+    }
+
+    //if you don't even have the stat (and its not free) of course you can't pay
+    if (!this.stats[card.costStatName]) {
+      console.log("JR NOTE: I can't pay because I don't even have the stat")
+      return false;
+    }
+
+    //you have the stat AND have more than enough to pay it
+    if (this.stats[card.costStatName] >= card.costStatValue) {
+      console.log("JR NOTE: I can pay because i have enough of the stat")
+      return true;
+    }
+    console.log("JR NOTE: i can't afford this card :(")
+    return false;
+  }
+
+  playCard = (parent, card) => {
+    /*
+   if you can not pay its cost, nope sound
+
+   if you can, deduct its cost from your stats
+   remove the card from your hand and put it in your discard pile
+   apply the results from it
+    */
+    if (!this.canPay(card)) {
+      nopeFX.play();
+      return;
+    }
+    if (card.costStatValue) {
+      if (!this.stats[card.costStatName]) {
+        this.stats[card.costStatName] = 0; //initialize
+      }
+      this.stats[card.costStatName] += card.costStatValue * -1;
+    }
+
+    removeItemOnce(this.hand, card);
+    this.discards.push(card);
+    this.applyResultsFromCard(parent, card);
+
+  }
+
+  applyResultsFromCard = (parent, card) => {
+    this.stats[card.resultStatName] += card.resultChangeValue;
+    //do a new whole frame of the game please
+    this.render(parent);
   }
 
   /*
@@ -81,7 +140,7 @@ class Game {
       const remainder = this.drawAtATime - this.deck.length;
       this.drawXCards(this.deck.length);
       //if you can, draw the rest out of the discard pile
-      if (this.discard.length > 0) {
+      if (this.discards.length > 0) {
         this.shuffleDiscardIntoDeck();
         this.drawXCards(remainder);
       }
@@ -140,32 +199,45 @@ class Game {
     const countEle = createElementWithClassAndParent("div", cardHolder, 'cards-count-right');
     countEle.innerText = source.length;
 
+    const endTurnButton = createElementWithClassAndParent("button", cardHolder, 'end-turn-button');
+    endTurnButton.innerText = "End Tick";
+
+    endTurnButton.onclick = ()=>{
+      this.drawNewHand();
+      this.render(parent);
+    }
+
+
+
   }
 
   renderStats = (parent) => {
     const container = createElementWithClassAndParent("div", parent, 'stat-area');
     for (let [key, value] of Object.entries(this.stats)) {
-      const bar = createElementWithClassAndParent("div", container, 'stat-bar');
-      const colors = makeColorsForStat(key)
-      bar.style.backgroundColor = colors[0];
-      const nameEle = createElementWithClassAndParent("div", bar, 'stat-name');
-      nameEle.innerText = `${key}:`;
-      const valueEle = createElementWithClassAndParent("div", bar, 'stat-value');
-      valueEle.innerText = value;
+      if (value != 0) {
 
-      if (ohgodplzletjrdebugiaskedniceys) {
-        bar.onclick = () => {
-          this.stats[key] = this.stats[key] + 1;
-          this.renderStats(parent);
+
+        const bar = createElementWithClassAndParent("div", container, 'stat-bar');
+        const colors = makeColorsForStat(key)
+        bar.style.backgroundColor = colors[0];
+        const nameEle = createElementWithClassAndParent("div", bar, 'stat-name');
+        nameEle.innerText = `${key}:`;
+        const valueEle = createElementWithClassAndParent("div", bar, 'stat-value');
+        valueEle.innerText = value;
+
+        if (ohgodplzletjrdebugiaskedniceys) {
+          bar.onclick = () => {
+            this.stats[key] = this.stats[key] + 1;
+            this.renderStats(parent);
+          }
         }
       }
     }
 
   }
 
-  renderHand = (parent)=>{
-    const handEle = createElementWithClassAndParent("div", parent, "hand");
-    handEle.innerText = `${this.hand.length} Cards In Hand`;
+  renderHand = (parent, container) => {
+    const handEle = createElementWithClassAndParent("div", container, "hand");
 
     /*
     have X cards i need to fit into Y space
@@ -173,23 +245,38 @@ class Game {
     */
     const handRect = handEle.getBoundingClientRect();
     const widthToTarget = handRect.width;
-    const spacePerCard = widthToTarget/this.hand.length;
+    const spacePerCard = widthToTarget / this.hand.length;
     let currentX = -85;
 
-    for(let card of this.hand){
+    for (let card of this.hand) {
       const cardEle = card.renderCard(handEle);
-      cardEle.style.cssText  = `position: absolute; transform: scale(0.5); bottom: -500px; left: ${currentX}px`
-      currentX+= spacePerCard;
+      const x = currentX;
+      const y = -500;
+      cardEle.style.cssText = `position: absolute; transform: scale(0.5); bottom: -${y}px; left: ${x}px`
+      currentX += spacePerCard;
+      cardEle.onclick = () => {
+        this.playCard(card);
+      }
+      if (!this.canPay(card)) {
+        cardEle.style.filter = "brightness(0.5)";
+      }
+      console.log("JR NOTE: can have a cool dragging effect, but not in mvp")
+      cardEle.onmouseup = () => {
+        this.playCard(parent, card);
+      }
+
+
     }
 
   }
 
   render = (parent) => {
+    parent.innerHTML = ""; //clear previous frame
     this.renderStats(parent);
     const sceneContainer = createElementWithClassAndParent("div", parent, 'game-area');
     this.renderDrawPile(parent);
     this.renderDiscardPile(parent);
-    this.renderHand(sceneContainer);
+    this.renderHand(parent, sceneContainer);
 
 
   }

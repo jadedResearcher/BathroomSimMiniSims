@@ -24,7 +24,7 @@ const makeColorsForStat = (stat)=>{
   return colors;
 }
 
-class Scene {
+class Card {
   title = "An Example Scene";
   text = "A scene happens to [PLAYER]."
   costStatName = "Strength";
@@ -41,6 +41,7 @@ class Scene {
       this[key] = json[key];
     }
   }
+
 
   renderCard = (parent)=>{
     console.log("JR NOTE: trying to render card to parent", parent,{cost: stringtoseed(this.resultStatName)})

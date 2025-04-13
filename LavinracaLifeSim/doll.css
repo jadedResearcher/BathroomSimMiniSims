@@ -311,6 +311,7 @@ label {
     position: absolute;
     width: 90%;
     height: 113px;
+    bottom: 52px;
 }
 
 .hand .outer-card{

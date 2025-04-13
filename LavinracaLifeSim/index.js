@@ -14,7 +14,7 @@ const renderTest = ()=>{
     editButton.innerText = "Create A Card";
     editButton.onclick = ()=>{
         contents.innerHTML = "";
-        const testScene = new Scene();
+        const testScene = new Card();
         testScene.renderEditForm(contents);
     }
 
