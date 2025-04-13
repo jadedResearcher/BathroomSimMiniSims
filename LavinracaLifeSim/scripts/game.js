@@ -18,6 +18,8 @@ class Game {
   discards = [];
   hand = [];
   rand;
+  currentBGSrc;
+  currentText;
 
 
   constructor(cardset) {
@@ -33,7 +35,7 @@ class Game {
   }
 
   discardHand = () => {
-    if(this.hand.length){
+    if (this.hand.length) {
       this.discards = this.discards.concat(this.hand);
     }
     this.hand = [];
@@ -90,6 +92,7 @@ class Game {
   }
 
   playCard = (parent, card) => {
+    console.log("JR NOTE: playing card", card)
     /*
    if you can not pay its cost, nope sound
 
@@ -114,8 +117,30 @@ class Game {
 
   }
 
-  applyResultsFromCard = (parent, card) => {
+  renderCurrentScene = (gameArea) => {
+    const bgImage = createElementWithClassAndParent("img", gameArea, 'scene-bg');
+    bgImage.src = this.currentBGSrc;
+
+    const textEle = createElementWithClassAndParent("div", gameArea, 'scene-text');
+    textEle.innerText = this.currentText;
+  }
+
+  applyResultsFromCard = async (parent, card) => {
     this.stats[card.resultStatName] += card.resultChangeValue;
+    const gameArea = parent.querySelector(".game-area");
+    const cardEle = card.renderCard(gameArea);
+    cardEle.classList.add("played-card")
+
+
+    this.currentBGSrc = card.bgAbsoluteSrc;
+    this.currentText = card.text;
+    this.renderCurrentScene(gameArea);
+    //on top of everything, and only temporary
+    gameArea.append(cardEle)
+    await sleep(1000);
+    cardEle.classList.add("discarding-card")
+
+    await sleep(5000)
     //do a new whole frame of the game please
     this.render(parent);
   }
@@ -202,7 +227,7 @@ class Game {
     const endTurnButton = createElementWithClassAndParent("button", cardHolder, 'end-turn-button');
     endTurnButton.innerText = "End Tick";
 
-    endTurnButton.onclick = ()=>{
+    endTurnButton.onclick = () => {
       this.drawNewHand();
       this.render(parent);
     }
@@ -254,9 +279,6 @@ class Game {
       const y = -500;
       cardEle.style.cssText = `position: absolute; transform: scale(0.5); bottom: -${y}px; left: ${x}px`
       currentX += spacePerCard;
-      cardEle.onclick = () => {
-        this.playCard(card);
-      }
       if (!this.canPay(card)) {
         cardEle.style.filter = "brightness(0.5)";
       }
@@ -274,6 +296,9 @@ class Game {
     parent.innerHTML = ""; //clear previous frame
     this.renderStats(parent);
     const sceneContainer = createElementWithClassAndParent("div", parent, 'game-area');
+    if (this.currentBGSrc) {
+      this.renderCurrentScene(sceneContainer);
+    }
     this.renderDrawPile(parent);
     this.renderDiscardPile(parent);
     this.renderHand(parent, sceneContainer);

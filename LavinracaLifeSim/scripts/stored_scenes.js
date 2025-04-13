@@ -2,7 +2,7 @@ const all_scenes = [];
 
 const trainingStrength = new Card();
 trainingStrength.syncToJSONString(`
-{"title":"Training Time","text":"[PLAYER] needs to get stronger. They learn martial arts and various exercise routines to get their noodle-like appendages so much more buff.","costStatName":"","singleUse":false,"costStatValue":0,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/58.png","resultStatName":"Strength","resultChangeValue":1,"triggerStatName":"Strength","triggerMax":3,"triggerMin":0}  `);
+{"title":"Training Time","text":"[PLAYER] needs to get stronger. They learn martial arts and various exercise routines to get their noodle-like appendages so much more buff.","costStatName":"","singleUse":false,"costStatValue":0,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/AlternianDesert.png","resultStatName":"Strength","resultChangeValue":1,"triggerStatName":"Strength","triggerMax":3,"triggerMin":0}  `);
 all_scenes.push(trainingStrength);
 
 /*
@@ -13,10 +13,10 @@ all_scenes.push(trainingStrength);
 */
 
 const findPotato = new Card();
-trainingStrength.syncToJSONString(`
-  {"title":"Find a Potato","text":"[PLAYER] trips face first and discovers a RUDE POTATO peeking out of the ground.Their Potato, now.","costStatName":"","singleUse":true,"autoPlay":true,"costStatValue":0,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/58.png","resultStatName":"Potato","resultChangeValue":1}
+findPotato.syncToJSONString(`
+  {"title":"Find a Potato","text":"[PLAYER] trips face first and discovers a RUDE POTATO peeking out of the ground.Their Potato, now.","costStatName":"","singleUse":true,"autoPlay":true,"costStatValue":0,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/AlternianCliff.png","resultStatName":"Potato","resultChangeValue":1}
   `);
-all_scenes.push(trainingStrength);
+all_scenes.push(findPotato);
 
 const eatPotato = new Card();
 eatPotato.syncToJSONString(`
