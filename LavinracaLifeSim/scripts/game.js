@@ -2,6 +2,9 @@
 a game keeps track of your stats and knows to
 end itself if victory or defeat is over zero
 */
+const shuffle = new Audio();
+shuffle.src="http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/spooky_card_shuffle.mp3";
+
 let ohgodplzletjrdebugiaskedniceys = true;
 console.warn("JR NOTE: don't forget to disable debug mode")
 class Game {
@@ -33,6 +36,7 @@ class Game {
 
   shuffleDeck = () => {
     this.deck = this.rand.shuffle(this.deck);
+    shuffle.play();
   }
 
   shuffleDiscardIntoDeck = () => {
