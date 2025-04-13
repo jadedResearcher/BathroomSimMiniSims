@@ -32,7 +32,7 @@ all_scenes.push(superTrain);
 
 const fightEvilWithStrength = new Card();
 fightEvilWithStrength.syncToJSONString(`
-{"title":"Fight Evil","text":"[PLAYER] uses their STRENGTH to fight Evil!","costStatName":"Strength","singleUse":false,"costStatValue":3,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/58.png","resultStatName":"Evil","resultChangeValue":-1,"triggerStatName":"Strength","triggerMax":10,"triggerMin":3}  `);
+{"title":"Fight Evil","text":"[PLAYER] uses their STRENGTH to fight Evil!","costStatName":"Strength","singleUse":false,"costStatValue":3,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/58.png","resultStatName":"Evil","resultChangeValue":-3,"triggerStatName":"Strength","triggerMax":10,"triggerMin":3}  `);
 all_scenes.push(fightEvilWithStrength);
 
 
@@ -43,7 +43,7 @@ all_scenes.push(evilRises);
 
 const victory = new Card();
 victory.syncToJSONString(`
-{"title":"Victory","text":"[PLAYER] has finally defeated the Evil! They celebrate a lasting peace!","costStatName":"Strength","singleUse":true,"costStatValue":13,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/58.png","resultStatName":"Victory","resultChangeValue":1,"triggerStatName":"Evil","triggerMax":-13,"triggerMin":-999}  `);
+{"title":"Victory","text":"[PLAYER] has finally defeated the Evil! They celebrate a lasting peace!","costStatName":"Strength","singleUse":true,"costStatValue":6,"bgAbsoluteSrc":"http://farragofiction.com/LifeSim/images/LifeSimBGs/58.png","resultStatName":"Victory","resultChangeValue":1,"triggerStatName":"Evil","triggerMax":-13,"triggerMin":-999}  `);
 all_scenes.push(victory);
 
 

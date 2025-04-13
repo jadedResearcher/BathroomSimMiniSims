@@ -312,6 +312,7 @@ label {
     width: 90%;
     height: 113px;
     bottom: 52px;
+    z-index: 1000;
 }
 
 .hand .outer-card {
@@ -350,8 +351,35 @@ label {
 }
 
 .discarding-card {
-    animation: move 5s ease-in;
+    animation: move 3s ease-in;
     animation-iteration-count: 1;
+}
+
+.destroying-card {
+    animation: burn 2s ease-in;
+    animation-iteration-count: 1;
+}
+
+@keyframes burn {
+    0% {
+        opacity: 100%;
+        filter: contrast(100) grayscale(0.1)
+    }
+
+    10% {
+        opacity: 90%;
+        filter: contrast(200) grayscale(0.3)
+    }
+
+    30% {
+        opacity: 50%;
+        filter: contrast(500) grayscale(0.6)
+    }
+
+    100% {
+        opacity: 0%;
+        filter: contrast(5000) grayscale(1)
+    }
 }
 
 @keyframes move {

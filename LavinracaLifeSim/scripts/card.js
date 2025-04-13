@@ -44,14 +44,11 @@ class Card {
 
 
   renderCard = (parent)=>{
-    console.log("JR NOTE: trying to render card to parent", parent,{cost: stringtoseed(this.resultStatName)})
-
 
     const costColors = makeColorsForStat(this.costStatName)
 
     const resultColors = makeColorsForStat(this.resultStatName)
 
-    console.log("JR NOTE: colors", {costColors, resultColors})
     const container = parent;
     const outerCardBoxWithRoundedEdges = createElementWithClassAndParent("div", container, 'outer-card');
     outerCardBoxWithRoundedEdges.style.backgroundColor = costColors[0];
