@@ -204,7 +204,7 @@ its not just interloper sim that gets to do that anymore lol (and the random pag
         return false;
       }
 
-      let affirmations = ["Zampanio is a really fun game, you should play it.", "Thank you for playing Zampanio.", "Zampanio needs you to live a long, healthy life.", "Have you hydrated lately?"]
+      let affirmations = ["Click twice to skip to next video.","Click once to stop the loop of three.","Zampanio is a really fun game, you should play it.", "Thank you for playing Zampanio.", "Zampanio needs you to live a long, healthy life.", "Have you hydrated lately?"]
       let weird_videos = await getWeirdVideosArray();
 
       const subliminal_ele = document.querySelector("#subliminal")
@@ -213,11 +213,16 @@ its not just interloper sim that gets to do that anymore lol (and the random pag
       playing = true;
       let v = document.querySelector("video");
       let loopCount = 0;
-      window.onclick = ()=>{
-        loopCount = 113; //at least stop looping on click, but doesn't interupt video
+      let maxLoopCount = 3; //then move on to next video
+
+      window.onclick = () => {
+        if (loopCount < maxLoopCount) {
+          loopCount = maxLoopCount * 2; //at least stop looping on click, but doesn't interupt video
+        }else{//okay fine you REALLY want to skip ahead...
+          v.dispatchEvent(new Event("ended")); //synthetic end event
+        }
       }
       v.play();
-      let maxLoopCount = 3; //then move on to next video
       v.addEventListener('ended', (event) => {
         loopCount++;
         if (loopCount < maxLoopCount) {
@@ -238,7 +243,7 @@ its not just interloper sim that gets to do that anymore lol (and the random pag
       });
     }
     window.onclick = () => {
-      if(!playing){
+      if (!playing) {
         playAll();
 
       }
