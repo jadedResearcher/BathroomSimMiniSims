@@ -1,0 +1,179 @@
+<html language="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Wait. Have you been here before?">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>StaticSim</title>
+
+  <style>
+    body {
+      background: black;
+      margin:0px;
+    }
+
+    #gallery {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-left: auto;
+      /*centers it horizontally*/
+      margin-right: auto;
+      /*centers it horizontally*/
+      font-size: 20px;
+      margin-bottom: 33px;
+      flex-wrap: wrap;
+      padding-bottom: 300px;
+    }
+
+    #gallery video {
+      height: 100vh;
+      width: auto;
+      cursor: pointer;
+      object-fit: cover;
+    }
+
+    #gallery-item {
+      max-width: 300px;
+    }
+
+    #gallery {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      margin: 0px;
+    }
+
+    .bg {
+      position: absolute;
+      width: 1000px;
+    }
+
+    .player {
+      position: absolute;
+      top: 225px;
+      left: 500px;
+      animation: tremble 3s linear infinite;
+
+    }
+
+    .enemy {
+      position: absolute;
+      left: 200px;
+      top: 153px;
+      animation: pumpkin-flicker 10s ease-in infinite;
+
+    }
+
+    .toilet {
+      cursor: pointer;
+      position: absolute;
+    }
+
+    @keyframes pumpkin-flicker {
+      0% {
+        transform: scale(1.05);
+      }
+
+      50% {
+        transform: scale(1.0);
+      }
+
+      100% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes tremble {
+
+      0%,
+      20%,
+      40%,
+      60%,
+      80%,
+      100% {
+        transform: translate(1px, 1px);
+
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translate(-1px, 0px);
+      }
+    }
+  </style>
+
+<script>
+/*
+alya (all hallow eves pun, name means skyward (she climbs a lot more than the kittens) , miraculous lady bug reference) is 13 months old (at time of adoption)
+which is full grown, most likely
+but still mentally full of crimes
+originally i was looking at a cool tortiousshell cat the shelter had
+cuz i thought it would be neat to have black, black and orange, black and orange and white, like a pattern
+but she ended up being too skitish for our exuberent crime kittens
+but they had a black cat with basically the perfect personality, and the age we were hoping for (older than hallow and eve to temper their crimes but still ready and willing to play with them)
+and its objectively funny imagining someone doing a double take seeing alya first, then seeing hallow and going "no i KNOW that cat had eyes :( :( :("
+*/
+//yes okay theres a thousand easier ways to get video on screen but this is a simple shitpost im making while sleepy and i am just reusing another room
+  let galleryEle;
+  const makeGalleryItem = (video_url, thumbnail_url)=>{
+    //this html can be copied and pasted directly into the gallery element if you prefer
+    //just change out the ${thumbnail_url} and ${video_url} with the real ones
+    //or you can call makeGalleryItem for each one in window.onload
+    const html = `
+    <video poster="${thumbnail_url}"   loop="true"  playsinline="" webkit-playsinline="" x5-playsinline=""   name="media">
+      <source src="${video_url}" type="video/mp4">
+      </video>`;
+
+      const ele = document.createElement("div");
+      ele.class="gallery-item"
+      ele.innerHTML = html;
+      galleryEle.append(ele);
+      
+  }
+
+  window.onload = ()=>{
+    console.log(`JR NOTE:  /*
+alya (all hallow eves pun, name means skyward (she climbs a lot more than the kittens) , miraculous lady bug reference) is 13 months old (at time of adoption)
+which is full grown, most likely
+but still mentally full of crimes
+originally i was looking at a cool tortiousshell cat the shelter had
+cuz i thought it would be neat to have black, black and orange, black and orange and white, like a pattern
+but she ended up being too skitish for our exuberent crime kittens
+but they had a black cat with basically the perfect personality, and the age we were hoping for (older than hallow and eve to temper their crimes but still ready and willing to play with them)
+and its objectively funny imagining someone doing a double take seeing alya first, then seeing hallow and going "no i KNOW that cat had eyes :( :( :("
+*/ `)
+    galleryEle = document.querySelector("#gallery");
+    //throw a bunch of test ones on the screen
+    makeGalleryItem("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/alya_is_named.mp4","http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/AllHallowsEve/alya_jump-moshed-05-17-22-11-52-105.gif")
+    playAll();
+
+  }
+  let playing = false;
+
+  const playAll = ()=>{
+    playing = true;
+    let videos = document.querySelectorAll("video");
+    for(let v of videos){
+      setTimeout(()=>v.play(),3000*Math.random());
+    }
+  }
+  window.onclick = ()=>{
+   playAll();
+  }
+</script>
+
+</head>
+
+<body>
+  
+  <div id="gallery">
+
+  </div>
+</body>
+
+</html>

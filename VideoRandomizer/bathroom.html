@@ -1,0 +1,259 @@
+<html language="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Wait. Have you been here before?">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://farragofiction.com/CatalystsBathroomSim/getWeirdVideos.js"></script>
+  <title>StaticSim</title>
+
+  <style>
+    body {
+      background: black;
+      margin: 0px;
+      cursor: pointer;
+
+    }
+
+    #subliminal {
+      position: fixed;
+      font-size: 72px;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+      top: 50%;
+      left: 50%;
+      /* bring your own prefixes */
+      transform: translate(-50%, -50%);
+      animation: flicker 30s ease-in infinite;
+
+    }
+
+
+    @keyframes flicker {
+      0% {
+        transform: skewX(1deg) translate(-50%, -50%);
+        opacity: 0.01;
+      }
+
+      50% {
+        transform: skewX(-1deg) translate(-50%, -50%);
+        opacity: 0.1;
+
+      }
+
+      100% {
+        transform: skewX(1deg) translate(-50%, -50%);
+        opacity: 0.01;
+
+      }
+    }
+
+    #gallery {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-left: auto;
+      /*centers it horizontally*/
+      margin-right: auto;
+      /*centers it horizontally*/
+      font-size: 20px;
+      margin-bottom: 33px;
+      flex-wrap: wrap;
+      padding-bottom: 300px;
+    }
+
+    #gallery video {
+      height: 100vh;
+      width: auto;
+      cursor: pointer;
+      object-fit: cover;
+    }
+
+    #gallery-item {
+      max-width: 300px;
+    }
+
+    #gallery {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      margin: 0px;
+    }
+
+    .bg {
+      position: absolute;
+      width: 1000px;
+    }
+
+    .player {
+      position: absolute;
+      top: 225px;
+      left: 500px;
+      animation: tremble 3s linear infinite;
+
+    }
+
+    .enemy {
+      position: absolute;
+      left: 200px;
+      top: 153px;
+      animation: pumpkin-flicker 10s ease-in infinite;
+
+    }
+
+    .toilet {
+      cursor: pointer;
+      position: absolute;
+    }
+
+    @keyframes pumpkin-flicker {
+      0% {
+        transform: scale(1.05);
+      }
+
+      50% {
+        transform: scale(1.0);
+      }
+
+      100% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes tremble {
+
+      0%,
+      20%,
+      40%,
+      60%,
+      80%,
+      100% {
+        transform: translate(1px, 1px);
+
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translate(-1px, 0px);
+      }
+    }
+  </style>
+
+  <script>
+    /*
+    
+    ive made so many spooky videos and YES they autoplay in ads in the fake parts of Eyedol but
+    why not put them in the bathroom too
+    
+    its not just interloper sim that gets to do that anymore lol (and the random pages that are just my cats or that Friend Shaped Thing)
+    
+    
+    */
+    //yes okay theres a thousand easier ways to get video on screen but this is a simple shitpost im making while sleepy and i am just reusing another room
+    let galleryEle;
+    const makeGalleryItem = (video_url, thumbnail_url) => {
+      //this html can be copied and pasted directly into the gallery element if you prefer
+      //just change out the ${thumbnail_url} and ${video_url} with the real ones
+      //or you can call makeGalleryItem for each one in window.onload
+      const html = `
+    <video   playsinline="" webkit-playsinline="" x5-playsinline=""   name="media">
+      <source src="${video_url}" type="video/mp4">
+      </video>`;
+
+      const ele = document.createElement("div");
+      ele.class = "gallery-item"
+      ele.innerHTML = html;
+      galleryEle.append(ele);
+
+    }
+
+    window.onload = async () => {
+      console.log(`JR NOTE:  /*
+ive made so many spooky videos and YES they autoplay in ads in the fake parts of Eyedol but
+why not put them in the bathroom too
+
+its not just interloper sim that gets to do that anymore lol (and the random pages that are just my cats or that Friend Shaped Thing)
+
+*/ `)
+      galleryEle = document.querySelector("#gallery");
+      //throw a bunch of test ones on the screen
+
+      makeGalleryItem("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/alya_is_named.mp4", "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/AllHallowsEve/alya_jump-moshed-05-17-22-11-52-105.gif")
+      //playAll();
+
+    }
+    let playing = false;
+
+    const playAll = async () => {
+
+
+      const isItFriday = () => {
+        //midnight and fridays are wungle time
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const date = new Date();
+        if (urlParams.get("friday") === "plzjrwantsin") {
+          return false;
+        }
+        if (urlParams.get("friday") || date.getHours() == 0 || date.getDay() === 5) {
+          return true;
+        }
+        return false;
+      }
+
+      let affirmations = ["Zampanio is a really fun game, you should play it.", "Thank you for playing Zampanio.", "Zampanio needs you to live a long, healthy life.", "Have you hydrated lately?"]
+      let weird_videos = await getWeirdVideosArray();
+
+      const subliminal_ele = document.querySelector("#subliminal")
+      console.log("JR NOTE: weird videos is", weird_videos)
+      let video_index = 0;
+      playing = true;
+      let v = document.querySelector("video");
+      let loopCount = 0;
+      window.onclick = ()=>{
+        loopCount = 113; //at least stop looping on click, but doesn't interupt video
+      }
+      v.play();
+      let maxLoopCount = 3; //then move on to next video
+      v.addEventListener('ended', (event) => {
+        loopCount++;
+        if (loopCount < maxLoopCount) {
+          v.play();
+        } else {
+          subliminal_ele.innerText = affirmations[video_index % affirmations.length];
+          v.src = weird_videos[video_index];
+          if (isItFriday()) {
+            v.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/jr_says_sleep.mp4"; //if it becomes friday or midnight while you're playing, stop
+            if (isItFriday()) {
+              affirmations = ["Zampanio needs you to live a long, healthy life.", "Rest.", "Sleep.", "Take a break.", "Have you Hydrated?", "Do something besides Zampanio.", "Have you talked to anyone lately?"]
+            }
+          }
+          video_index++;
+          loopCount = 0;
+          v.play();
+        }
+      });
+    }
+    window.onclick = () => {
+      if(!playing){
+        playAll();
+
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <div id="gallery">
+
+  </div>
+
+  <div id="subliminal">Zampanio is a really fun game, you should play it.</div>
+</body>
+
+</html>
