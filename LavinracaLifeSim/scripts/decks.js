@@ -144,12 +144,35 @@ class CardSet {
 
 
   renderEditForm = (parent) => {
-    const container = createElementWithClassAndParent("div", parent);
+    const container = createElementWithClassAndParent("div", parent, 'edit-container');
+    //make a new one for each game
+    let gameContainer;
+
     const headerEle = createElementWithClassAndParent("h2", container);
     headerEle.innerText = "Edit CardSet!";
 
     const summaryEle = createElementWithClassAndParent("div", container, 'summary');
     summaryEle.innerHTML = `${this.title}, ${this.cards.length} unique cards and ${this.startingDeck.length} cards in starting deck.`;
+
+    const gameTestButton = createElementWithClassAndParent("button", container);
+    gameTestButton.innerText = "Play Test Game With This Deck";
+    gameTestButton.onclick = () => {
+      gameContainer = createElementWithClassAndParent("div", parent, 'game-container');
+      const quitButton = createElementWithClassAndParent("button", parent);
+      const game = new Game(this);
+      container.style.display = "none";
+      game.render(gameContainer);
+      quitButton.innerText = "Quit Game And Go Back To Editing";
+      quitButton.style.position = "fixed";
+      quitButton.style.top = "31px"
+      quitButton.onclick = ()=>{
+        gameContainer.remove();
+        container.style.display = "block";
+        quitButton.remove();
+      }
+
+    }
+
 
     const jsonForm = createTextAreaInputWithLabel(container, 'json', "Save Data*:", JSON.stringify(this, null, 4), 31);
     const note = createElementWithClassAndParent("div", container, 'sub-section');
@@ -157,6 +180,8 @@ class CardSet {
     note.style.cssText = `    font-size: 14px;
     width: fit-content;
     margin-bottom: 32px;`;
+
+
 
     jsonForm.input.onchange = () => {
       this.syncToJSONString(jsonForm.input.value)
@@ -199,7 +224,7 @@ class CardSet {
     const drawCardImage = createElementWithClassAndParent("img", container, "card-back");
     drawCardImage.src = "http://www.farragofiction.com/AudioLogs/images/wallpaper.png";
     drawCardImage.style.filter = `${this.filterValues()}`;
-    drawCardImage.style.boxShadow = `-5px ${source.length}px 18px black`;
+    drawCardImage.style.boxShadow = `-5px 3px 18px black`;
 
 
     const jsonFormCards = createTextAreaInputWithLabel(container, 'json', "Cards in This Set:", JSON.stringify(this.cards, null, 4), 31);
@@ -218,8 +243,8 @@ class CardSet {
 
     let index = 0;
     for (let card of this.cards) {
-      index ++;
-      const numberInput = createNumberInputWithLabel(container, 'card-count'+index, `# '${card.title}' Cards In Starting Deck`, howManyOfThisCardTitleInStartingDeck(card.title, this.startingDeck));
+      index++;
+      const numberInput = createNumberInputWithLabel(container, 'card-count' + index, `# '${card.title}' Cards In Starting Deck`, howManyOfThisCardTitleInStartingDeck(card.title, this.startingDeck));
     }
 
 
