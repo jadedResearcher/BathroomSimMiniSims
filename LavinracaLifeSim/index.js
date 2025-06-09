@@ -25,8 +25,9 @@ const renderTest = ()=>{
         const testDeck = new CardSet();
         testDeck.renderEditForm(contents);
     }
+    //note: these are accessed from card set creator now
 
-    const cardSetButton = createElementWithClassAndParent("button", contents);
+    /*const cardSetButton = createElementWithClassAndParent("button", contents);
     cardSetButton.innerText = "View Simple Cardset";
     cardSetButton.onclick = ()=>{
         contents.innerHTML = "";
@@ -39,6 +40,6 @@ const renderTest = ()=>{
         contents.innerHTML = "";
         const game = new Game(genericCardset);
         game.render(contents)
-    }
+    }*/
 
 }
