@@ -34,7 +34,7 @@ class Game {
   constructor(cardset) {
 
     this.cardset = cardset;
-    this.deck = cardset.startingDeck;
+    this.deck = cardset.startingDeckToCards();
     const allStats = getAllStatsForCardset(this.cardset);
     for (let stat of allStats) {
       this.stats[stat] = 0;
@@ -42,6 +42,7 @@ class Game {
     this.rand = new SeededRandom(Date.now());
     this.drawNewHand();
   }
+  
 
   discardHand = () => {
     if (this.hand.length) {

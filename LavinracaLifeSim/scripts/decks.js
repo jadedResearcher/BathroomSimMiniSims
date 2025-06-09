@@ -45,7 +45,12 @@ class CardSet {
   description = "A cardset is a playstyle, mostly oriented around a narrative theme or clown type. This cardset is based around just, normal heroic tropes. Fighting evil and all that.";
   //all cards possibly to find in a cardset
   cards = [victory, findPotato, eatPotato, defeat, evilRises, trainingStrength, fightEvilWithStrength, superTrain];
-
+  //a nice bright orange back for the cards for default
+  //brightness(2) contrast(2) saturate(3) hue-rotate(359deg)
+  hueRotate = "359";
+  brightness = "2";
+  saturation = "3";
+  contrast = "2";
   //what cards you begin the game with
   //pairs of card title
   //its a bit awkward to use but doesn't make us have to encode the cards multiple times (inefficient)
@@ -58,10 +63,15 @@ class CardSet {
     this.startingDeck = startingDeck ? startingDeck : this.startingDeck;
   }
 
+  //the color of the card deck's back
+  filterValues = () => {
+    return `brightness(${this.brightness}) contrast(${this.contrast}) saturate(${this.saturation}) hue-rotate(${this.hueRotate}deg)`;
+  }
+
   startingDeckToCards = () => {
     const ret = [];
     for (let category of this.startingDeck) {
-      for (let i = 0; i<category[1]; i++) {
+      for (let i = 0; i < category[1]; i++) {
         ret.push(getCardWithTitle(category[0], this.cards));
       }
     }
@@ -172,8 +182,24 @@ class CardSet {
     const textForm = createTextAreaInputWithLabel(container, 'text', "Text", this.description);
     textForm.input.onchange = () => syncThisToForm("description", textForm.input.value);
 
+    //brightness(2) contrast(2) saturate(3) hue-rotate(359deg)
+    const brightnessInput = createNumberInputWithLabel(container, 'brightness', `# 'Card Back Brightness`, this.brightness);
+    brightnessInput.input.onchange = () => syncThisToForm("brightness", brightnessInput.input.value);
+
+    const contrastInput = createNumberInputWithLabel(container, 'contrast', `# 'Card Back Contrast`, this.contrast);
+    contrastInput.input.onchange = () => syncThisToForm("contrast", contrastInput.input.value);
+
+    const saturateInput = createNumberInputWithLabel(container, 'saturate', `# 'Card Back Saturation`, this.saturation);
+    saturateInput.input.onchange = () => syncThisToForm("saturation", saturateInput.input.value);
+
+    const hueInput = createNumberInputWithLabel(container, 'hue', `# 'Card Back Hue Rotation`, this.hueRotate);
+    hueInput.input.onchange = () => syncThisToForm("hueRotate", hueInput.input.value);
 
 
+    const drawCardImage = createElementWithClassAndParent("img", container, "card-back");
+    drawCardImage.src = "http://www.farragofiction.com/AudioLogs/images/wallpaper.png";
+    drawCardImage.style.filter = `${this.filterValues()}`;
+    drawCardImage.style.boxShadow = `-5px ${source.length}px 18px black`;
 
 
     const jsonFormCards = createTextAreaInputWithLabel(container, 'json', "Cards in This Set:", JSON.stringify(this.cards, null, 4), 31);
@@ -190,8 +216,10 @@ class CardSet {
     width: fit-content;
     margin-bottom: 32px;`;
 
+    let index = 0;
     for (let card of this.cards) {
-      const numberInput = createNumberInputWithLabel(container, 'trigger-max', `# '${card.title}' Cards In Starting Deck`, howManyOfThisCardTitleInStartingDeck(card.title, this.startingDeck));
+      index ++;
+      const numberInput = createNumberInputWithLabel(container, 'card-count'+index, `# '${card.title}' Cards In Starting Deck`, howManyOfThisCardTitleInStartingDeck(card.title, this.startingDeck));
     }
 
 
