@@ -5,52 +5,199 @@
 
 */
 
-const getAllStatsForCardset = (cardset)=>{
+const getAllStatsForCardset = (cardset) => {
   const ret = [];
   const cards = cardset.cards;
-  for(let card of cards){
+  for (let card of cards) {
     const cost = card.costStatName;
-    if(cost && !ret.includes(cost)){
+    if (cost && !ret.includes(cost)) {
       ret.push(cost)
     }
 
     const reward = card.resultStatName;
-    if(reward && !ret.includes(reward)){
+    if (reward && !ret.includes(reward)) {
       ret.push(reward)
     }
   }
   return ret;
 }
 
+/*
+its june 2025 now, i have three kittens (Alya, Hallow and Eve) and they aaaalmost get along (hallow and eve are still besties tho). 
+
+i made the new eyedol games landing page and a BUNCH of kitten related things while i was focusing my spoons onto them but
+i think im ready to get back into this
+
+
+*/
+
+const getCardWithTitle = (title, cardArray) => {
+  return cardArray.find((i) => i.title === title);
+}
+
+//array of [title, number] pairs
+const howManyOfThisCardTitleInStartingDeck = (title, deckArray) => {
+  return deckArray.find((i) => i[0] === title)[1];
+}
 
 class CardSet {
   title = "Test Card Set";
-  //a nice bright orange for default
-  //brightness(2) contrast(2) saturate(3) hue-rotate(359deg)
-  hueRotate="359";
-  brightness="2";
-  saturation="3";
-  contrast="2";
+  description = "A cardset is a playstyle, mostly oriented around a narrative theme or clown type. This cardset is based around just, normal heroic tropes. Fighting evil and all that.";
+  //all cards possibly to find in a cardset
+  cards = [victory, findPotato, eatPotato, defeat, evilRises, trainingStrength, fightEvilWithStrength, superTrain];
 
-  description = "A cardset is a playstyle, mostly oriented around clown type. This cardset is based around just, normal heroic tropes. Fighting evil and all that.";
-  cards = [victory, findPotato,eatPotato,defeat, evilRises, trainingStrength, fightEvilWithStrength, superTrain];
+  //what cards you begin the game with
+  //pairs of card title
+  //its a bit awkward to use but doesn't make us have to encode the cards multiple times (inefficient)
+  startingDeck = [[victory.title, 1], [findPotato.title, 4], [eatPotato.title, 2], [defeat.title, 1], [evilRises.title, 2], [trainingStrength.title, 3], [fightEvilWithStrength.title, 3], [superTrain.title, 0]]
 
-  startingDeck = [victory,findPotato,eatPotato,findPotato,findPotato,findPotato, defeat, evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises,evilRises, trainingStrength, trainingStrength, fightEvilWithStrength, fightEvilWithStrength, fightEvilWithStrength, fightEvilWithStrength];
-
-  filterValues=()=>{
-    return `brightness(${this.brightness}) contrast(${this.contrast}) saturate(${this.saturation}) hue-rotate(${this.hueRotate}deg)`;
+  constructor(title, description, cards, startingDeck) {
+    this.title = title ? title : this.title;
+    this.cards = cards ? cards : this.cards;
+    this.description = description ? description : this.description;
+    this.startingDeck = startingDeck ? startingDeck : this.startingDeck;
   }
-  render=(parent)=>{
+
+  startingDeckToCards = () => {
+    const ret = [];
+    for (let category of this.startingDeck) {
+      for (let i = 0; i<category[1]; i++) {
+        ret.push(getCardWithTitle(category[0], this.cards));
+      }
+    }
+    return ret;
+  }
+
+
+  render = (parent) => {
     const title = createElementWithClassAndParent("h2", parent);
     title.innerText = this.title;
-    const description = createElementWithClassAndParent("div", parent,'sub-section');
+    const description = createElementWithClassAndParent("div", parent, 'sub-section');
     description.innerText = this.description;
 
-    const container = createElementWithClassAndParent("div", parent,'grid tiny-cards');
 
-    for(let card of this.cards){
-      card.renderCard(container);
+    const label = createElementWithClassAndParent("div", parent);
+    label.innerText = "All Possible Cards:"
+    label.style.marginTop = "31px"
+    const cardsContainer = createElementWithClassAndParent("div", parent, 'grid tiny-cards');
+
+    for (let card of this.cards) {
+      card.renderCard(cardsContainer);
     }
+
+    const label2 = createElementWithClassAndParent("div", parent);
+    label2.innerText = "Starting Deck:"
+    label2.style.marginTop = "31px"
+
+    const deckContainer = createElementWithClassAndParent("div", parent, 'grid tiny-cards');
+
+    const hydratedDeck = this.startingDeckToCards();
+    for (let card of hydratedDeck) {
+      card.renderCard(deckContainer);
+    }
+
+  }
+
+  syncCardsToJSONString = (jsonArray) => {
+    this.cards = []
+    for (let card of jsonArray) {
+      const tmp = new Card();
+      tmp.syncToJSONString(JSON.stringify(card));
+      this.cards.push(tmp);
+    }
+    console.log("JR NOTE: after cards sync i am", this)
+  }
+
+  syncStartingDeckToJSONString = (jsonArray) => {
+    this.startingDeck = []
+    for (let card of jsonArray) {
+      const tmp = new Card();
+      tmp.syncToJSONString(JSON.stringify(card));
+      this.startingDeck.push(tmp);
+    }
+    console.log("JR NOTE: after deck sync i am", this)
+  }
+
+  syncToJSONString = (jsonString) => {
+    const json = JSON.parse(jsonString);
+    for (let key of Object.keys(json)) {
+      if (key === "cards") {
+
+
+      } else if (key === "startingDeck") {
+
+      } else {
+        this[key] = json[key]; //default behavior
+      }
+    }
+  }
+
+
+  renderEditForm = (parent) => {
+    const container = createElementWithClassAndParent("div", parent);
+    const headerEle = createElementWithClassAndParent("h2", container);
+    headerEle.innerText = "Edit CardSet!";
+
+    const summaryEle = createElementWithClassAndParent("div", container, 'summary');
+    summaryEle.innerHTML = `${this.title}, ${this.cards.length} unique cards and ${this.startingDeck.length} cards in starting deck.`;
+
+    const jsonForm = createTextAreaInputWithLabel(container, 'json', "Save Data*:", JSON.stringify(this, null, 4), 31);
+    const note = createElementWithClassAndParent("div", container, 'sub-section');
+    note.innerHTML = "* NOTE: you can edit this card either in the save data directly, or the form below.";
+    note.style.cssText = `    font-size: 14px;
+    width: fit-content;
+    margin-bottom: 32px;`;
+
+    jsonForm.input.onchange = () => {
+      this.syncToJSONString(jsonForm.input.value)
+      container.remove();
+      this.renderEditForm(parent);
+    }
+
+    const syncThisToForm = (attributeName, value) => {
+
+      this[attributeName] = value;
+      //no cost
+      if (!this.costStatName) {
+        this.costStatValue = 0;
+      }
+      container.remove();
+      this.renderEditForm(parent);
+    }
+
+
+    const titleForm = createTextInputWithLabel(container, 'title', "Title", this.title);
+    titleForm.input.onchange = () => syncThisToForm("title", titleForm.input.value);
+
+    const textForm = createTextAreaInputWithLabel(container, 'text', "Text", this.description);
+    textForm.input.onchange = () => syncThisToForm("description", textForm.input.value);
+
+
+
+
+
+    const jsonFormCards = createTextAreaInputWithLabel(container, 'json', "Cards in This Set:", JSON.stringify(this.cards, null, 4), 31);
+
+    jsonFormCards.input.onchange = () => {
+      this.syncCardsToJSONString(JSON.parse(jsonFormCards.input.value))
+      container.remove();
+      this.renderEditForm(parent);
+    }
+
+    const cardsNote = createElementWithClassAndParent("div", container, 'sub-section');
+    cardsNote.innerHTML = "* NOTE: Each card shoulud only appear a single time unless you have a good reason. These will be the cards that the shop pulls from.";
+    cardsNote.style.cssText = `    font-size: 14px;
+    width: fit-content;
+    margin-bottom: 32px;`;
+
+    for (let card of this.cards) {
+      const numberInput = createNumberInputWithLabel(container, 'trigger-max', `# '${card.title}' Cards In Starting Deck`, howManyOfThisCardTitleInStartingDeck(card.title, this.startingDeck));
+    }
+
+
+
+    this.render(container);
+
   }
 }
 
@@ -64,17 +211,17 @@ const genericCardset = new CardSet();
  itty bitty kittens
 
  they're too young to take home yet
- 
+
  but the shelters letting me visit them tomorrow and i am so hype i can't codes
 
  im gonna turn their pics and videos into so many spooky things
- 
+
 */
 
 /*
 okay actually no, that didn't work out, the kittens were too sick to visit AND someone else adopted them
 
-but i found BETTER than them. 
+but i found BETTER than them.
 
 (sorry jimbo, i know your name was perfect but it wasn't meant to be)
 

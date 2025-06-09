@@ -184,7 +184,7 @@ const pickFrom = (array) => {
 
 
 const createTextInputWithLabel = (parent,id,labelText, initialValue)=>{
-  const container = createElementWithClassAndParent("div",parent);
+  const container = createElementWithClassAndParent("div",parent,"form-container");
 
   const label = createElementWithClassAndParent("label", container)
   label.for=id;
@@ -202,8 +202,8 @@ const createTextInputWithLabel = (parent,id,labelText, initialValue)=>{
   return {container, input, label};
 }
 
-const createTextAreaInputWithLabel = (parent,id,labelText, initialValue)=>{
-  const container = createElementWithClassAndParent("div",parent);
+const createTextAreaInputWithLabel = (parent,id,labelText, initialValue, rows=8)=>{
+  const container = createElementWithClassAndParent("div",parent,"form-container");
 
 
   const label = createElementWithClassAndParent("label", container)
@@ -216,7 +216,7 @@ const createTextAreaInputWithLabel = (parent,id,labelText, initialValue)=>{
   input.id = id;
   input.name = id;
   input.value = initialValue;
-  input.rows = "4";
+  input.rows = ""+rows;
   input.cols = "81";
 
 
@@ -225,7 +225,7 @@ const createTextAreaInputWithLabel = (parent,id,labelText, initialValue)=>{
 }
 
 const createNumberInputWithLabel = (parent,id,labelText, initialValue,max=113,min=-113)=>{
-  const container = createElementWithClassAndParent("div",parent);
+  const container = createElementWithClassAndParent("div",parent,"form-container");
 
   const label = createElementWithClassAndParent("label", container)
   label.for=id;
@@ -245,7 +245,7 @@ const createNumberInputWithLabel = (parent,id,labelText, initialValue,max=113,mi
   return {container, input, label};
 }
 const createCheckboxInputWithLabel = (parent,id,labelText, initialValue)=>{
-  const container = createElementWithClassAndParent("div",parent);
+  const container = createElementWithClassAndParent("div",parent,"form-container");
 
   const label = createElementWithClassAndParent("label", container)
   label.for=id;

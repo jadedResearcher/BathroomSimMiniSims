@@ -37,12 +37,17 @@ body {
     margin-top: 5px;
 }
 
+.form-container {
+    margin-top: 13px;
+}
+
 label {
     width: 333px;
-    border-bottom: 3px dotted white;
+    border-top: 3px dotted white;
     display: inline-block;
     padding: 3px;
     margin-bottom: 13px;
+    vertical-align: top;
 }
 
 .grid {

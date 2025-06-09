@@ -93,7 +93,7 @@ class Card {
     const summaryEle = createElementWithClassAndParent("div", container, 'summary');
     summaryEle.innerHTML = this.humanSummarySentence();
 
-    const jsonForm = createTextAreaInputWithLabel(container, 'json', "Save Data*:", JSON.stringify(this));
+    const jsonForm = createTextAreaInputWithLabel(container, 'json', "Save Data*:", JSON.stringify(this,null,4));
     const note = createElementWithClassAndParent("div", container, 'sub-section');
     note.innerHTML = "* NOTE: you can edit this card either in the save data directly, or the form below. <br><br>You can copy the save data to import this into your deck as well.";
     note.style.cssText = `    font-size: 14px;
@@ -130,8 +130,9 @@ class Card {
     const autoPlayEle = createCheckboxInputWithLabel(container, 'single-use', "Autoplay:", this.autoPlay);
     autoPlayEle.input.onchange = () => syncThisToForm("autoPlay", !this.autoPlay);
 
-    const bgForm = createTextAreaInputWithLabel(container, 'background-src', "Background Image URL", this.bgAbsoluteSrc);
+    const bgForm = createTextInputWithLabel(container, 'background-src', "Background Image URL", this.bgAbsoluteSrc);
     bgForm.input.onchange = () => syncThisToForm("bgAbsoluteSrc", bgForm.input.value);
+    bgForm.input.style.width="40%"
 
     const exampleImage = createElementWithClassAndParent("img", container, "preview");
     exampleImage.src = this.bgAbsoluteSrc;

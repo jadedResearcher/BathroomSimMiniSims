@@ -18,6 +18,14 @@ const renderTest = ()=>{
         testScene.renderEditForm(contents);
     }
 
+    const decjButton = createElementWithClassAndParent("button", contents);
+    decjButton.innerText = "Create A CardSet";
+    decjButton.onclick = ()=>{
+        contents.innerHTML = "";
+        const testDeck = new CardSet();
+        testDeck.renderEditForm(contents);
+    }
+
     const cardSetButton = createElementWithClassAndParent("button", contents);
     cardSetButton.innerText = "View Simple Cardset";
     cardSetButton.onclick = ()=>{
