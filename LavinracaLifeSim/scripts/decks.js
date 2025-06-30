@@ -37,7 +37,12 @@ const getCardWithTitle = (title, cardArray) => {
 
 //array of [title, number] pairs
 const howManyOfThisCardTitleInStartingDeck = (title, deckArray) => {
-  return deckArray.find((i) => i[0] === title)[1];
+  const results = deckArray.find((i) => i[0] === title);
+  if (results && results.length > 0) {
+    return results[1];
+  } else {
+    return 1; //don't want to say zero because then the default state will end up cardless and thats annoying
+  }
 }
 
 class CardSet {
@@ -128,6 +133,12 @@ class CardSet {
     console.log("JR NOTE: after deck sync i am", this)
   }
 
+  /*
+i realized something the other day
+there's a whole community of people spreading rumors about zampanio that im getting to watch
+its nice
+nostalgic
+  */
   syncToJSONString = (jsonString) => {
     const json = JSON.parse(jsonString);
     for (let key of Object.keys(json)) {
@@ -142,6 +153,28 @@ class CardSet {
     }
   }
 
+
+  /*
+i think i have a really simple core game i am trying to build with it
+as simple as something like this can be
+that will let me quickly create new decks that tell their own stories/have their own secrets (except to wastes)
+and we decided that obviously teh harvest will still accept prayers
+but inverted now
+before she accepted prayers all day besides during her breaks
+but now she's remembered that 23 parts of herself come from a universe where all disputes are handled via childrens card game
+so
+she's playing zampanio the card game p much constantly 
+then comes up for air twice a day for lunch and to panic remember she has prayers to answer
+the prayers will then manifest as new card decks
+created by me
+
+there will be a lot of clowns inside them
+but also i intend for the tools to be available to anyone brave enough to make their own decks to share
+cuz the harvest is Change and Inspiration and Libraries and etc
+i forgot all her domains
+oh right, Being Served
+she's a decadent self indulgent god who wants you to make things for her
+  */
 
   renderEditForm = (parent) => {
     const container = createElementWithClassAndParent("div", parent, 'edit-container');
@@ -165,7 +198,7 @@ class CardSet {
       quitButton.innerText = "Quit Game And Go Back To Editing";
       quitButton.style.position = "fixed";
       quitButton.style.top = "31px"
-      quitButton.onclick = ()=>{
+      quitButton.onclick = () => {
         gameContainer.remove();
         container.style.display = "block";
         quitButton.remove();

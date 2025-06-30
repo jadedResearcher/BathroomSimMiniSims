@@ -620,10 +620,16 @@ class Entity {
     return `The ${this.name} doesn't seem to want to talk to you :(<br><br>That's okay though!<br><br>You don't need anyone.`;
   }
 
-  /*
+  /*original before BB crashed
 The Worm is Free: What Sins Will He Commit: 2
 I can only hope that I Witness: 19
 Secret Third Option Waste Ending: 23
+  */
+
+  /*  june, 2025 addition
+The Worm is Free: What Sins Will He Commit: 1
+I can only hope that I Witness: 1 + 1 badly hacked
+${encodeURI("may all who are weary find peace in the hands of the Puppeteer")}?: 1
   */
 
   removeFromContents = async (item) => {
