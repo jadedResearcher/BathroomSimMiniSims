@@ -5,6 +5,8 @@
 
 */
 
+
+
 const getAllStatsForCardset = (cardset) => {
   const ret = [];
   const cards = cardset.cards;
@@ -35,11 +37,11 @@ const getCardWithTitle = (title, cardArray) => {
   return cardArray.find((i) => i.title === title);
 }
 
-//array of [title, number] pairs
-const howManyOfThisCardTitleInStartingDeck = (title, deckArray) => {
-  const results = deckArray.find((i) => i[0] === title);
-  if (results && results.length > 0) {
-    return results[1];
+//map of title: amount pairs
+const howManyOfThisCardTitleInStartingDeck = (title, deckMap) => {
+  const results = deckMap[title];
+  if (results !== undefined) {
+    return results;
   } else {
     return 1; //don't want to say zero because then the default state will end up cardless and thats annoying
   }
@@ -59,13 +61,29 @@ class CardSet {
   //what cards you begin the game with
   //pairs of card title
   //its a bit awkward to use but doesn't make us have to encode the cards multiple times (inefficient)
-  startingDeck = [[victory.title, 1], [findPotato.title, 4], [eatPotato.title, 2], [defeat.title, 1], [evilRises.title, 2], [trainingStrength.title, 3], [fightEvilWithStrength.title, 3], [superTrain.title, 0]]
+  //startingDeck = [[victory.title, 1], [findPotato.title, 4], [eatPotato.title, 2], [defeat.title, 1], [evilRises.title, 2], [trainingStrength.title, 3], [fightEvilWithStrength.title, 3], [superTrain.title, 0]]
+  //actually trying to keep track of array of arrays was annoying in the card builder
+  startingDeck = {}
 
   constructor(title, description, cards, startingDeck) {
     this.title = title ? title : this.title;
     this.cards = cards ? cards : this.cards;
     this.description = description ? description : this.description;
-    this.startingDeck = startingDeck ? startingDeck : this.startingDeck;
+    //since its a map little harder to set default
+    if (!startingDeck) {
+      this.startingDeck[victory.title] = 1
+      this.startingDeck[findPotato.title] = 4
+      this.startingDeck[victory.title] = 1
+      this.startingDeck[eatPotato.title] = 2
+      this.startingDeck[defeat.title] = 1
+      this.startingDeck[evilRises.title] = 2
+      this.startingDeck[trainingStrength.title] = 3
+      this.startingDeck[fightEvilWithStrength.title] = 1
+      this.startingDeck[superTrain.title] = 0
+    } else {
+      this.startingDeck = startingDeck;
+
+    }
   }
 
   //the color of the card deck's back
@@ -75,9 +93,10 @@ class CardSet {
 
   startingDeckToCards = () => {
     const ret = [];
-    for (let category of this.startingDeck) {
-      for (let i = 0; i < category[1]; i++) {
-        ret.push(getCardWithTitle(category[0], this.cards));
+    //for every map in the starting deck, find a card that matches its title and add it the correct amount of times
+    for (let category of Object.keys(this.startingDeck)) {
+      for (let i = 0; i < this.startingDeck[category]; i++) {
+        ret.push(getCardWithTitle(category, this.cards));
       }
     }
     return ret;
@@ -112,25 +131,14 @@ class CardSet {
     }
 
   }
-
+  //this just in, the segundian lamia played a game called "shrub"
+  //(based on a typo i made the other day)
   syncCardsToJSONString = (jsonArray) => {
     this.cards = []
     for (let card of jsonArray) {
-      const tmp = new Card();
-      tmp.syncToJSONString(JSON.stringify(card));
-      this.cards.push(tmp);
+      this.cards.push(makeCardFromJSON(card));
     }
     console.log("JR NOTE: after cards sync i am", this)
-  }
-
-  syncStartingDeckToJSONString = (jsonArray) => {
-    this.startingDeck = []
-    for (let card of jsonArray) {
-      const tmp = new Card();
-      tmp.syncToJSONString(JSON.stringify(card));
-      this.startingDeck.push(tmp);
-    }
-    console.log("JR NOTE: after deck sync i am", this)
   }
 
   /*
@@ -139,13 +147,21 @@ there's a whole community of people spreading rumors about zampanio that im gett
 its nice
 nostalgic
   */
-  syncToJSONString = (jsonString) => {
-    const json = JSON.parse(jsonString);
+  syncToJSON = (json) => {
+    console.log("JR NOTE: deck syncToJSON")
     for (let key of Object.keys(json)) {
+      console.log("JR NOTE: key is", key)
       if (key === "cards") {
-
-
-      } else if (key === "startingDeck") {
+        //json[key]
+        this.cards = [];
+        console.log("JR NOTE: cards is", json[key])
+        for (let cardObj of json[key]) {
+          this.cards.push(makeCardFromJSON(cardObj))
+        }
+        /*
+          loop on the json array, make a new Card
+          then sync that card to the json array
+        */
 
       } else {
         this[key] = json[key]; //default behavior
@@ -185,7 +201,7 @@ she's a decadent self indulgent god who wants you to make things for her
     headerEle.innerText = "Edit CardSet!";
 
     const summaryEle = createElementWithClassAndParent("div", container, 'summary');
-    summaryEle.innerHTML = `${this.title}, ${this.cards.length} unique cards and ${this.startingDeck.length} cards in starting deck.`;
+    summaryEle.innerHTML = `${this.title}, ${this.cards.length} unique cards and ${Object.keys(this.startingDeck).length} cards in starting deck.`;
 
     const gameTestButton = createElementWithClassAndParent("button", container);
     gameTestButton.innerText = "Play Test Game With This Deck";
@@ -217,14 +233,19 @@ she's a decadent self indulgent god who wants you to make things for her
 
 
     jsonForm.input.onchange = () => {
-      this.syncToJSONString(jsonForm.input.value)
+      this.syncToJSON(JSON.parse(jsonForm.input.value))
       container.remove();
       this.renderEditForm(parent);
     }
 
     const syncThisToForm = (attributeName, value) => {
-
-      this[attributeName] = value;
+      if (attributeName.includes("startingDeck")) {
+        console.log("JR NOTE: special starting deck carve out", attributeName, value)
+        //in theory could have a system that parses ANY map as x.y or something but too risky in case the card title has a dot or whatever my separator is
+        this.startingDeck[attributeName.replace("startingDeck", "")] = value;
+      } else {
+        this[attributeName] = value;
+      }
       //no cost
       if (!this.costStatName) {
         this.costStatValue = 0;
@@ -277,7 +298,10 @@ she's a decadent self indulgent god who wants you to make things for her
     let index = 0;
     for (let card of this.cards) {
       index++;
+      console.log("JR NOTE: looping for starting tdeck form, card is", card)
       const numberInput = createNumberInputWithLabel(container, 'card-count' + index, `# '${card.title}' Cards In Starting Deck`, howManyOfThisCardTitleInStartingDeck(card.title, this.startingDeck));
+      numberInput.input.onchange = () => syncThisToForm(`startingDeck${card.title}`, numberInput.input.value);
+
     }
 
 

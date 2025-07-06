@@ -129,38 +129,8 @@ const all_hallows_eve = {
   "saturation": "1",
   "contrast": "2",
   "startingDeck": [
-    [
-      "Victory",
-      1
-    ],
-    [
-      "Find a Potato",
-      4
-    ],
-    [
-      "Eat A Potato",
-      2
-    ],
-    [
-      "Defeat",
-      1
-    ],
-    [
-      "Evil Rises",
-      2
-    ],
-    [
-      "Training Time",
-      3
-    ],
-    [
-      "Fight Evil",
-      3
-    ],
-    [
-      "Super Training Time",
-      0
-    ]
+
+
   ],
   "costStatValue": 0
 }

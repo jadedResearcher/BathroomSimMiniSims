@@ -2,19 +2,26 @@
 const VICTORY = "Victory";
 const DEFEAT = "Defeat";
 
+//not a json string, a json object
+const makeCardFromJSON = (json) => {
+  const tmp = new Card();
+  tmp.syncToJSON(json)
+  return tmp;
+}
 
-const makeColorsForStat = (stat)=>{
-  const seed =  (stringtoseed(stat)%360);
-  const hue =  seed%360;
+
+const makeColorsForStat = (stat) => {
+  const seed = (stringtoseed(stat) % 360);
+  const hue = seed % 360;
   const rand = new SeededRandom(seed);
-  let saturation = 0.5 + rand.nextDouble()/2;
-  let value = 0.65 + rand.nextDouble()/4;
+  let saturation = 0.5 + rand.nextDouble() / 2;
+  let value = 0.65 + rand.nextDouble() / 4;
 
   const colors = Please.make_scheme(
     {
       h: hue,
       s: saturation,
-      v: value 
+      v: value
     },
     {
       scheme_type: 'analogous',
@@ -35,15 +42,14 @@ class Card {
   resultStatName = "Health"
   resultChangeValue = -1; //can be negative
 
-  syncToJSONString = (jsonString) => {
-    const json = JSON.parse(jsonString);
+  syncToJSON = (json) => {
     for (let key of Object.keys(json)) {
       this[key] = json[key];
     }
   }
 
 
-  renderCard = (parent)=>{
+  renderCard = (parent) => {
 
     const costColors = makeColorsForStat(this.costStatName)
 
@@ -56,29 +62,29 @@ class Card {
     const innerCardBoxWithSquareEdges = createElementWithClassAndParent("div", outerCardBoxWithRoundedEdges, 'inner-card');
     innerCardBoxWithSquareEdges.style.backgroundColor = costColors[1];
 
-    const headerSection = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,'card-header');
+    const headerSection = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges, 'card-header');
     const victoryOrDefeatOrAutoOrSingleIcon = createElementWithClassAndParent("div", headerSection); //ascii check, x, * or 1 or infinity symbol 
-    
-    victoryOrDefeatOrAutoOrSingleIcon.innerText = `${this.resultStatName===VICTORY?"✔":""}${this.resultStatName===DEFEAT?"X":""}${this.autoPlay?"*":""}${this.singleUse?"1":"∞"}`;
-    const cardTitle = createElementWithClassAndParent("div", headerSection,'card-title');
+
+    victoryOrDefeatOrAutoOrSingleIcon.innerText = `${this.resultStatName === VICTORY ? "✔" : ""}${this.resultStatName === DEFEAT ? "X" : ""}${this.autoPlay ? "*" : ""}${this.singleUse ? "1" : "∞"}`;
+    const cardTitle = createElementWithClassAndParent("div", headerSection, 'card-title');
     cardTitle.innerText = this.title;
-    const costText = createElementWithClassAndParent("div", headerSection,'cost-text'); //i.e. 5 Strength
+    const costText = createElementWithClassAndParent("div", headerSection, 'cost-text'); //i.e. 5 Strength
     costText.innerText = `${this.costStatValue} ${this.costStatName}`;
 
-    const contentBox = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges,"content-box");
+    const contentBox = createElementWithClassAndParent("div", innerCardBoxWithSquareEdges, "content-box");
 
-    const boxForImage = createElementWithClassAndParent("div", contentBox,"card-image-box");
+    const boxForImage = createElementWithClassAndParent("div", contentBox, "card-image-box");
     const bgImage = createElementWithClassAndParent("img", boxForImage);
     bgImage.src = this.bgAbsoluteSrc;
 
- 
 
-    const boxForSummaryText = createElementWithClassAndParent("div", contentBox,'summary-text-box');
+
+    const boxForSummaryText = createElementWithClassAndParent("div", contentBox, 'summary-text-box');
     const resultSummaryText = createElementWithClassAndParent("div", boxForSummaryText, 'summary-text');
     resultSummaryText.style.color = resultColors[0];
 
-    resultSummaryText.innerText = this.humanResultSentence() +".";
-    const textForResultStat = createElementWithClassAndParent("div", boxForSummaryText,'result-text');
+    resultSummaryText.innerText = this.humanResultSentence() + ".";
+    const textForResultStat = createElementWithClassAndParent("div", boxForSummaryText, 'result-text');
     textForResultStat.innerText = this.resultStatName;
     textForResultStat.style.backgroundColor = resultColors[0];
     return outerCardBoxWithRoundedEdges;
@@ -93,7 +99,7 @@ class Card {
     const summaryEle = createElementWithClassAndParent("div", container, 'summary');
     summaryEle.innerHTML = this.humanSummarySentence();
 
-    const jsonForm = createTextAreaInputWithLabel(container, 'json', "Save Data*:", JSON.stringify(this,null,4));
+    const jsonForm = createTextAreaInputWithLabel(container, 'json', "Save Data*:", JSON.stringify(this, null, 4));
     const note = createElementWithClassAndParent("div", container, 'sub-section');
     note.innerHTML = "* NOTE: you can edit this card either in the save data directly, or the form below. <br><br>You can copy the save data to import this into your deck as well.";
     note.style.cssText = `    font-size: 14px;
@@ -101,7 +107,7 @@ class Card {
     margin-bottom: 32px;`;
 
     jsonForm.input.onchange = () => {
-      this.syncToJSONString(jsonForm.input.value)
+      this.syncToJSONS(JSON.parse(jsonForm.input.value))
       container.remove();
       this.renderEditForm(parent);
     }
@@ -110,7 +116,7 @@ class Card {
 
       this[attributeName] = value;
       //no cost
-      if(!this.costStatName){
+      if (!this.costStatName) {
         this.costStatValue = 0;
       }
       container.remove();
@@ -132,7 +138,7 @@ class Card {
 
     const bgForm = createTextInputWithLabel(container, 'background-src', "Background Image URL", this.bgAbsoluteSrc);
     bgForm.input.onchange = () => syncThisToForm("bgAbsoluteSrc", bgForm.input.value);
-    bgForm.input.style.width="40%"
+    bgForm.input.style.width = "40%"
 
     const exampleImage = createElementWithClassAndParent("img", container, "preview");
     exampleImage.src = this.bgAbsoluteSrc;
@@ -162,11 +168,11 @@ class Card {
   }
 
   humanSummarySentence = () => {
-    return `<u>${this.title}</u> ${this.humanTriggerSentence()}, and after it is played, ${this.humanResultSentence()}. ${this.autoPlay?"It will play itself automatically if its cost can be paid. ":""} ${this.singleUse?"It will destroy itself after use.":""}`;
+    return `<u>${this.title}</u> ${this.humanTriggerSentence()}, and after it is played, ${this.humanResultSentence()}. ${this.autoPlay ? "It will play itself automatically if its cost can be paid. " : ""} ${this.singleUse ? "It will destroy itself after use." : ""}`;
   }
 
   humanTriggerSentence = () => {
-    if(!this.costStatName){
+    if (!this.costStatName) {
       return 'can be played for free'
     }
     return `requires the player to spend ${this.costStatValue} ${this.costStatName}`;
