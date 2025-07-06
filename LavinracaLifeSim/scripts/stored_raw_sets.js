@@ -15,7 +15,7 @@ const all_hallows_eve = {
     },
     {
       "title": "Behold Eve, the Gremlin!",
-      "text": "Eve climbed JR and started attacking their hair in a bid to convince the to take her along with Hallow and it worked. Her heavy breathing makes her an incredible source of sound effects AND easy for Hallow to find when its time to wrestle. She was born on cinnamon bun day.",
+      "text": "Eve climbed JR and started attacking their hair in a bid to convince them to take her along with Hallow and it worked. Her heavy breathing makes her an incredible source of sound effects AND easy for Hallow to find when its time to wrestle. She was born on cinnamon bun day.",
       "costStatName": "",
       "singleUse": false,
       "autoPlay": true,
@@ -128,9 +128,18 @@ const all_hallows_eve = {
   "brightness": "1",
   "saturation": "1",
   "contrast": "2",
-  "startingDeck": [
-
-
-  ],
+  "startingDeck": {
+    "Eve is so silly": "2",
+    "Alya Jumps": "2",
+    "Hallow Vs Alya": "2",
+    "Alya is a cryptid": "2",
+    "Hallow and Eve Play Rough": "2",
+    "Hallow is Aesthetic": "2",
+    "Hallow and Eve are Besties!": "2",
+    "Cute Explosion!": "1",
+    "Behold Eve, the Gremlin!": "1",
+    "Behold Hallow the Summoning Dark!": "1",
+    "Behold Alya, the High Lady!": "1"
+  },
   "costStatValue": 0
 }

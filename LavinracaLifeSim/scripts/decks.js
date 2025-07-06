@@ -43,7 +43,7 @@ const howManyOfThisCardTitleInStartingDeck = (title, deckMap) => {
   if (results !== undefined) {
     return results;
   } else {
-    return 1; //don't want to say zero because then the default state will end up cardless and thats annoying
+    return 0; //if its one, the form is annoying to edit, cuz only saves if differnet
   }
 }
 
@@ -138,7 +138,6 @@ class CardSet {
     for (let card of jsonArray) {
       this.cards.push(makeCardFromJSON(card));
     }
-    console.log("JR NOTE: after cards sync i am", this)
   }
 
   /*
@@ -148,20 +147,13 @@ its nice
 nostalgic
   */
   syncToJSON = (json) => {
-    console.log("JR NOTE: deck syncToJSON")
     for (let key of Object.keys(json)) {
-      console.log("JR NOTE: key is", key)
       if (key === "cards") {
         //json[key]
         this.cards = [];
-        console.log("JR NOTE: cards is", json[key])
         for (let cardObj of json[key]) {
           this.cards.push(makeCardFromJSON(cardObj))
         }
-        /*
-          loop on the json array, make a new Card
-          then sync that card to the json array
-        */
 
       } else {
         this[key] = json[key]; //default behavior
@@ -193,6 +185,12 @@ she's a decadent self indulgent god who wants you to make things for her
   */
 
   renderEditForm = (parent) => {
+    window.onerror = (e) => {
+      console.error(e)
+      console.log(e)
+      alert("An error happened? If you have a javascript console, check to see it, otherwise.. uh. Whoops? Maybe it didn't break the page..." + e)
+    }
+    console.log("JR NOTE: rendering edit form for this", this)
     const container = createElementWithClassAndParent("div", parent, 'edit-container');
     //make a new one for each game
     let gameContainer;
@@ -240,7 +238,7 @@ she's a decadent self indulgent god who wants you to make things for her
 
     const syncThisToForm = (attributeName, value) => {
       if (attributeName.includes("startingDeck")) {
-        console.log("JR NOTE: special starting deck carve out", attributeName, value)
+        console.log("JR NOTE: starting deck needs to be", attributeName.replace("startingDeck", ""), value)
         //in theory could have a system that parses ANY map as x.y or something but too risky in case the card title has a dot or whatever my separator is
         this.startingDeck[attributeName.replace("startingDeck", "")] = value;
       } else {
@@ -298,7 +296,6 @@ she's a decadent self indulgent god who wants you to make things for her
     let index = 0;
     for (let card of this.cards) {
       index++;
-      console.log("JR NOTE: looping for starting tdeck form, card is", card)
       const numberInput = createNumberInputWithLabel(container, 'card-count' + index, `# '${card.title}' Cards In Starting Deck`, howManyOfThisCardTitleInStartingDeck(card.title, this.startingDeck));
       numberInput.input.onchange = () => syncThisToForm(`startingDeck${card.title}`, numberInput.input.value);
 
