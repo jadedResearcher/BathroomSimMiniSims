@@ -124,7 +124,7 @@ const fridayMode = async () => {
   const glitched_clips = video_clips.filter((item) => item.includes("glitch"));
   const videoEle = createElementWithClassAndParent("video", body, "friday-video");
   const creditsEle = createElementWithClassAndParent("div", body, "credits-friday");
-  creditsEle.innerHTML = "Streamer clips from : <a target='_blank' href='https://www.youtube.com/watch?v=SB3YZoJjYL4&t=7395s'>here</a>  ";
+  creditsEle.innerHTML = "Streamer clips from : <a target='_blank' href='https://www.youtube.com/watch?v=SB3YZoJjYL4&t=7395s'>here</a><br><Br>Thanks to the Chronologist of Zampanio for pointing out the Rot took the Videos in 2026 so I could fix them  ";
 
 
   videoEle.src = url + pickFrom(glitched_clips);//guarantee first is glitch
@@ -182,7 +182,7 @@ window.onload = async () => {
   load();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  if(urlParams.get("deepfryersim")){
+  if (urlParams.get("deepfryersim")) {
     deepFriedMode(false);
   }
   debugMiniGame = urlParams.get('debugMiniGame');
@@ -207,12 +207,12 @@ const truthLog = (title, text) => {
   const truthCSSTitle = "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;";
   const truthCSSBody = "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;";
   if (truthEle) {
-    const container = createElementWithClassAndParent("div",truthEle);
+    const container = createElementWithClassAndParent("div", truthEle);
     container.style.cssText = "padding: 10px;";
-    const titleEle = createElementWithClassAndParent("div",container);
+    const titleEle = createElementWithClassAndParent("div", container);
     titleEle.innerText = title;
     titleEle.style.cssText = truthCSSTitle;
-    const textEle = createElementWithClassAndParent("div",container);
+    const textEle = createElementWithClassAndParent("div", container);
     textEle.innerText = text;
     textEle.style.cssText = truthCSSBody;
     container.scrollIntoView();
@@ -686,7 +686,7 @@ const renderMazeTab = () => {
   header.innerText += ` (${allBeaten ? "All" : numberBeaten} Rooms Beaten) ${allUnlocked ? "Maze Fully Explored!" : ""} `;
   if (allUnlocked) {
     restartButton.innerText += " (And Gain a Reward)"
-    restartButton.className ="restart-button-prize"
+    restartButton.className = "restart-button-prize"
   }
 
   if (allBeaten) {
